@@ -1,0 +1,412 @@
+WEBVTT
+
+00:00.540 --> 00:07.110
+Now let's go ahead and implement our example with the simple counter on the blog post page that will
+
+00:07.140 --> 00:11.030
+display the amount of users currently on the page.
+
+00:11.070 --> 00:15.970
+So as I said we'll use sessions to keep track of the users.
+
+00:16.020 --> 00:23.670
+So the first thing we have to do is read the current user session I.D. we can do that using the session
+
+00:23.670 --> 00:31.530
+function helper and it will return an object from which we can call get I.D. to get the current user
+
+00:31.530 --> 00:44.230
+session now will define two variables that counter key and users key so those who would be the cache
+
+00:44.230 --> 00:48.930
+keys from which we will then read and store the counter.
+
+00:48.940 --> 00:56.410
+So how many users on the page and this key would be used to fetch and store the information about the
+
+00:56.410 --> 00:59.470
+users that visit that the page.
+
+00:59.470 --> 01:04.330
+So let's give them some names so it can be blog post.
+
+01:04.720 --> 01:06.400
+We'll use the blog post.
+
+01:06.430 --> 01:10.610
+So each blog post has an unique key name.
+
+01:10.660 --> 01:14.650
+This can be called counter and then this would be blog post
+
+01:18.710 --> 01:19.340
+users
+
+01:22.220 --> 01:31.130
+now will need the user's variable to which will read directly from the cache the contents of the user's
+
+01:31.640 --> 01:32.870
+key.
+
+01:32.870 --> 01:39.320
+So as I've said this would be an array where the key would be the session I.D. and the value would be
+
+01:39.320 --> 01:41.790
+the last visit that time.
+
+01:42.410 --> 01:47.380
+Now will also create a new variable called users update.
+
+01:47.390 --> 01:55.880
+This would be an empty array and we'll put into this array all the users that should stay on that list
+
+01:55.910 --> 01:59.060
+that are not expired.
+
+01:59.090 --> 02:04.360
+Now the next variable would be called difference.
+
+02:04.390 --> 02:12.160
+This is initially set as 0 as will use this variable inside this step.
+
+02:12.160 --> 02:14.190
+So we already have this first step.
+
+02:14.230 --> 02:23.160
+We are reading the users that were on the page from the cache and then inside this loop where we will
+
+02:23.160 --> 02:30.190
+check if someone has been expired will actually modify this difference to update the counter.
+
+02:30.240 --> 02:37.890
+It will also be used later in the example when the user was not on the list or the user was on the list
+
+02:37.920 --> 02:39.630
+but was expired.
+
+02:39.630 --> 02:47.610
+So on this step even the user that is active on the page but have hasn't visited it for a minute could
+
+02:47.610 --> 02:48.450
+be removed.
+
+02:48.450 --> 02:52.030
+So the difference variable would be decreased.
+
+02:52.050 --> 02:54.930
+So in this cases it would be also increased.
+
+02:54.940 --> 02:56.400
+We'll see that in a second.
+
+02:58.850 --> 03:10.930
+So now let's iterate over the users so we'll use for each and the key in this example would be the session
+
+03:11.830 --> 03:16.050
+and the value from an array element would be the last.
+
+03:16.050 --> 03:25.410
+Visit time now we can also add another variable called now inside which will store their current time
+
+03:25.500 --> 03:27.270
+using the now helper.
+
+03:27.270 --> 03:31.490
+This will create a new instance of the carbon object.
+
+03:31.500 --> 03:34.160
+Now let's go to the condition.
+
+03:34.260 --> 03:42.120
+So what we will do is we will check if now which is the current date diff in minutes
+
+03:45.370 --> 03:47.110
+from the last visit
+
+03:50.150 --> 03:59.210
+so if the difference between now and the last visit or of a particular user is equal or more than one
+
+03:59.360 --> 04:05.510
+minute will decrease the difference a variable.
+
+04:05.540 --> 04:10.250
+So then this would be used to update the actual counter.
+
+04:10.250 --> 04:20.270
+Otherwise we will add this element to the user's update so we'll keep the user by his session key.
+
+04:20.270 --> 04:26.840
+That's actually a session and his last visit time.
+
+04:26.850 --> 04:31.540
+So basically what that what that does is described inside this diagram.
+
+04:31.540 --> 04:35.790
+First we have the list of the users that we saved previously.
+
+04:35.790 --> 04:42.880
+If the user is expired then we remove him from the list and decrease their counter to be updated.
+
+04:42.930 --> 04:45.110
+Otherwise we keep him on the list.
+
+04:45.120 --> 04:51.220
+That would be then stored in the cache.
+
+04:51.300 --> 04:59.640
+The next step would be to check if the current user was not on the list of the users that we have fetched
+
+04:59.640 --> 05:11.780
+from the cache so we'll add an if statement and will verify using our ie key exists
+
+05:14.300 --> 05:27.100
+whether the session I.D. was on the user's array so actually we want to check for false so whether it
+
+05:27.100 --> 05:31.410
+wasn't on the users array.
+
+05:31.600 --> 05:39.880
+Now if it wasn't we would like to increment the difference which would be the value will later modify
+
+05:39.910 --> 05:49.780
+the counter by because why we do that is if the user wasn't on the last visit at least users then we
+
+05:49.780 --> 05:59.350
+know that he is a fresh user but there might be also another scenario where user the current user was
+
+05:59.350 --> 06:06.180
+on that list but he was removed because his last visit was more than one minute ago.
+
+06:06.250 --> 06:08.710
+So let's also check for this condition.
+
+06:13.550 --> 06:20.290
+So will do or now diff in minutes.
+
+06:23.100 --> 06:25.290
+And we will verify the user
+
+06:28.570 --> 06:36.330
+last visit time by checking if it is bigger or equal one.
+
+06:36.430 --> 06:41.040
+Now the next thing we need to do is on the users update.
+
+06:41.080 --> 06:46.390
+We need to set the actual visit time of the current user.
+
+06:46.660 --> 06:58.150
+So for his session I.D. will set the value to be now so that way we make sure that we update the current
+
+06:58.150 --> 07:00.100
+user last visit.
+
+07:00.100 --> 07:04.820
+Time now will store that inside the cash.
+
+07:04.900 --> 07:14.220
+So we have our user scheme that we have first read in this place and now it is the time to update it.
+
+07:14.500 --> 07:22.290
+So we'll do cash put and we can do that without specifying for how long.
+
+07:22.330 --> 07:25.930
+We want to store it because we want to store it indefinitely.
+
+07:25.930 --> 07:34.360
+Or alternatively you can use the forever method which does the same as using put but without the expiration
+
+07:34.360 --> 07:36.610
+time.
+
+07:36.610 --> 07:40.210
+So the key name is user skin
+
+07:42.870 --> 07:45.390
+so user is key and the value would be.
+
+07:45.390 --> 07:48.350
+Users update.
+
+07:48.350 --> 07:55.320
+So now inside the array will have an updated up to date and most fresh list of all the users and their
+
+07:55.380 --> 07:57.380
+last visit time.
+
+07:57.540 --> 07:59.730
+Now I've noticed that I've made a mistake.
+
+07:59.790 --> 08:03.330
+This is already a variable also not a function call.
+
+08:04.140 --> 08:04.550
+OK.
+
+08:04.580 --> 08:11.160
+So this should be just using the now variable which already contains a current date.
+
+08:11.160 --> 08:20.850
+Now the next thing we'll do is we'll use cash increment to modify the integer counter which we have
+
+08:21.720 --> 08:31.940
+under the counter key so let's copy the variable name and what we are doing is we are doing a trick
+
+08:32.000 --> 08:39.140
+because the difference most often and probably most often would be negative because we decree amended
+
+08:39.170 --> 08:43.040
+to remove the users that are no longer on the page.
+
+08:43.100 --> 08:50.660
+We only incremented in case if the user is the user that hasn't visited this page in the last minute
+
+08:51.420 --> 08:51.890
+by.
+
+08:52.070 --> 08:59.610
+But we can anyway use increment and if you will provide a negative value it will just decrease the counter.
+
+08:59.720 --> 09:06.950
+Now also you should know about the increment method is that if this key won't exist it will automatically
+
+09:07.250 --> 09:10.840
+assume it is zero and incremented to 1.
+
+09:10.910 --> 09:17.990
+But what we can also do to use all the methods that we have learned is we can add an if statement and
+
+09:17.990 --> 09:28.740
+check if this item actually exists so if the counter key already exists or maybe you will first check
+
+09:28.830 --> 09:31.810
+if it doesn't exist.
+
+09:31.860 --> 09:42.890
+So if this item doesn't exist inside the cache will do cache forever as we want to store it forever
+
+09:42.890 --> 09:52.330
+we don't want it to expire counter Key will set it as one because this makes sense if we are the first
+
+09:52.360 --> 09:53.830
+user on that page.
+
+09:53.830 --> 09:57.180
+So the counter wasn't saved before then.
+
+09:57.220 --> 10:03.310
+It means it can be said us one and now.
+
+10:03.310 --> 10:10.280
+Otherwise if it already existed then we will do cache increment.
+
+10:10.360 --> 10:12.800
+This way we'll use all the methods.
+
+10:12.850 --> 10:14.770
+In this example.
+
+10:14.770 --> 10:20.180
+Now finally we can do cash get
+
+10:26.040 --> 10:28.560
+and use the same counter key.
+
+10:28.560 --> 10:35.070
+Now we don't have to provide a default value because at this point we are sure that this exists because
+
+10:35.070 --> 10:35.970
+we have save it.
+
+10:35.970 --> 10:38.180
+If it wouldn't exist.
+
+10:38.190 --> 10:44.610
+Now since we are currently working on files this won't be as fast as it could be.
+
+10:44.730 --> 10:50.940
+But then in the next lectures we'll move and I will show you an example with Redis.
+
+10:51.210 --> 10:58.650
+So that way you don't have to worry about saving and reading because this would be actually pretty fast.
+
+10:58.650 --> 11:00.410
+So now this is the final step.
+
+11:00.420 --> 11:08.130
+We are reading the final counter through the cash get and then we are passing it to the view to show
+
+11:08.310 --> 11:12.420
+the amount of users currently on the page.
+
+11:12.420 --> 11:16.740
+Now finally let's verify if this actually works.
+
+11:16.740 --> 11:24.090
+So refresh this page and you should see that this is being read by 1 people.
+
+11:24.090 --> 11:31.830
+Now if you refresh further our algorithm prevents this counter to be increased because your session
+
+11:31.830 --> 11:40.080
+I.D. is being stored in inside a different key on the cache with the with the time and date of your
+
+11:40.110 --> 11:42.000
+last visit.
+
+11:42.120 --> 11:50.310
+Now to verify it let's copy this address and open a new incognito window.
+
+11:50.310 --> 11:54.570
+And now you will see that it is being read by two people.
+
+11:54.570 --> 12:01.260
+Now you might also notice that refreshing this page doesn't do anything and the counter stays up to
+
+12:01.290 --> 12:05.390
+people now to actually test that.
+
+12:05.420 --> 12:08.200
+You will now have to wait one minute.
+
+12:08.420 --> 12:16.400
+And if you will keep refreshing this page then after about one minute this first user that has visited
+
+12:16.460 --> 12:23.870
+this page would be removed from the list and then you will see here that it is currently read by one
+
+12:23.960 --> 12:24.470
+people
+
+12:28.680 --> 12:34.980
+now I've waited a little bit and to refresh this page and now you can see that it is being read by one
+
+12:34.980 --> 12:36.840
+person which is this window.
+
+12:36.840 --> 12:38.760
+So this session is active.
+
+12:39.360 --> 12:42.630
+So the guy that visits that this page was removed.
+
+12:42.630 --> 12:46.840
+But if he will refresh the page he will be added back to the list.
+
+12:47.040 --> 12:53.530
+And then you will see that it is being visited by two people if you will refresh this window.
+
+12:53.550 --> 12:56.470
+This would also be updated and reflected here.
+
+12:56.520 --> 13:06.460
+And each time they visit they last visit that date is also updated so that was very simple example of
+
+13:06.460 --> 13:13.990
+how you can use they use the catch mechanism not only for caching intermediate data that you just don't
+
+13:13.990 --> 13:19.780
+want to read from the database or any other place where it will take more time to fetch.
+
+13:19.840 --> 13:24.400
+You can also use it as data storage in its own right.

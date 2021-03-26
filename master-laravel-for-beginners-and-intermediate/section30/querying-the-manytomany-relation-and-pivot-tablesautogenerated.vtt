@@ -1,0 +1,217 @@
+WEBVTT
+
+00:00.540 --> 00:07.830
+Now you should start this lecture with an empty blog post stock table and what you might have seen in
+
+00:07.830 --> 00:16.090
+the last lectures when we associate it tag with a blog post is that we had empty created art and updated
+
+00:16.110 --> 00:17.810
+art columns.
+
+00:17.940 --> 00:25.510
+Yet we have defined this relation or basically this table to also contain timestamps.
+
+00:25.830 --> 00:33.090
+So what you can do to actually have the timestamps of when the relation was created is you can add with
+
+00:33.090 --> 00:38.980
+timestamps to the declaration of this relation on both models.
+
+00:39.060 --> 00:45.490
+So let us do that and also let's save the changes.
+
+00:45.590 --> 00:55.020
+Now let's go to the terminal end run peach bee artisan Tinker Let's fetch a blog post using blog posts
+
+00:55.020 --> 00:58.790
+find will also use the blog post one.
+
+00:58.830 --> 01:05.940
+Now let us clear the screen because it took almost the whole screen to fetch this model.
+
+01:06.300 --> 01:15.140
+And now let's do something like this so blog post docs sync.
+
+01:15.440 --> 01:24.620
+And now we know that we have tags with I do want to and free so we can attach them using sync.
+
+01:24.770 --> 01:28.630
+It says that it has attached models with this I.D..
+
+01:28.700 --> 01:38.300
+Now let's go back to the table and now you can see that the created art and updated art was filled.
+
+01:38.350 --> 01:43.650
+So this is how you can define this relation to also include the timestamps.
+
+01:43.660 --> 01:52.420
+So whenever you attach or create a relation then you will be able to figure out when this was created.
+
+01:52.420 --> 01:57.770
+Now let's see how we can query the tax of our particular blog post.
+
+01:57.970 --> 02:03.040
+So we have our blog post variable and it's tag tax relation.
+
+02:03.040 --> 02:09.760
+If we call it not as a method or as bad as a field the same as we did with one two one and one too many
+
+02:11.020 --> 02:16.390
+will assign all the tasks associated with a particular blog post.
+
+02:16.390 --> 02:21.740
+So this is how can you simply query their relation.
+
+02:21.790 --> 02:30.190
+Now notice that this actually gives us this pivot field and this gives us access to the actual role
+
+02:30.460 --> 02:34.270
+which is inside.
+
+02:34.390 --> 02:42.250
+Now notice that this returned those tag models but older attacks have also an additional field called
+
+02:42.280 --> 02:50.020
+Pivot which actually is relating to the record inside the database which is basically defining this
+
+02:50.020 --> 02:52.600
+relation now.
+
+02:52.600 --> 02:59.620
+So basically this is returning what is inside this pivot or intermediate table called block post tag.
+
+03:01.090 --> 03:04.820
+So now you can actually read the attributes of this.
+
+03:05.530 --> 03:07.660
+So let's get first start.
+
+03:07.690 --> 03:16.410
+So we have tags so this way we are accessing the first stack and we can access the pivot.
+
+03:16.450 --> 03:23.080
+Now if you would like to read when the relation was created you can do it like that you access it using
+
+03:23.080 --> 03:32.660
+the pivot table and you can read it normally as you would lead read an attribute of our eloquent model.
+
+03:32.780 --> 03:40.790
+So by default it is using pivot as the name of this additional field that will represent the database
+
+03:40.790 --> 03:45.100
+record of the pivot or intermediate table.
+
+03:45.140 --> 03:53.210
+Now the name of this attribute pivot can also be configured so you can access the pivot table record
+
+03:53.330 --> 03:58.540
+associated with our relation using a different name then pivot.
+
+03:58.640 --> 04:02.540
+So let's say we would like to fetch a tag
+
+04:05.600 --> 04:12.970
+so we do up dog find one now the tag has some blog posts.
+
+04:13.840 --> 04:19.330
+So let's do posts tag blog posts.
+
+04:19.420 --> 04:23.020
+That's that way you can read this relation from the other side.
+
+04:23.200 --> 04:31.910
+So from our tag you read all the blog posts associated with a tag and this happens to have only one.
+
+04:32.000 --> 04:35.460
+But either way each returns are collection.
+
+04:35.680 --> 04:38.860
+And now you can see this has pivot attribute.
+
+04:38.890 --> 04:45.970
+So this will basically always access the same pivot record whether you read that from the blog post
+
+04:46.000 --> 04:48.520
+or from the tag.
+
+04:48.700 --> 04:57.100
+But if you would like to use something else then pivot you can configure that so you'll have to configure
+
+04:57.100 --> 04:59.720
+that on both sides of the relation.
+
+04:59.770 --> 05:02.380
+The name you'd like to use for that.
+
+05:02.380 --> 05:10.640
+You can use that as method and we can call that tact for example.
+
+05:10.640 --> 05:17.740
+Now you'll have to restart Tinker first press control see to stop the Tinker and now run it again.
+
+05:17.750 --> 05:20.420
+BHP artisan thinker.
+
+05:20.780 --> 05:26.400
+So now we do the same thing will fetch a dog using up tag.
+
+05:26.750 --> 05:35.880
+Find one will fetch the blog posts associated with that tag using blog posts.
+
+05:35.880 --> 05:42.660
+We know that it is only a one blog post so we can already use first because this is a collection.
+
+05:42.660 --> 05:49.200
+It has a first method which will give you the first element from the collection so you can see that
+
+05:49.290 --> 05:57.720
+we got a blog post and then this blog post that was returned has are talked property instead of the
+
+05:57.720 --> 05:59.060
+pivot.
+
+05:59.130 --> 06:06.950
+So what you can do is you can do posts tagged created art.
+
+06:07.980 --> 06:11.930
+So that's another way you can access this pivot table attribute.
+
+06:11.940 --> 06:19.050
+So you will have to change its name on both sides of the relation and then maybe that might be a more
+
+06:19.110 --> 06:22.180
+verbose for you to read.
+
+06:22.200 --> 06:27.360
+Now obviously you don't have to do that and this has some problems because if you change the name of
+
+06:27.360 --> 06:34.500
+that pivot table access or inside the relation then you have to remember how this is called and if you
+
+06:34.500 --> 06:41.610
+don't do that then you always know that you can read this record inside the pivot table using the pivot
+
+06:41.640 --> 06:42.740
+attribute.
+
+06:43.050 --> 06:46.730
+And as I've said you have to do that from both sides of the relation.
+
+06:46.740 --> 06:58.260
+Let's see this clear the screen now if we will fetch our blog post with the idea one to the post variable
+
+06:59.580 --> 07:05.610
+and now we'll read all the tax of that blog post.
+
+07:05.610 --> 07:08.130
+You can see that from this side of the relation.
+
+07:08.130 --> 07:16.500
+It still has the name pivot so that way you are accessing this relation records that contain the blog
+
+07:16.500 --> 07:24.170
+posts I.D. and tag I.D. but to modify it also from the blog post site you will also have to add as a
+
+07:24.170 --> 07:30.510
+method call here and maybe provide a different name for the pivot table access or.

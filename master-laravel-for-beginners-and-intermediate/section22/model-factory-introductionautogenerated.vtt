@@ -1,0 +1,364 @@
+WEBVTT
+
+00:01.190 --> 00:09.680
+In the last lecture we've seen how to use weave count static method of the model to fetch the count
+
+00:09.860 --> 00:17.810
+of related models and we use that to fudge the count of comments for each of the blog posts on the blog
+
+00:17.810 --> 00:19.380
+post least.
+
+00:19.400 --> 00:25.160
+We have also modified this test to display that to see if the text.
+
+00:25.160 --> 00:34.120
+No comments yet is displayed when we create our new blog post using our create dummy blog post method.
+
+00:34.220 --> 00:42.470
+Probably we should rename this test to be with no comments because that's what we are actually testing.
+
+00:42.470 --> 00:48.140
+In this case and we might also have a scenario when we actually do have comments.
+
+00:48.620 --> 00:57.950
+So let's see what we can do that because previously we only had created a blog post so we just could
+
+00:57.950 --> 01:04.820
+just create a private method in our test that will just create this blog post and save it to the database.
+
+01:04.910 --> 01:13.520
+But when we would like to verify for example that one blog post has five comments and it is being displayed
+
+01:14.120 --> 01:21.860
+but we do not really care about what's inside those comments we do not do not want to explicitly specify
+
+01:21.860 --> 01:25.500
+them we would like them to be generated for us.
+
+01:25.550 --> 01:31.870
+That's the good point where I should introduce you to them model factories.
+
+01:31.970 --> 01:46.300
+So before I do let's write another test and this time will verify if we can see one blog post with comments.
+
+01:46.380 --> 01:48.290
+So this is a brand new test.
+
+01:48.300 --> 01:58.350
+We are adding and for now we can also use this ranch part where we create our dummy blog post.
+
+01:58.350 --> 02:00.840
+We will also fetch the response
+
+02:05.390 --> 02:12.420
+and now let's see how we can quickly generate some comments for this particular blog post so we'll need
+
+02:12.440 --> 02:13.730
+terminal for that.
+
+02:13.850 --> 02:22.820
+And I've said that we'll use model factories so model factories is a tool in LA travel that lets you
+
+02:22.850 --> 02:31.700
+generate couple of instances of particular model using either some random data that will be output generated
+
+02:31.700 --> 02:34.630
+by a library called faker.
+
+02:34.940 --> 02:41.390
+So you can check out this link that is being included to this lecture and read about the possibilities
+
+02:41.420 --> 02:51.290
+of faker because it's a great library that lets you generate fake data so you can generate names you
+
+02:51.290 --> 02:57.800
+can generate addresses you can generate random text will use just a simple example but just so you know
+
+02:57.800 --> 03:06.350
+possibilities of these libraries are pretty amazing so you can generate a lot of fake data for all your
+
+03:06.350 --> 03:14.480
+needs for your tests or you can even seed your database if you want to have some more random data.
+
+03:14.600 --> 03:23.030
+So let's go ahead and first create the model factory so we'll do that using the artisan comment called
+
+03:23.120 --> 03:34.770
+Make factory then will specify the name of this factory which would be comment factory and additionally
+
+03:35.070 --> 03:41.940
+we can specify for which model we want to create it and we want it for comment.
+
+03:41.940 --> 03:45.150
+Now where can we find this factory.
+
+03:45.180 --> 03:53.100
+So it is created inside the database folder there is inside it there's factories folder and there it
+
+03:53.100 --> 03:55.770
+is our new comment factory.
+
+03:57.240 --> 04:05.850
+So you can see that it out magically has imported the faker for us and by the way if you are wondering
+
+04:05.880 --> 04:07.920
+where did we get the faker from.
+
+04:07.950 --> 04:16.250
+By default Lara it includes it inside the composer Jason so that's why you already have it installed.
+
+04:17.640 --> 04:21.480
+So let's see how we should define our factory.
+
+04:22.200 --> 04:23.430
+So it is very simple.
+
+04:23.430 --> 04:32.240
+You have the factory which is ultimately populated inside here so you do not really have to worry.
+
+04:32.280 --> 04:35.490
+Where did you get this object instance.
+
+04:35.490 --> 04:41.370
+And then it has defined method inside it it accepts two arguments.
+
+04:41.370 --> 04:47.860
+So first one is the name of the class that you are defining a factory for.
+
+04:48.120 --> 04:55.090
+And second is a closure which accepts an instance of the faker object.
+
+04:55.110 --> 05:00.550
+Actually it's fake are generated generator but it is bank alliance here.
+
+05:00.840 --> 05:02.200
+As faker.
+
+05:03.100 --> 05:12.420
+And now you should return an array and this array will specify will actually match the fields of this
+
+05:12.420 --> 05:12.870
+model.
+
+05:12.870 --> 05:19.150
+So in case of the comment for example we have content.
+
+05:19.280 --> 05:26.090
+Well we of course have also timestamps but we do not really have to worry about that right now and for
+
+05:26.090 --> 05:33.120
+content you can use faker to generate let's say text.
+
+05:33.320 --> 05:39.620
+So if you will use this property it will generate some random text for it.
+
+05:39.620 --> 05:41.990
+And that's basically all you have to do.
+
+05:41.990 --> 05:51.000
+You have the model factory written now comment that does not only have content but one of the required
+
+05:51.120 --> 05:58.290
+attributes is actually the blog post idea where you have to specify to which blog post this comment
+
+05:58.560 --> 06:00.360
+should be related to.
+
+06:00.900 --> 06:07.770
+But this we won't have to worry about because that would be a parameter that we can specify.
+
+06:07.770 --> 06:14.910
+So as you can see this is how comment looks like it has the creator that and updated that and we will
+
+06:14.910 --> 06:20.730
+have to specify content and well we won't have to specify content because this would be generated for
+
+06:20.730 --> 06:29.460
+us but we will have to specify the blog post idea so let's immediately test this so you can run Peach
+
+06:29.460 --> 06:41.040
+Pit artisan Tinker and now to use our factory model factory you will use the magic function called Factory
+
+06:41.160 --> 06:47.150
+to which you should specify the model you are using it for
+
+06:50.700 --> 06:54.000
+and then it has a method called create.
+
+06:54.000 --> 06:59.820
+And inside this method you can specify any additional parameters that you need.
+
+07:00.240 --> 07:02.380
+So we'll specify the blog post.
+
+07:02.420 --> 07:10.870
+Heidi and now first let's go ahead and check what I.D. do we have inside the database so let's assume
+
+07:10.870 --> 07:18.010
+we'll add this to the blog post we've added to it might be different on your machine depending on what
+
+07:18.010 --> 07:21.490
+blog post you have added before so specified as to
+
+07:25.120 --> 07:25.670
+first.
+
+07:25.680 --> 07:29.710
+I need to close that right OK.
+
+07:29.720 --> 07:38.050
+And you can see that it generated a new comment for us and this is the random text that got generated
+
+07:38.050 --> 07:40.490
+for us so we don't really have to worry about that.
+
+07:40.510 --> 07:42.840
+And this is the what is.
+
+07:42.860 --> 07:44.730
+Well the model factory is for it.
+
+07:44.740 --> 07:48.460
+It can generate some random data for us.
+
+07:48.460 --> 07:52.670
+We only specified what we need which was the blog post I.D..
+
+07:53.020 --> 08:00.760
+And now if you will go to your database client and check comments you can see that this was actually
+
+08:00.760 --> 08:04.190
+saved as a comment to a blog post.
+
+08:04.990 --> 08:05.250
+OK.
+
+08:05.260 --> 08:08.820
+So now we see that this works.
+
+08:08.830 --> 08:11.920
+So now let's go back to our test
+
+08:15.220 --> 08:24.890
+so we have our dummy blog post created here by the way we can also create a model factory for our report
+
+08:24.930 --> 08:27.410
+post but we'll do that later.
+
+08:27.480 --> 08:32.490
+For now let's just add a couple of comments to our blog post.
+
+08:32.490 --> 08:38.940
+Now let's just go ahead and add some comments using the factory function.
+
+08:38.940 --> 08:42.420
+So you have to specify the model name so you can do that two ways.
+
+08:42.420 --> 08:51.410
+You can just specify the class name using the full namespace or Additionally you might just use that
+
+08:51.440 --> 08:52.490
+comment class
+
+08:55.940 --> 08:59.270
+class property which would result in the same.
+
+08:59.270 --> 09:06.290
+So it will just give the fully qualified class name for it but for this remember that you will have
+
+09:06.290 --> 09:12.600
+to order your statement for comment.
+
+09:12.990 --> 09:13.660
+OK.
+
+09:13.730 --> 09:20.050
+Now the first parameter is the model for which you would like to generate some data.
+
+09:20.110 --> 09:26.230
+And the second parameter optional one is the amount of those models that you would like to generate.
+
+09:26.230 --> 09:37.560
+So let's assume we would like for comments and now we can call create and it accepts an array of any
+
+09:37.560 --> 09:39.090
+additional parameters.
+
+09:39.090 --> 09:46.410
+So since we haven't specified that block post I.D. in our model factory which makes sense because we
+
+09:46.410 --> 09:54.630
+would like to choose to which blog post we assign those comments will generate it for the post that
+
+09:54.630 --> 09:58.810
+we have just created using create dummy block post.
+
+09:58.890 --> 10:04.540
+So we just read the idea of it.
+
+10:04.660 --> 10:05.180
+All right.
+
+10:05.180 --> 10:08.370
+We have saved the changes.
+
+10:08.570 --> 10:18.380
+Now we can fetch the page using post and this route because remember that we imported this refresh database
+
+10:18.380 --> 10:18.740
+trade.
+
+10:18.740 --> 10:25.220
+So after each single test it will reset the Eskil light database that we have.
+
+10:25.220 --> 10:29.670
+So we do not have to worry about this blog post that we created earlier.
+
+10:29.900 --> 10:31.600
+The database would be reset.
+
+10:31.610 --> 10:35.810
+So we start with empty one.
+
+10:35.880 --> 10:40.760
+So now that we fetch the response here we should fetch.
+
+10:41.040 --> 10:50.930
+We should be able to assert that we can see the text and let's see what we should expect.
+
+10:50.930 --> 10:58.930
+So in case of for comments we should see our text for comments.
+
+11:01.450 --> 11:01.750
+OK.
+
+11:01.750 --> 11:03.080
+And that's basically it.
+
+11:03.090 --> 11:13.120
+Now let's quit thinker clear this and run peach Puneet and now you can see that we have eleven tests
+
+11:13.180 --> 11:14.640
+and twenty nine assertions.
+
+11:14.650 --> 11:22.740
+So this works because if you would expect free comments and run this test you can see that it fails
+
+11:22.770 --> 11:26.850
+because we actually expect to see four comments.
+
+11:26.850 --> 11:36.900
+So model factories are just perfect way to use it in to generate some data inside your tests when sometimes
+
+11:36.900 --> 11:44.570
+you do not really care about specific properties of your model like we did inside this test.
+
+11:44.640 --> 11:49.670
+We verified if we can exactly see the exact text of this post.
+
+11:49.680 --> 11:58.830
+So in this scenario we can replace this create dummy blog post with model factory for blog posts generated
+
+11:58.920 --> 12:02.970
+and then just verify if we can see the comments.

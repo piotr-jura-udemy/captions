@@ -1,0 +1,76 @@
+WEBVTT
+
+00:01.140 --> 00:09.780
+Let's work on styling the lists of posts and an individual post page, so please open the partial post
+
+00:09.780 --> 00:15.480
+blade BHP and the show Blade template from the posts folder.
+
+00:17.240 --> 00:20.630
+The post title does not need a key.
+
+00:22.760 --> 00:25.970
+And should be a header element instead.
+
+00:31.250 --> 00:39.080
+Also, we want need to present the loping features, so let's get rid of art and even styles for an
+
+00:39.080 --> 00:43.100
+element living just one style.
+
+00:47.120 --> 00:56.360
+Let's add a link pointing to the editing form and add a element styled as a button.
+
+01:01.230 --> 01:07.560
+As usual, we use the helper to generate a URL.
+
+01:21.440 --> 01:29.480
+The form should be rendered in line, so the in line bootstrap class.
+
+01:30.610 --> 01:34.450
+Then started the deleting button as the other one.
+
+01:36.550 --> 01:41.170
+So are the Biden and Biden primary classes.
+
+01:43.190 --> 01:44.060
+Let's take a look.
+
+01:46.000 --> 01:46.880
+Almost good.
+
+01:47.710 --> 01:54.250
+We need a label on this button and also some spacing between the separate entries.
+
+01:59.250 --> 02:02.310
+So let's add the added level.
+
+02:05.100 --> 02:14.250
+And this development should have an MVP free class, meaning margin bottom of the size free, by the
+
+02:14.250 --> 02:14.670
+way.
+
+02:14.730 --> 02:18.630
+It probably won't hurt to add a link to the post.
+
+02:18.630 --> 02:19.030
+Right.
+
+02:19.770 --> 02:23.010
+So let's skip you over this element.
+
+02:24.570 --> 02:31.020
+Pasted in here because, well, it actually contains almost the same code, we just need to change the
+
+02:31.020 --> 02:38.160
+action name to posts show and close the AI elements tag.
+
+02:42.050 --> 02:44.780
+All right, now save the charges.
+
+02:46.180 --> 02:47.140
+Do refresh.
+
+02:50.840 --> 02:54.140
+It seems that it works pretty nice.

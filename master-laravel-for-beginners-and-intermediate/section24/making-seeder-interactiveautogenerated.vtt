@@ -1,0 +1,370 @@
+WEBVTT
+
+00:00.870 --> 00:07.290
+In the last lecture I have mentioned that we can ask users surrounding the seeder for some additional
+
+00:07.350 --> 00:08.240
+input.
+
+00:08.550 --> 00:13.500
+So let's go into the Cedar class from which that database cedar extends.
+
+00:13.500 --> 00:20.490
+You can go to this class by pressing out and clicking on the class name so you can see that there is
+
+00:20.490 --> 00:27.780
+protected field command and command is itself an instance of the Artisan command.
+
+00:27.780 --> 00:30.790
+So let's see what we can do with it.
+
+00:30.810 --> 00:39.720
+So first thing we can do is we can ask the customer the user running the cedar if he wants to refresh
+
+00:39.720 --> 00:40.790
+the database.
+
+00:40.830 --> 00:47.770
+Otherwise we will have to run peach bee migrate refresh with the seed flag.
+
+00:47.940 --> 00:49.290
+So let's see how we can do that.
+
+00:49.290 --> 00:53.210
+This command confirm.
+
+00:53.520 --> 01:00.120
+So confirm is a method which allows us to ask a question and provide a default value.
+
+01:00.120 --> 01:01.250
+Basically this is.
+
+01:01.260 --> 01:03.240
+Yes or no.
+
+01:03.240 --> 01:11.840
+So here we can specify the question do you want to refresh the database
+
+01:16.230 --> 01:16.870
+now.
+
+01:16.930 --> 01:25.740
+If the user would confirm that he would like to refresh the database we can use this command call.
+
+01:25.930 --> 01:33.550
+And here we can write any artisan command available and since we know we can call migrate to refresh
+
+01:35.520 --> 01:36.210
+we can do that.
+
+01:37.200 --> 01:46.470
+Additionally there is another useful method inside this common class called either line which would
+
+01:46.470 --> 01:54.090
+just print a line or info which would print a green message that something was successful so we can
+
+01:54.090 --> 01:59.810
+say database was refreshed.
+
+02:02.700 --> 02:10.010
+Now we can immediately check if that works by running Peach Pit artisan D.B. seed.
+
+02:10.190 --> 02:15.790
+So what you see here is you are being asked the question with the default no.
+
+02:15.920 --> 02:21.550
+As you might see here in this confirm method the default value is false.
+
+02:21.560 --> 02:27.890
+So if you would like to always propose users that their migrations should happen by default you can
+
+02:27.890 --> 02:29.720
+provide the second value here.
+
+02:31.450 --> 02:36.570
+To be true and then let's rerun it again to see what we got.
+
+02:36.580 --> 02:39.860
+So you can see that by default we got yes.
+
+02:39.880 --> 02:46.350
+So that means user just wouldn't have to enter anything pressing Enter would be enough.
+
+02:46.360 --> 02:48.970
+Now let's see what happens if we type.
+
+02:48.970 --> 02:49.950
+No.
+
+02:50.320 --> 02:57.330
+We got an error because we got the duplicate entry for example for this email and that is because that
+
+02:57.330 --> 03:08.690
+database is already seeded so let's remove the default value and see what we achieve by having this
+
+03:08.690 --> 03:15.420
+question asked before we run our cedar so if we type.
+
+03:15.420 --> 03:24.610
+Yes it will refresh the database showed the message that database was refreshed and then run all the
+
+03:24.700 --> 03:27.640
+seeders one by one.
+
+03:27.650 --> 03:34.570
+Now it's important to note that obviously do not have to ask users for any additional input.
+
+03:34.600 --> 03:39.700
+I'm just showing you are an option that you can achieve it this way.
+
+03:39.770 --> 03:46.640
+But obviously you don't really have to do that running cedar as it is by default as you have written
+
+03:46.640 --> 03:49.280
+it is also fine.
+
+03:49.280 --> 03:56.570
+But what happens if we got this questions asked and we wouldn't like to be asked any questions you just
+
+03:56.870 --> 04:05.870
+want to proceed with some defaults and random DBC to come out without being asked any questions.
+
+04:05.870 --> 04:13.250
+So if you run Peach Pit artisan without any common name you get some help.
+
+04:13.250 --> 04:17.820
+And if you will scroll to the top there are also available options.
+
+04:17.840 --> 04:22.460
+One of them is Dash and or no interaction.
+
+04:22.700 --> 04:32.510
+So if you will run BHP artisan Debbie seed with that and the flag or any parameter what you will get
+
+04:32.630 --> 04:35.290
+is you won't get asked any questions.
+
+04:35.300 --> 04:38.170
+It will just proceed with all the defaults.
+
+04:38.210 --> 04:45.330
+So we get an error because that database is already see that and we got some duplicates.
+
+04:45.400 --> 04:45.640
+Okay.
+
+04:45.650 --> 04:54.020
+Now let's move on to the other see there is that we have for example the user table cedar.
+
+04:54.020 --> 05:03.370
+And another thing that we can achieve is for example we can ask users how many users they want to be
+
+05:03.490 --> 05:06.860
+created.
+
+05:06.940 --> 05:14.260
+So obviously here we also have access to the command field because this glass is also extending the
+
+05:14.260 --> 05:25.290
+base cedar class which has this comment field and the method name we can use is ask So here we can ask
+
+05:25.290 --> 05:35.220
+a question and get get some value so let's ask how many users would you like.
+
+05:35.220 --> 05:42.450
+Now this time the second value is the default one that we will get if user want to enter an input so
+
+05:42.600 --> 05:45.080
+we can keep it up 20.
+
+05:45.090 --> 05:53.640
+And now another important thing is that since we are accepting input it will be a string and the factory
+
+05:53.640 --> 05:55.470
+accepts an integer.
+
+05:55.470 --> 06:05.430
+So we'll have to cast this value to integer and final step is to change this constant 20 to the variable
+
+06:05.940 --> 06:16.440
+to which we have read the input from the user so let's clear the terminal and run everything again.
+
+06:16.470 --> 06:19.500
+So first question is do we want to refresh the database.
+
+06:19.500 --> 06:20.520
+Yes.
+
+06:20.730 --> 06:25.680
+And now we can see on the bottom that we are being asked how many users would we like.
+
+06:25.950 --> 06:31.710
+So if you will press enter you will just get the default that you can see or you can even say that you
+
+06:31.710 --> 06:38.520
+want thousand users and it will actually add 1000 users to the database.
+
+06:38.520 --> 06:46.050
+Now let's go ahead and do the same thing for the blog post so we will ask the same question here.
+
+06:46.590 --> 06:53.190
+But this time will of course ask for the blog post and use the default that we have here which is 50
+
+06:53.310 --> 07:02.040
+maybe we can also rename it to block count doesn't really matter how we call it and put this variable
+
+07:02.040 --> 07:08.100
+here so there won't be a static value but what we read from the variable but now we have a problem since
+
+07:08.100 --> 07:14.040
+we are asking for asking the user how many users he would like to be created.
+
+07:14.040 --> 07:17.900
+He can also type 0 and then we won't have any users.
+
+07:18.090 --> 07:23.130
+And here we depend on at least one user bank available.
+
+07:23.190 --> 07:32.820
+So what we can do is we can use a plain peach bee max function which would get the bigger value of the
+
+07:32.940 --> 07:34.320
+two values provide it.
+
+07:34.860 --> 07:42.630
+So if we'll call this Max with the input from the user and one it will get a bigger value.
+
+07:42.660 --> 07:50.640
+So in this case if the user would provide zero or invalid value it will create at least one user.
+
+07:51.120 --> 07:58.560
+So this is a protection for ourselves because otherwise Well we it doesn't make sense to create anything
+
+07:58.650 --> 08:02.970
+else if we do not have at least one user.
+
+08:03.000 --> 08:09.630
+So in this case we are safe now we can ask for the blog posts and create some blog posts.
+
+08:09.690 --> 08:15.910
+Now let's also copy this line and see what we can do with the comments.
+
+08:15.950 --> 08:16.910
+So how many
+
+08:19.410 --> 08:21.130
+comments would you like.
+
+08:21.150 --> 08:25.080
+We can also provide a default to be 150.
+
+08:25.320 --> 08:28.140
+Change the variable name to comments count
+
+08:31.410 --> 08:35.130
+and modified a static value to use the variable.
+
+08:36.180 --> 08:43.620
+And now with this we allow users to actually specify that they want zero blog posts.
+
+08:43.620 --> 08:55.040
+So in this case we should check if posts count is bigger than zero.
+
+08:56.900 --> 09:05.950
+And in this case we can provide information using command.
+
+09:05.970 --> 09:12.380
+There are no blog posts so no comments will be added.
+
+09:15.220 --> 09:24.100
+We can even move that as the first thing that happens because well it doesn't make sense to ask for
+
+09:24.100 --> 09:26.750
+how many comments users would want if.
+
+09:26.990 --> 09:29.410
+Well there's nothing to be added.
+
+09:29.410 --> 09:32.010
+We can also add a written statement.
+
+09:32.350 --> 09:36.910
+So nothing will happen if there are no blog posts to be found.
+
+09:36.910 --> 09:43.570
+And of course if there are any we can then ask for how many comments they want and create the appropriate
+
+09:43.630 --> 09:45.160
+number of comments.
+
+09:45.160 --> 09:48.660
+So let's clear the screen and test it all out.
+
+09:48.700 --> 09:51.610
+So first let's see.
+
+09:51.850 --> 09:53.380
+We have refreshed the database.
+
+09:53.380 --> 09:55.840
+Now how many users would you like.
+
+09:55.960 --> 09:58.030
+Well let's type 0.
+
+09:58.720 --> 10:01.840
+So at least one should be created.
+
+10:01.840 --> 10:04.090
+Now how many blog posts would you like.
+
+10:04.090 --> 10:06.340
+Let's see 0.
+
+10:06.520 --> 10:11.170
+Now it seems at this point we are being asked for how many comments we would like.
+
+10:11.170 --> 10:17.920
+And obviously this is because I've made a mistake here not these not sorry for that we should check
+
+10:17.920 --> 10:23.840
+what our posts count is actually equal to zero not whether it is bigger than zero.
+
+10:23.840 --> 10:33.250
+Because only then we just quit this action so let's save this changes again press control see in the
+
+10:33.250 --> 10:36.790
+terminal and rerun that again.
+
+10:36.790 --> 10:46.140
+So yes we specify zero so we should have at least one user zero for the blog posts and now we can see
+
+10:46.140 --> 10:51.510
+that we got this message that there are no blog posts so no comments will be added.
+
+10:51.540 --> 10:59.610
+Now let's go to the database to see what we have so we can see 0 blog posts 0 comments.
+
+11:00.020 --> 11:07.550
+And actually we got two users because one of them is like hardcoded the John Doe it is being created
+
+11:07.550 --> 11:17.550
+from the state inside the model factory so you can play around with it provide different combinations.
+
+11:17.560 --> 11:25.690
+But this is generally a way you would use to ask the users for some additional input and also remember
+
+11:26.290 --> 11:33.540
+that if you do not want to ask the users any questions or you do not want to be asked any questions
+
+11:33.550 --> 11:40.750
+then you can just around DBC with the end flag and then it will provide you the default values and default
+
+11:40.780 --> 11:42.310
+options for everything.
+
+11:42.370 --> 11:48.880
+So this would just crash because we have duplicate entry but in case you will manually refresh the database
+
+11:48.940 --> 11:51.490
+then it will just work with the defaults.

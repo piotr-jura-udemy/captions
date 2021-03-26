@@ -1,0 +1,133 @@
+WEBVTT
+
+00:00.830 --> 00:08.210
+To be able to visit your project on your local computer under a custom domain like Laravel DOT Test,
+
+00:08.210 --> 00:13.670
+for example, you need to configure a so-called virtual Hulst in the Apache Web server.
+
+00:14.450 --> 00:18.090
+Just so you know, doing this is completely optional.
+
+00:18.830 --> 00:27.260
+There is a much easier way to run your Laravel app using the built in development web server 99 percent
+
+00:27.260 --> 00:31.610
+of the time it's enough to use a built in server for local development.
+
+00:32.330 --> 00:41.890
+The development server is started by running BB Artisan Service Command in the project directory and
+
+00:41.930 --> 00:44.120
+can be stopped by pressing control.
+
+00:44.120 --> 00:44.630
+See?
+
+00:48.280 --> 00:54.130
+The project is available under the localhost IP with the Port 80000 by default.
+
+00:56.250 --> 01:04.500
+This and the next lecture is here only for legacy reasons, but if you decided to go along, the process
+
+01:04.500 --> 01:05.640
+is not complicated.
+
+01:06.690 --> 01:08.280
+Go to the exam folder.
+
+01:10.550 --> 01:22.310
+Then to Apache config folder and open the HTP decon file, mind that the extension of this file can
+
+01:22.310 --> 01:23.810
+be hidden on your system.
+
+01:24.320 --> 01:26.390
+Well, it depends on your system settings.
+
+01:27.450 --> 01:34.920
+That's the only file you will see there called HD DVD anyway, you can drag it onto the visual studio
+
+01:34.920 --> 01:35.460
+called.
+
+01:37.450 --> 01:42.970
+Next, press control F and search for the hosts.
+
+01:44.990 --> 01:48.680
+It should take you around line five to one.
+
+01:49.900 --> 01:55.810
+And commence this line if it is commanded by removing the harsh character from the beginning of the
+
+01:55.810 --> 02:00.770
+line, if it is already uncommented, then leave it as it is.
+
+02:01.480 --> 02:06.730
+This makes Apache use their separate file that contains the virtual host config.
+
+02:07.450 --> 02:10.020
+Now we need to open this viscose file.
+
+02:10.660 --> 02:13.330
+So go to the extra folder.
+
+02:14.740 --> 02:22.720
+And locate the htp d v Holst's dot com and then drag it to the ED.
+
+02:24.030 --> 02:28.770
+Again, the extension might be hidden here, but the name is unique.
+
+02:32.490 --> 02:41.070
+There are two example configurations in there, and we will modify one toggled they command in the first
+
+02:41.070 --> 02:42.840
+one by selecting it.
+
+02:46.080 --> 02:51.120
+And pressing control on your keyboard, you might have to do that twice.
+
+02:54.170 --> 03:00.620
+Remove the first line and set the document routes to points to the Laravel application where you have
+
+03:00.620 --> 03:01.370
+created it.
+
+03:02.440 --> 03:10.510
+By default, this would be Seekamp H.T. Dogs, Laravel, and then we need to actually point to the public
+
+03:10.510 --> 03:19.150
+folder inside our Laravel application, the server name has to be Laravel to test and we can specify
+
+03:19.150 --> 03:23.560
+that allow us to be Laravel the test with the prefix.
+
+03:24.580 --> 03:25.510
+W w w.
+
+03:28.380 --> 03:35.550
+Additionally, configurator files were errors and server access log would be logged into in case of
+
+03:35.550 --> 03:38.160
+a party error specific to this site.
+
+03:38.580 --> 03:40.440
+This is where you will find logs.
+
+03:40.770 --> 03:46.380
+But mind, this is just for server specific logs, not BHP application logs.
+
+03:55.890 --> 03:58.290
+Next, safe Cengiz.
+
+03:59.600 --> 04:03.470
+And go back to the Zamp control panel.
+
+04:05.570 --> 04:09.020
+Restart Apache to apply the new configuration.
+
+04:10.050 --> 04:16.380
+Though you are not done yet to use the domain, you need to configure it locally on your system first
+
+04:16.860 --> 04:18.960
+and there is a separate lecture about that.

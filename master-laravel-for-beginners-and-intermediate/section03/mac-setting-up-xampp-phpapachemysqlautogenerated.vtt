@@ -1,0 +1,79 @@
+WEBVTT
+
+00:00.950 --> 00:06.950
+This lecture is only for the Mac OS users, if you are not a Mac, please just skip this lecture.
+
+00:08.100 --> 00:14.820
+We will learn how to install and configure Daxam package, which is a bundle of Apache Web server and
+
+00:14.820 --> 00:19.080
+then MySQL database, the first step is to download Gazump.
+
+00:19.830 --> 00:25.140
+So visit Daxam website and go to the download section.
+
+00:25.860 --> 00:28.970
+Voda Download links are available on the main page.
+
+00:28.980 --> 00:30.540
+Please don't click them.
+
+00:32.080 --> 00:34.510
+Scroll to the MapQuest section.
+
+00:36.230 --> 00:44.930
+From the options, choose the first BHP seven point for the one lighter in size, the second one uses
+
+00:44.930 --> 00:47.900
+the virtual machine and I don't recommend it.
+
+00:49.130 --> 00:53.960
+When the package is downloaded, Ronder installer use default options.
+
+00:56.900 --> 01:00.860
+You might be asked for your password, so please divert.
+
+01:04.560 --> 01:12.030
+Other than that, just use the default options and press next until it installs.
+
+01:15.720 --> 01:20.400
+Zamp is located in the applications subfolder.
+
+01:22.100 --> 01:29.750
+To start it, random manager or ASX up, it can also be started from the launchpad.
+
+01:32.720 --> 01:34.880
+Or using the spotlight.
+
+01:39.410 --> 01:43.400
+When started, you'd be asked for your admin password.
+
+01:50.290 --> 01:56.380
+On the MENAGED servers stop, you can start a party and Michael.
+
+01:58.930 --> 02:05.680
+Just click on the server, you wants to be started and press start or stop to stop the server.
+
+02:07.980 --> 02:15.510
+If Apache does not start, make sure port aid is not blocked, it can be blocked by Skype, so make
+
+02:15.510 --> 02:20.670
+sure to quit Skype before trying or other servers you might be running.
+
+02:22.800 --> 02:32.670
+Finally, go visit HTP 127 oh one in your browser, which is the localhost address, and you should
+
+02:32.670 --> 02:34.650
+see the SARP dashboard.
+
+02:35.490 --> 02:38.040
+This means the setup was a success.
+
+02:39.080 --> 02:42.980
+Next, you can visit this local address.
+
+02:44.240 --> 02:52.370
+Be my admin to access the database manager later when we'll set up the database.
+
+02:52.700 --> 02:55.940
+We will also learn about other recommendations.

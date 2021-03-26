@@ -1,0 +1,103 @@
+WEBVTT
+
+00:01.290 --> 00:08.070
+To be able to visit your project on your local computer under a custom domain like Laravel, the test,
+
+00:08.700 --> 00:13.800
+you need to configure a so-called virtual host in the Apache Web server.
+
+00:15.240 --> 00:17.470
+It is not complicated at all.
+
+00:18.060 --> 00:22.800
+You need to go to the applications folder and then Zamp.
+
+00:24.350 --> 00:25.250
+Some files.
+
+00:26.990 --> 00:27.740
+EDC.
+
+00:29.330 --> 00:38.720
+And then open the http d dot com file, you can drag it onto the visual studio code icon in the dark.
+
+00:42.690 --> 00:48.750
+Next press, come on, Tev, and search for the hosts.
+
+00:50.050 --> 00:52.600
+There should only be one entry in this file.
+
+00:53.200 --> 00:56.740
+It should take you around line four eight eight.
+
+00:58.220 --> 01:05.600
+And command this line by removing the harsh character from the beginning of the line, this makes Apache
+
+01:05.600 --> 01:11.960
+use their separate file that contains the virtual host config, save the changes.
+
+01:15.220 --> 01:24.160
+Now we need to open this V hosts file, so go to the extra folder and locate HDTV codes dot com and
+
+01:24.160 --> 01:26.200
+drag it to the visual studio called.
+
+01:27.400 --> 01:34.060
+There are two example conflicts in there, and we will modify one, so let's do it with this one first,
+
+01:34.210 --> 01:36.370
+remove the first line, we won't need that.
+
+01:36.610 --> 01:43.060
+And then you need to set the document routes to punch to the folder where your application is.
+
+01:43.300 --> 01:46.840
+And server name is the domain name you will use.
+
+01:47.560 --> 01:49.030
+Let's start with the domain.
+
+01:49.840 --> 01:52.300
+So we want that to be Laravel.
+
+01:53.950 --> 02:00.550
+Those test, let's also fix the layers, so it's w w w Laravel to test.
+
+02:01.840 --> 02:09.150
+Then you need to specify the document route and it has to point to the folder where you have just created
+
+02:09.150 --> 02:10.820
+the new Laravel application.
+
+02:11.530 --> 02:18.130
+So if you followed the instructions, this would be applications slash sump, slash clunk sound files,
+
+02:18.460 --> 02:20.470
+then HD docs.
+
+02:23.580 --> 02:31.620
+Lot of public, it is public because in the public folder, you can find the index Buerge be filed the
+
+02:31.620 --> 02:34.410
+main entry points to the Laravel application.
+
+02:35.280 --> 02:41.370
+Additionally, you can give the error log and custom log files, names that are specific to our site
+
+02:41.370 --> 02:44.370
+name so they can be easily found in the logs folder.
+
+02:46.110 --> 02:51.690
+So a specific name would, for example, be Laravel to Test and Laravel.
+
+02:53.470 --> 02:55.000
+The first access log.
+
+02:57.060 --> 03:01.320
+Next, saved the changes and go back to the subpanel.
+
+03:04.880 --> 03:12.620
+Restart Apache to apply the new configuration while you are done to actually use the domain.
+
+03:12.800 --> 03:17.780
+You need to configure it locally on your system and there is a separate lecture about that.

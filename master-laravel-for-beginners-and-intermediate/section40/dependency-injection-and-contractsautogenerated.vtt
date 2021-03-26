@@ -1,0 +1,403 @@
+WEBVTT
+
+00:01.020 --> 00:05.370
+In this lecture we will continue working with dependency injection.
+
+00:05.370 --> 00:13.650
+And as I've said we will replace this dependency on the cash facade and the session helper function
+
+00:14.010 --> 00:19.320
+and we will actually inject those proper services using constructor.
+
+00:19.320 --> 00:24.540
+But before we do that we need to learn about something which is a contract.
+
+00:24.990 --> 00:30.990
+So there is this documentation page in light of all dogs about the difference between a contract and
+
+00:31.070 --> 00:31.930
+a four seed.
+
+00:32.520 --> 00:40.860
+So what contract is basically this is an peach B interface that has some matters like our usual interface
+
+00:40.980 --> 00:44.460
+and those methods of course do not have an implementation.
+
+00:44.940 --> 00:50.460
+So contract is basically making sure that some functionality is being provided.
+
+00:51.180 --> 00:58.830
+So as a lot of our documentation says for seeds and helper functions are just a simple way of using
+
+00:58.920 --> 01:07.470
+lot of a service container without needing to resolve those contracts or passing them through dependency
+
+01:07.470 --> 01:09.900
+injection in constructor.
+
+01:09.900 --> 01:16.980
+It also says that in most cases each phosphate has an equivalent contract and this is important for
+
+01:16.980 --> 01:25.020
+us because to replace four seats we need to know what is the equivalent interface or contract that we
+
+01:25.020 --> 01:33.860
+will have to pass as an argument to the constructor.
+
+01:33.990 --> 01:41.660
+No let's also take a look at the second paragraph which says that phosphates do not require you to specify
+
+01:41.660 --> 01:45.540
+them on the class constructor and contracts do.
+
+01:45.560 --> 01:50.960
+This is explicitly dependent defining the dependencies of your class.
+
+01:50.960 --> 01:57.110
+Well a lot of all dogs are right that some developers prefer to explicitly define their dependencies
+
+01:57.140 --> 01:58.500
+of their classes.
+
+01:58.550 --> 02:05.100
+It's then easier to keep track of how many dependencies a class have and with phosphates.
+
+02:05.120 --> 02:10.250
+It's just easy to forget yourself and use well every possible facet.
+
+02:10.490 --> 02:13.530
+There is out there now.
+
+02:13.580 --> 02:20.270
+Also another thing to know is that while using phosphates and Dependency Injection is fine.
+
+02:20.270 --> 02:26.900
+So both of them is fine and I want to really tell you which you should use but there is a feeling that
+
+02:27.260 --> 02:32.000
+when you write typical lava applications using phosphates it's just perfect.
+
+02:32.030 --> 02:40.060
+It's just fine it makes it very easy and possibly convenient but when you create a package for larval
+
+02:40.220 --> 02:48.230
+so something like a third party package that can be downloaded by others then you have to use contracts.
+
+02:48.230 --> 02:50.090
+So this is our recommended way.
+
+02:50.240 --> 02:59.540
+If you create packages now we said that in most cases each phosphate has an equivalent contract and
+
+02:59.540 --> 03:05.690
+there is actually a list of all those phosphates and their equivalent contracts at the bottom of this
+
+03:05.690 --> 03:06.530
+documentation.
+
+03:06.530 --> 03:09.930
+So this link contract reference.
+
+03:10.160 --> 03:13.370
+So let's find those that we need.
+
+03:13.370 --> 03:19.340
+So the first one is cash and that's the contract that we will have to use.
+
+03:19.340 --> 03:29.480
+So let's copy this name and they use statement for it and we will actually Elias it as cash and we can
+
+03:29.480 --> 03:31.410
+add that as an argument.
+
+03:31.430 --> 03:34.130
+So cash like that.
+
+03:34.130 --> 03:40.080
+Of course this has to be neutralized so this cash equals cash.
+
+03:40.100 --> 03:43.000
+Let's also add a private field for that.
+
+03:43.020 --> 03:46.120
+So private cash
+
+03:49.380 --> 03:52.740
+and now another one is the session.
+
+03:52.740 --> 03:59.100
+So let's find where do we have the session equivalent well.
+
+03:59.130 --> 04:00.330
+So this might be fine.
+
+04:00.330 --> 04:06.860
+So session driver basically is using the default session driver and well we will have just one.
+
+04:06.870 --> 04:08.850
+So let's also add this
+
+04:12.800 --> 04:16.140
+now of course we'll have to remove the use of this for seed.
+
+04:16.220 --> 04:24.220
+So let's do that and now let's also specify a dependency off session.
+
+04:26.950 --> 04:30.450
+And obviously we have to utilize this in constructor.
+
+04:30.460 --> 04:34.300
+So this would be available to other methods of this class.
+
+04:34.330 --> 04:36.470
+And well let's define our field.
+
+04:36.520 --> 04:40.150
+You don't really have to define this field but I think it's a good practice.
+
+04:40.150 --> 04:45.130
+It's obvious then what are all the fields of a class.
+
+04:45.130 --> 04:50.090
+So now will have to somehow replace the usage of this fixates.
+
+04:50.110 --> 04:57.010
+But first let's go to the service container so you will now see how you can actually inject those things
+
+04:58.650 --> 05:05.100
+now to pass something to the counter we would actually need to first resolve something from the service
+
+05:05.100 --> 05:13.220
+container inside this service definition so we can do the same thing as we did before in user controller
+
+05:13.240 --> 05:14.700
+or post controller.
+
+05:14.700 --> 05:22.740
+We use the resell function but this is useful if you do not have access to the application object.
+
+05:22.740 --> 05:24.290
+And this time we have.
+
+05:24.420 --> 05:33.690
+So we can use up make up make is just basically the same thing as using that resolve helper function.
+
+05:33.690 --> 05:39.750
+So now we define those dependencies as contracts as interfaces.
+
+05:39.810 --> 05:46.710
+So if you will open this by clicking You can see that that's an interface and you know that we can't
+
+05:46.800 --> 05:49.230
+instantiate interfaces in peach B.
+
+05:49.230 --> 05:52.640
+They only have to be implemented by classes.
+
+05:52.860 --> 06:01.110
+So how it happens that we ask for an interface and typing with interface and get an object we will cover
+
+06:01.110 --> 06:05.190
+that in next lecture so please don't worry about that right now.
+
+06:05.400 --> 06:12.780
+Just so we know you can also ask for interfaces and then a lot of us will know what object what service
+
+06:12.780 --> 06:14.950
+to pass for that interface.
+
+06:15.210 --> 06:17.750
+So you will learn that in the next lecture.
+
+06:17.760 --> 06:22.680
+Now let's also inject the second one that this class needs.
+
+06:22.680 --> 06:25.330
+So the first one was cash.
+
+06:25.470 --> 06:28.990
+The second one is session.
+
+06:29.040 --> 06:32.310
+So mind this is equivalent of the FSA.
+
+06:32.340 --> 06:38.170
+So we checked what contracts are equivalent of using FSA aid.
+
+06:38.310 --> 06:41.560
+So now our service is correct.
+
+06:41.580 --> 06:43.530
+It has all the dependencies
+
+06:46.330 --> 06:57.320
+we can even do DDA here on this cash and before that to dump on this session to see if we actually got
+
+06:57.560 --> 07:01.290
+the proper objects passed.
+
+07:01.390 --> 07:06.880
+So now let's go to one of the blog posts and well you can see that there is the store.
+
+07:06.880 --> 07:13.930
+This is actually an object passed from the session and you can see that the namespace for it is illuminate
+
+07:13.990 --> 07:15.060
+sessions store.
+
+07:16.360 --> 07:24.100
+And here we get cash manager even though we have asked for an interface so we'll get to this a lot of
+
+07:24.190 --> 07:26.680
+magic in the next lecture anyway.
+
+07:26.690 --> 07:29.810
+This this is actually working so it's great.
+
+07:30.010 --> 07:37.450
+So we have dumped this because actually as it stands right now we will have an issue let's say for example
+
+07:37.660 --> 07:43.180
+we have removed an import for the cash phosphate so we can't use that anymore.
+
+07:43.180 --> 07:46.650
+So let's refactor now this method a little bit.
+
+07:46.660 --> 07:54.600
+So it now can fully take advantage of all the dependencies that we have so you can see that here we
+
+07:54.600 --> 07:57.800
+depend on the tax method from the cash facility.
+
+07:57.810 --> 08:04.740
+But if you remember not all cash implementations support tax only Redis does this.
+
+08:04.890 --> 08:13.320
+And since we are accepting an interface now this can accept any implementation of the cash whether this
+
+08:13.320 --> 08:21.660
+is Redis or something else that doesn't support tax so we'll have to add another field called supports
+
+08:21.750 --> 08:31.020
+tax and how we can figure that out is whether the cash object contains tax method.
+
+08:31.020 --> 08:34.740
+So there is a BHP function for that called method exists.
+
+08:34.800 --> 08:39.900
+The object is cash and method is tax.
+
+08:40.110 --> 08:46.970
+So this would be true if the cash that was passed here supports tax.
+
+08:47.220 --> 08:49.770
+So this is our new field.
+
+08:49.770 --> 08:56.430
+Now what we can immediately do is we can replace this session helper function with this session.
+
+08:56.430 --> 09:04.350
+So now we are using the finger that was injected to the class instead of resolving the session using
+
+09:04.350 --> 09:09.140
+session helper function and then there is a problem with this tax.
+
+09:09.240 --> 09:16.820
+So notice that whenever we call any method of the cash we have to proceed with their tax goal.
+
+09:16.890 --> 09:27.050
+If we want to use tax so the first thing we can actually do is we can create a new variable called cash
+
+09:30.210 --> 09:31.790
+which would be like that.
+
+09:31.940 --> 09:36.560
+So if we support tax and
+
+09:39.550 --> 09:41.370
+the tax were part were passed.
+
+09:41.380 --> 09:42.610
+So no.
+
+09:43.390 --> 09:44.070
+So tax.
+
+09:44.100 --> 09:46.680
+Ah sorry.
+
+09:46.730 --> 09:48.100
+Different than normal.
+
+09:49.450 --> 09:52.480
+So tax is an argument of this method.
+
+09:54.600 --> 10:08.530
+So if this is true that cash would be this cash tax with the tax passed otherwise it's just this cash
+
+10:09.830 --> 10:16.370
+so using this simple trick we now would access the cash using this variable.
+
+10:16.550 --> 10:22.720
+And we also support whatever was passed as the dependency whether this supports tax or not.
+
+10:22.730 --> 10:25.640
+And we also took care where their tax were provided.
+
+10:25.640 --> 10:35.180
+So if someone wants them at one point or not now we can replace all the uses of their cash first aid
+
+10:35.240 --> 10:43.580
+with this tax go just simply with cash so let's do that with older cases where we have used previously
+
+10:43.580 --> 10:44.530
+the cash for seed.
+
+10:44.560 --> 10:46.150
+So that would be here.
+
+10:47.240 --> 10:48.160
+Also here
+
+10:51.760 --> 10:58.730
+in this place here and finally at the bottom.
+
+10:58.790 --> 11:02.820
+So now what we achieved here is we are not only passing dependencies we are.
+
+11:02.990 --> 11:09.590
+We are also checking if those dependency support something and then we now support to have those stocks
+
+11:09.650 --> 11:16.070
+whatever user has specified or if they didn't want anything then we just ignore them because previously
+
+11:16.520 --> 11:23.700
+even on the user controller like here we haven't provided tax and yet they were used.
+
+11:23.720 --> 11:27.670
+So now we have a perfect example of our dependency injection.
+
+11:27.680 --> 11:36.470
+So no let's now refresh and you can see that this still works perfectly and all the dependencies were
+
+11:36.470 --> 11:39.990
+injected using their constructor.
+
+11:40.040 --> 11:45.870
+So finally in the next lecture you will actually see how to use contracts.
+
+11:45.890 --> 11:54.860
+We will also create our very own contract and then you will see how you can make our dependency on a
+
+11:54.860 --> 12:02.170
+contract and then lot of it would actually inject our concrete implement implementations.
+
+12:02.180 --> 12:10.470
+So our class that implements this contract or interface and then finally will get two facets and we
+
+12:10.520 --> 12:13.120
+also create our own for seed.
+
+12:13.120 --> 12:15.950
+So you could then fully understand that.

@@ -1,0 +1,337 @@
+WEBVTT
+
+00:00.420 --> 00:07.680
+Now to conclude our section about outer ization let's do some work on the contact page.
+
+00:07.770 --> 00:16.050
+So what we will do in this lecture is we have the simple contact page which just displays one paragraph.
+
+00:16.440 --> 00:24.390
+So what we would like to do is we will like to add a link to another page which would contain some detailed
+
+00:24.390 --> 00:28.630
+contact information like an email or a phone.
+
+00:28.920 --> 00:37.500
+And we want this page to look like this for anyone who has not authenticated but for authenticated users
+
+00:37.530 --> 00:39.980
+that are for example admins.
+
+00:40.170 --> 00:48.000
+We would like to display a link to the special contact page and also we would like to protect this special
+
+00:48.000 --> 00:54.780
+control page from anyone that is not authenticated and not an admin.
+
+00:54.780 --> 01:00.530
+So that seems like a use case that you might have in your application.
+
+01:00.600 --> 01:05.360
+So let's first start with our our service provider.
+
+01:05.370 --> 01:12.180
+So as we have introduced the blog post policy class you might think that you should use policies for
+
+01:12.180 --> 01:13.160
+everything.
+
+01:13.350 --> 01:17.940
+But we talked about that before and that's obviously not the case.
+
+01:17.940 --> 01:26.790
+So policies are used best when you have a resource or a model that you want to specify some abilities
+
+01:26.910 --> 01:31.420
+rights permissions for that particular resource or model.
+
+01:32.130 --> 01:38.300
+But using Gates is just perfectly fine you might define them for any other cases.
+
+01:38.310 --> 01:48.370
+That seems to be like a global to your application or basically they do not relate to any specific model.
+
+01:48.400 --> 01:56.250
+Now we will define a gate that will protect this resource which is our special contact page.
+
+01:56.740 --> 02:06.430
+So we'll define it as contact or maybe we have com controller so we can even use home secret.
+
+02:06.430 --> 02:10.200
+So that's the name of our new gate.
+
+02:10.200 --> 02:12.430
+Then it will receive a callback.
+
+02:13.000 --> 02:19.360
+So the first argument is always on user you never have to pass it when you verify permissions.
+
+02:19.480 --> 02:23.190
+And then there are additional arguments if you provide them.
+
+02:23.200 --> 02:26.590
+So when you check for permissions you should provide those arguments.
+
+02:26.590 --> 02:29.980
+But if you don't have any you don't have to do that.
+
+02:29.980 --> 02:30.790
+So that's enough.
+
+02:30.820 --> 02:33.220
+That's the simplest gate.
+
+02:33.220 --> 02:38.740
+So since we won't be checking for any models we do not have any more arguments.
+
+02:38.740 --> 02:47.150
+Now we can just simply return whatever the user is admin and that's it.
+
+02:47.170 --> 02:49.650
+That's our gate.
+
+02:49.720 --> 02:56.830
+Now let's go to the view which shows the contact page which can be found inside the views folder.
+
+02:56.860 --> 02:59.710
+That's this one contact the blade BHP.
+
+03:00.250 --> 03:08.750
+What we can immediately do is we can use what we learned in the previous lecture so we can use the can
+
+03:08.750 --> 03:10.070
+directive.
+
+03:10.130 --> 03:12.560
+So the gate name is home.
+
+03:12.600 --> 03:13.340
+Secret
+
+03:19.200 --> 03:21.600
+and here we can display our special link
+
+03:26.320 --> 03:30.460
+so we haven't we don't have a route for this special link yet.
+
+03:30.490 --> 03:35.090
+So we just we'll just display text to verify that.
+
+03:35.170 --> 03:38.710
+Let's go back to our application and see if that works
+
+03:43.480 --> 03:47.560
+apparently I've misspelled the name of the class.
+
+03:47.560 --> 03:50.300
+So it's gate and not gate sorry for that.
+
+03:50.590 --> 03:53.710
+Let's fix that quickly and refresh.
+
+03:53.710 --> 04:00.280
+Now you can see that we see this text special contact details because we are out integrated as John
+
+04:00.280 --> 04:05.540
+Doe which is an account for an admin in our system.
+
+04:05.590 --> 04:10.620
+So if you log out you can see that on the contact page you won't see anything.
+
+04:10.630 --> 04:17.350
+Also if you will try to log in as one of the other users you have inside the database from the cedar.
+
+04:17.350 --> 04:21.220
+Remember that the password for all of them is secret.
+
+04:21.220 --> 04:25.230
+You can see that you want see this special link.
+
+04:25.390 --> 04:29.610
+So let's log in again as John Doe go to the contact page.
+
+04:31.420 --> 04:34.410
+And now let's open our Controller.
+
+04:34.440 --> 04:37.050
+So we have our home controller by the way.
+
+04:37.150 --> 04:41.660
+You can actually remove this action we are not using it anymore.
+
+04:41.950 --> 04:46.160
+And also we can ditch this old blog post template.
+
+04:46.180 --> 04:54.110
+So let's remove it altogether now will define a method to show this secret page.
+
+04:54.130 --> 05:01.360
+Let's call it secret and it will simply return a View called secret
+
+05:05.060 --> 05:09.070
+and now you should create a new template inside the views folder.
+
+05:09.080 --> 05:11.080
+So let's go ahead and do that.
+
+05:11.090 --> 05:19.900
+This would be secret blade BHP and this could be copied from the contract because this would basically
+
+05:19.900 --> 05:26.160
+extend the layout and show some additional information.
+
+05:26.200 --> 05:29.990
+Of course we do not need this can directive here.
+
+05:30.280 --> 05:35.840
+So this is secret e-mail secret.
+
+05:35.990 --> 05:38.360
+Lara test.
+
+05:39.490 --> 05:47.570
+All right so this is our secret page now we do not use our resource controller and it won't work anyway
+
+05:47.590 --> 05:49.120
+for our home controller.
+
+05:49.120 --> 05:56.140
+So let's go to Web BHP where we are defining our routes.
+
+05:56.470 --> 06:01.680
+Now we have two routes defined using our home controller.
+
+06:01.690 --> 06:03.310
+First one is the home one.
+
+06:03.310 --> 06:06.170
+And the second one is contact.
+
+06:06.190 --> 06:10.290
+Now let's define another one for our secret page.
+
+06:10.360 --> 06:22.270
+So this will be get secret and the controller is home controller method name is secret name would also
+
+06:22.270 --> 06:26.170
+be secret.
+
+06:26.260 --> 06:31.080
+And here's another thing we will do so we'll protect this.
+
+06:31.260 --> 06:39.990
+You are all together the same way we did that with when we applied the middleware out for our home controller.
+
+06:40.030 --> 06:47.500
+We just did that to show you how we can protect certain URL that users that are not authenticated cannot
+
+06:47.500 --> 06:50.530
+visit this URL at all.
+
+06:50.530 --> 06:58.930
+And what we will do now is will do the same thing with secret just that users that are not out integrated
+
+06:59.020 --> 07:05.920
+well in this case it won't be about if the user is authenticated or not but whether he is an admin or
+
+07:05.980 --> 07:06.760
+he isn't
+
+07:09.780 --> 07:19.410
+so will add middleware to this route media were using middleware method and what we can do is we can
+
+07:19.410 --> 07:27.060
+use our can and middleware can middleware works exactly the same as you would use it inside for example
+
+07:27.160 --> 07:33.510
+larval blade directive it is using the larval alteration system.
+
+07:33.510 --> 07:40.980
+And now what you can do is the first argument should be the name of the ability in our case is home
+
+07:41.070 --> 07:42.480
+secret.
+
+07:42.480 --> 07:48.000
+And then additionally using commerce you can specify another parameter.
+
+07:48.000 --> 07:57.840
+So for example if you would like this to protect root that for example is related to a model let's say
+
+07:57.840 --> 08:07.110
+a post you would be able to do something like post update and post and posting this case would be the
+
+08:07.110 --> 08:16.890
+name of the root parameter like we have inside our roots for editing deleting posts but we are doing
+
+08:16.950 --> 08:23.580
+a simpler case this time I will show you the more complicated cases later in this course but now we
+
+08:23.580 --> 08:27.540
+just need to check for home secret.
+
+08:27.540 --> 08:28.800
+That's it.
+
+08:28.920 --> 08:35.540
+Now we are protecting this secret page so no one who is an admin won't be able to visit it.
+
+08:35.610 --> 08:43.880
+The final thing to do is on our contact page we need to display a link so let's do that.
+
+08:43.880 --> 08:50.630
+We did that couple of times before so you should already know how to do that but you of course have
+
+08:50.630 --> 09:00.180
+to put a link then we'll echo our route using root function and the root name is secret
+
+09:05.990 --> 09:08.080
+and basically that's it.
+
+09:08.090 --> 09:14.600
+Let's also change the label to go to special contact details.
+
+09:14.600 --> 09:15.950
+And this is basically it.
+
+09:15.950 --> 09:26.570
+Now let's refresh the page and since I am an admin I can go to the secret page so you can see I as an
+
+09:26.570 --> 09:28.600
+admin was able to do that.
+
+09:28.610 --> 09:33.480
+Now let's go to the other is bar and copy the URL.
+
+09:33.500 --> 09:40.730
+Now let's log out and try to paste this page so we can see that we are unable to visit it that you can
+
+09:40.730 --> 09:47.090
+see that we have the 400 free that we are on to rise to do that.
+
+09:47.090 --> 09:54.000
+Now let's also go ahead and log in as someone else for example I have this Ahlam heels so I will log
+
+09:54.010 --> 09:54.720
+our logging.
+
+09:54.740 --> 10:01.100
+Ask her remember that you only need to use if you use the default seating logic that I've shown you
+
+10:01.100 --> 10:08.420
+only in the email that password is always secret but it will be different in your database us as you
+
+10:08.420 --> 10:20.190
+know it is being randomly generated so let's logging us this lady password is secret we can even save
+
+10:20.190 --> 10:20.480
+it.
+
+10:20.550 --> 10:28.170
+Now we can see we are Arlan hills and if you go to contact page you can see that you are unable to see
+
+10:28.170 --> 10:30.360
+the link to the special contact page.
+
+10:30.360 --> 10:35.550
+It is only for admins and obviously we can't visit that link.

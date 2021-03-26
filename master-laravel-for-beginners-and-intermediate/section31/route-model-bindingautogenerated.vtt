@@ -1,0 +1,445 @@
+WEBVTT
+
+00:00.390 --> 00:03.630
+So the forum for submitting comments was created.
+
+00:03.630 --> 00:10.540
+Now we have to submit it somewhere because the action is not defined so let's create our Controller.
+
+00:10.560 --> 00:18.970
+So let's run peach bee artisan make controller and create post comment controller.
+
+00:19.100 --> 00:21.810
+We will also need our request class.
+
+00:21.840 --> 00:24.850
+So let's create a request class.
+
+00:24.870 --> 00:27.460
+Call it store comment.
+
+00:28.740 --> 00:35.100
+So basically we did that before with our post controller where we created our store post class which
+
+00:35.100 --> 00:41.640
+contained the validation rules for the data being sent.
+
+00:41.640 --> 00:44.730
+Now let's define our route for this resource.
+
+00:44.730 --> 00:47.000
+So this would be our resource controller.
+
+00:48.710 --> 00:56.680
+We'll call it posts comments and the name would be post comment controller.
+
+00:56.680 --> 01:04.480
+Same as the class name and we only want root for the store matter.
+
+01:06.010 --> 01:10.800
+Now by the way this resource pose doesn't have to be slash posts.
+
+01:10.810 --> 01:15.000
+It can be just posts.
+
+01:15.030 --> 01:21.780
+Now let's clear the screen and run Peach Pit artisan the route least to see the routes that we have
+
+01:21.810 --> 01:29.100
+so you can see that the for the post route for the posts resource we get the routes properly defined
+
+01:29.130 --> 01:38.250
+as it was before but now for our posts comments we got a new route only one and it is both slash post
+
+01:38.280 --> 01:45.670
+I.D. slash comments and the route name esports posts dot comments dot star.
+
+01:45.840 --> 01:53.940
+Now we created our specific controller for comments associated with post because comments can only be
+
+01:53.940 --> 02:01.860
+basically added for an existing blog post and then you probably would only read comments for our particular
+
+02:02.100 --> 02:06.120
+blog post or at least return them from their controller.
+
+02:06.930 --> 02:13.670
+So let's open this new controller post comment controller defined those actions that we need which is
+
+02:13.680 --> 02:21.900
+store so we won't need separate action for displaying the forum as the forum is displayed on the blog
+
+02:21.900 --> 02:24.840
+post itself and we only need to save it.
+
+02:25.410 --> 02:28.130
+So the argument to that is store.
+
+02:28.140 --> 02:31.020
+Comment mind that you are.
+
+02:31.100 --> 02:34.520
+You have that use use statement.
+
+02:34.880 --> 02:36.530
+And the argument name is.
+
+02:36.560 --> 02:44.400
+Request now save the changes and now let's go to the store.
+
+02:44.410 --> 02:44.880
+Comments.
+
+02:44.880 --> 02:50.250
+So we have to define some validation rules since we only have content.
+
+02:50.440 --> 02:52.640
+That's enough.
+
+02:52.690 --> 02:54.880
+We'll have to check if this is present.
+
+02:54.880 --> 03:01.390
+So we are the required validator and let's say the minimum text of the comments should be five characters.
+
+03:01.390 --> 03:06.240
+Also let's return True from outer rise as this is did remaining.
+
+03:06.240 --> 03:13.180
+If the user is outraged to make this request so let's allow for everyone because we will require authorization
+
+03:13.240 --> 03:17.030
+anyway we will do that inside the controller.
+
+03:19.300 --> 03:20.920
+Inside constructor
+
+03:24.060 --> 03:34.620
+so will the middleware the alpha middleware and applied only to the store method.
+
+03:34.620 --> 03:42.950
+This way users have to be authenticated before they can send anything to this action.
+
+03:42.960 --> 03:50.220
+Now we have added this controller as a basically sub resource of the posts so our view as you've seen
+
+03:50.220 --> 03:51.120
+on the route.
+
+03:51.240 --> 04:00.570
+We have the post argument added to the route and what I will show you now is called the route model
+
+04:00.570 --> 04:01.810
+building.
+
+04:01.980 --> 04:09.360
+Now how the route model building works is basically similar to what we had inside the post controller
+
+04:09.420 --> 04:13.220
+where the route had a parameter called Post.
+
+04:13.230 --> 04:20.340
+But in this case it didn't matter we could call it I.D. but then we used find or fail to fetch a blog
+
+04:20.340 --> 04:27.750
+post with the given I.D. so that was the route model binding does instead is start if you will add an
+
+04:27.870 --> 04:36.180
+argument to your action which is type printed which means you specify the type of the object passed
+
+04:36.720 --> 04:38.000
+in our case.
+
+04:38.010 --> 04:46.230
+This would be blog post and also the name of the parameter to your action matches the name of the route
+
+04:46.260 --> 04:46.920
+parameter.
+
+04:46.920 --> 04:55.560
+In this case this is the post what lot of ill will do is it will essentially call the find or fail on
+
+04:55.560 --> 04:58.500
+the block post model so it will fetch us for us.
+
+04:58.500 --> 05:04.370
+So the difference is that you do not have to do that explicitly as we did here.
+
+05:06.300 --> 05:12.840
+So in this case we needed to do some more things we wanted to add some cash so this wasn't the best
+
+05:12.960 --> 05:15.150
+use case for route model binding.
+
+05:15.720 --> 05:21.050
+But in this case we just want to save some comments to the actual blog post.
+
+05:21.090 --> 05:26.120
+So it's a perfect scenario for using the route model binding.
+
+05:26.550 --> 05:36.510
+Now since we have a blog post we can add comments to eat using the comments relation because we can
+
+05:36.510 --> 05:45.480
+do it by calling the comment create method and passing an array of data of attributes of that model
+
+05:47.010 --> 05:52.650
+but instead we can also call the create model on the relation itself.
+
+05:52.650 --> 05:56.250
+So this is actually called Post.
+
+05:56.250 --> 06:04.830
+Now you only have to specify an array of the comment attributes and what we need to add is the user
+
+06:04.830 --> 06:11.850
+I.D. and the content because the blog post idea would be ultimately assigned since we are using the
+
+06:11.850 --> 06:13.660
+create on the relations so we.
+
+06:13.670 --> 06:19.230
+It already knows to which blog post it has to add this comment.
+
+06:19.230 --> 06:28.350
+Now before we do that we have to make some of the fields on the comment model mass assign a all by defining
+
+06:28.800 --> 06:31.170
+fear level attributes on the comment.
+
+06:31.170 --> 06:33.470
+We did the same on the blog post.
+
+06:33.510 --> 06:40.940
+If you remember so this is how you define attributes which are mass assign a.
+
+06:41.070 --> 06:50.000
+So we need user I.D. and we need content save the changes and go back to the controller.
+
+06:50.190 --> 06:54.270
+So first will assign content since we are using the store.
+
+06:54.270 --> 07:01.050
+Comments request which will already validate the data or if the data is invalid it will just return
+
+07:01.050 --> 07:11.100
+back to the last page with the error is variable populate it which you can then access inside the forum.
+
+07:11.450 --> 07:15.560
+We can read this value using request input method
+
+07:20.660 --> 07:29.120
+and the field name is content and then the user i.e. can also be fetched from the request because it
+
+07:29.120 --> 07:38.660
+has are user method which will return the currently authenticated user and it has an idea field.
+
+07:38.660 --> 07:40.910
+I have misspelled the name.
+
+07:40.970 --> 07:41.240
+OK.
+
+07:41.270 --> 07:45.790
+This will basically save the comment to a blog post.
+
+07:46.280 --> 07:49.650
+Now inside the blog post store method.
+
+07:49.670 --> 07:52.100
+We also add a flash message.
+
+07:52.580 --> 07:55.600
+So let's do the same for the comments.
+
+07:55.700 --> 08:03.200
+We can pay start to request session Flash will are the status message Let's rename it the comment was
+
+08:03.560 --> 08:04.570
+created.
+
+08:05.060 --> 08:09.740
+And finally will redirect back to the blog post page.
+
+08:09.740 --> 08:17.960
+So let's use the redirect helper method but this time instead of specifying the route we'll just use
+
+08:17.960 --> 08:21.150
+the back method and what that does it will.
+
+08:21.230 --> 08:25.520
+It will just redirect you back to the last page you were on.
+
+08:25.530 --> 08:34.610
+OK so before we continue and test out there is also something we have to do now on the blog post when
+
+08:34.640 --> 08:42.080
+it changed to We removed a cache element because blog posts are cached on the when we are displaying
+
+08:42.110 --> 08:49.430
+a blog post but I forgot to add this tax goal and you actually have to do that when you store items
+
+08:49.490 --> 08:51.650
+that are tagged you have to provide.
+
+08:51.650 --> 08:56.900
+Also the same list of tags when you are forgetting them.
+
+08:56.900 --> 09:04.850
+So here we have to add tags some blog post and only then are called to forget by the way we can also
+
+09:04.850 --> 09:12.110
+remove this cache element when the blog post is deleted and now we'll have to do the same on the comment.
+
+09:12.560 --> 09:19.840
+So for simplicity let just copy this updating event and update on the comment model.
+
+09:19.970 --> 09:22.910
+But this time it will be creating
+
+09:25.700 --> 09:28.300
+in this case we do not have a blog post.
+
+09:28.300 --> 09:37.850
+We have a comment so we can also clear the cache here for the using the blog post stock and here will
+
+09:38.270 --> 09:41.510
+use the comment model and it is.
+
+09:41.510 --> 09:48.980
+It contains blog post I I.D. attribute so that way we will immediately see this comment because otherwise
+
+09:49.010 --> 09:52.220
+it would be cached here.
+
+09:52.250 --> 09:59.960
+Now finally before we test out we have to add our root to the forum so it didn't have an action.
+
+09:59.960 --> 10:01.940
+So now let's use a root.
+
+10:03.080 --> 10:05.180
+Let's check what our root name was.
+
+10:05.180 --> 10:07.220
+So it was posts comments.
+
+10:07.250 --> 10:08.180
+Store.
+
+10:08.180 --> 10:09.580
+We can paste it here.
+
+10:11.430 --> 10:21.000
+And we also need an argument for this post route parameter so posts can be read from the post variable
+
+10:21.000 --> 10:30.220
+post I.D. And we have this post variable available here because this forum is always included on the
+
+10:30.220 --> 10:35.010
+show template of their posts and there is the post variable there.
+
+10:35.010 --> 10:41.940
+And when you include a template older included templates inherit all the data that was available to
+
+10:41.940 --> 10:48.530
+the parent view so say the changes refresh this page
+
+10:51.810 --> 10:54.740
+so the form would be updated with the correct action.
+
+10:54.750 --> 10:56.380
+And let's test this.
+
+10:56.400 --> 11:00.000
+So this is r comment.
+
+11:00.070 --> 11:03.910
+Now when you press up comment well it should work.
+
+11:03.910 --> 11:10.320
+But first we have to fix the problem and inside the controller.
+
+11:10.330 --> 11:11.310
+The Post Comment.
+
+11:11.320 --> 11:12.370
+Action.
+
+11:12.460 --> 11:18.730
+I forgot to add an import for the blog post so you need to add it here.
+
+11:18.730 --> 11:23.650
+This happens to me all the time so don't worry if you forget it sometime.
+
+11:23.940 --> 11:24.220
+Okay.
+
+11:24.220 --> 11:32.400
+Now save the changes and we can refresh this request because it will read sanded so let's wait a little
+
+11:32.400 --> 11:39.060
+while and then we should see the comment added and well voila it is out there.
+
+11:39.060 --> 11:42.630
+This is a comment you can even add one more.
+
+11:42.930 --> 11:51.990
+This is another comment no mind that if you will Art more and more comments there is another cash element
+
+11:52.020 --> 11:59.480
+that might be out of date and this is actually the most comment at least of the blog posts.
+
+11:59.640 --> 12:01.790
+So now we are storing this.
+
+12:01.800 --> 12:11.570
+If you remember we are storing it inside the view composer so it is stored under the most commented
+
+12:11.630 --> 12:17.230
+key name so we'll have to forget this key.
+
+12:17.230 --> 12:25.950
+Also when we are adding a comment so we have to use the list of tax and file the key name is just most
+
+12:26.280 --> 12:28.720
+commented.
+
+12:28.850 --> 12:34.560
+Now we have to reset that in case we will add a lot of comments and then this post will become most
+
+12:34.570 --> 12:38.310
+commented then it has to be shown here.
+
+12:38.340 --> 12:45.840
+Now the final step would be to check if the errors are shown when we submit the comments form without
+
+12:45.840 --> 12:48.020
+specifying any comment at all.
+
+12:48.120 --> 12:54.900
+So let's press our comment and you can see that nothing was added but we also don't see any error and
+
+12:54.900 --> 13:02.130
+this is because we haven't added errors component on the underscore form template for the comments.
+
+13:02.160 --> 13:03.250
+So let's do that now.
+
+13:03.290 --> 13:09.950
+Eating after just out errors and and errors directive.
+
+13:09.990 --> 13:17.340
+So now if you will submit empty box you see that the content field is required or if the comments are
+
+13:17.340 --> 13:18.060
+too short.
+
+13:18.060 --> 13:23.000
+You also see the error message now in the next lecture.
+
+13:23.010 --> 13:31.410
+We will do some optimizations to our application and you will also learn how you can fetch are deeply
+
+13:31.410 --> 13:33.180
+nested relationships.

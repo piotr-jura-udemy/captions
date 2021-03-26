@@ -1,0 +1,175 @@
+WEBVTT
+
+00:01.130 --> 00:07.250
+In the last lecture we have moved our barge component to the components folder and created an alliance
+
+00:07.250 --> 00:10.070
+for it inside ups service provider.
+
+00:10.070 --> 00:14.920
+So now we can use it as a normal lot of a late directive.
+
+00:14.930 --> 00:20.710
+Now let's think if this should actually be the place where we'll display batch.
+
+00:20.960 --> 00:23.210
+So it is displayed somewhere over here.
+
+00:23.210 --> 00:25.420
+It's very small not really visible.
+
+00:25.430 --> 00:27.770
+Maybe we can show it next to the title.
+
+00:30.630 --> 00:40.980
+So let's move this code and displayed under the title obviously if it's passing the conditions that
+
+00:41.100 --> 00:51.020
+the blog post is like not older than 20 minutes so let's do it like that and let's see if it is being
+
+00:51.020 --> 00:51.650
+displayed.
+
+00:51.650 --> 00:53.690
+Now it is.
+
+00:53.690 --> 01:00.950
+And actually what we can do with this bunch is since we are using our div element in case of that batch
+
+01:00.950 --> 01:04.190
+classes in bootstrap we can't even make it spun.
+
+01:04.370 --> 01:11.750
+So it only will style this but it won't force to display a div element which might take a whole new
+
+01:11.750 --> 01:13.690
+row of your application.
+
+01:13.730 --> 01:18.260
+So now it might be more reusable inside different elements.
+
+01:18.260 --> 01:23.620
+In this case it didn't make a difference but there might be cases where you will put this into a paragraph
+
+01:23.900 --> 01:28.120
+and then it will basically force our brand new paragraph to be displayed.
+
+01:29.240 --> 01:30.920
+So we did our first thing.
+
+01:30.920 --> 01:36.080
+Now let's see if we can add some additional parameters.
+
+01:36.410 --> 01:41.960
+Now we can specify another slot and this time we'll add a slot.
+
+01:41.960 --> 01:46.030
+That will tell us whether this box should be displayed at all.
+
+01:46.100 --> 01:47.840
+So we'll add an if statement
+
+01:50.850 --> 01:52.350
+and we'll display everything.
+
+01:52.410 --> 02:03.590
+If that show is not defined at all or if this show is true.
+
+02:03.750 --> 02:07.450
+So how it works is whether this is not displayed then.
+
+02:07.560 --> 02:15.360
+Well of course the component would be rendered or alternatively when it is actually defined the show's
+
+02:15.360 --> 02:21.590
+slot then it will check if it is set to true.
+
+02:21.810 --> 02:27.470
+So let's finish it with and they've invented so it is clearly visible.
+
+02:29.250 --> 02:30.950
+And now let's see what we can do.
+
+02:30.950 --> 02:35.270
+So this should be displayed by the way you can see that this post is aging.
+
+02:35.270 --> 02:39.430
+So I've modified the time to be at least 30 minutes.
+
+02:39.440 --> 02:49.000
+Now let's add a parameter so we can add it as show and specify false and you can see there is no bunch
+
+02:49.250 --> 02:54.760
+if I specified as true the body's there.
+
+02:54.760 --> 02:59.920
+And if I remove this parameter altogether it's also there.
+
+02:59.920 --> 03:02.200
+So this seems to work.
+
+03:02.360 --> 03:10.780
+Now how we want to use this condition is instead of adding an additional if statement here we can instead
+
+03:10.870 --> 03:13.870
+add this condition to the component.
+
+03:13.870 --> 03:23.500
+Now we do not have to create this new instance of the carbon this way we can use the new helper and
+
+03:23.500 --> 03:27.510
+then everything will be as it was before diff in minutes.
+
+03:27.700 --> 03:36.040
+So let's cut this paste it inside here and we can remove the if statement from this place altogether.
+
+03:36.070 --> 03:40.410
+So now it seems like it's much more readable.
+
+03:40.450 --> 03:47.680
+So what we are doing right now is we want to display this text has a batch and the condition for displaying
+
+03:47.680 --> 03:55.580
+this batch is whether the blog post is actually from the last 30 minutes.
+
+03:55.630 --> 04:02.770
+So we want to put this logic about the posts inside the component itself because otherwise it will depend
+
+04:02.800 --> 04:07.330
+on the post on the blog post model and we don't want to do that.
+
+04:07.330 --> 04:14.110
+We are making our component reusable so let's see if that works.
+
+04:14.110 --> 04:21.060
+So we can see that it works perfectly because this blog post is from the last 40 minutes.
+
+04:21.070 --> 04:30.190
+If we are modified back to 20 minutes say the changes now it is not displayed.
+
+04:30.260 --> 04:34.450
+So this is how you can make your components very reusable.
+
+04:34.520 --> 04:40.610
+You can define unlimited amount of slots and that's the pretty.
+
+04:41.480 --> 04:44.690
+That's the simplest way you can pass slots in here.
+
+04:46.680 --> 04:52.470
+But there is also a way that you can pass some data to your components are slots.
+
+04:52.680 --> 04:59.460
+Well if it might be there might be a situation where you would like to pass some additional content
+
+04:59.460 --> 05:09.600
+some mark up some HDMI all and then passing the data to the slots using this array next to the component
+
+05:09.600 --> 05:18.060
+name is pretty cumbersome but we'll see how to do that in the next lectures when we will redo our cards
+
+05:18.090 --> 05:25.350
+on the right which display the recent we display the most active commented posts and most active users
+
+05:25.680 --> 05:30.900
+using this other syntax for passing data to your component slots.

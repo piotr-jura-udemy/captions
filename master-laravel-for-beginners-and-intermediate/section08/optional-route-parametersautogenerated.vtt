@@ -1,0 +1,136 @@
+WEBVTT
+
+00:00.540 --> 00:05.450
+This time, we will talk about optional parameters, but first let's talk about this one.
+
+00:05.880 --> 00:11.620
+So the parameter we've added last time to the route is by default are required parameter.
+
+00:12.180 --> 00:19.510
+What this means is this route to match it actually has to contain something after the second slash.
+
+00:19.980 --> 00:24.810
+So let me show you, if we go to the browser, this works perfectly.
+
+00:24.810 --> 00:29.610
+But if I remove the numbers, well, it won't match.
+
+00:29.610 --> 00:31.980
+We have 404 not found.
+
+00:32.700 --> 00:39.600
+Now, there is also a way to defined a so-called optional parameter so it can either be provided in
+
+00:39.600 --> 00:41.250
+the euro or not.
+
+00:41.760 --> 00:43.420
+So let's define such route.
+
+00:43.440 --> 00:51.390
+Again, we will use their route class starting gate method and we might want to have a route that will
+
+00:51.390 --> 00:53.120
+display recent posts.
+
+00:53.670 --> 00:58.810
+So a list of all the recent posts and it might have our parameter.
+
+00:59.310 --> 01:03.820
+And this would be an optional one called days ago.
+
+01:05.250 --> 01:10.760
+So you define an optional parameter exactly the same way as a required one.
+
+01:10.770 --> 01:13.280
+But at the end, you are the question mark.
+
+01:13.470 --> 01:15.990
+This marks an optional parameter.
+
+01:16.800 --> 01:18.420
+Now let's are the function.
+
+01:22.850 --> 01:29.180
+As I've said in the last lecture, the names of function arguments do not have to match the names of
+
+01:29.180 --> 01:30.170
+root parameters.
+
+01:30.200 --> 01:33.700
+That's why I can name it days ago.
+
+01:34.400 --> 01:40.970
+And in case with the optional parameters, you should provide a default to your function argument,
+
+01:41.120 --> 01:43.960
+as the name suggests, it's optional.
+
+01:44.060 --> 01:45.530
+So it might not be provided.
+
+01:45.530 --> 01:49.110
+It's good and actually it's necessary to have a default.
+
+01:49.490 --> 01:52.050
+So let's say maybe 20.
+
+01:52.730 --> 02:04.670
+Now what this root can do, I will just return some static text so it can be posts from I'll concatenate
+
+02:04.670 --> 02:10.390
+with days ago and days ago, something like this.
+
+02:10.400 --> 02:18.620
+So you might want to use optional root parameters when you want people to be able to specify an argument.
+
+02:19.010 --> 02:26.090
+Let's say they would like to see posts from last five days or the last 10 days, but you would like
+
+02:26.090 --> 02:29.510
+to have some default value right now.
+
+02:29.720 --> 02:31.570
+Let's verify how this works.
+
+02:32.510 --> 02:39.560
+So instead of posts, we would now go to resend sorry to recent dush posts.
+
+02:39.860 --> 02:40.470
+There it is.
+
+02:40.790 --> 02:48.110
+So now we have the default 20, but optionally I can specify a parameter and then it's actually five.
+
+02:49.440 --> 02:55.400
+Finally, as I've said a couple of lectures ago, it's a good practice to give all of your roots names.
+
+02:55.980 --> 02:57.450
+So let's start with this one.
+
+02:57.900 --> 03:00.300
+We will call it posts show.
+
+03:00.840 --> 03:09.850
+And this one this one will be called Posts Posts, Recent Index.
+
+03:11.070 --> 03:15.470
+Now, those names are not accidental, but I'll get to them later.
+
+03:15.570 --> 03:15.900
+Why?
+
+03:15.900 --> 03:17.350
+I called them this way.
+
+03:17.670 --> 03:22.710
+Finally, let's open the terminal and rerun bipartisan route least.
+
+03:25.350 --> 03:30.600
+And now you can see a couple of more routes that we have just defines together with their names.
+
+03:30.930 --> 03:34.260
+Of course, it takes a little bit more space.
+
+03:34.260 --> 03:36.750
+So I'll zoom out and we can see that clearly.

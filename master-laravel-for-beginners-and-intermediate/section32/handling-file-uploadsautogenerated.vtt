@@ -1,0 +1,289 @@
+WEBVTT
+
+00:00.300 --> 00:06.450
+Last time we have other than new field to the forum for submitting blog posts to contain the input that
+
+00:06.450 --> 00:13.390
+will include a file and most importantly we have added the end type property to the forum itself.
+
+00:13.470 --> 00:16.550
+So then it can upload files.
+
+00:16.620 --> 00:24.660
+Now before we continue make sure that you have added this file system driver to your dot and file and
+
+00:24.660 --> 00:26.620
+specify this as a public.
+
+00:26.640 --> 00:31.360
+So we want to make the Default File System driver public.
+
+00:31.890 --> 00:39.060
+And now those files that we will upload will be stored inside the storage up public folder and then
+
+00:39.150 --> 00:42.810
+any other sub folders that we will use.
+
+00:42.960 --> 00:50.520
+Now since this form is submitting to the store action of the post controller we should be able to access
+
+00:50.520 --> 00:53.430
+the uploaded the file here.
+
+00:53.430 --> 01:01.620
+So first let's learn about the basic methods that we can use for manipulating the file upload and the
+
+01:01.620 --> 01:09.240
+first thing you can do is you can call the dump method which is just a lot of a function to display
+
+01:09.240 --> 01:10.920
+some data on the screen.
+
+01:10.920 --> 01:12.960
+It's kind of a debugging tool.
+
+01:13.710 --> 01:23.580
+So what we can do is you can display using the request object that we have on our store action signature.
+
+01:23.580 --> 01:31.410
+It has the method has file which we can use to verify if the user actually have uploaded any file because
+
+01:31.440 --> 01:40.920
+this field as you've seen there you actually have to select a file only then it is being uploaded.
+
+01:40.920 --> 01:49.290
+So this method will accept the name of those field as you remember the name was found nail so using
+
+01:49.340 --> 01:50.680
+a request has file.
+
+01:50.700 --> 01:57.660
+We can check whether the file was actually uploaded and now let's are the DI statement as we do not
+
+01:57.660 --> 02:02.280
+really want to add blog posts at this time.
+
+02:02.280 --> 02:09.570
+So let's put any valid data to title and content and select a file which can be a j pick file.
+
+02:09.570 --> 02:11.950
+Anything will work.
+
+02:12.100 --> 02:19.020
+Now when you press create you can see that we have shown true on the screen which means that the file
+
+02:19.110 --> 02:27.630
+is there if you will go back and refresh the form and submit the correct data but without selecting
+
+02:27.690 --> 02:30.700
+a file you will see false.
+
+02:30.810 --> 02:37.390
+So you can always use request has filed to verify if the file was submitted.
+
+02:37.410 --> 02:47.250
+Now let's store the result of this request has file called to has file variable and only if the file
+
+02:47.250 --> 02:53.400
+was uploaded will try to fetch some additional information about this file upload
+
+02:57.590 --> 03:05.960
+so first to fetch this file we have to call request file so this will return the file that was submitted
+
+03:05.990 --> 03:07.500
+using specified field.
+
+03:07.520 --> 03:09.160
+In this case it is fun.
+
+03:09.170 --> 03:13.330
+Neil.
+
+03:13.400 --> 03:20.480
+So now we should have an instance of the uploaded file class on the file variable and we can use that
+
+03:20.480 --> 03:24.560
+to fetch some additional properties of this file.
+
+03:24.560 --> 03:33.140
+So here let's also do dump file and now let's read some additional information about that file.
+
+03:33.140 --> 03:42.170
+So what you can get is Get client mind type which would return the MIME type of the file you will see
+
+03:42.170 --> 03:47.380
+that in seconds what this returns.
+
+03:47.630 --> 03:54.890
+Also you can get the client or regional extension which would mean what extension was specified for
+
+03:54.890 --> 03:55.430
+that file.
+
+03:55.430 --> 04:03.990
+You can also use that to guess what type of file that is And finally let's also out this dump for his
+
+04:04.170 --> 04:05.620
+file.
+
+04:05.670 --> 04:08.130
+Now save the changes.
+
+04:08.130 --> 04:13.470
+So when you refresh refresh a form without a file you should still see falls
+
+04:20.110 --> 04:20.500
+now.
+
+04:20.620 --> 04:25.180
+Well we actually have to move this as file to the top.
+
+04:25.180 --> 04:26.740
+Otherwise it won't be visible.
+
+04:26.740 --> 04:28.480
+If the file wasn't submitted.
+
+04:28.700 --> 04:28.950
+Okay.
+
+04:28.960 --> 04:36.810
+Now let's refresh the forum which didn't contain a file and you see falls which means file wasn't uploaded.
+
+04:37.000 --> 04:44.240
+But now this time let's select JP GIF file so this would be an image.
+
+04:44.430 --> 04:47.070
+So first thing you see on the top is true.
+
+04:47.070 --> 04:49.300
+Which means the file is there.
+
+04:49.380 --> 04:56.940
+Now we have an instance of the uploaded file which you can see we are dumping their file object here
+
+04:57.690 --> 05:00.320
+and we have plenty of information about this file.
+
+05:00.330 --> 05:04.930
+So you have the original name you have in mind type.
+
+05:05.040 --> 05:11.100
+Also there is the path name which is the temporary location where the file is stored.
+
+05:11.400 --> 05:17.910
+So whenever you upload files in BHP it will put them first to a temporary location.
+
+05:17.910 --> 05:27.930
+This also includes the file name temporary name and also you can read that file size in bytes.
+
+05:27.930 --> 05:30.980
+Now the next thing we dumped was the MIME type.
+
+05:31.020 --> 05:35.460
+So you can see that the mind type is image slash JPEG.
+
+05:35.760 --> 05:40.670
+And then there is the original extension of that file.
+
+05:40.870 --> 05:44.520
+Okay so we know how to check if the file was submitted.
+
+05:44.520 --> 05:49.590
+We also know how to fetch some information about that uploaded file.
+
+05:49.590 --> 05:58.450
+Now let's see how we can store them using the lot of us storage mechanism now let's see how we can actually
+
+05:58.450 --> 06:02.320
+move this file to a permanent location.
+
+06:02.320 --> 06:04.630
+So this is actually pretty simple.
+
+06:04.630 --> 06:11.740
+Of course the you can use the storage fast phosphate directly but also lava comes with a very handy
+
+06:11.740 --> 06:21.220
+method of the uploaded file which is called store and you don't even have to figure out the extension
+
+06:21.220 --> 06:22.060
+of that file.
+
+06:22.060 --> 06:28.210
+You don't have to do anything you can for example only supply the folder you would like to store it
+
+06:28.210 --> 06:36.000
+in so let it let it be farmed nails and basically that's it.
+
+06:36.010 --> 06:39.550
+The file would be stored there and let's see how that works.
+
+06:40.060 --> 06:43.780
+So refresh the request where you had a file included.
+
+06:46.370 --> 06:48.390
+And now it should be stored.
+
+06:48.390 --> 06:53.460
+So now let's go to the directory where we have the larval application.
+
+06:53.460 --> 06:59.950
+So as I've said we have configured couple of disks or there they were actually configured by default.
+
+07:00.300 --> 07:10.590
+And we have used the public disk by default and inside the file system the public disk is configured
+
+07:10.590 --> 07:18.040
+to store files locally using the local driver and the root of where they should be stored.
+
+07:18.060 --> 07:27.350
+Is that up public inside this storage folder so let's go to the storage folder there is the app folder
+
+07:28.160 --> 07:37.280
+public folder and you see that new folder thumbnails was created which is happening to match the name
+
+07:37.280 --> 07:42.830
+of the folder we given this file store method to store that file in.
+
+07:42.830 --> 07:48.380
+But when you will go inside it you can see that the uploaded image is there.
+
+07:48.380 --> 07:56.440
+It has also generated name which is unique for the files and it also contains an extension.
+
+07:58.100 --> 08:02.360
+So this is basically what you have to do to store the files.
+
+08:02.360 --> 08:11.210
+The most simplest way and additionally we can also dump the file name that was generated so the store
+
+08:11.210 --> 08:20.340
+method would return the file name where this was actually stored on the file system so let's also see
+
+08:20.340 --> 08:21.360
+this.
+
+08:21.420 --> 08:24.970
+So we'll refresh the page where you have the file submitted.
+
+08:25.770 --> 08:32.850
+And the last element that we have dumped is actually this file inside this storage folder so you will
+
+08:32.850 --> 08:36.450
+then be able to store this inside the database.
+
+08:36.450 --> 08:38.300
+We'll do that in the next lectures.
+
+08:38.310 --> 08:43.640
+Actually we will create another model for storing images.
+
+08:44.370 --> 08:49.880
+But this is the most basic example that you can do to store files.
+
+08:49.920 --> 08:56.940
+Obviously this can be found inside the repository the link is included but will it work on this in the
+
+08:56.940 --> 09:04.140
+next lecture so you will know all the things you can do with that storage first aid.

@@ -1,0 +1,175 @@
+WEBVTT
+
+00:00.450 --> 00:08.460
+Now that we have implemented some authorization inside our application so it now mothers who you are
+
+00:08.850 --> 00:15.840
+and what permissions Do you have to actually do something with that blog posts we should check if our
+
+00:15.840 --> 00:18.440
+tests still work.
+
+00:18.510 --> 00:23.860
+So let's open the terminal and run the tests using peach unit
+
+00:27.440 --> 00:33.920
+and you can see that now we have some tests failing specifically for the test.
+
+00:33.920 --> 00:36.860
+Update valid and test delete.
+
+00:36.860 --> 00:44.870
+Instead of seeing three hundred two code which means that everything was successful and we get a redirect
+
+00:44.930 --> 00:54.050
+because those pages are actually redirecting to our blog post page or the main page we get 400 free
+
+00:54.050 --> 01:02.330
+which means that we do not actually have access to perform this operations.
+
+01:02.330 --> 01:11.980
+So why this happens is that we are actually trying to perform those operations as authenticated users.
+
+01:11.990 --> 01:22.760
+So let's find those tests for example the test update valid we are acting as a user and as you remember
+
+01:22.760 --> 01:32.750
+this user method we have added it to our test case class from which all the other tests extend and it
+
+01:32.750 --> 01:37.440
+is creating user inside the database.
+
+01:37.520 --> 01:45.490
+So definitely we will have to change it because the blog post does not actually match this user.
+
+01:45.620 --> 01:54.940
+So let's see how we can fix that so the first step would be to somehow provide the user I.D. for the
+
+01:54.940 --> 01:58.570
+blog post that we create inside this method.
+
+01:59.110 --> 02:06.480
+So as you might remember there is this create method which can accept some additional parameters and
+
+02:06.480 --> 02:10.390
+we will use that to override the user I.D..
+
+02:11.890 --> 02:23.350
+Now let's use this user which is this method from our base test case class to provide some user I.D.
+
+02:23.590 --> 02:26.870
+for the created blog post.
+
+02:26.890 --> 02:32.830
+Now if you will run the test you can see that we've eliminated some errors so we can but we can still
+
+02:32.830 --> 02:42.850
+see the two failures and this is because each call to this this User class is actually creating a new
+
+02:42.940 --> 02:45.130
+user each time it is being called
+
+02:47.820 --> 02:49.410
+so let's open this class again.
+
+02:49.420 --> 02:56.380
+The test case you can see that the call to factor will actually create a new user each time we call
+
+02:56.380 --> 02:58.110
+this method.
+
+02:58.150 --> 03:08.870
+So what we can do is inside this create dummy blog post we can provide an optional user I.D. parameter
+
+03:11.250 --> 03:18.090
+so when we will need to provide a user I.D. when it matters like in these two cases where the user I.D.
+
+03:18.540 --> 03:25.350
+of the user performing an action has to be exactly the same as the user I.D. of the blog post.
+
+03:25.500 --> 03:30.740
+They have too much because that's how we defined our outer reservation rules.
+
+03:30.780 --> 03:33.930
+We will provide a user I.D. to this method.
+
+03:33.930 --> 03:36.190
+So we'll create the user first.
+
+03:36.540 --> 03:44.880
+But for the other cases when it does not really matter we can just create a user just in this very method
+
+03:44.940 --> 03:56.190
+and just use that whatever idea it has so we can do that simply what this construct B does is if this
+
+03:56.190 --> 04:06.390
+value is anything other than no use it if it's something else then use the statement on the right side
+
+04:06.450 --> 04:08.040
+of this operator.
+
+04:08.040 --> 04:16.860
+So this was introduced in BHP seven point one and well it's better than ternary operator for this particular
+
+04:17.100 --> 04:20.460
+case OK.
+
+04:20.460 --> 04:25.320
+Now for those two cases that are failing.
+
+04:25.320 --> 04:32.120
+So test update valid what we'll have to do is we have to create the user beforehand.
+
+04:32.250 --> 04:33.900
+So let's call this user
+
+04:36.850 --> 04:45.210
+and now we can provide the user I.D. and also when we are acting a specific user we want to create it
+
+04:45.910 --> 04:53.470
+but we'll use the instance that was already created in this our range section.
+
+04:53.500 --> 04:57.010
+So let's save the changes and re run the tests.
+
+04:57.760 --> 05:01.140
+So we've managed to eliminate one failure.
+
+05:01.210 --> 05:06.460
+So we are left with the only one and we have to do the same here.
+
+05:06.460 --> 05:17.150
+So first we are creating the user then we are passing the user I.D. to the blog post creating method.
+
+05:17.200 --> 05:26.690
+So when we are acting as this particular user we are certain that the blog post has exactly the same
+
+05:26.690 --> 05:31.500
+idea as the idea of the user performing this operation.
+
+05:31.550 --> 05:34.690
+So obviously there are better ways to solve it.
+
+05:34.700 --> 05:40.790
+We can create seeders specific seeder that will load all the data that we need we can add some more
+
+05:40.790 --> 05:48.530
+complicated methods to the test case class and also we probably should check for the failures when someone
+
+05:48.590 --> 05:57.260
+not not having the rights to perform an operation on a blog post like editing or deleting perform performs
+
+05:57.260 --> 05:58.420
+that and it fails.
+
+05:58.430 --> 06:06.590
+So we should do a test for checking the specific code like 400 free in this example but we will do that
+
+06:06.590 --> 06:12.710
+later or obviously you can try to do it right now was a kind of practice.
+
+06:12.710 --> 06:15.500
+So let's see if the tests actually work.
+
+06:15.500 --> 06:23.030
+So currently our suite is still working we have 999 twenty nine passing assertions.

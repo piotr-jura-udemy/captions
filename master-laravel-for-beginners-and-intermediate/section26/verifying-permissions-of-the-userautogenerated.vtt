@@ -1,0 +1,127 @@
+WEBVTT
+
+00:00.810 --> 00:07.020
+In the last two lectures you have seen how can you use gates to create authorization constraints and
+
+00:07.020 --> 00:14.930
+then check if certain user can't perform specific action by using gate denies FISA the method.
+
+00:14.940 --> 00:19.560
+And also we have used the outer Rice helper to simplify this for us.
+
+00:19.680 --> 00:21.180
+Now let's run.
+
+00:21.180 --> 00:23.340
+Peach bee artisan Tinker.
+
+00:23.400 --> 00:36.140
+Inside the terminal and let's see how can we check if our specific user that we specify is able to perform
+
+00:36.190 --> 00:38.120
+a specific action.
+
+00:38.180 --> 00:44.630
+So what we have here is our blog post list and we have terminal on the right.
+
+00:44.660 --> 00:51.810
+So first we'll list all the users that we have inside the database by calling user.
+
+00:51.830 --> 00:53.070
+All right.
+
+00:53.270 --> 00:55.830
+Now we see some users on the right.
+
+00:55.840 --> 01:02.170
+Basically we have all of the users from our database and we see blog posts.
+
+01:02.270 --> 01:10.250
+So when you will hover under the on this title on the bottom of this browser page you can see the I.D.
+
+01:10.250 --> 01:16.690
+of this blog post and this particular one happens to have the I.D. 17.
+
+01:16.700 --> 01:23.990
+So remember what I.D. your blog post has because of obviously it might be different on your machine.
+
+01:23.990 --> 01:30.590
+This one has I.D. 17 and we'll verify that for other user than this one.
+
+01:30.620 --> 01:38.370
+So it is our data log Reinhold and let's find here a user that has a different idea like we.
+
+01:38.370 --> 01:41.760
+I will use Ty Rick Cummings.
+
+01:41.960 --> 01:46.760
+So first I will fetch this user using the user model.
+
+01:46.790 --> 01:56.330
+Find a method with the I.D. 21 so I have it here and then I will fetch the blog post so blog post find
+
+01:56.740 --> 02:03.500
+and I will use that I.D. 17 the one that you can see by hovering over the blog post.
+
+02:03.710 --> 02:11.180
+So I am making sure that I am fetching a blog post that is being outlawed by different user than this
+
+02:11.180 --> 02:11.610
+one.
+
+02:12.580 --> 02:13.330
+OK.
+
+02:13.460 --> 02:15.490
+So far so good.
+
+02:15.500 --> 02:24.170
+Now let's clear the screen and see what can we do with gates so we can use the gate file for seed inside
+
+02:24.260 --> 02:34.040
+the lateral thinker and to check if certain user can perform an action on this particular gate we can
+
+02:34.040 --> 02:36.140
+use for user.
+
+02:36.800 --> 02:43.550
+And here you will have to pass the instance of the model of the user that we have fetch which had a
+
+02:43.550 --> 02:50.080
+name Dereck and then we can do what we did before.
+
+02:50.080 --> 02:59.830
+So we can call denies let's for example check if this particular user is well can't edit a blog post
+
+03:00.880 --> 03:08.380
+so we'll pass the instance of the post and you can see that it returns true which means that this user
+
+03:08.380 --> 03:13.200
+cannot edit this blog post but it's not all.
+
+03:13.300 --> 03:18.650
+So we can check it for particular user also using that allows method.
+
+03:18.670 --> 03:21.260
+So it's just opposite of denies.
+
+03:21.260 --> 03:28.240
+It's just depends what you will have to do in your code are to one particular place and what would make
+
+03:28.240 --> 03:30.320
+more sense.
+
+03:30.430 --> 03:39.400
+So we are just basically calling the same thing but using allows and you can see that it returned false.
+
+03:40.360 --> 03:49.090
+So when you need to check not if the currently authenticated user can do something but whether a specific
+
+03:49.090 --> 03:58.570
+user can do something you can use this for a user and also it's good to remember that the gate I say
+
+03:58.590 --> 04:06.100
+does not only contain that the nice method which checks if certain user can't do something but it also
+
+04:06.100 --> 04:11.470
+contains the allows method which checks if the user can do something.

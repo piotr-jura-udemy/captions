@@ -1,0 +1,358 @@
+WEBVTT
+
+00:02.450 --> 00:09.470
+In the last lectures we played around a little bit with a lot of old Tinker and we've also seen how
+
+00:09.470 --> 00:17.780
+we can fetch models from the database so you can see that our page is a little bit outdated because
+
+00:17.780 --> 00:26.510
+we have the home and contact sections and also a link to an individual blog post which is hardcoded
+
+00:26.840 --> 00:30.950
+inside the home controller from this array.
+
+00:30.950 --> 00:38.360
+And now we should probably move to using our model and fetch the data from the database.
+
+00:38.420 --> 00:48.760
+So as we've created two records inside this table we now have something to fetch so let's move to the
+
+00:48.760 --> 00:50.070
+Visual Studio code.
+
+00:50.110 --> 00:55.080
+By the way it seems I forgot to close the Anacortes tag here.
+
+00:57.640 --> 00:58.810
+So this would be correct.
+
+00:59.320 --> 00:59.630
+Okay.
+
+00:59.630 --> 01:03.090
+It doesn't really matter because we are gonna remove this root.
+
+01:03.220 --> 01:10.160
+But first let's open the terminal and type page bee artisan route least.
+
+01:10.430 --> 01:13.290
+It's a comment you should already be familiar with.
+
+01:13.420 --> 01:15.530
+And let's review our roots.
+
+01:15.820 --> 01:19.650
+So ignore this one because it's being added by Lara.
+
+01:19.990 --> 01:22.450
+So it's not important right now.
+
+01:22.450 --> 01:30.610
+So we had the home route which with the home name and it's inside the home controller and also the blog
+
+01:30.610 --> 01:35.200
+post has their name blog post and is inside the same controller.
+
+01:35.200 --> 01:37.600
+Same with the contact page.
+
+01:37.600 --> 01:45.670
+So we should think if that's really the best way to go around that because now we have everything inside
+
+01:45.670 --> 01:55.140
+one single controller one single class which basically seems to be handling or having too much responsibility.
+
+01:55.810 --> 02:01.680
+So we will solve that by moving the logic related to this plane.
+
+02:01.690 --> 02:09.960
+Blog posts into a separate controller so let's get to work and start cleaning up our application.
+
+02:09.970 --> 02:13.800
+So close the terminal and remove this link.
+
+02:15.040 --> 02:20.410
+Because now we do not want a link to one blog post with the static i.e. one.
+
+02:20.410 --> 02:27.640
+We want to link to all the blog posts so we can also remove this route because we've only created it
+
+02:27.640 --> 02:32.980
+to learn about the required and optional parameters.
+
+02:32.980 --> 02:35.890
+So let's remove that and see what do we have.
+
+02:35.890 --> 02:43.080
+So now we only have the home and contact pages and also if we would check the route least.
+
+02:43.420 --> 02:46.630
+Now we only have the home and contact routes.
+
+02:48.060 --> 02:56.010
+So now before we just jump on and create a new post controller class and define routes for all the possible
+
+02:56.010 --> 03:01.440
+routes we might be having in this like for displaying the least of the blog post.
+
+03:01.470 --> 03:06.400
+One blog post and also for adding them modifying and deleting them.
+
+03:07.020 --> 03:10.010
+Let's think what is actually a blog post.
+
+03:10.020 --> 03:20.330
+It is a resource so Lavell has a concept to handle these situations and it is called our resource controller.
+
+03:20.550 --> 03:24.170
+So let's jump to the Vikki page for this lecture.
+
+03:24.180 --> 03:31.830
+The link is included in this lecture and there is another handy command to generate such controllers
+
+03:32.160 --> 03:40.260
+and it's like you would normally do it but with the resource suffix so what it what it does it will
+
+03:40.260 --> 03:48.630
+generate both controller but with all of the actions that you might possibly need to handle.
+
+03:48.630 --> 03:56.910
+This blog post the resource already created and then you can define the routes for it using this single
+
+03:56.910 --> 04:05.120
+Call so you will just use a route resource and have all the routes for our blog post controller.
+
+04:05.310 --> 04:15.730
+So let's go ahead and do this so let's go to the Visual Studio code and type P HB artisan make controller
+
+04:16.300 --> 04:28.000
+post controller resource so we have created our resource controller successfully and we can open it.
+
+04:28.270 --> 04:31.180
+So let's close terminal for just a second.
+
+04:32.450 --> 04:40.430
+And you can see that we've got plenty of methods out of the box so the index create store show.
+
+04:40.430 --> 04:46.370
+Edit Update and destroy.
+
+04:46.390 --> 04:54.220
+Now let's go to work BHP and ARD all these routes at one go using the resource static method of the
+
+04:54.220 --> 04:56.070
+route object.
+
+04:56.320 --> 05:04.960
+So we want this to be slash posts and the controller would be post controller.
+
+05:05.220 --> 05:08.600
+So we do not have to specify any action methods.
+
+05:08.610 --> 05:15.120
+And now let's go to the terminal and rerun the peach bipartisan route list.
+
+05:16.200 --> 05:21.110
+So now you see that we've got a lot of stuff out of the box.
+
+05:21.540 --> 05:31.140
+So we've got a post index which is also convention in LA travel to use those specific group names.
+
+05:31.140 --> 05:38.790
+And it's a good idea to follow that because it will be understandable by everyone else that you might
+
+05:38.790 --> 05:40.240
+be working with.
+
+05:40.440 --> 05:49.530
+So the index the post index would be for displaying the list of the posts the store would be to save
+
+05:49.530 --> 05:57.210
+it the create would be to display a kind of form when you'd like to display a form to create a brand
+
+05:57.210 --> 05:58.980
+new blog post.
+
+05:58.980 --> 06:03.360
+This show would be to display an individual resource.
+
+06:03.360 --> 06:05.900
+So not only blog posts I'm talking generally.
+
+06:05.970 --> 06:16.110
+So individual resource and the update is for saving changes to the model destroy for deleting and edit
+
+06:16.110 --> 06:21.950
+for showing a forum to edit an existing blog post.
+
+06:22.350 --> 06:30.030
+You can also see that we haven't we didn't have to specify the methods individually it just ordered
+
+06:30.030 --> 06:31.800
+them out of the box for us.
+
+06:31.830 --> 06:35.560
+And also there you URLs look.
+
+06:35.580 --> 06:36.030
+Correct.
+
+06:36.030 --> 06:38.640
+So we didn't have to specify them.
+
+06:38.670 --> 06:43.990
+They are generated out of the box now in our case.
+
+06:44.020 --> 06:50.480
+We are not ready yet to add new blog posts and modify them or delete them.
+
+06:50.590 --> 06:55.680
+And we only want to display their list of the posts and an individual blog post.
+
+06:56.080 --> 07:03.880
+So how can we do that since we have all these methods and the roots are ultimately generated we can
+
+07:04.270 --> 07:13.070
+call another method the chain on other methods on the resource method and the method name is only and
+
+07:13.130 --> 07:15.320
+it accepts an array.
+
+07:15.320 --> 07:20.590
+So now you can specify which of those routes you want.
+
+07:20.630 --> 07:24.830
+So you only use the suffix after the resource name.
+
+07:25.070 --> 07:26.870
+So we only want to index
+
+07:29.730 --> 07:30.420
+and show
+
+07:34.220 --> 07:42.670
+so let's who rerun our peach pit artisan route list and now we only have those to the index and show.
+
+07:42.830 --> 07:50.480
+So for clarity we can remove the other methods for now we can of course bring them back later or just
+
+07:50.480 --> 07:54.380
+leave them but we'll just remove them for now
+
+07:57.150 --> 07:58.850
+so that's the update method.
+
+07:58.860 --> 08:02.270
+And finally the destroy method.
+
+08:02.810 --> 08:03.110
+OK.
+
+08:03.120 --> 08:10.650
+So now we have those two methods and now we will try to load the models from the database and return
+
+08:10.650 --> 08:13.600
+them to the user.
+
+08:13.600 --> 08:20.380
+So now let's use what we have learned in previous lectures and see how we can load the model.
+
+08:20.380 --> 08:28.750
+So you might remember that the blog post is inside the up namespace and it has the method all.
+
+08:29.350 --> 08:34.450
+So we do not have views prepared for this yet we'll do that in another lecture.
+
+08:34.450 --> 08:44.260
+So now you can use our handy larval function called D.D. and it's a shortcut for dump and die.
+
+08:44.350 --> 08:50.730
+So it will just echo the contents of whatever was passed through it and die.
+
+08:50.740 --> 09:02.630
+So it will just stop executing it so let's save this and see if we can go to the polls you URL so you
+
+09:02.630 --> 09:04.610
+can see that we have the collection.
+
+09:04.610 --> 09:10.010
+And yes it contains our two blog posts.
+
+09:10.010 --> 09:18.550
+So the actual data out them is inside the attributes property.
+
+09:18.560 --> 09:21.840
+Now let's try to fetch one model.
+
+09:21.980 --> 09:29.090
+So as you might remember we will also use Didi as you might remember there is the find a method that
+
+09:29.450 --> 09:37.970
+allows us to find the model by day by its primary key which in this case happens to be I.D..
+
+09:38.510 --> 09:42.660
+So since we have the I.D. passed it's part of the route.
+
+09:42.860 --> 09:51.850
+We can just do block posts find and pass the I.D. So inside the database we have to.
+
+09:51.850 --> 09:57.070
+So there is with blog post with the idea one and I.D. tool.
+
+09:57.310 --> 09:59.080
+So let's see if that would work.
+
+10:00.810 --> 10:07.620
+So now we have the first one with the new content and modified title and the second one
+
+10:11.090 --> 10:17.800
+with attributes that match what is inside the database.
+
+10:17.810 --> 10:20.990
+Now let's take a look at this blog post model.
+
+10:21.010 --> 10:28.060
+You can see that relating to it using including the namespace isn't really convenient because you will
+
+10:28.090 --> 10:36.960
+have to older to all the times type the up prefix and it will become even more cumbersome if the namespace
+
+10:36.970 --> 10:39.190
+would be any longer.
+
+10:39.190 --> 10:46.630
+So you can import this class using the use statement so you will have to add the U statement after the
+
+10:46.670 --> 10:50.450
+namespace and type the class name.
+
+10:50.630 --> 10:53.930
+So this would be up blog post
+
+10:56.810 --> 11:04.550
+and now instead of typing the full class name including the namespace you can just use it like that
+
+11:04.560 --> 11:11.000
+so you will just use the block post class name and this would also work the same.
+
+11:11.100 --> 11:14.290
+It's I think it is much more convenient
+
+11:17.630 --> 11:24.500
+now let's see what would happen if you tried to go to a blog post that we know doesn't exist.
+
+11:24.500 --> 11:26.950
+So let's say 333.
+
+11:27.050 --> 11:35.310
+So we just No and probably we will expect our 400 for not found page and we didn't get that.
+
+11:35.810 --> 11:39.090
+So we'll discuss how to do that in the next lecture.
+
+11:39.290 --> 11:48.300
+And also I will show you a way to fetch individual models even more convenient way and also will work.
+
+11:48.830 --> 11:55.370
+We will work with the views and see how we can easily display our collection of items.

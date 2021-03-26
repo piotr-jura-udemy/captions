@@ -1,0 +1,70 @@
+WEBVTT
+
+00:00.300 --> 00:12.990
+Configuring the local domain on your computer is super easy in the terminal type pseudo nano ATC hosts.
+
+00:14.940 --> 00:17.130
+And type your password when asked.
+
+00:18.160 --> 00:22.600
+On the left, you need to type 127 oh.
+
+00:24.370 --> 00:32.110
+Oh, one, which is your localhost IP address and on the right, separated by any number of spaces,
+
+00:32.110 --> 00:33.310
+type the domain name.
+
+00:34.270 --> 00:37.270
+This would be Laravel Dot Test.
+
+00:40.050 --> 00:47.130
+Now, control, oh, will save the changes you need to confirm the filename, so yes, hit enter and
+
+00:47.130 --> 00:50.670
+then control X will quit the ED.
+
+00:53.490 --> 00:59.670
+You should be able to visit the Laravel dot test in the browser and see the Laravel project page, but
+
+01:00.120 --> 01:03.870
+if you don't see it, try running this command in the terminal.
+
+01:04.170 --> 01:12.360
+It is pseudo DNS cache, util, dash, flash cache.
+
+01:13.320 --> 01:19.800
+It will flash their DNS cache off your system and should help also make sure you have restarted the
+
+01:19.800 --> 01:24.900
+Apache server after making the virtual host config changes.
+
+01:26.490 --> 01:33.120
+It might happen that when you would go on Laravel dot test to test your website, you would see this
+
+01:33.120 --> 01:34.290
+permission error.
+
+01:35.220 --> 01:36.560
+Well, don't worry about that.
+
+01:36.570 --> 01:39.410
+It happens to fix this.
+
+01:39.420 --> 01:49.270
+Just go to your application folder in the terminal and just run this command pseudo h mod dash, big
+
+01:49.290 --> 01:54.900
+error, 777 storage slash da.
+
+01:55.050 --> 01:59.910
+Well, this will basically fix the file permission issues that you might be having.
+
+02:00.330 --> 02:04.620
+You would need to confirm with the password as this is an admin command.
+
+02:07.300 --> 02:11.990
+Now refresh, and there it is, the Laravel Project, welcome page.
+
+02:12.400 --> 02:14.500
+So everything is running correctly.

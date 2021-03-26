@@ -1,0 +1,94 @@
+WEBVTT
+
+00:00.960 --> 00:06.000
+In the last lecture We optimized the way we load some of the models.
+
+00:06.000 --> 00:13.380
+So for example we optimized the way we load blog posts together with its relations like tags comment
+
+00:13.380 --> 00:17.520
+count and the outer of that blog post.
+
+00:17.520 --> 00:24.630
+Now you can see that inside the post controller we are making a query which is exactly the same as it
+
+00:24.630 --> 00:31.500
+is being constructed on the post stuck controller with the difference that here we use the blog posts
+
+00:31.560 --> 00:33.700
+a relation of a tag.
+
+00:34.020 --> 00:42.630
+But what we can do is well we can actually move all of this code to the model and create a new scope
+
+00:43.800 --> 00:51.750
+because what you can see here in those local scopes is they are basically adding something to the query
+
+00:52.320 --> 01:04.800
+so we can simply do something like public function scope latest with relations.
+
+01:04.830 --> 01:08.490
+Now we have to provide the instance of the query builder
+
+01:12.240 --> 01:19.760
+and we can immediately return everything that we do here so we can call the scope from within the scope.
+
+01:20.640 --> 01:31.280
+So we'll do latest with count with user and with tax so let's copy that and move that to the local query
+
+01:31.280 --> 01:42.730
+scope now save the changes and what we can do now is instead of having the same query constructed in
+
+01:42.730 --> 01:55.270
+two places we can instead call it like that latest for relations on the post controller.
+
+01:57.090 --> 02:01.220
+But then we are accessing the relation as a method.
+
+02:01.230 --> 02:09.700
+So we basically have access to all the query methods and also to the local query scope so here we can
+
+02:09.700 --> 02:14.880
+also do latest with relations
+
+02:17.480 --> 02:25.130
+now save the changes and after refreshing the page where we feel that by tag you can see that still
+
+02:25.130 --> 02:30.480
+the same amount of queries is made and that everything works perfectly.
+
+02:30.500 --> 02:37.190
+So this is another optimization you can make whenever you see you are making or constructing queries
+
+02:37.520 --> 02:44.840
+that are essentially the same in more than one place then it is a good candidate to move it to the single
+
+02:44.840 --> 02:52.310
+place because anyway when something fails it's always best to have a single point of failure.
+
+02:52.310 --> 02:57.920
+And what that means is whenever you see something is incorrect then well you know where to look for
+
+02:57.920 --> 02:58.090
+it.
+
+02:58.100 --> 03:03.870
+And otherwise if you construct the same query in different places.
+
+03:03.920 --> 03:05.980
+Well you are basically prone to errors.
+
+03:05.990 --> 03:13.160
+You can forget something in some place and with things like that you aren't forgetting anything because
+
+03:13.160 --> 03:15.870
+there is only one place where things can break.
+
+03:15.870 --> 03:23.690
+And also it is great for test stability because you basically test your code in one place and if you
+
+03:23.690 --> 03:30.200
+will break something with this method then whatever tests you might be having for listing blog posts
+
+03:30.200 --> 03:36.200
+with tags and generally blog posts you should see that on you when your tests fail.

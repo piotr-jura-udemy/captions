@@ -1,0 +1,253 @@
+WEBVTT
+
+00:00.780 --> 00:08.970
+In this section we will learn about the concept of the cash so will learn what caching is how it works
+
+00:09.000 --> 00:15.870
+in LA AVO and what good it can do for us and also what are the potential problems.
+
+00:15.870 --> 00:18.960
+So let's take a look at our blog posts page.
+
+00:19.080 --> 00:24.090
+You can see that we display a list of blog posts with the count of comments that they have.
+
+00:24.090 --> 00:30.480
+And also on the right side of this page you can see that we display most commented blog posts and also
+
+00:30.480 --> 00:35.220
+we display the users that were most active and most active in the last month.
+
+00:36.060 --> 00:42.210
+So if you will take a look at the post controller you can see that we are executing separate queries
+
+00:42.210 --> 00:50.040
+for all of this data and important thing to know is that this happens every time we visit this particular
+
+00:50.040 --> 00:51.120
+page.
+
+00:51.120 --> 00:56.910
+So it might not be a problem when you are developing on your local environment and only you are visiting
+
+00:56.910 --> 01:04.740
+this page but this might be a problem when your application is life and there are plenty of users visiting
+
+01:04.740 --> 01:12.630
+your pages and then they visit this blog post page and you execute a lot of queries from your database.
+
+01:12.690 --> 01:16.110
+So this might just slow down your application.
+
+01:16.110 --> 01:22.590
+So usually fetching the data from the database is the pain point inside the application.
+
+01:22.590 --> 01:31.240
+So you would always wants to make as little queries to the database as possible and sometimes it's much
+
+01:31.320 --> 01:39.360
+it's not the best idea to actually query the database especially if the data does not change.
+
+01:39.360 --> 01:44.990
+So let's see if anything actually happens when we refresh this page.
+
+01:45.060 --> 01:50.910
+Well we know that nothing has happened because we haven't added on your blog post and we haven't added
+
+01:50.910 --> 01:57.510
+any comments so nothing actually has changed the most commented blog posts are still the same.
+
+01:57.510 --> 02:01.140
+The most active users are also the same.
+
+02:01.140 --> 02:08.730
+And anyway they're actually fetched from the database each single time you refresh the page and maybe
+
+02:08.730 --> 02:10.950
+they shouldn't be.
+
+02:10.950 --> 02:18.400
+Now let's see what cash actually is how it works and what it can do for us.
+
+02:18.510 --> 02:20.020
+So we are starting here.
+
+02:20.040 --> 02:23.990
+For example we are inside our control controller doesn't have to be a controller.
+
+02:24.000 --> 02:29.520
+You can fetch data from different places but let's assume we are inside a controller.
+
+02:29.520 --> 02:35.460
+So we are here we want some data we want blog posts we have comments we want to fetch the most comment
+
+02:35.460 --> 02:38.010
+and blog posts.
+
+02:38.010 --> 02:45.030
+Now normally you will just ask for this data through your database you will use eloquent model which
+
+02:45.030 --> 02:51.340
+would execute a query and return that fresh data each time you ask for it.
+
+02:51.390 --> 02:53.740
+So let's think of it as a layer.
+
+02:53.760 --> 03:01.080
+Normally you just have those two layers you have your controller and your storage so cache will be a
+
+03:01.080 --> 03:08.310
+layer that you will put in between your actual storage so where the real data is being stored which
+
+03:08.310 --> 03:10.340
+would be my sequel database.
+
+03:10.340 --> 03:18.780
+In our case and the controller or the other place from which you fetch the data now what cache actually
+
+03:18.840 --> 03:29.400
+is is it's an abstract concept for actually storing the data that you would like to fetch from a different
+
+03:29.400 --> 03:36.060
+kind of storage from which it can be accessed faster than from a database.
+
+03:36.060 --> 03:40.660
+So for example you can store the cache inside playing files.
+
+03:40.680 --> 03:46.920
+This only works for simple applications so this is the default option by the way and we'll use it by
+
+03:46.920 --> 03:47.460
+default.
+
+03:47.910 --> 03:55.530
+But there are also better options so you can also store it inside my sequel database which doesn't really
+
+03:55.530 --> 04:03.300
+make much sense because you will either have to have two databases or just use the same database.
+
+04:03.300 --> 04:13.830
+That all depends of how your queries are complicated but anyway the most most the most interesting options
+
+04:13.920 --> 04:17.900
+are using either the main cached or Redis.
+
+04:17.970 --> 04:27.360
+So basically mem cached and are other databases in their own right but how they work is they actually
+
+04:27.420 --> 04:31.360
+instead of storing full tables with a structure.
+
+04:31.650 --> 04:35.340
+They are simple key value store.
+
+04:35.340 --> 04:43.050
+So you have a database which basically has a key which might be a string or a number or whatever and
+
+04:43.320 --> 04:47.060
+it just returning data for that particular key.
+
+04:47.160 --> 04:49.380
+And this makes them very fast.
+
+04:49.650 --> 04:53.930
+Additional think you should know is that they can work inside the memory.
+
+04:54.540 --> 05:02.300
+So usually my sequel will store the data on a disk and it it will read the data from the disk.
+
+05:02.300 --> 05:07.090
+So if you have an SSD drive on your server it might be faster.
+
+05:07.280 --> 05:13.820
+But anyway it's always slower to read from the disk then to read from the memory.
+
+05:13.850 --> 05:22.590
+That's why using mem cached or Redis might make querying for the data much much faster.
+
+05:22.980 --> 05:30.530
+OK so we talked about those layers and that cache will seat between our place where we fetch the data
+
+05:30.560 --> 05:34.730
+for example on controller and the actual storage.
+
+05:34.730 --> 05:39.110
+Now let's see what the simple diagram of how this will work looks like.
+
+05:39.800 --> 05:42.400
+So first you want to fetch the data.
+
+05:43.010 --> 05:48.140
+So we ask your cache whether it already has the data for whatever you want.
+
+05:48.140 --> 05:51.740
+If it does it is simply returned from the cache.
+
+05:51.740 --> 05:55.690
+So let's imagine we have that in Redis or a man cache servers.
+
+05:55.790 --> 05:59.570
+It is being usually immediately returned from the memory.
+
+05:59.600 --> 06:02.480
+So this is very fast.
+
+06:02.480 --> 06:11.000
+Now if it's not found in cache then we have to actually fetch it from the database but then we can store
+
+06:11.000 --> 06:12.220
+it inside the cache.
+
+06:12.380 --> 06:16.330
+So many cache Redis and then return it back.
+
+06:17.360 --> 06:23.750
+So after this first cycle if this wasn't found in cash it is actually fetched.
+
+06:23.750 --> 06:29.090
+So we actually execute this queries but then we store it inside the cache.
+
+06:29.780 --> 06:34.040
+So when another user is doing the same thing as you did.
+
+06:34.040 --> 06:40.730
+So he is fetching the data this time it is found in cache because it was already cached by the previous
+
+06:40.730 --> 06:41.590
+request.
+
+06:41.780 --> 06:53.220
+So it is immediately returned now before you actually optimize any part of your application it's important
+
+06:53.220 --> 06:57.020
+to know what is the slowest part of your application.
+
+06:57.030 --> 06:59.940
+What can potentially cause problems.
+
+06:59.940 --> 07:06.390
+So this section is not really about that we need some performance optimizations right now but we will
+
+07:06.510 --> 07:11.460
+just generally learn on how to use cash and how it works.
+
+07:11.460 --> 07:19.440
+But before you actually optimize anything remember that you have have to profile it first and profiling
+
+07:19.500 --> 07:23.310
+means actually finding what has to be optimized.
+
+07:23.370 --> 07:30.090
+So you shouldn't be optimizing when you don't know what is the slowest part of your application.
+
+07:30.090 --> 07:38.100
+Now in the next lecture to actually find out what queries are being executed will install a great package
+
+07:38.100 --> 07:46.560
+called larval debug debug bar when we'll be able to see here on our page what queries were executed.
+
+07:46.950 --> 07:54.120
+Obviously this is optional you don't really have to install it but this will give us much more insight
+
+07:54.190 --> 08:00.870
+on what happens in our application and what we can or should optimize.

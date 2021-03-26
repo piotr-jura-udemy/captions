@@ -1,0 +1,115 @@
+WEBVTT
+
+00:01.420 --> 00:08.140
+Now last time we created this simple batch component that we are using when we display our blog post
+
+00:08.950 --> 00:16.300
+and you might have noticed that we have added it to our global namespace for our larval blade of use.
+
+00:16.540 --> 00:19.720
+And that's not a best practice to do that.
+
+00:19.720 --> 00:29.410
+And instead you should actually create a new folder called it components and move this component.
+
+00:29.410 --> 00:32.110
+This batch component into this folder.
+
+00:32.410 --> 00:37.180
+But now if you will refresh the page you will see that it no longer works.
+
+00:37.180 --> 00:40.180
+It says that the batch of you wasn't found.
+
+00:40.180 --> 00:47.950
+And that's because when you create a component and it is not in their main folder of your views you
+
+00:47.950 --> 00:51.220
+will have to specify the actual folder name.
+
+00:51.220 --> 00:54.260
+So components that batch.
+
+00:56.890 --> 01:04.720
+Now it is being displayed but it might not be very convenient to type all this complicated directory
+
+01:04.720 --> 01:06.640
+names for your components.
+
+01:06.640 --> 01:13.210
+You would like to actually keep it simple because otherwise this is becoming so verbose that you might
+
+01:13.210 --> 01:18.210
+think that creating and using components doesn't really make sense for you.
+
+01:18.220 --> 01:21.760
+You are typing more than you did before.
+
+01:21.760 --> 01:24.970
+So obviously the result solution for this.
+
+01:25.000 --> 01:33.110
+So let's close all these templates and open our up service provider.
+
+01:33.210 --> 01:41.250
+Now this is the place where we where you can register a thing called component alliance and you can
+
+01:41.250 --> 01:44.560
+do that simply by using the blade for site.
+
+01:44.580 --> 01:53.480
+So at this time you might want to press enter to add the import for the blade for Sayed and call the
+
+01:53.480 --> 01:55.900
+component static method.
+
+01:56.020 --> 01:59.560
+Now specify the name of your template.
+
+01:59.740 --> 02:03.070
+So that fully qualified name components blade
+
+02:06.150 --> 02:12.660
+and we will add alliance for this component call it batch.
+
+02:12.720 --> 02:21.720
+Now this simple piece of code is doing us a great favor because now instead of using the component directive
+
+02:21.780 --> 02:28.790
+we can magically add budge directive and finish it with end batch.
+
+02:29.870 --> 02:37.730
+So now you do not really have to specify the component name because obviously it actually knows what
+
+02:37.730 --> 02:43.770
+is the component name you only can specify the additional parameters as the first argument.
+
+02:43.760 --> 02:46.670
+So let's save the changes and see if that works.
+
+02:46.670 --> 02:49.420
+You can see that it works perfectly obviously.
+
+02:49.500 --> 02:57.530
+You can also remove any additional slot settings like we are modifying the type here to display batch
+
+02:57.560 --> 03:00.950
+with a different color if you will remove that
+
+03:03.990 --> 03:08.700
+it still works and it is green by default because that's how we design it.
+
+03:09.210 --> 03:15.180
+So remember when you create your components it's a good practice to put them into the components folder
+
+03:16.350 --> 03:19.360
+and then inside your app service provider.
+
+03:19.410 --> 03:26.390
+Use the blade if I say component method specified a full complete full component template name.
+
+03:26.700 --> 03:29.450
+And then second parameter would be Elias.
+
+03:29.580 --> 03:32.880
+So you can use it as a blade directive.

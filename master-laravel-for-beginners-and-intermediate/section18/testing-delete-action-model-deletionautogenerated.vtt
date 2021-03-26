@@ -1,0 +1,145 @@
+WEBVTT
+
+00:01.000 --> 00:08.340
+So the last time we created this test for testing if we can successfully update an existing blog post
+
+00:08.970 --> 00:16.720
+and now we will be testing if we can successfully delete a blog post.
+
+00:16.770 --> 00:26.160
+So first we of course need an existing blog post so we can either copy this or since we are creating
+
+00:26.160 --> 00:27.870
+the same blog post.
+
+00:27.870 --> 00:32.730
+In this case we are actually doing it at least three times.
+
+00:32.820 --> 00:40.470
+So we do it here in the update test and now in the daily test we can create a private method
+
+00:46.400 --> 00:57.330
+and call it create dummy blog post and it should return our blog post instance so let's copy this into
+
+00:57.330 --> 01:03.090
+this method and from it will return that post.
+
+01:04.230 --> 01:11.130
+So now we can use this method and make our test a little bit shorter because we were actually repeating
+
+01:11.190 --> 01:22.300
+ourselves too many times so we can call create dummy blog post so we no longer need to repeat those
+
+01:22.300 --> 01:23.470
+lines everywhere
+
+01:26.370 --> 01:28.360
+and we can do the same here.
+
+01:32.600 --> 01:43.100
+And finally we can start our test for deleting the blog post by actually storing a new dummy blog post.
+
+01:43.160 --> 01:52.090
+So now we should make our request to delete this blog post so let's copy this code fragment in this
+
+01:52.090 --> 01:56.070
+case we will be using the delete HDP verb.
+
+01:56.080 --> 02:04.360
+So we are calling the delete method and it doesn't contain any firearms so that deleting only needs
+
+02:04.360 --> 02:07.420
+to specify the you URL of the resource.
+
+02:07.420 --> 02:11.580
+And in our case it is posts with the Post I.D..
+
+02:11.890 --> 02:20.430
+We also expect redirect and we expect a status.
+
+02:20.430 --> 02:22.820
+So let's see what should be the status.
+
+02:22.860 --> 02:25.130
+We have one blog post inside here.
+
+02:25.140 --> 02:30.320
+So when we press delete we expect it to be blog post was deleted.
+
+02:33.450 --> 02:37.740
+So let's copy this line where we verify the status
+
+02:41.190 --> 02:44.250
+and copy this text blog post was deleted.
+
+02:50.040 --> 02:54.100
+And now we can do the same what we did with our update test.
+
+02:54.350 --> 02:54.860
+So
+
+02:57.810 --> 03:06.560
+first let's verify that this blog post was actually stored so let's add this assertion here.
+
+03:06.560 --> 03:15.630
+We expect the post to be inside the database and we can also reuse the asset database missing.
+
+03:19.660 --> 03:22.210
+After we actually delete this blog post
+
+03:25.670 --> 03:32.430
+so it's pretty simple now let's open the terminal and run the tests.
+
+03:32.510 --> 03:36.980
+Now you can see that we have 10 tests 27 assertions.
+
+03:37.190 --> 03:44.300
+And basically we have covered every possible action that we have inside our application with the exception
+
+03:44.360 --> 03:53.600
+of testing the validation for updating the blog post and we haven't also tested all that possible validations
+
+03:53.630 --> 03:59.870
+because if you check the store post it's not that we only have the minimum length required.
+
+03:59.870 --> 04:04.520
+We also require the palms to be provided at all.
+
+04:04.580 --> 04:08.540
+And we also have a limit for the title The maximum length.
+
+04:09.380 --> 04:16.520
+So usually you would like to create tests for all the possible cases because that's the meaning of the
+
+04:16.520 --> 04:24.680
+test to verify all the possible cases that can happen inside your application and especially the edge
+
+04:24.680 --> 04:26.210
+cases.
+
+04:26.210 --> 04:34.340
+So whenever you see an edge case happening inside your up that something is hard to reproduce but can
+
+04:34.340 --> 04:35.060
+happen.
+
+04:35.060 --> 04:43.430
+You should definitely write a test for your specific edge cases but this should be pretty simple at
+
+04:43.430 --> 04:44.060
+this point.
+
+04:44.120 --> 04:51.290
+So I believe that if you would like to do some practice you should go ahead and create more tests for
+
+04:51.560 --> 04:59.180
+updating and verifying for example the validation constraints and also do the same with storing and
+
+04:59.180 --> 05:07.070
+verifying other possible validation errors that might occur when you send invalid data.
+
+05:07.520 --> 05:10.100
+So this would conclude our testing.
+
+05:10.100 --> 05:17.570
+The basics of testing at least because we'll do some more later and let's move to the next section.

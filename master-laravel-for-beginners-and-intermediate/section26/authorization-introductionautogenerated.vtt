@@ -1,0 +1,166 @@
+WEBVTT
+
+00:00.420 --> 00:08.730
+Currently in our application we are able to secure some of the functionality of this simple block by
+
+00:08.730 --> 00:11.700
+requiring users to authenticate.
+
+00:11.700 --> 00:18.360
+For example you can see now that I am not authenticated because I see both the register and logging
+
+00:18.360 --> 00:26.120
+buttons and when I go to the list of blog posts I see the edit and delete button.
+
+00:26.310 --> 00:31.160
+But when I pressed them I am being redirected to the logging page.
+
+00:31.290 --> 00:37.770
+So that's well the first level of securing your application that you need to have an account to perform
+
+00:37.830 --> 00:39.630
+a certain action.
+
+00:40.170 --> 00:49.440
+But then if I authenticate I am able to edit those blog posts and actually I can edit all of them and
+
+00:49.530 --> 00:55.710
+also I can delete every single blog post and in the future when we will be adding comments.
+
+00:55.710 --> 01:03.120
+I would also be able at least at this stage to edit and delete comments of all the users.
+
+01:03.270 --> 01:10.320
+Which probably doesn't make sense in the real world because basically whoever will register on your
+
+01:10.320 --> 01:17.610
+application especially with the open registration like we have that basically you need to provide some
+
+01:17.850 --> 01:21.290
+username password and you can do anything.
+
+01:21.330 --> 01:28.760
+So this is where there is another level in the security of your application called How to reception
+
+01:29.790 --> 01:38.270
+and what that means is you are telling the application if certain user can perform a specific action.
+
+01:39.030 --> 01:41.930
+So the concept is actually pretty simple.
+
+01:41.940 --> 01:52.740
+So what we will do in this lecture is we will define certain authorisation rules that for example users
+
+01:52.770 --> 02:01.470
+that haven't created a particular blog post won't be able to edit and delete those blog posts.
+
+02:01.470 --> 02:09.600
+But first before we do that since we already have our user I.D. of the blog post out or on the blog
+
+02:09.600 --> 02:15.120
+post instance we can display who has created a particular blog post.
+
+02:15.390 --> 02:19.290
+So let's go to the Visual Studio code and modify our application
+
+02:22.000 --> 02:29.530
+so let's find our views for the posts which can be find in found inside the resources folder and open
+
+02:29.530 --> 02:32.540
+the index and show template.
+
+02:32.620 --> 02:39.460
+So what we already have inside the show template where where we display on one single blog post is we
+
+02:39.460 --> 02:47.860
+have this paragraph when we display when this was added so we will do the same with the index template
+
+02:47.890 --> 02:59.160
+so let's copy this code and we might place it below the title maybe so we'll display that The Post was
+
+02:59.230 --> 03:04.460
+are that and the date when it was added using the DB for humans.
+
+03:04.490 --> 03:15.000
+So it will show a nice text like it was added three minutes ago but now we can also use our assigned
+
+03:15.030 --> 03:28.770
+user to display Q It was added by so we can do that by and we can use post user name
+
+03:31.430 --> 03:37.690
+and additionally we can add some class like text muted.
+
+03:38.060 --> 03:42.410
+Now let's save the changes and refresh this page
+
+03:45.010 --> 03:45.780
+apparently.
+
+03:45.770 --> 03:51.280
+I've used the wrong field name so let's find a blog post
+
+03:54.690 --> 03:54.930
+Yeah.
+
+03:54.980 --> 04:04.040
+So the problem is that we actually haven't defined our relation that lava can understand for the user.
+
+04:04.040 --> 04:12.200
+So we only generated a migration that are that user I.D. to the blog post so we will also have to add
+
+04:12.290 --> 04:14.690
+a mental note for this relation.
+
+04:19.320 --> 04:21.210
+So this would be public function.
+
+04:21.240 --> 04:30.910
+User and we'll return this belongs to up user.
+
+04:31.140 --> 04:39.480
+And this is because the blog post itself contains are user I.D. field and we can also do that.
+
+04:39.480 --> 04:51.510
+On the other side inside the user will define public function blog posts and will return.
+
+04:51.510 --> 04:59.120
+This has many and this will relate to up
+
+05:01.770 --> 05:04.670
+blog post class.
+
+05:04.860 --> 05:12.510
+So this is a one to many relationships a one user can have many blog posts but one particular blog post
+
+05:12.510 --> 05:17.960
+can only be altered by one specific user.
+
+05:18.000 --> 05:19.810
+So now this should work.
+
+05:19.890 --> 05:25.060
+Let's refresh the page and you can see it works perfectly.
+
+05:25.120 --> 05:33.530
+All the blog posts now have this text when it was added and by whom it was added.
+
+05:33.670 --> 05:42.040
+So now we have this situation that we are authenticated by as John Doe and we see different blog posts
+
+05:42.040 --> 05:45.580
+that were altered by different users.
+
+05:45.730 --> 05:53.320
+So we should only be able to edit those that we have added ourselves and also delete only those that
+
+05:53.320 --> 05:57.040
+we have added ourselves and not the other ones.
+
+05:59.860 --> 06:04.120
+So we will see how to actually do that in the next lecture.
+
+06:04.120 --> 06:12.570
+I will first show you the simplest possible way to define those outer recession constraints inside a
+
+06:12.570 --> 06:13.870
+layer of application.

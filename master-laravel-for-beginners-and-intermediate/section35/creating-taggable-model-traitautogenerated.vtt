@@ -1,0 +1,565 @@
+WEBVTT
+
+00:00.540 --> 00:08.520
+In the last lecture I've explained how we can create traits to put the common functionality of our models
+
+00:08.790 --> 00:13.170
+into a specific trade that we can then reuse on many models.
+
+00:13.170 --> 00:18.600
+And I've explained that on the built in larval self deletes trade.
+
+00:18.690 --> 00:26.070
+So we are talking about booting to specify some events on a model and also how other methods can override
+
+00:26.430 --> 00:28.750
+the default model methods.
+
+00:29.490 --> 00:31.150
+So let's close that us.
+
+00:31.200 --> 00:40.740
+Now it's time to actually create our own trade so inside the up namespace let's create a new folder
+
+00:40.960 --> 00:48.960
+called it traits and then we'll create our new file and call it targetable peach B.
+
+00:50.120 --> 00:53.180
+So we have to start with the BJP tag.
+
+00:53.270 --> 01:00.380
+Specify the namespace which is up traits and define our new trait called tag Aboul
+
+01:04.370 --> 01:10.600
+now since every trait that is being used within a class will add some methods to it.
+
+01:10.640 --> 01:19.190
+If they don't exist or override them and this applies also to fields what we can do is actually you
+
+01:19.190 --> 01:28.010
+can see that we have exactly the same code for defining the tax relationship on both the blog post and
+
+01:28.010 --> 01:30.100
+the comment.
+
+01:30.320 --> 01:37.110
+So what we can do is we can move this to a trade.
+
+01:37.230 --> 01:45.690
+So now we have this tax method on a trade and instead of redefining this on a model will remove this
+
+01:45.930 --> 01:46.560
+from both.
+
+01:46.570 --> 01:49.380
+Comment and blog post
+
+01:52.290 --> 02:02.300
+save the changes and what we will do instead is you will just use taxable make sure you have other the
+
+02:02.360 --> 02:10.320
+import here to the app trade stack of all and basically now we have tax relationship defined on blog
+
+02:10.320 --> 02:16.220
+post and if we'll use that in comments too.
+
+02:16.290 --> 02:19.860
+We also have it now to make sure that it works.
+
+02:19.860 --> 02:23.180
+Let's see our application if it still works.
+
+02:24.070 --> 02:31.070
+So let's go to the browser refresh and you can see that everything works perfectly.
+
+02:31.090 --> 02:39.760
+So what we have done is now the tax relationship is defined inside this straight target ball and to
+
+02:39.760 --> 02:43.220
+fully see the benefit of doing things like that.
+
+02:43.240 --> 02:51.310
+Let's imagine that you need to add tax to videos to images to blog posts to comments to any other models
+
+02:51.310 --> 02:54.020
+that you might have inside your application.
+
+02:54.040 --> 03:01.090
+Now everything that you need to do is just use that targetable trait and they have this relationship.
+
+03:01.810 --> 03:04.780
+So it's kind of magical.
+
+03:04.930 --> 03:07.920
+Now we have this relationship defined.
+
+03:08.080 --> 03:10.540
+But that's not really powerful.
+
+03:10.540 --> 03:19.230
+It doesn't really take much for us to really put this tax method on all of those models.
+
+03:19.240 --> 03:27.460
+The biggest feature of actually defining this huggable trait is that every model that has the content
+
+03:27.460 --> 03:36.450
+field will actually have all the tax associated whenever and whenever they are created or updated.
+
+03:36.580 --> 03:44.250
+So let's see how we can do that to actually find tax inside the content we'll use regular expressions
+
+03:44.740 --> 03:51.290
+so you can head to this website where we can test our regular expressions to see if they work.
+
+03:52.240 --> 03:58.440
+So first let's go to any blog post copy its content.
+
+03:58.600 --> 04:05.200
+So this is where we will look for something and here will specify our regular expression pattern that
+
+04:05.200 --> 04:10.930
+we will use to find any talks that are inside the content.
+
+04:10.930 --> 04:18.280
+So let's assume that we can add tags by using the sign and the tag name.
+
+04:18.280 --> 04:26.160
+So let's say we want to tag this with science sport and politics.
+
+04:27.040 --> 04:33.500
+And now how do we find that so everything should start with ET sign.
+
+04:33.500 --> 04:34.940
+But what does it give us.
+
+04:34.940 --> 04:38.130
+Is it's only matching the ad signs.
+
+04:38.180 --> 04:47.020
+We actually need to find the content between those two ad signs so we can do that by specifying a group
+
+04:47.050 --> 04:54.840
+of characters to exclude so we do that using this character inside square brackets.
+
+04:54.840 --> 05:06.060
+So we are saying find me everything starting with ET sign then find all the characters except X at sine
+
+05:08.700 --> 05:11.250
+but to find the whole target name.
+
+05:11.250 --> 05:12.360
+We need a plus.
+
+05:12.930 --> 05:17.460
+So this with the plus means find one or more.
+
+05:17.460 --> 05:22.890
+Now you can see that we are matching something but there are too many matches.
+
+05:22.890 --> 05:30.050
+And what we actually have to do is we have to close that with another ad sign.
+
+05:30.060 --> 05:35.140
+So now you also see the full explanation on the right of what is happening.
+
+05:35.190 --> 05:41.720
+If you do not know much about regular expressions I invite you to read the BHP documentation about that.
+
+05:42.000 --> 05:44.320
+But let's go through it again.
+
+05:44.370 --> 05:51.450
+So what we wants to achieve is since we do not know what tag names are possible and we do not want to
+
+05:51.450 --> 06:01.050
+fetch them from database right now yet at least what we will do is we search for it sign then any characters
+
+06:01.050 --> 06:08.100
+that are different than at sign this will match all the content between the ad signs and this has to
+
+06:08.100 --> 06:13.080
+be one character or longer since the plus modifier.
+
+06:13.080 --> 06:18.220
+And then we finish up with another at sign.
+
+06:18.240 --> 06:24.390
+Now if you take a look on the right side on the much information box you can see that we are matching
+
+06:24.450 --> 06:31.050
+the tag names along with the ad signs that are just used to denote the tag to be used.
+
+06:31.050 --> 06:35.910
+And we do not actually want this ad signs to be included.
+
+06:35.910 --> 06:45.040
+So we can create a group and end closing with their parentheses and now what we see is actually a full
+
+06:45.040 --> 06:51.260
+match including the ad signs and our group which is actually the tag name.
+
+06:51.520 --> 06:55.290
+So not that we know how the regular expression should look like.
+
+06:55.640 --> 06:58.190
+Now let's actually use that.
+
+06:58.690 --> 07:04.060
+So we will define our static method inside our target all trade.
+
+07:04.120 --> 07:09.530
+We will cold up find tags in content.
+
+07:09.760 --> 07:12.490
+This accepts one parameter the content
+
+07:20.120 --> 07:22.250
+I forgot the function.
+
+07:22.400 --> 07:26.360
+That's why it is red OK.
+
+07:26.380 --> 07:33.850
+Now to find all the accurate occurrences inside a string using our regular expression we will use preg
+
+07:33.970 --> 07:44.890
+match all BHP function where first you have to specify a pattern so let's see what our pattern is.
+
+07:44.920 --> 07:46.800
+So let's copy it from here.
+
+07:46.840 --> 07:51.130
+So select everything and just copy it.
+
+07:51.190 --> 07:57.130
+Now you also have to enclose it with slash and add M modifier
+
+07:59.810 --> 08:10.680
+so slash at the beginning slash at the end and the M modifier.
+
+08:10.710 --> 08:16.670
+Now the second parameter is the subject we would like to look inside which is content.
+
+08:17.400 --> 08:23.820
+And now the first parameter is actually our reference to an array in which it will return everything
+
+08:23.820 --> 08:40.390
+that it has found so let's use a tags variable for that.
+
+08:40.400 --> 08:48.140
+Now how this works is that pretty much all will create an array where the index the first index zero
+
+08:48.140 --> 08:50.720
+will contain everything that was matched.
+
+08:50.720 --> 08:55.040
+So it will contain full matches and add index 1.
+
+08:55.070 --> 08:58.010
+It will contain all the group matches.
+
+08:58.280 --> 09:08.290
+So we'll have it science sport and politics inside so what we can do actually is to fetch all the tax
+
+09:08.290 --> 09:11.950
+with the given names we can return.
+
+09:12.030 --> 09:16.790
+Tag this is our model up tag.
+
+09:16.830 --> 09:27.510
+So make sure you add that import that we will create a query using were in and we want to find tags
+
+09:27.560 --> 09:37.770
+by name so we specify that we want to find tags using name column and the parameters would be tax using
+
+09:37.800 --> 09:38.800
+index 1.
+
+09:38.820 --> 09:43.830
+So this tags one should contain everything from the group matches.
+
+09:43.860 --> 09:46.320
+So science sport and politics.
+
+09:46.320 --> 09:51.910
+In this example now we have to make sure that we actually have anything found.
+
+09:51.960 --> 10:02.520
+So we use this peach be new operator that came up with BHP seven and what this does is if this is specified
+
+10:02.550 --> 10:03.810
+and not empty.
+
+10:03.840 --> 10:10.340
+So when the tax array is field and has index 1 then just take the value.
+
+10:10.350 --> 10:20.070
+Otherwise use the value on the right which is in our case would be an empty array.
+
+10:20.080 --> 10:28.420
+Now this will actually create a query where we'll select everything from tag using name and we'll fetch
+
+10:28.450 --> 10:33.640
+all the stocks that have the names that we have found using our regular expression.
+
+10:33.640 --> 10:39.300
+So finally we have to call get to actually execute this query.
+
+10:39.340 --> 10:52.330
+Now having this method what now we can do is we can create a protected static function.
+
+10:52.740 --> 10:58.470
+As I've explained before we'll create a method that will put this straight.
+
+10:58.470 --> 10:59.870
+So the same as it.
+
+11:00.060 --> 11:06.750
+It is done inside the self delete straight so we can do that either protect her all or public.
+
+11:07.470 --> 11:10.330
+So we need to add boot and the trade name.
+
+11:10.500 --> 11:13.500
+So let's do that boot target targetable
+
+11:16.240 --> 11:21.450
+and now we have access to everything that we can specify on the model itself.
+
+11:22.180 --> 11:27.130
+So on the blog post we have added some events for that model.
+
+11:27.280 --> 11:33.520
+And now what we will do is we'll specify some events but they will be applied to older models that are
+
+11:33.520 --> 11:36.630
+using this straight.
+
+11:36.650 --> 11:41.550
+So first there is an updating event.
+
+11:41.630 --> 11:44.260
+This will receive an instance of the models.
+
+11:44.260 --> 11:48.050
+So in this situation we already have a model that is being updated.
+
+11:49.130 --> 11:52.340
+And another one is static created
+
+11:57.320 --> 12:02.930
+so not is that here we are using updating because we already have an idea of the model.
+
+12:03.260 --> 12:11.240
+And the second event we are not using creating but created because we will need the actual idea of that
+
+12:11.240 --> 12:11.970
+model.
+
+12:12.020 --> 12:18.860
+And at this point when the creative event is being dispatched there is not not an idea of the model
+
+12:18.890 --> 12:28.310
+associated because this is actually fired because the model before the model is stored inside the database.
+
+12:28.320 --> 12:31.380
+Now let's see the magic.
+
+12:31.380 --> 12:38.430
+So we have a model since it is using the tag of all trade it has the tax relationship.
+
+12:38.430 --> 12:46.890
+So we do tags and then if you remember how we can associate some elements in the many to many relationship
+
+12:47.280 --> 12:56.250
+if you do not just go back to the lecture about many to many relationship we can use the sink method.
+
+12:56.250 --> 13:03.480
+So will this what this will do to replace older relationships that this model actually has we have a
+
+13:03.480 --> 13:06.340
+new set of relationships.
+
+13:07.020 --> 13:16.610
+So now another magic we do static to call our find tax in content method and why we are calling it with
+
+13:16.620 --> 13:21.480
+static is because there are static and instance methods.
+
+13:21.600 --> 13:29.520
+If we are calling something on the static method which would taxable is and have to be we have to use
+
+13:29.520 --> 13:32.280
+that you will have to access and.
+
+13:32.520 --> 13:37.560
+Well actually we only can access static methods inside a static method.
+
+13:38.010 --> 13:43.380
+So this is why we created this method as a static one.
+
+13:43.410 --> 13:50.700
+Now if you do not remember those double semicolons is how you access static members of a class.
+
+13:50.700 --> 13:52.580
+So this is for instance methods.
+
+13:52.950 --> 14:02.730
+And this is for static methods and static is just a keyword which relates to the actual class so we
+
+14:02.730 --> 14:12.350
+do static find docs in content and seems we know that models have to have a content field what this
+
+14:12.350 --> 14:19.580
+will do is this will return all the attacks with the given name that were found inside the content and
+
+14:19.730 --> 14:28.820
+mobile tax sink will actually associate those stocks to the model so the create that is actually the
+
+14:28.820 --> 14:39.010
+same now save the changes and what we can do right now is if you make sure that the ball is being used
+
+14:39.040 --> 14:47.830
+on block post and comment let's immediately go ahead and create a new blog post that will have some
+
+14:47.830 --> 14:48.850
+tax.
+
+14:48.850 --> 14:51.930
+So let's see maybe politics and entertainment.
+
+14:51.940 --> 14:58.600
+Notice that the most recent post does has some tags but we haven't added any because we refresh the
+
+14:58.600 --> 14:59.400
+database.
+
+15:00.040 --> 15:02.010
+So first we have to log in of course.
+
+15:02.050 --> 15:05.830
+Now let's specify some title and the content.
+
+15:05.830 --> 15:17.270
+This is another blog post and then we can up tags like this science and sport so they start with Ed
+
+15:17.270 --> 15:21.250
+sign and they end with AD sign.
+
+15:21.260 --> 15:23.890
+Now you press create and magic.
+
+15:23.930 --> 15:28.310
+You can see that we have those stocks associated.
+
+15:28.310 --> 15:37.280
+If I modified his blog post and I change it to enter tainment or maybe something simpler like politics
+
+15:38.650 --> 15:44.070
+update Well apparently there is no politics stuck or I've missed it.
+
+15:44.090 --> 15:48.760
+So let's modify this again so sport or economy.
+
+15:48.760 --> 15:53.660
+This definitely exists and you can see that I have those stocks.
+
+15:53.680 --> 16:02.490
+Now if you will check the database inside Tiger balls you can see that this was added to the Taco Bell
+
+16:02.500 --> 16:08.310
+I.D. blog post 51 that I have just created and there are the tag I.D. here.
+
+16:08.410 --> 16:12.670
+And of course the tiger Bowl type.
+
+16:12.880 --> 16:14.560
+Now let's see another magic.
+
+16:14.680 --> 16:33.160
+So I will add a comment oh no this is not sport it's actually let's say Pauly tics.
+
+16:33.260 --> 16:41.970
+Now I've added a comment and let's see the database and what you can see now is that tag was actually
+
+16:41.970 --> 16:44.020
+associated to this comment.
+
+16:44.070 --> 16:46.320
+There is the tag about I.D. 301.
+
+16:46.320 --> 16:47.220
+This would make sense.
+
+16:47.220 --> 16:55.150
+It's the comment I.D. the tag a ball type is the comment but there are no tags displayed on that yet.
+
+16:55.160 --> 16:56.930
+So let's display something.
+
+16:56.930 --> 17:04.100
+Fortunately we have our comment list comment components sorry.
+
+17:05.960 --> 17:13.190
+And what we can do is if you will also find a view for displaying posts let's say this one.
+
+17:13.190 --> 17:20.010
+We have our tax component which for which you only have to pass the tax related.
+
+17:20.330 --> 17:22.200
+So let's copy that.
+
+17:22.550 --> 17:29.990
+And now for every comment what we will do is we'll display tax but not from post but from that comment
+
+17:32.720 --> 17:40.170
+refresh and what you can see is that I've added a comment which now has a tag and it's just magical.
+
+17:40.170 --> 17:47.630
+It whole it all has happened thanks to this tiger trade not automatically is creating tax based on the
+
+17:47.630 --> 17:54.500
+content using this simple regular expression matching and then finding those tanks inside the database
+
+17:54.590 --> 18:02.060
+by name and finally using sink to associate all those stocks and also replace any or any other that
+
+18:02.060 --> 18:03.740
+were old.
+
+18:03.740 --> 18:05.050
+So let's try that again.
+
+18:05.060 --> 18:06.650
+I will post another comment.
+
+18:06.660 --> 18:21.130
+Maybe it's actually sport and economy and voila you have you have tax associated with our comment.
+
+18:22.030 --> 18:27.550
+Obviously there are some problems right now with our application so I just wanted to show you how to
+
+18:27.550 --> 18:28.710
+do certain things.
+
+18:28.720 --> 18:34.990
+It doesn't really matter how that looks in our up because this really doesn't work the way we might
+
+18:34.990 --> 18:41.560
+expect at this point having tax for both blog posts and comments when we pressed attack we might want
+
+18:41.560 --> 18:48.460
+to go to some TAC page where we'll see all the blog posts and tax from this sorry the blog posts and
+
+18:48.460 --> 18:56.350
+comments from this stock and we only see all the blog posts that are associated to this tag.
+
+18:56.410 --> 18:58.630
+So this of course can be fixed later.
+
+18:58.650 --> 19:06.910
+And now it's actually very easy to do but just so you see how powerful lower level is and how nice thinks
+
+19:06.910 --> 19:15.210
+we can create and how easy that actually is to do stuff that we can later reuse in our applications.

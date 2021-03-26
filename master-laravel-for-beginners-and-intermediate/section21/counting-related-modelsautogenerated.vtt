@@ -1,0 +1,169 @@
+WEBVTT
+
+00:00.690 --> 00:06.480
+Now the last thing I wanted to show you before we move on to something else with their one too many
+
+00:06.480 --> 00:11.940
+relationships is how to get the count of the related models.
+
+00:11.940 --> 00:15.250
+So it is very very simple.
+
+00:15.250 --> 00:23.300
+Now imagine we would like to fetch that blog posts so we use that blog post but now instead of with
+
+00:23.790 --> 00:29.520
+will use with count and we specify the relation.
+
+00:29.510 --> 00:30.870
+Name it start simple.
+
+00:30.860 --> 00:34.050
+That's everything we basically need to do.
+
+00:34.050 --> 00:38.060
+And finally since this creates a new query we need to call.
+
+00:38.060 --> 00:40.830
+Get to get the actual result.
+
+00:40.830 --> 00:48.670
+Now let's execute that and what gets added to each blog post is the new field.
+
+00:48.690 --> 00:55.950
+It is called comments count and how lovable creates that field is it is using the original relation
+
+00:55.950 --> 00:56.580
+name.
+
+00:56.580 --> 01:05.570
+We should be comments and then it adds underscore count so we can see that with each blog post now we
+
+01:05.570 --> 01:12.320
+get returned the amount of the comments that are related to this blog post so five for the first one
+
+01:12.800 --> 01:19.460
+second for the second one comment for the third and 0 comments for the last one.
+
+01:19.460 --> 01:22.720
+So this was pretty simple.
+
+01:22.720 --> 01:30.180
+Now let's clear the screen and let's see how we can make something a little bit more complicated.
+
+01:30.190 --> 01:40.990
+So we would like to fetch the blog posts with the count of comments but we also would like to get what
+
+01:40.990 --> 01:43.390
+are the new comments for each blog post.
+
+01:43.390 --> 01:47.800
+So imagine you have a very popular Web site and you only want.
+
+01:47.800 --> 01:50.790
+You want to get all the comments at all.
+
+01:50.860 --> 01:55.230
+And you also want to fetch all the brand new comments.
+
+01:55.270 --> 01:57.880
+So this time will pass an array to this
+
+02:00.900 --> 02:03.600
+and the second argument would be comments.
+
+02:03.600 --> 02:07.050
+So the relation name but we'll give it an alliance.
+
+02:07.080 --> 02:15.010
+So this would be maybe new comments.
+
+02:15.330 --> 02:23.480
+And now since this is on the array we can pass value because normally comments would be fetched as usual
+
+02:23.480 --> 02:26.770
+comment count but here we want something specific.
+
+02:26.780 --> 02:32.240
+So we'll pass closure as a value of this key.
+
+02:32.240 --> 02:43.320
+It will also accept a query and inside this closure body we would like to specify the actual condition
+
+02:43.380 --> 02:48.900
+which comment has to pass to be included inside this counting field.
+
+02:49.320 --> 02:51.750
+So we will do query where
+
+02:54.520 --> 02:58.000
+create created art.
+
+02:58.000 --> 03:02.530
+So we want to only include the brand new comments.
+
+03:02.530 --> 03:06.500
+Is newer or equal.
+
+03:06.650 --> 03:17.260
+And now let's go back to the our database client and maybe copy this data so we'll use it just to make
+
+03:17.770 --> 03:19.660
+something interesting.
+
+03:20.850 --> 03:26.620
+Okay now let's close this query where coal are the semicolon.
+
+03:26.620 --> 03:30.610
+Closed the function.
+
+03:30.640 --> 03:35.230
+Now we have to close the array and close that with count coal.
+
+03:35.290 --> 03:42.730
+So I know it looks pretty complicated to write all this inside the Tinker and inside terminal.
+
+03:42.730 --> 03:49.570
+Maybe that would be easier to actually write it inside some of the actions inside the post controller
+
+03:49.600 --> 03:58.120
+maybe you can even do that here and just dump the results using DDR method now anyway since we are writing
+
+03:58.120 --> 03:59.010
+it here.
+
+03:59.080 --> 04:02.700
+Finally we have to call get to get the actual results.
+
+04:06.110 --> 04:08.310
+And this is what we got back.
+
+04:08.310 --> 04:17.010
+So for the blog post for the first blog post we got the comments count we have the five and the new
+
+04:17.010 --> 04:22.040
+comments are zero for the second post since we have just added those comments.
+
+04:22.050 --> 04:29.370
+We got two in each of those fields the same for the third one and the last one has zeros everywhere
+
+04:29.400 --> 04:31.900
+because it doesn't have any comments.
+
+04:32.010 --> 04:41.430
+So this is how you can filter to how you can add more fields asked comments even using the same relation.
+
+04:41.430 --> 04:43.620
+But this time query it somehow.
+
+04:43.640 --> 04:50.370
+So we just used the date but you can use anything you can even count comments which contain a specific
+
+04:50.370 --> 04:59.040
+word or maybe later when we'll have users inside our application you can for example count the comments
+
+04:59.040 --> 05:02.220
+that were written by our specific user.
+
+05:02.340 --> 05:09.390
+So that would be it for querying the relationship count and let's move on to something else.

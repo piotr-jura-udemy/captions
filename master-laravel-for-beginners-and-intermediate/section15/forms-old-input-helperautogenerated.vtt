@@ -1,0 +1,52 @@
+WEBVTT
+
+00:02.230 --> 00:08.980
+It might be a very useful feature to keep the input entered by the user if the validations failed,
+
+00:09.150 --> 00:13.780
+especially if the forms are larger and contain more fields.
+
+00:14.680 --> 00:16.390
+Let me show you what I mean.
+
+00:17.170 --> 00:20.350
+Send this forum with the incorrect input.
+
+00:20.770 --> 00:24.980
+And apart from seeing the errors, you can see the input is gone.
+
+00:25.810 --> 00:27.340
+You need to retype it again.
+
+00:27.940 --> 00:34.090
+It's fine when you have two fields, but not so fine if you have 10 or 20 fields.
+
+00:34.990 --> 00:43.240
+Laravel will keep the so-called old input in the session for you and you can retrieve it using the global
+
+00:43.240 --> 00:46.110
+old helper function in blade templates.
+
+00:46.630 --> 00:55.990
+All you have to do is to set the value of the input to a call to an old function with the name of that
+
+00:55.990 --> 00:56.550
+field.
+
+00:56.560 --> 00:58.180
+So title in this case.
+
+00:58.750 --> 01:05.590
+Alternatively, it accepts a second optional argument with a default value, and we will use that later.
+
+01:07.010 --> 01:09.100
+Let's do the same with the text area.
+
+01:10.510 --> 01:13.330
+So we called with content.
+
+01:19.010 --> 01:26.360
+Next time you will submit the form with the incorrect input, the input will stay in the form so we
+
+01:26.360 --> 01:27.110
+can fix it.

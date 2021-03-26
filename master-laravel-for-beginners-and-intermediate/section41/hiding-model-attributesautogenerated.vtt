@@ -1,0 +1,142 @@
+WEBVTT
+
+00:00.810 --> 00:08.580
+In the last lecture we worked on our simple end point returning some data as Jason and we talked about
+
+00:08.730 --> 00:17.100
+some fields that are returned but we don't necessarily want them such as commendable type 4 for example.
+
+00:17.640 --> 00:27.360
+So let's go to the Visual Studio code or we can close these classes and as an example let's open the
+
+00:27.360 --> 00:28.340
+User class.
+
+00:28.350 --> 00:34.350
+So this is our user model and this was added by a of.
+
+00:34.370 --> 00:40.620
+So there is this field called Hayden and it contains two entries password.
+
+00:40.660 --> 00:51.950
+And remember token so why is this inside the User model so you can also refer to the documentation link
+
+00:51.970 --> 00:56.290
+included hiding attributes from Jason.
+
+00:56.490 --> 01:04.860
+So it's extremely simple in light of all if you just convert model or collection of models to array
+
+01:05.070 --> 01:05.670
+and vars.
+
+01:05.670 --> 01:14.850
+This is being converted to Jason by specifying this protected hidden field on your models and including
+
+01:14.910 --> 01:18.780
+the column names that you would like to hide.
+
+01:18.780 --> 01:21.120
+You are telling Lavell not to include them
+
+01:24.000 --> 01:28.680
+so let's see what we would like to hide here.
+
+01:28.680 --> 01:32.980
+So we probably would like to hide deleted hard
+
+01:36.500 --> 01:45.080
+so let's go to our comment and add this protected hidden.
+
+01:45.140 --> 01:55.880
+This has to be an array so we don't want deleted art but also we do not want commendable type us.
+
+01:55.970 --> 01:59.570
+This is not really interesting commendable type.
+
+01:59.570 --> 02:06.400
+So our front end doesn't really need to know because it already expects from this end point to return
+
+02:06.410 --> 02:07.900
+comments for blog posts.
+
+02:07.910 --> 02:10.580
+So this is totally not interesting.
+
+02:10.600 --> 02:15.790
+What's the class name for this comment.
+
+02:15.960 --> 02:29.880
+Now this commendable idea might also not be very useful so let's also hide it commendable idea because
+
+02:29.970 --> 02:38.670
+this is our blog post idea and we already provided the blog post idea in the URL so we do not need that.
+
+02:39.160 --> 02:39.530
+Okay.
+
+02:39.540 --> 02:48.810
+After making these changes to the comment now every time you will convert our model to an array which
+
+02:48.930 --> 02:53.430
+in this case a lot of it is doing for us it is converting our collection.
+
+02:53.430 --> 03:00.630
+And as you remember from the last lecture that collection in turn converts every element of this collection
+
+03:00.780 --> 03:01.750
+to an array.
+
+03:01.860 --> 03:11.250
+Using that to Array method using this setting you are telling Lavell how this model should be converted
+
+03:11.580 --> 03:14.070
+to an array and then to Jason.
+
+03:14.070 --> 03:23.610
+So you are ignoring this fields so if you will make this request again now we can see that those fields
+
+03:23.700 --> 03:25.780
+are not returned anymore.
+
+03:27.310 --> 03:29.520
+So nothing really bad happened.
+
+03:29.530 --> 03:36.160
+If we would return those fields that would be just excessive data then probably not anyone should ever
+
+03:36.160 --> 03:36.610
+see.
+
+03:37.390 --> 03:45.520
+But this has some well most important use cases is where you actually have some data on the model that
+
+03:45.820 --> 03:55.720
+should never ever be returned back to publicly visible API so like imagine you would like to load our
+
+03:55.720 --> 03:59.500
+user profile by having an end point.
+
+03:59.530 --> 04:06.880
+And if you would not hide their password or remember token what you are doing is basically providing
+
+04:06.960 --> 04:14.020
+all the user passwords through an API for let's say everyone who is viewing a user profile.
+
+04:14.170 --> 04:21.420
+So it's really important to take a good look at what you are actually returning through your API.
+
+04:21.850 --> 04:29.290
+If you use this simple method of serialized models or collections but I would like to remind you that
+
+04:29.290 --> 04:36.610
+there is also are much better recommended way but that will cover later and it is called Creating resource
+
+04:36.610 --> 04:43.810
+classes for every model and sometimes a couple of resource classes depending on what information from
+
+04:43.810 --> 04:45.690
+a model you need.
+
+04:45.850 --> 04:47.110
+But we will get to that later.

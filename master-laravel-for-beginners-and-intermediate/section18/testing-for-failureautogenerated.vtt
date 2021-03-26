@@ -1,0 +1,223 @@
+WEBVTT
+
+00:00.690 --> 00:07.020
+So as I said in the last lecture now will verify how to test for the failure in the sense that the user
+
+00:07.020 --> 00:09.470
+provided invalid input.
+
+00:09.960 --> 00:16.050
+So you can see that when we provide values that are too short we see the two error messages.
+
+00:16.050 --> 00:17.970
+So now we'll be testing for that.
+
+00:18.000 --> 00:20.370
+So we need to create another test.
+
+00:21.890 --> 00:25.430
+Let's call a test store fail
+
+00:29.060 --> 00:33.480
+and create our paradigms.
+
+00:33.500 --> 00:42.990
+So the title could be X and the content will also be just X so those two values will be too short
+
+00:45.770 --> 00:51.070
+now we can copy this fragment because we'll be making the same call.
+
+00:51.090 --> 00:56.970
+So we are sending parents to the post we expect a redirect because it also happens when we have invalid
+
+00:56.970 --> 01:00.810
+values just that it redirects to the form.
+
+01:00.810 --> 01:07.430
+Now we won't be checking for the status because it is being only added when the data is valid.
+
+01:07.440 --> 01:14.430
+In this case we have another session variable and it is called errors.
+
+01:14.430 --> 01:21.930
+So as I've explained that before it's being created automatically by Lovell and other globally so you
+
+01:21.930 --> 01:25.410
+can use it anywhere you like.
+
+01:25.410 --> 01:34.910
+So since we have our session variable errors lets who read it using the session function and assign
+
+01:34.910 --> 01:38.090
+it to the messages variable.
+
+01:38.090 --> 01:46.700
+And now before we proceed to checking it let's use D.D. inside the test to see what does it contain.
+
+01:46.700 --> 01:49.940
+So you can also use data inside the tests.
+
+01:49.940 --> 02:01.500
+Let's run it and you can see that it is an object of the type view error bug so by looking inside this
+
+02:01.530 --> 02:09.870
+object you can see that it contains a property called bugs which is an array and that in our case it
+
+02:09.900 --> 02:13.590
+only contains one element the default one.
+
+02:13.590 --> 02:19.860
+So we would actually wants to access those messages inside the default bug.
+
+02:20.760 --> 02:29.610
+So you can check the API of the lava objects on this page and you can even search for any other object
+
+02:29.610 --> 02:37.920
+that you are interested in to see the larval internals and all this on and its object API so old variable
+
+02:38.040 --> 02:46.010
+methods that you can call so in this case we do not really want to play with those bugs.
+
+02:46.010 --> 02:53.120
+We will only want to access those default one so you can even view the source of this.
+
+02:53.120 --> 03:04.070
+If you are a bug on this page by clicking view source and then by looking into it on github there is
+
+03:04.070 --> 03:11.990
+this special method call which allows you to call any dynamic methods that are not defined are not part
+
+03:11.990 --> 03:22.190
+of this object and in this case if we will call any method that doesn't exist here it will call it on
+
+03:22.190 --> 03:24.080
+the default bug.
+
+03:24.470 --> 03:35.560
+And since the default bug is of the type message bug let's go ahead and try to find this object inside
+
+03:35.560 --> 03:39.220
+the API so search for the message bug.
+
+03:42.530 --> 03:45.680
+And you have the least of all the available metals.
+
+03:45.710 --> 03:53.460
+The one that we'll be using is called get messages so let's try that out.
+
+03:53.610 --> 04:02.010
+So instead of fetching this individual box because we have only one we want to call get messages which
+
+04:02.010 --> 04:09.570
+will be called on this object it's one of the larval magics it likes to do this stuff a lot.
+
+04:09.570 --> 04:17.700
+So this is like the first time I've showed you this but lava is full of this features that sometimes
+
+04:17.730 --> 04:27.030
+people that are used to defining older methods on the objects they're using in BHP might find it confusing
+
+04:27.060 --> 04:30.550
+that we are calling a method that doesn't exist there.
+
+04:30.660 --> 04:33.650
+But this is just how lava is built.
+
+04:33.810 --> 04:40.650
+It contains a lot of this functionality all over the place and we will see that later with the models
+
+04:41.100 --> 04:51.020
+that it is using some defaults and allows you to use some magic properties and metals all over the place.
+
+04:51.090 --> 04:58.590
+And one of those examples are actually the model attributes like the title and content are not defined
+
+04:58.650 --> 04:59.700
+on the model.
+
+04:59.850 --> 05:08.340
+They use their magic access source that when you try to access a field that doesn't exist Lavell knows
+
+05:08.340 --> 05:12.160
+that it should fetch the value of their model field.
+
+05:13.170 --> 05:14.700
+OK so enough of this.
+
+05:14.700 --> 05:24.000
+Now let's see what do we get by calling this get messages so we get the title and the content and those
+
+05:24.000 --> 05:30.430
+are the race with all the errors about this particular field.
+
+05:30.480 --> 05:35.940
+So now we should be able to do our CERT equals
+
+05:38.470 --> 05:49.400
+and verify that the messages title first element of it is equal to the title match must be of these
+
+05:49.400 --> 05:50.830
+five characters.
+
+05:50.840 --> 05:53.090
+We can even copy that from the terminal
+
+05:59.190 --> 06:04.530
+and now let's copy this line and check the same for the content.
+
+06:04.530 --> 06:12.750
+So the first message for the content field is that it has to be at least 10 characters.
+
+06:12.900 --> 06:17.660
+So let's base that inside here.
+
+06:17.710 --> 06:23.470
+Now we can remove this line and this is our test.
+
+06:23.620 --> 06:31.690
+So we are checking my posting to the posts and point with invalid parameters we expect our redirect
+
+06:31.720 --> 06:39.850
+because it always happens when we have an error when we submit invalid data inside the forum and then
+
+06:39.910 --> 06:48.490
+Lavell ultimately creates a session variable called errors that we can then access and read if there
+
+06:48.490 --> 06:51.370
+are the errors that we expect it to be there.
+
+06:51.850 --> 06:54.040
+So it's finally run peach.
+
+06:54.100 --> 06:54.610
+You need
+
+06:58.430 --> 06:58.970
+apparently.
+
+06:58.970 --> 07:00.240
+I forgot to call.
+
+07:00.290 --> 07:02.530
+Get messages here.
+
+07:02.540 --> 07:04.520
+That's why we got an error.
+
+07:04.520 --> 07:07.010
+Now let's rerun it again.
+
+07:07.250 --> 07:13.610
+And now you can see that we have eight tests 16 assertions and everything is green.
+
+07:13.610 --> 07:21.080
+So we are growing our lists of tests at making our application tested so whenever we change something
+
+07:21.110 --> 07:28.340
+now we should immediately see that when we run the test that something may be have gone wrong.
+
+07:29.180 --> 07:31.280
+So that would be it for this lecture.
+
+07:31.280 --> 07:39.320
+And in the next one as promised I will show you how we can test the updates and deleting a model.

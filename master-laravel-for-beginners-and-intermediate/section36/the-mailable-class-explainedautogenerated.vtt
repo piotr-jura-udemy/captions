@@ -1,0 +1,319 @@
+WEBVTT
+
+00:00.360 --> 00:06.390
+In the last lecture you've learned the basics of how to configure e-mails sending through lateral application.
+
+00:06.390 --> 00:13.260
+You should also have a mail drop account set up or if you prefer to use any other options you are free
+
+00:13.260 --> 00:14.150
+to do so.
+
+00:14.190 --> 00:21.380
+I've just shown you in the last lecture what are the possible drivers but for development and just learning.
+
+00:21.390 --> 00:29.430
+I highly recommend using made trap now since we have everything set up we are ready to generate a first
+
+00:29.430 --> 00:32.920
+class that we will use to send an email.
+
+00:33.210 --> 00:35.520
+So we do that using artisan command.
+
+00:35.520 --> 00:45.310
+There is a command for everything so the command itself is make mail and we'll call it comment post
+
+00:45.320 --> 00:48.050
+at.
+
+00:48.290 --> 00:51.620
+You can see I've made create it successfully command.
+
+00:51.620 --> 00:59.120
+And now if you will take a look at your app namespace there is new folder called mail and this is where
+
+00:59.210 --> 01:04.040
+all the classes related to sending emails are being stored.
+
+01:04.040 --> 01:05.480
+So this is our class.
+
+01:05.480 --> 01:13.580
+So what you should know about emails in LA Evo is that every email or every type of email that you would
+
+01:13.580 --> 01:21.300
+like to send is a separate class that will extend the base line level mail class.
+
+01:21.710 --> 01:29.540
+So it has a constructor we'll get to that in a moment but generally the most important thing about email
+
+01:29.630 --> 01:35.870
+or each separate type of email is the build method where you configure how this should be rendered.
+
+01:35.870 --> 01:44.110
+So even a lot of all by default calls this view method which is similar to how it works inside controllers.
+
+01:44.240 --> 01:46.080
+But this is doing something else.
+
+01:46.100 --> 01:55.040
+It is just saying which view or blade view specifically we should use to render the contents of our
+
+01:55.160 --> 01:55.810
+email.
+
+01:56.240 --> 02:00.020
+So obviously we do not have the view dot name yet.
+
+02:00.050 --> 02:01.400
+So we'll create one.
+
+02:01.430 --> 02:11.200
+So let's go ahead and create a template for this particular comment post it type of email so let's go
+
+02:11.200 --> 02:15.020
+ahead and create the missing view for our email.
+
+02:15.020 --> 02:22.300
+We'll do that inside the resources of use folder but first we need to create a new namespace specifically
+
+02:22.360 --> 02:23.870
+for emails.
+
+02:24.070 --> 02:26.450
+So let's call it emails.
+
+02:26.470 --> 02:33.280
+Now we can also add a sub namespace for posts because this will only relate to the comments that are
+
+02:33.280 --> 02:36.850
+being posted on our particular blog post.
+
+02:37.600 --> 02:44.760
+So there is posts and the template name might be comments that so comment that blade peach P.
+
+02:44.760 --> 02:52.140
+This will create an empty blade template but now we can immediately configure inside this class.
+
+02:52.150 --> 02:54.190
+What is the template name.
+
+02:54.220 --> 03:05.800
+So this is emails posts comment that so as usual with larval blade views the same as we do inside controllers.
+
+03:05.990 --> 03:13.870
+We use the relative directory to the resources views so you can see this is emails and instead of the
+
+03:13.880 --> 03:22.140
+slash they note denoting the directory structure we are using delta so nothing new to learn here.
+
+03:22.430 --> 03:30.270
+Now another important thing is how do we pass any data to this actual male level class.
+
+03:30.440 --> 03:39.160
+So here in this class any property that is public will be available to the view under the same name.
+
+03:39.260 --> 03:49.690
+So if this is about a comment that is being posted let's immediately add public comment and now everything
+
+03:49.720 --> 03:55.420
+that will be stored on this property on them on this instance of the comment posted.
+
+03:55.420 --> 04:03.460
+Class will be available under the same name inside their view for the email so we know actually what
+
+04:03.550 --> 04:12.190
+are the possible options we might read from that comment but first also we need to know how do we actually
+
+04:12.310 --> 04:20.730
+set this public comment so we can do that using constructor so we can pass on comment object.
+
+04:20.980 --> 04:27.640
+So let's do that we can even typing that as our up comment.
+
+04:27.640 --> 04:31.520
+So make sure you add the proper import.
+
+04:31.600 --> 04:38.920
+Call it comment and inside the constructor will just assign this whatever is passed through that constructor
+
+04:38.950 --> 04:46.410
+to this public comment property on this comment post that object like that.
+
+04:46.620 --> 04:52.800
+Now let's don't worry right now how we will pass this comment to the comment posted that and how we
+
+04:52.800 --> 04:55.740
+will even create this comment posted object.
+
+04:55.740 --> 05:00.360
+Now let's focus on how we will construct the actual email.
+
+05:00.660 --> 05:07.200
+So this will happen inside the build method and what we are doing right now is we are specifying which
+
+05:07.200 --> 05:10.210
+larval blade view we should be using.
+
+05:10.290 --> 05:16.950
+So you can see that the first option of this method is the actual view name then optionally you can
+
+05:16.950 --> 05:21.420
+specify the second one as an array and pass some additional data.
+
+05:21.480 --> 05:28.590
+So this will just create variables that will be available inside this very view with the name that you
+
+05:28.590 --> 05:33.470
+give to an R a key and value would be this value that will be available.
+
+05:33.660 --> 05:36.830
+But for us having this public comment is enough.
+
+05:37.440 --> 05:44.070
+Additionally every method that you will call on the instance of a male object actually returns this
+
+05:44.070 --> 05:46.610
+very object so you can change them.
+
+05:46.620 --> 05:54.240
+For example you might want to specify from whom this email should be sent specifically for this particular
+
+05:54.240 --> 05:55.320
+type of email.
+
+05:55.320 --> 06:01.590
+The comment posted as you see this method accepts an address you may address us first argument and the
+
+06:01.590 --> 06:09.030
+name of the sender as the second one so you can say something like mean larval dots test
+
+06:12.580 --> 06:19.720
+and other mean so you will only use that if you do not want to send emails from the default from others
+
+06:19.750 --> 06:23.460
+that is been configured inside the mail BHP file.
+
+06:23.500 --> 06:26.010
+You might remember that from the last lecture.
+
+06:26.080 --> 06:32.740
+So obviously for most of the inmates you probably would like to send them from one specific email but
+
+06:32.740 --> 06:38.080
+this is useful if you would like to have some emails that are sent let's say to do some stuff of your
+
+06:38.080 --> 06:43.620
+application to some administrators and then others you might send to customers.
+
+06:43.660 --> 06:49.630
+So this is also configurable and you can you can see you chain all those method calls because all of
+
+06:49.630 --> 06:53.740
+them return actual instance of this same very object.
+
+06:55.480 --> 07:02.280
+So we won't actually configure this here but let's see another interesting option which is subject so
+
+07:02.290 --> 07:10.300
+subject of the email it is definitely something you should have unique if you want specify are subject
+
+07:10.300 --> 07:18.330
+for a class for a mid-level class what you will get by default is email with this subject comment post
+
+07:18.340 --> 07:25.630
+that so a lot of it will just separate all those parts of the common case using spaces and something
+
+07:25.630 --> 07:30.570
+like that will be used as the subject so definitely you might want to configure that.
+
+07:31.570 --> 07:38.230
+So let's do the first thing we will configure subject of course if you are wondering about things like
+
+07:38.320 --> 07:41.130
+file attachment we will cover that in the next lecture.
+
+07:41.140 --> 07:43.640
+So just stay tuned.
+
+07:43.750 --> 07:55.040
+Now we can use something like comment was posted on your blog post and then pass it as a subject using
+
+07:55.040 --> 07:56.140
+subject method.
+
+07:57.750 --> 08:04.680
+But since we already have our comment in stance and this we assume because we will only send this email
+
+08:04.740 --> 08:11.580
+when a comment is posted on a blog post we can safely assume that this is actually a comment on a blog
+
+08:11.580 --> 08:17.890
+post so we can read what is the title of the blog post.
+
+08:19.110 --> 08:21.290
+So let's generate the subject differently.
+
+08:21.330 --> 08:22.830
+We can say comment.
+
+08:24.000 --> 08:36.420
+Was posted on your and here will actual you read the title of the blog post so we have access to the
+
+08:36.570 --> 08:40.970
+comment which is this comment.
+
+08:41.130 --> 08:47.740
+Now you know that the comment has this commendable which will read all the related entity.
+
+08:47.760 --> 08:54.540
+Well the related entity that might be blog posts or a user in our case we know that this is the blog
+
+08:54.540 --> 08:54.950
+post.
+
+08:54.960 --> 08:59.320
+In this case and we know that it has a title property.
+
+08:59.370 --> 09:06.270
+So basically what we will generate now is the subject of the email it would be that comment was posted
+
+09:06.630 --> 09:13.070
+on your title of the blog post and then we can additionally add blog post.
+
+09:13.160 --> 09:17.120
+So we are already using that data that was passed here
+
+09:19.930 --> 09:25.840
+in this lecture we've learned that for every email that we will be sending or every type of email we
+
+09:25.840 --> 09:28.850
+should create a class that extends Malabo.
+
+09:28.960 --> 09:34.950
+We've learned that older public properties of this class will be available inside the view.
+
+09:35.050 --> 09:42.790
+We've seen how to create are specific blade template for one specific email how to use it inside the
+
+09:42.790 --> 09:51.580
+mid-level class and we've already seen how we will pass any data to this particular class using constructor
+
+09:51.970 --> 09:58.000
+and where then we immediately seen how we can create a subject how to configure that you may others
+
+09:58.000 --> 10:00.550
+from which this email was sent.
+
+10:00.550 --> 10:06.190
+And we've also had a dynamic subject where we specified to which blog post something was added.
+
+10:06.820 --> 10:08.010
+So let's call it a day.
+
+10:08.020 --> 10:14.650
+And in the next lecture we'll actually work on the actual view everything that would be rendered inside
+
+10:14.650 --> 10:17.920
+the email and we will also send it.

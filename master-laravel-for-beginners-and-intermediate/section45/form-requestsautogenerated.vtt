@@ -1,0 +1,172 @@
+WEBVTT
+
+00:01.250 --> 00:08.160
+In the last lecture we've seen how to display the validation errors if they happen.
+
+00:08.160 --> 00:16.280
+But currently we are validating the data inside the controller using the request validate method.
+
+00:16.440 --> 00:26.420
+So there is an alternative way you can do that in Lavell and it is by creating a custom request class.
+
+00:26.550 --> 00:28.420
+So let's create one now.
+
+00:28.650 --> 00:35.510
+You can do that ultimately using the artisan and the command is make request.
+
+00:37.200 --> 00:42.180
+Now you will have to specify the request names or the good idea of calling.
+
+00:42.180 --> 00:53.730
+This request is using the method name which is store store blog post or you can just do store posts
+
+00:53.760 --> 00:58.590
+so it matches with the controller name.
+
+00:58.600 --> 01:07.210
+So now we have our new class created inside the requests folder and the requests folder itself is created
+
+01:07.240 --> 01:10.600
+inside the app HDP folder.
+
+01:10.630 --> 01:16.130
+So if the request folder doesn't exist it is being created for us by Lavell.
+
+01:16.140 --> 01:17.560
+Now let's open this class
+
+01:20.440 --> 01:27.280
+now we have this outer method which checks if the current user is authorized to perform this request.
+
+01:27.280 --> 01:31.900
+We haven't gets to the authorization or out indication even yet.
+
+01:31.930 --> 01:37.270
+So let's ignore that for now and just leave it as it is returning false.
+
+01:37.270 --> 01:42.370
+So the part that interests us is the rules method.
+
+01:42.370 --> 01:47.320
+So it should return all the validation rules that should be applied.
+
+01:48.040 --> 01:50.580
+Now we have that already defined here.
+
+01:52.070 --> 02:02.600
+So let's just cut this array with the rules from our post controller and they stop to the rules method.
+
+02:02.600 --> 02:09.810
+Now you can use this rule classes to not clutter your controllers with validation logic and just store
+
+02:09.810 --> 02:17.330
+that inside a separate class which makes sense because generally you would like to separate concerns
+
+02:17.510 --> 02:25.040
+us most as possible so whenever something can handle one thing and be separated into a separate class
+
+02:25.520 --> 02:29.030
+it makes sense to do that.
+
+02:29.060 --> 02:39.170
+Now let's say the changes now to use our brand new class will have to change the type hint of the request
+
+02:39.170 --> 02:41.300
+parameter for our store method.
+
+02:41.330 --> 02:52.660
+So instead of being just a request object we will use the store post so of course you will have to import
+
+02:52.660 --> 02:59.880
+this class first so let's imported from the UP HDP.
+
+03:03.460 --> 03:10.340
+Requests store post.
+
+03:10.550 --> 03:20.590
+All right now instead of using request validate the validation will actually happen before we even get
+
+03:20.590 --> 03:21.610
+to this controller.
+
+03:21.610 --> 03:24.760
+So when does this validation will fail.
+
+03:24.760 --> 03:30.190
+It will also do the automatic redirect to the previous page.
+
+03:30.190 --> 03:36.310
+But now to access this data we'll just use the request validated method.
+
+03:37.690 --> 03:43.900
+So here inside the validated data variable will have all the data that was sent.
+
+03:44.080 --> 03:45.670
+If it is valid.
+
+03:45.820 --> 03:48.970
+So now let's try to use that DDA method.
+
+03:50.320 --> 03:57.770
+And we will dump the contents of our validated data and see what format we get it.
+
+03:58.210 --> 04:07.210
+Now when we send the form we see that we got the 403 error and that means that we are not out to rise
+
+04:07.210 --> 04:09.400
+to perform this request.
+
+04:09.400 --> 04:18.190
+And this is because we are returning falls inside the outer I's method of our store post request.
+
+04:18.220 --> 04:23.410
+So instead we'll have to return true and try again.
+
+04:23.740 --> 04:30.730
+So let's go back to the form and try to send it again so you can see that the validation works and we
+
+04:30.730 --> 04:38.260
+are ultimately redirected back to the previous page and we can display the errors from the global late
+
+04:38.320 --> 04:39.160
+errors.
+
+04:39.160 --> 04:39.850
+Variable
+
+04:44.230 --> 04:49.510
+Now let's try posting some data that will actually pass the validation
+
+04:52.230 --> 04:59.460
+and you see that we have an array with the title and content with the data that was actually sent through
+
+04:59.460 --> 05:01.140
+the form.
+
+05:01.260 --> 05:11.330
+So currently to use this data we would have to do either what we do right now so we could fetch this
+
+05:11.330 --> 05:20.810
+data using request input or alternatively we can read the validated data as an array so we can read
+
+05:20.990 --> 05:29.060
+the title and we could also read the content but we want to actually use it this way so let's remove
+
+05:29.060 --> 05:36.680
+that and now let's follow to the next lecture when I will show you what's the shorter way of assigning
+
+05:36.740 --> 05:38.570
+the model attributes.
+
+05:38.570 --> 05:40.610
+When you have an array of the data.
+
+05:41.060 --> 05:48.770
+So here we have an array of validated data and instead of assigning each single attribute to the blog
+
+05:48.770 --> 05:54.980
+post model we can assign all the validated data at once and say the model.
+
+05:54.980 --> 05:58.040
+But you will see that in the next lecture.

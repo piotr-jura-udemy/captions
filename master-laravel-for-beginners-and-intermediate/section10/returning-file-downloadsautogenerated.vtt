@@ -1,0 +1,70 @@
+WEBVTT
+
+00:00.700 --> 00:04.400
+It's easy to force the browser to download a file.
+
+00:05.080 --> 00:09.990
+You can do that using the download method of the response object.
+
+00:10.840 --> 00:18.180
+So let's define our fun slash download route to try this out.
+
+00:20.530 --> 00:28.930
+We will be calling the response helper function that will return the response object and then we will
+
+00:28.930 --> 00:31.540
+call the downloads method of it.
+
+00:32.720 --> 00:36.290
+So the first argument is the path to the fire.
+
+00:37.430 --> 00:41.570
+Well, let's first get some file to download.
+
+00:42.050 --> 00:49.160
+So under this lecture, you will be able to download this image, make sure you copy it and in your
+
+00:49.160 --> 00:54.830
+project folder, go to the public folder and just pasted their.
+
+00:58.030 --> 01:05.950
+Now back to the code, so the first argument is the path to the file now to actually give the proper
+
+01:05.950 --> 01:11.160
+path to your public folder, you can call the public path helper function.
+
+01:11.980 --> 01:19.050
+And now inside it, let's just put slash Daniel Jabe jpeg.
+
+01:19.060 --> 01:21.700
+Well, the extension, OK.
+
+01:25.210 --> 01:33.370
+The second argument is an optional name, the user will see if it needs to be different from the original
+
+01:33.790 --> 01:44.560
+filename so it can be, for example, the face jpg and the third is the least of an optional headers
+
+01:44.560 --> 01:45.520
+to return.
+
+01:45.700 --> 01:49.840
+This is an array, so we won't add any additional headers.
+
+01:49.840 --> 01:51.100
+So let's skip that.
+
+01:53.380 --> 02:04.660
+Now we are done and we can try it out in the browser, so the URL is fun, download and to download
+
+02:04.660 --> 02:10.930
+should be initiated, but it might not be started automatically as this depends on your browser.
+
+02:11.260 --> 02:16.380
+You can see on the bottom that might download has actually started if you missed out.
+
+02:16.900 --> 02:18.070
+Let's see this again.
+
+02:18.580 --> 02:25.840
+I'll type the euro and watch the bottom as it gets downloaded automatically.

@@ -1,0 +1,487 @@
+WEBVTT
+
+00:00.570 --> 00:04.960
+We have defined our Many to Many relationship with blog posts and talks.
+
+00:04.970 --> 00:11.940
+We've also implement that in many places in our application but what we are missing right now is our
+
+00:11.940 --> 00:18.270
+database seeder for the blue for the tax and associating them with the blog post.
+
+00:18.270 --> 00:25.560
+So basically what we will do in this lecture is we will create to see their classes to seed dogs and
+
+00:25.560 --> 00:33.270
+then to see the relationship between blog posts and tags and also we will use this occasion to play
+
+00:33.270 --> 00:37.380
+around a little bit with the lot of our collections.
+
+00:37.380 --> 00:43.200
+So let's start with making our new seeder for the tag model.
+
+00:43.230 --> 00:53.190
+So we will use the artisan command peach bee artisan make cedar and as you can see we've used the same
+
+00:53.190 --> 00:56.650
+conventions we used before for naming the cedars.
+
+00:56.760 --> 00:59.520
+So let's call it tax table.
+
+00:59.520 --> 01:00.180
+Cedar
+
+01:04.640 --> 01:06.560
+so it is created here.
+
+01:06.710 --> 01:10.540
+We have our round command that we will have to now implement.
+
+01:10.550 --> 01:12.030
+So let's go ahead and do that.
+
+01:12.020 --> 01:14.510
+This would be simple.
+
+01:14.510 --> 01:21.070
+Now we won't use the model factories this case as you do not always have to use them.
+
+01:21.080 --> 01:24.550
+You should only use them when they make sense.
+
+01:24.560 --> 01:27.350
+So the tag model is very simple.
+
+01:27.350 --> 01:29.000
+It only contains a name.
+
+01:29.030 --> 01:32.990
+The rest of those parameters we don't really care about.
+
+01:32.990 --> 01:37.370
+So let's define some names for our tax load.
+
+01:37.380 --> 01:44.430
+Be science sport politics.
+
+01:44.510 --> 01:55.020
+We also might have enter tainment and maybe economy so that's basically all the data we'll need for
+
+01:55.020 --> 01:56.910
+the cedar.
+
+01:56.910 --> 02:03.180
+No let's make use of a lot of our collections and see what we can use them for.
+
+02:03.180 --> 02:11.670
+So first we'll use the collect helper function to create a collection from this array.
+
+02:11.700 --> 02:20.310
+Now the tax is a collection object and we can iterate over all of those tag names using each which accepts
+
+02:20.310 --> 02:21.870
+a callback.
+
+02:21.870 --> 02:28.230
+And to this callback will pass every element of this collection which basically would be a string so
+
+02:28.230 --> 02:33.940
+we can call it called the argument our tag name.
+
+02:33.960 --> 02:37.750
+Now we can create our new instance of the tag.
+
+02:37.830 --> 02:41.440
+Make sure you are the import here.
+
+02:42.480 --> 02:45.590
+The only fake FEMA dog needs is a name.
+
+02:45.600 --> 02:55.170
+So let's just assign tag name that we get past and finally we'll do tag save so that's it.
+
+02:55.200 --> 02:57.660
+That's everything that we need.
+
+02:57.660 --> 02:58.070
+And.
+
+02:58.140 --> 03:09.030
+Well for now we will always create those uh those five tax now this won't get registered automatically
+
+03:09.030 --> 03:16.110
+inside the database cedar so we either have to call this class specifically inside the seeder or we
+
+03:16.110 --> 03:17.130
+can add it here.
+
+03:17.130 --> 03:27.700
+So talk table cedar mind that I am using this now in this class the database seeder you do not really
+
+03:27.700 --> 03:33.400
+have to import your seeder just added at the end of this call.
+
+03:33.530 --> 03:34.890
+And now let's see what we have.
+
+03:34.900 --> 03:44.550
+BHP artisan D.B. seed so yes we want to refresh the database.
+
+03:44.560 --> 03:52.300
+Now we want the default blog post the full amount of blog post default amount of comments.
+
+03:52.300 --> 03:56.100
+And also you can see that it is now sitting ducks.
+
+03:56.140 --> 04:00.640
+So after we'll refresh the page what you will see is that.
+
+04:00.760 --> 04:08.770
+Well basically no blog posts have tax now associated but if you will see the tax table you can see that
+
+04:08.800 --> 04:10.600
+they are actually loaded.
+
+04:11.680 --> 04:19.180
+So let's clear the terminal and what we will do now is we'll create another seeder that will see the
+
+04:19.180 --> 04:30.450
+relation table for this many to many relationship so BHP artisan make cedar and we can cold that blog
+
+04:30.450 --> 04:41.430
+post talk table cedar because that's what's the name of our pivot table actually is so it is create
+
+04:41.430 --> 04:52.270
+that we can open that we have our round command and now let's see how we can implement this method so
+
+04:52.270 --> 04:59.470
+first we will have to get the count of tax so at this point we want to make sure that we actually have
+
+04:59.470 --> 05:02.400
+some tax inside the database.
+
+05:02.530 --> 05:03.880
+So let's do tag.
+
+05:04.990 --> 05:08.310
+All count.
+
+05:08.460 --> 05:15.510
+So to the top count variable we are assigning all the while the count of the tax that are in inside
+
+05:15.510 --> 05:18.570
+the database in case you will change that later.
+
+05:18.630 --> 05:23.130
+Also mind the use statement are that here.
+
+05:23.880 --> 05:28.350
+Now we have the count of the tax so we can check if there are any.
+
+05:28.350 --> 05:37.630
+Because if there are zero tax or let's add an if statement we can tell the user running this command
+
+05:37.630 --> 05:54.440
+using this command info that no tax found skipping assigning tax to blog posts and we will return.
+
+05:54.440 --> 05:59.150
+So at this point we are just quitting this command because there is nothing to do here
+
+06:02.150 --> 06:03.290
+now in this method.
+
+06:03.290 --> 06:10.430
+We will also ask the user how many tax he wants to assign to our blog post by asking how many minimum
+
+06:10.430 --> 06:14.440
+tax should be assigned and how many maximum tax.
+
+06:14.660 --> 06:17.870
+So how many minimum.
+
+06:17.880 --> 06:26.690
+So we'll read the user answers into the variable of course we need to convert that to integer.
+
+06:27.090 --> 06:31.530
+And now we are doing this command ask.
+
+06:31.560 --> 06:32.970
+We did that before.
+
+06:33.000 --> 06:39.650
+So we have to ask the question and then optionally provide our default value.
+
+06:39.660 --> 06:43.560
+So the question minimum tax on blog post
+
+06:46.700 --> 06:48.070
+and the default value.
+
+06:48.360 --> 06:51.380
+Well let maybe let it be zero.
+
+06:51.480 --> 06:54.310
+And how many marks.
+
+06:54.330 --> 06:57.330
+So that's another question.
+
+06:57.330 --> 06:59.990
+And we ask it using the same method.
+
+07:00.000 --> 07:06.690
+This command ask and the maximum tax on blog post.
+
+07:06.860 --> 07:12.120
+So let's keep the let's keep those questions simple.
+
+07:12.620 --> 07:19.010
+And we also have to provide our default value which should be the maximum tax available.
+
+07:19.340 --> 07:26.630
+But also let's make sure that whatever user provides it's not bigger than the actual number of tags
+
+07:26.660 --> 07:27.620
+that we have
+
+07:30.230 --> 07:31.370
+so we'll use.
+
+07:31.370 --> 07:36.710
+Well we'll use the minimum value and it accepts two arguments.
+
+07:36.710 --> 07:46.590
+So it will take that the lower value it will take the lower value from two arguments what user provides
+
+07:46.800 --> 07:48.260
+and the attack count.
+
+07:48.300 --> 07:52.140
+So if user provided free it will choose free of course.
+
+07:52.260 --> 07:54.430
+Because at this point we have five ducks.
+
+07:54.570 --> 07:57.410
+But if the user would say let's say eight.
+
+07:57.540 --> 08:03.180
+Then we will use duck count which currently should be five.
+
+08:03.340 --> 08:10.570
+Okay now we should iterate over all the blog posts and assign some tax to them.
+
+08:10.590 --> 08:12.270
+So how can we do that.
+
+08:12.330 --> 08:21.780
+We have our blog post model press enter at this point so you have the import of it we will use all because
+
+08:21.780 --> 08:24.900
+we want to iterate over all the blog posts.
+
+08:24.900 --> 08:31.590
+And now we can use collections each matter and define a closure.
+
+08:31.590 --> 08:40.800
+Now we know that this would be of the type of blog post and inside disclosure will assign some tax to
+
+08:40.860 --> 08:43.820
+a blog post.
+
+08:43.980 --> 08:50.400
+Now we'll need to use some variables from the outside scope which is how many I mean how many marks
+
+08:50.490 --> 08:53.390
+because they are not available inside closures.
+
+08:53.580 --> 09:01.200
+So as I've said couple of times before you always have to use the use statement if you want to access
+
+09:01.200 --> 09:04.590
+some variables that aren't in the scope of the closure.
+
+09:04.590 --> 09:08.230
+So how many I mean how many marks.
+
+09:08.250 --> 09:11.830
+So now they would be available.
+
+09:11.980 --> 09:19.060
+Now let's calculate how many blog posts so how much sorry how many tags we would like to assign to a
+
+09:19.060 --> 09:19.760
+blog post.
+
+09:19.760 --> 09:29.140
+So we will generate a random integer integer using random int which accepts minimum and maximum so we'll
+
+09:29.200 --> 09:29.800
+give it.
+
+09:29.830 --> 09:32.770
+How many mean how many marks.
+
+09:35.280 --> 09:37.540
+And now let's read some tax.
+
+09:37.540 --> 09:46.270
+So how would you read some random records from our database using the tag model.
+
+09:46.270 --> 09:51.770
+So at this point we should also have tag imported in our use statement.
+
+09:52.000 --> 09:59.070
+So there is a method in random order on every model on every local model that you create.
+
+09:59.410 --> 10:03.970
+And this will basically return talks in a randomized order.
+
+10:03.970 --> 10:07.570
+So by default they will be ordered by I.D..
+
+10:07.570 --> 10:14.740
+But here we will randomize them so they will be in random fetched in random order.
+
+10:14.760 --> 10:16.920
+Now we do not want old attacks.
+
+10:16.920 --> 10:22.360
+We only want the amount of tax that we have for randomly selected for that block post.
+
+10:22.370 --> 10:29.430
+So we'll use take.
+
+10:29.730 --> 10:35.770
+Now finally we would like to execute this query and get those tags.
+
+10:35.790 --> 10:44.040
+But since we would only Well we only need I.D. of those tags because we'll use the sink method of the
+
+10:44.040 --> 10:45.960
+relation as we.
+
+10:45.960 --> 10:49.390
+Well you've seen that couple of lectures before.
+
+10:49.410 --> 10:54.180
+Now we can use the plug method on the collection to only get the I.D..
+
+10:54.660 --> 11:04.700
+Now the tax would be a collection of I.D. finally what we can do is we since we are iterating over every
+
+11:04.700 --> 11:11.110
+blog post in our database and every blog post has this relation defined docs.
+
+11:11.120 --> 11:15.610
+Now we can call sync and just parse the tag ideas.
+
+11:15.650 --> 11:20.300
+Now we don't have to worry about attaching and detaching because we are sitting the database.
+
+11:20.300 --> 11:23.200
+So at this point it is empty now.
+
+11:23.570 --> 11:28.910
+When adding some relations you might remember you do not really have to call and save metal.
+
+11:28.920 --> 11:32.890
+Sink is ultimately doing that for us.
+
+11:32.960 --> 11:35.130
+So now let's save the changes.
+
+11:35.270 --> 11:43.730
+Clear the terminal and large it a little bit by clicking here and now let's run BGP artisan DB seed
+
+11:45.020 --> 11:53.000
+say yes so the database runs so we trance older migrations let's use default the users default amount
+
+11:53.000 --> 11:56.460
+of block post default amount of comments.
+
+11:56.930 --> 12:01.330
+And of course I forgot to add this seeder to the database CDO.
+
+12:01.340 --> 12:04.280
+That's why it wasn't run so let's do that now.
+
+12:05.990 --> 12:10.190
+So blog post stock table cedar class.
+
+12:10.450 --> 12:10.690
+Okay.
+
+12:10.700 --> 12:11.920
+Now this would work.
+
+12:11.950 --> 12:15.690
+So let's clear the screen and run peach bee artisan DBC.
+
+12:15.710 --> 12:22.840
+Again repeat the steps so we will just use default values.
+
+12:22.940 --> 12:26.600
+Now at this point we are asked how many minimum blog posts we.
+
+12:26.780 --> 12:27.170
+How many.
+
+12:27.170 --> 12:33.630
+A minimum of tags we want on each blog post let's use default 0 maximum 5.
+
+12:33.980 --> 12:41.870
+And it is generated so let's now check out the blog post stock table you can see quite a lot of records
+
+12:41.900 --> 12:45.500
+inside hundred twelve specifically.
+
+12:46.340 --> 12:53.660
+And now if you will refresh the list of the blog posts you will see that some blog posts have talks.
+
+12:53.660 --> 12:54.410
+Others don't.
+
+12:54.410 --> 12:57.350
+And some have quite a lot of them.
+
+12:57.440 --> 13:05.210
+So now going to the sport category actually makes sense because you can see we get to the post dot controller
+
+13:05.360 --> 13:10.880
+and you can see all the blog posts that have the support tag defined.
+
+13:11.580 --> 13:18.350
+Let's do the same with entertainment and now all the blog posts with the entertainment tag are visible
+
+13:18.350 --> 13:19.990
+here.
+
+13:20.060 --> 13:27.410
+So in this lecture we've seen how we can simply generate some data without even using the model factory
+
+13:27.410 --> 13:29.180
+for simple cases.
+
+13:29.180 --> 13:35.690
+We've also played around a little bit with the larger collections we've seen how to iterate with each
+
+13:35.690 --> 13:38.220
+how to simply save some data.
+
+13:38.240 --> 13:39.460
+We've also seen.
+
+13:40.040 --> 13:47.120
+Well basically we repeated the steps we did previously asking some questions checking if data exists.
+
+13:47.270 --> 13:55.010
+And you've also learned how you can pick some records from the database table in random order for this
+
+13:55.190 --> 14:02.840
+use cases like we want some random tax to be selected from the database and all the other stuff we basically
+
+14:02.930 --> 14:03.770
+already did.

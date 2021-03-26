@@ -1,0 +1,94 @@
+WEBVTT
+
+00:00.540 --> 00:07.360
+In this section we'll learn about a new kind of the eloquent relationship which is many to many.
+
+00:07.380 --> 00:11.970
+So far we know the simple relations one to one and one too many.
+
+00:11.970 --> 00:18.830
+So for this one we have our existing blog post and we will create our new model called tag.
+
+00:19.110 --> 00:25.200
+So what you can see which is already different than the previous relations is that one blog post can
+
+00:25.200 --> 00:28.110
+be associated to many tracks.
+
+00:28.140 --> 00:32.140
+So this one for example is associated to two models.
+
+00:32.280 --> 00:39.660
+But what's different about this one and one to many is that the same tag can be associated to different
+
+00:39.720 --> 00:40.890
+blog post models.
+
+00:40.890 --> 00:47.700
+So for example this one in the middle is associated to the first blog post model and for the blog post
+
+00:47.700 --> 00:48.870
+model.
+
+00:48.870 --> 00:58.540
+So this makes this so what this would cause is that we have a different structure to represent those
+
+00:58.540 --> 01:01.030
+relationships inside the database.
+
+01:01.030 --> 01:02.820
+So let's take a look.
+
+01:02.950 --> 01:09.250
+We have our existing blog post model that we already know we will create a new tag model which will
+
+01:09.250 --> 01:15.080
+have I.D. the timestamps and a name to just say what's the name of that tag.
+
+01:15.700 --> 01:22.450
+But additionally you can see that neither of those models neither blog post or tag has a column that
+
+01:22.450 --> 01:24.100
+will indicate any relation.
+
+01:24.100 --> 01:27.640
+So there is no tag I.D. on the blog post.
+
+01:27.640 --> 01:34.330
+And also there is no blog post idea on the tag which was different for example with blog posts and comments
+
+01:34.390 --> 01:41.950
+in one to many relationship where that comment model actually had our field code called a blog post
+
+01:41.950 --> 01:43.310
+I.D..
+
+01:43.390 --> 01:47.080
+Now in this example with the many to many relationship.
+
+01:47.080 --> 01:54.550
+What we need to represent this relation at the database level is to create our so-called intermediate
+
+01:54.880 --> 01:57.180
+or pivot table.
+
+01:57.370 --> 02:06.490
+So how this looks like is this has an idea but also it has two columns which actually will make this
+
+02:06.490 --> 02:07.730
+relation possible.
+
+02:07.780 --> 02:16.080
+So there is also blog post idea and tag I.D. additionally we have timestamps so for every late relation
+
+02:16.090 --> 02:23.500
+that should be created between a blog post and a tag we will insert our new record to this pivot or
+
+02:23.500 --> 02:28.090
+intermediate table and this would represent their relation.
+
+02:28.180 --> 02:34.570
+So let's go ahead and create our migration for this new relation and then see how we should define it
+
+02:35.170 --> 02:38.840
+on the blog post model and the newly created tag model.

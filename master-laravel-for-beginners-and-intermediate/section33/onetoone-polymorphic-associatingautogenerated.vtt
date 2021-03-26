@@ -1,0 +1,127 @@
+WEBVTT
+
+00:00.120 --> 00:07.380
+Now let's see if we will be still able to upload our new image that will be part of a blog post without
+
+00:07.380 --> 00:09.780
+changing any logic whatsoever.
+
+00:09.810 --> 00:19.830
+Inside the post controller so select a file that is valid and try uploading now what you should see
+
+00:20.040 --> 00:25.730
+is the error that filled imaginable type doesn't have a default value.
+
+00:26.100 --> 00:33.430
+And you can see what we tried to insert so we only tried to modify the path update it out and created
+
+00:33.440 --> 00:35.400
+it values.
+
+00:35.490 --> 00:38.970
+And that is not enough white.
+
+00:39.020 --> 00:47.520
+That is not enough is that we use the image create method and what it does it creates a new image and
+
+00:47.730 --> 00:55.250
+immediately saves the model about the only properties that we have provided is the path and then created
+
+00:55.260 --> 00:59.380
+out and updated that was added ultimately.
+
+00:59.400 --> 01:08.100
+So well the problem is that now you have those two fields inside the images table which is imaginable
+
+01:08.130 --> 01:17.710
+type and imaginable I.D. and they are both are key so you can't leave this key empty.
+
+01:18.180 --> 01:27.500
+So to fix that instead of using create which not only creates a new instance of the image model but
+
+01:27.590 --> 01:31.040
+immediately saves it to the database.
+
+01:31.040 --> 01:33.410
+Now you have to use make.
+
+01:33.410 --> 01:42.020
+So this will only construct a new image but this will only be saved when we call the post image save.
+
+01:42.020 --> 01:43.450
+So this part doesn't change.
+
+01:43.460 --> 01:52.460
+We assign this one to one polymorphic relationship the same way as normal one to one polymorphic relationship.
+
+01:52.460 --> 01:59.160
+It's just we can't save this new image model without assigning first those two fields.
+
+01:59.300 --> 02:06.590
+So imaginable I.D. and imaginable type so you can also do something like this.
+
+02:06.590 --> 02:17.160
+So when you create a new image you can create our new model and then just specify them so you will do.
+
+02:17.160 --> 02:18.630
+Imagine imagine.
+
+02:18.660 --> 02:26.220
+Ball Heidi post I.D. but of course it well doesn't really make sense.
+
+02:26.220 --> 02:27.870
+We can make that much easier.
+
+02:27.870 --> 02:36.390
+But just by just using make and then all those two fields that magical I.D. and imaginable type will
+
+02:36.390 --> 02:45.210
+be set by calling save on the image relation on the Post model blog post model actually.
+
+02:46.380 --> 02:54.360
+So remove that and now let's also locate the store method on the post controller because we do the exact
+
+02:54.360 --> 02:58.080
+same finger we call image create.
+
+02:58.080 --> 03:01.530
+So this has to be image make now.
+
+03:01.530 --> 03:04.860
+So this is the changes we need for the post controller.
+
+03:04.860 --> 03:13.760
+Now let's verify that by simply refreshing this page you can see that this works perfectly now also
+
+03:13.770 --> 03:24.580
+let's see what is inside our images table so there is the path to the image timestamps but now notice
+
+03:24.610 --> 03:28.210
+this part imaginable type and imaginable I.D..
+
+03:28.370 --> 03:29.420
+So imagine all type.
+
+03:29.420 --> 03:31.970
+Now concerns are fully qualified.
+
+03:31.970 --> 03:32.830
+Class name.
+
+03:32.840 --> 03:35.370
+So this is the model it relates to.
+
+03:35.660 --> 03:40.160
+And then I.D. is obviously an I.D. on this model.
+
+03:40.160 --> 03:46.830
+So this would mean it relates to I.D. on the blog posts table.
+
+03:46.850 --> 03:56.870
+So when we will implement adding a new image to the user profile it will then contain up user and I.D.
+
+03:56.930 --> 03:59.240
+on the user's table.
+
+03:59.240 --> 04:01.760
+So let's do that in the next lecture.

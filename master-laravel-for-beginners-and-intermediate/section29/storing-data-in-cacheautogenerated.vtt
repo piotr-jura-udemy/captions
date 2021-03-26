@@ -1,0 +1,364 @@
+WEBVTT
+
+00:00.210 --> 00:08.550
+Now let's continue with our optimizations by first taking a look at the cash BHP file which can be found
+
+00:08.640 --> 00:17.310
+inside the config folder of your a lot of application so it configure So what is the default cash storage
+
+00:17.400 --> 00:19.380
+or cache driver.
+
+00:19.380 --> 00:23.070
+And as I've said by default it is a file anyway.
+
+00:23.100 --> 00:30.450
+It is being configured inside your dot and file so whatever is there will always take precedence if
+
+00:30.450 --> 00:31.950
+it's not configured.
+
+00:31.980 --> 00:35.010
+This would be assumed as a file.
+
+00:35.010 --> 00:44.010
+Now here you can configure the cache stores so the places or mechanism of storing your cached data so
+
+00:44.040 --> 00:44.840
+obviously.
+
+00:44.910 --> 00:53.460
+And as usual Lavell has some default sensible configurations so there is one for database you can store
+
+00:53.460 --> 01:02.190
+it inside memory but that will only work for one request inside a race you can store it inside APC.
+
+01:02.490 --> 01:08.670
+There is also the file driver which I've mentioned and here you can see where this data will be actually
+
+01:08.670 --> 01:09.210
+stored.
+
+01:09.240 --> 01:18.090
+So it is the framework directory inside storage so you can see framework cache data.
+
+01:18.100 --> 01:21.220
+So this is where your cache will be currently start.
+
+01:21.250 --> 01:24.560
+If you are using the file mechanism.
+
+01:24.640 --> 01:33.490
+Also there is a configuration for the main cached so you can configure the host and part of the main
+
+01:33.490 --> 01:34.370
+cache server.
+
+01:34.450 --> 01:37.390
+And this is taken directly from the end file.
+
+01:37.390 --> 01:46.670
+So if you would like to configure it then you should put those variables inside your dot and file.
+
+01:46.780 --> 01:54.790
+Now the final mechanism of the cache storage is the Redis one and then there is the connection called
+
+01:54.790 --> 02:01.990
+cache so to configure this connection you will go to the database BHP file
+
+02:05.540 --> 02:08.160
+and here you have the cache connection.
+
+02:08.300 --> 02:12.710
+So it's using the also the environment variables.
+
+02:12.710 --> 02:19.970
+So for the development your set that inside inside your dot and file and on your server you will put
+
+02:19.970 --> 02:23.670
+that as an environment variable.
+
+02:23.690 --> 02:24.030
+Okay.
+
+02:24.050 --> 02:27.830
+So those are the basics of that configuration.
+
+02:27.830 --> 02:36.020
+Another thing you might know which is an interesting thing to know is that a lot of us will try to use
+
+02:36.080 --> 02:41.880
+our prefix for all the keys that you put inside your cache storage.
+
+02:41.900 --> 02:49.070
+And this is because as it says sometimes if you use cache storages which can also be used for something
+
+02:49.070 --> 02:56.750
+else for example the APC is basically are BHP default cash when it tries to compile some of the code
+
+02:57.380 --> 03:06.590
+or optimize the BHP itself it is using APC so to not create then conflict names because basically as
+
+03:06.590 --> 03:13.640
+I've said that cash is a key value storage so you just have a key which could be a string and then you
+
+03:13.640 --> 03:15.700
+fetch some value by that key.
+
+03:15.980 --> 03:24.310
+So not to create conflicts it will append R prefix to all your keys that you will use for your caching
+
+03:26.060 --> 03:26.460
+OK.
+
+03:26.490 --> 03:35.040
+So let's go to our page and probably the thing that we can immediately cash is those what you see on
+
+03:35.040 --> 03:35.510
+the right.
+
+03:35.520 --> 03:44.010
+The most commented blog posts and those information about the most active users because it won't really
+
+03:44.100 --> 03:46.040
+it won't change often.
+
+03:46.260 --> 03:52.830
+And another thing to consider when you are cashing some data is whether it is crucial for you to get
+
+03:52.890 --> 03:55.210
+the fresh data.
+
+03:55.320 --> 04:04.260
+Each single time and what I mean by fresh data is the data that is up to date with what is inside the
+
+04:04.260 --> 04:05.850
+database.
+
+04:05.850 --> 04:13.470
+So when you have a blog you probably would like all the blog posts to be immediately visible when someone
+
+04:13.530 --> 04:21.900
+adds them but those information about who was active in general or in the last month might be out of
+
+04:21.900 --> 04:22.190
+date.
+
+04:22.190 --> 04:23.690
+Nothing bad will happen.
+
+04:23.700 --> 04:27.690
+It's not crucial for our application to function properly.
+
+04:27.870 --> 04:31.910
+So we are not having an e-commerce store here.
+
+04:31.920 --> 04:38.780
+So we are not reading orders or user data or products or the actual prices of them.
+
+04:38.850 --> 04:45.330
+We read data or we show data that is interesting fun but not crucial.
+
+04:45.330 --> 04:48.230
+It doesn't really have to be up to date.
+
+04:48.510 --> 04:56.220
+So let's see how we can store that in cash and read it from cash instead of making the query every single
+
+04:56.220 --> 04:56.930
+time.
+
+04:56.970 --> 05:01.650
+So let's open a lot of debug bar by clicking on the query stop.
+
+05:01.650 --> 05:09.090
+And now you see that we are making 5 queries so let's go to our post controller.
+
+05:09.090 --> 05:14.940
+By the way you won't need this code any more so I can safely remove that along with the import of the
+
+05:14.940 --> 05:21.780
+db file say because now we have a lot of old debug bar for this purpose.
+
+05:21.780 --> 05:30.290
+So the first thing we can have here is we can read the most commented blog posts.
+
+05:31.080 --> 05:38.370
+So let's take a look at the diagram so we'll put a layer between our storage which is my sequel and
+
+05:38.380 --> 05:43.860
+lock one and first we'll ask the cache if it contains an element.
+
+05:43.860 --> 05:49.940
+If it's not only then we'll ask to actually fetch it from the database.
+
+05:50.220 --> 05:55.450
+So obviously Lavell makes it very easy for us to do so.
+
+05:55.470 --> 06:01.440
+There is a phosphate class to interact with the cache so this is the first one on the list.
+
+06:01.440 --> 06:03.770
+You can see the namespace here.
+
+06:03.840 --> 06:04.850
+Just press enter.
+
+06:04.860 --> 06:09.240
+So this would add an import which you can see here.
+
+06:09.370 --> 06:16.900
+If you do not have those plugins in Visual Studio code make sure to add them or just type this import
+
+06:17.870 --> 06:18.540
+anyway.
+
+06:18.550 --> 06:26.810
+The method that we all use right now is called remember and it's very useful and neat thing.
+
+06:27.610 --> 06:31.090
+So what it accepts are free arguments.
+
+06:31.090 --> 06:33.220
+So the first one is the key.
+
+06:33.370 --> 06:37.770
+So that's the cache key under which we would like to store something.
+
+06:37.780 --> 06:41.270
+So first let's get the most commented.
+
+06:41.470 --> 06:44.980
+So that would be our key most commented.
+
+06:46.180 --> 06:50.460
+Now the second argument is for how long you would like to store it.
+
+06:50.860 --> 06:58.360
+So you can see that the argument name here is called minutes but it would be minutes if you will provide
+
+06:58.360 --> 07:06.550
+the value as an integer and you can see here in the method header that it doesn't have to be an integer.
+
+07:06.550 --> 07:09.730
+It can be a date interval for example.
+
+07:09.730 --> 07:17.080
+So you can also use seconds for example if we'll create a new instance of that car bomb which is an
+
+07:17.080 --> 07:24.110
+equivalent of a date time and use at seconds method on it immediately.
+
+07:24.370 --> 07:31.960
+We can store something for 10 seconds so whenever someone will attempt to read it in the 10 seconds
+
+07:31.960 --> 07:38.800
+since we say we started it started inside the cache he will get the cache diversions otherwise it will
+
+07:38.800 --> 07:46.090
+be read from the database and now the final thing is two other closure which will provide a default
+
+07:46.090 --> 07:47.100
+value.
+
+07:47.170 --> 07:56.170
+So what this means is cache remember means give me what's inside the cache storage under the most commented
+
+07:56.290 --> 07:59.620
+key and if it's not there.
+
+07:59.630 --> 08:07.600
+Store it for this amount of time and here from disclosure we return the value that we actually wants
+
+08:07.600 --> 08:17.620
+to be puts there so we can get this query move it to the closure and obviously we have to return that
+
+08:20.130 --> 08:24.180
+and now here will just past and most comment that variable
+
+08:27.260 --> 08:29.900
+so let's see what we did.
+
+08:29.930 --> 08:37.100
+Now refresh the page now you see we still have five queries but if you refresh again now you see we
+
+08:37.100 --> 08:38.440
+have four queries.
+
+08:38.930 --> 08:43.780
+So what that means is exactly what we have on our diagram.
+
+08:43.820 --> 08:50.540
+So we are tragic trying to fetch the data through the cache layer if it's found it is being returned
+
+08:50.570 --> 08:58.460
+immediately but if it is not found it is bang first fetched from the database stored inside the cache
+
+08:58.790 --> 09:06.830
+and then returned to the user by the next user visiting the page which I tried to simulate by just refreshing
+
+09:06.830 --> 09:10.300
+the page would get the cached result.
+
+09:10.400 --> 09:18.140
+So this might of course have some problems with it because if you cache some information then you either
+
+09:18.140 --> 09:26.180
+have to store it for short time or somehow remove it from the cache if the data is no longer valid.
+
+09:26.210 --> 09:34.910
+So for example let's see we would cache the blog posts that we see here but someone adds a new blog
+
+09:34.910 --> 09:36.800
+post and we want to show that immediately.
+
+09:36.800 --> 09:39.540
+Then you will have to somehow reset the cache.
+
+09:39.560 --> 09:44.100
+So that's one of the problems you will have when you will use caching.
+
+09:44.130 --> 09:45.980
+We'll do that in the next lecture.
+
+09:45.980 --> 09:54.380
+But now let's also see if we can cache some other queries that we are making here because most definitely
+
+09:54.650 --> 09:56.480
+this won't change very often.
+
+09:56.480 --> 10:07.150
+So things like most active users so let's are the most active and most active last month.
+
+10:07.190 --> 10:13.550
+So now we can cache all these data I'm copying this code just to make it quicker for myself.
+
+10:13.550 --> 10:17.900
+You can also do that now inside the most active.
+
+10:17.900 --> 10:27.540
+We should put this query or result of this query and most active last month goes here
+
+10:31.540 --> 10:42.690
+and here we return this same variables so most active and most active last month and now the most important
+
+10:42.690 --> 10:47.940
+change as every cash item has to have a unique key.
+
+10:47.940 --> 10:52.470
+I need to modify those keys so this is where you get when you copy the code.
+
+10:52.470 --> 10:54.920
+You might forget about something.
+
+10:55.020 --> 10:56.220
+Okay so this is fine.
+
+10:56.220 --> 11:07.210
+Now we have free cash cached items and then on initial view of that Post's page will get all the queries
+
+11:07.210 --> 11:07.860
+executed.
+
+11:07.870 --> 11:13.240
+But then for the next 60 minutes we'll have them cashed.

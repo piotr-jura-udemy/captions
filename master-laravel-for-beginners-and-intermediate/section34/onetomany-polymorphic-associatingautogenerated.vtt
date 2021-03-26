@@ -1,0 +1,322 @@
+WEBVTT
+
+00:00.570 --> 00:04.930
+So let's quickly remind ourselves what we did in the last lecture.
+
+00:04.950 --> 00:12.030
+Apart from creating a migration for one too many polymorphic relationship for comments we have modified
+
+00:12.450 --> 00:16.400
+how this relationship looks on comments or now it is commendable.
+
+00:16.410 --> 00:18.710
+And it calls more too.
+
+00:18.780 --> 00:25.710
+So this is a way to do it for one to many relationship which is polymorphic on the blog post.
+
+00:25.710 --> 00:29.040
+We have comments and instead of has many.
+
+00:29.100 --> 00:36.870
+We are using more of many and we've also added our relationship comments on for our user which also
+
+00:36.870 --> 00:44.190
+is using more of many notice that we previously had a comment relationship for the user which was used
+
+00:44.190 --> 00:49.260
+to fetch all the comments that were created by it by our particular user.
+
+00:49.260 --> 00:54.180
+And this one is for all the comments that are on our particular user.
+
+00:54.180 --> 01:01.950
+So now people would also be able to comment on particular user.
+
+01:01.950 --> 01:09.240
+Now we previously created this post command controller which was our resource controller which used
+
+01:09.330 --> 01:13.320
+our middleware to protect certain root.
+
+01:13.320 --> 01:20.880
+We only have one action inside it and we require authentication for this store action which saves on
+
+01:20.880 --> 01:22.440
+new comment to the blog post.
+
+01:22.950 --> 01:30.870
+So here we are using the root model binding to fetch a blog post immediately by typing it with the proper
+
+01:30.870 --> 01:32.130
+class.
+
+01:32.370 --> 01:39.060
+Then we have the store comment request class in which we have put some validation rules for comments.
+
+01:39.060 --> 01:40.480
+There is only one here.
+
+01:40.650 --> 01:45.360
+The content is required and has to be at least five characters long.
+
+01:46.500 --> 01:52.680
+Now when we call create on the relationship we do not have to worry about assigning the commendable
+
+01:52.680 --> 01:57.210
+idea and commendable type Lavell is handling this for us.
+
+01:57.210 --> 02:05.580
+That's why it's important how you define the relation itself on the models so a lot of us can understand
+
+02:05.820 --> 02:07.320
+what are you trying to do.
+
+02:08.700 --> 02:18.480
+So here we only had to pass the content and the user I.D. So this time we would like to create the same
+
+02:18.480 --> 02:24.330
+controller but for users so it would actually be almost the same controller.
+
+02:24.330 --> 02:29.900
+So we can quickly generate this controller for adding comments to users.
+
+02:30.150 --> 02:31.300
+So let's do that.
+
+02:31.300 --> 02:39.300
+Peach be artisan make controller and let's call it user comment.
+
+02:39.760 --> 02:40.450
+Controller
+
+02:43.310 --> 02:49.670
+so not is that we are not doing this on the user controller which only has an update method.
+
+02:50.010 --> 02:57.000
+And of course basically it has some more methods but it is using only free to show the user profile
+
+02:57.110 --> 03:05.190
+show the editing form and to actually update the user in which we are only changing the user profile
+
+03:05.280 --> 03:06.360
+image.
+
+03:06.360 --> 03:13.870
+So this user comment controller is about something else so it is related to handling a different resource.
+
+03:13.890 --> 03:22.140
+That's why you should always create a brand new controller which is centred around some abstract concept
+
+03:22.680 --> 03:27.970
+so user controller is centered around the user model itself.
+
+03:27.990 --> 03:35.410
+Then the post TAC controller which we also have is centered about relating tags to our Controller.
+
+03:35.670 --> 03:43.060
+Then we have post comment controller which is about relating comments to come to our blog post.
+
+03:43.260 --> 03:47.880
+So that's why we have also created a user comment controller.
+
+03:48.300 --> 03:56.400
+OK I hope this makes sense and what we will actually doing this case is we can just copy whatever we
+
+03:56.400 --> 04:03.990
+have inside the post comment controller because this controller would be essentially the same.
+
+04:04.050 --> 04:07.040
+We also require out integration to post comments.
+
+04:07.050 --> 04:17.530
+As for the very reason that each comment requires a user I.D. We do not have anonymous comments then
+
+04:17.530 --> 04:24.920
+we will use the route model binding so we'll type hints are argument of the action.
+
+04:25.150 --> 04:33.040
+And since this would be our resource controller Lavell will know what it has to fetch to this action.
+
+04:33.280 --> 04:37.130
+So we use user from the namespace up user.
+
+04:37.140 --> 04:40.360
+That's very important as you import the proper one.
+
+04:40.360 --> 04:43.300
+So mind this import here.
+
+04:43.360 --> 04:44.950
+Next we have store comment.
+
+04:44.950 --> 04:50.940
+We can use the same request class because it is actually the same.
+
+04:51.010 --> 04:54.170
+So also mind that you have to add an import.
+
+04:54.550 --> 04:55.420
+This request.
+
+04:55.420 --> 04:56.080
+Import class.
+
+04:56.080 --> 04:56.960
+We do not need.
+
+04:57.010 --> 05:00.190
+So we can remove that.
+
+05:00.490 --> 05:06.400
+Now obviously this parameter inside the route would be called user you will see that in a moment.
+
+05:06.400 --> 05:08.470
+So of course it's not a post.
+
+05:08.590 --> 05:12.040
+So let's update updated also here.
+
+05:12.040 --> 05:17.620
+Now the relationship on the user it's important that you shouldn't use comments because comments is
+
+05:17.620 --> 05:18.580
+something else.
+
+05:18.580 --> 05:27.560
+Those are comments of a user so you should use comments on and then create stays the same.
+
+05:27.640 --> 05:37.750
+We read content from the input we read user from the requests so currently authenticated user.
+
+05:37.830 --> 05:42.690
+You also might remember that we can fetch it using also the Alpha site.
+
+05:42.960 --> 05:46.120
+So we have many plenty of ways which we can fetch a user.
+
+05:46.140 --> 05:50.320
+You should always just decide on one that you will use.
+
+05:50.610 --> 05:57.210
+Now in this case we also said the status message for the flash message which should be displayed on
+
+05:57.210 --> 06:03.260
+the next page after the redirect but we've already know that we can do that differently.
+
+06:04.440 --> 06:16.500
+So we can use read return redirect back and we can add something like this with status so this will
+
+06:16.500 --> 06:24.310
+just create session variable with the name that would be lower case after whatever comes after with.
+
+06:24.330 --> 06:28.290
+So we did that already and here you only specified the actual message
+
+06:31.210 --> 06:33.610
+so we can do it like that.
+
+06:33.610 --> 06:41.230
+Then we won't require this separate call and this makes this controller even shorter.
+
+06:41.230 --> 06:46.980
+Now since we are doing it like that here let's also modify the original post comment.
+
+06:46.980 --> 06:47.580
+Controller
+
+06:50.280 --> 06:54.080
+so it's also important that you are consistent throughout this course.
+
+06:54.090 --> 06:57.420
+I'm showing you different ways to do different things.
+
+06:57.420 --> 07:01.530
+But remember that you shouldn't like follow everything what I do.
+
+07:01.530 --> 07:05.090
+I'm showing you different ways so you you are aware of them.
+
+07:05.280 --> 07:12.840
+But in your application when you will create them you should decide on the one way which you can which
+
+07:12.840 --> 07:15.700
+you use to accomplish a specific task.
+
+07:15.720 --> 07:22.970
+So we also know that there are many possibilities which you can use to assign something to our relationship
+
+07:22.980 --> 07:31.020
+you can for example create a new comment model and then assign its properties like commendable ideas
+
+07:31.050 --> 07:37.230
+commendable type but what you should do differently in your production application is those that you
+
+07:37.230 --> 07:39.580
+will then create on yourself.
+
+07:39.630 --> 07:46.540
+After finishing this course you should probably stick to one way of handling specific task.
+
+07:46.650 --> 07:49.860
+If there is like no reason to do it differently.
+
+07:49.980 --> 07:51.860
+Just a suggestion.
+
+07:51.960 --> 07:55.020
+Of course we can also remove this request class from here.
+
+07:55.260 --> 07:58.500
+And this is this is highlighted in red.
+
+07:58.500 --> 08:04.460
+Thanks to our plugging that they have for Visual Studio code explained at the beginning of the course.
+
+08:04.560 --> 08:06.030
+So let's save the changes.
+
+08:06.060 --> 08:11.010
+And now finally come P or control p on Windows.
+
+08:11.070 --> 08:18.350
+And let's go to the Web BJP to define our root for our new controller.
+
+08:18.420 --> 08:26.100
+So this would all also be a resource controller like this definition that you see here we'll call it
+
+08:26.120 --> 08:42.200
+users comments user comment controller the only route that we need is star and basically we are done.
+
+08:42.200 --> 08:49.880
+We have created a controller which can handle adding a comment to a particular user.
+
+08:49.880 --> 08:57.750
+Now let's run PDP artisan route released to see if our route was added properly.
+
+08:58.460 --> 09:00.140
+And there it is.
+
+09:00.140 --> 09:08.380
+It's called user dot comments that store it relates to the store method on the user comment controller.
+
+09:08.380 --> 09:17.730
+It has the and web middleware and the H2 DP method is post and this is how the euro would look like.
+
+09:17.860 --> 09:25.210
+So not these that user is added automatically it is marching with the variable name not we've given
+
+09:25.270 --> 09:27.820
+inside the store action.
+
+09:27.880 --> 09:33.250
+So by type hinting it we are using that route model binding.
+
+09:33.250 --> 09:39.460
+So that would be about how to create the logic for storing the comments in the next lecture will handle
+
+09:39.970 --> 09:48.340
+how to actually create the views to do that and we'll also reuse whatever we have already created both
+
+09:48.340 --> 09:54.160
+for showing the comments and for having a forum for adding the comments.

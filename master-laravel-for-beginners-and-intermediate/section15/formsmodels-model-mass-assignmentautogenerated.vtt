@@ -1,0 +1,154 @@
+WEBVTT
+
+00:01.640 --> 00:09.080
+In the future, you might create models that have more columns than just a couple, or you might not
+
+00:09.080 --> 00:17.750
+like the idea that you need to reassign every single input value to a model property, explicitly eloquent
+
+00:17.750 --> 00:22.340
+models allowed to perform mass assignment as a solution.
+
+00:23.180 --> 00:31.670
+Since this is potentially a security vulnerability, you need to be explicit about properties that can
+
+00:31.670 --> 00:43.730
+be mass assigned vars in the model class, the fillable property must be defined and contain all model
+
+00:43.730 --> 00:47.270
+columns that can be assigned at Mass.
+
+00:50.410 --> 00:58.750
+The protection is there, as you might unintentionally override properties, you did not really want
+
+00:58.750 --> 01:03.400
+to be changed so easily like the user's password.
+
+01:06.800 --> 01:13.640
+There are free ways to perform the assignment when constructing a new model.
+
+01:14.480 --> 01:19.700
+You can either use, create or make model static methods.
+
+01:20.600 --> 01:23.600
+The difference between them is very significant.
+
+01:24.760 --> 01:25.630
+Create.
+
+01:26.920 --> 01:34.690
+Would create a new model instance, feel all of its properties with the input and immediately try to
+
+01:34.690 --> 01:36.400
+save the model to the database.
+
+01:37.370 --> 01:47.810
+Make will create their model, feel its properties, but it would not try to save the model to the database.
+
+01:50.140 --> 01:59.980
+Both of these methods create and make will create a new instance of the middle class, but if you create,
+
+01:59.980 --> 02:07.330
+you don't need to call save on their model, but with make, you will have to call save at some point
+
+02:07.330 --> 02:09.330
+to actually save it to the database.
+
+02:10.300 --> 02:10.690
+Why?
+
+02:10.690 --> 02:12.340
+There are two separate methods.
+
+02:12.820 --> 02:16.000
+Well, they have their own use cases.
+
+02:16.520 --> 02:20.910
+If you have all properties needed at a time, you can use create.
+
+02:21.340 --> 02:30.910
+But if a model has related models which might not exist yet, or you don't have values for all needed
+
+02:30.910 --> 02:40.030
+properties yet, you can use their make methods to partially fill model columns and only save it when
+
+02:40.030 --> 02:41.800
+you collect more data.
+
+02:45.870 --> 02:54.150
+The third way is to use the field method, the fuel method only exists in the model instance, so it
+
+02:54.150 --> 02:55.410
+is not a static method.
+
+02:55.650 --> 03:00.060
+You will use it like that on an existing model instance.
+
+03:00.060 --> 03:03.900
+You can call, feel and pass an array of attributes to it.
+
+03:05.280 --> 03:12.150
+It's useful if you already have the model instance, so in cases where you want to modify an existing
+
+03:12.150 --> 03:21.480
+model or the instance was just previously created somewhere else, all of those methods accept an array
+
+03:21.480 --> 03:22.390
+as a parameter.
+
+03:22.920 --> 03:25.920
+The keys of the array are column.
+
+03:25.920 --> 03:32.160
+The names and values are the values you want to assign to this columns.
+
+03:36.250 --> 03:43.250
+If you take a look at the blog post storm, I thought this might ring a bell in your heads.
+
+03:43.900 --> 03:52.240
+In fact, you already have an array of user input with keys matching the column names of the model.
+
+03:52.840 --> 03:56.140
+And this data is additionally already validated.
+
+03:56.770 --> 04:04.330
+It seems logical that the code can be made shorter by using the model create method and passing the
+
+04:04.330 --> 04:05.890
+validated input to it.
+
+04:07.590 --> 04:15.390
+So instead of those four lines, we can do something like this to the post variable, we will assign
+
+04:15.600 --> 04:23.250
+the blog post create with the validated as an input.
+
+04:25.940 --> 04:34.220
+Now, a reminder, before you can use the create method, you have to add the columns that can be assigned
+
+04:34.220 --> 04:39.290
+to the fillable field, because if you want to do that, this is what happens.
+
+04:40.030 --> 04:42.620
+Imagine that's a valid input.
+
+04:45.720 --> 04:47.370
+That's the error you get.
+
+04:48.930 --> 04:55.450
+So you need to explicitly define those columns in the fillable field, let's do that now.
+
+04:55.680 --> 04:59.040
+So we need the title here and content.
+
+04:59.670 --> 05:05.670
+And every time you will have more fields on the models and you want them as assigned, remember to add
+
+05:05.670 --> 05:07.590
+them to the fillable field.
+
+05:09.520 --> 05:11.040
+So now let's try again.
+
+05:13.140 --> 05:14.510
+This time it went fine.

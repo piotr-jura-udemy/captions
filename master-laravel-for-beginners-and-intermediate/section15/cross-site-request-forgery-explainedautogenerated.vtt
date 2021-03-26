@@ -1,0 +1,127 @@
+WEBVTT
+
+00:00.620 --> 00:09.110
+To protect your users from the most basic malicious actions from third parties, you need to protect
+
+00:09.110 --> 00:16.370
+them from the Ceaser F attack, the cross site request forgery.
+
+00:17.330 --> 00:25.370
+Let's take a look at this example scenario where the perpetrator takes over one of your users account
+
+00:25.640 --> 00:36.350
+by forging passwords, change requests, the unsuspecting user might get a forced email urging him to
+
+00:36.350 --> 00:37.220
+click a link.
+
+00:38.340 --> 00:45.750
+The email does not have to say anything about the password change, it could pretend to be a newsletter
+
+00:45.780 --> 00:51.450
+sent from your website, anything that would make you click the link.
+
+00:52.530 --> 01:03.210
+The user clicks the link and it leads to a malicious website that immediately sends a form with the
+
+01:03.210 --> 01:06.270
+new password to the real website.
+
+01:06.270 --> 01:17.280
+Your URL, if your website would not be seen as a protected and the user will be authenticated, your
+
+01:17.280 --> 01:24.240
+website would safely assume the request is real and will change the user password.
+
+01:25.450 --> 01:30.910
+Well, it's just an example, but that's how she Assaraf, attacks work in general.
+
+01:31.470 --> 01:34.430
+Now, how do you prevent such attacks?
+
+01:35.050 --> 01:36.400
+You've seen it already.
+
+01:36.880 --> 01:43.690
+Laravel returns the 419 error when it thinks your website might be attacked.
+
+01:45.860 --> 01:48.470
+So how it all works in Laravel.
+
+01:49.600 --> 02:00.580
+Well, with every forum on your website, you should generate R, C, SRF Tokin, that's a unique token
+
+02:00.580 --> 02:02.280
+sent with your forums.
+
+02:03.100 --> 02:06.130
+You can generate one using their seats.
+
+02:06.130 --> 02:08.200
+Şeref Blade Directive.
+
+02:09.940 --> 02:17.920
+It is being added as a hidden form field, the token is also stored in your session.
+
+02:20.750 --> 02:29.600
+The route that is responsible for the form submittal handling checks, if the toxin was sent and then
+
+02:29.600 --> 02:34.730
+if it matches the one that was generated for the form page.
+
+02:35.710 --> 02:46.300
+Well, Laravel does that automatically for every route that uses that post, put potch or delete HTP
+
+02:46.300 --> 02:56.200
+verbs, and it happens in the very fine Ceaser F Tolkan Meter, where you already know how middleware
+
+02:56.200 --> 02:56.940
+works.
+
+02:56.950 --> 03:02.020
+It is the code executed before route's or after route's.
+
+03:02.920 --> 03:04.870
+So this is something to remember.
+
+03:06.010 --> 03:18.070
+Don't ever create actions that save, modify or delete data on behalf of the user using the get htp
+
+03:18.070 --> 03:21.760
+verb, that's the easiest way to get hacked.
+
+03:24.250 --> 03:27.490
+Finally, let's try submitting the form again.
+
+03:28.570 --> 03:37.930
+But before that, let's ask, did call with the request in the store method to see if we can reach this
+
+03:37.930 --> 03:40.180
+route correctly when sending the form.
+
+03:40.780 --> 03:42.940
+Don't forget to save this change.
+
+03:46.180 --> 03:50.720
+Now go to the form page and make sure you refresh it.
+
+03:51.670 --> 03:53.410
+You can open the inspector.
+
+03:56.050 --> 03:57.940
+And take a look at the forum.
+
+03:59.630 --> 04:07.220
+What we are looking for is this hidden field with the CSA ref tokin that is now automatically added
+
+04:07.220 --> 04:08.300
+to your form.
+
+04:10.940 --> 04:13.300
+Now, let's try to add some data.
+
+04:15.430 --> 04:23.310
+Press create to submit it, and there it is, we correctly reached the proper URL and dumped some data,
+
+04:23.320 --> 04:28.180
+at least this works now and you are seeing SRF protected.

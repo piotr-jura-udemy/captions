@@ -1,0 +1,298 @@
+WEBVTT
+
+00:00.390 --> 00:06.840
+In the last lecture we've learned the basics of logging which we required to create our custom subscriber
+
+00:06.840 --> 00:10.860
+that will listen to couple of travel events at once.
+
+00:10.860 --> 00:15.680
+And those will be their cash events because we are using some caching actually.
+
+00:15.690 --> 00:19.720
+So we'll see when we had a cash hit and cash miss.
+
+00:19.770 --> 00:25.590
+So whenever something was read from cash or not as a useful information that we can for example post
+
+00:25.680 --> 00:30.500
+somewhere so we'll just stored on the logs for simplicity.
+
+00:30.600 --> 00:38.370
+Now to generate a new subscriber you will actually make a listener so BHP artisan make listener cash
+
+00:38.370 --> 00:39.540
+subscriber.
+
+00:39.600 --> 00:41.090
+That would be the name.
+
+00:41.430 --> 00:47.180
+Now this will create a new class inside the least inner folder so least.
+
+00:48.360 --> 00:57.460
+So this is our cash subscriber that doesn't interact with the Q Now it doesn't even have to have a constructor
+
+00:59.650 --> 01:00.510
+and know how.
+
+01:00.510 --> 01:06.550
+This is how subscribers are structured is well a little bit different than listener.
+
+01:06.550 --> 01:08.710
+So let's open an example listener.
+
+01:08.710 --> 01:15.700
+So I've said on the lecture about list owners that they only have one handle method that accepts one
+
+01:15.700 --> 01:17.780
+type of an event.
+
+01:17.830 --> 01:22.560
+Now that's not the case with least we've done subscriber sorry.
+
+01:22.780 --> 01:29.640
+Actually they will have a separate method for every type of event that they handle.
+
+01:30.490 --> 01:36.940
+So in this case we'll handle two events from the larval so build in events.
+
+01:36.940 --> 01:39.010
+So let's use them.
+
+01:39.010 --> 01:44.500
+So use illuminate cache events
+
+01:47.230 --> 01:58.800
+and we'll have those two cash hit and there is also cash missed now for every one of those events that
+
+01:58.800 --> 02:04.740
+we handle those built in lower level events that will be ultimately dispatched bilateral.
+
+02:05.100 --> 02:11.840
+We will create our specific method with the name containing handle and then the event name.
+
+02:11.910 --> 02:22.340
+So handle cash hit and this event is can be typing that as cash hit and another one.
+
+02:22.340 --> 02:35.920
+Public function handle cash missed and here will also type gained cash missed event.
+
+02:35.990 --> 02:43.760
+Now so you will handle all the logic related to whenever cash cash was read or actually missed so it
+
+02:43.760 --> 02:46.020
+had to be read from the database.
+
+02:46.190 --> 02:51.030
+But first we also have to add another method called subscribe.
+
+02:51.260 --> 02:53.170
+So public functions subscribe.
+
+02:53.180 --> 02:57.520
+So this method is kind of like a handle method in least in there.
+
+02:57.530 --> 02:59.280
+So it has to beta.
+
+02:59.540 --> 03:08.420
+It only accepts one parameter which are events and then on these events which is some object you call
+
+03:08.420 --> 03:10.340
+the listener method.
+
+03:10.340 --> 03:15.950
+So what you will do here is first argument you specified to what event this should listen.
+
+03:15.950 --> 03:26.230
+So first we have the cash hit and this has to be a fully qualified class name and second one is the
+
+03:26.380 --> 03:35.590
+actual class name of the handler which in our case is up these donors cash subscriber
+
+03:38.120 --> 03:39.740
+and then using the ET sign.
+
+03:39.770 --> 03:41.270
+You have to specify the method.
+
+03:41.300 --> 03:49.010
+So this is handled cash hit so we are telling it to listen to this event.
+
+03:49.010 --> 03:52.630
+Now we can copy it out because we are actually leased into two events.
+
+03:52.640 --> 03:59.990
+The second one is cash missed and the method name is handling cash mixed
+
+04:03.220 --> 04:03.460
+now.
+
+04:03.460 --> 04:07.800
+Additionally you have to open event service provider.
+
+04:08.590 --> 04:16.010
+And here you have this Listen field for leased owners but additionally we have to tell our travel about
+
+04:16.010 --> 04:19.290
+the subscriber so this would be protected.
+
+04:20.740 --> 04:30.130
+Subscribe and this only contains an array of all the subscribers that we should use inside a.
+
+04:30.170 --> 04:36.440
+So there is no need actually and we'll add our new cash subscriber.
+
+04:37.520 --> 04:40.820
+So this also has to be an array of fully qualified class names.
+
+04:40.820 --> 04:43.920
+That's why we use the class constant of the cash subscriber.
+
+04:43.940 --> 04:49.370
+So make sure you are adding your statement for this cash subscriber.
+
+04:49.370 --> 04:51.230
+Now let's go to the actual logic
+
+04:53.990 --> 05:02.810
+so we can read something about the cash hit or cash missed as those are events that have some data which
+
+05:02.930 --> 05:07.440
+is value that was retrieved and all things like that.
+
+05:07.460 --> 05:10.810
+So the important thing about the cash items is probably the key.
+
+05:10.810 --> 05:14.360
+So we need to log what was read from the cash what wasn't.
+
+05:15.200 --> 05:17.380
+So we'll use the lock for sale.
+
+05:17.390 --> 05:19.430
+So make sure you are adding an import.
+
+05:19.550 --> 05:26.330
+And we'll just log in form so the log low level that that's not an error we just log some information
+
+05:26.330 --> 05:29.530
+that something has happened.
+
+05:29.660 --> 05:32.540
+Now what we can do is we can log
+
+05:35.480 --> 05:47.770
+that event key read from or just say something like cash hit and then on the cash missed we do log in
+
+05:47.770 --> 05:55.710
+for event key cache miss.
+
+05:55.850 --> 06:02.330
+So actually if you do not know what I'm doing here when you use this double quotes then using this curly
+
+06:02.330 --> 06:09.710
+braces you can read some variables or data from BHP in this case what I'm reading the object property.
+
+06:09.710 --> 06:11.870
+So we have those single ones you won't do that.
+
+06:11.900 --> 06:19.970
+This would be this would just simply print whatever is inside those paragraphs but with the double ones
+
+06:20.030 --> 06:26.240
+you can use some additional variables when you surround them with curly braces just so you know.
+
+06:27.040 --> 06:27.440
+OK.
+
+06:27.470 --> 06:30.310
+So we did basically everything.
+
+06:30.800 --> 06:35.720
+And now what we will do is we'll go to the blog post please visit some blog posts and then you will
+
+06:35.720 --> 06:39.200
+see how we can create logs based on that.
+
+06:39.230 --> 06:41.750
+So let's go to a blog post let's visit this one.
+
+06:41.750 --> 06:43.430
+This should create some cash.
+
+06:43.640 --> 06:46.670
+Let's see that again and again.
+
+06:46.670 --> 06:53.260
+Now let's find another one like this one let's click it again again and again.
+
+06:54.410 --> 06:55.790
+And maybe this one.
+
+06:55.820 --> 06:56.780
+All right that's enough.
+
+06:56.780 --> 07:05.580
+Now let's go to the app storage logs for today and you can see what we have here.
+
+07:05.600 --> 07:06.500
+So let's take a look.
+
+07:06.500 --> 07:08.110
+So first our messages.
+
+07:08.120 --> 07:09.930
+When we tried something.
+
+07:10.040 --> 07:16.460
+So what you've learned about basics of logging and then you see all the other cache keys that you had
+
+07:16.640 --> 07:18.530
+and lava is dispatching those events.
+
+07:18.530 --> 07:21.010
+That's why we know that there was catch heat.
+
+07:21.020 --> 07:22.010
+There was a cache miss.
+
+07:22.010 --> 07:31.760
+First time we have visited our blog post and then after some time whenever we visited this again we
+
+07:31.760 --> 07:33.340
+got cash heat.
+
+07:33.350 --> 07:36.560
+So there was something found inside the cache.
+
+07:36.590 --> 07:42.650
+So this way you can add subscribers for example to log some information about lava what's happening
+
+07:42.710 --> 07:43.820
+inside it.
+
+07:43.850 --> 07:45.980
+It also has some other events.
+
+07:45.980 --> 07:52.850
+So there are events for the Q There are events for the queries that are being made by lava eloquent
+
+07:53.270 --> 07:55.020
+but whatever that might be.
+
+07:55.130 --> 08:01.370
+You can also subscribe to your own events in one simple subscriber.
+
+08:01.580 --> 08:05.360
+But this cannot be easily converted to something that can run on a queue.
+
+08:05.360 --> 08:07.460
+So that's the basic difference.
+
+08:07.460 --> 08:14.390
+But anyway you can see how you can add some additional information log something or use this to your
+
+08:14.390 --> 08:20.750
+benefit when subscribing to the default built in events that Lara is dispatching.

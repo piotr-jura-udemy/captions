@@ -1,0 +1,67 @@
+WEBVTT
+
+00:00.330 --> 00:07.380
+In the whole last section we've learned how to manage files and specifically uploading files inside
+
+00:07.380 --> 00:09.420
+your of applications.
+
+00:09.420 --> 00:18.130
+So you were able to add a blog post with an image that was easily uploaded by selecting a file to upload
+
+00:18.200 --> 00:26.060
+and then it created a new row inside the images table which contained a path to an image and a blog
+
+00:26.060 --> 00:27.140
+post I.D..
+
+00:27.890 --> 00:35.660
+So in this section what we will try to achieve and learn is to be able to also show our user profile
+
+00:35.660 --> 00:43.110
+page which this user can also edit his own avatar by uploading our file.
+
+00:43.190 --> 00:51.590
+So before we actually achieve that we obviously have to create logic for uploading this avatar of the
+
+00:51.590 --> 00:52.460
+user.
+
+00:52.460 --> 00:54.420
+But this is not our goal.
+
+00:54.470 --> 01:04.490
+What we want to learn is how to create a relationship in light eloquent called polymorphic relationships.
+
+01:04.490 --> 01:07.470
+Now we'll start with the simplest one.
+
+01:07.550 --> 01:17.310
+So polymorphic 1 to 1 and to say that in simplest terms what is a poly for poly morphemes relationship.
+
+01:17.570 --> 01:27.080
+It is a relationship where on one side you will have an image table but this table won't be only limited
+
+01:27.080 --> 01:35.900
+to blog posts but instead you would be able to use the same table to store the images both for blog
+
+01:35.900 --> 01:39.200
+posts and for the users.
+
+01:39.200 --> 01:42.500
+So this won't have a blog post a day column anymore.
+
+01:42.500 --> 01:45.560
+This would be something else.
+
+01:45.560 --> 01:53.810
+So before we get to the actual polymorphic one to one relationship we have to quickly implement the
+
+01:53.810 --> 02:02.350
+logic for showing a user profile and modifying the user profile which means adding an avatar.
+
+02:02.390 --> 02:07.860
+So let's go ahead and see how quickly can we do it inside Lara.
+
+02:07.880 --> 02:12.920
+Well at this point when we have learned all the basics required.

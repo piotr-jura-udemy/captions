@@ -1,0 +1,187 @@
+WEBVTT
+
+00:00.550 --> 00:08.560
+So far in this section we just delayed execution of sending an email either using the shoot queue interface
+
+00:08.680 --> 00:12.160
+or just calling the delay method on the mail for sale.
+
+00:12.610 --> 00:18.790
+And in this one you will see how you can create an actual job that is more like what you see on this
+
+00:18.790 --> 00:19.330
+diagram.
+
+00:19.330 --> 00:23.550
+So this job will be read something from the database.
+
+00:23.620 --> 00:30.640
+It might even dispatch another jobs and will actually do an example like that that you read something
+
+00:30.640 --> 00:33.650
+from the database in the background job.
+
+00:33.790 --> 00:41.530
+So won't bother your main application and then will also try to send emails which in turn would also
+
+00:41.530 --> 00:45.890
+produce another jobs to be put on the queue.
+
+00:46.000 --> 00:54.640
+So let's go ahead and see how we can create a new job so let's open the terminal and run P2P artisan
+
+00:54.880 --> 00:59.200
+make job and we will call this job.
+
+00:59.200 --> 01:02.020
+Notify users
+
+01:05.870 --> 01:10.480
+post was comment at.
+
+01:10.600 --> 01:17.770
+So now let's take a look at the directory structure so you can see that there is new folder called jobs
+
+01:17.770 --> 01:20.440
+created inside your up directories.
+
+01:20.440 --> 01:27.470
+So this is where job classes will be kept so we can close the terminal now.
+
+01:27.490 --> 01:33.430
+And this class is very simple it should remind you of the Malabo class.
+
+01:33.430 --> 01:40.990
+So basically there is a constructor to which you can use to pass some data and then there is the handle
+
+01:40.990 --> 01:42.940
+method which basically is everything.
+
+01:42.940 --> 01:50.710
+This job has so larval will automatically call everything what is inside this handle method and this
+
+01:50.710 --> 01:55.820
+will as their name suggests the comment suggests execute the job.
+
+01:56.930 --> 01:59.960
+Now let's see how we can dispatch this job.
+
+01:59.960 --> 02:05.990
+This patching means putting this on the queue to be executed later.
+
+02:05.990 --> 02:08.630
+So what this will will this job will do.
+
+02:08.630 --> 02:09.500
+It will.
+
+02:09.530 --> 02:16.490
+It will check out what are the users that have commented on a particular blog post and it will notify
+
+02:16.490 --> 02:23.660
+everyone else then a new comment was posted so we can clear this class.
+
+02:23.660 --> 02:29.540
+This post comment controller a little bit so we'll leave the initial sanding to the outer of the blog
+
+02:29.540 --> 02:30.920
+post.
+
+02:30.950 --> 02:39.170
+But now you can also use this notify user well basically notify user so we have to use this class and
+
+02:39.170 --> 02:48.320
+it will have a static dispatch method to which you will pass any additional arguments that will be defined
+
+02:48.440 --> 02:53.030
+on the constructor of this class of this job class.
+
+02:53.030 --> 02:59.270
+So currently it doesn't have anything so let's add one argument so we'll need a comment
+
+03:02.400 --> 03:06.760
+so this would be our comment from the app comment so comment model.
+
+03:06.780 --> 03:07.500
+Basically
+
+03:11.520 --> 03:21.270
+now let's also add a public comment field so public comment and assign this field inside the constructor
+
+03:24.070 --> 03:26.890
+so this comment equals comment.
+
+03:29.730 --> 03:35.790
+So now we can pass this comment to the dispatch method and in intern bilateral.
+
+03:36.000 --> 03:45.480
+When this job will be processed by the CU Walker this argument will be passed to this job class constructor.
+
+03:45.480 --> 03:54.910
+So basically we can actually try that out so let's open our Q. Walker.
+
+03:55.110 --> 03:57.330
+Sorry not this command.
+
+03:57.330 --> 03:57.960
+Q.
+
+04:00.550 --> 04:08.620
+This one so we run the Q Walker and now inside our application let's try to add a comment.
+
+04:08.620 --> 04:09.630
+Hello.
+
+04:09.940 --> 04:11.850
+Executing our job.
+
+04:12.850 --> 04:19.840
+Now this should execute the first job which was responsible for sending that email.
+
+04:19.840 --> 04:28.510
+You can see it was processed successfully and also we have dispatched the notify users post was commented
+
+04:28.540 --> 04:29.750
+and also processed.
+
+04:29.930 --> 04:37.420
+Basically because there is nothing inside this job so it just ran the handle method nothing well went
+
+04:37.420 --> 04:42.970
+wrong and this job was marked as being processed.
+
+04:43.060 --> 04:49.270
+So this is how you create your custom jobs not just adding that email should be cute.
+
+04:49.360 --> 04:55.630
+But here we will actually do something but well we'll do that in the next lecture because this will
+
+04:55.630 --> 05:02.900
+involve adding some queries to fetch older users that have commented on our blog post.
+
+05:02.980 --> 05:09.820
+So just so you know whenever you want to move something to the background whenever this includes making
+
+05:09.910 --> 05:18.580
+any requests to some external API using HDB clear client which is a perfect idea for a background job
+
+05:18.960 --> 05:26.050
+all that has to do some database intensive processing like let's say calculating something we might
+
+05:26.180 --> 05:31.750
+not create a job that will calculate the feature post every week.
+
+05:31.750 --> 05:40.440
+Let's say you create this classes that will implement should cue you run that using to be artisan make
+
+05:40.450 --> 05:49.510
+job and then you dispatch jobs by calling their static statically dispatch method on their job class
+
+05:50.020 --> 05:55.630
+and then you can pass some additional arguments optionally of course which would be passed by lateral
+
+05:55.660 --> 06:04.750
+to this job class constructor so let's follow me into the next lecture when we will actually do something
+
+06:04.750 --> 06:06.610
+useful with this job.

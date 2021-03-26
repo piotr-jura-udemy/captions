@@ -1,0 +1,265 @@
+WEBVTT
+
+00:00.420 --> 00:06.960
+In the last lecture we have learned how to display a collection of a particular results in our Jason
+
+00:06.960 --> 00:13.410
+API and also how to pollinate it and even accept an additional parameter like how many items we would
+
+00:13.410 --> 00:15.150
+like per page.
+
+00:15.180 --> 00:17.810
+Now there is an error in this.
+
+00:17.820 --> 00:25.140
+What I have shown you and it is that if there will be no per page parameters specified and will convert
+
+00:25.140 --> 00:27.300
+that to integer.
+
+00:27.300 --> 00:29.820
+This would result in what you can see here.
+
+00:29.820 --> 00:30.930
+So it might.
+
+00:30.930 --> 00:39.450
+There is no parameter here and we are specifying this per page parameter by default to be zero which
+
+00:39.510 --> 00:40.770
+of course is wrong.
+
+00:40.770 --> 00:48.660
+So let's so let's quickly fixed up and we'll fix would be just not to convert this result to integer
+
+00:49.140 --> 00:56.820
+because what we want is either for it to be normal or to be 15 so that's the only way to provide the
+
+00:56.880 --> 00:58.860
+15 R's default.
+
+00:58.950 --> 01:06.990
+Now after saving this changes you can see that when not provided the parameter is 15 by default.
+
+01:07.650 --> 01:07.940
+Okay.
+
+01:07.950 --> 01:12.270
+Now let's get to the point which is that the whole point of this lecture.
+
+01:12.330 --> 01:16.150
+How do you actually store something through the Jason API.
+
+01:16.980 --> 01:22.140
+So now let's get to the point and first let's take a look at the store method which would be responsible
+
+01:22.140 --> 01:24.230
+for storing this resource.
+
+01:24.450 --> 01:29.580
+So it come up with one parameter called a request.
+
+01:29.940 --> 01:33.450
+And as you can see this route would be the postal route.
+
+01:33.470 --> 01:42.180
+So it accepts post HDP verb and there is one parameter called Post which means that if will define it
+
+01:42.300 --> 01:45.600
+the lot of it will convert that to the specific object.
+
+01:45.600 --> 01:47.750
+And this actually is a blog post.
+
+01:47.760 --> 01:55.040
+So now we can easily store this comment and immediately attach it to the blog post.
+
+01:55.110 --> 02:02.100
+Now let's also take a look at how we have implemented that when we were storing this comment using our
+
+02:02.100 --> 02:05.940
+form our traditional H email forum submitted.
+
+02:05.940 --> 02:13.170
+So we have one additional argument which is store comment and that's the last the request class that
+
+02:13.290 --> 02:14.750
+handles the validation.
+
+02:14.760 --> 02:17.160
+So we can also reuse that.
+
+02:17.430 --> 02:21.490
+Also mind that in this case we'll need to import this class.
+
+02:21.490 --> 02:24.240
+So mind that you have this import at the top.
+
+02:25.580 --> 02:25.980
+Okay.
+
+02:25.980 --> 02:30.390
+Everything else would also be the same except the last part.
+
+02:30.390 --> 02:32.560
+Here we return a redirect.
+
+02:32.580 --> 02:35.160
+And instead we'll do something else here.
+
+02:35.820 --> 02:37.720
+So first let's based up.
+
+02:37.860 --> 02:43.260
+So this should be enough to store our comment and attach it to a blog post.
+
+02:43.260 --> 02:48.090
+Now how do we actually even send that.
+
+02:48.090 --> 02:49.260
+So let's take a look.
+
+02:50.100 --> 02:51.890
+Let's go to the postman.
+
+02:51.900 --> 02:56.840
+We can copy this URL and open a new tab.
+
+02:56.860 --> 03:06.100
+And here we have to change the method to post now to send some Jason we'll go to the boarded up you
+
+03:06.100 --> 03:13.720
+choose the row so you can type the actual body and you have to specify it as Jason.
+
+03:13.780 --> 03:18.480
+So first let's try sending empty Jason and see what happens.
+
+03:19.800 --> 03:31.150
+So what you got back is I redirect 300 0 to and this says that it is redirecting to lot of the test.
+
+03:31.150 --> 03:38.470
+So why this happens even though we are having the correct URL the verb and we even specify the content
+
+03:38.470 --> 03:46.030
+type as application Jason the reason for that is when you are sending data for lateral to understand
+
+03:46.060 --> 03:50.120
+what actually is being sent and what to return.
+
+03:50.290 --> 03:59.620
+You need to provide another HDP header called accept and this those two headers are like the first one.
+
+03:59.620 --> 04:05.630
+The content type is specifying what's the data type of that you will sent with the body.
+
+04:05.650 --> 04:10.410
+So this can be text HDMI email or in our case its application Jason.
+
+04:10.420 --> 04:18.400
+So this means we are sending Jason but this one accept is what you are accept what you are expecting
+
+04:18.430 --> 04:20.030
+in return.
+
+04:20.050 --> 04:21.850
+So we have to tell a lot of that.
+
+04:21.850 --> 04:27.550
+We also expect Jason now on the after adding this header
+
+04:30.920 --> 04:37.450
+now if you will send this empty Jason body with just this two characters.
+
+04:37.470 --> 04:43.460
+You can see that the validation actually works and it says the content field was required.
+
+04:43.470 --> 04:46.210
+And of course wasn't provided.
+
+04:46.320 --> 04:54.360
+So you feel specify content but let it be invalid for now so let's say free characters and we might
+
+04:54.360 --> 04:56.850
+remember that it has to be at least five.
+
+04:57.140 --> 05:00.400
+The validation also works.
+
+05:00.510 --> 05:07.350
+So the way this is set up in Lavell is it actually understands that you are sending Jason and you are
+
+05:07.350 --> 05:16.020
+accepting accepting Jason as a response back so you can use the same methods like request input to read
+
+05:16.110 --> 05:24.360
+the body of the Jason because you know that in pitch B to convert something let's say to an array you
+
+05:24.360 --> 05:32.230
+would have to use either that Jason encode function or Jason decode.
+
+05:32.250 --> 05:38.520
+So in light of all you don't have to do that it's enough if you will just use the request input.
+
+05:38.520 --> 05:45.490
+And in this case content is just property of the Jason body.
+
+05:45.570 --> 05:53.970
+Now we are almost at the point where we can actually store this comment but this won't work just now
+
+05:54.000 --> 05:58.680
+because if you will provide a valid value let's see what happens.
+
+05:58.680 --> 06:05.280
+So we actually get an exception saying trying to get proper the idea of non object.
+
+06:05.280 --> 06:09.380
+This happens in line 40 in post comment controller.
+
+06:09.390 --> 06:11.800
+So let's see what is this.
+
+06:12.180 --> 06:21.320
+So line forty is we are actually getting the user from the request and trying to get the currently out
+
+06:21.360 --> 06:23.080
+indicated user I.D..
+
+06:23.790 --> 06:32.790
+Now remember when I said how API is and traditional websites differ in the sense of how they are authenticated.
+
+06:32.790 --> 06:42.210
+So you know that we do not we haven't authenticated in any way to use this API so we are just sending
+
+06:42.480 --> 06:43.650
+some requests.
+
+06:43.650 --> 06:46.630
+Normally we would logging through a forum.
+
+06:46.710 --> 06:50.600
+And in this case we provide no authentication formation.
+
+06:50.610 --> 06:52.830
+So lot of things stop.
+
+06:53.110 --> 06:57.870
+Well you are basically not authenticated and while it's right about that.
+
+06:57.900 --> 07:06.400
+So before we can actually store this comment we will have to learn what's the basic ways that Lavell
+
+07:06.480 --> 07:17.430
+provide to authenticate this API requests using tokens that are buying assigned to particular users.
+
+07:17.430 --> 07:23.690
+So we'll get to that in the next lecture because it well it's not so simple.
+
+07:23.720 --> 07:25.590
+It will take a little time to set up.
+
+07:25.860 --> 07:32.970
+So see you in the next lecture will get the basics of authentication using API set up so that we can
+
+07:32.970 --> 07:38.220
+store and do other things to resources that will require some authentication.

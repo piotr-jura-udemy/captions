@@ -1,0 +1,157 @@
+WEBVTT
+
+00:00.980 --> 00:08.930
+Last time we created a test that verifies that we can see no blog post initially and then when we actually
+
+00:08.930 --> 00:13.280
+add our single blog post that we can see it on the main page.
+
+00:13.430 --> 00:20.640
+So we are actually adding a blog post but we weren't testing our own end points for adding blog posts
+
+00:20.660 --> 00:25.280
+so I mean the forum for adding the blog post.
+
+00:25.370 --> 00:30.410
+So let's see what does this require to be properly tested.
+
+00:30.440 --> 00:36.800
+So assuming that we provide valid parameters so they are both present and have the required length the
+
+00:36.800 --> 00:44.960
+minimum of five characters for title and ten for content when we press create we should see the blog
+
+00:44.960 --> 00:46.590
+post was created.
+
+00:46.610 --> 00:54.350
+So that's one thing we should test that we can see a flash message that is being added to the session.
+
+00:54.440 --> 01:02.280
+And additionally we can check if we can see the blog post because we are being redirected to this post.
+
+01:02.450 --> 01:08.450
+So let's go back to the Visual Studio code and let's proceed with writing this test.
+
+01:08.450 --> 01:15.960
+So we are we are adding public function we can call it test store valid.
+
+01:16.910 --> 01:22.940
+And in this case we are testing this scenario when we provide all the valid parameters and everything
+
+01:23.000 --> 01:24.870
+works.
+
+01:25.120 --> 01:29.560
+So let's start by creating an array of valid parameters
+
+01:32.320 --> 01:35.860
+so the title should be at least five characters.
+
+01:35.860 --> 01:46.650
+So let's give a valid title and the content needs to be present and be at least 10 characters.
+
+01:47.380 --> 01:51.990
+Okay so this might serve as our arrange part.
+
+01:52.060 --> 02:01.360
+Now we should actually call this end point that saves this blog post and we can use both because this
+
+02:01.360 --> 02:08.590
+action is using the post verb and the euro is posts.
+
+02:09.360 --> 02:17.670
+And the second argument is our firearms so we are simulating HDP H DTP request that would be made in
+
+02:17.670 --> 02:22.650
+the browser like we would be submitting a form.
+
+02:22.650 --> 02:33.780
+So in this case when we call the posts if it is valid then it is making our redirect so it is redirecting
+
+02:33.780 --> 02:39.050
+to the actual blog post page so we can check for the status.
+
+02:39.150 --> 02:44.070
+So assert status would be three hundred and two.
+
+02:44.070 --> 02:52.500
+So this is the H DTP code for successful redirect when normal page is being displayed and or the normal
+
+02:52.500 --> 03:00.280
+sexist code is 200 but in case when we have a redirect then it is three hundred two.
+
+03:00.960 --> 03:09.690
+Now how we can check if the this status message this flash message was added to the session we can use
+
+03:09.750 --> 03:15.840
+another session method called assert session has
+
+03:19.020 --> 03:24.370
+and now we can take a look at how our session variable is called.
+
+03:24.720 --> 03:32.940
+So inside the store method in our controller we we are adding a flash message called status so let's
+
+03:33.390 --> 03:38.960
+check if it contains status so we can see that we can change all those messages.
+
+03:38.960 --> 03:46.590
+So first we call post and then we can call immediately the Assad status on the result and then immediately
+
+03:46.620 --> 03:51.630
+call another assertion that we'll be operating on the same response
+
+03:54.410 --> 04:01.400
+and finally we can verify if this message is actually what we expect it to be.
+
+04:01.400 --> 04:06.120
+So we can use this our CERT equals
+
+04:09.590 --> 04:16.940
+and we can read the session variable value using the session method session function.
+
+04:16.940 --> 04:18.090
+Sorry.
+
+04:18.110 --> 04:20.360
+So it's called status
+
+04:25.160 --> 04:29.190
+and now let's check inside the browser what we should expect.
+
+04:29.190 --> 04:32.100
+So we are adding the blog post was created.
+
+04:32.100 --> 04:33.420
+We can even copy that
+
+04:36.730 --> 04:37.040
+okay.
+
+04:37.040 --> 04:47.440
+Now we should be able to run this test so let's run peach unit and you can see that it is successful
+
+04:47.450 --> 04:53.190
+so we have started the blog post because we provided white bathrooms.
+
+04:53.210 --> 04:55.940
+Also we have checked for a redirect.
+
+04:55.940 --> 05:01.030
+We verified that status variable is inside the session.
+
+05:01.040 --> 05:12.350
+So we have a status and that the status is actually equal to the blog post was created.
+
+05:12.350 --> 05:14.870
+So this was pretty simple wasn't it.
+
+05:15.020 --> 05:21.320
+In the next lecture I will show you how we can test for the failure in the sense that the user provided
+
+05:21.410 --> 05:27.410
+invalid parameters because we also have to test for situations like this whether our validation works
+
+05:27.470 --> 05:34.340
+as expected and also you will see how to test editing and deleting.

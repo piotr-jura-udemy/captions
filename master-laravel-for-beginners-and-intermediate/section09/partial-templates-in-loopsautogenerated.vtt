@@ -1,0 +1,67 @@
+WEBVTT
+
+00:01.720 --> 00:11.020
+When you use Parshall's in loops specifically, you can use the each directive instead of loop directive
+
+00:11.020 --> 00:17.380
+combined with include that each DirecTV has four arguments.
+
+00:18.340 --> 00:21.640
+First is the partial template name.
+
+00:24.080 --> 00:26.780
+Second, their collection to render.
+
+00:29.150 --> 00:39.170
+First, the name of the iteration variable made available in the partial template that's posed in our
+
+00:39.170 --> 00:47.250
+case for optional is the partial template name to render when the collection is empty.
+
+00:48.050 --> 00:54.380
+So it's like an equivalent of empty in the four hours directive.
+
+00:56.370 --> 00:58.770
+With each directive, however.
+
+01:00.360 --> 01:08.460
+The partial template does not inherit any variables from the current context in our case.
+
+01:12.120 --> 01:20.130
+The loop variable is not available to make this example work, we would need to temporarily comment
+
+01:20.130 --> 01:23.490
+out the code that depends on the low preferrable.
+
+01:24.550 --> 01:31.470
+But first, let's comb it out for ourselves and let's see how it goes.
+
+01:33.550 --> 01:43.690
+So refreshing, you can see an error, there is an undefined variable loop and, well, exactly, that's
+
+01:43.690 --> 01:51.310
+the problem because it's not being inherited as it would be when you use to include directive.
+
+01:52.520 --> 02:01.790
+So if we just comment out the code, depending on it, and just leave this template to be as simple
+
+02:01.790 --> 02:04.700
+as this, rendering the title.
+
+02:09.120 --> 02:10.530
+It actually would work.
+
+02:14.850 --> 02:21.930
+So you should know that there is a shorthand alternative to render a collection using partials that
+
+02:21.960 --> 02:30.420
+each directive but beware if you need to partial to inherit the variables, stick to the other directives
+
+02:30.420 --> 02:32.580
+combined with include.
+
+02:36.830 --> 02:44.570
+Let's bring back the code to the previous state, as I just wanted to show you this each directive,
+
+02:44.570 --> 02:48.410
+but we will stick to four else for this example.

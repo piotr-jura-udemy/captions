@@ -1,0 +1,538 @@
+WEBVTT
+
+00:01.050 --> 00:08.460
+Before we go straight into developing our first and blind to that we will return just pure data using
+
+00:08.460 --> 00:09.680
+Jason format.
+
+00:09.720 --> 00:18.840
+It's important to know the standard tool that is used in industry these days for testing your API saw
+
+00:18.870 --> 00:24.000
+for sanding x h are requests to your application.
+
+00:24.000 --> 00:29.310
+And this is called postman so postman started as a Chrome extension.
+
+00:29.310 --> 00:38.520
+But from some years it's now a standalone application so you can go to the get postman dot com slash
+
+00:38.520 --> 00:42.230
+products and grab your postman right now.
+
+00:42.240 --> 00:48.690
+So you just press that download the app install it and just have it started.
+
+00:48.690 --> 00:57.270
+So do that now and after you have you are done with this let's open postman and explain how it works
+
+00:57.360 --> 01:01.210
+and what features does it offer to you.
+
+01:01.260 --> 01:06.120
+Well I hope that by now you have downloaded postman and have it running.
+
+01:06.120 --> 01:13.530
+So this is how the main interface of postman looks like the first thing you would like to do is to create
+
+01:13.560 --> 01:16.440
+a separate workspace for our application.
+
+01:16.440 --> 01:20.060
+This will help us keep some things separate.
+
+01:20.090 --> 01:23.680
+So we'll have some specific requests that we are making.
+
+01:23.760 --> 01:31.140
+And in case you have couple applications that you are testing with postman then it's definitely makes
+
+01:31.140 --> 01:40.540
+sense to create a separate workspace for every one of them so choose our type personnel and call it.
+
+01:40.810 --> 01:50.700
+Laura will that test create a workspace and this will open a new tab so you can make your first request.
+
+01:50.700 --> 01:54.800
+And also here on the left you have a history.
+
+01:54.930 --> 01:59.460
+This will list all the requests that you have made.
+
+01:59.460 --> 02:01.140
+So let's make a first one.
+
+02:01.140 --> 02:06.260
+So make sure your app is running the Apache server and database.
+
+02:06.270 --> 02:10.250
+And let's try Laura Bell dot test.
+
+02:10.600 --> 02:17.840
+So here you will always type that your URL you would like to make a request to and on the left.
+
+02:18.010 --> 02:22.660
+You can select what type of request that that would be.
+
+02:22.660 --> 02:25.140
+So this is HDP verb.
+
+02:25.480 --> 02:34.090
+So we'll get a main page of our app using get and here you can press Send to immediately get response
+
+02:36.030 --> 02:39.150
+so you also have some additional options here.
+
+02:39.150 --> 02:42.390
+You can save this request we'll get to that in a second.
+
+02:42.390 --> 02:48.150
+Now let's take a look at how the request making looks like.
+
+02:48.150 --> 02:54.420
+So first you have some tabs where you can send or specify some parameters.
+
+02:54.420 --> 02:56.570
+So those would be query parameters.
+
+02:56.640 --> 03:04.140
+For example you can specify a page with a value so you will edit this right here.
+
+03:04.140 --> 03:12.760
+You can also enable or disable some parameters then you can specify some authorization rules.
+
+03:12.780 --> 03:21.370
+So we'll get to that later but it offers every possible outer authorization you can have in your application.
+
+03:21.430 --> 03:24.130
+Of course don't worry about it right now.
+
+03:24.150 --> 03:29.940
+Then you can specify headers that you would like to send with your request.
+
+03:30.060 --> 03:36.990
+Then there is body of course body only makes sense when you sent boot or post requests.
+
+03:37.020 --> 03:43.950
+You'll never send a body with a get a request but for example if you would like to send some Jason you
+
+03:43.950 --> 03:45.210
+will choose ro
+
+03:48.180 --> 03:51.690
+on this list you will specify the type of this request.
+
+03:51.690 --> 03:58.200
+So if you choose application Jason then you will have to provide some valid Jason in here.
+
+03:58.200 --> 04:01.400
+Of course it's also good for testing forms.
+
+04:01.530 --> 04:09.030
+So if you will select form data you are able to send forms to end points that actually accept and handle
+
+04:09.030 --> 04:15.900
+forms and other key you will define our field name and of course value on the right.
+
+04:15.920 --> 04:24.080
+Now let's get to this part that starts out actually at this point and this is the response.
+
+04:24.110 --> 04:32.970
+So you can see that we have actually made one get request so let's send it again and this is our response.
+
+04:32.970 --> 04:40.620
+So response body you can see that this is an H the email and postman even highlights this as a code.
+
+04:40.620 --> 04:46.270
+You can also click this row button to see how the real response looked like.
+
+04:46.980 --> 04:53.010
+So that's not really readable but it's sometimes useful and the very interesting thing is that Preview
+
+04:53.010 --> 04:58.830
+button which lets you see what was actually returned from the server in this case.
+
+04:58.850 --> 05:06.450
+That's an H e-mail page without styles of course but this is just pure HDL.
+
+05:07.170 --> 05:14.580
+Now on this stub you can see all the cookies that were sent back from the server and actually a lot
+
+05:14.590 --> 05:17.990
+of this is not an empty API end point.
+
+05:18.000 --> 05:19.950
+This is our traditional web page.
+
+05:19.960 --> 05:29.130
+So Lavell is setting some cookies one of them is the larval session and then there is ICS as RF token
+
+05:29.220 --> 05:33.750
+which is used for protection against ICS as ref attacks.
+
+05:33.780 --> 05:41.460
+When you sent forms so you can always check that out easily what cookies were stored on each request
+
+05:42.270 --> 05:49.860
+and then there is this header stop which you can see what age DDP headers were returned together with
+
+05:49.860 --> 05:51.400
+the request.
+
+05:51.450 --> 05:54.240
+So this was our request part.
+
+05:54.240 --> 06:03.330
+Now you can see that here on the left we got some requests so you can click each one of them and send
+
+06:03.330 --> 06:04.380
+them again.
+
+06:04.380 --> 06:07.380
+So this is a very useful feature.
+
+06:07.390 --> 06:14.580
+Now let's go back to this main interface where we have our request and interesting thing might be this
+
+06:14.580 --> 06:15.770
+code button.
+
+06:16.020 --> 06:23.210
+So if you will click it you can see how you can make this request using a different tool for example.
+
+06:23.220 --> 06:31.020
+This is Siu URL so if you are on Mark on Unix you can just paste it to your command line and this will
+
+06:31.020 --> 06:32.830
+make our request.
+
+06:33.240 --> 06:40.530
+But also there are other tools for other languages which lets you generate the code to make the same
+
+06:40.530 --> 06:46.020
+request that you have just made using a postman a very useful feature.
+
+06:46.020 --> 06:51.450
+So for example you can generate code for P2P using Siu url
+
+06:55.200 --> 06:57.360
+and you can make an exchange.
+
+06:57.370 --> 07:00.300
+Are requests using JavaScript of course.
+
+07:00.300 --> 07:02.700
+Well we won't be really using that.
+
+07:02.700 --> 07:09.630
+We'll be using our specific library to make those ICS H R requests but just so you know it's a very
+
+07:09.630 --> 07:12.700
+useful feature of postman.
+
+07:12.870 --> 07:17.840
+Now you can see that every request that I made can be opened in a separate tab.
+
+07:19.890 --> 07:25.890
+So maybe let's make another one so we know that we have these posts.
+
+07:25.900 --> 07:35.740
+Your URL and we can open up post number one and this displays some contents of this blog post.
+
+07:36.010 --> 07:43.690
+Now another very useful feature of postman is that when you make different kind of requests to test
+
+07:43.720 --> 07:48.310
+different things you might be using collections.
+
+07:48.310 --> 07:54.580
+So let's go ahead and create our first collection right now which would be of course created only for
+
+07:54.580 --> 07:55.850
+this workspace.
+
+07:55.870 --> 07:59.380
+So create one now and web.
+
+07:59.380 --> 08:04.370
+Call it web pages so you can ignore the description for now.
+
+08:05.020 --> 08:05.230
+OK.
+
+08:05.260 --> 08:08.830
+Now you have a first collection.
+
+08:08.970 --> 08:19.040
+So what you can do right now is you can save a request and maybe call it home page you can order the
+
+08:19.040 --> 08:20.030
+description.
+
+08:20.030 --> 08:26.150
+But here you will add it to the web pages collection so press save to web pages.
+
+08:28.250 --> 08:31.970
+Now we have this another request for getting a blog post.
+
+08:31.970 --> 08:33.620
+You can also save it.
+
+08:33.770 --> 08:40.300
+So let's save it and call it request name would be block post.
+
+08:40.680 --> 08:49.120
+No one safe to web pages and now those requests have a name.
+
+08:49.120 --> 08:54.040
+So if you close them and you'd like to make some requests again.
+
+08:54.100 --> 08:59.880
+Now when you will click this collection you can make those requests again very easily.
+
+09:01.060 --> 09:07.330
+So this will not only keep your elves but it will also keep all the parameters.
+
+09:07.330 --> 09:15.340
+So imagine you will have a page parameter so if you will save changes to this close to requests.
+
+09:15.340 --> 09:21.250
+Now you can reopen home page and it will keep every data that you had before.
+
+09:21.260 --> 09:28.020
+So all the parameters all the authorization data and all the headers that you would like to send.
+
+09:28.070 --> 09:35.570
+Now by the way it's interesting that if you would like to specify a body and you will set this as Jason
+
+09:35.600 --> 09:42.860
+application Jason postman is smart enough to add this header for you the content type which of course
+
+09:43.250 --> 09:44.760
+has to be application.
+
+09:44.770 --> 09:49.490
+Jason if you are saying sending any Jason to the back end.
+
+09:49.850 --> 09:54.770
+No of course using postman to test your web pages and read the H.
+
+09:54.770 --> 09:57.650
+The email generated is not a very useful.
+
+09:57.650 --> 10:03.590
+It's mostly useful if you are actually interacting with employees that return data.
+
+10:03.590 --> 10:08.780
+For example the Jason data so you can close this request right now.
+
+10:08.780 --> 10:15.290
+Save the changes so it will keep every data that you have provided like palms and they'll let us create
+
+10:15.290 --> 10:19.910
+a new collection and call it API.
+
+10:19.910 --> 10:26.540
+So of course we do not have an end point right now which would provide us some Jason data.
+
+10:27.050 --> 10:29.090
+So let's go ahead and quickly create one.
+
+10:29.090 --> 10:31.190
+This should be very straightforward
+
+10:33.910 --> 10:41.860
+So first we'll go to the Web BHP to create a new route let's say in post command controller.
+
+10:42.310 --> 10:45.760
+So we'll add an index action here.
+
+10:46.150 --> 10:53.080
+And now let's open post comment controller and we'll return a list of comments for a blog post.
+
+10:53.890 --> 11:06.920
+So create a new action public function index and this will accept blog post so mind that we are using
+
+11:06.930 --> 11:14.830
+the route model binding and returning some Jason is actually extremely easy in of.
+
+11:14.840 --> 11:16.990
+So let's see what we'll do.
+
+11:17.000 --> 11:21.280
+So this is just post comments and that's it.
+
+11:21.290 --> 11:27.590
+So of course I will explain that in detail in the next lectures how that even works and gets converted
+
+11:27.590 --> 11:29.000
+to Jason automatically.
+
+11:29.030 --> 11:31.440
+So please don't worry about this right now.
+
+11:31.460 --> 11:36.020
+Just save the changes so we can test that out.
+
+11:36.280 --> 11:44.930
+Now let's create our new request and this will be actually tipping a lot of all that test posts slash
+
+11:44.930 --> 11:52.590
+one slash comments and this is a new end point that we have just created.
+
+11:52.590 --> 11:59.840
+It's using that and get verb and let's try to send this request and voila.
+
+11:59.970 --> 12:06.630
+What you can see here right here right now is the actual Jason that was returned and it contains all
+
+12:06.630 --> 12:09.240
+the comments of this particular blog post.
+
+12:09.240 --> 12:17.830
+Of course if you have some data for a blog post number one if you didn't make sure you have run their
+
+12:19.380 --> 12:26.280
+BHP artisan D.B. seed command which would generate some data for you
+
+12:30.570 --> 12:37.410
+not what you can see here is that all the comment models that are part of this blog post.
+
+12:37.410 --> 12:40.570
+Number one are being serialized Jason.
+
+12:41.610 --> 12:49.860
+So you have all the properties of these models including I.D. dates but also some properties that maybe
+
+12:49.860 --> 12:55.440
+you wouldn't like to show to a user like commendable type and commendable I.D..
+
+12:55.800 --> 13:03.330
+So we also work on that so we can understand how you can specify which properties should be serialized
+
+13:03.330 --> 13:04.260
+by default.
+
+13:04.260 --> 13:06.390
+To Jason and to our race.
+
+13:06.390 --> 13:07.440
+I'll get that.
+
+13:07.600 --> 13:11.730
+I'll get to that in a second so don't really worry about this right now.
+
+13:11.970 --> 13:20.930
+But what you can do is you can save this request so go back to the main view of the collections and
+
+13:20.990 --> 13:32.430
+API ice and call this request block post one comments click save to API and now you have another request
+
+13:32.430 --> 13:33.740
+stored.
+
+13:33.780 --> 13:37.460
+So now when you will close that you will open the post.
+
+13:37.530 --> 13:40.110
+Remember to always select this workspace.
+
+13:40.110 --> 13:42.080
+It should be selected by default.
+
+13:42.090 --> 13:48.360
+If you have last to use that but if you have some different workspaces for testing different apps you
+
+13:48.360 --> 13:55.500
+can easily switch between them and this will keep a separate list of history separate collections.
+
+13:55.500 --> 14:01.770
+And it will remember different requests so it will reopen your last Topps here.
+
+14:01.770 --> 14:08.550
+Now you can make this request very easily by just clicking here and pressing send to see if your API
+
+14:08.550 --> 14:12.200
+works what data it returns and all things like that.
+
+14:13.110 --> 14:21.750
+Now the last interesting thing that you might know right now is that you can actually export this data.
+
+14:21.750 --> 14:28.900
+So if you will press this button you have some options for exporting a collection.
+
+14:28.900 --> 14:36.790
+So if you press export select the collection to point one or the recommended version as the most recent
+
+14:36.790 --> 14:44.830
+one this will store a file in adjacent that everyone else from your team your colleagues they can then
+
+14:44.950 --> 14:52.420
+import that directly into their post man and they can make all these requests that you are making.
+
+14:52.420 --> 14:59.860
+So this is a very useful tool for testing APIs and then sharing those files with your friends or teammates
+
+15:00.250 --> 15:03.060
+so they can also do the same.
+
+15:03.100 --> 15:08.950
+So when your colleague would like to import some data that you have stored in postmen that will just
+
+15:08.950 --> 15:16.540
+press import and choose device here or just drop them to this window and they will automatically have
+
+15:16.570 --> 15:20.440
+all those collections that you have.
+
+15:20.440 --> 15:25.510
+So this lecture was only about the basics of using postman.
+
+15:25.570 --> 15:28.110
+Of course it's much more complicated.
+
+15:28.120 --> 15:35.140
+It has a lot of interesting features that are not really in the scope of this course like writing tests
+
+15:35.500 --> 15:43.480
+or creating a mock servers which basically allows you to test an API that doesn't exist yet but actually
+
+15:43.570 --> 15:48.130
+we are implementing the API so that's not useful in this course.
+
+15:48.250 --> 15:54.850
+But generally I invite you to learn more about love about sorry about postman and all its features because
+
+15:54.850 --> 15:57.430
+it's really a great tool.
+
+15:57.430 --> 16:00.670
+So of course don't worry about this API point right now.
+
+16:00.670 --> 16:08.170
+We've just created it to show use their features of postman but then in the next lectures will actually
+
+16:08.170 --> 16:15.480
+get to that how this works that we get adjacent returned by simply returning our collection in lava
+
+16:15.760 --> 16:20.620
+and also how we can hide all these properties that we do not want to show.
+
+16:20.620 --> 16:28.060
+Back to the users and of course we'll also learn about more advanced ways and things that you will have
+
+16:28.060 --> 16:35.950
+to know to create API is in lot of them including some outer ization and then creating our specific
+
+16:36.640 --> 16:43.300
+views of your models that well you can use in different end points but we'll get to that in the next
+
+16:43.300 --> 16:43.650
+lecture.
+
+16:43.660 --> 16:45.610
+So that's enough for this lecture.
+
+16:45.610 --> 16:47.170
+See you in the next one.

@@ -1,0 +1,355 @@
+WEBVTT
+
+00:00.420 --> 00:07.510
+Now let's take a step back and see what we have learned so far about the authorization in Lavell.
+
+00:07.710 --> 00:16.170
+So we have started off by defining Gates using the gate for say define and we know that the first arguments
+
+00:16.200 --> 00:20.350
+to it is the name of this gate check.
+
+00:20.400 --> 00:29.220
+And the second was the closure the function which accept a user and then a lot of oil would pass user
+
+00:29.370 --> 00:39.190
+for it to check the permissions against and then a list of additional parameters that you will specify.
+
+00:39.210 --> 00:43.370
+So how did we verify users permissions.
+
+00:43.410 --> 00:46.560
+So we used gate allows.
+
+00:46.830 --> 00:55.500
+We specified the gate check name like update posts and then we specified that post.
+
+00:56.010 --> 01:05.120
+So if we did that inside the controller then we have passed the model and that's why inside this closure
+
+01:05.160 --> 01:15.390
+we will then able to verify user I.D. and compare it to the user I.D. field of the blog post.
+
+01:15.390 --> 01:25.620
+So you know that we also did this out to rise inside controllers where we also specified the gate check
+
+01:25.620 --> 01:36.610
+name and also past the post as the second parameter now in the last lecture.
+
+01:36.610 --> 01:41.860
+We created a new class and called it the blog post policy.
+
+01:41.860 --> 01:51.700
+So as we said the policy classes are used to centralize logic that is responsible for deciding whether
+
+01:51.730 --> 02:00.100
+user is able to perform an action on specific model or any other resource.
+
+02:00.550 --> 02:05.770
+So in this case we have a policy for a blog post.
+
+02:05.770 --> 02:15.370
+So we have centered all the logic responsible for granting or denying access to certain operations like
+
+02:15.370 --> 02:25.210
+view create or update for a user might be the currently authenticated one or the one you would like
+
+02:25.210 --> 02:25.750
+to check.
+
+02:25.750 --> 02:31.300
+There's this permissions for and a blog post model.
+
+02:31.300 --> 02:41.350
+So what we did first is we registered gate checks with those names like posts that update and specified
+
+02:41.680 --> 02:48.040
+methods where this should methods of the class that it should run.
+
+02:48.040 --> 02:59.070
+Instead of defining closures then we moved moved even further and we used gate resource to register
+
+02:59.460 --> 03:06.330
+for gate checks at once using the blog post policy class.
+
+03:06.330 --> 03:16.590
+So as we said using resource would register the gate checks with this specific names CREATE VIEW update
+
+03:16.770 --> 03:19.080
+and delete by default.
+
+03:19.080 --> 03:27.660
+And it is expecting those methods to be defined in the class that you have specified as an argument
+
+03:28.080 --> 03:38.360
+to the gate resource method call now since we said before that the policy classes are best used if you
+
+03:38.360 --> 03:47.420
+want to group authorization logic around certain model or resource and blog post is such a resource
+
+03:47.990 --> 03:57.410
+it seems to be a waste to either define those gate checks using names and then you'll have to remember
+
+03:57.410 --> 04:07.730
+those those names because inside controllers if you do this out rise you have to explicitly reference
+
+04:07.860 --> 04:11.090
+the full gate check name.
+
+04:11.660 --> 04:21.950
+So using gate resource only solved part of the problem it lets let us specify a prefix for a model generated
+
+04:22.160 --> 04:29.660
+for gate checks for us which happens to match the method names we have to specify on the block post
+
+04:29.870 --> 04:40.670
+policy but it really doesn't solve the problem of specifying how we should outlaw rise access to a particular
+
+04:40.880 --> 04:47.240
+model or resource it's still making it a little bit complicated.
+
+04:47.300 --> 04:56.150
+So let's imagine that we will have comments resource then we will have to register it using gate resource
+
+04:56.720 --> 05:08.010
+and we will get another list of gate check names which might look like comments create comments update
+
+05:08.510 --> 05:10.060
+cetera.
+
+05:10.350 --> 05:19.260
+So if we basically are most of the time checking for this basic operations on particular models like
+
+05:19.260 --> 05:31.200
+CREATE VIEW update delete and such it might be a better idea to just use those names so instead of using
+
+05:31.290 --> 05:41.130
+long complicated names and remembering how you called them exactly or what names would the gate resource
+
+05:41.220 --> 05:50.220
+generate you might easily forget what it actually does it might be a better idea to just register policy
+
+05:50.370 --> 05:54.720
+for particular model so let's do that.
+
+05:54.720 --> 05:58.710
+So first let's comment out this line.
+
+05:58.740 --> 06:03.710
+Save the changes and that's the place you can tell a lot of.
+
+06:03.870 --> 06:08.790
+Which policy it should use for particular model.
+
+06:08.790 --> 06:12.700
+So let's define one for our blog post model.
+
+06:12.900 --> 06:19.800
+So the array key is the full class name of your model or resource.
+
+06:19.800 --> 06:22.870
+It doesn't have to be an eloquent model.
+
+06:23.040 --> 06:29.290
+And then second argument is the class name of the policy class.
+
+06:29.310 --> 06:41.650
+So blog post policy so now what we have by adding this blog post and defining policy for it.
+
+06:42.030 --> 06:45.170
+It gets out to registered thanks to this call.
+
+06:45.270 --> 06:52.410
+This registered policy so you can't remove the remove this call because it is responsible for telling
+
+06:52.430 --> 06:57.110
+Lavell which policy to use for which model.
+
+06:57.270 --> 07:02.430
+Now we can make things a little bit simpler.
+
+07:02.850 --> 07:11.880
+So let's go to the post controller and what you can do now is instead of specifying the name of the
+
+07:11.880 --> 07:17.380
+gate check you can just do it like that.
+
+07:17.820 --> 07:22.860
+So you verify if you can update the blog post.
+
+07:23.940 --> 07:32.360
+So imagine that you will also have some comments and you would like if the user can edit the blog post
+
+07:32.370 --> 07:36.920
+but has can if you can also edit comments.
+
+07:37.110 --> 07:44.970
+So what you do here is by calling out your eyes and specifying just the method which is defined on a
+
+07:44.970 --> 07:56.890
+policy and passing a model instance Lavell will automatically know which policy it has to use.
+
+07:56.910 --> 08:03.690
+So now for every new model or resource if you would like to define some authorization logic and group
+
+08:03.690 --> 08:13.710
+it you just need to create a policy class defined some methods which basically mean the abilities that
+
+08:13.710 --> 08:19.330
+you will check then you just check for those abilities.
+
+08:19.330 --> 08:24.550
+So update would be a method name on the policy class and that's it.
+
+08:24.740 --> 08:33.670
+Val will guess which model do you mean when you will pass the second argument which in our case here
+
+08:33.700 --> 08:36.760
+in this post controller would always be a blog post.
+
+08:37.180 --> 08:45.190
+But if we do the same for the comments controller a lot of will also be able to guess that when you
+
+08:45.190 --> 08:52.810
+check this out to rice for the update ability and you will pass a comment as a second argument it will
+
+08:52.810 --> 08:58.970
+know which policy to use now we will have to modify it everywhere.
+
+08:58.970 --> 09:08.720
+So we also have to modify it here and also with that delete so you can see this makes it much simpler.
+
+09:08.780 --> 09:11.390
+We only specify what we want to do.
+
+09:11.450 --> 09:19.320
+We passed the model and we do not worry about anything because Lavell will know which policy to use.
+
+09:19.340 --> 09:24.760
+So now let's save all this changes and let's see if this still works.
+
+09:26.260 --> 09:32.860
+You can see that I am not out to rise to edit or delete but I can view the blog post.
+
+09:33.100 --> 09:42.820
+So only when we call explicitly this out rise it is verifying the user rights for particular resource
+
+09:43.120 --> 09:49.150
+and it knows which policy class to use for that particular model.
+
+09:49.150 --> 09:52.740
+So now it makes our life much simpler.
+
+09:52.760 --> 10:01.890
+Note this is simple enough if you will generate your policy classes by applying additional model parameter.
+
+10:01.930 --> 10:09.220
+This makes it easy to remember you will always have the abilities with the same names and you do not
+
+10:09.220 --> 10:16.380
+have to remember any long complicated names to use inside out price checks.
+
+10:16.510 --> 10:24.790
+You just need to remember a small subset of the operation names then you only pass a model or resource
+
+10:25.120 --> 10:30.300
+and Lavell is guessing which policy to use.
+
+10:30.340 --> 10:40.630
+Now if that wouldn't be simple enough you can remove the ability names altogether from added update
+
+10:41.990 --> 10:44.590
+and delete.
+
+10:44.600 --> 10:49.880
+Now let's go to policy and see if that will somehow work.
+
+10:49.880 --> 10:50.360
+So let's.
+
+10:50.360 --> 10:58.400
+Are Diddy updating and Didi deleting
+
+11:01.290 --> 11:10.600
+and now inside our application let's try everything so you can see that it actually gets to the right
+
+11:10.720 --> 11:20.950
+policy and what we did is we simply called this out to rise inside the controller and passed the model
+
+11:21.070 --> 11:22.430
+instance.
+
+11:22.450 --> 11:24.830
+So how is that possible.
+
+11:24.850 --> 11:29.090
+So this is another magic of Lavell.
+
+11:29.950 --> 11:40.160
+And actually what it does is I've pasted the map of how it knows which policy method it should use.
+
+11:40.990 --> 11:48.020
+So what we are doing right now is we are only passing the model to this outer rise.
+
+11:48.580 --> 11:56.620
+And what a lot of ABC is doing is it tries to convert the method name of your controller.
+
+11:57.310 --> 12:09.010
+So we have added and update and then it converts it converts start to specific call on the policy class.
+
+12:09.010 --> 12:18.790
+So for added update it would call the update method on policy and for destroy methods or destroy action
+
+12:19.210 --> 12:28.580
+as you see here on the controller when you call out rise it will call the delete method on their policy
+
+12:29.270 --> 12:31.940
+which we happen to have it here.
+
+12:31.940 --> 12:42.140
+So now let's remove those DDA calls and generally what you can remember is that if you go with the larval
+
+12:42.140 --> 12:50.390
+defaults you will create resource controllers which will generate a controller with specific names.
+
+12:50.390 --> 12:57.110
+So those controllers this particular controller is basically centered around one resource about the
+
+12:57.110 --> 12:58.630
+blog post.
+
+12:58.640 --> 13:02.330
+So we haven't created those names manually.
+
+13:02.470 --> 13:06.710
+Lovell did that when we generated our resource controller.
+
+13:06.710 --> 13:15.170
+So if you will keep to certain conventions in Lavell it can really make your life a lot easier.
+
+13:15.200 --> 13:25.190
+Of course there is nothing wrong to specify the ability names yourself explicitly or even using gates
+
+13:25.850 --> 13:32.290
+and defining this specific gate checks explicitly.
+
+13:32.290 --> 13:33.420
+There is nothing wrong with that.
+
+13:33.430 --> 13:41.500
+You can still do that but I'm just showing you how you can well basically make your life a lot simpler.
+
+13:41.500 --> 13:45.620
+But obviously it's old too.
+
+13:45.640 --> 13:47.340
+It's all up to your preference.
+
+13:47.350 --> 13:50.710
+So I'm not saying that this way or the other is better.
+
+13:50.830 --> 13:58.720
+You should think what works better for you what makes your code cleaner and which way you basically
+
+13:58.780 --> 13:59.440
+prefer.

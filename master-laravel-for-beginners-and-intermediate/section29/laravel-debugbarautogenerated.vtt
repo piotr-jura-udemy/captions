@@ -1,0 +1,340 @@
+WEBVTT
+
+00:00.510 --> 00:06.240
+In the previous lecture I've mentioned that there is a great tool for Lara Vela called larval debug
+
+00:06.240 --> 00:13.140
+bar which will show you a lot of information about what happens inside your application with queries
+
+00:13.140 --> 00:14.580
+were executed.
+
+00:14.580 --> 00:20.800
+So it is a great tool that you probably should use when you develop your application.
+
+00:20.850 --> 00:23.410
+So this is the link to this page.
+
+00:23.410 --> 00:24.990
+This package is included.
+
+00:24.990 --> 00:32.730
+So let's go ahead and install this package inside your application so we can just copy this command
+
+00:32.760 --> 00:41.680
+to installed a lot of old debug bar paste it into the terminal and it will be installed so we don't
+
+00:41.680 --> 00:48.340
+really have to watch that installation process but the important thing to know is that it will be automatically
+
+00:48.340 --> 00:55.780
+enabled when up debug is set to true by the way you can set it inside your dealt end of file.
+
+00:56.290 --> 01:00.970
+Well it should be enabled by default because we are in the development mode.
+
+01:01.060 --> 01:05.130
+So if you haven't changed it then it should be by default.
+
+01:05.200 --> 01:05.640
+True.
+
+01:07.060 --> 01:15.280
+Now it took awhile to actually download this package and install it inside larval but after it has finished
+
+01:15.640 --> 01:17.080
+you should be ready to go.
+
+01:17.080 --> 01:20.330
+So basically it is enabled by default.
+
+01:22.660 --> 01:31.680
+So now when you will refresh the page what you immediately see is you see all the views that were used
+
+01:32.250 --> 01:38.790
+and you also see all the queries that were executed for your application.
+
+01:38.790 --> 01:51.120
+So what we can immediately see is that we have hundred for queries executed for this single page and
+
+01:51.120 --> 02:01.210
+what it does is it only displays a list of blog posts and then on the right it shows that most comment
+
+02:01.210 --> 02:06.530
+at blog posts most active users and most active users last month.
+
+02:07.290 --> 02:11.130
+So a hundred for queries seems to be too much.
+
+02:11.190 --> 02:19.830
+And probably this also happens because we are fetching the names of the hours of those blog posts so
+
+02:19.830 --> 02:23.940
+we can actually optimize it without using the cache at all.
+
+02:24.690 --> 02:33.270
+But anyway we have something to work on now what we can immediately do without even thinking about what
+
+02:33.270 --> 02:39.360
+is the topic of this section which is caching is we can eliminate some of these queries.
+
+02:39.360 --> 02:47.440
+So you see that we are having a lot of select queries for the user and well it's basically most of the
+
+02:47.440 --> 02:55.260
+queries and we are actually reading their user name which created a particular blog post.
+
+02:55.420 --> 03:05.410
+So what we can do here is from this particular query we actually should have used with to fetch the
+
+03:05.500 --> 03:10.700
+user relation of the blog post along with the blog posts themselves.
+
+03:11.140 --> 03:17.100
+So this would immediately optimize our application and quite a lot.
+
+03:17.110 --> 03:23.720
+So now let's refresh the page and by doing this simple change you can see what happens.
+
+03:23.730 --> 03:29.930
+We have five queries so it's already pretty big optimization.
+
+03:29.940 --> 03:35.690
+But without knowing what happens we probably wouldn't be able to figure it out.
+
+03:35.730 --> 03:42.310
+So that's the well immediate benefit of using tools like larval debug bar.
+
+03:42.300 --> 03:47.760
+Now let's go back to the caching and we'll continue in the next lecture.
+
+03:47.760 --> 03:53.660
+Now let's take a look at what we actually can find inside this level debug bar.
+
+03:53.700 --> 03:56.250
+So first we have a message a stop.
+
+03:56.250 --> 04:03.210
+There is nothing in there but there is the timeline so you can see how much time did it take to boot
+
+04:03.210 --> 04:04.370
+your application.
+
+04:04.380 --> 04:12.270
+So basically that means how much time lot of has took to start up and then you can see how much time
+
+04:12.300 --> 04:13.980
+it took for your application.
+
+04:14.010 --> 04:15.660
+Actual code to execute.
+
+04:15.690 --> 04:20.880
+So this could be starting up of the lot of when the request started.
+
+04:21.510 --> 04:24.830
+And then how much time your application actually took.
+
+04:24.830 --> 04:32.250
+So starting from controllers fetching data and rendering a view so you can see it is a hundred twenty
+
+04:32.250 --> 04:36.570
+two milliseconds you can see what the exceptions were from.
+
+04:36.690 --> 04:47.520
+We haven't any next you can see what views were used and where on the rooftop you can see all the information
+
+04:47.520 --> 04:49.230
+about this particular route.
+
+04:49.230 --> 04:56.670
+So what HDP mattered what your URL was used what media were well supplied.
+
+04:56.670 --> 04:58.050
+What's the root name.
+
+04:58.050 --> 04:59.460
+What is the controller.
+
+04:59.520 --> 05:07.350
+The namespace and all the other information like the file where this action was actually executed.
+
+05:07.350 --> 05:10.520
+Then we have our query stop.
+
+05:10.560 --> 05:17.580
+So this is really interesting because we can see what is the actual rescue our query that Lara Val is
+
+05:17.580 --> 05:21.870
+generating from our eloquent model.
+
+05:21.870 --> 05:29.860
+You can also check some additional information like the stack trace which basically means what's the
+
+05:29.940 --> 05:35.870
+order in which certain classes were called to execute this code.
+
+05:35.880 --> 05:37.950
+Now here you can see all the queries.
+
+05:37.980 --> 05:45.870
+And also interesting things on the right side is how long did it that it took to execute the square
+
+05:45.900 --> 05:50.280
+and get back the information from the database server.
+
+05:50.280 --> 05:56.290
+And also when this query was started and what database it has run on.
+
+05:56.700 --> 06:04.440
+So those are pretty fast so you can see they only took microseconds but the slowest one is to fetch
+
+06:04.500 --> 06:09.020
+all the blog post which took three milliseconds.
+
+06:09.060 --> 06:11.940
+Now this would show you the emails that were sent.
+
+06:11.940 --> 06:14.040
+We haven't talked about e-mails yet.
+
+06:14.040 --> 06:17.000
+So it's nothing of our concern.
+
+06:17.160 --> 06:23.030
+Then we have that out top where you can check what's the user name so we can see we are the guests.
+
+06:23.050 --> 06:25.120
+So we weren't authenticated.
+
+06:25.560 --> 06:33.330
+Now interesting thing is also the gate top where you can see what gate checks were tried and what is
+
+06:33.330 --> 06:35.000
+the result of them.
+
+06:35.010 --> 06:40.660
+So what we can see is that we have two hundred gate checks.
+
+06:40.710 --> 06:46.330
+So it is because actually currently inside the database we have hundreds of blog posts.
+
+06:46.350 --> 06:49.200
+At least I have you might have different values.
+
+06:49.320 --> 06:56.790
+So it's also applied to the initial queries that also depend on how many data you had inside the database
+
+06:56.820 --> 06:59.100
+how many blog posts.
+
+06:59.100 --> 07:10.110
+Now here we see that for each of those blog posts listed here we tried to see if they can edit or delete
+
+07:10.110 --> 07:11.150
+the blog posts.
+
+07:11.160 --> 07:18.890
+So this actually happens inside the view in the posts index blade BHP.
+
+07:18.900 --> 07:28.970
+So this is here at the top when we try to verify whether the user can perform specific operations.
+
+07:28.970 --> 07:32.750
+So we are using this can and we can also optimize that.
+
+07:32.750 --> 07:40.160
+So this shouldn't be executed if the user is not authenticated at all which we aren't currently as you
+
+07:40.160 --> 07:43.960
+can see on the top of the application.
+
+07:44.090 --> 07:49.180
+So we'll do that in a second but then we also have some information about the session.
+
+07:49.190 --> 07:55.700
+So what is stored in what data is stored in the current user session.
+
+07:55.850 --> 08:02.360
+And also finally on the request that you have some information about this age GDP request.
+
+08:02.360 --> 08:03.380
+So what's the path.
+
+08:03.380 --> 08:12.980
+What was the result resulting status code the content type and header server variables cookies and all
+
+08:12.980 --> 08:14.670
+the other attributes.
+
+08:14.750 --> 08:23.240
+And of course additionally here you can see that authenticated user the route how much memory we used
+
+08:23.240 --> 08:24.870
+for this request.
+
+08:24.890 --> 08:26.660
+How long did it took.
+
+08:26.840 --> 08:32.670
+And also the version of the peach bee that your server is running.
+
+08:33.560 --> 08:37.160
+So now let's do another optimization.
+
+08:37.160 --> 08:43.790
+So here we are unnecessarily checking for some privileges even though the user is not authenticated
+
+08:43.790 --> 08:44.240
+at all.
+
+08:44.240 --> 08:46.370
+So we already should know that.
+
+08:46.400 --> 08:52.560
+Well he doesn't have any privileges so he can't have any abilities.
+
+08:52.580 --> 09:02.320
+Now you might remember that we already did that inside our layout so we used those larval directive
+
+09:03.110 --> 09:08.290
+called guest so we verified if the user is not authenticated.
+
+09:08.290 --> 09:18.160
+And only if he is we used else to display something for the authenticated user.
+
+09:18.180 --> 09:23.930
+Now I've mentioned that there is another directive like this and it is called out.
+
+09:24.660 --> 09:35.170
+So what we can do here is we can surround this with off and end of directives.
+
+09:35.250 --> 09:41.790
+So this would only ever be considered to be rendered if the user is authenticated and we can do the
+
+09:41.790 --> 09:44.030
+same here.
+
+09:44.160 --> 09:50.330
+So it doesn't make sense to verify permissions if the user is not authenticated at all.
+
+09:51.980 --> 09:58.690
+So let's say the changes and now refresh the page and see if that did change anything.
+
+09:58.700 --> 10:02.190
+So now you can see that there is nothing under the gate.
+
+10:02.210 --> 10:09.830
+So now we just haven't checked for any permissions and obviously didn't make any sense anyway because
+
+10:09.980 --> 10:12.320
+obviously a user was not authenticated.
+
+10:13.130 --> 10:20.840
+So those were first optimizations that we can immediately do by installing this lot of all debug bar
+
+10:21.560 --> 10:28.790
+and in the next lecture we'll see how and which queries we might optimize or which data we should be
+
+10:28.790 --> 10:30.770
+storing inside the cache.

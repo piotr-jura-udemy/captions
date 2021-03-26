@@ -1,0 +1,367 @@
+WEBVTT
+
+00:00.450 --> 00:04.320
+In the last lecture we finished doing the logging forum.
+
+00:04.320 --> 00:06.100
+But we can't test it yet.
+
+00:06.120 --> 00:12.300
+Of course if you are following me pretty quickly and your session is still active.
+
+00:12.360 --> 00:13.750
+After we have registered.
+
+00:13.770 --> 00:20.960
+Then when you will go to the logging page you should be also redirected back to this home page us.
+
+00:21.030 --> 00:23.260
+You are currently signed in.
+
+00:23.280 --> 00:25.210
+At least I am now.
+
+00:25.380 --> 00:33.570
+Let's see how we can display some links or some content to the user depending if they are authenticated
+
+00:33.660 --> 00:34.290
+or not.
+
+00:35.010 --> 00:38.790
+And we'll do that inside our layout.
+
+00:39.060 --> 00:43.740
+So let's close all these files and go to the layout.
+
+00:43.740 --> 00:52.170
+Blade peach P so you can see that we already are displaying something depending or session for example
+
+00:52.470 --> 00:59.790
+like this status messages when something happens and here on the top are our links for example to blog
+
+00:59.790 --> 01:06.910
+posts and at home and contact pages so we'll be modifying it here first maybe let's change this are
+
+01:06.930 --> 01:12.220
+the blog posts to just out now.
+
+01:12.630 --> 01:21.720
+There is another directive in Lavell called guest so this allows us to display something for guests
+
+01:23.270 --> 01:30.220
+and it also has an else statement so we can display something for authenticated users.
+
+01:30.380 --> 01:38.800
+And you have to close it with and guest so let's see if that works.
+
+01:38.890 --> 01:39.870
+So far.
+
+01:39.880 --> 01:45.080
+Guest will display guest and for everyone else Hello.
+
+01:45.180 --> 01:49.890
+User so save the changes and let's refresh the page.
+
+01:49.890 --> 01:56.200
+So depending on if your authenticated session is still active you should see something.
+
+01:56.490 --> 02:03.150
+I am seeing Hello user because I have registered and I am still logged in.
+
+02:03.150 --> 02:11.490
+So now that we know how we can conditionally display something for the users we can display some additional
+
+02:11.580 --> 02:14.110
+links for them.
+
+02:14.310 --> 02:23.610
+So first when the user is not authenticated what we would like to show them is probably the link to
+
+02:23.640 --> 02:26.310
+register and logging.
+
+02:27.450 --> 02:30.270
+So let's copy one of those links
+
+02:35.270 --> 02:39.950
+OK so first through it would be register
+
+02:43.850 --> 02:46.950
+and the second one would be logging.
+
+02:47.270 --> 02:53.630
+So this is what we are showing the users that are not out indicated.
+
+02:53.630 --> 03:01.080
+Also there is a way to verify in Lavell that certain route exists.
+
+03:01.100 --> 03:09.100
+So for cases that for example you do not allow everyone to create an account in your system.
+
+03:09.110 --> 03:15.890
+This might be useful for some systems that are like B2B so you are the only one who can create accounts
+
+03:15.920 --> 03:18.740
+they cannot register themselves.
+
+03:18.920 --> 03:21.530
+You can use the if directive to check that.
+
+03:21.560 --> 03:24.480
+So let's see how we can do that.
+
+03:24.590 --> 03:35.360
+So there is this If directive and we can use that route has to verify if the register route exists.
+
+03:35.420 --> 03:40.500
+So if it does display our registration link.
+
+03:40.550 --> 03:41.620
+So there is no else.
+
+03:41.620 --> 03:46.990
+So we only display it when we actually have that route.
+
+03:47.000 --> 03:49.540
+So this is the way you would do that.
+
+03:49.610 --> 03:59.660
+Now for the LS We would like to display a link to logout so let's copy this
+
+04:02.560 --> 04:08.650
+and specify it us logout and the route for logging out is log out.
+
+04:08.650 --> 04:14.040
+You can also check that using the peach bee artisan route least.
+
+04:14.380 --> 04:21.380
+But now seems this route is accepting only the post method not the get method.
+
+04:21.430 --> 04:24.340
+We will have to use forum methods.
+
+04:24.410 --> 04:30.790
+We will now since the logout link is now since the logo.
+
+04:30.790 --> 04:37.720
+The route is only working with the post method so we can't just use our direct link.
+
+04:37.720 --> 04:40.870
+We will have to add a forum.
+
+04:40.870 --> 04:46.970
+So let's see how we can do that for this case and all the other cases too.
+
+04:46.990 --> 04:56.700
+So we'll create a forum with the idea log logout form will specify an action which would be route log
+
+04:56.920 --> 05:03.210
+out so the same as in the link and the method would be post
+
+05:07.350 --> 05:11.930
+so let's close the forum and continue on the next line.
+
+05:19.520 --> 05:26.010
+And now we'll add some style to this forum because we do not want to actually display it.
+
+05:26.080 --> 05:31.470
+We only want the post request to be made for this forum.
+
+05:31.510 --> 05:33.850
+Now it since it's a forum.
+
+05:33.850 --> 05:42.070
+We need this C a directive to protect us from the cross site request forgery.
+
+05:42.070 --> 05:51.970
+Now what we will do is we will actually modify this encore to have an on click event so we'll write
+
+05:52.000 --> 05:53.470
+a little bit of JavaScript.
+
+05:54.790 --> 06:02.920
+So the first thing we'll have to do is to call event prevent default and what it is doing it is preventing
+
+06:02.950 --> 06:05.780
+this element default behavior.
+
+06:05.800 --> 06:13.150
+So default behavior would be when you click on it it will just direct you to this link using the get
+
+06:13.150 --> 06:13.970
+method.
+
+06:14.140 --> 06:15.490
+And we do not want that.
+
+06:15.490 --> 06:26.950
+So we have to call the prevent default first and only then we can use document get element by I.D. We'll
+
+06:26.980 --> 06:37.120
+find logout form and will submit this form and that is everything we have to do so we have this form
+
+06:37.150 --> 06:39.340
+and it's not being displayed.
+
+06:39.370 --> 06:46.030
+But when you will click on this link will prevent a default behavior and then send this forum that way
+
+06:46.030 --> 06:54.830
+we can make up both the request to the logout root OK save the changes and let's go back to the application
+
+06:54.860 --> 06:57.500
+and see what we see here.
+
+06:58.340 --> 07:03.740
+So we have our home contact blog posts art and a logo at the bottom.
+
+07:03.770 --> 07:05.120
+So let's click it now.
+
+07:05.120 --> 07:09.290
+Now what you see here is the 419 error.
+
+07:09.350 --> 07:16.550
+You actually shouldn't see that error if you made everything correctly by but I actually made a mistake
+
+07:17.000 --> 07:19.460
+I forgot to close the forum tag.
+
+07:19.460 --> 07:28.640
+So this CSO ref token wasn't actually sent and this is what happens when you send no CSO ref token with
+
+07:28.640 --> 07:32.010
+a form or it is invalid.
+
+07:32.090 --> 07:39.380
+So if I go back refresh and try to log out again you can see that now on the right we have the register
+
+07:39.470 --> 07:44.060
+and logging links and I log out successfully.
+
+07:44.060 --> 07:52.040
+So just so you know there is this very FICA serif token which is enabled for all of your roots and it
+
+07:52.040 --> 07:56.810
+lives inside the middleware folder inside HDP.
+
+07:57.200 --> 08:05.450
+So you can configure it so you can define some exceptions for which pages or which your eyes you do
+
+08:05.450 --> 08:11.160
+not want this CSR CSR red tokens validation to work.
+
+08:11.180 --> 08:15.820
+So this is actually important as an alliance called middleware.
+
+08:16.310 --> 08:25.070
+But the actual class is defined inside here so you can out click it and go inside it to see how that
+
+08:25.070 --> 08:26.490
+works.
+
+08:26.510 --> 08:31.520
+So there is this handle method and it does couple of checks.
+
+08:31.520 --> 08:40.200
+But the final one is tokens much so if you click it you can see that it is trying to get the token from
+
+08:40.200 --> 08:48.960
+request which means either getting the input field underscore token or the request header called ex
+
+08:49.080 --> 08:50.660
+CSA ref token.
+
+08:50.820 --> 08:58.710
+In my case when I forgot to close this form the underscore token field wasn't included with the form.
+
+08:58.740 --> 09:06.750
+That's why the tokens didn't match because it tried to fetch it and it was actually no that's why it
+
+09:06.750 --> 09:13.530
+costs an error and this token so much methods return false.
+
+09:13.560 --> 09:19.890
+So in case you are seeing there 419 error and you think you shouldn't be.
+
+09:19.890 --> 09:22.010
+This would be the place to check it.
+
+09:22.860 --> 09:33.780
+So you can even modify this file and for example do the DDA to see if the token is actually sent.
+
+09:34.000 --> 09:41.740
+So if file if I will remove this again and send it again with which won't include the underscore token
+
+09:41.740 --> 09:42.750
+field.
+
+09:42.850 --> 09:46.380
+Now here I should see that the token is no.
+
+09:46.390 --> 09:49.270
+So I would know where I made a mistake.
+
+09:49.390 --> 09:54.280
+So do not be afraid to sometimes modify those classes inside the vendor.
+
+09:54.610 --> 09:57.430
+I do not mean modify them permanent permanently.
+
+09:57.430 --> 09:58.720
+This you shouldn't do.
+
+09:58.960 --> 10:05.920
+But if you try to find an error and you have no idea where to look for it then you can might sometimes
+
+10:05.920 --> 10:10.540
+modify them just to see where the error might be.
+
+10:10.540 --> 10:18.650
+Well also sometimes another case might be that there is something wrong with your sessions like Lavell
+
+10:18.670 --> 10:23.890
+cannot write to the folder where your sessions are files are kept.
+
+10:23.890 --> 10:29.690
+Which would by default be the folder inside.
+
+10:29.740 --> 10:34.050
+Let me find that storage framework sessions.
+
+10:34.060 --> 10:39.130
+So here are the default session if you use that sessions as files stored.
+
+10:39.130 --> 10:47.050
+So make sure that Marable has the right permissions for this folder or the Apache server or however
+
+10:47.050 --> 10:51.910
+you are using it has the permissions to right to this folder.
+
+10:51.910 --> 11:01.830
+But generally let's go back to our layout so let's fix it up again and now we should be able to log
+
+11:01.830 --> 11:06.020
+in so I've registered previously with this account.
+
+11:06.060 --> 11:07.820
+And now when I log in.
+
+11:07.860 --> 11:15.460
+I am redirected back to their home page which we also have configured and now I see the logout page.
+
+11:15.570 --> 11:23.850
+So in the next lecture it might be a good idea to modify who can access those buttons because now anyone
+
+11:23.850 --> 11:32.220
+can edit or delete blog posts so we should prevent users that are at least not authenticated so they
+
+11:32.220 --> 11:33.280
+can't do that.
+
+11:33.300 --> 11:40.820
+And in the future we will only allow the users that actually created those blog posts to edit and delete
+
+11:40.830 --> 11:41.160
+them.

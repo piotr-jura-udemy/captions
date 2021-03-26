@@ -1,0 +1,178 @@
+WEBVTT
+
+00:00.480 --> 00:06.680
+In this lecture we will see how we can assign comments to our blog post and the other way around.
+
+00:06.720 --> 00:14.630
+Assigning blog posts to existing comment so we'll run PJ artisan thinkers to do that as usual.
+
+00:14.620 --> 00:21.980
+Later I will of course also show you how to implement this functionality inside the blog post application.
+
+00:22.080 --> 00:31.470
+So first let's see what blog posts do we have so we can use blog posts all to fetch all the blog posts
+
+00:31.470 --> 00:32.550
+from the database.
+
+00:32.550 --> 00:34.850
+I happen to have only one currently.
+
+00:34.920 --> 00:37.850
+If you do not have an ID just go ahead and add them.
+
+00:37.890 --> 00:48.230
+Maybe even using the application UI so let's assign this blog post to the BP variable so it has to.
+
+00:48.270 --> 00:58.710
+So let's fetch it using Find and now two assigned comments will create a new comment and since comment
+
+00:58.710 --> 01:05.940
+has the content property which is required because we haven't made it optional using the new label now
+
+01:05.940 --> 01:07.590
+we have to assign something.
+
+01:07.920 --> 01:10.200
+Maybe our first comment
+
+01:14.060 --> 01:23.670
+and now we can easily save it by using the comments method and it will return an object which has a
+
+01:23.670 --> 01:24.610
+metal save.
+
+01:24.630 --> 01:31.260
+And now we can save a comment to a blog post and now we can see that the comment was saved.
+
+01:31.440 --> 01:35.400
+Let's check the database to make sure that it is actually there.
+
+01:35.400 --> 01:43.310
+Refresh the comments table and you will see that there is a first comment with that blog post I.D. too.
+
+01:43.500 --> 01:52.600
+So let's go ahead and create another comment so we'll create a new object assigned some other content
+
+01:52.720 --> 01:55.570
+to it like second comment.
+
+02:00.190 --> 02:09.410
+And now we can associate it with the blog post using Comment blog posts relation method associate
+
+02:11.970 --> 02:12.710
+BP.
+
+02:12.740 --> 02:22.170
+That's the that's our blog post model that we have already fetched and call save.
+
+02:22.190 --> 02:27.390
+Now let's see if this comment is inside the table so we can use comment.
+
+02:27.890 --> 02:34.220
+All static method to fetch all the comments and you can see there are two and they are both assigned
+
+02:34.250 --> 02:37.120
+to the blog post with their I.D. too.
+
+02:37.490 --> 02:47.620
+If we will check that inside the database you can see that it is actually there.
+
+02:47.750 --> 02:51.970
+Now of course there is another way to assign comments.
+
+02:52.010 --> 03:04.270
+So let's create a third one new comment and you can assign that content like first comment.
+
+03:04.470 --> 03:12.180
+And also we can directly access the blog post I.D. because it's our normal column on this model and
+
+03:12.180 --> 03:17.400
+set it to something which would be the idea of an existing blog post model
+
+03:20.490 --> 03:22.340
+and now saved a comment.
+
+03:24.230 --> 03:27.050
+And let's check the database table
+
+03:29.740 --> 03:31.710
+and you can see it out there is the first comment.
+
+03:31.720 --> 03:41.050
+And it has the I.D. of two exactly how we saved it and let's clear the screen and you do not always
+
+03:41.110 --> 03:45.810
+have to save this comments one by one or those related models.
+
+03:45.820 --> 03:48.340
+You can also save many at once.
+
+03:48.340 --> 03:49.780
+So let's see how we can do that.
+
+03:49.780 --> 03:52.960
+Let's create a new comment
+
+03:55.520 --> 04:01.190
+set the content to anything could be just one letter.
+
+04:01.290 --> 04:14.550
+And now let's create another comment and also set the content maybe to be the content is be OK.
+
+04:14.560 --> 04:19.010
+Now we have our BP the blog post the original with the idea too.
+
+04:19.780 --> 04:21.760
+And now it has their comments.
+
+04:21.940 --> 04:27.810
+And this also has other than the save method it has save many.
+
+04:28.390 --> 04:33.900
+And inside the save menu we have to pass an array of all the objects that we would like to store.
+
+04:33.910 --> 04:44.320
+So in our case this would be comment comments to Carlos Del array apparently I forgot to add the contents
+
+04:44.320 --> 04:48.720
+to the proper variables so I ordered it twice to the comments.
+
+04:48.730 --> 04:56.110
+So it has to be comments to content maybe see.
+
+04:56.160 --> 04:58.880
+And now BP comments.
+
+04:58.890 --> 05:07.740
+So that's the relation method which will return the object save many and inside it comment and comment.
+
+05:07.770 --> 05:11.240
+To close the array and safe again.
+
+05:11.250 --> 05:17.400
+And you can see that two comments were saved and there are both assigned to the blog post with the I.D.
+
+05:17.700 --> 05:18.420
+one.
+
+05:18.420 --> 05:26.470
+Now let us also verify inside the database that they are there.
+
+05:26.490 --> 05:32.040
+So this is the simplest way we can assign those relations to each other in the next one.
+
+05:32.040 --> 05:37.360
+I will also show you the simple ways to retrieve those relationships.
+
+05:37.530 --> 05:44.760
+Of course there are much more complicated ways to retrieve and query those relationships but we'll cover
+
+05:44.760 --> 05:51.540
+that just after I will show you the free basic relationships and of course the next one would be the
+
+05:51.540 --> 05:53.540
+many to many relationship.
+
+05:53.670 --> 05:57.300
+And after that we'll go to the more complicated queries.

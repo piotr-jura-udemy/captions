@@ -1,0 +1,394 @@
+WEBVTT
+
+00:02.150 --> 00:09.890
+In the last lecture I told you about the basics of lot of migrations but we only explored the migrations
+
+00:09.890 --> 00:13.580
+that are created out of the box by the lava itself.
+
+00:13.580 --> 00:18.640
+We haven't created our own migration yet so let's do that now.
+
+00:18.680 --> 00:20.660
+In this lecture.
+
+00:20.660 --> 00:26.870
+So first you'll need to open the terminal let's clear it and run.
+
+00:26.880 --> 00:34.220
+Peach bee artisan so you can see we have a handful of commands here and this is really our time saving
+
+00:34.220 --> 00:41.060
+thing to know that you can generate a lot of larval classes using the make commands into one of those
+
+00:41.150 --> 00:50.510
+is make migration so you could see that those migrations are pretty long classes and creating them by
+
+00:50.510 --> 00:56.240
+hand can be cumbersome and you don't do not have to do that all by yourself.
+
+00:56.270 --> 01:06.750
+So the easiest way is to use the make migration so let's enlarge the terminal again clear this and run
+
+01:06.760 --> 01:15.010
+peach bee artisan make migration after which you will specify the name of the new migration.
+
+01:15.010 --> 01:19.440
+So we would like to create a blog post stable so let's write.
+
+01:19.440 --> 01:24.820
+Create blog blog posts table.
+
+01:24.820 --> 01:32.320
+So what I did here is not only given a name to a migration but it also allows it allows me to get some
+
+01:32.320 --> 01:35.880
+boilerplate code for creating a table.
+
+01:36.670 --> 01:44.540
+So this keyboard create in the name of the migration and the blog post table makes a lot about understand.
+
+01:44.590 --> 01:46.390
+What are you trying to achieve.
+
+01:46.870 --> 01:50.630
+So let's try to run this command OK.
+
+01:50.740 --> 01:51.580
+It is created.
+
+01:51.570 --> 01:55.360
+Now let's open it.
+
+01:55.520 --> 02:01.590
+You can see that it created our new file with the class create blog posts table inside it.
+
+02:01.670 --> 02:09.680
+And it generate generated up and down methods for us and the boilerplate code is schema.
+
+02:09.680 --> 02:11.150
+Create blog posts.
+
+02:11.150 --> 02:17.850
+So this is what we intended to do we wanted to create blog posts table.
+
+02:18.140 --> 02:21.140
+So there are additional ways you can do this.
+
+02:21.350 --> 02:28.700
+So let's take a look at the terminal and instead of specifying it inside the name.
+
+02:28.700 --> 02:38.490
+Now let's try to generate some random migration like log posts something.
+
+02:38.660 --> 02:39.690
+Now it is created.
+
+02:39.710 --> 02:45.090
+And if you would open this file you can see that it is empty.
+
+02:45.110 --> 02:49.470
+So larval didn't know what are you trying to do.
+
+02:51.040 --> 02:53.970
+So now let's go back to terminal again.
+
+02:56.900 --> 03:00.620
+If you would do this like this blog post something too.
+
+03:00.770 --> 03:02.690
+So the name doesn't matter.
+
+03:02.690 --> 03:12.200
+You can add an additional flag called create and the argument to this is the name of the table.
+
+03:12.200 --> 03:19.130
+So if we would execute it like that using create blog posts.
+
+03:19.130 --> 03:20.650
+Now let's see what was created.
+
+03:22.010 --> 03:24.620
+So that's our brand new migration.
+
+03:24.620 --> 03:29.710
+And it also contains the boilerplate for creating tables.
+
+03:30.050 --> 03:33.200
+So it is up to you how you want to do it.
+
+03:33.200 --> 03:42.260
+I prefer to use the Create table name underscore table naming to my migrations because it just saves
+
+03:42.260 --> 03:53.050
+me time and I get the boilerplate code out of the box OK just creating the migration file doesn't change
+
+03:53.110 --> 04:01.840
+anything inside the database so we can safely delete those free files and let's really run it correctly
+
+04:02.650 --> 04:04.610
+with how we initially wanted that.
+
+04:04.630 --> 04:06.440
+So create blog posts.
+
+04:06.520 --> 04:15.870
+Table OK so now we have our migration and let's open it so notice the upcoming.
+
+04:15.900 --> 04:21.140
+As I said it is specifying what changes should be made to the database schema.
+
+04:22.230 --> 04:29.550
+So we are using their schema for Sade and I know I haven't talked about facades yet.
+
+04:29.550 --> 04:30.720
+I will do in a bit.
+
+04:30.720 --> 04:32.580
+So don't worry about that just now.
+
+04:33.360 --> 04:40.680
+So this object schema has a method to create which you specify the table name into which you would like
+
+04:40.680 --> 04:41.950
+to create.
+
+04:42.090 --> 04:45.680
+And it accepts a second argument which is a closure.
+
+04:45.720 --> 04:54.300
+So it is our function without a name which gets passed the instance of the blueprint object and this
+
+04:54.300 --> 05:01.220
+blueprint object has some handy methods which allow us to create some columns on that table.
+
+05:01.230 --> 05:10.800
+So this is how we work we use schema create specified a table name and then inside this closure we specify
+
+05:10.800 --> 05:20.470
+what columns should be added so inside disclosure you wouldn't typically specify the column names and
+
+05:20.470 --> 05:27.670
+types as you water for example in a query for you my sequel database you would use this methods from
+
+05:27.670 --> 05:35.710
+the blueprint object and by default it adds to it is increments and timestamp.
+
+05:35.710 --> 05:41.890
+So I invite you to check the Lara Val Cheat Sheet which I published on github and I talked about it
+
+05:41.890 --> 05:49.570
+a couple of times and here I specify some typical column types and also include some inside this document
+
+05:49.690 --> 05:56.560
+and explain what they are doing so we can see that the table increments creates an outer incrementing
+
+05:56.740 --> 05:58.350
+unsigned integer column.
+
+05:58.510 --> 06:06.430
+So a typical column of the type I.D. It is a unique identifier of the row inside the table.
+
+06:06.970 --> 06:14.020
+And this handy method from Lara Val the timestamps which is very useful and it is actually built in
+
+06:14.260 --> 06:22.000
+into lava to support those two columns that it will create and this will create two columns sanctuary
+
+06:22.450 --> 06:31.180
+the notable columns of the type timestamp the created at and updated at which you can use to put the
+
+06:31.180 --> 06:39.810
+date of when particular row was created inside the database and also when it was updated.
+
+06:39.850 --> 06:42.890
+So this is what this initial migration would do.
+
+06:42.910 --> 06:47.340
+It would create this table and those three columns.
+
+06:47.440 --> 06:48.250
+So let's run it.
+
+06:48.250 --> 06:59.090
+Now we can go into the terminal and around peach bee artisan migrate so it runs successfully.
+
+06:59.090 --> 07:06.830
+And now let's go to the p HP my admin or any other client you're using refresh and you see there is
+
+07:06.830 --> 07:08.860
+a blog posts table.
+
+07:08.870 --> 07:11.240
+Let's go to the structure.
+
+07:11.240 --> 07:14.480
+So there is a idea which is our primary key.
+
+07:14.540 --> 07:23.270
+It is unsigned integer and we have to timestamp columns created out and updated at now.
+
+07:23.280 --> 07:28.590
+As I said before sometimes there are situations where you aren't happy with the changes that you've
+
+07:28.590 --> 07:33.820
+applied to the database and you would like to roll back the change.
+
+07:33.840 --> 07:37.780
+So of course deleting deleting this file would do nothing.
+
+07:37.800 --> 07:39.690
+You have to run a command.
+
+07:39.750 --> 07:48.420
+So let's take a look at the terminal and the command for this speech be artisan migrate rollback and
+
+07:48.420 --> 07:52.830
+it will roll back the most recent migration that we have executed.
+
+07:53.010 --> 07:55.920
+You can see the output it is rolling back.
+
+07:55.920 --> 08:03.300
+This migration and what it does it it is calling what's inside the down method.
+
+08:03.750 --> 08:09.970
+So this would drop the blog post table if it exists now let's check if that's the case.
+
+08:10.050 --> 08:11.660
+Refresh this.
+
+08:11.940 --> 08:16.750
+And yes there is no blog posts tables so this was successful.
+
+08:17.580 --> 08:26.100
+Now mind that rolling back does not prevent you from rewriting this migration again because if you would
+
+08:26.100 --> 08:31.860
+like to run migrate again let's do that.
+
+08:31.860 --> 08:34.950
+It will create the blog post table again.
+
+08:34.950 --> 08:40.950
+So if you really want to get rid of the changes that you've made because it's actually not working for
+
+08:40.950 --> 08:47.130
+you first you have to roll back and then you would probably have to delete this file because otherwise
+
+08:47.160 --> 08:48.960
+it would be always executed
+
+08:51.700 --> 08:54.700
+now our blog post stable is pretty empty.
+
+08:54.700 --> 08:58.060
+It only has a D and the timestamp columns.
+
+08:58.060 --> 09:07.480
+So now let's try to modify this table to generate a new migration will do P2P artisan make migration
+
+09:08.800 --> 09:16.320
+and we can call it art title content to blog posts table
+
+09:20.360 --> 09:25.810
+and equivalent of this because now let's take a look at this migration.
+
+09:25.880 --> 09:33.410
+So it happens to know that we want to do something to the blog posts stable as you see the schema table
+
+09:33.730 --> 09:34.340
+this.
+
+09:34.580 --> 09:37.730
+So this time we do not have schema create we have schema tables.
+
+09:37.730 --> 09:43.390
+So this is executing this is the way to do it for tables that already exists.
+
+09:43.390 --> 09:48.700
+So we want to modify the table and the same you can see inside the down method.
+
+09:49.130 --> 09:56.000
+So Lara VO also picked up that we want to do something to the blog post table but if you would give
+
+09:56.470 --> 09:59.390
+a name that doesn't reflect this.
+
+09:59.480 --> 10:08.180
+So you wouldn't use blog posts table you can at this suffix table blog posts.
+
+10:08.180 --> 10:14.780
+So if this name Art title content to blog post table would be something not meaningful it wouldn't contain
+
+10:14.900 --> 10:20.870
+blog posts table then adding the suffix would also generate this boilerplate code.
+
+10:21.290 --> 10:23.900
+But let's say that for now we are.
+
+10:24.800 --> 10:25.450
+We are good
+
+10:28.370 --> 10:35.120
+and let's go back to our migration and see how we can add new columns.
+
+10:35.120 --> 10:42.080
+So we are getting past this blueprint object which has some handy methods.
+
+10:42.080 --> 10:45.260
+One of them is string.
+
+10:45.470 --> 10:52.370
+So this means we would like to create a new column that would reflect the type var chart inside your
+
+10:52.370 --> 10:53.350
+database.
+
+10:53.450 --> 10:59.230
+So we'll call it title and the second.
+
+10:59.730 --> 11:07.470
+Second field we would like to add is content since content can be more than 255 characters which is
+
+11:07.470 --> 11:16.020
+default for var char we use text.
+
+11:16.040 --> 11:23.180
+Now let's go back to the down method and now we would have to specify that we would like to drop specific
+
+11:23.180 --> 11:24.830
+columns.
+
+11:25.010 --> 11:34.820
+We can drop columns by using the table drop column and specify our column name.
+
+11:34.820 --> 11:43.350
+So if you would specify title next you can just copy this and paste again to drop the content column.
+
+11:43.760 --> 11:46.600
+But additionally this method accepts an array.
+
+11:46.630 --> 11:55.490
+So instead of calling it two times we can pass that argument as an array and pass all the column names
+
+11:55.490 --> 12:00.200
+that we would like to drop.
+
+12:00.210 --> 12:01.790
+So this is our immigration.
+
+12:01.800 --> 12:13.930
+Now let's run inside the terminal peach pea artisan migrate so it is successful and refresh our database
+
+12:14.680 --> 12:24.650
+so we have our blog post table and inside the structure you can see that we have the title and the content.
+
+12:24.730 --> 12:35.800
+Now if you run peach pea artisan migrate Roebuck we have rolled back our most recent change and columns
+
+12:35.890 --> 12:37.140
+are deleted.
+
+12:37.270 --> 12:42.790
+So let's migrate again and we have our columns back inside the table.

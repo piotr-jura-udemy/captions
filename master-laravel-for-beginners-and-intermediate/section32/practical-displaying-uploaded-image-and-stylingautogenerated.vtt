@@ -1,0 +1,184 @@
+WEBVTT
+
+00:00.360 --> 00:06.270
+Now in the last lecture we tried to display the image that was added to the blog post and this is what
+
+00:06.270 --> 00:07.290
+we have ended up.
+
+00:07.290 --> 00:13.500
+So we found a way to display the proper URL for the image but it doesn't look really well.
+
+00:13.500 --> 00:17.160
+You will probably agree with that that it's not really readable.
+
+00:17.160 --> 00:21.170
+This is not how modern page should look like.
+
+00:21.210 --> 00:24.540
+So now let's play around with Styles a little bit.
+
+00:24.540 --> 00:30.650
+So we what we want to achieve is just display this image on the background.
+
+00:30.870 --> 00:39.960
+So first since we allow blog post to be submitted without an image we should try and verify if the Post
+
+00:40.020 --> 00:42.780
+image is actually set.
+
+00:42.780 --> 00:45.160
+If it's not we will display something else.
+
+00:45.160 --> 00:49.120
+So let's ask this if statement.
+
+00:49.620 --> 01:00.740
+Now if there there is no image we display our normal header but if the reason image will wrap it with
+
+01:00.740 --> 01:01.790
+a div element
+
+01:06.160 --> 01:11.970
+and this div element will contain some individual style.
+
+01:12.030 --> 01:16.400
+So what we want to do is we want to add the background.
+
+01:16.740 --> 01:22.450
+So let's are the background to your URL.
+
+01:23.630 --> 01:32.360
+Now we'll have to echo post image your url.
+
+01:32.400 --> 01:34.890
+So here there will be a background
+
+01:38.750 --> 01:48.040
+and also when we close this h1 tag we will also have to check if post contains image.
+
+01:48.230 --> 01:56.230
+So normally you will just close this header.
+
+01:56.740 --> 01:58.630
+So this extra idea has to go hero
+
+02:04.160 --> 02:10.280
+but in case there is an image to be displayed with this we close the H1 element.
+
+02:10.310 --> 02:16.100
+But we also have to close the deal element that is basically optional here.
+
+02:17.730 --> 02:17.970
+OK.
+
+02:17.990 --> 02:20.240
+So maybe let's reformat it like that.
+
+02:20.240 --> 02:24.200
+So it's more readable what is happening.
+
+02:24.290 --> 02:24.530
+OK.
+
+02:24.560 --> 02:30.410
+That's not everything that we will do with style so we display this background as your URL.
+
+02:30.410 --> 02:34.700
+But we also want a minimum height of 500 pixels
+
+02:37.740 --> 02:41.100
+let's display the text are white to
+
+02:43.820 --> 02:54.780
+we want this to be aligned Center and the most important thing is background attachment so we want the
+
+02:54.780 --> 02:57.840
+background to stay when people are scrawling.
+
+02:57.840 --> 03:00.190
+You will see this effect in a second.
+
+03:01.170 --> 03:02.790
+So let's save the changes.
+
+03:04.730 --> 03:11.840
+You of course do not really have to retype all those styles and they can be found on the link attached
+
+03:11.840 --> 03:15.220
+to this lecture so you can check that out on github.
+
+03:15.290 --> 03:22.190
+If you make any mistakes now we'll also need some additional styling for the H1 element.
+
+03:24.260 --> 03:35.300
+So first we want padding top to be at least hundred pixels and we also want the text shadow because
+
+03:35.300 --> 03:40.070
+this text will now be shown on the background so it has to be visible
+
+03:42.640 --> 03:44.080
+so it is one pixel
+
+03:47.380 --> 03:50.080
+and the color of the shadow is black.
+
+03:56.230 --> 03:58.900
+OK now that's basically everything.
+
+03:59.680 --> 04:03.940
+So let's also remove this image tag save the changes.
+
+04:04.060 --> 04:06.370
+And now let's see how does it look like
+
+04:10.990 --> 04:15.560
+so apparently I've did something wrong when generating the URL.
+
+04:15.560 --> 04:22.670
+Let's verify that it's actually not background you URL is background image.
+
+04:22.750 --> 04:23.710
+So sorry for that.
+
+04:23.710 --> 04:26.320
+That's the correct name of the CSX property.
+
+04:26.320 --> 04:29.160
+So save the changes and to refresh.
+
+04:29.590 --> 04:32.010
+And this is what we have right now.
+
+04:32.050 --> 04:37.320
+And you can see when I am scrolling this background stays in the same place.
+
+04:37.330 --> 04:38.690
+So it's a nice effect.
+
+04:38.710 --> 04:47.560
+And this is thanks to the background attachment property if you will remove that then you get the defaults
+
+04:48.190 --> 04:55.370
+which is something like this.
+
+04:55.410 --> 04:57.270
+So now it stays in the same place.
+
+04:57.270 --> 05:00.590
+Now let's also check if other blog posts work.
+
+05:00.600 --> 05:04.230
+So the older one were that were generated with cedar.
+
+05:04.230 --> 05:07.170
+They do not have an image and you can see that.
+
+05:07.170 --> 05:10.470
+Now that title is displayed like it was before.
+
+05:10.470 --> 05:15.810
+So the default way back to when you have an image you can display it modern way.
+
+05:15.810 --> 05:18.570
+And then there is also text shadow.

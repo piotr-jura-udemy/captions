@@ -1,0 +1,358 @@
+WEBVTT
+
+00:01.990 --> 00:09.760
+In their last lectures we worked with larval migrations and we've created and then added two fields
+
+00:10.180 --> 00:12.570
+to the blog posts table.
+
+00:12.580 --> 00:24.100
+And also we rolled back some changes so make sure that your blog posts table looks like this if it doesn't
+
+00:24.190 --> 00:32.350
+then you probably have some on the run migrations so go to the terminal and run peach bee artisan migrate
+
+00:32.890 --> 00:41.470
+so you can see I have nothing to migrate which means My database is up to date I'd like to remind you
+
+00:41.620 --> 00:48.610
+that there is the Vicki page I've created inside this link you can find it under this lecture with all
+
+00:48.610 --> 00:52.950
+the comments and descriptions of what we'll be doing in this lecture.
+
+00:52.960 --> 00:54.120
+So go check it out.
+
+00:54.130 --> 01:00.030
+You can always find those commands and more explanations inside this link.
+
+01:00.090 --> 01:02.430
+That's enough of the introductions.
+
+01:02.430 --> 01:04.650
+Now let's talk business.
+
+01:04.650 --> 01:14.630
+To interact with the database we'll be using the eloquent eloquent is a lot of the library cold or N
+
+01:15.210 --> 01:19.670
+or a or M stands for object relationship mapping.
+
+01:20.010 --> 01:28.350
+And it is a fancy name for a concept where you have a peach B class and a dispute B class corresponds
+
+01:28.350 --> 01:37.050
+to a particular table and we'll be using this simple class to both fetch the data and store the data.
+
+01:37.530 --> 01:42.090
+So Lara Val is using the Active Record model.
+
+01:42.090 --> 01:48.680
+You can check it out in google and read more about this but you will soon find out how it works.
+
+01:49.990 --> 01:57.600
+We have already created the blog posts table but we do not have a model to manage it yet.
+
+01:57.790 --> 02:05.290
+So let's create a new model and you can do that using the artisan comment make model followed by the
+
+02:05.290 --> 02:07.110
+model name let's run it now.
+
+02:07.960 --> 02:18.880
+So go to the terminal and run peach bee artisan make model blog post model is created successfully now
+
+02:18.880 --> 02:25.030
+close the terminal and models are stored by default inside the app.
+
+02:25.240 --> 02:31.300
+So let's open this class and all models by default are part of the app namespace.
+
+02:31.810 --> 02:36.680
+So this is our blog post model that extends the base model class.
+
+02:36.700 --> 02:40.510
+It looks very simple but it is very powerful.
+
+02:40.630 --> 02:49.930
+If you'd care to open this model class by left clicking it with the alt key you can see that it has
+
+02:49.930 --> 02:51.090
+plenty of methods.
+
+02:51.100 --> 02:53.620
+It is actually overwhelming.
+
+02:53.620 --> 02:55.360
+So don't worry about that not.
+
+02:55.390 --> 03:04.930
+I'm just showing you that it has a lot of possibilities now before we really use this model inside our
+
+03:04.930 --> 03:08.360
+controllers or routes directly in the web BHP.
+
+03:08.470 --> 03:15.060
+I'd like to show you a great tool which is included in rather a lot of old called Tinker.
+
+03:15.070 --> 03:17.530
+So let's open the terminal again and run.
+
+03:17.530 --> 03:19.950
+Peach bee artisan thinker.
+
+03:20.650 --> 03:30.490
+So it lets you write and execute the BJP code as you would be inside BJP files but you can do it inside
+
+03:30.490 --> 03:31.400
+terminal.
+
+03:31.420 --> 03:37.300
+So for example you would be able to execute some random page called and see the result.
+
+03:38.050 --> 03:46.450
+So you can see that I haven't seen the result of adding 4 to 4 and it's because apparently the libraries
+
+03:46.450 --> 03:52.190
+used by tinker have some problems from the modern BJP seven point three.
+
+03:52.270 --> 03:56.170
+So to fix that problem it's also described inside the Vicky.
+
+03:56.200 --> 04:04.570
+We have to modify the peach bee unify the configuration file for the HP so it can be found inside the
+
+04:04.660 --> 04:05.330
+sump.
+
+04:05.380 --> 04:14.410
+Some files at DC peach bee or whatever you have it installed on Windows but look for it inside the ATC
+
+04:14.410 --> 04:27.280
+folder or additionally you can find it by typing P P E grep peach P any so this will only probably work
+
+04:27.370 --> 04:30.970
+if you have good bash on windows or on Mac.
+
+04:30.970 --> 04:35.080
+You can safely type it and it shows whereas the configuration file.
+
+04:35.080 --> 04:38.540
+So now I can go and open this file.
+
+04:38.560 --> 04:50.930
+I already have it open sometime ago so I will just reopen it and find this PCR e settings and copy this
+
+04:50.930 --> 04:58.160
+setting paste it into the peach any file and save the changes.
+
+04:58.590 --> 05:03.980
+Now the Tinker should work again if you had any previous versions of BHP.
+
+05:03.980 --> 05:05.760
+This problem might not affect you.
+
+05:05.790 --> 05:09.050
+So only do this if you see this problem some.
+
+05:09.090 --> 05:14.670
+Now let's rerun Tinker and see our example again.
+
+05:14.980 --> 05:18.690
+Now we can see the result of adding four to four.
+
+05:18.760 --> 05:25.030
+So we can also use that to play around with our brand new blog post model.
+
+05:25.030 --> 05:27.780
+Let's see how.
+
+05:27.830 --> 05:31.760
+Now let's see what we can do using Tinker.
+
+05:31.760 --> 05:40.560
+So first let's try to fudge all the records from our blog posts table using our brand new model.
+
+05:40.670 --> 05:48.560
+So we'll have to reference the model including the namespace and we'll use the static method all to
+
+05:48.560 --> 05:51.580
+fetch all the records from the blog posts.
+
+05:51.580 --> 06:02.300
+Table loops after running this we can see that there is error and it states that the table larval will
+
+06:02.360 --> 06:06.470
+block underscore post doesn't exist.
+
+06:06.470 --> 06:09.420
+And actually this is expected.
+
+06:09.680 --> 06:19.310
+And it is because by convention Laurel assumes that the table name is the snake case plural model name.
+
+06:19.310 --> 06:21.530
+I've included a couple of examples.
+
+06:22.040 --> 06:29.900
+So for the blog post it will assume the table name is blog underscore posts or for the very long train.
+
+06:29.900 --> 06:33.940
+It is very underscore along underscore trains.
+
+06:34.010 --> 06:41.520
+So if we would like to use the blog posts table without underscore this is how our model should be called.
+
+06:42.320 --> 06:45.420
+Fortunately we can solve this.
+
+06:45.530 --> 06:50.930
+So Lavell has some properties defined inside models by default.
+
+06:50.930 --> 07:01.070
+And one of those is the expected table name so we can add a protected table field and specify our table
+
+07:01.070 --> 07:09.610
+name manually so do it like that modify the table to the blog posts say the changes
+
+07:12.770 --> 07:18.030
+and now let's restart Tinker and fetch all the posts again.
+
+07:18.110 --> 07:26.820
+So up blog post all and what we see here is the result of this query.
+
+07:26.910 --> 07:34.320
+So when we are fetching multiple records the larva will return an instance of the collection object.
+
+07:34.590 --> 07:42.070
+The collection object can be treated as a BHP array but it has some handy extras.
+
+07:42.120 --> 07:49.770
+So basically you should be able to access the result of this like this assuming that there is at least
+
+07:49.770 --> 07:53.650
+two records returned from this query.
+
+07:53.670 --> 07:57.180
+Currently we have none so this just won't work.
+
+07:57.210 --> 08:06.340
+And as you can see undefined offset so I've also included some information about collections inside
+
+08:06.340 --> 08:07.100
+the document.
+
+08:07.120 --> 08:15.340
+And you can check check that out but we'll also get to this in time so we should follow the lot of our
+
+08:15.340 --> 08:16.300
+conventions.
+
+08:16.300 --> 08:23.200
+And since we started with migrations and we created the table and then we didn't know what's the lot
+
+08:23.200 --> 08:31.760
+of our convention fund for table names we can also generate new models along with the migration and
+
+08:31.760 --> 08:33.180
+that's the recommended way.
+
+08:33.200 --> 08:34.760
+I'd recommend doing that.
+
+08:35.300 --> 08:40.850
+So you can do that by typing peach artisan make model.
+
+08:40.850 --> 08:50.810
+Let's use the very long train example and you can either add migration suffix or just an
+
+08:54.560 --> 09:02.420
+so let's now open it inside visual studio code and you can see we have a migration and now the table
+
+09:02.420 --> 09:05.180
+name follows a lot of old conventions.
+
+09:05.180 --> 09:07.490
+So we have this ready migration.
+
+09:07.490 --> 09:08.450
+We want to use that.
+
+09:08.450 --> 09:17.260
+So actually you can safely and they lead this migration and this very long train model.
+
+09:17.780 --> 09:23.750
+I believe it's a good idea to follow the conventions of the tools that you are using.
+
+09:23.750 --> 09:31.880
+So now let's use what we learned about migrations previously and modify the blog post stable to be blog
+
+09:32.150 --> 09:37.760
+underscore post so we can generate a new migration for it.
+
+09:38.630 --> 09:47.690
+So let's do that now type BJP artisan make migration and we can call it Change blog posts
+
+09:50.310 --> 10:03.530
+table name and we can add the suffix table blog posts to add some boilerplate broad boilerplate code.
+
+10:03.530 --> 10:07.480
+I've mentioned this and it's also included inside the Vicky.
+
+10:08.030 --> 10:09.050
+So let's execute it.
+
+10:09.050 --> 10:18.140
+Now and check what was generated for us so we can close this terminal window now and we have the boiler
+
+10:18.180 --> 10:18.810
+plate.
+
+10:19.190 --> 10:27.980
+So another thing I included inside the Vicky is how to rename the table name so you can use the schema
+
+10:28.140 --> 10:30.210
+rename static method.
+
+10:30.390 --> 10:38.170
+So let's just copy this and make this migration slide migration like this.
+
+10:38.370 --> 10:47.790
+So we modify the blog posts to blog underscore posts and that down method which will just turn back
+
+10:47.790 --> 10:49.130
+this change roll back.
+
+10:49.200 --> 10:52.080
+It should be the opposite.
+
+10:52.080 --> 10:57.840
+So we are changing their blog underscore posts to blog posts
+
+11:00.540 --> 11:00.850
+OK.
+
+11:00.850 --> 11:11.440
+Now let's run BHP artisan migrate and let's see our database table refresh it.
+
+11:11.780 --> 11:21.440
+And now we follow the conventions so we can close this migration and comment out there so I will leave
+
+11:21.440 --> 11:22.870
+this line of code.
+
+11:22.880 --> 11:25.730
+So you know how to customize the table name.
+
+11:26.450 --> 11:29.870
+But we should generally follow the conventions.
+
+11:29.900 --> 11:32.930
+So that's why we've created another migration.
+
+11:33.320 --> 11:41.420
+So that would be enough for this lecture in the next one will actually try to read some data from the
+
+11:41.540 --> 11:47.780
+blog posts table and write some new rows into our database.

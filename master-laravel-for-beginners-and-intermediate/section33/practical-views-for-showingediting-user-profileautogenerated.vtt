@@ -1,0 +1,430 @@
+WEBVTT
+
+00:00.600 --> 00:06.420
+Now in this lecture we will create the views for showing the user profile for the controller that we
+
+00:06.420 --> 00:14.190
+already have and will create another view for displaying a forum so users can upload the new image for
+
+00:14.190 --> 00:15.950
+the profile.
+
+00:16.020 --> 00:22.390
+So this won't bring us very far to understanding one to one polymorphic relationships.
+
+00:22.470 --> 00:25.890
+It's just for for you to code along with me.
+
+00:26.010 --> 00:32.790
+And in case you feel confident you can just skip this lecture and just grab the girl code from the github
+
+00:32.820 --> 00:40.110
+which is always included in the link under the lecture if you feel like coding then just let us continue
+
+00:40.170 --> 00:41.860
+and create those views.
+
+00:42.550 --> 00:45.560
+Okay so let's go ahead and implement those views.
+
+00:45.600 --> 00:53.420
+Start by creating the users folder inside resources views users and create two files.
+
+00:53.430 --> 01:03.570
+The edit blade peach P for displaying the form to modify user avatar and probably also user data and
+
+01:03.570 --> 01:12.990
+second one show blade peach which will be used to display the user profile after creating those views.
+
+01:13.020 --> 01:20.490
+We can go back to the controller and immediately render them using that view helper function.
+
+01:21.180 --> 01:29.220
+So in the case of showing the profile this would be users show and will pass the user as an argument
+
+01:29.880 --> 01:30.840
+to the view.
+
+01:31.710 --> 01:38.150
+So notice we already have user instance fetched here and also the edited form.
+
+01:38.250 --> 01:41.700
+We can do return return view users.
+
+01:41.700 --> 01:46.650
+EDIT Notice also how we named those views and all the actions.
+
+01:46.650 --> 01:54.390
+So in this case we want to have to remember what is the view name because it's always the same as the
+
+01:54.450 --> 01:56.510
+controller action.
+
+01:56.550 --> 02:03.420
+And here we all also pass the user instance which is also fetched.
+
+02:03.450 --> 02:05.890
+Using the root model binding.
+
+02:05.940 --> 02:13.310
+Okay let's then go back to the edit view and implemented by adding the form.
+
+02:13.590 --> 02:20.260
+Now we will begin this template by adding that extends directive and specifying the layout.
+
+02:20.280 --> 02:25.440
+Each should extend then we are adding section content.
+
+02:25.460 --> 02:29.930
+This would be rendered inside this layout.
+
+02:29.930 --> 02:37.160
+Now we will surround everything with a form tag as basically everything here would be part of the forum
+
+02:37.790 --> 02:40.210
+and now important things about the forum.
+
+02:40.220 --> 02:48.740
+The method has to be post as you know there is only get or post since we are submitting data to rules
+
+02:48.770 --> 02:51.370
+that will be actually put route.
+
+02:51.380 --> 02:59.400
+We will also add another directive to specify that also we will be uploading files so we need any type
+
+02:59.400 --> 03:05.850
+multipart forum data then we will need an action.
+
+03:06.080 --> 03:07.700
+So let's render that.
+
+03:07.700 --> 03:10.910
+The route is users update
+
+03:14.870 --> 03:18.230
+and then we specify a parameter which is user
+
+03:20.920 --> 03:26.150
+and we read that from the user that we get past to this particular view.
+
+03:26.200 --> 03:32.040
+Finally will wants to make this form horizontal so let's use the bootstrap class form.
+
+03:32.200 --> 03:38.550
+Horizontal sorry I've misspelled the name horizontal
+
+03:43.000 --> 03:47.790
+okay and now inside the form we need CSF ref protection.
+
+03:47.830 --> 03:51.130
+So I think this direct directive is necessary.
+
+03:51.130 --> 03:57.810
+This would send a token that is then get gets confirmed inside lateral application.
+
+03:57.850 --> 04:00.420
+Now the method is actually boot.
+
+04:00.700 --> 04:09.340
+So we had to specify that because the end point we would like to send it to this one is actually using
+
+04:09.340 --> 04:10.210
+the put method.
+
+04:10.210 --> 04:21.200
+So we just can't send it using post and now finally inside the forum we'll create greed.
+
+04:21.290 --> 04:28.970
+So we are adding one element D class row and then on the left side will display the user image.
+
+04:28.970 --> 04:36.980
+So let's add one div and another one here.
+
+04:37.130 --> 04:37.370
+OK.
+
+04:37.400 --> 04:48.040
+Now this sub this page would be one third two thirds split so this div has to have column for
+
+04:50.810 --> 04:58.360
+and the second one will have the class column 8 because there are always 12 columns inside bootstrap
+
+04:58.390 --> 05:06.770
+Greta and this would take one third part of the oldest section and another column would take two thirds
+
+05:09.790 --> 05:12.310
+so let's work with the left column first.
+
+05:13.150 --> 05:16.190
+So we will need to display an image here.
+
+05:16.270 --> 05:21.810
+Let's just add our simple EMG tag right now but also below it.
+
+05:21.820 --> 05:26.900
+We would like to allow users to specify a new image.
+
+05:26.920 --> 05:29.350
+So this will contain a form element.
+
+05:29.350 --> 05:35.200
+We are surrounding it with the card class so it looks nicer.
+
+05:36.370 --> 05:44.770
+So as usual there is a devolution card class and incited DPH with the card body class so we can add
+
+05:44.950 --> 06:01.970
+age 6 header here with the tags upload on different photo and on input with the class form control file
+
+06:02.240 --> 06:03.750
+that's a bootstrap class.
+
+06:05.150 --> 06:12.340
+Type of this input e file and name would be Avatar.
+
+06:12.340 --> 06:13.870
+Now let's go back to that image.
+
+06:13.870 --> 06:16.330
+It will also have some classes.
+
+06:16.540 --> 06:21.570
+So one from bootstrap EMG thumb nail.
+
+06:21.570 --> 06:25.890
+This would just display the picture with a frame and Avatar.
+
+06:25.890 --> 06:32.240
+Because we want this image to always be 128 pixels by hundred twenty eight pixels.
+
+06:32.280 --> 06:33.180
+Of course you.
+
+06:33.540 --> 06:39.180
+It's not a requirement it doesn't have to be like that but we are just making some assumptions to make
+
+06:39.180 --> 06:40.680
+it easier for us.
+
+06:40.770 --> 06:48.200
+And in this place will later modify it to actually display this image if it was said.
+
+06:48.270 --> 06:58.280
+So now let's work with the right side of the column so we'll add to these elements here first will contain
+
+07:00.020 --> 07:02.570
+input for editing the user name.
+
+07:02.570 --> 07:06.290
+That's the only thing we have modifiable.
+
+07:06.290 --> 07:08.360
+So this would be div class form group.
+
+07:08.360 --> 07:10.910
+Let's immediately copy that.
+
+07:11.050 --> 07:15.290
+US will also insert another element which would be a submit button.
+
+07:16.730 --> 07:18.140
+So this should be very easy.
+
+07:18.140 --> 07:33.730
+We just need we just need to add a label and then an input with the form control class no value type.
+
+07:33.950 --> 07:46.520
+Text this obviously can be pre filed using the current user name and now finally here we have another
+
+07:46.520 --> 07:50.780
+input of type submit.
+
+07:50.780 --> 07:53.030
+And this is our submit button.
+
+07:53.360 --> 08:01.920
+Class is button and button primary and value will be safe.
+
+08:01.930 --> 08:12.680
+Changes and here we can also add name label so user will know what they are actually editing.
+
+08:12.680 --> 08:19.370
+Now we also need to add the name attribute for those field which is exactly the same name.
+
+08:19.370 --> 08:24.990
+That's the only attribute we would like to allow to modify for the user currently.
+
+08:25.070 --> 08:32.300
+But now let's copy this whole template and paste it to the show blade BHP but we'll only make a couple
+
+08:32.300 --> 08:35.990
+of changes so we'll remove the form altogether.
+
+08:35.990 --> 08:44.570
+This will only display the user profile so we also do not need this field as this is for uploading the
+
+08:44.570 --> 08:54.690
+new image and we can remove everything from here we'll just display each free element just for now as
+
+08:54.690 --> 08:58.190
+there is only the user name to be displayed.
+
+08:58.440 --> 09:02.180
+So let just this played out and also we'll modify this element later.
+
+09:02.220 --> 09:04.860
+So it presents the user profile image.
+
+09:04.860 --> 09:10.910
+If there is any of course OK so we have those two templates implemented.
+
+09:11.130 --> 09:16.930
+They are also being rendered inside the controller.
+
+09:16.940 --> 09:21.380
+Now let's also modify one of the few components that we have.
+
+09:22.840 --> 09:25.720
+Which is the updated components.
+
+09:25.810 --> 09:33.780
+So in case there is provided there is the user I.D. provider will generate a link to the user profile.
+
+09:34.000 --> 09:38.320
+So we need to add another slot here and verify that it is being set.
+
+09:38.350 --> 09:44.210
+So if insert user I.D. then will display a link.
+
+09:44.660 --> 09:46.550
+Otherwise we keep it as it is.
+
+09:46.550 --> 09:51.110
+So we just display the user name and if.
+
+09:51.110 --> 09:54.290
+Now let's actually implement this user name.
+
+09:54.290 --> 10:02.440
+Displaying so this would be by h graph so we need to render the root to the user profile.
+
+10:02.440 --> 10:14.920
+So this is users show the parameter name is user and the user I.D. is the user I.D. that is that gets
+
+10:14.920 --> 10:17.490
+passed to this particular component.
+
+10:17.530 --> 10:21.720
+So let's close the root call here okay.
+
+10:22.360 --> 10:25.160
+Now here will render the user name.
+
+10:25.250 --> 10:29.440
+And now let's close the graph element.
+
+10:29.440 --> 10:31.980
+Okay so the component is updated.
+
+10:34.680 --> 10:38.460
+And now let's find places where this is actual used.
+
+10:38.510 --> 10:45.720
+So for example on the index template where we have the posts so we are passing the name here.
+
+10:45.720 --> 10:48.850
+Now let's also parse the user I.D..
+
+10:50.990 --> 10:54.670
+So this is posts post user I.D..
+
+10:55.500 --> 10:57.120
+Okay save the changes.
+
+10:57.140 --> 11:00.860
+Now let's go to our index page and let's see what we have.
+
+11:00.860 --> 11:03.950
+Now you can see that for every user we got a link
+
+11:07.370 --> 11:11.180
+so we required authentication so I have to log in first.
+
+11:11.190 --> 11:12.800
+But well let's see that again.
+
+11:12.800 --> 11:17.760
+So we see the name and there should be a picture here.
+
+11:17.780 --> 11:26.110
+So since I am authenticated as John Doe which we should probably remember has the user idea of one.
+
+11:26.180 --> 11:35.190
+So if I modify the you URL to be the one for editing form so user slash one slash edit.
+
+11:35.540 --> 11:41.330
+Now I see that page you can see that here there is this border around an image that is not displayed
+
+11:41.330 --> 11:41.620
+yet.
+
+11:41.630 --> 11:43.800
+We'll of course fix that later.
+
+11:43.850 --> 11:50.000
+Here we have a nice box for uploading a new profile picture and optionally also modifying the name and
+
+11:50.000 --> 11:54.240
+safe changes button so we will implement this logic in the next lectures.
+
+11:54.250 --> 12:03.200
+But first of course we have to start implementing our ONE TO 1 polymorphic relationship and understanding
+
+12:03.200 --> 12:11.330
+it because we will store all this profile images inside one single images table which will hold the
+
+12:11.330 --> 12:16.310
+fun things for blog posts but also avatars for the users.
+
+12:16.340 --> 12:19.390
+Now there is one more thing I actually forgot to tell you.
+
+12:19.390 --> 12:26.660
+Remember that we have added another class and you seem that I somehow magically have it and you don't.
+
+12:26.660 --> 12:33.830
+And this is because I did it before and I have compiled styles which actually contain this avatar class
+
+12:34.550 --> 12:38.240
+but I haven't really showed that to you so let's do that now.
+
+12:38.300 --> 12:43.250
+So we'll add Avatar class inside the app SPSS file
+
+12:45.960 --> 12:54.960
+and specify that the width of the element and haIf of the element should be hundreds 28 pixels save
+
+12:54.960 --> 13:02.660
+the changes and now let's open the terminal and run enter and run Dev.
+
+13:02.720 --> 13:10.520
+This will compile all the assets using larval mix and this of course includes our styles so they whenever
+
+13:10.520 --> 13:15.940
+you make changes inside SPSS files they have to be re compiled somehow.
+
+13:16.890 --> 13:25.280
+Okay so now you should also have everything that I have and now you should have the same view and this
+
+13:25.400 --> 13:31.960
+avatar class should be visible and this elements should always have the exact width and behave.
+
+13:32.000 --> 13:37.720
+Now we will also have to cover this problem when someone doesn't have an in default of other image.
+
+13:37.730 --> 13:45.230
+We could just display some default image or I know work work it out somehow but let's just not worry
+
+13:45.230 --> 13:46.490
+about it right now.

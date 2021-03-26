@@ -1,0 +1,91 @@
+WEBVTT
+
+00:01.040 --> 00:05.850
+Blade comes with other useful directives for conditional rendering.
+
+00:06.680 --> 00:17.450
+Let's try that unless directive, it will render the content only if its condition is false and it has
+
+00:17.450 --> 00:28.810
+no alternative or else options, it has to be closed with one and unless directive so lets other condition
+
+00:28.830 --> 00:31.470
+this can be posed is new.
+
+00:32.540 --> 00:41.510
+So if this condition will be false, the content will be rendered so we can put something like it is
+
+00:41.510 --> 00:48.920
+an old post using unless safety changes.
+
+00:48.920 --> 00:52.700
+And let's head to the chrome to verify it at first.
+
+00:52.700 --> 00:54.650
+Let's try with blog post one.
+
+00:55.550 --> 01:02.630
+It's not rendered because this is our new blog post and here it is, unless it's working.
+
+01:05.770 --> 01:09.430
+Next, there are the ESET and empty directives.
+
+01:10.210 --> 01:15.250
+They work exactly the same as their counterparts functions.
+
+01:17.520 --> 01:26.280
+But first, let's add that his comments property to one of our posts, maybe to the first one, so his
+
+01:26.280 --> 01:28.170
+comments equals true.
+
+01:30.560 --> 01:33.060
+So we want added to the second blog post.
+
+01:33.860 --> 01:35.540
+Now let's go back to the template.
+
+01:38.910 --> 01:44.550
+So below the content, let's use that is, said DirecTV.
+
+01:45.880 --> 01:54.190
+Which adds with our counterpart and is set to verify if the variable is actually set.
+
+01:55.970 --> 02:07.970
+So we'll check if Post has comments is set and we will render that the Post has some comments using
+
+02:07.970 --> 02:08.600
+it said.
+
+02:13.080 --> 02:15.450
+So let's verify that in the browser.
+
+02:16.990 --> 02:24.700
+That's the first blog post, and you can see that the Post has some comments, text is rendered and
+
+02:24.700 --> 02:30.490
+on the second blog post, there is no text as this property does not exist.
+
+02:34.970 --> 02:38.330
+Now, let's glance at the blade dogs.
+
+02:40.050 --> 02:46.710
+So you can see there's plenty more of this conditional rendering directives, most of them are combined
+
+02:46.710 --> 02:53.290
+with Laravel features you are yet to learn about, so you will see them much later in the course.
+
+02:54.180 --> 03:00.270
+So we want to use at all, if you are curious, go take a look at what's possible.
+
+03:03.820 --> 03:12.160
+Finally, you might be happy to learn that you can create your own custom if statements in late and
+
+03:12.160 --> 03:14.440
+the recent accommodation page about it.
+
+03:15.010 --> 03:22.090
+So whenever you feel like you are ready to do it and you will find some usage for it, I invite you
+
+03:22.090 --> 03:24.610
+to just try it out on yourself.

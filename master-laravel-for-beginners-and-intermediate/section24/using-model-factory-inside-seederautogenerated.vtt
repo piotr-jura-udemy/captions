@@ -1,0 +1,160 @@
+WEBVTT
+
+00:00.480 --> 00:08.400
+In the last lecture we have seen how we can use the database seeder to populate our database with some
+
+00:08.400 --> 00:10.890
+data using a single command.
+
+00:10.890 --> 00:21.800
+So it was BJP artisan D.B. seed or alternatively we ran the peach bee artisan migrate refresh with the
+
+00:21.820 --> 00:27.990
+seed the flag so it recreated the whole database and also seeded it with the data.
+
+00:27.990 --> 00:35.010
+Now we have inserted this static record and by static I mean we just specified what data we would like
+
+00:35.010 --> 00:37.830
+to insert here in this very lines.
+
+00:38.400 --> 00:47.250
+So let's see what would be the difference if we would use factory so to call a model factory.
+
+00:47.250 --> 00:54.780
+We can simply use the factory function and then we have to specify what class we would like to use.
+
+00:54.780 --> 01:05.340
+So let's use up user and the class constant to get a fully qualified class name of the up user.
+
+01:05.420 --> 01:12.860
+And now we can specify a second parameter to specify how many records we would like to be inserted.
+
+01:12.860 --> 01:24.160
+So let's say we would like 20 users and then we have to just call Create Now let's see how it will work.
+
+01:24.160 --> 01:31.050
+So we will call it with migrate refresh command to rebuild all the database and.
+
+01:31.630 --> 01:34.300
+Well not to have an error that we already have.
+
+01:34.870 --> 01:37.660
+This particular user because it's still there.
+
+01:37.690 --> 01:38.120
+It will.
+
+01:38.140 --> 01:39.830
+It will still be inserted.
+
+01:41.260 --> 01:48.550
+So now let's see what we have inside the user's table and you can see that we have John Doe that we
+
+01:48.550 --> 01:49.980
+have called first.
+
+01:50.110 --> 02:03.330
+And also 20 additional users so we have 21 in total so we did that using this simple one liner and we
+
+02:03.330 --> 02:07.500
+have used what we already have the model factory for the user.
+
+02:07.740 --> 02:16.630
+Now we have seen that there is also a function of the model factory called US state and we use that
+
+02:16.720 --> 02:26.680
+inside the block post model factory when if we wanted to have some of the parameters specified as exact
+
+02:26.680 --> 02:37.170
+values like in this case we wanted new title we created a new state we have used that inside that test.
+
+02:37.170 --> 02:43.740
+Actually you probably already seen that in this lecture we specified what state do we want.
+
+02:43.740 --> 02:51.510
+So instead of having this long line we can create a state for the user too.
+
+02:51.600 --> 02:58.920
+And this is useful because when you see the database with some data sometimes you might want to load
+
+02:59.010 --> 03:06.660
+as a specific user and easily remember what email and password you'll have to use for that because otherwise
+
+03:07.170 --> 03:11.530
+you will have random users with random emails as you see here.
+
+03:11.550 --> 03:20.580
+So then after each DBC command when you run it you will have to check what are the emails available.
+
+03:20.670 --> 03:21.750
+So let's do that now.
+
+03:21.750 --> 03:32.500
+So we will we might copy this fragment from the blog post factor it into the user factory modify the
+
+03:32.500 --> 03:44.500
+class name because this is actually a user and specify a new state House John Doe and now the only two
+
+03:44.500 --> 03:47.080
+parameters that we would like to override
+
+03:51.210 --> 03:53.030
+is the name and email.
+
+03:53.130 --> 03:55.780
+So we might even keep the password.
+
+03:55.830 --> 04:01.720
+The default one that we have here which is actually secret.
+
+04:01.870 --> 04:10.210
+So now that we have this John Doe state inside their user factory we can replace this call with the
+
+04:10.210 --> 04:22.470
+factory call so let's do factory up User class now we can use the state using the state's method.
+
+04:23.770 --> 04:26.570
+The state name is John Doe.
+
+04:27.010 --> 04:29.140
+And then we call create
+
+04:32.050 --> 04:38.410
+so let's clear the tree now and recreate the database with the seed flag.
+
+04:40.910 --> 04:48.170
+And now when you check the database you can see that we still have our John Doe and all the other users
+
+04:48.260 --> 04:49.390
+are random.
+
+04:49.430 --> 04:56.300
+So on the Web site you will be able to log in us our new John user.
+
+04:56.480 --> 04:57.380
+So let's try it.
+
+04:57.380 --> 05:03.270
+John Lara old test to make sure it's John.
+
+05:03.300 --> 05:04.230
+Yes it's John.
+
+05:04.290 --> 05:12.290
+And the password is just simply lowercase secret and you can see we are logged in.
+
+05:12.310 --> 05:16.530
+You can trade with all the other users that we have here.
+
+05:16.580 --> 05:19.010
+So OK let's log out now.
+
+05:19.040 --> 05:27.250
+Now that was the first easy example of how we can use the model factories to quickly populate our database
+
+05:27.280 --> 05:33.850
+and in the next lecture we will see how we can handle relations between models and this will be the
+
+05:33.850 --> 05:41.800
+case for the blog posts and comments where you have to specify are user I.D. for each new created model.

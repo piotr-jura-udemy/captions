@@ -1,0 +1,130 @@
+WEBVTT
+
+00:00.690 --> 00:06.380
+In this section we'll learn what are the queries scopes inside the larval eloquent.
+
+00:06.390 --> 00:07.600
+How can we use them.
+
+00:07.620 --> 00:10.110
+And what are the benefits of them.
+
+00:10.140 --> 00:18.330
+But before we do that let's fix an outstanding error in our application which is when we are authenticated
+
+00:18.390 --> 00:19.230
+as a user.
+
+00:19.680 --> 00:25.000
+And we try to add a blog post which seems to be valid and we press create.
+
+00:25.020 --> 00:31.350
+We actually get an error and the error says that the user I feel doesn't have a default value which
+
+00:31.350 --> 00:32.520
+of course it doesn't.
+
+00:33.120 --> 00:40.080
+And you can see that it's not even trying to insert the user I.D. for the new blog post so this won't
+
+00:40.080 --> 00:45.630
+happen automatically we have to specify a user I.D. When we create a new blog post.
+
+00:46.740 --> 00:54.300
+So what we have here inside the store method of our post controller is the validated data array.
+
+00:54.300 --> 01:03.000
+It is an array of data that have passed the validation the title and the content so we can add a user
+
+01:03.000 --> 01:04.170
+I.D. field here
+
+01:07.300 --> 01:14.140
+and now since we already have a request object here the request object contains a user method.
+
+01:14.350 --> 01:20.900
+The user method would be the currently authenticated user if of course the user is out antiquated.
+
+01:20.980 --> 01:27.550
+And since we make sure that the store End Point should only be available for our dedicated users we
+
+01:27.550 --> 01:30.580
+can safely get that.
+
+01:30.580 --> 01:33.960
+Now it's user I.D. not a user model.
+
+01:34.060 --> 01:43.020
+So we have to read the I.D. property so we would think that this should work already but you might see
+
+01:43.020 --> 01:44.880
+what is the problem here.
+
+01:45.480 --> 01:48.860
+So let's open the blog post A.T..
+
+01:49.000 --> 01:55.810
+Take a look at this field definition and think about if you can guess what would be the problem.
+
+01:56.350 --> 02:00.620
+But before you do let's try it again.
+
+02:00.650 --> 02:09.850
+So now we think we are assigning the user I.D. So let's press create and you can see that we are still
+
+02:09.850 --> 02:16.750
+not providing the user I.D. even though we have said it to the validated data array.
+
+02:16.870 --> 02:24.820
+So if you haven't guessed it is because when we pass all the properties at once.
+
+02:24.820 --> 02:27.390
+So we are doing mass assignment.
+
+02:27.390 --> 02:29.880
+This is this is what we are doing here.
+
+02:29.920 --> 02:39.760
+We are passing all the attributes of a model in a single pass using an array all those attributes of
+
+02:39.760 --> 02:48.460
+our model which we would like to be able to be passed using mass assignment has to be defined in the
+
+02:48.520 --> 02:50.810
+field battlefield of the model.
+
+02:50.860 --> 02:54.370
+So obviously user I.D. wasn't here.
+
+02:54.640 --> 02:57.280
+So let's add it now save the changes
+
+03:00.710 --> 03:02.390
+and now we should be fine.
+
+03:02.540 --> 03:08.810
+So let's press create and you can see that we have a new blog post with the new flag that was other
+
+03:08.990 --> 03:10.880
+a second ago.
+
+03:11.090 --> 03:18.100
+Now if we'll go to the blog post lists you can see that this blog post is nowhere to be found.
+
+03:18.140 --> 03:26.260
+Actually it is added at the very bottom of our list even though it is the most recent.
+
+03:26.460 --> 03:33.410
+So you would probably assume that the blog posts that were added most recently should be at the top
+
+03:33.450 --> 03:34.920
+not at the bottom.
+
+03:35.140 --> 03:41.580
+And this is where we will start implementing the query scopes and you will see what great things you
+
+03:41.580 --> 03:44.880
+can achieve by adding query scopes.
+
+03:45.090 --> 03:47.400
+So let's begin our new section.

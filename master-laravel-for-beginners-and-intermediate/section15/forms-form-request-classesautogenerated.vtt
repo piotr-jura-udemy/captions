@@ -1,0 +1,85 @@
+WEBVTT
+
+00:00.610 --> 00:07.810
+For more complicated validation scenarios, our special kind of forum request class can be created.
+
+00:08.620 --> 00:16.120
+Let's make one using bipartisan make request and call it Star Post.
+
+00:18.860 --> 00:25.490
+The request classes are kept inside the AAFP HDP requests folder.
+
+00:29.180 --> 00:37.550
+Therefore, request classes are an alternative to putting validation rules directly inside the controller.
+
+00:38.800 --> 00:48.550
+So you should change the type of the class in the storm, edit from request to the store post, by the
+
+00:48.550 --> 00:53.890
+way, make sure that this store post class is being imported at the top.
+
+00:58.790 --> 01:05.540
+The rules method on this new class should return an array with validation rules.
+
+01:06.860 --> 01:10.640
+So let's move this array that we have inside the controller.
+
+01:12.990 --> 01:18.240
+And pasted to the rules, medalled inside the store post class.
+
+01:23.480 --> 01:27.620
+Now, in the controller, you just read the validated data.
+
+01:30.770 --> 01:35.410
+Using the request validated methods.
+
+01:39.320 --> 01:46.790
+The cast on foreign requests work the same way as if you would call the validate method on the base
+
+01:46.820 --> 01:47.900
+request object.
+
+01:48.410 --> 01:52.970
+If there are errors, it would redirect to the last page with errors.
+
+01:52.970 --> 01:54.200
+Flash to the session.
+
+01:54.440 --> 01:57.710
+When everything is fine, it just continues execution.
+
+02:00.540 --> 02:08.640
+The validated variable will now contain an array with all the input for which we have provided the validation
+
+02:08.640 --> 02:09.380
+rules.
+
+02:09.720 --> 02:19.230
+So instead of using the request input method directly to read the raw input, we should read the input
+
+02:19.230 --> 02:30.600
+from the validated variable array instead so validated title and validated content.
+
+02:33.590 --> 02:39.730
+The forum requests can do more than just allow you to move the rules to another place.
+
+02:40.740 --> 02:48.930
+The outrace method can check if the user is allowed to actually send this form, we will cover authorization
+
+02:48.930 --> 02:49.450
+later.
+
+02:49.470 --> 02:54.010
+So for now, you can just returned from this method.
+
+02:55.600 --> 02:59.100
+Finally, let's check if everything still works.
+
+03:00.050 --> 03:07.180
+So try to send a form with some valid data and it works correctly.
+
+03:07.980 --> 03:17.010
+Very soon you will also see how you can quickly create models directly from an array using a feature
+
+03:17.010 --> 03:19.140
+called Mass Assignment.

@@ -1,0 +1,124 @@
+WEBVTT
+
+00:00.800 --> 00:03.960
+So we have just created our new Laravel project.
+
+00:04.010 --> 00:12.080
+Now let's open it in visual studio code using trick so you can type Code Dart, which will open visual
+
+00:12.080 --> 00:15.510
+studio code with all the contents of the current directory.
+
+00:16.130 --> 00:19.160
+So there it is, our Laravel project.
+
+00:20.260 --> 00:27.130
+I understand this might look a little bit intimidating for everyone that is new to Laravel, so let's
+
+00:27.130 --> 00:33.280
+quickly go over the folder structure and all the files out there, what they mean and what they are
+
+00:33.280 --> 00:33.770
+for.
+
+00:34.720 --> 00:40.060
+Let's go over the most important folders and files from top to bottom.
+
+00:40.740 --> 00:42.550
+So the first one is the ARB.
+
+00:43.390 --> 00:51.100
+It contains all the business logic of your application, whether it is handling a request or interacting
+
+00:51.100 --> 00:52.210
+with the database.
+
+00:53.740 --> 01:00.400
+Then there is the conflict, so as the name suggests here, you will configure your application.
+
+01:01.700 --> 01:09.170
+Then you have a database folder, which is for modifying and working with your database schema.
+
+01:10.410 --> 01:17.970
+A public folder contains some entry points to your application on Index B file, and additionally,
+
+01:17.970 --> 01:22.830
+May might contain some stylus scripts, images, things like this.
+
+01:23.770 --> 01:32.420
+Then resources, well, it also contains Stiles scripts, but also translations and some HTML.
+
+01:32.800 --> 01:36.010
+This is where you will be putting their views.
+
+01:36.400 --> 01:39.780
+That's why we have this MVC separation.
+
+01:40.570 --> 01:44.320
+So there is model models to leave in the app folder.
+
+01:45.010 --> 01:51.430
+Controller controllers leave in HTP controllers folder and views.
+
+01:52.240 --> 01:55.170
+Views are inside resources views Folarin.
+
+01:56.710 --> 02:04.930
+Then the Roots folder are also very important one here, you configure routes to your application routes
+
+02:04.930 --> 02:07.900
+are entry points to your app now.
+
+02:08.230 --> 02:15.550
+Also, there is a storage folder, tests and vendor, which basically contains all the third party libraries
+
+02:15.550 --> 02:18.280
+that you will install, including Laravel.
+
+02:18.970 --> 02:26.500
+Now, if you are already feeling dizzy from all this new words like comptrollers, roots models, don't
+
+02:26.500 --> 02:26.760
+worry.
+
+02:26.770 --> 02:28.060
+We will cover that later.
+
+02:28.090 --> 02:31.830
+Now, we are just having an overview of the project structure.
+
+02:32.350 --> 02:36.190
+So continuing we have adult and file.
+
+02:36.850 --> 02:38.290
+This is very important.
+
+02:38.530 --> 02:42.970
+It contains some environment specific settings for your app.
+
+02:43.540 --> 02:45.440
+Mostly this is credentials.
+
+02:45.460 --> 02:51.850
+So, for example, database credentials, they might be different in your local machine and when the
+
+02:51.850 --> 02:53.040
+app goes to server.
+
+02:53.380 --> 02:55.510
+So this is a very useful file.
+
+02:56.110 --> 03:04.630
+And then to manage any third party dependencies like third party libraries, you have composer Jason
+
+03:04.630 --> 03:05.140
+Faile.
+
+03:05.350 --> 03:13.630
+This is for PvP dependencies and package JSON, which is for JavaScript and an affront and dependencies.
+
+03:14.710 --> 03:16.750
+So basically, that's it.
+
+03:17.320 --> 03:22.540
+That's the most important folders and files in your Laravel project.

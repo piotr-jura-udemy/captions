@@ -1,0 +1,253 @@
+WEBVTT
+
+00:00.540 --> 00:08.220
+In the last lecture we were able to display who outlawed our specific blog post and we talk that when
+
+00:08.220 --> 00:10.710
+I am authenticated as a different user.
+
+00:10.710 --> 00:13.560
+In this example I am John Doe.
+
+00:13.560 --> 00:18.810
+I shouldn't be able to edit or delete others blog posts.
+
+00:18.810 --> 00:24.660
+So let's go to the Visual Studio code and see how can we achieve that.
+
+00:24.660 --> 00:31.490
+So you need to find a provider's folder and then open the service provider.
+
+00:31.500 --> 00:37.770
+So as I've mentioned a couple of times previously the provider classes are the places where you set
+
+00:37.770 --> 00:43.980
+up some specific logic that is about some part of your application.
+
+00:43.980 --> 00:51.040
+And this one that our service provider is about authentication and authorization setup.
+
+00:51.090 --> 00:54.930
+So what we will gonna do is will define a gate.
+
+00:54.930 --> 01:02.640
+So what is a gate gate is basically simple closure that has a name.
+
+01:02.880 --> 01:05.310
+So there is a name of the gate.
+
+01:05.310 --> 01:13.770
+And then there is a closure that will get called to verify if certain user is able to perform a specific
+
+01:13.800 --> 01:15.370
+action.
+
+01:15.600 --> 01:23.220
+So you should have this gate for sale imported already in your of service provider.
+
+01:23.220 --> 01:32.490
+But if you don't make sure you have added this specific use statement at the top of your hour service
+
+01:32.490 --> 01:40.910
+provider of course you can also find this code inside GitHub the link is included.
+
+01:40.920 --> 01:44.980
+Now let's see how we can define a simple gate.
+
+01:45.120 --> 01:51.090
+So this gate for sale provides us a static method called define.
+
+01:51.390 --> 01:57.810
+And as you can see on the parameter hint The first is called ability.
+
+01:57.810 --> 02:06.920
+So this would be a global ability we define something that can be done and let's call it update post.
+
+02:07.010 --> 02:17.200
+So we define an ability that someone can update a blog post and the second parameter to gate define
+
+02:17.710 --> 02:19.170
+is the callback.
+
+02:19.180 --> 02:28.230
+It's the closure that will be called to verify if specific user can actually perform certain action.
+
+02:28.450 --> 02:35.480
+So those closures will always receive a user instance as a first argument.
+
+02:35.500 --> 02:42.490
+So you do not really have to worry about that Lavell will pass the currently authenticated user instance
+
+02:42.580 --> 02:53.250
+as the first parameter and then it will pass a second parameter or more parameters and in this case
+
+02:53.490 --> 02:56.850
+we will want to pass our particular blog post.
+
+02:56.860 --> 03:03.520
+So let's create a second parameter called Post.
+
+03:03.600 --> 03:12.330
+So this is how Gates definition looks like and what we should do inside this gate is we should somehow
+
+03:12.330 --> 03:18.410
+verify if this user is able to edit this blog post.
+
+03:19.230 --> 03:26.640
+So currently the simplest way we can do that or the simplest rule we can invent because of course you
+
+03:26.640 --> 03:31.810
+can come up with any possible rules even very complicated ones.
+
+03:32.040 --> 03:33.970
+But let's keep it simple for now.
+
+03:34.800 --> 03:43.170
+So we should return true whether when the particular user is able to perform this action or false when
+
+03:43.560 --> 03:48.530
+he shouldn't perform this action he shouldn't be able to perform this action.
+
+03:48.930 --> 04:02.230
+So we will verify if the user I.D. is equal to the post user I.D. column.
+
+04:02.250 --> 04:08.560
+So now we have this gate defined but it's not used anywhere out domestically.
+
+04:08.580 --> 04:18.690
+So we have to now verify and we have to do that explicitly whether a particular user can perform a particular
+
+04:18.990 --> 04:20.940
+action.
+
+04:20.940 --> 04:30.120
+So let's copy this gate for state import and go to the post controller because this is where we'll perform
+
+04:30.120 --> 04:36.780
+this check and let's paste it to our post controller.
+
+04:36.790 --> 04:48.790
+Now let's scroll to the update action and now we have a couple of ways to verify whether a particular
+
+04:48.790 --> 04:52.390
+user should perform specific action.
+
+04:52.990 --> 04:57.620
+So the first way is to use the gate for sale.
+
+04:58.180 --> 05:06.940
+So we have defined one gate the update post but now we have a couple of we have actually two methods
+
+05:08.110 --> 05:11.510
+and the first one would be denies.
+
+05:13.160 --> 05:24.710
+So what it accepts is you can check whether specific ability like update posts can be performed by specific
+
+05:24.710 --> 05:25.100
+users.
+
+05:25.100 --> 05:28.430
+So we do not really have to pass the user instance.
+
+05:28.430 --> 05:35.340
+As I've said before it will be passed ultimately by Lavell.
+
+05:35.480 --> 05:42.230
+Now this will return whether specific user can do something or actually in this case denies will return
+
+05:42.230 --> 05:44.210
+whether he can't do something.
+
+05:44.210 --> 05:53.510
+So we should surrounded with an if statement and now when user cannot update a blog post we can simply
+
+05:54.050 --> 05:56.590
+call a board function.
+
+05:56.810 --> 06:05.990
+So a board function will just redirect to our specific page with our specific message and this will
+
+06:05.990 --> 06:15.920
+redirect to an error page and in each CTP protocol when someone is not allowed to perform specific action
+
+06:16.160 --> 06:20.230
+you should return 400 free code.
+
+06:20.330 --> 06:26.570
+You can additionally of course specify a message but if you want then the default message will be provided
+
+06:26.570 --> 06:27.630
+by Lavell.
+
+06:29.750 --> 06:31.260
+So let's test that.
+
+06:31.280 --> 06:38.700
+So now we are checking if the user which will be passed by Lavell can update a specific post minded
+
+06:38.710 --> 06:45.230
+that we do not have to worry about users that are not authenticated because they won't be able to even
+
+06:45.230 --> 06:52.920
+go to the forum in the first place because this is actually being protected using the alpha middleware.
+
+06:53.120 --> 07:00.230
+So no one will be ever able to get to the edit or update update pages if they are not authenticated
+
+07:00.320 --> 07:01.720
+at all.
+
+07:01.820 --> 07:07.280
+Okay enough talking now let's go back to our page let's refresh.
+
+07:07.280 --> 07:14.570
+And now we are out indicated as John Doe and let's try to edit this blog post so you can see that you
+
+07:14.570 --> 07:16.880
+are still able to go to the forum.
+
+07:17.330 --> 07:25.050
+But if you will press update you are being redirected to the 400 free page.
+
+07:25.410 --> 07:31.140
+Now let's see if we can customize the message like you.
+
+07:31.500 --> 07:33.980
+Or maybe let's use double quotes.
+
+07:33.990 --> 07:39.740
+You can't edit this blog post and save the changes.
+
+07:39.760 --> 07:49.280
+Now if you will refresh you can see that you see this message and there is 400 free code.
+
+07:49.280 --> 07:55.240
+So obviously you will be able to customize how those error pages looked like.
+
+07:55.280 --> 07:57.830
+Those are the defaults provided by Lavell.
+
+07:57.890 --> 08:01.260
+Let's not worry about it right now we'll get to that later.
+
+08:01.400 --> 08:04.790
+But this is how you can protect resources.
+
+08:04.790 --> 08:11.210
+So since we are still able to see the form and probably we shouldn't because we won't be able to change
+
+08:11.210 --> 08:21.070
+this blog post anyway we can copy this to the edit action itself which displays the forum.
+
+08:21.210 --> 08:28.350
+So here we are where we are fetching that blog post and we'll be also using our board to display this
+
+08:28.350 --> 08:30.650
+page in the first place.
+
+08:30.750 --> 08:38.220
+So let's go back to the blog post at least and now when you try to edit you immediately are being redirected
+
+08:38.220 --> 08:44.490
+to the error page with the specific message that you cannot edit this blog post.

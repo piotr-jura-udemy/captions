@@ -1,0 +1,430 @@
+WEBVTT
+
+00:00.390 --> 00:06.660
+At this point this is what you should see so the menu items and everything on the left on the right
+
+00:06.690 --> 00:10.230
+and on the top is translated in the desired language.
+
+00:10.230 --> 00:13.950
+So currently our default happens to be Spanish.
+
+00:13.950 --> 00:21.570
+And in this lecture will add two links to the top menu for authenticated users to view the profile his
+
+00:21.570 --> 00:24.830
+own profile of course and editing his own profile.
+
+00:24.840 --> 00:32.160
+Also we'll modify the database to store the locale on the User model and then we'll also modify the
+
+00:32.160 --> 00:35.070
+forum to choose their preferred language for the user.
+
+00:35.070 --> 00:37.300
+So let's go.
+
+00:37.850 --> 00:39.140
+So you should have the layout.
+
+00:39.140 --> 00:43.540
+Blade beach be open and let's copy those links for simplicity.
+
+00:43.550 --> 00:49.070
+They have to go to this ls blog because this is for guests and as indicated users.
+
+00:49.130 --> 00:52.760
+And well this ls blog is for people that have logged in
+
+00:55.710 --> 01:04.420
+so we need to create a link to the user's profile so it is users show for viewing the user profile.
+
+01:04.490 --> 01:06.500
+Now this accepts our parameters.
+
+01:06.500 --> 01:11.370
+So this would be inside an array and the parameter name.
+
+01:11.390 --> 01:22.230
+If you remember each user we can read the user using the alpha side so our user does method I.D..
+
+01:23.270 --> 01:28.100
+Now this is getting too long so let's reformat that a little bit.
+
+01:29.610 --> 01:29.960
+Okay.
+
+01:29.970 --> 01:38.350
+Now we have to close this array and close the root code and let's add this text to the next line.
+
+01:39.030 --> 01:46.680
+Okay now you can copy that again because the second link would be very similar but of course it's not
+
+01:46.770 --> 01:47.850
+hard.
+
+01:47.880 --> 01:50.910
+This would be a profile.
+
+01:50.910 --> 01:57.560
+Now this text is edit profile and the link in this case is not show it is.
+
+01:57.670 --> 02:02.910
+Edit And of course it also accepts are user parameters.
+
+02:02.920 --> 02:06.510
+So save the changes and now let's see if that works.
+
+02:06.510 --> 02:07.800
+So I'm not authenticated.
+
+02:07.800 --> 02:12.180
+So let's logging as John Doe.
+
+02:12.180 --> 02:13.620
+So I have the spare field.
+
+02:13.650 --> 02:15.470
+EDIT added data profile.
+
+02:15.570 --> 02:23.010
+Okay so it works now in the editing profile form will need another field but before we added let's first
+
+02:23.010 --> 02:25.050
+create a migration for the user.
+
+02:27.060 --> 02:30.030
+So let's open the terminal and run.
+
+02:30.280 --> 02:32.160
+Peach be artisan.
+
+02:32.160 --> 02:38.580
+Make migration add low color to users sorry to users.
+
+02:38.640 --> 02:42.980
+Table.
+
+02:43.000 --> 02:46.090
+So at this point we can close the layout and terminal.
+
+02:46.090 --> 02:49.340
+Now let's locate this brand new migration.
+
+02:49.360 --> 02:53.430
+It would be as usual in the same folder.
+
+02:53.740 --> 02:59.070
+So we have the scaffold and what we do is table.
+
+02:59.280 --> 03:01.260
+Sorry table string.
+
+03:01.260 --> 03:04.330
+Because this would be us string column.
+
+03:04.330 --> 03:06.300
+Call it local.
+
+03:06.300 --> 03:07.110
+And the length.
+
+03:07.140 --> 03:09.300
+Well let's give it free characters.
+
+03:09.300 --> 03:19.610
+That should be enough and of course finally we do table drop column and column is local.
+
+03:19.610 --> 03:24.430
+Now before we run this migration we actually might do with a default.
+
+03:24.650 --> 03:25.420
+So default.
+
+03:25.490 --> 03:29.530
+Let's say this would be English okay.
+
+03:29.540 --> 03:39.280
+Now we can run P2P artisan migrate and well we should have this local column on our users table right
+
+03:39.310 --> 03:40.070
+now.
+
+03:40.680 --> 03:48.640
+Okay so let's close this migration and proceed with the actual editing of the user profile so this happens
+
+03:48.700 --> 03:51.190
+inside the user controller.
+
+03:51.190 --> 03:53.860
+So let's open it now.
+
+03:53.950 --> 04:02.020
+So this one displays the form so we'll have to add a field so maybe actually let's open this forum OK
+
+04:02.060 --> 04:04.960
+so this is this one.
+
+04:05.090 --> 04:06.200
+Now what do we have here.
+
+04:06.200 --> 04:11.990
+There is the name and well basically the field to upload an image.
+
+04:12.020 --> 04:16.520
+So we have to first somehow show what are the languages available.
+
+04:16.790 --> 04:22.190
+Now let's define them on the user model so we can add a constant here.
+
+04:22.190 --> 04:26.370
+So public const localities look at this.
+
+04:26.370 --> 04:28.600
+Yeah makes sense.
+
+04:28.640 --> 04:29.660
+OK.
+
+04:29.720 --> 04:33.720
+And what we will do is their language code will be a key.
+
+04:33.920 --> 04:45.840
+So E N and then we need a label because we'll use that for forms so English now E as this would actually
+
+04:46.080 --> 04:51.000
+well let it be in the in the language.
+
+04:51.130 --> 04:53.020
+Well in the actual language.
+
+04:53.020 --> 04:57.120
+So it's Espanol for German.
+
+04:57.130 --> 05:03.260
+Let it be Deutsche OK.
+
+05:03.440 --> 05:10.580
+So now we'll use this public constant that we have defined on the user model inside the form.
+
+05:10.580 --> 05:13.020
+So let's add another field.
+
+05:13.220 --> 05:16.580
+We can start by just copying this div element
+
+05:21.060 --> 05:22.980
+so this would be our language.
+
+05:23.040 --> 05:27.240
+And now instead of the input we'll have select.
+
+05:27.240 --> 05:31.750
+So this will be a list of options to pick up from.
+
+05:31.780 --> 05:34.820
+So this select needs are bootstrap class.
+
+05:34.950 --> 05:44.030
+So that is form control and the name would be as the field name so local.
+
+05:44.460 --> 05:54.000
+Now to display all these languages we can use that for each directive and we'll iterate over up user
+
+05:55.470 --> 05:58.590
+locals as local.
+
+05:58.830 --> 06:00.150
+That's the actual key.
+
+06:00.150 --> 06:08.870
+So e n e as the E and a label the label to actually display this inside a form.
+
+06:08.880 --> 06:19.440
+So end for each and for every element inside this array will display an option with a value that would
+
+06:19.440 --> 06:26.070
+be sorry I need to surround that we've currently braces OK.
+
+06:26.090 --> 06:28.970
+So this would be local
+
+06:35.240 --> 06:35.480
+now.
+
+06:35.480 --> 06:43.330
+Close the tag and inside it we'll just echo the label now.
+
+06:43.340 --> 06:47.490
+Additionally since this is ah well I select.
+
+06:47.510 --> 06:55.010
+So if the user has already selected our preferred language we should somehow display it or select it
+
+06:56.090 --> 07:04.830
+so we can do that by checking if the user Loco is different than loco
+
+07:09.050 --> 07:12.190
+if it is different than the local that we are currently processing.
+
+07:12.200 --> 07:13.360
+We don't do anything.
+
+07:13.400 --> 07:23.840
+But otherwise we'll echo select it so that some HDMI attribute that we all echo which will select the
+
+07:23.930 --> 07:30.550
+user that actually has the local that was selected so we iterate over each of the locals.
+
+07:30.620 --> 07:38.150
+And if the user is actually user local it's actually the same as the one we are iterating over.
+
+07:38.150 --> 07:40.460
+Then we'll echo select that.
+
+07:41.940 --> 07:43.220
+Okay that's fine.
+
+07:43.220 --> 07:47.690
+Now let's check if this actually works.
+
+07:47.930 --> 07:55.100
+So it should because we have everyone is now with English by default because we have added English as
+
+07:55.100 --> 07:57.250
+the default language.
+
+07:57.260 --> 08:05.560
+Now let users now let's add this possibility for the user to actually modify their language.
+
+08:05.900 --> 08:13.560
+So this update method has our custom request class which is called update user and lets open it.
+
+08:13.880 --> 08:19.010
+So it might make sense to add some validation rules for the language to be chosen.
+
+08:19.010 --> 08:23.250
+So no one will post a language that we do not support.
+
+08:23.510 --> 08:27.080
+So let's add another one this will be low local.
+
+08:27.680 --> 08:32.600
+So another validation rule and now something interesting.
+
+08:32.600 --> 08:39.800
+So normally so far we have written those validation rules just as strings but since this time we actually
+
+08:39.800 --> 08:48.110
+want to read one of those values from the locals constant on the user model and we actually want only
+
+08:48.110 --> 08:49.750
+the keys.
+
+08:50.180 --> 08:51.890
+Then we'll have to do that differently.
+
+08:51.890 --> 08:53.050
+So how can you do that.
+
+08:53.090 --> 08:59.440
+In this cases are you can add an array where the first key would be required.
+
+09:00.580 --> 09:06.180
+So we just surround all those validation rules instead of using this character to split them.
+
+09:06.190 --> 09:11.170
+We are using an array where every element would be another rule.
+
+09:11.380 --> 09:21.120
+So there is this rule class which has an in method and well what this will do is it will check if the
+
+09:21.120 --> 09:32.220
+value is in some specific set and our set is actually the user model up user locales.
+
+09:32.320 --> 09:36.100
+But since this will actually check for the labels.
+
+09:36.100 --> 09:44.970
+So English Espanol Deutsch we actually want the keys and to get the keys we can use that peach B or
+
+09:45.010 --> 09:47.690
+A keys.
+
+09:47.690 --> 09:48.330
+Function
+
+09:52.540 --> 09:53.790
+okay so this would be it.
+
+09:53.800 --> 09:57.060
+Now we have the validation rules defined.
+
+09:57.270 --> 09:58.780
+Let's go back to the controller.
+
+09:58.780 --> 10:07.130
+So this the whole chunk this if statement is only for File Uploading now we should have the request
+
+10:07.220 --> 10:08.720
+validated at this point.
+
+10:08.720 --> 10:14.030
+So we are certain that someone has submitted a language and that it is valid.
+
+10:14.030 --> 10:16.280
+So one of the languages that we support.
+
+10:16.310 --> 10:24.250
+So we can just set user local to request get local and user save
+
+10:28.370 --> 10:35.510
+now we can also change this message to profile was updated because now we can also change their user
+
+10:35.510 --> 10:40.090
+local case so let's refresh that.
+
+10:40.190 --> 10:44.910
+And well you see that this user with I.T. one has the English.
+
+10:44.930 --> 10:48.800
+So let's now change it to Spanish.
+
+10:48.890 --> 10:55.940
+Now it is Spanish if you refer as you can see that the Spanish is selected and then to German and also
+
+10:56.000 --> 10:56.900
+there is the German.
+
+10:56.900 --> 11:00.030
+So if you log out log in again.
+
+11:00.040 --> 11:02.600
+Now we are just verifying that it works.
+
+11:02.630 --> 11:09.200
+Let's go to profile editing and you can see German was selected of course the page is still in Spanish
+
+11:09.320 --> 11:12.110
+or the default language that you have set.
+
+11:12.110 --> 11:15.820
+And this is because we only store this value inside the database.
+
+11:15.830 --> 11:17.370
+So that was the first part.
+
+11:17.450 --> 11:23.420
+Only in the next lecture we will actually implement this functionality so the user chosen language is
+
+11:23.420 --> 11:26.090
+automatically picked up when he logs in.
+
+11:26.180 --> 11:32.630
+And also another thing that lets you change the language on the fly depending on the URL you are using
+
+11:32.630 --> 11:33.650
+to visit the pages.
+
+11:33.650 --> 11:36.200
+So let's do that in the next lecture.

@@ -1,0 +1,277 @@
+WEBVTT
+
+00:00.980 --> 00:06.750
+Now in the last lecture we've seen that if we tried to fudge on a non-existent resource the one that
+
+00:06.750 --> 00:15.170
+we have just deleted or set some reserves that just didn't exist at all like this one with 500.
+
+00:15.420 --> 00:17.500
+We get this not very nice.
+
+00:17.580 --> 00:20.000
+Jason responds.
+
+00:20.010 --> 00:27.960
+Now it's a good time to introduce a concept of so-called fallback routes so fallback route is a route
+
+00:27.990 --> 00:37.030
+that you will define in either web BHP or API BHP and the important thing is that this has to be low
+
+00:37.040 --> 00:42.220
+last route defined inside this specific file.
+
+00:42.240 --> 00:50.100
+Now having this route fallback allows you to return a response when Well for example no other route
+
+00:50.130 --> 00:51.150
+could be matched.
+
+00:52.540 --> 00:56.420
+So you can return some specific Jason response here.
+
+00:56.470 --> 01:05.780
+Now let's say we do not have this route yet And first let's try to go to our route that we know doesn't
+
+01:05.790 --> 01:06.360
+exist.
+
+01:06.360 --> 01:15.150
+Something like this so you also get an exception in this case not found HDP exception.
+
+01:15.150 --> 01:21.130
+So this has been converted and I will show you how bi lateral to adjacent response.
+
+01:21.210 --> 01:24.620
+But first let's add this fallback route.
+
+01:25.260 --> 01:29.350
+Okay now insiders we can return our Jason response.
+
+01:29.370 --> 01:32.120
+So return response.
+
+01:33.690 --> 01:36.740
+Jason and specify some messages.
+
+01:36.990 --> 01:47.400
+So message could be not found and dismantled accept second parameter which should be the status code
+
+01:47.400 --> 01:48.150
+to return.
+
+01:48.150 --> 01:53.880
+And of course with the case of something wasn't found we should return 404.
+
+01:53.880 --> 01:59.250
+This is the standard code for signaling back that something was found.
+
+01:59.400 --> 02:07.860
+Now save the changes and let's go back to postman so you can see that the first thing we have achieved
+
+02:07.890 --> 02:14.070
+is returning a nicer response when something wasn't found.
+
+02:14.160 --> 02:17.610
+And in this specific case something wasn't found.
+
+02:17.640 --> 02:21.540
+Means that the route wasn't marched.
+
+02:21.560 --> 02:27.250
+So now let's modify this we are all back to resource that we have just deleted.
+
+02:27.290 --> 02:34.940
+And try sending this again and this time we get this response that we don't really like.
+
+02:35.600 --> 02:38.980
+So let's see how this all works in Lavell.
+
+02:39.140 --> 02:46.000
+So we have this fallback route which is being defined using a route fallback that only returns are simple
+
+02:46.010 --> 02:57.230
+Jason response when the user accepts Jason back but the most work and settings for this are inside the
+
+02:57.410 --> 03:04.390
+handler BHP class which actually exists in your project and it can be found inside the app.
+
+03:04.400 --> 03:06.370
+Exceptions handler.
+
+03:06.440 --> 03:10.530
+So this is a lot of exception handler now.
+
+03:10.550 --> 03:15.170
+This only has two methods and the one that interests us is to render.
+
+03:15.260 --> 03:21.410
+As you can see from the description it renders an exception into AGW response so when something bad
+
+03:21.410 --> 03:27.460
+happens in your ARB This is deciding what to return back to the user.
+
+03:27.500 --> 03:34.760
+Now you should go by out clicking to this spa and render cold because it actually extends a class from
+
+03:34.770 --> 03:44.930
+larval so let's do that now inside this render method you can see some more details and what we get.
+
+03:44.930 --> 03:48.780
+Barking postman is actually this fragment.
+
+03:49.160 --> 03:56.150
+So first it is checking whether you expect Jason back from the response and it decides that by looking
+
+03:56.210 --> 04:00.390
+at the accept header and then calling either proper G.
+
+04:00.410 --> 04:03.300
+Jason response or proper response.
+
+04:03.380 --> 04:11.240
+So this is being returned back when you accept Jason back and this one when you just want to h the email.
+
+04:11.240 --> 04:18.860
+Now let's also out click prepare Jason response and what you can see now is basically how our response
+
+04:18.890 --> 04:19.840
+get generated.
+
+04:19.850 --> 04:27.830
+So it has some additional methods for converting exception to an array but well that's not very interesting
+
+04:27.830 --> 04:28.620
+right now.
+
+04:28.700 --> 04:40.180
+Just so you know this is being handled in this place but if you will open this render method again you
+
+04:40.180 --> 04:43.020
+can see that there are also some specific cases.
+
+04:43.030 --> 04:51.430
+So Lara VO inside this render method is checking whether the race to reset the raised exception is of
+
+04:51.430 --> 04:58.780
+specific type and then it also is producing a specific response for these particular exceptions like
+
+04:59.200 --> 05:06.130
+authentication exception when you are not authenticated or a validation exception when you validate
+
+05:06.250 --> 05:12.520
+some data coming to your end point and this is invalid if you will take a look at this.
+
+05:12.580 --> 05:21.010
+This authenticated it also is producing a specific response depending whether you expect Jason Bach
+
+05:24.660 --> 05:29.910
+now we can also do something like this inside our handler.
+
+05:29.910 --> 05:38.220
+So before this will pass to this parent render method we can check for something.
+
+05:38.550 --> 05:44.260
+Now in case of the problem that we have right here.
+
+05:44.400 --> 05:53.850
+So when we try to fetch a model that doesn't exist we can check if exception is of specific kind music
+
+05:53.880 --> 06:00.090
+instance of this will just check if the exception object is of specific class.
+
+06:00.150 --> 06:08.820
+Now we want to use model not found exception so mind that you will need to add this use statement here
+
+06:11.670 --> 06:17.160
+and when this is of this specific class and also when request
+
+06:20.800 --> 06:31.090
+expects Jason so those two condemned conditions have to be met we can modify how the response is being
+
+06:31.090 --> 06:31.800
+generated.
+
+06:31.800 --> 06:39.430
+So instead of passing it to this render method of the parent class letting this be handled here and
+
+06:39.430 --> 06:47.710
+generating well an exception converted to Jason we can instead use something like this so we can return
+
+06:47.800 --> 06:49.280
+our full back route.
+
+06:50.530 --> 06:52.770
+So you'll have to call route first.
+
+06:52.960 --> 06:57.880
+We need to import the specific class so let's find it.
+
+06:57.880 --> 07:11.380
+This is this one illuminates support phosphates root and then the method is respond with root so now
+
+07:11.380 --> 07:16.230
+that we have defined our fallback route we can also give a name to it.
+
+07:17.790 --> 07:21.920
+API fallback remember is very important.
+
+07:21.930 --> 07:25.460
+The fallback route has to be last one defined inside the file
+
+07:28.880 --> 07:30.490
+and inside our handler.
+
+07:30.530 --> 07:35.210
+We are telling Lara VO that each should respond with this fallback route.
+
+07:35.360 --> 07:43.700
+If the exception is of the type model not found exception and the request is expecting to get Jason
+
+07:43.700 --> 07:44.200
+back.
+
+07:45.290 --> 07:49.990
+So after this changes if you will try to fetch a model that doesn't exist.
+
+07:51.170 --> 07:53.940
+Yes apparently I've used the wrong method.
+
+07:53.960 --> 08:00.740
+It's not a response we fruit is respond with root and let's try that again.
+
+08:00.750 --> 08:06.750
+Now if you will try to fetch this model that doesn't exist you are also being returned the adjustment
+
+08:06.780 --> 08:16.480
+Jay-Z the Jason that you have defined inside the fallback route so let's recap.
+
+08:16.570 --> 08:24.020
+So first we have added a fallback route just for the API so if some end point wouldn't be found.
+
+08:24.110 --> 08:31.880
+Then this fallback route will automatically return this J some of response with specific status code.
+
+08:32.420 --> 08:42.020
+And also we figured that there is r handler for handling exceptions that has some functionality built
+
+08:42.020 --> 08:50.570
+in and e using a base class and its render method that can render the response based on what the user
+
+08:50.570 --> 08:58.460
+is expecting whether this is Jason or HDL but that it can also return some specific responses based
+
+08:58.490 --> 09:07.760
+on that actual error that happened and we use that to return our specific response by calling route
+
+09:07.910 --> 09:14.930
+respond with route which would return our response using this fallback route that we have just defined
+
+09:16.380 --> 09:25.560
+only if we expect Jason and the exception of kind model not found exception is from and this is always
+
+09:25.560 --> 09:32.590
+from when Lara VO tries to load the model and it couldn't find it it doesn't exist inside the database.
+
+09:32.670 --> 09:37.560
+So this is how you can nicely handle this exceptions in your API.

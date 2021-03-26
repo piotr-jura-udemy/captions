@@ -1,0 +1,220 @@
+WEBVTT
+
+00:00.590 --> 00:06.420
+Now if you find using those keys for the messages that you have to translate a little bit inconvenient
+
+00:06.420 --> 00:13.830
+because you can't remember what actually should be shown in this very place where for example you are
+
+00:13.980 --> 00:17.630
+using defaults as the messages in your language.
+
+00:17.640 --> 00:21.660
+You probably would like to know what this message would actually be.
+
+00:21.660 --> 00:27.630
+So when this file messages grows like the example you've seen here in validation you might not really
+
+00:28.020 --> 00:32.070
+remember what actually would be the message.
+
+00:32.070 --> 00:39.780
+So fortunately there is another way much simpler to story or translations in Lavell and it is to use
+
+00:39.780 --> 00:41.540
+J some files.
+
+00:41.940 --> 00:43.050
+So how to do that.
+
+00:43.500 --> 00:51.810
+So inside your luck folder you will create adjacent file with the short name of the language.
+
+00:51.810 --> 00:54.960
+And Jason extension.
+
+00:54.960 --> 00:58.410
+So this would have a typical Jason structure.
+
+00:58.410 --> 01:07.760
+And now what you can do is the key can be exact text to be translated like Welcome to lot of all and
+
+01:07.770 --> 01:10.980
+the value should be the translation in a language
+
+01:14.350 --> 01:17.100
+something like this.
+
+01:17.140 --> 01:26.310
+Now let's create also this file for Spanish so e as Jason copy the contents from initial English one
+
+01:28.420 --> 01:29.450
+and also let's.
+
+01:29.470 --> 01:31.660
+Well the language is in Spanish.
+
+01:31.660 --> 01:35.770
+So what we have is being a window a lot of El
+
+01:38.750 --> 01:41.160
+so let's move this translation to Spanish.
+
+01:41.180 --> 01:41.480
+OK.
+
+01:41.480 --> 01:54.440
+Now what you can do is you can very simply just use this double underscore and here immediately paste
+
+01:54.440 --> 01:56.480
+the text that you want translated.
+
+01:57.560 --> 01:59.690
+So this would be welcome to a lot of El
+
+02:05.310 --> 02:08.470
+so let's say that we are using Jason here so it will be clear.
+
+02:08.490 --> 02:13.200
+Now save the changes and let's take a look.
+
+02:13.200 --> 02:15.050
+Using Jason Benny Randle.
+
+02:15.190 --> 02:16.130
+A lot of.
+
+02:16.470 --> 02:24.060
+So this is in Spanish so that might be much simpler or much clearer to you to keep translations in this
+
+02:24.060 --> 02:31.740
+format so you will just put that on the Jason File and the key would be the actual message that would
+
+02:31.740 --> 02:39.510
+be that has to be translated and then you can just add this to your files and then it will be translated
+
+02:39.540 --> 02:41.940
+to let's say Spanish or German.
+
+02:42.390 --> 02:49.710
+And the important thing is that you can keep those files together so you can use the Jason files and
+
+02:49.710 --> 02:51.450
+those BHP files together.
+
+02:51.450 --> 02:57.660
+So it's up to your preference sometimes when you use some external packages they might force you to
+
+02:57.660 --> 03:00.210
+use BHP and store everything.
+
+03:00.210 --> 03:02.970
+Ask BHP are raised and that's fine.
+
+03:02.970 --> 03:09.270
+You can also keep some messages for example some complicated wear or long messages like messages for
+
+03:09.360 --> 03:11.570
+e-mails where you have a lot of text.
+
+03:11.850 --> 03:18.540
+You might prefer to just keep them using short key like welcome message in e-mail which might even have
+
+03:18.540 --> 03:25.200
+like free paragraphs or something and then for the shorter ones or something that can be put to your
+
+03:25.200 --> 03:29.280
+template you can just put that to the Jason File.
+
+03:29.400 --> 03:36.510
+Now if you wonder how do you pass any additional parameters using Jason files it's all so simple so
+
+03:36.540 --> 03:44.820
+let's add something like Hello name and in English this would be Hello.
+
+03:44.820 --> 03:49.880
+Name Now let's move that to Spanish
+
+03:53.000 --> 03:55.050
+or LA Ola.
+
+03:55.350 --> 04:01.680
+Now mind that if you do not know that in Jason everything is surrounded by this curly braces.
+
+04:01.680 --> 04:04.520
+Jason can also have a raise but we won't need them here.
+
+04:05.130 --> 04:10.170
+But the text inside Jason fires have to have double quotes.
+
+04:10.170 --> 04:15.310
+So if you need to use double quotes in your translation you have to escape it like that.
+
+04:15.450 --> 04:17.780
+You cannot use a single pause in Jason.
+
+04:17.790 --> 04:23.910
+I know it might be obvious to some of you guys but for others it might not be.
+
+04:23.940 --> 04:29.020
+Now let's try this example.
+
+04:29.140 --> 04:31.890
+Now how do you pass parameters well exactly the same.
+
+04:31.900 --> 04:39.370
+But what we have to do is you have to type the text including the parameters so hello naming this case
+
+04:39.410 --> 04:44.470
+and then inside the array you will actually pass the parameter needed.
+
+04:44.530 --> 04:46.930
+So let's try it like that
+
+04:50.250 --> 04:55.440
+and the second example using Jason and passing the name parameter which you can see here
+
+05:01.830 --> 05:04.910
+apparently this didn't work because we are.
+
+05:05.090 --> 05:05.390
+Yes.
+
+05:05.390 --> 05:07.250
+So the key was wrong in Spanish.
+
+05:07.250 --> 05:11.300
+So the key has to be the same as in the original language.
+
+05:11.300 --> 05:13.450
+So the one that you will use in templates.
+
+05:13.460 --> 05:17.620
+So since I'm using hello here then.
+
+05:17.690 --> 05:23.750
+Well of course the key for Spanish has to be in English to only the value is actually in Spanish.
+
+05:23.870 --> 05:29.000
+But well if you're a mother a language is Spanish you can also use keys us in Spanish.
+
+05:29.000 --> 05:30.260
+That's perfectly fine.
+
+05:30.260 --> 05:32.030
+Doesn't have to be in English.
+
+05:32.180 --> 05:34.130
+I would say the changes and now it's correct.
+
+05:34.130 --> 05:35.560
+So all are built.
+
+05:36.110 --> 05:38.080
+So we will use both of those methods.
+
+05:38.110 --> 05:45.010
+So we'll also use this BHP files and then we'll also use Jason's for most of our translations.
+
+05:45.170 --> 05:49.690
+So let's actually move to the next lecture and do something more interesting.

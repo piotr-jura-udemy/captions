@@ -1,0 +1,73 @@
+WEBVTT
+
+00:01.080 --> 00:07.620
+Sometimes you might want to see the preview of how the email that would be sent would look like inside
+
+00:07.620 --> 00:08.490
+the browser.
+
+00:08.520 --> 00:16.080
+For whatever reasons either for debugging purposes or you might even want to add such feature to your
+
+00:16.080 --> 00:22.620
+application that someone before they actually send an email let's say in our newsletter or something
+
+00:22.620 --> 00:28.900
+that would be read by many people they would like to first see how this email would look like.
+
+00:28.980 --> 00:34.110
+So we are the simple end point to our application inside the web.
+
+00:34.110 --> 00:45.780
+BHP let's just add our route let's call it May and then closure in inside disclosure we will just simply
+
+00:45.780 --> 00:47.530
+read a comment.
+
+00:47.610 --> 00:50.100
+The first one so it doesn't really matter which one.
+
+00:50.130 --> 00:59.310
+So make sure you have some comments in your database so we fetch this comment model to actually render
+
+00:59.310 --> 00:59.510
+it.
+
+00:59.520 --> 01:07.530
+And now to render an email preview what you have to do is basically from this route or even a controller
+
+01:07.680 --> 01:12.000
+that only depends where you would like to implement that.
+
+01:12.090 --> 01:16.930
+You just return a new instance of this Malabo class.
+
+01:17.100 --> 01:23.270
+So in our case this would be comment post that mark down so we pass the necessary comment to it.
+
+01:24.320 --> 01:25.400
+And basically that's it.
+
+01:25.430 --> 01:26.650
+So now we should have.
+
+01:26.660 --> 01:34.820
+This may level route so let's copy that and inside our application let let's visit a lot of older tests
+
+01:34.850 --> 01:42.680
+less male level and now you can see how the email that would be sent to this user which actually this
+
+01:42.680 --> 01:46.310
+comment relates to would look like so we can easily preview that.
+
+01:46.310 --> 01:53.840
+Of course you can out much more possibilities you can enable previews for specific things inside your
+
+01:53.840 --> 01:56.630
+application you can just protect this route.
+
+01:56.630 --> 02:03.710
+So on the other means can see it so we can do plenty of things but generally this how easy it is to
+
+02:03.710 --> 02:07.640
+generate a preview of what will be sent inside an email.

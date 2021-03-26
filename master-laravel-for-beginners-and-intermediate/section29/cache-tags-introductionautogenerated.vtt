@@ -1,0 +1,199 @@
+WEBVTT
+
+00:00.330 --> 00:06.600
+Now in the last lecture when we have set up readies us our storage for the cash and you should already
+
+00:06.600 --> 00:09.190
+do that to learn from this lecture.
+
+00:09.390 --> 00:15.360
+We said that cash stocks can only be used if your storage is either readies or ma'am cash.
+
+00:15.420 --> 00:18.060
+So it's not supported for us storage.
+
+00:18.060 --> 00:23.110
+That is database like my school or the file system.
+
+00:23.130 --> 00:28.530
+Now let's see what actually are the cash stocks and how can we use them to our benefit.
+
+00:28.800 --> 00:32.480
+So for this let's run to be artisan thinker.
+
+00:32.490 --> 00:35.950
+And now we can play around a little bit with the cash.
+
+00:36.030 --> 00:42.300
+So first we'll try to store an item inside the cash and we'll use tax for that.
+
+00:42.990 --> 00:49.710
+So you can access the cash for Sade but first instead of calling put method which will store something
+
+00:49.710 --> 00:52.840
+inside the cash you need to use tags.
+
+00:53.040 --> 00:58.080
+So we'll go ahead and use an example from larval documentation.
+
+00:58.080 --> 01:01.820
+So we will like to tag this item with the people tag.
+
+01:02.130 --> 01:05.090
+And also an artists tag.
+
+01:06.510 --> 01:14.030
+And only then we can use port and we'll store it under the key John value can be.
+
+01:14.050 --> 01:17.680
+Hello I'm I'm John.
+
+01:17.950 --> 01:20.610
+And we'll start that for 10 minutes.
+
+01:23.290 --> 01:30.460
+Now the thing with cash stocks is that you have to always specify the tax when you store an item.
+
+01:30.460 --> 01:37.710
+And also you have to specify the same exact least of tax if you want to read the item from the cash.
+
+01:37.750 --> 01:39.130
+So that's really important.
+
+01:39.130 --> 01:45.220
+I will show you in a moment what will happen if you want to read an item and you don't provide the tax
+
+01:45.430 --> 01:48.940
+which you have provided when storing an item.
+
+01:48.940 --> 01:53.500
+So now to read this item we'll have to do cash tags.
+
+01:53.590 --> 02:04.270
+We'll have to say that the tax where people and artists only then we can use get and read the item under
+
+02:04.270 --> 02:04.900
+the key.
+
+02:04.960 --> 02:07.500
+John and we have the virus.
+
+02:07.520 --> 02:09.680
+Hello I am John.
+
+02:09.830 --> 02:20.090
+Now if you will like to do cash get and read the key John it won't read that so it's not available.
+
+02:20.090 --> 02:27.380
+So this is basically I would say it's a problem it doesn't make tax usable as you think you they could
+
+02:27.380 --> 02:30.350
+be but this is the way they work.
+
+02:30.350 --> 02:37.250
+So to store an item you have to provide a list of tax but then to read an item you always have to provide
+
+02:37.280 --> 02:40.190
+a list of the same tags.
+
+02:40.220 --> 02:43.830
+So now let's see how the tax can be useful.
+
+02:44.270 --> 02:52.340
+So let's store another item using cash tax will also other people tag.
+
+02:52.740 --> 02:58.050
+But this time another tag would be outers.
+
+02:58.260 --> 03:07.930
+So now we can call pooled and the key would be on and the value can be Hello I'm um.
+
+03:08.180 --> 03:14.340
+We'll also store that for 10 minutes now to read this value.
+
+03:14.350 --> 03:21.310
+You will also have to provide a list of tax like people and outers.
+
+03:21.310 --> 03:22.690
+So let's do that.
+
+03:22.690 --> 03:28.660
+Get Um and now you can read this volume.
+
+03:29.080 --> 03:37.180
+So the useful thing with tax is that you can actually you remove all the cash items that now can contain
+
+03:37.240 --> 03:42.460
+at least one of those stocks that you have provided for the above items.
+
+03:42.460 --> 03:52.630
+So let's see we have store John using people and artists stocks but we have also stored arm using people
+
+03:53.260 --> 03:54.670
+and outers sorry.
+
+03:54.670 --> 04:01.170
+So this John was using people and artists and using people and outdoors.
+
+04:01.660 --> 04:06.670
+So now we can actually remove items and only provide one tag.
+
+04:07.180 --> 04:11.560
+So how we will do this is we can call cache tags.
+
+04:11.710 --> 04:21.680
+We can use the common tag like people and then call flash and this will remove all the items that were
+
+04:21.680 --> 04:23.110
+cached with people.
+
+04:23.120 --> 04:29.120
+So here you actually don't have to provide all the taxes that were used to initially store an item.
+
+04:29.120 --> 04:35.240
+And thanks to that we'll remove every cache item that has that people tag.
+
+04:35.240 --> 04:40.010
+And in our case it happens to be also John but also an.
+
+04:41.330 --> 04:50.190
+So now let's copy this item copy this line where we have Red John and now you can see that it is no.
+
+04:50.240 --> 04:58.580
+But also if you would try to read the element under the key arm you also see that it is normal.
+
+04:58.580 --> 05:05.210
+So what you can use it for is if you have a certain category of cache items inside your application
+
+05:05.240 --> 05:07.300
+let's say we have a simple block.
+
+05:07.330 --> 05:15.290
+So we might cache some items using the block post stack and some different tacks but if we would like
+
+05:15.290 --> 05:23.480
+to remove those those items let's say in this simple application we cache items when we open a blog
+
+05:23.480 --> 05:23.840
+post.
+
+05:23.840 --> 05:32.180
+So this could be cached using the blog post stack but also we can cache items here on the most commented
+
+05:32.180 --> 05:32.840
+blog posts.
+
+05:32.840 --> 05:40.880
+They also can contain our blog post stack and then if we want to refresh our application like we'll
+
+05:41.270 --> 05:47.790
+see on example the next lecture about let's say we want to reset the cache every time around midnight.
+
+05:48.020 --> 05:54.560
+You can do that using a simple call to the cache stocks and use flash.
+
+05:54.560 --> 06:01.990
+So this will remove all the cash that was created using this particular tack.
+
+06:02.000 --> 06:09.680
+So this is a very useful option to use cash stocks but mostly it is about removing a group of items.

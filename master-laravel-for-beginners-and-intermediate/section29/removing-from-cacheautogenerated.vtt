@@ -1,0 +1,235 @@
+WEBVTT
+
+00:00.600 --> 00:07.050
+In this lecture we'll learn how we can remove the data from the cache because sometimes you need to
+
+00:07.050 --> 00:14.040
+do that explicitly and as an example we'll use a page with an individual blog post.
+
+00:14.040 --> 00:21.060
+So first we'll catch this blog post when someone visits the page but then we'll edit this blog post
+
+00:21.120 --> 00:29.120
+title to see that it wasn't updated so then we'll have to manually remove this from the cache.
+
+00:30.450 --> 00:39.810
+So let's go to the post controller show action and we'll start a blog post inside the variable so we'll
+
+00:39.810 --> 00:42.080
+be using the cash for site.
+
+00:42.120 --> 00:51.540
+Remember metals what we did before and now in this case we have to come up with some dynamic he and
+
+00:51.540 --> 00:59.940
+what I mean by dynamic is we won't just use keys like here most active or most active last month.
+
+00:59.940 --> 01:06.960
+It has to contain some identifier of the post because otherwise you will be showing users the same post
+
+01:07.080 --> 01:09.480
+all the time.
+
+01:09.480 --> 01:13.140
+So we have to do something like blog post
+
+01:16.910 --> 01:23.720
+and then add the blog post ideas or any other unique parameter of the model so.
+
+01:23.720 --> 01:29.780
+Also notice that since we will be we'll start caching our data.
+
+01:29.780 --> 01:36.890
+It might be a good idea to come up with some nomenclature of how you'd like to call this case because
+
+01:37.070 --> 01:44.660
+if you will have more and more keys than using keys like most active or most active last month for most
+
+01:44.660 --> 01:47.400
+comment it doesn't really say much about them.
+
+01:47.540 --> 02:06.390
+So maybe let's change that to blog post comment at and here users most active and finally users most
+
+02:06.570 --> 02:07.500
+active.
+
+02:07.710 --> 02:09.110
+Last month
+
+02:14.110 --> 02:14.470
+OK.
+
+02:14.480 --> 02:22.810
+Now we would like to also store this blog post for 60 Minutes and lets out a closure that will actually
+
+02:22.810 --> 02:25.390
+fetch this blog post together with the comments
+
+02:29.170 --> 02:31.770
+so we have to return it from disclosure
+
+02:35.090 --> 02:41.040
+and now we'll use this data and pass it to the view okay.
+
+02:41.070 --> 02:50.820
+So let's go to the web browser and you can see that for this page Lavell has to make four queries.
+
+02:50.910 --> 02:56.310
+Now if you will now we have a problem undefined variable I.D..
+
+02:56.580 --> 03:04.950
+And it happened because the closure cannot access variables which are from the outside scope and by
+
+03:04.950 --> 03:05.460
+scope.
+
+03:05.490 --> 03:09.330
+I mean the closure scope is only here.
+
+03:09.330 --> 03:14.270
+So anything that was defined outside it is not available to the closure.
+
+03:14.430 --> 03:19.920
+So to make it available you have to add use and specify a variable name.
+
+03:20.460 --> 03:23.280
+So this time it will work.
+
+03:24.030 --> 03:25.710
+OK so we have a blog post.
+
+03:25.860 --> 03:32.760
+Now it was cached under the blog post with the I.D. key which was forty seven in that case.
+
+03:32.760 --> 03:38.250
+And after you refresh you can see that now it only made two queries.
+
+03:38.250 --> 03:41.110
+So this is cached.
+
+03:41.140 --> 03:49.150
+So now let's see what will happen if we will get to the main page and mind that I am now logged in as
+
+03:49.150 --> 03:49.660
+other means.
+
+03:49.660 --> 03:50.560
+So if you are not.
+
+03:50.560 --> 04:00.600
+Then make sure you log in and you will edit this post so let's change the title to something valid and
+
+04:00.600 --> 04:07.800
+what you can see is that the post was updated but the name remained the old one because it is being
+
+04:07.800 --> 04:09.050
+returned from cache.
+
+04:09.060 --> 04:17.040
+You can see here in the queries that no query was made to fetch this blog post but if you will go to
+
+04:17.040 --> 04:24.870
+the blog post list here you can see that the title was changed because we do not cache this part.
+
+04:24.870 --> 04:30.330
+So this is I think you will have to know and you will have problems with that all the time that you
+
+04:30.330 --> 04:34.680
+have to think what you should cache for how long.
+
+04:35.070 --> 04:38.390
+And also you have to worry about clearing the cache.
+
+04:38.420 --> 04:43.080
+So we have to remove items from the cache when the cache is no longer valid.
+
+04:43.110 --> 04:49.050
+So data has to be fetched again from the database.
+
+04:49.050 --> 04:57.210
+Now what you you can do to achieve that with models for example is you can use events.
+
+04:57.210 --> 05:01.250
+So here inside the blog post model we have inside the boot method.
+
+05:01.260 --> 05:08.520
+We have two methods that we handle the deleting and restoring and it is to delete all the comments and
+
+05:08.520 --> 05:10.230
+restore them.
+
+05:10.230 --> 05:16.690
+So now we can add another event handler and the even name is updating.
+
+05:16.730 --> 05:22.760
+So when the post will be updating we can reset the cache for this particular item
+
+05:25.850 --> 05:35.090
+so let's are the closure and now we will have to use the cash for seed so make sure you either press
+
+05:35.090 --> 05:44.360
+enter in Visual Studio code so the import is added or add the import manually to this namespace.
+
+05:44.360 --> 05:54.590
+So now there is a method called forget and the only argument it accepts is the actual cash key name
+
+05:56.240 --> 05:58.490
+so if will go to the post controller.
+
+05:58.490 --> 06:00.890
+This is our cash key.
+
+06:00.890 --> 06:04.190
+So it contains blog post with the I.D..
+
+06:04.610 --> 06:09.770
+And here we can read it from the models or blog post I.D..
+
+06:10.400 --> 06:17.990
+Now from this point of time when we will attempt to update this to something else let's use Y for example
+
+06:19.400 --> 06:20.890
+and we update the blog post.
+
+06:20.890 --> 06:27.050
+You can see that now it fetch the fresh data from the database and you can always check that on the
+
+06:27.050 --> 06:28.370
+query stop.
+
+06:28.370 --> 06:31.360
+So you can see it reads from the blog post stable.
+
+06:31.430 --> 06:33.610
+And also it reads from the comments table.
+
+06:33.620 --> 06:37.700
+That's why it has the fresh data presented.
+
+06:37.730 --> 06:43.340
+Now the next time you visit this page you can see that queries for the blog post and comments are no
+
+06:43.340 --> 06:44.100
+longer made.
+
+06:44.120 --> 06:50.990
+And this is because it is now being read from the cache and it happens again on the all subsequent calls
+
+06:50.990 --> 06:52.430
+to this page.
+
+06:52.430 --> 06:56.780
+But when will edit this blog post then it will reset this cache.
+
+06:58.190 --> 07:04.310
+So this is how can you remove the data when you know it is no longer fresh and needs to be updated.
+
+07:04.340 --> 07:06.260
+That's just an example.
+
+07:06.260 --> 07:13.700
+Generally you should use cache forget and provide the key the same key that you used to remember this
+
+07:13.700 --> 07:16.240
+data in cash in the first place.

@@ -1,0 +1,52 @@
+WEBVTT
+
+00:00.950 --> 00:07.700
+Let's take a bird's eye overview of the tools available in the Laravel framework to make it easy to
+
+00:07.700 --> 00:09.180
+work with databases.
+
+00:09.680 --> 00:12.910
+By the way, this diagram is available for you to download.
+
+00:13.670 --> 00:19.540
+First off, reading and storing data can be achieved using Roskill.
+
+00:19.550 --> 00:22.490
+Queries are more object oriented.
+
+00:22.490 --> 00:24.820
+Alternative is to use query builder.
+
+00:25.790 --> 00:30.030
+It lets you build queries by fluently calling methods.
+
+00:30.710 --> 00:33.650
+And finally, there is the eloquent or M.
+
+00:35.110 --> 00:42.760
+In this course, we will mostly use eloquent is the Laravel implementation of the active record button.
+
+00:43.210 --> 00:50.590
+Active record, in summary, means that each database table will have its own dedicated P2P class,
+
+00:50.950 --> 00:58.740
+also called model model can be used to create, modify and delete table records.
+
+00:59.290 --> 01:05.620
+Note the query builder is often used together with eloquent were more complicated.
+
+01:05.620 --> 01:15.850
+Queries are made to create, modify and delete database tables you can use migration's each migration
+
+01:15.850 --> 01:22.440
+is a class that defines what changes should be applied to the database schema.
+
+01:23.140 --> 01:27.120
+These changes can then be applied and rolled back.
+
+01:28.510 --> 01:34.160
+Finally, seeding tools lets you easily populate the database with data.
+
+01:34.750 --> 01:42.880
+This can be either real data needed in your application or data generated for testing purposes.

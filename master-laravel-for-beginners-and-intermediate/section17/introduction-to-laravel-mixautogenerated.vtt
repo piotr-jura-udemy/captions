@@ -1,0 +1,109 @@
+WEBVTT
+
+00:00.970 --> 00:10.470
+Laravel comes equipped with tools for asset management, even though our application is written in their
+
+00:10.600 --> 00:19.310
+style sheet and a JavaScript asset management is done using notes G.S., the JavaScript runtime notes
+
+00:19.330 --> 00:26.090
+Jesus comes with their NPM, the note package manager for JavaScript.
+
+00:26.110 --> 00:28.810
+It is what the composer is to be.
+
+00:29.930 --> 00:36.590
+All front and libraries will be fetched menaged and versioned using NPM.
+
+00:38.930 --> 00:47.180
+Park is a JavaScript module bundler, by definition, by capabilities, it makes it easy to use JavaScript
+
+00:47.180 --> 00:57.320
+modules, Bundall and Minify, JavaScript and Access Code and use CSS preprocessor slike less Sarsae
+
+00:57.320 --> 01:06.170
+stylus or posts says it allows you to use their most recent versions of JavaScript and compiles the
+
+01:06.170 --> 01:12.170
+code the way it will work also on older browsers while being a great tool.
+
+01:12.570 --> 01:17.450
+It's a tool you have to learn how to use and it is not trivial.
+
+01:17.960 --> 01:20.180
+That's why a lot of a mix exists.
+
+01:21.020 --> 01:24.260
+It makes using web bug features dead simple.
+
+01:25.870 --> 01:33.100
+Let's have an overview of what features the combination of these tools give you, as mentioned, preprocessing
+
+01:33.100 --> 01:41.140
+success, possibility to use modern JavaScript without worrying about the browser support, extracting
+
+01:41.140 --> 01:48.370
+vendor libraries, all third party libraries code can go to one file and your application code into
+
+01:48.370 --> 01:52.930
+another file, improving your site caching abilities.
+
+01:53.680 --> 01:55.420
+Hot module replacement.
+
+01:56.360 --> 02:04.340
+It means superfast recompletion time, this feature can recompile and replace only parts of your application,
+
+02:04.340 --> 02:12.470
+front and code that has changed during the development of automatic versioning improves browser caching
+
+02:12.470 --> 02:13.520
+of your assets.
+
+02:14.120 --> 02:22.670
+After every compilation your assets gets are unique, harsh, appended to filenames using viewed single
+
+02:22.670 --> 02:26.240
+file components is supported out of the box.
+
+02:26.660 --> 02:28.310
+No configuration is needed.
+
+02:29.740 --> 02:38.140
+You can use JavaScript modular system, which is something like namespace in B and finally, and maybe
+
+02:38.140 --> 02:43.660
+most importantly, your assets get minified out of the box.
+
+02:43.880 --> 02:46.930
+No configuration is needed on your side.
+
+02:48.180 --> 02:54.600
+If you don't have much JavaScript or front end experience, your head may be spinning from all these
+
+02:54.600 --> 03:02.280
+buzzwords you don't have to worry for as most of these features are there for you to work transparently.
+
+03:02.910 --> 03:04.470
+That's the beauty of Laravel.
+
+03:04.500 --> 03:11.610
+The most advanced state of the art features of today's web development are available even to absolute
+
+03:11.610 --> 03:12.300
+beginners.
+
+03:13.200 --> 03:15.350
+Try to look at this this way.
+
+03:15.810 --> 03:18.660
+You don't need to be a mechanic to drive a car.
+
+03:19.230 --> 03:24.240
+If a thing is interesting to you, you might start tinkering and learn the inner workings.
+
+03:24.630 --> 03:26.020
+But you don't have to.
+
+03:26.280 --> 03:29.270
+You can still drive and get the job done.

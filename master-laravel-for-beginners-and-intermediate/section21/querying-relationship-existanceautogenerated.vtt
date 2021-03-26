@@ -1,0 +1,265 @@
+WEBVTT
+
+00:00.480 --> 00:05.930
+Now let's go back to making some more complicated queries and you will need thinker for that.
+
+00:05.930 --> 00:08.760
+So make sure you have started it from your comment line.
+
+00:09.480 --> 00:17.130
+So in this lecture I will show you an example where we'll see if blog posts have any comments.
+
+00:17.190 --> 00:24.500
+So basically we'll try to fudge only the blog posts that happen to have some comments.
+
+00:24.540 --> 00:28.490
+So first of course we'll see what blog posts do we have.
+
+00:28.860 --> 00:32.000
+So we'll see what we get by calling blog posts.
+
+00:32.160 --> 00:38.070
+Oh and I happen to have free blog posts inside the database so we got them all.
+
+00:38.070 --> 00:44.040
+But remember that we haven't been adding any comments to those two last blog posts only to the first
+
+00:44.040 --> 00:44.750
+one.
+
+00:44.910 --> 00:50.180
+So let's see how we can fetch only the blog posts that happened to have some comments.
+
+00:51.240 --> 01:01.030
+So we'll do a blog post and instead of with we'll use has and now will use the name of this relation
+
+01:01.030 --> 01:09.260
+which is comments and since this will create a query we need to use get to get the actual result of
+
+01:09.260 --> 01:17.810
+this and you can see that we only got the blog post with Ida too which would match what we have inside
+
+01:17.810 --> 01:18.650
+the database.
+
+01:18.650 --> 01:23.420
+As you can see there is no comment with that idea other than two.
+
+01:23.840 --> 01:28.570
+So we only got one result now.
+
+01:28.580 --> 01:37.860
+Let's verify if this is actually the case and let's create another comment so we can assign it to a
+
+01:37.860 --> 01:44.910
+new variable let's create new comment.
+
+01:45.080 --> 01:47.630
+We have to set the content of it.
+
+01:47.630 --> 01:54.260
+It can be anything like ABC and now will save it to some blog post.
+
+01:54.290 --> 02:00.830
+But as you remember we can also do it from the other side so we can set the blog post I did directly
+
+02:00.830 --> 02:01.750
+on the comment.
+
+02:02.160 --> 02:07.830
+Let's see what we have inside that database may be will assign it to the blog post free.
+
+02:07.850 --> 02:12.740
+So let's do that now and finally we have to save it.
+
+02:12.730 --> 02:14.860
+So comment save
+
+02:17.790 --> 02:18.170
+OK.
+
+02:18.190 --> 02:24.850
+Now let's clear the screen and see what we will get by calling this again so blog post has
+
+02:27.880 --> 02:28.660
+comments.
+
+02:28.750 --> 02:29.920
+Get in.
+
+02:30.220 --> 02:36.460
+Now we get to blog posts since this has five comments and we have just added a comment to this blog
+
+02:36.460 --> 02:38.170
+post with ideas free.
+
+02:38.230 --> 02:41.920
+So that's why we got two blog posts back.
+
+02:41.950 --> 02:48.040
+So this is how you would query for all the models that have this certain relationship.
+
+02:48.040 --> 02:53.500
+And basically I don't mean that they have it defined because obviously all of the blog posts have it
+
+02:53.500 --> 03:02.090
+defined but with all their blog posts that happen to have at least one comment as saying so one.
+
+03:02.410 --> 03:07.480
+So the relation contains at least one element assigned.
+
+03:07.530 --> 03:09.620
+So this was pretty simple.
+
+03:09.620 --> 03:17.320
+Now let's clear the screen and add some more comments so we'll create new instance of the comment model
+
+03:17.410 --> 03:24.170
+assign content to it which of course can be anything whatever comes to your mind.
+
+03:24.300 --> 03:29.920
+And this time will also assign it to the blog post with Ida free.
+
+03:29.960 --> 03:31.090
+We'll save this comment.
+
+03:31.090 --> 03:35.470
+So now the blog post with Ida free will have two comments.
+
+03:35.470 --> 03:38.230
+Clear it and create another comment.
+
+03:38.230 --> 03:45.940
+Obviously it's really time to learn about database seeding because it's becoming really a pain to write
+
+03:46.060 --> 03:48.650
+all this code manually.
+
+03:48.700 --> 03:50.880
+So we are creating another comment.
+
+03:51.040 --> 03:57.880
+And this time we'll assign it to our last blog post which let me check.
+
+03:57.880 --> 04:00.620
+Happens to have ideas for.
+
+04:00.800 --> 04:05.710
+So whatever you have inside your database might be different.
+
+04:05.770 --> 04:10.050
+And now we are saving this last comment.
+
+04:10.350 --> 04:13.880
+So let's see if we have all those comments inside the database.
+
+04:13.890 --> 04:21.380
+So there should be one blog post with five comments one blog post with free comments and the last one
+
+04:21.470 --> 04:22.980
+only has one comment.
+
+04:23.540 --> 04:25.620
+Okay now let's clear the screen.
+
+04:25.790 --> 04:34.450
+And this time will try to fetch all the blog posts that happened to have at least two comments.
+
+04:34.490 --> 04:38.870
+So again we'll be using that has static method.
+
+04:39.830 --> 04:45.950
+We specify the relation name which is comments but now we can add a condition.
+
+04:45.950 --> 04:51.950
+So we want this to be more or equal to.
+
+04:52.360 --> 04:59.200
+So now we want to fetch all the blog posts that have at least two comments so you can see that we got
+
+04:59.200 --> 05:01.800
+back to elements that I wish I did too.
+
+05:01.810 --> 05:09.130
+And we've IDI free which would match what we expect because the last blog post with 84 has only one
+
+05:09.490 --> 05:11.410
+comment.
+
+05:11.450 --> 05:13.430
+Now let's see another example.
+
+05:13.430 --> 05:21.680
+So let's clear it up and take a look at the data base so I R that is comments like ABC for a reason
+
+05:21.710 --> 05:29.450
+because now we would like to fetch all the blog posts that have have some comments but they would have
+
+05:29.450 --> 05:32.360
+to also contain the text ABC.
+
+05:32.360 --> 05:40.130
+So if you haven't created it like that make sure that you will create at least two comments for two
+
+05:40.130 --> 05:44.030
+blog posts that will have the ABC text inside it.
+
+05:46.540 --> 05:48.000
+So let's see how we can do that.
+
+05:48.010 --> 05:58.810
+So we assign it to posts and we'll use blog post where has this time so we'll do an additional query
+
+05:58.840 --> 06:08.330
+and it will accept two parameters so we want to fetch from the comments and the second parameter would
+
+06:08.330 --> 06:10.170
+be closure.
+
+06:10.310 --> 06:19.500
+So this would get past the query object from which we can execute more complicated query and we'll do
+
+06:19.510 --> 06:21.390
+query where.
+
+06:21.400 --> 06:30.090
+So where is the method of this query object that we get past and we want to check the content property
+
+06:30.150 --> 06:33.600
+of our comments we'll use the like.
+
+06:33.600 --> 06:41.940
+Operator And we want to contain everything we want to find everything that has ABC inside it
+
+06:44.830 --> 06:46.690
+so don't forget the semicolon.
+
+06:46.690 --> 06:56.210
+Now we had to close this function close the call to where has And finally we would like get.
+
+06:56.240 --> 06:59.340
+So we want to get this result.
+
+07:00.140 --> 07:07.010
+And as you can see and as we expected we can get back to blog posts and they are with the idea free
+
+07:07.430 --> 07:09.440
+and I.D. for.
+
+07:09.710 --> 07:14.370
+So let's take another look at our database and how it looks like.
+
+07:14.660 --> 07:22.250
+So we can see those first five comments assigned to the blog post with Ida doesn't have a b c text inside
+
+07:22.250 --> 07:29.360
+it but those last free ones do have it and they happen to be assigned to the blog post with ideas free
+
+07:29.770 --> 07:31.190
+and ideas for.
+
+07:31.730 --> 07:39.830
+So we fudged all the blog posts that contain certain text inside their comments by using this where
+
+07:40.040 --> 07:42.110
+has static method.

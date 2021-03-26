@@ -1,0 +1,79 @@
+WEBVTT
+
+00:00.930 --> 00:08.820
+Now before we move to the database seeding concept let's first run our tests and see if they still do
+
+00:08.820 --> 00:09.300
+work.
+
+00:09.330 --> 00:17.070
+So remember that we are running our tests using the obscure light database not the one we are using
+
+00:17.070 --> 00:19.980
+for our application which is my askew url.
+
+00:20.010 --> 00:28.800
+So there are certain differences and some of this behavior of the school like database might be different.
+
+00:28.800 --> 00:36.450
+So after running the tests you can see that we have a lot of errors and it seems to be a recurring error
+
+00:36.930 --> 00:41.960
+that you cannot add are not new column with default value.
+
+00:41.970 --> 00:43.560
+No.
+
+00:43.560 --> 00:53.220
+So this relates to our latest migration where we are the user I.D. column which is not new at all but
+
+00:53.240 --> 01:00.630
+in Eskew a light you cannot add a note no column without specifying our default value even if the table
+
+01:00.660 --> 01:02.010
+is empty.
+
+01:02.010 --> 01:09.210
+So we had that problem before with my school database but then we had records inside the database and
+
+01:09.210 --> 01:15.770
+now the database is to recreate it every time we run our specific test.
+
+01:15.810 --> 01:23.970
+Well it is automatically recreated by Lavell but it complains about this particular case that we create
+
+01:24.300 --> 01:29.240
+not no column and do not specify our default value.
+
+01:29.880 --> 01:37.980
+So to walk around this error we might use the same construct as we used in different migrations to check
+
+01:38.010 --> 01:39.440
+the environment.
+
+01:39.450 --> 01:44.120
+D.B. connection if it is askew l like testing.
+
+01:44.400 --> 01:52.030
+So let's copy this fragment here and do specific migration for that obscure light.
+
+01:52.290 --> 01:56.290
+So let's move this as the.
+
+01:56.300 --> 02:05.890
+Behavior for anything else than the obscure light tests and for school light tests will provide a dummy
+
+02:06.010 --> 02:09.580
+default value since this column is an integer.
+
+02:09.580 --> 02:12.100
+We can specify zero
+
+02:14.840 --> 02:19.220
+and now after making this change our tests will run.
+
+02:19.220 --> 02:25.190
+So this is just our short lecture about this particular problem in school light.
+
+02:25.190 --> 02:29.780
+And now let's go and work on the database seeding.

@@ -1,0 +1,88 @@
+WEBVTT
+
+00:00.360 --> 00:07.190
+So now when we are done with our registration forum let's work on our logging Forum.
+
+00:07.200 --> 00:13.860
+First let us navigate to our page your URL slash logging and see what happens.
+
+00:13.860 --> 00:20.910
+So actually this route should be there but you can see that we are being redirected to the slash hole
+
+00:21.360 --> 00:28.620
+and this is because if you have followed the last lectures and actually did register and submit the
+
+00:28.620 --> 00:35.180
+forum successfully a new account was created and you are also being logged in.
+
+00:35.180 --> 00:37.520
+Ultimately when you registered.
+
+00:37.800 --> 00:45.990
+So what happens right now is there is another middleware that works there.
+
+00:45.990 --> 00:52.010
+When you are authenticated and this is the guest middleware.
+
+00:52.320 --> 01:01.590
+So let's see our logging controller it is using the guest middleware for all the routes except log out.
+
+01:01.610 --> 01:07.940
+So that includes the logging page logging form and the end point that is actually authenticating us
+
+01:07.970 --> 01:15.400
+using the Guard component so to check what this guest Middleware is actually doing.
+
+01:15.530 --> 01:25.280
+Let us go to the kernel Phi kernel file inside our HDP folder and in the root middleware definition
+
+01:25.280 --> 01:30.970
+you can see that the guest Middleware is some alliance for the redirect.
+
+01:31.040 --> 01:40.190
+If I was indicated middleware that happens to be part of our project you can find it in up HDP middleware.
+
+01:40.190 --> 01:41.170
+So let's open it.
+
+01:42.680 --> 01:50.480
+And this is also an example of the before middleware so it is doing something before it lets us process
+
+01:50.840 --> 01:53.570
+the logic inside our Controller.
+
+01:54.020 --> 02:00.560
+So you can see that it is using that out for sate and is fetching the guard.
+
+02:00.560 --> 02:08.810
+So in our case it will actually fetch that default guard and this check method is just verifying if
+
+02:08.810 --> 02:10.640
+the user is out indicated.
+
+02:10.670 --> 02:16.370
+So it will return true if the user is actually authenticated.
+
+02:16.370 --> 02:24.620
+So again I know I haven't talked about for yet phosphate see it and also the guards weren't really explained
+
+02:24.680 --> 02:31.400
+in very much detail but let's assume that we know what it is what it is doing right now.
+
+02:31.400 --> 02:36.580
+So we are basically checking using this component if we are authenticated.
+
+02:36.590 --> 02:44.970
+Now if we are we'll be redirected using that redirect helper function to this you url.
+
+02:45.470 --> 02:53.930
+So that's the place you will modify it to when you'd like your users be redirected when they are signed
+
+02:54.020 --> 02:57.850
+in but they would like to visit their logging page.
+
+02:58.580 --> 03:06.880
+So let's save the changes in this redirect if out indicated middleware and see again what happens.
+
+03:06.880 --> 03:13.960
+So we go to the logging page and we are redirected back to our home page.

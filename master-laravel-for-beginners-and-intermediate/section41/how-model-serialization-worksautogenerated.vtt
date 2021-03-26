@@ -1,0 +1,169 @@
+WEBVTT
+
+00:00.570 --> 00:08.130
+Now remember in the last lecture when we introduced both men we did this first to request to the API
+
+00:08.180 --> 00:11.070
+endpoint and got this Jason back.
+
+00:11.340 --> 00:19.410
+And you can remember that all we had to do is to return this post comments which is a collection object.
+
+00:19.710 --> 00:23.790
+And then this was magically turned into the J some.
+
+00:24.090 --> 00:32.850
+So let's see how this all works and what can you do to return a Jason response from Lavell.
+
+00:33.030 --> 00:40.950
+So this is actually documented inside a lot of documentation so link included under this lecture so
+
+00:41.340 --> 00:51.750
+you can either return a String from end point which would return as a HDL or alternatively if you will
+
+00:51.750 --> 01:00.150
+return an array Lovell will automatically convert that to a Jason response so the framework is doing
+
+01:00.150 --> 01:02.230
+this for us.
+
+01:02.400 --> 01:11.310
+Now let's go back to visual studio code and actually this post comments is not an array you can verify
+
+01:11.310 --> 01:20.130
+that by doing a dump post comments and here we'll actually check is array.
+
+01:20.160 --> 01:27.660
+So this is a peach B function checking if the variable is actually an array and add die here.
+
+01:27.660 --> 01:29.460
+Now let's go back to postmen.
+
+01:29.550 --> 01:32.850
+We can use it even for debugging.
+
+01:33.210 --> 01:41.070
+So as you will dump something then you can just go to preview and now you see that it's not an array
+
+01:41.580 --> 01:46.320
+but what it is is it is our collection.
+
+01:46.320 --> 01:49.960
+So let's get the class of post comments using.
+
+01:49.970 --> 01:50.600
+Sorry.
+
+01:50.850 --> 01:55.840
+Using peach b get class function.
+
+01:56.000 --> 01:57.110
+Now let's try it out again.
+
+01:57.110 --> 02:06.790
+So this is not an array but it is illuminate database eloquent collection so let's find collection class
+
+02:08.700 --> 02:18.890
+so this would be this one illuminate database lock and and eat extends this base class
+
+02:21.910 --> 02:27.030
+so if you will go to this base class Illuminate Support collection mind.
+
+02:27.040 --> 02:30.370
+You have to have out pressed and click on it.
+
+02:32.380 --> 02:36.940
+Now what you can see here is that it implements a specific interface.
+
+02:36.940 --> 02:46.210
+It is called a rainbow if you will out click on this again you can see it has only one method to array.
+
+02:46.240 --> 02:52.990
+Now this is this is interesting because a lot of that is not only checking in your controllers whether
+
+02:53.740 --> 03:02.320
+what you return is an array but also if it implements this specific arrival interface and as you remember
+
+03:02.380 --> 03:10.330
+which whenever class implements this interface it has to implement all the methods of the interface.
+
+03:10.390 --> 03:18.170
+So by using this interface you are telling Lavell that some class can be converted to array and vast
+
+03:18.790 --> 03:29.300
+array can be converted to Jason so inside this collection object which we know that post comments is
+
+03:29.330 --> 03:33.970
+it is a collection there should be are two Array method.
+
+03:34.040 --> 03:39.440
+So press comment f or control F and find that to Array method.
+
+03:39.440 --> 03:46.880
+So it is actually implemented in this collection object and what it does it's using array map which
+
+03:46.880 --> 03:53.330
+is a BJP function to iterate over all the elements of this collection.
+
+03:53.720 --> 04:03.170
+And then if they also are an instance of a reliable which means they implement this interface the arrival
+
+04:03.170 --> 04:09.930
+interface it calls value to Array method on those individual classes.
+
+04:10.850 --> 04:11.210
+Okay.
+
+04:11.240 --> 04:19.750
+So we have a collection and we also know that this collection has items of class comment.
+
+04:20.840 --> 04:22.710
+So let's go into comment.
+
+04:22.710 --> 04:28.800
+This is our larval model so we can see that comment extends model.
+
+04:29.060 --> 04:35.900
+And if you go into model what you can find is a reliable.
+
+04:35.930 --> 04:44.360
+So it also implements this interface VARs Lavell knows how to convert this particular class or every
+
+04:44.360 --> 04:48.210
+class that extends model to an array.
+
+04:48.500 --> 04:56.840
+So Lovell has some settings that lets you configure how the model should be converted to array but we'll
+
+04:56.840 --> 05:00.010
+cover that in the next lecture.
+
+05:00.020 --> 05:03.870
+Now just so you know this is how it all works.
+
+05:03.920 --> 05:12.170
+So it's not only that the response has to be an array but it can also be a class that implements are
+
+05:12.170 --> 05:12.830
+reliable.
+
+05:13.370 --> 05:18.500
+And then this is also nicely converted to Jason as you could see here.
+
+05:18.500 --> 05:28.590
+So if we will comment that out again we can see that this is our collection object which has our comment
+
+05:28.590 --> 05:35.980
+models and then Lavell knows how to convert it to an array and then finally it knows that when you return
+
+05:36.000 --> 05:41.300
+and the way it has to be converted to adjacent response and that's it.
+
+05:41.430 --> 05:43.100
+This is how it works.
+
+05:43.380 --> 05:51.210
+And in the next lecture you will see how you can tell a lot of know how to convert a model to an array
+
+05:51.630 --> 05:57.030
+VARs if you would not like to include some fields you can hide them.

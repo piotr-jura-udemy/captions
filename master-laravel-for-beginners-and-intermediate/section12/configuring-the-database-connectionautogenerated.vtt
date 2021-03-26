@@ -1,0 +1,103 @@
+WEBVTT
+
+00:00.840 --> 00:08.590
+Let's open the dot and file in the code editor as we are to configure the MySQL database connection.
+
+00:09.300 --> 00:17.270
+First, you need to connect to the database using some database client for a mug.
+
+00:17.280 --> 00:25.350
+I tend to recommend sequel or table plus four Windows and Linux, the MySQL workbench.
+
+00:26.480 --> 00:34.250
+My Uncle Workbench works for all systems, so I'll use it to show you how to create a new database.
+
+00:34.910 --> 00:37.940
+First, we need to configure the connection.
+
+00:39.170 --> 00:42.170
+Make sure your database is running first.
+
+00:43.890 --> 00:50.670
+Now Prest is adding a button and typed Conexion details the IP address, the port.
+
+00:50.700 --> 00:54.210
+Well, that probably should be left unchanged now.
+
+00:54.210 --> 00:56.640
+Username and password.
+
+00:56.640 --> 01:02.020
+In my case, this is a route for a user name and route for password.
+
+01:02.850 --> 01:07.020
+Now, you can give this connection some name like Laravel eight.
+
+01:09.000 --> 01:15.390
+And press, OK, now double click this and you should be connected to your database.
+
+01:16.380 --> 01:26.490
+Now, we actually should create the database, so for this, click the button for adding the new schema.
+
+01:28.540 --> 01:31.990
+Now, here you type the actual database name, you will create.
+
+01:32.260 --> 01:36.930
+I will use Lavallade, you are free to choose anything you prefer.
+
+01:37.970 --> 01:46.310
+Secondly, we need to choose the default colation, and it should be UTF.
+
+01:48.120 --> 01:50.610
+UTF eight, M.B four.
+
+01:51.600 --> 01:59.970
+It is how Laravel is configured by default, this setting lets you use full spectrum of Unicode characters
+
+01:59.970 --> 02:02.460
+in your database strings.
+
+02:03.520 --> 02:06.220
+Finally pressed the button.
+
+02:07.270 --> 02:15.580
+Apply again and close on the list of schemas masks, you should now see Laravel, eight.
+
+02:16.820 --> 02:26.420
+Press this info button and go to the tables tab and now head back to the editor, so we need to put
+
+02:26.420 --> 02:29.750
+the same connection details in the file.
+
+02:29.930 --> 02:37.700
+So host port database name that you just came up with and username and password.
+
+02:37.700 --> 02:40.820
+In my case, it's root for both.
+
+02:44.460 --> 02:53.190
+Final test to check if Laravel is configured properly with the database is to run P2P artisan migrate.
+
+02:55.210 --> 03:00.040
+Interminable, you should see more or less what I see on the screen.
+
+03:00.460 --> 03:03.090
+Don't worry about migration's just yet.
+
+03:03.100 --> 03:06.980
+I'll explain them in details very soon now.
+
+03:07.120 --> 03:07.930
+Head back to them.
+
+03:07.930 --> 03:10.000
+My school work workbench.
+
+03:12.500 --> 03:21.490
+And make sure that you are on this table, stop press refresh, and now you should see some tables are
+
+03:21.490 --> 03:21.800
+added.
+
+03:21.950 --> 03:27.140
+This means we are properly connected to the database from within Laravel.

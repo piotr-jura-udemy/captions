@@ -1,0 +1,130 @@
+WEBVTT
+
+00:00.870 --> 00:08.280
+In their last lecture we have removed this wrapping with that data as the top most property of the returned
+
+00:08.360 --> 00:08.990
+Jason.
+
+00:09.000 --> 00:17.220
+So now you just get an array with all the resources serialized to Jason but this is not being always
+
+00:17.760 --> 00:23.750
+returned without wrapping and one of the cases is where you use power nation.
+
+00:23.790 --> 00:30.750
+So that's a very useful thing to split the resources the collection of resources that you are returning
+
+00:30.750 --> 00:32.000
+into some chunks.
+
+00:32.010 --> 00:35.160
+And this makes sense when you have large collections.
+
+00:35.400 --> 00:38.880
+So how to pollinate all this resources.
+
+00:38.880 --> 00:45.510
+It's very simple in light of all you all you have to do is to use the built in Boggy Nate method.
+
+00:45.930 --> 00:51.600
+So you will call that instead of the Get because Geb is returning the whole collection.
+
+00:51.600 --> 00:52.830
+So let's check it out.
+
+00:53.040 --> 01:01.990
+So we'll just call pollinate and now even though you have disabled wrapping for all resources you still
+
+01:01.990 --> 01:04.050
+get that data parameter.
+
+01:04.210 --> 01:09.670
+And the reason for that is that when you putting out your collection it has to contain some additional
+
+01:09.670 --> 01:10.560
+information.
+
+01:10.570 --> 01:18.880
+And this is actually very useful because you've got links and this is a link to display all the comments
+
+01:19.000 --> 01:23.260
+from the page one which is the first page from the last page.
+
+01:23.260 --> 01:29.920
+Notice this additional page parameter that is automatically being appended to the URL stub a lot of
+
+01:29.920 --> 01:30.970
+it is returning.
+
+01:30.970 --> 01:39.400
+So this means you can simply use this you URLs and specify a page parameter and then a lot of VO will
+
+01:39.490 --> 01:47.610
+automatically split this collection and get only those elements that match the actual page of the results.
+
+01:47.710 --> 01:53.500
+Then there is the additional metadata which is containing the current page.
+
+01:53.500 --> 02:00.360
+This from and two parameters which specify how many items you actually have in this page.
+
+02:00.490 --> 02:06.140
+The last page parameter per page and the total number of elements.
+
+02:06.250 --> 02:08.650
+So that's actually very useful.
+
+02:08.650 --> 02:14.540
+Now in this case we happen to have only seven comments for this particular comment.
+
+02:14.640 --> 02:17.800
+So well if you have less than seven.
+
+02:17.920 --> 02:24.340
+Just try to find a blog post that has more comments so you can do something useful with this lecture
+
+02:25.080 --> 02:29.920
+and the how to configure how many elements you want per page.
+
+02:29.920 --> 02:37.990
+This is I think you will probably often like to use so it's very simple you just need to pass a parameter
+
+02:37.990 --> 02:44.370
+of the first parameter to plug in it is actually specifying how many items you want per page specified
+
+02:44.430 --> 02:47.210
+five save the changes.
+
+02:47.220 --> 02:55.320
+And now let's see what do we get now actually you can see that the last page E two which means we have
+
+02:55.320 --> 03:00.470
+two pages and this are the first five comments.
+
+03:00.630 --> 03:07.030
+So to get to the next page let's copy this URL and open this link in the next stop.
+
+03:07.050 --> 03:16.290
+But this time will specify a page parameter and now we should only have to comment resources and also
+
+03:16.290 --> 03:19.800
+it should be visible that we are on the page too.
+
+03:19.830 --> 03:27.480
+So this is actually magical in light of all the only thing you had to do e to call the pudgy Nate on
+
+03:27.480 --> 03:28.830
+the query.
+
+03:28.920 --> 03:35.910
+And because this works on the local level so it's not that you get all the elements are returned and
+
+03:35.910 --> 03:43.820
+then on the lava in P B tries to split this into chunks it actually is producing specific queries.
+
+03:43.850 --> 03:46.980
+So you are not fetching excessive elements.
+
+03:46.980 --> 03:49.470
+It does this on deck where a level.

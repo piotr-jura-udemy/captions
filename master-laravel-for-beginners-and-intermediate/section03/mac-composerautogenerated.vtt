@@ -1,0 +1,52 @@
+WEBVTT
+
+00:02.130 --> 00:07.110
+Composer is the tool to manage your project dependencies.
+
+00:07.560 --> 00:11.820
+For example, the Laravel framework is the dependency of your project.
+
+00:12.690 --> 00:16.050
+But Laravel also depends on some other third party libraries.
+
+00:16.050 --> 00:18.420
+And to install them, it uses composer.
+
+00:19.230 --> 00:21.630
+You would like to install composer globally.
+
+00:21.810 --> 00:25.560
+Not only you would be able to manage a specific project dependencies.
+
+00:25.770 --> 00:30.410
+Additionally, you will also be able to create new projects using it.
+
+00:30.790 --> 00:35.920
+The installation process on Mako's and other Unix systems is very easy.
+
+00:36.630 --> 00:41.250
+Visit this link and copy the code fragment from there.
+
+00:44.980 --> 00:53.650
+Now open the terminal and paste the command and he Dentzer to run it, it will download the composer
+
+00:53.650 --> 00:54.580
+executable.
+
+00:55.610 --> 01:00.800
+Then type this command V composer FA.
+
+01:03.870 --> 01:14.670
+User, local, been composer to make composer global, it would move the file you've just downloaded
+
+01:14.670 --> 01:17.520
+into a directory with binaries.
+
+01:18.800 --> 01:28.430
+Finally, make sure you restart the terminal and then inside the terminal type composer Dash V, make
+
+01:28.430 --> 01:35.540
+it uppercase and you should see the composer version, which also proves it's installed correctly and
+
+01:35.540 --> 01:36.530
+works globally.

@@ -1,0 +1,493 @@
+WEBVTT
+
+00:00.690 --> 00:08.330
+In the last three lectures we created some useful query scopes for example to get the most commented
+
+00:08.350 --> 00:09.360
+blog post.
+
+00:09.360 --> 00:13.260
+Most active users and most active users last month.
+
+00:13.830 --> 00:20.110
+So at the beginning of this section we actually started with creating a global query scope.
+
+00:20.250 --> 00:26.760
+So let's go to the Visual Studio code and while the basic difference between local and global query
+
+00:26.760 --> 00:33.960
+scope is here you can see the use search of the local query scope so we call them are static methods
+
+00:34.020 --> 00:41.250
+of the model and you have to call them explicitly which means you actually have to type that method
+
+00:41.280 --> 00:42.760
+and call it soda.
+
+00:42.770 --> 00:50.180
+Then only only then local query scope is being applied but it's different with the global query scopes
+
+00:50.190 --> 00:58.470
+like we created this latest scope when we wanted models to be out magically sorted by the most recent
+
+00:58.470 --> 01:00.180
+creation date.
+
+01:00.240 --> 01:06.990
+But the problem with that was that this part of the query was added to every possible query that got
+
+01:07.050 --> 01:09.430
+executed for a particular model.
+
+01:09.510 --> 01:16.080
+In our case this was a blog post model so we registered that for blog post model and for the comment
+
+01:16.080 --> 01:17.380
+model as well.
+
+01:17.580 --> 01:24.810
+And this caused some issues that when we used the aggregate functions like count to get the count of
+
+01:24.840 --> 01:33.660
+all the elements in the model or all the records inside our database table this didn't really play out
+
+01:33.660 --> 01:39.960
+well when we wanted to sort by a different column without adding a group by statement.
+
+01:39.960 --> 01:46.770
+You might remember that we had to modify their strict settings inside the database and I've told you
+
+01:46.770 --> 01:55.170
+that that's not the best idea to hide the problems under the carpet now so it is a good time to actually
+
+01:55.170 --> 02:02.100
+show you a much better use example of the global query scope so let's go ahead and create another one
+
+02:02.400 --> 02:11.240
+which would be a much better example of where you should apply the global query scopes so let's logging
+
+02:11.330 --> 02:20.390
+into our application as John which is John Doe our admin and go to the blog posts so you can see that
+
+02:20.900 --> 02:22.750
+all the blog posts are there.
+
+02:23.180 --> 02:27.330
+And now let's modify the permissions of our admin.
+
+02:27.380 --> 02:33.670
+So this is this gate override that we give some special permissions to particular users.
+
+02:33.680 --> 02:38.000
+Now let's also give back the admin the delete right.
+
+02:38.540 --> 02:41.780
+So now he can delete some blog posts.
+
+02:41.780 --> 02:47.140
+Now you can see when we refresh those blog posts that we had there are no longer here.
+
+02:47.180 --> 02:54.050
+So maybe if we are authenticated as a not meaning we should be able to see all the blog posts even those
+
+02:54.050 --> 02:59.330
+that were self deleted but they still exist inside the database.
+
+02:59.330 --> 03:01.940
+So let's see how we can do that.
+
+03:02.090 --> 03:12.340
+Let's go ahead and create a new scope inside the scopes folder and let's call it delete it are the mean
+
+03:13.540 --> 03:15.820
+scope.
+
+03:16.090 --> 03:25.770
+Now we can copy the code from this latest scope because this would be almost the same but let's immediately
+
+03:25.770 --> 03:30.630
+remove the query because we all have something completely different in here.
+
+03:30.630 --> 03:40.410
+And of course let's rename the class to delete that are the mean scope not what what we will try to
+
+03:40.410 --> 03:49.080
+achieve is we would like to give admin opportunity to see all the blog posts even those that were deleted
+
+03:49.800 --> 03:58.020
+so we can achieve that by utilizing the south facade as you can see that's the namespace for the Alpha
+
+03:58.020 --> 03:59.000
+Site.
+
+03:59.010 --> 04:05.330
+Press enter and you will have that automatically added by Visual Studio code.
+
+04:05.430 --> 04:12.180
+Now there is a check method inside this facade which will return true if the current user is authenticated.
+
+04:12.210 --> 04:21.510
+So let's add an if statement if our check and then of has another method called the user which will
+
+04:21.510 --> 04:23.980
+get you the currently authenticated user.
+
+04:24.000 --> 04:30.420
+Now this check will actually check if the user is authenticated so we can safely call user and we'll
+
+04:30.420 --> 04:35.010
+check if the user current user is an admin.
+
+04:35.010 --> 04:46.040
+Well if the user is an admin we can use with trashed method on the query builder which will also include
+
+04:46.400 --> 04:51.500
+all the self deleted models for our particular model.
+
+04:51.500 --> 04:59.960
+So now if we'll add this global query scope for a particular model then if you are on admin or you are
+
+04:59.960 --> 05:05.260
+currently authenticated as an admin user you will see everything.
+
+05:05.540 --> 05:09.290
+So let's save this and go to our blog post model
+
+05:12.730 --> 05:19.680
+and now let's add a different query scope not the latest scope but deleted admin scope.
+
+05:19.900 --> 05:24.160
+Mind that this is ultimately adding on import for me.
+
+05:24.160 --> 05:31.140
+Be sure that you have added this manually if this doesn't do it automatically for you.
+
+05:31.150 --> 05:40.540
+So let's save the changes and you can see that we have deleted some blog posts before so now I haven't
+
+05:40.540 --> 05:46.930
+refreshed the page but when I do and I am authenticated as John Doe who is an admin I should now see
+
+05:46.930 --> 05:52.010
+the blog post that I've previously deleted.
+
+05:52.660 --> 05:56.190
+Well it says it cannot find a method we've thrashed.
+
+05:56.200 --> 06:02.530
+Of course I've misspelled the metal name sorry for that with trashed
+
+06:09.230 --> 06:09.760
+now.
+
+06:09.850 --> 06:16.730
+I'm not really sure if I see those blog posts so let's comment that out and it seems it doesn't really
+
+06:16.730 --> 06:18.320
+change anything.
+
+06:18.320 --> 06:25.310
+So another thing you should know about self deletes is it is actually working by utilizing a global
+
+06:25.310 --> 06:27.080
+query scope.
+
+06:27.080 --> 06:34.040
+So that's the class that is being added or global query scope that is being added to your models when
+
+06:34.040 --> 06:37.120
+you use the soft deletes trade.
+
+06:37.250 --> 06:42.050
+And we do that here inside that blog post model.
+
+06:42.050 --> 06:49.910
+So what we will have to do is since this global query scope self deleting scope is taking precedence
+
+06:49.940 --> 06:52.710
+and it is actually modifying our query.
+
+06:53.270 --> 07:01.650
+So let's make sure that we add this other global query scope call before the Parent Board.
+
+07:01.700 --> 07:08.660
+So parent board will actually boot your model and will also check what is inside the traits and when
+
+07:08.660 --> 07:15.530
+it finds that you are using the soft delete straight it will add proper global query scope which prevents
+
+07:15.590 --> 07:20.180
+us from seeing the results that we want.
+
+07:20.210 --> 07:23.180
+So let's go back to our deleted admin scope.
+
+07:23.180 --> 07:23.600
+All right.
+
+07:23.630 --> 07:26.860
+Now we would like to see that trashed post.
+
+07:26.870 --> 07:30.170
+So those are not trashed post nuts.
+
+07:30.380 --> 07:35.540
+Now let's refresh the page and well you can see that I am now seeing models.
+
+07:35.570 --> 07:42.780
+So this one the most recent one I have deleted those free and still I can see them because I am an admin
+
+07:43.430 --> 07:46.200
+if I will log out and go to the blog posts.
+
+07:46.220 --> 07:49.400
+You can see I cannot see them now.
+
+07:49.580 --> 07:50.860
+It's not really visual.
+
+07:50.860 --> 07:57.200
+Right now what is happening probably it's hard for you to remember all those titles and it is for me
+
+07:57.200 --> 07:57.920
+too.
+
+07:58.640 --> 08:09.710
+So let's just log in and go to that index template for the blog posts so I can somehow modify the way
+
+08:09.740 --> 08:11.540
+they are shown.
+
+08:11.540 --> 08:14.470
+If they are actually deleted
+
+08:18.760 --> 08:25.120
+so let's modify this template a little bit so we will use an if statement.
+
+08:25.120 --> 08:32.320
+Now you might remember that the model that is using the soft delete straight has another method called
+
+08:32.440 --> 08:44.740
+trap trashed which will return true if the model was soft delete it so we can add if post trashed
+
+08:47.240 --> 08:53.550
+and if it was trashed we'll add another element that delete element.
+
+08:53.550 --> 08:58.460
+Actually we probably might have to do that inside the H free.
+
+08:59.560 --> 08:59.840
+OK.
+
+08:59.880 --> 09:01.740
+So let's do something like this
+
+09:04.570 --> 09:05.550
+sorry for that.
+
+09:05.920 --> 09:06.170
+OK.
+
+09:06.190 --> 09:16.340
+Let's copy this fragment and now we'll also are the closing element if of course that post was trashed.
+
+09:16.370 --> 09:18.440
+All right now let's go back here and.
+
+09:18.710 --> 09:25.820
+Well now you should see that pretty clearly that when the post is deleted we are striking through the
+
+09:25.820 --> 09:27.440
+title.
+
+09:27.440 --> 09:33.610
+Now we can also add some additional possible styling for the link element.
+
+09:33.860 --> 09:36.890
+So we will add a conditional class
+
+09:41.260 --> 09:47.220
+so if the Post e is trashed will that text muted class.
+
+09:47.230 --> 09:53.780
+So this would be a great title if it's not deleted then we want add anything go.
+
+09:53.890 --> 09:56.620
+OK let's save the changes and refresh.
+
+09:56.620 --> 10:00.010
+So now it should be pretty clear what is happening.
+
+10:00.010 --> 10:05.500
+So if I will delete another blog post let's say this one.
+
+10:05.500 --> 10:10.610
+You can see that blog post was deleted and now it is being strike through and grey.
+
+10:10.660 --> 10:16.730
+But if I log out I do not see those posts.
+
+10:16.840 --> 10:18.340
+Now let's log in again.
+
+10:18.490 --> 10:25.410
+And another thing you can see is there is a most active user can I on my Glenn.
+
+10:25.630 --> 10:33.020
+So let's try to find her and delete all the blog posts that she has.
+
+10:33.070 --> 10:36.070
+Are that maybe also this one
+
+10:39.320 --> 10:39.980
+this one
+
+10:45.890 --> 10:46.400
+and this one.
+
+10:46.450 --> 10:46.680
+OK.
+
+10:46.700 --> 10:47.970
+That should be enough.
+
+10:47.990 --> 10:57.500
+Now what you see here is she is still being most active writer because because I've added this global
+
+10:58.160 --> 11:02.680
+query scope that we include the self deleted models.
+
+11:03.020 --> 11:06.370
+She is being included into all the queries.
+
+11:06.830 --> 11:11.110
+But now notice what happens if I will log out.
+
+11:11.210 --> 11:19.510
+So I do log out and now when I go to the blog post list the most active user is now John Doe.
+
+11:19.640 --> 11:26.600
+So I've deleted most of her blog posts and you can see here in the results of the search inside the
+
+11:26.600 --> 11:29.240
+browser that she only has one.
+
+11:29.270 --> 11:31.850
+So if she's not included anywhere.
+
+11:31.850 --> 11:35.480
+So this is a power of the global query scopes.
+
+11:35.480 --> 11:44.450
+And what we can do with them now what we can also do is as you can see on the blog post least when you
+
+11:44.450 --> 11:51.500
+are authenticated as an mean that there is still a button to delete a blog post where it shouldn't actually
+
+11:51.500 --> 11:54.500
+be because those posts are already deleted.
+
+11:56.490 --> 12:03.020
+So here when we check whether the posts can be deleted we are basically checking for that authorization
+
+12:03.030 --> 12:04.110
+right.
+
+12:04.110 --> 12:13.420
+So what we can additionally do is we can surround this with an if statement and if the post is not trashed
+
+12:13.480 --> 12:22.110
+we only then check for the rights to delete it and then show the bottom so now when you refresh this
+
+12:22.530 --> 12:29.540
+you you see that well you can't actually delete this anymore because obviously it is actually deleted
+
+12:29.670 --> 12:33.220
+already.
+
+12:33.230 --> 12:37.370
+Now let's do one more thing or basically I will show you one more thing.
+
+12:37.940 --> 12:45.410
+So what we are doing here is we are telling a lot of old that it should also include trashed models
+
+12:45.830 --> 12:52.520
+but as I've told you basically this work is being achieved by this self deleting scope which is part
+
+12:52.520 --> 13:01.110
+of the larval framework and it is our global query scope that is being added when you use the self delete
+
+13:01.110 --> 13:04.120
+straight on your model.
+
+13:04.280 --> 13:13.010
+Now instead of calling we've trashed we can also do another thing which is eliminating our global scope
+
+13:13.040 --> 13:23.840
+so we can do without global scope and now we'll have to add a full class name of this global query scope
+
+13:23.900 --> 13:29.850
+which is eliminate database eloquent soft deleting scope
+
+13:32.880 --> 13:37.640
+so this can be commented out save the changes here if you are.
+
+13:38.040 --> 13:40.170
+Well if I'm doing things too fast don't worry.
+
+13:40.170 --> 13:45.270
+This would also be included into coming to this lecture so you can always check that out.
+
+13:45.300 --> 13:48.900
+So don't worry if you if it is too fast.
+
+13:49.860 --> 13:55.890
+So what we did is instead of calling with trust we removed our global query scope.
+
+13:55.890 --> 14:03.270
+So this is by the way how you can remove the global query scope for a particular query.
+
+14:04.110 --> 14:11.190
+So what I mean is global query scopes are applied to all the queries inside this model.
+
+14:11.190 --> 14:16.130
+So if you have a global query scope that you would like to use most of the time.
+
+14:16.260 --> 14:19.980
+But there are some exceptions where you wouldn't like to use it.
+
+14:20.010 --> 14:20.700
+This is how.
+
+14:20.700 --> 14:28.360
+How can you remove it from one particular query and mind that you do not have to do that inside another.
+
+14:28.410 --> 14:35.830
+Another global query scope this can be done anywhere like for example inside the post control or you
+
+14:35.830 --> 14:39.930
+can call it here without global query scope.
+
+14:39.940 --> 14:42.700
+Now let's see if this would have the same effect.
+
+14:43.480 --> 14:51.360
+So now you see that when we refresh the page we still see the blog posts that were deleted and well
+
+14:51.390 --> 15:00.750
+I basically achieved that by removing this soft deleting scope from the well from the global query scopes
+
+15:00.780 --> 15:05.570
+that are applied if I will comment that out and say the changes.
+
+15:05.700 --> 15:13.680
+Now I want to see the deleted blog posts are self deleted blog posts even though I am an admin so there
+
+15:13.680 --> 15:15.600
+are both ways to achieve the same thing.
+
+15:15.630 --> 15:25.350
+In this particular case but this is generally a way you would remove a global query scope from one particular
+
+15:25.350 --> 15:27.570
+query that you would like to execute.

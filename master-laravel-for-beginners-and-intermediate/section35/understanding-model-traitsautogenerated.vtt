@@ -1,0 +1,112 @@
+WEBVTT
+
+00:01.080 --> 00:08.400
+In the last lecture I have mentioned that now we will create a trade that we will be then able to use
+
+00:08.550 --> 00:17.400
+in our models and then apply the tax relation to them without actually specifying them on each single
+
+00:17.640 --> 00:18.930
+model.
+
+00:18.930 --> 00:25.200
+So first let's see how the trades actually work and what they are.
+
+00:25.200 --> 00:33.520
+So we'll use the soft deletes trade as an example because we have already using that inside our models.
+
+00:33.540 --> 00:39.920
+So in the example with blog post when we add self deletes let's see what happens.
+
+00:39.960 --> 00:48.360
+So out click their self deletes and let's see what is inside it so we can see that the trades are defined
+
+00:48.360 --> 00:50.660
+with the keyword trade.
+
+00:50.730 --> 00:59.180
+This is different to the class now how trades work is they do not exist on themselves.
+
+00:59.270 --> 01:08.090
+So class you can create a new instance of but trades are only to be used within a class and how they
+
+01:08.090 --> 01:17.900
+work is they add some functionality to your classes so you can define some fields or you can define
+
+01:17.990 --> 01:19.520
+some methods.
+
+01:19.520 --> 01:27.500
+But the interesting thing about trades is if your original class has some methods or some fields if
+
+01:27.500 --> 01:32.890
+you will use a trade they will overwrite how they work.
+
+01:32.900 --> 01:40.870
+So for example if you have a forest delete method or any other methods inside your models you can really
+
+01:40.870 --> 01:49.490
+find them inside the trade and when you use this trait inside one of your classes this BHP will actually
+
+01:49.490 --> 01:59.160
+use the metals from the trade another of things you should know is this boot self deletes.
+
+01:59.510 --> 02:08.030
+So when we have our models for example the blog post we have this public static boot method.
+
+02:09.440 --> 02:16.970
+But when we call the power in the boot it actually has a call to boot traits.
+
+02:17.090 --> 02:24.650
+So what this allows us to do is inside our traits that we will use in models.
+
+02:25.950 --> 02:32.920
+We can specify are public static method which will be called boot.
+
+02:32.940 --> 02:40.140
+This is the prefix you have to always give but if you will follow that with the trade name.
+
+02:40.140 --> 02:49.170
+In this case it is self deletes then you can also add something specific to when your model is booting.
+
+02:49.170 --> 02:56.760
+So in this case self deletes is also always adding a global scope to older models in which it is being
+
+02:56.760 --> 02:58.070
+used.
+
+02:58.920 --> 03:01.800
+So we'll use this to boot.
+
+03:01.950 --> 03:11.130
+Our blog post and comment models to be able to automatically respond to those model events.
+
+03:11.250 --> 03:18.780
+So when the blog posts and comment will be created or updated you can see that we are doing this inside
+
+03:18.780 --> 03:26.470
+the boot methods of those models themselves like we are using the updating restoring and deleting.
+
+03:26.560 --> 03:33.960
+We will be able to add some events inside one trade and they will be then applied to all the models
+
+03:34.920 --> 03:42.840
+and that is all thanks to adding this static method with specific name because Lavell knows about them
+
+03:43.320 --> 03:46.110
+and can run them for you.
+
+03:46.110 --> 03:53.640
+So you do not really have to specifically call them and this allows us to just add one simple thing.
+
+03:54.270 --> 04:01.830
+We will create a trade called Tiger ball then we will just use it and what we will have is not only
+
+04:01.830 --> 04:10.050
+the relationship defined but also whenever blog post or comment is added or update it will automatically
+
+04:10.140 --> 04:17.850
+assign all the tasks that were specified inside either blog post or comment content.
+
+04:17.850 --> 04:19.340
+So let's see how we will do that.

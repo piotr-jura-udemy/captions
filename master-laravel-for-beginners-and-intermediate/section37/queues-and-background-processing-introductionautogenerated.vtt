@@ -1,0 +1,295 @@
+WEBVTT
+
+00:00.540 --> 00:07.560
+In the last section of this course you've learned how to send an email to our user and we used a simple
+
+00:07.560 --> 00:13.890
+example when we have send an email to notify our blog post out or that someone has commented on his
+
+00:13.890 --> 00:14.730
+blog post.
+
+00:15.840 --> 00:21.720
+So let's take a look at the current flow and what are the problems with and with this flow.
+
+00:21.810 --> 00:25.070
+So we have a user that adds a comment.
+
+00:25.110 --> 00:28.590
+And this goes as a request to the web server.
+
+00:28.650 --> 00:36.690
+Whether this is engineers or Apache and it gets processed by BHP it gets to our application for simplicity
+
+00:36.720 --> 00:44.760
+let's assume that everything happens inside a controller as we did that this way in the last section.
+
+00:44.760 --> 00:52.560
+Now the controller has to fetch some data from the database whatever that might be and then it tries
+
+00:52.560 --> 00:54.350
+to send an email.
+
+00:54.360 --> 00:56.450
+So we have used the mail for seed.
+
+00:56.520 --> 01:03.990
+It's send the method and the problem with that is at this point it tried to communicate with an external
+
+01:04.050 --> 01:04.890
+server.
+
+01:04.890 --> 01:12.720
+This actually was a mail drop SMP server but anyway you could have noticed that sending a comment has
+
+01:12.720 --> 01:15.180
+significantly slowed down.
+
+01:15.180 --> 01:17.170
+It was actually a couple of seconds.
+
+01:17.730 --> 01:25.400
+And now what we are dependent on when we are trying to add a comment is how fast the remote server is
+
+01:25.400 --> 01:32.880
+sending this e-mail whether this is as empty server or external service like mail gun or SARS from Amazon
+
+01:33.420 --> 01:36.290
+how fast it will respond back to us.
+
+01:37.260 --> 01:39.200
+So we know that the e-mail was sent.
+
+01:39.300 --> 01:44.980
+We get the response and we return it back to the user browsing the web site.
+
+01:45.000 --> 01:47.940
+So this is not very efficient.
+
+01:47.940 --> 01:53.350
+And sometimes there are things that you don't really have to do immediately.
+
+01:53.400 --> 01:58.450
+So they are not crucial to serve back the response to the user.
+
+01:58.530 --> 02:06.210
+And this is one of those examples so it's a perfect candidate to move it to the background processing
+
+02:06.660 --> 02:07.780
+or cues.
+
+02:07.890 --> 02:11.670
+And this is what we'll cover in this section.
+
+02:11.700 --> 02:18.900
+So now let's take a look at the new flow that will add so we'll talk about the cues in general in a
+
+02:18.900 --> 02:24.580
+second but let's now focus on what we would like to achieve.
+
+02:24.600 --> 02:26.450
+So this starts as usual.
+
+02:26.460 --> 02:33.060
+We have a user making a request adding a comment and now there is something happening inside the controller
+
+02:33.330 --> 02:36.800
+that might be just adding this comment to the database.
+
+02:37.230 --> 02:44.220
+But instead of trying to immediately send the e-mail and waste time on communicating with any external
+
+02:44.220 --> 02:48.870
+services we just add a job to a queue.
+
+02:49.230 --> 02:53.150
+Now queue can be stored in different kind of storage.
+
+02:53.160 --> 02:55.410
+We'll get to that in a second.
+
+02:55.410 --> 03:00.060
+So for now let's just assume that we store this job somewhere.
+
+03:00.060 --> 03:07.170
+So job would be a thing that has to be done by some background process which means not throughout the
+
+03:07.560 --> 03:12.190
+web request that is being made to your server and handled by BHP.
+
+03:12.450 --> 03:16.210
+It is stored somewhere for later processing.
+
+03:16.800 --> 03:23.730
+So this allows us to immediately return the response to the user and the user does not notice that the
+
+03:23.730 --> 03:28.050
+web page is slower for any reason.
+
+03:28.080 --> 03:36.420
+Now this another background process is basically a command that you will run on your server and by server.
+
+03:36.420 --> 03:39.850
+I do not mean a web server like Apache or engineers.
+
+03:39.870 --> 03:43.080
+It is just a machine where you host your Web site.
+
+03:43.110 --> 03:50.290
+So wherever that might be a digital ocean Amazon or just any kind of server.
+
+03:50.340 --> 03:58.980
+So what we will run is a queue process or and this is basically pretty simple what this will do is it
+
+03:58.980 --> 04:05.450
+will get something from the database.
+
+04:05.480 --> 04:12.290
+Now this queue process or will process all the jobs that were added to be processed later.
+
+04:12.290 --> 04:21.850
+So basically we might have created a job called send e-mail to the user that created the blog post.
+
+04:21.980 --> 04:26.400
+Now we'll run a queue process or and this will Brandy's job.
+
+04:26.450 --> 04:27.760
+This job might do anything.
+
+04:27.800 --> 04:34.180
+It might read something from the database so we get this data from the database.
+
+04:34.190 --> 04:37.550
+Now we can try to send an e-mail.
+
+04:37.760 --> 04:44.120
+This will communicate with the external server and if everything goes well that job will be processed.
+
+04:44.150 --> 04:48.260
+And this queue processor can just pick up the next job to be done.
+
+04:48.920 --> 04:54.000
+So that's a very simple explanation of what will happen.
+
+04:54.060 --> 05:02.690
+Now let's take a look at how this actually set up so there is a concept of drivers inside the queues.
+
+05:02.700 --> 05:06.860
+So you need to choose where you would store all those jobs.
+
+05:07.020 --> 05:11.090
+So you have basically initially you are provided with five options.
+
+05:11.220 --> 05:12.260
+It's either sink.
+
+05:12.300 --> 05:18.920
+This would be just storing those jobs inside a plain text files which is totally inefficient.
+
+05:18.930 --> 05:25.420
+It's just for development purposes it can store jobs inside a database table.
+
+05:25.470 --> 05:29.080
+This is what we will use throughout this course to make things simpler.
+
+05:29.160 --> 05:36.840
+But there are also specific applications or services that are just created to process jobs.
+
+05:36.840 --> 05:39.120
+One of them is the beanstalk.
+
+05:39.240 --> 05:42.060
+There is Amazon rescue us which is just for that.
+
+05:42.060 --> 05:47.450
+It is a service from Amazon to create and process jobs on a cue.
+
+05:47.820 --> 05:50.380
+And then there is Redis.
+
+05:50.820 --> 05:52.770
+So this is our workflow.
+
+05:52.830 --> 05:59.280
+So we have larval application wherever that is controller or anything else doesn't really matter.
+
+05:59.280 --> 06:01.530
+But this will create a job.
+
+06:01.740 --> 06:03.260
+Of course don't worry about it.
+
+06:03.270 --> 06:04.680
+How do you create a job.
+
+06:04.680 --> 06:06.080
+What a job is.
+
+06:06.150 --> 06:08.910
+We'll get to that we have examples in a second.
+
+06:08.910 --> 06:12.430
+You will actually see how simple that is in light of all.
+
+06:12.450 --> 06:19.300
+So let's assume we create a job something to we say Lara I'll do it later OK.
+
+06:19.400 --> 06:25.980
+Travel will then started on the que so on the storage basically whatever that might be.
+
+06:26.020 --> 06:30.820
+This would be one of the drivers whichever you choose to use.
+
+06:31.180 --> 06:39.070
+Now another process the queue worker will ask this storage and it will always pick up our job.
+
+06:39.070 --> 06:47.230
+One by one so it will pick up that next job that has to be processed then it will process that job whatever
+
+06:47.230 --> 06:48.420
+that may be.
+
+06:48.490 --> 06:55.860
+We will make some classes like our mid-level classes to be automatically cued.
+
+06:55.870 --> 07:03.580
+So this would not even require any coding from us to make them background processes and we'll also create
+
+07:03.670 --> 07:09.430
+job classes where we will specifically tell Lavell what has to be done.
+
+07:09.550 --> 07:14.560
+So we are at the point of processing a job now.
+
+07:14.590 --> 07:17.620
+It will see if this job was successful.
+
+07:17.620 --> 07:21.350
+If nothing has brake or nothing was broken.
+
+07:21.460 --> 07:26.020
+So if there was a success this will remove this job from the storage.
+
+07:26.200 --> 07:28.800
+So this won't be run anytime again.
+
+07:28.900 --> 07:33.640
+So this will be just remove the job is done or if this will fail.
+
+07:33.640 --> 07:41.170
+If this job will fail it can optionally store it on our failed jobs table inside the database to be
+
+07:41.170 --> 07:43.670
+processed later.
+
+07:43.690 --> 07:50.050
+Now this might seem a little bit complicated but we needed this initial explanation especially if you
+
+07:50.050 --> 07:58.780
+are totally not accustomed to the queues and background processing but in a second in the next lecture
+
+07:58.780 --> 08:07.090
+you will see how actually simple that is and will achieve creating our first background job and then
+
+08:07.090 --> 08:11.680
+running it basically almost without any coding at all.

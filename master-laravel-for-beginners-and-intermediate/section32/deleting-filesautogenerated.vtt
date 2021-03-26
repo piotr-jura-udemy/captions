@@ -1,0 +1,148 @@
+WEBVTT
+
+00:00.580 --> 00:06.810
+The last time we took a little time to actually make our application which is part of this chorus a
+
+00:06.810 --> 00:10.140
+little bit nicer by styling a little bit.
+
+00:10.140 --> 00:16.740
+Now let's go back to the most important thing which is learning how the travel works and how to do things
+
+00:16.800 --> 00:18.060
+with it.
+
+00:18.060 --> 00:26.370
+So we have a blog post that contains an image and we have added it by uploading our new image together
+
+00:26.370 --> 00:27.890
+with the blog post.
+
+00:27.990 --> 00:37.890
+But what we also have is our ability to edit images and then now we have the opportunity to edit blog
+
+00:37.890 --> 00:41.520
+post which already can contain an image.
+
+00:41.520 --> 00:50.190
+So when you will upload a new file for this blog post then you probably want to make sure that not only
+
+00:50.190 --> 00:53.150
+the path to the old file.
+
+00:53.160 --> 00:59.460
+Well to this relation because each blog post contains only one is updated but you will also like to
+
+00:59.460 --> 01:07.560
+delete the old file from the disk because this will no longer be stored inside the database so we need
+
+01:07.560 --> 01:10.670
+to delete files.
+
+01:11.460 --> 01:20.190
+So let's go to the post controller and update action because here we also have to handle an upload.
+
+01:20.190 --> 01:24.840
+So first let's copy the code that we have inside the store method.
+
+01:26.500 --> 01:34.790
+So we also will check if the request has file because we have this on both forms.
+
+01:34.990 --> 01:45.630
+Now we would also store the file and generate a new path for it but then we have to check if the Post
+
+01:46.230 --> 01:47.280
+has an image
+
+01:50.490 --> 01:54.140
+so if the Post has already an image.
+
+01:54.210 --> 02:02.350
+What we will do is we'll modify the image path to the new one.
+
+02:02.350 --> 02:06.670
+But before we do that we have to delete this old image.
+
+02:06.670 --> 02:13.900
+So again we are accessing the storage for Sade and it has our delete method.
+
+02:14.530 --> 02:24.790
+So before we store the new path on the image we should delete the old one like that now otherwise
+
+02:28.090 --> 02:33.410
+if the blog post didn't have an image we will store it as we did before.
+
+02:33.460 --> 02:40.870
+In this method the blog post actually is inside the post variable and of course after making this changes
+
+02:40.900 --> 02:46.150
+we will have to save the image and changes to it.
+
+02:46.180 --> 02:55.060
+Now the blog post is soft delectable which means it's not actually being deleted from the database but
+
+02:55.200 --> 03:04.780
+what you could also do in case it wasn't self debatable is in the events defined inside the boot method
+
+03:04.810 --> 03:16.990
+on the blog post you might define something like blog post image delete and then you will define also
+
+03:17.360 --> 03:19.480
+an event for the blog post.
+
+03:19.540 --> 03:21.170
+Sorry for the image model.
+
+03:21.640 --> 03:29.290
+And then on the image model you will define are deleting or delete that event and then on it you would
+
+03:29.290 --> 03:31.900
+be able to use storage delete.
+
+03:31.900 --> 03:37.410
+So now the image will just handle the image model will handle deleting itself.
+
+03:37.420 --> 03:45.880
+So whenever that image would be removed from the database it will also take care of removing the file
+
+03:45.910 --> 03:47.010
+itself.
+
+03:47.440 --> 03:53.060
+But since it is actually self to delete ABL we won't do that.
+
+03:53.080 --> 03:55.540
+So now let's verify if that works.
+
+03:58.930 --> 04:06.790
+So there is an image related to the blog post with Ida 50 free which happens to be this blog post.
+
+04:06.790 --> 04:16.600
+We are editing right now and you can see that it has this image starting with this string.
+
+04:16.620 --> 04:25.620
+So now let's make sure that this would be deleted so we can see that this file is actually inside the
+
+04:25.740 --> 04:28.720
+storage up public thumbnails.
+
+04:28.740 --> 04:30.950
+That starts with this particular name.
+
+04:32.150 --> 04:38.750
+It's also on the database and now if I modified the original blog post and upload a different image
+
+04:39.320 --> 04:43.050
+now you can see that this image is different.
+
+04:44.600 --> 04:51.110
+Also when we refresh the database you can see that there is still the same record which relates to this
+
+04:51.110 --> 04:53.960
+blog post but now the name is different.
+
+04:55.500 --> 05:01.280
+And also on the disk you can see that this imagine no longer is there and there is a new one.
+
+05:01.290 --> 05:06.120
+So this is how you would remove files using this storage for Sayed.

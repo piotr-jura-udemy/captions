@@ -1,0 +1,265 @@
+WEBVTT
+
+00:00.450 --> 00:06.270
+At the very end of the last lecture I have mentioned that there are different approaches to creating
+
+00:06.270 --> 00:12.840
+database seeders in Lara all the simplest one you see on the screen is to just implement the run method
+
+00:12.930 --> 00:17.780
+of the database seeder class and create all your models inside.
+
+00:17.820 --> 00:25.230
+This single method in specific order that your application requires then another approach is to create
+
+00:25.230 --> 00:29.890
+specific cedar classes and this can be handled different ways.
+
+00:29.890 --> 00:37.110
+So for example you can have cedar class for every model that you have or you can create some specific
+
+00:37.110 --> 00:45.450
+cedar classes that you will be then able to run individually to fill up the database with the with the
+
+00:45.450 --> 00:48.040
+data depending on your needs.
+
+00:48.060 --> 00:50.150
+So let me give you an example.
+
+00:50.340 --> 00:57.660
+So you can either create a cedar for each single model like user posts and comments and we'll do that
+
+00:57.660 --> 00:58.700
+in a second.
+
+00:58.860 --> 01:05.070
+Or alternatively you can create seeders that will just populate the data in a different way.
+
+01:05.070 --> 01:14.400
+So for example one cedar can create 20 users 50 posts and 250 comments and another cedar can create
+
+01:14.460 --> 01:23.360
+let's say to users 1000 blog posts and maybe 10000 comments depending on your actual development needs.
+
+01:23.460 --> 01:30.500
+But let's go with the first way which would be to create cedar class for every individual model.
+
+01:31.470 --> 01:38.640
+So of course there is a comment for that called peach artisan make cedar and you have to come up with
+
+01:38.910 --> 01:44.490
+a proper name for this class and a good convention is to use the table name.
+
+01:45.300 --> 01:55.310
+So this would be users table cedar and you can see that this class was created inside the seeds folder.
+
+01:55.310 --> 02:01.480
+So I will now go ahead and create cedar for each of our models.
+
+02:01.550 --> 02:09.480
+So this would be blog posts table cedar and the last one would be
+
+02:12.440 --> 02:21.770
+comments table cedar obviously you can see all of those free classes were created inside the database
+
+02:22.070 --> 02:24.040
+seeds folder.
+
+02:24.080 --> 02:30.200
+Now obviously you will have to refactor this code a little bit more for the specific chunks of responsible
+
+02:30.200 --> 02:36.140
+for specific models into the different classes that we have just created.
+
+02:36.290 --> 02:43.850
+And also you will see how you can accept some additional input from the user to modify the way we seed
+
+02:43.940 --> 02:46.330
+the database.
+
+02:46.330 --> 02:49.700
+Now let's immediately go ahead and refactor this code.
+
+02:49.700 --> 02:58.430
+So we need this first chunk creating users and let's move it to our users tables Cedar Run method.
+
+02:58.430 --> 03:04.910
+Now since we call those cedar classes are called separately we do not need our single collection.
+
+03:04.910 --> 03:08.390
+That will then work on will fetch the users differently.
+
+03:08.410 --> 03:15.950
+So we do not need these variables and also we don't have to concatenate them into a single collection.
+
+03:15.950 --> 03:16.930
+So this is enough.
+
+03:16.940 --> 03:21.290
+This will just create some user models.
+
+03:21.290 --> 03:23.880
+Now let's go back to database cedar now.
+
+03:24.050 --> 03:28.570
+How would you call this user a stable cedar.
+
+03:28.670 --> 03:35.240
+This is that was this commented out line that was here before we even made any changes.
+
+03:35.360 --> 03:36.440
+And this is how we do it.
+
+03:36.440 --> 03:44.990
+You use that this Cole method of the database cedar to call the specific cedar class.
+
+03:45.170 --> 03:47.300
+Now this was our first class.
+
+03:47.300 --> 03:53.390
+Now let's go and move to the blog post so here is our blog post tables cedar
+
+03:56.240 --> 04:03.020
+and now you can see that we have disposed variable we of course do not need it anymore as we won't be
+
+04:03.020 --> 04:05.900
+immediately doing anything with posts.
+
+04:05.900 --> 04:11.460
+But the problem is where do we get the users from.
+
+04:11.470 --> 04:17.860
+So this is pretty easy since we would like to add some blog posts to all the users.
+
+04:17.860 --> 04:25.930
+We can simply fetch older users using their static all method and everything stays the same.
+
+04:25.930 --> 04:31.050
+And this would now be responsible for saving their users.
+
+04:31.060 --> 04:39.610
+And finally we have comments so let's move this code into the comments tables cedar of course we do
+
+04:39.610 --> 04:46.120
+not need this variable anymore and we have posts here which we had the same problem before.
+
+04:46.150 --> 04:54.270
+Now we can also fetch the posts using the old method of up blog post.
+
+04:54.340 --> 04:58.910
+So this should fetch us all the blog posts from the database.
+
+04:59.080 --> 05:08.170
+And now what we have to handle is the order in which those seeders are cold so you can either add multiple
+
+05:08.170 --> 05:19.420
+calls to this this call or alternatively you can just have a single call and only specify them in order
+
+05:19.660 --> 05:21.640
+inside an array.
+
+05:21.730 --> 05:34.950
+So the next step should be blog posts table cedar and finally comments table cedar so maybe let's reformat
+
+05:34.960 --> 05:42.050
+it so it is more readable now before you can run this new database cedar.
+
+05:42.060 --> 05:48.840
+You have to run composer dump out to load to regenerate the outer loader.
+
+05:48.870 --> 05:55.120
+Remember that you will have to run this command each time you will create a new database cedar.
+
+05:55.140 --> 06:00.070
+Class seems I've made a typo.
+
+06:00.090 --> 06:02.700
+It is actually out of load.
+
+06:02.850 --> 06:03.270
+Okay.
+
+06:03.270 --> 06:15.430
+It was a regenerated and now let's find this command in the history and this beach artisan migrate to
+
+06:15.430 --> 06:15.910
+refresh.
+
+06:15.910 --> 06:23.670
+So we want to refresh the database and re seeded again with the new data.
+
+06:23.700 --> 06:30.720
+So now you can see inside the terminal that it is saying what it is doing and it signals that it is
+
+06:30.720 --> 06:33.180
+using specific seeders.
+
+06:33.270 --> 06:40.500
+Now if you will check the database now you can see that the effect is exactly the same as we had before
+
+06:40.500 --> 06:45.710
+when everything was inside this single database Cedar Run method.
+
+06:45.810 --> 06:53.460
+But the difference is that even if we call here all these cedar classes in specific order having the
+
+06:53.460 --> 07:01.470
+same effect the additional bonus that we get by separating those seeding logic into classes is that
+
+07:01.470 --> 07:05.340
+we can call those cedar classes individually.
+
+07:05.340 --> 07:14.810
+So first let's run peach bee artisan migrate refresh so we have recreated the data base but haven't
+
+07:14.810 --> 07:17.680
+seeded it so it is empty.
+
+07:17.810 --> 07:24.520
+You can even verify that that all the tables are empty for example the user stable.
+
+07:24.980 --> 07:29.860
+And now you can run one cedar individually.
+
+07:29.930 --> 07:32.720
+Let's say you would like to load the users.
+
+07:32.720 --> 07:41.090
+So what you will do is you will write peach bee artisan DB seed and you will only specify a class that
+
+07:41.090 --> 07:41.780
+you would like.
+
+07:41.840 --> 07:51.370
+So this would be users table cedar and now let's go to the database you can see that we have the users
+
+07:51.430 --> 07:59.560
+inside the database but there is no blog posts or comments so let's see if we can load blog posts so
+
+07:59.560 --> 08:00.580
+blog posts.
+
+08:00.580 --> 08:02.320
+Table cedar
+
+08:05.850 --> 08:14.940
+comments is still empty but we do get their blog posts so you can use this specific cedar classes to
+
+08:14.940 --> 08:17.900
+just to maybe do everything at once.
+
+08:17.930 --> 08:24.930
+But using some different logic so they can work differently depending on your needs or you can just
+
+08:25.020 --> 08:28.170
+load the data for a specific table.
+
+08:28.170 --> 08:36.150
+That all depends on the needs of your application and what you might currently need to do so in the
+
+08:36.150 --> 08:45.090
+next lecture we'll see how we can possibly enhance this single individual cedar classes by asking users
+
+08:45.090 --> 08:50.130
+some input for example how many blog posts they would like to be created.

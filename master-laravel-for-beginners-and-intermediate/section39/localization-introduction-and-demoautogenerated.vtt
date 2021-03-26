@@ -1,0 +1,148 @@
+WEBVTT
+
+00:00.780 --> 00:08.490
+In this section we'll learn about the localization or in other words translating your application into
+
+00:08.520 --> 00:10.640
+different languages.
+
+00:10.680 --> 00:17.630
+So first let's see a quick demo of what you will achieve at the end of this section.
+
+00:18.510 --> 00:24.780
+I will stress that again this is only what you will see after completing this section.
+
+00:24.780 --> 00:31.100
+Okay now let's logging as a user that I have set up to have a different language.
+
+00:31.110 --> 00:32.540
+So notice what happens.
+
+00:32.550 --> 00:35.190
+Everything it is is in English.
+
+00:35.190 --> 00:44.520
+Now this person logs in and suddenly everything is in German so the home page is in German.
+
+00:44.550 --> 00:49.350
+The blog posts the menu on the top everything on the right.
+
+00:49.350 --> 00:56.010
+You can see that there now the texts saying Who are the deposed and when is in German.
+
+00:56.010 --> 00:57.750
+Also the tax.
+
+00:57.810 --> 01:00.840
+Sorry the days that have passed are in German.
+
+01:00.840 --> 01:04.410
+Target is actually a day in German.
+
+01:04.440 --> 01:10.890
+Also we have correct a singular and plural forms like free commentator.
+
+01:10.980 --> 01:21.830
+Then there is one commentator or aim commentator and also when there are no comments the text is also
+
+01:21.860 --> 01:22.850
+in German.
+
+01:23.660 --> 01:32.150
+When you go to the blog post The View also everything is in German now I will also add those links to
+
+01:32.150 --> 01:32.770
+the profile.
+
+01:32.780 --> 01:41.420
+Finally to our menu and to the profile editing for authenticated users what we'll also do is the possibility
+
+01:41.420 --> 01:45.980
+for users to change their language and this will be stored for them.
+
+01:45.980 --> 01:51.100
+So let's say this guy is actually using German as his language.
+
+01:51.100 --> 02:01.920
+So Deutsche Now let's change him to Spanish and immediately you can see the web page is in Spanish so
+
+02:01.920 --> 02:07.670
+of course not everything because well let's not waste time to translate every single message.
+
+02:07.680 --> 02:13.620
+But let's say almost 90 percent of our page is in Spanish.
+
+02:13.620 --> 02:14.660
+And what isn't.
+
+02:14.670 --> 02:20.940
+We'll default to English so we'll also know how to work and what happens when you have some missing
+
+02:20.940 --> 02:24.860
+translation so you haven't translated everything yet.
+
+02:25.380 --> 02:29.400
+So we can also see that it looks like almost correct Spanish.
+
+02:29.400 --> 02:34.010
+I have no idea to be our idea to be honest because I don't know Spanish at all.
+
+02:34.110 --> 02:40.650
+But anyway this guy now has the page in Spanish when he logs out then you can see the page in English
+
+02:40.680 --> 02:43.330
+which is a default language for the session.
+
+02:43.380 --> 02:49.380
+If we logging again you can remember that we have saved Spanish as this guy's language.
+
+02:49.710 --> 02:59.050
+And then again everything is back in Spanish so what we will actually also see is how to change the
+
+02:59.050 --> 03:06.670
+language for the user for the current session and we'll do that in a very neat way using the euro else.
+
+03:07.060 --> 03:12.930
+So maybe let's take a look at the blog posts so take a look at the others bar and what you see is a
+
+03:12.930 --> 03:16.150
+lot of old dot test slash posts.
+
+03:16.390 --> 03:21.010
+So that's the default address that we have set up using larval roots.
+
+03:21.910 --> 03:29.590
+But since this course is based on somebody we are using Apache I will also show you how to modify it
+
+03:29.620 --> 03:35.680
+so you can do links like this using the language as part of the url.
+
+03:35.890 --> 03:42.950
+So E for German slash boats and when you press enter.
+
+03:42.950 --> 03:49.830
+Now you can see that the page is in German and also when the user will be clicking other links.
+
+03:49.850 --> 03:54.010
+Now his session becomes German.
+
+03:54.040 --> 03:56.370
+You can also do that in Spanish.
+
+03:56.560 --> 04:04.150
+So now you can see the home page and we are in Spanish so we'll achieve that by creating finally creating
+
+04:04.270 --> 04:11.410
+our root middleware that will actually set the user language for the session depending on their request
+
+04:11.440 --> 04:17.510
+argument or the language that will be stored inside that database.
+
+04:18.070 --> 04:22.150
+As we see here on the user profile of course after you logging.
+
+04:22.990 --> 04:31.090
+So this will be remembered for the user and also you will be able to create those great SEO links by
+
+04:31.090 --> 04:39.250
+adding our specific language for particular user so he can see the page in the language that he knows.

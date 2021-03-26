@@ -1,0 +1,367 @@
+WEBVTT
+
+00:00.450 --> 00:02.420
+Now let's get straight to the point.
+
+00:02.490 --> 00:09.130
+Let's make this first process sending e-mail to the outer of the blog post that his blog post was comment
+
+00:09.130 --> 00:14.030
+at a background job so it won't slow down our request.
+
+00:14.040 --> 00:20.120
+So first let's take a look at the Q BHP file which can be found inside the conflict folder.
+
+00:20.130 --> 00:23.140
+This is a configuration file for the Qs.
+
+00:23.640 --> 00:27.390
+So what you can see here is the default connection that you should use.
+
+00:27.390 --> 00:33.840
+If you do not specify another one because of course you can specify directly on which connection you
+
+00:33.840 --> 00:36.030
+would like to send a job.
+
+00:36.750 --> 00:43.920
+So there are already some of the connections pre configured for you so you can see saying database beanstalk
+
+00:44.150 --> 00:51.930
+rescuers and Redis as we've said we'll use that database one and you can see that this is stored as
+
+00:51.930 --> 00:55.110
+an environment variable called Q connection.
+
+00:55.110 --> 00:57.300
+By default it is sync.
+
+00:57.500 --> 01:05.060
+So now let's go to that dot and file and modify that to database.
+
+01:05.240 --> 01:13.250
+So how this would actually be stored is there will be a separate table inside your larval project or
+
+01:13.310 --> 01:15.220
+basically your database.
+
+01:15.290 --> 01:19.550
+Now to create this table we need to run a specific command.
+
+01:19.550 --> 01:23.880
+This would be peach bee artisan cue table.
+
+01:23.960 --> 01:31.340
+This will create our new migration to create this job stable so table will be called jobs and then you
+
+01:31.340 --> 01:35.810
+just need to run Peach Pit artisan migrate.
+
+01:35.850 --> 01:39.290
+OK so now this table is created.
+
+01:39.290 --> 01:43.800
+Now let's take a look at the Peach Pit my admin.
+
+01:43.950 --> 01:45.930
+So this is our new job stable.
+
+01:45.930 --> 01:49.910
+Take a look at the structure so there is a usual idea.
+
+01:49.920 --> 01:53.610
+There is a queue because we might have separate queues.
+
+01:53.640 --> 01:58.520
+So not everything has to be put on one single queue that is then processed.
+
+01:58.530 --> 02:05.730
+You might have queues with different names different priority so you might decide which jobs are more
+
+02:05.730 --> 02:10.740
+important to process first and which ones can be processed later.
+
+02:10.920 --> 02:17.370
+So this is really useful if you have some essential tasks and something that is not really crucial to
+
+02:17.370 --> 02:21.560
+your application and can be run later.
+
+02:21.570 --> 02:28.590
+Now every job has some amount of attempts because they might fail for whatever reason and you might
+
+02:28.590 --> 02:33.000
+decide how many attempts should be taken to process a job.
+
+02:33.360 --> 02:35.940
+So this is a column for that.
+
+02:36.090 --> 02:40.000
+Now there are also reserved are available at created art.
+
+02:40.140 --> 02:42.900
+So this would be some time study will be stored.
+
+02:42.930 --> 02:45.370
+Let's not worry about it right now.
+
+02:45.570 --> 02:47.640
+And the most important is the payload.
+
+02:47.640 --> 02:50.140
+This is basically what has to be done.
+
+02:50.160 --> 02:54.090
+You also do not have to worry about that because a handles that.
+
+02:54.360 --> 02:58.130
+So you will see in a second what actually gets stored here.
+
+02:58.810 --> 03:01.950
+Okay let's go back to our application right now.
+
+03:01.950 --> 03:04.740
+So now we have basically everything set up.
+
+03:05.070 --> 03:10.680
+So we are ready to make our first job.
+
+03:10.680 --> 03:18.510
+So to make this job Let's go to the command post that mark down.
+
+03:18.620 --> 03:22.340
+Now what you might have noticed here is that by default.
+
+03:22.580 --> 03:29.040
+When we created this Malabo lot of oil has added are you statement for an interface.
+
+03:29.090 --> 03:30.890
+This interface is called Shoot.
+
+03:30.900 --> 03:37.070
+Q It's actually empty so there is no method to implement from this interface.
+
+03:37.070 --> 03:38.790
+It's just there.
+
+03:38.960 --> 03:45.670
+And what this is used for is if a class will implement this interface like that.
+
+03:45.890 --> 03:49.670
+So we need that implements keyword shoot.
+
+03:49.670 --> 03:59.500
+Q If you do something like that lava is smart so it will figure out that if a class implements this
+
+03:59.500 --> 04:06.940
+interface it should automatically put this mail that is being sent to as a background job.
+
+04:08.930 --> 04:14.350
+Now basically what we have done here is we created our first background job.
+
+04:14.870 --> 04:18.610
+So from now on if we will try to add a comment.
+
+04:18.620 --> 04:23.590
+This will be put as a background job that lava will process.
+
+04:23.630 --> 04:30.320
+Now you have to notice that we didn't have to do any specific to how we called this mail send everything
+
+04:30.320 --> 04:32.030
+stays the same.
+
+04:32.030 --> 04:39.290
+The only difference is that now that we implement this shoot Q interface this will be dispatched as
+
+04:39.290 --> 04:46.640
+a job to process later and then you will of course have to run the Q Walker so it can pick up this job
+
+04:46.670 --> 04:54.080
+from this storage which is database in our case and process it which actually would only then send the
+
+04:54.080 --> 04:55.770
+actual email.
+
+04:55.880 --> 04:57.290
+So let's see that in action
+
+05:00.080 --> 05:02.330
+now to clearly see what's happening.
+
+05:02.360 --> 05:05.390
+Make sure your mail drop inbox is empty.
+
+05:05.390 --> 05:09.020
+You can press this button it will remove all the previous messages.
+
+05:09.020 --> 05:11.440
+We don't need them anyway.
+
+05:11.570 --> 05:17.580
+Now let's go to our Web site and type a comment first make sure you are out tentacled it.
+
+05:17.960 --> 05:23.300
+So let's say something like this should be cute
+
+05:26.320 --> 05:26.510
+now.
+
+05:26.520 --> 05:33.380
+Notice how quickly this comment was was rather it you might have seen previously that sending this e-mail
+
+05:33.410 --> 05:37.880
+actually has slowed down this process significantly.
+
+05:37.910 --> 05:40.570
+Now let's take a look at the mail drop.
+
+05:40.610 --> 05:45.440
+So you would expect that you have an e-mail here but there is nothing yet.
+
+05:45.440 --> 05:52.910
+And even if you wait for 10 minutes there won't be anything here because now sending e-mail is a background
+
+05:52.910 --> 06:00.530
+process that has to be executed and the job is stored inside that job stable.
+
+06:01.910 --> 06:04.010
+So let's take a look at what we have here.
+
+06:04.130 --> 06:08.930
+So we haven't specified any cute names so we have a default one.
+
+06:08.930 --> 06:11.850
+Let's not worry about it right now.
+
+06:11.870 --> 06:19.280
+Also you can see that inside the payload there is some information it's hard to really to read what
+
+06:19.520 --> 06:20.250
+there is.
+
+06:20.260 --> 06:26.810
+But well what you can see is that it is a comment posted markdown.
+
+06:26.960 --> 06:35.150
+So there is some kind of job and this job has everything that is required to actually send this email
+
+06:35.180 --> 06:43.340
+because what a lot of it does it is it's serialized is the class that is basically describing what our
+
+06:43.340 --> 06:44.980
+job is.
+
+06:44.990 --> 06:52.700
+So by implementing that should cue interface we basically made this comment post that markdown may Malabo
+
+06:52.700 --> 07:00.710
+class a job class too and it has basically well it has all the information that we have passed through
+
+07:00.710 --> 07:03.230
+it and a lot of knows what to do with that.
+
+07:03.230 --> 07:12.620
+So this basically works magically now it has some additional properties attempts is zero right now.
+
+07:12.620 --> 07:19.700
+So to actually run this you will have to open the terminal inside the directory where your application
+
+07:19.700 --> 07:20.460
+is.
+
+07:20.600 --> 07:31.060
+Now let's run peach artisan to see what jobs are available so those are the jobs related to the processing
+
+07:31.060 --> 07:37.440
+the queue and what you will actually have to run is for the.
+
+07:37.470 --> 07:41.750
+Well the simplest way is to run the queue work artisan command.
+
+07:41.790 --> 07:43.770
+So let's do that.
+
+07:43.770 --> 07:50.730
+So let's clear the screen and run peach bee artisan queue work and this will start the queue process
+
+07:50.730 --> 07:56.050
+or so this is our flow.
+
+07:56.180 --> 07:57.500
+We have created the e-mail.
+
+07:57.560 --> 08:02.020
+It was stored inside the queue which is database in our case.
+
+08:02.030 --> 08:07.760
+Now we are running this queue processor that will take the jobs to one by one and do everything that
+
+08:07.850 --> 08:08.750
+it has to do.
+
+08:11.340 --> 08:18.640
+So let's go back to the console and run BHP artisan queue work.
+
+08:18.670 --> 08:22.630
+Now you can see what this is doing so it has speak up.
+
+08:22.630 --> 08:30.340
+The first job from the database table it did what it had to do and then it output at that this job was
+
+08:30.340 --> 08:31.840
+processed.
+
+08:31.840 --> 08:36.490
+So now when you will refresh the database you will see that it was removed.
+
+08:37.120 --> 08:43.080
+And while this makes sense because the job was processed everything that has to be done was done.
+
+08:43.600 --> 08:46.560
+And it doesn't need it anymore so it was removed.
+
+08:46.720 --> 08:49.180
+And this is how queues work.
+
+08:49.170 --> 08:55.000
+Now if you will go to may drop what you now can see is the e-mail that had to be sent.
+
+08:56.170 --> 09:03.650
+So we didn't slow slow down our request by sending this e-mail wasting time to communicate with unreceptive
+
+09:03.660 --> 09:07.850
+P server which can take well many seconds.
+
+09:08.050 --> 09:15.830
+We have just moved this as a background job that works when you of course start a queue process or.
+
+09:16.520 --> 09:22.510
+But now you have your e-mail and well basically our application has gained a lot of performance.
+
+09:22.520 --> 09:26.930
+So it's not slowed down for the users anymore.
+
+09:27.230 --> 09:31.400
+Of course this is just the simplest way to create your jobs.
+
+09:31.400 --> 09:38.840
+And there may level class is just just a perfect example on how to queue some of the stuff that your
+
+09:38.840 --> 09:46.910
+application needs to do but is actually pretty slow and usually not very crucial to how your application
+
+09:46.940 --> 09:48.620
+is functioning.
+
+09:48.620 --> 09:51.650
+And in the next lecture we'll see more examples.
+
+09:51.650 --> 09:57.770
+And basically in this section where see more examples of on how you can create jobs what you can do
+
+09:57.770 --> 10:04.460
+with them and then we'll also learn about how how to handle this SKU process all and all the options
+
+10:04.460 --> 10:06.830
+regarding queues in larval.

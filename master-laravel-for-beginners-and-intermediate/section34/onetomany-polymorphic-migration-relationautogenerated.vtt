@@ -1,0 +1,190 @@
+WEBVTT
+
+00:01.110 --> 00:07.010
+So let's not waste any time and just create a new migration for modifying the comments table.
+
+00:07.020 --> 00:08.820
+We'll call it art.
+
+00:08.940 --> 00:10.590
+Polly Moore.
+
+00:11.000 --> 00:20.550
+Two comments table so this should generate a new migration with the this scaffolding which lets us immediately
+
+00:20.550 --> 00:29.130
+operate on the comments table now what we will have to do inside it is drop the key.
+
+00:30.160 --> 00:36.200
+So we do drop foreign block post I.D..
+
+00:36.230 --> 00:40.730
+Then we have to drop the column itself as we won't need that anymore
+
+00:43.790 --> 00:45.570
+so not this I'm doing it pretty fast.
+
+00:45.570 --> 00:51.700
+If that's too fast for you then you can always relate to the code inside the Get Up.
+
+00:51.870 --> 01:01.250
+Now the interesting part is we add morphs so this would add the comment of all two columns that commendable
+
+01:01.250 --> 01:02.990
+ideas and commendable type.
+
+01:02.990 --> 01:07.220
+If you don't remember from last section Marx does that for us.
+
+01:07.220 --> 01:12.230
+You can always out click this so you will see what actually gets created.
+
+01:12.230 --> 01:17.570
+And of course it creates a composite index from those two fields.
+
+01:17.600 --> 01:27.080
+Now the other side of this relation is to drop those two fields so it's enough to just use drop morphs
+
+01:27.380 --> 01:34.550
+and specify the argument as commendable and now we'll have to recreate the column.
+
+01:34.550 --> 01:36.680
+So we do.
+
+01:36.680 --> 01:50.630
+Signed integer block post I.D. skull so be an index and then we recreate the in key so in case you would
+
+01:50.630 --> 01:52.280
+like to reverse this migration.
+
+01:52.280 --> 01:54.500
+This is how you do it.
+
+01:54.500 --> 01:59.800
+So for brain block post I.D. does dusted for a key.
+
+01:59.810 --> 02:10.060
+It references the I.T. field on block posts table OK.
+
+02:10.160 --> 02:15.820
+Save the changes and let's run this migration BHP artisan migrate.
+
+02:16.430 --> 02:22.660
+So this wasn't very different from the last time we created our one to one polymorphic relationship.
+
+02:22.730 --> 02:25.520
+Basically almost exactly the same.
+
+02:25.910 --> 02:28.210
+Okay so we have modified the tables.
+
+02:28.220 --> 02:33.830
+Now let's go ahead and modify the relationships and at the missing one on the User model.
+
+02:35.320 --> 02:42.340
+So now let's start with the comment models so open the comment model and what we see here is the blog
+
+02:42.340 --> 02:52.230
+post relationship which we won't need anymore so we'll just replace start with that commendable relationship.
+
+02:52.270 --> 03:01.830
+So here we have to return this morph to so the same as we did in the 1 to 1 polymorphic relationship.
+
+03:01.840 --> 03:09.790
+But this is not everything we have to do here since we also reset the blog post cash when the new comment
+
+03:09.850 --> 03:11.800
+is uttered.
+
+03:11.860 --> 03:13.360
+Now let's see what we have here.
+
+03:13.360 --> 03:18.490
+So we have a comment model which we read a blog post idea from which is no longer true.
+
+03:18.490 --> 03:26.120
+It is commendable idea now so this will hold the blog post relationship.
+
+03:26.120 --> 03:32.960
+Now this is also not everything because the comment can now be added also to the user.
+
+03:33.200 --> 03:40.850
+So you can't just clear the blog post cash whenever our comment is added because it might be added to
+
+03:41.370 --> 03:42.820
+our user too.
+
+03:42.940 --> 03:51.530
+So what we can do to verify to what this comment is being associated is we can check if the comment
+
+03:52.070 --> 04:05.350
+commendable type is equal to blog post class at first list let's check if the blog post model is important.
+
+04:05.360 --> 04:16.890
+It's not so we actually had to use up blog post now only if this is true then we want to forget the
+
+04:16.890 --> 04:20.050
+cash for one particular blog post.
+
+04:20.250 --> 04:22.030
+So this is our comment model.
+
+04:22.050 --> 04:29.390
+Now let's modify the blog post so let's locate the blog post model.
+
+04:30.020 --> 04:38.960
+So there is this our relation comments we use has many to the up comment and we also fetch the comments
+
+04:39.050 --> 04:42.410
+always by the most most recent ones.
+
+04:42.410 --> 04:46.210
+So this is the local query scope.
+
+04:46.400 --> 04:50.620
+So what we should do instead is morph many.
+
+04:50.660 --> 04:56.940
+So this is a difference between one to one and one too many polymorphic because there we used more of
+
+04:56.940 --> 05:03.980
+one here we use more of many but we also have to specify the name of the field on the other side which
+
+05:03.980 --> 05:13.020
+is commendable and we can also fetch the fetch those comments by the most latest comments.
+
+05:13.040 --> 05:20.970
+Finally let's go to the user so you can see that the user already has a relationship to comments.
+
+05:21.070 --> 05:27.360
+So this is because user can post comments so we can read all the comments of our user.
+
+05:27.370 --> 05:30.710
+So we should call this relationship differently.
+
+05:30.970 --> 05:37.510
+Let's copy this relation from blog post because this will be the same on the User model.
+
+05:38.110 --> 05:44.030
+But instead of calling it comments let's call it comments on.
+
+05:44.230 --> 05:51.580
+So this will instead fetch all the comments on that particular user when we will add this possibility
+
+05:51.580 --> 05:58.600
+for everyone to comment on the user out or however you call it because we create blog posts so user
+
+05:58.630 --> 06:01.830
+can be considered awesome out or OK.
+
+06:01.840 --> 06:03.110
+That's basically it.
+
+06:03.310 --> 06:06.960
+We've created are one too many polymorphic relationship.
+
+06:07.270 --> 06:12.790
+Well in the next lectures we'll see how to actually implement this how to use that and you will see
+
+06:12.910 --> 06:15.020
+how simple that is in LA Bravo.

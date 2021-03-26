@@ -1,0 +1,85 @@
+WEBVTT
+
+00:02.580 --> 00:08.200
+Trusting data as it arise from the user input is not the best idea.
+
+00:08.830 --> 00:16.410
+Usually you need to make sure the input can pass some specific constraints, like it needs to have specific
+
+00:16.410 --> 00:23.490
+length, be of specific type, like a number, or be present at all.
+
+00:24.210 --> 00:31.650
+Validating the incoming data is very easy and convenient in Laravel, the request object.
+
+00:33.420 --> 00:38.620
+Passed as the storm heated argument has to validate methods.
+
+00:41.040 --> 00:51.270
+There are plenty of available validation rules out of the box that validate medalled accepts an array
+
+00:52.140 --> 00:57.660
+where the key is the input property to validate.
+
+00:59.080 --> 01:04.740
+And the value is a collection of validation rules.
+
+01:13.800 --> 01:25.200
+Validation rules can be a string with rules separated by the pipe character or an array of rules are
+
+01:25.210 --> 01:30.450
+full, list of rules available is available under this link.
+
+01:33.170 --> 01:39.290
+Now, let's ask some basic rules like minimum length.
+
+01:42.410 --> 01:44.270
+And the maximum length.
+
+01:47.970 --> 01:53.070
+Additional parameters to rules can be added after the column.
+
+01:58.000 --> 02:06.220
+The required rule make sure that value for the field is provided.
+
+02:14.710 --> 02:24.160
+It is normal to have more than one validation rule on a single property, but if you'd prefer the first
+
+02:24.160 --> 02:32.320
+error to stop the rest of the rules for a field from running at the bail rule to the least.
+
+02:36.130 --> 02:41.950
+Now, let's save the changes and let's see what happens when you call the validate method.
+
+02:49.450 --> 02:54.100
+If the data was valid, actually nothing unusual happens.
+
+02:54.280 --> 02:59.760
+The blog post gets created and this means your code continues to run.
+
+03:00.460 --> 03:09.140
+This means you don't need to check the validate call result when something goes wrong, you know?
+
+03:09.880 --> 03:13.660
+So how does Laravel tell you the validation failed?
+
+03:14.170 --> 03:17.980
+That depends on how the request was sent.
+
+03:19.030 --> 03:28.570
+When you send a form, it would redirect back to the last page, if the call is made using Ajax, Laravel
+
+03:28.570 --> 03:31.330
+will return address on response with errors.
+
+03:31.690 --> 03:34.230
+So let's focus on form validation first.
+
+03:35.110 --> 03:42.760
+Apart from redirecting to the last page, Laravel will flush the errors to the session.
+
+03:44.200 --> 03:51.430
+This means that the list of errors will be available as the errors session the variable.
+
+03:53.210 --> 03:58.160
+There is a separate lecture about displaying form errors.

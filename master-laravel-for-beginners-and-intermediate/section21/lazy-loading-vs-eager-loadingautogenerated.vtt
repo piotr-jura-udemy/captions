@@ -1,0 +1,232 @@
+WEBVTT
+
+00:01.450 --> 00:07.930
+Now before we move to creating some more interesting queries I wanted to show you what is the actual
+
+00:07.930 --> 00:15.040
+performance implication of using the eager loading V as the lazy loading.
+
+00:15.040 --> 00:18.160
+So for this we'll use forum as an example.
+
+00:18.160 --> 00:25.270
+Our index page with the blog posts when we fetch all the blog posts currently but we'll write a little
+
+00:25.330 --> 00:30.160
+chunk of code to also get all the comments from this blog post.
+
+00:30.160 --> 00:37.250
+So to make this example look realistic we need to add some more blog posts so let's do that now.
+
+00:37.600 --> 00:42.430
+Doesn't really matter what you enter here unless it is not valid.
+
+00:42.430 --> 00:47.920
+So let's create maybe 2 more valid blog posts.
+
+00:51.980 --> 00:57.050
+Doesn't really matter so I've just created two more blog posts.
+
+00:57.050 --> 01:02.300
+Now let's head back to our post controller and let's see the example.
+
+01:02.300 --> 01:15.470
+So first thing we'll have to do is we have to import a class from the illuminate namespace support for
+
+01:15.500 --> 01:20.940
+seeds and the class name is D.B..
+
+01:20.990 --> 01:28.370
+It's the upper case B so I haven't explained phosphates yet so we are going a little bit ahead of our
+
+01:28.370 --> 01:28.870
+time.
+
+01:28.880 --> 01:30.850
+But don't worry about it.
+
+01:31.040 --> 01:35.360
+It's not something you will use everyday inside your up.
+
+01:35.360 --> 01:39.170
+At least this particular example because you will be using phosphates.
+
+01:39.350 --> 01:41.680
+Now I just want to show you something.
+
+01:41.720 --> 01:49.310
+So you need to enable database logging and we can do that by accessing their phosphate which is object
+
+01:49.400 --> 01:56.280
+and call get the current connection and enable query log.
+
+01:56.970 --> 02:04.020
+So this simple instruction will enable the logging of all the queries that are made inside Lara VO So
+
+02:04.020 --> 02:08.580
+anytime Aquarius made it will be logged.
+
+02:08.580 --> 02:17.040
+So now will do very simple things will fetch all the blog posts into a variable so we'll use our blog
+
+02:17.040 --> 02:18.780
+post all.
+
+02:18.910 --> 02:26.700
+So this will fetch all the blog posts and now we'll iterate over all the blog posts by using the sample
+
+02:26.700 --> 02:27.630
+for each.
+
+02:28.140 --> 02:38.940
+So we do for each posts us post and then inside it will add another loop and now we'll iterate over
+
+02:39.060 --> 02:48.530
+all the blog posts comments so now this post would be a blog post instance and it will have this.
+
+02:48.750 --> 02:51.000
+We can use this field comments
+
+02:54.930 --> 02:57.490
+now what we are going to do is very simple.
+
+02:57.510 --> 03:04.140
+We want to echo the content on of every comment of every blog post.
+
+03:04.140 --> 03:09.470
+And finally we will use Didi which we have used before.
+
+03:09.500 --> 03:11.290
+It's just dump and die.
+
+03:11.330 --> 03:16.520
+And what we want to see is all the actual queries that were made.
+
+03:16.730 --> 03:24.620
+And we can access that by using the D.B. phosphates static method get query log.
+
+03:24.630 --> 03:26.760
+Now don't worry we will remove this code.
+
+03:26.760 --> 03:30.350
+It is just for showing you the example.
+
+03:30.360 --> 03:33.650
+Now save the changes make sure you save the changes.
+
+03:33.690 --> 03:41.910
+And now go to this page the posts where we have a list of all the blog posts and refresh and what you
+
+03:41.910 --> 03:50.030
+can see here will be all the queries that are being made so take a look at this.
+
+03:50.080 --> 03:51.840
+So we have a free blog post.
+
+03:51.830 --> 03:53.600
+So first it is fetching.
+
+03:53.640 --> 03:55.990
+That's all the blog posts.
+
+03:55.990 --> 03:59.750
+So maybe let's increase it a little bit so we can see what's happening.
+
+04:00.160 --> 04:04.750
+It's fetching all the blog posts so there is a query to fetch them.
+
+04:04.750 --> 04:12.700
+And then each time you go over this loop for each blog post it is doing another query.
+
+04:12.700 --> 04:19.960
+Exactly in this place when you are accessing the comments field it is making another query and this
+
+04:19.960 --> 04:21.190
+is lazy loading.
+
+04:21.220 --> 04:24.460
+So it doesn't fetch any comments upfront.
+
+04:24.460 --> 04:31.810
+It is only doing this particular query SELECT FROM comments where a blog post I.D. and now specifying
+
+04:31.810 --> 04:36.970
+the proper blog post I.D. when you access this comments field.
+
+04:36.970 --> 04:43.690
+So as you can see we can easily make even 100 queries when we will have a hundred blog posts on the
+
+04:43.720 --> 04:44.140
+page.
+
+04:44.140 --> 04:50.140
+And for some reason we would like to access the comments content or any other data for that matter is
+
+04:50.140 --> 04:57.720
+just for showing you the example and while we are we are lucky because on the Have we only have free
+
+04:57.720 --> 04:59.730
+blog posts but imagine having more.
+
+04:59.730 --> 05:07.380
+This would end up having like hundred queries if we will have a hundred blog posts now for comparison
+
+05:07.800 --> 05:15.060
+if we would fetch all the blog posts up front with the comments.
+
+05:15.300 --> 05:27.670
+So we'll do something like this blog post with comments get to actually fetch the result save the changes.
+
+05:27.670 --> 05:30.540
+And now let's go back and see what we get.
+
+05:30.630 --> 05:37.710
+And now you see we already have limited it to two queries and now it doesn't really matter how many
+
+05:37.710 --> 05:44.600
+blog posts we would have because you can see the second query that it is fetching all the comments where
+
+05:44.610 --> 05:47.010
+the blog post is in specific set.
+
+05:47.010 --> 05:54.570
+So this happens to be all the ideas of our blog posts that we have inside the database and you can verify
+
+05:54.570 --> 06:03.800
+that by going to your database client whatever you are using and seeing that we have this free I.D..
+
+06:03.810 --> 06:09.970
+So this might have a very significant impact on the performance of your application.
+
+06:10.170 --> 06:16.170
+And remember about that when you are deciding whether to use eager loading or lazy loading.
+
+06:16.170 --> 06:27.230
+So it is very easy to make it very slow by just making too many queries at once OK.
+
+06:27.240 --> 06:35.370
+So let's go back to the code editor I will just comment that out and comment that to the repository
+
+06:35.370 --> 06:40.080
+so you can see it and easily reused this example we of course do not need that.
+
+06:40.110 --> 06:47.790
+I just wanted to show you the difference of eager loading and lazy loading and how much impact it can
+
+06:47.790 --> 06:51.110
+have on your application performance.
+
+06:51.150 --> 06:57.870
+I'm not saying you should always use that you go to loading but you just have to decide and if you see
+
+06:57.870 --> 07:04.500
+that your queries are too slow or it is a pain point in your application you might just then consider
+
+07:04.830 --> 07:06.200
+using eager loading.
+
+07:06.330 --> 07:12.660
+And sometimes of course lazy loading is just fine when you are pretty sure you want to be doing too
+
+07:12.660 --> 07:17.130
+much queries or you won't need to read too much related data.

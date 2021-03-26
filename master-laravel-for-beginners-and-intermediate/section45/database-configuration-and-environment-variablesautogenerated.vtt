@@ -1,0 +1,274 @@
+WEBVTT
+
+00:01.650 --> 00:10.260
+Up to this moment we learned how to create roots inside the web BHP file first using the closures and
+
+00:10.320 --> 00:12.940
+then using controller classes.
+
+00:12.960 --> 00:18.000
+And we have also learned how to pass parameters and to render views.
+
+00:18.000 --> 00:21.080
+Now it's time to start working with real thing.
+
+00:21.240 --> 00:24.480
+And I mean working with the databases.
+
+00:24.480 --> 00:28.500
+So first we should create a brand new database.
+
+00:28.500 --> 00:36.450
+And if you are using sump which I prepared a video on how to set up you can go to this page the local
+
+00:36.450 --> 00:44.660
+host BHP my admin by the way I'd like you to remind you that I've created this of a cheat sheet.
+
+00:44.760 --> 00:51.120
+It's available in GitHub and the link is always available with where I put some basic configuration
+
+00:51.120 --> 00:52.730
+options how to use them.
+
+00:52.860 --> 00:57.840
+Some other basic information you can think of it as a frequently asked questions.
+
+00:57.850 --> 01:02.400
+There's also some animated gifs on how to do certain things.
+
+01:02.400 --> 01:04.240
+Now let's go to the BHP.
+
+01:04.290 --> 01:12.420
+My admin or any other software that you might be using and create a brand new database so you can just
+
+01:12.420 --> 01:18.830
+press this new button on the left and specify our database name.
+
+01:19.110 --> 01:21.840
+So let's go with Lara for now.
+
+01:22.110 --> 01:30.220
+And the second thing is we have to specify their characters set so scroll down to the bottom and you
+
+01:30.220 --> 01:35.120
+should see UTF M before Unicode S.I..
+
+01:35.170 --> 01:38.920
+So create a database using this character set.
+
+01:38.920 --> 01:39.840
+Just press create.
+
+01:39.850 --> 01:48.530
+It's enough for now we do not we want to create an ad tables inside P2P my admin No let's go back to
+
+01:48.530 --> 01:52.220
+the code editor and see where we can configure all that.
+
+01:52.550 --> 01:59.780
+So there is a folder called config inside our larval project and it has our database peach bee file
+
+02:00.260 --> 02:04.570
+which is used to configure how you work with databases.
+
+02:04.790 --> 02:09.710
+So the first setting you might see here is the default which means the default connection.
+
+02:09.710 --> 02:14.260
+You should use so that probably would be enough for most of your needs.
+
+02:14.510 --> 02:22.640
+If you are just using one database and the value of the settings is the result of the mysterious end
+
+02:22.800 --> 02:25.690
+function which accepts two parameters.
+
+02:25.700 --> 02:33.860
+The first is the environment variable name and the second is the default value if this environment variable
+
+02:33.920 --> 02:37.680
+cannot be found.
+
+02:37.800 --> 02:44.040
+No don't worry about the environment variables in this very second we'll get to them in just a couple
+
+02:44.040 --> 02:45.390
+of minutes.
+
+02:45.400 --> 02:53.790
+Now let's focus on the second parameter of this connection and it's my sequel the string my sequel so
+
+02:53.790 --> 02:58.870
+it doesn't magically tell Laura well that we should use the my sequel database.
+
+02:59.100 --> 03:03.670
+It is actually the name of a connection we have defined below.
+
+03:03.690 --> 03:07.500
+So this comes as standard by default from Lara.
+
+03:07.520 --> 03:14.550
+So we have this configurations and those are the connections defined for our application.
+
+03:14.550 --> 03:21.840
+So we have to ask you a light my sequel that pose a risk ask you well and ask you a server but the only
+
+03:21.840 --> 03:26.240
+one that will interest us at this very moment is then my sequel.
+
+03:26.670 --> 03:30.900
+So you can see that all of those connections have a driver specified.
+
+03:30.930 --> 03:36.180
+So this is actually what's defining which variable type we will use.
+
+03:36.330 --> 03:42.940
+You can see my sequel here and also the connection parameters like the host part the database name username
+
+03:42.990 --> 03:51.210
+password are all loaded using the end function which will fetch the value of an environment variable.
+
+03:51.330 --> 03:58.390
+Also notice the collation parameter and it is the same that we have specified when we created our database.
+
+03:58.390 --> 04:06.310
+Impeach B my army so unless you have a very good reason to use something else and you really know what
+
+04:06.310 --> 04:09.290
+you are doing then this should be your default.
+
+04:12.070 --> 04:17.980
+Now let's go back to the concept of environment variables that I've already talked about.
+
+04:18.370 --> 04:25.450
+So you can see that we have multiple calls to this and the function which accepts two arguments and
+
+04:25.450 --> 04:29.880
+the first one is the environment variable to use.
+
+04:29.980 --> 04:35.480
+And the second one would be the default value if this environment variable couldn't be found.
+
+04:36.430 --> 04:39.170
+So what are those environment variables.
+
+04:39.220 --> 04:46.600
+So bucking the days you would typically create up each bee file when you will put an array for example
+
+04:46.660 --> 04:54.670
+where all your configuration for your application would be stored or you might have used any files or
+
+04:54.880 --> 04:56.320
+Yamana files.
+
+04:56.320 --> 05:00.530
+So now we do not do things anymore these days.
+
+05:00.610 --> 05:05.010
+Now we use environment variables.
+
+05:05.090 --> 05:08.820
+So what's the benefit of using environment variables.
+
+05:08.880 --> 05:17.090
+So some history again back in the days we probably created one file let's say conflict peach B where
+
+05:17.090 --> 05:24.650
+we created a variable with which was an array and we've put all that configuration for our up like passwords
+
+05:24.710 --> 05:32.150
+and hosts of the database into this one file then you will probably upload some files through FTB to
+
+05:32.150 --> 05:40.340
+your server and probably it would have another copy of that file with the production settings.
+
+05:40.340 --> 05:46.300
+So the environment variables lets us create applications that are environment independent.
+
+05:46.430 --> 05:55.040
+And what I mean by that is that you can create one code that can run the same on every possible environment
+
+05:55.070 --> 06:01.160
+so you can have the same application on your local development environment on your testing environments
+
+06:01.640 --> 06:03.370
+and on production environments.
+
+06:03.380 --> 06:10.190
+And the only thing that change is their configuration which is being stored inside their environment
+
+06:10.190 --> 06:11.990
+variables.
+
+06:11.990 --> 06:16.130
+So where can we find them now.
+
+06:16.160 --> 06:24.830
+Let's open the DOT and file that as part of our project and we can see a list of the variables that
+
+06:24.890 --> 06:26.650
+are defined for our up.
+
+06:26.690 --> 06:31.960
+So what interests us is this DB connection up to DB password.
+
+06:32.450 --> 06:33.800
+So these end files.
+
+06:33.830 --> 06:42.500
+This is our development tool to not force developers to create environments like 51 machines Dockers
+
+06:43.070 --> 06:50.720
+or configure it in a complicated way it's just for you to be able to easily find all your configuration
+
+06:51.020 --> 06:57.170
+and it is being loaded only if this file exists by some development tools.
+
+06:57.170 --> 07:04.940
+So this is where we will configure our environment variables when we are developing our project.
+
+07:05.000 --> 07:11.760
+Now on your real server you would store this typically inside the virtual house definition.
+
+07:11.930 --> 07:14.720
+So let's go to our sample folder.
+
+07:14.720 --> 07:24.530
+The EDC extra and find our HDD PD v hosts file which we created and open it inside the visual studio
+
+07:24.530 --> 07:28.010
+called so on your server on your Apache server.
+
+07:28.010 --> 07:31.000
+At least you would do something like this.
+
+07:31.000 --> 07:40.260
+You would add a set and directive and define it like TB connection environment variable and its value.
+
+07:40.370 --> 07:49.400
+You can also store that inside a special file called Dot h the access if your server allows that and
+
+07:49.430 --> 07:54.670
+it allows that if it has this directive that allow overwrite all.
+
+07:54.680 --> 08:02.180
+So I've talked about that when we on the lecture about setting up the sump so you might remember this
+
+08:02.540 --> 08:04.860
+but we won't do it right now.
+
+08:04.910 --> 08:11.810
+Working with that end files is good enough at least when we are learning larval but just so you know
+
+08:12.080 --> 08:16.060
+that this is the way you would keep your environment variables.
+
+08:16.250 --> 08:23.810
+And then on different servers you will already have everything configured and you won't put any of your
+
+08:24.560 --> 08:29.120
+parameter secrets or passwords directly into your code.
+
+08:29.120 --> 08:38.780
+For example if you would like to store your code on services like GitHub or any other code repositories.

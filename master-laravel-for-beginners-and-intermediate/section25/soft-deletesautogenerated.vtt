@@ -1,0 +1,139 @@
+WEBVTT
+
+00:00.330 --> 00:05.760
+In the last two lectures you have seen two ways of deleting model relations.
+
+00:05.760 --> 00:13.980
+First was subscribing to event and second was handling it on the database level by adding a cascade
+
+00:14.220 --> 00:15.050
+on delete.
+
+00:15.090 --> 00:18.630
+So every relation was then removed.
+
+00:18.630 --> 00:27.660
+Now in light of all we can also use something called soft deletes and what that does is instead of removing
+
+00:27.660 --> 00:36.000
+the records from the database physically it will actually set a field on that model call deleted art
+
+00:36.360 --> 00:43.110
+which would be a date when the model was deleted and then a lot of people will understand that you will
+
+00:43.200 --> 00:50.880
+you have that field and that you are using soft delete on certain models and then when you will query
+
+00:50.880 --> 01:00.630
+for this model a want return every possible entry from the database it will only read return models
+
+01:00.660 --> 01:02.460
+that were deleted.
+
+01:03.240 --> 01:11.280
+So it's pretty simple what you have to do is you have to add a trait to the blog post called self deletes
+
+01:12.270 --> 01:20.160
+and you can notice that in this code I got that how to magically imported but that's the correct namespace
+
+01:20.160 --> 01:27.780
+you should type or you can check the code for this lecture in the github link is always provided.
+
+01:27.780 --> 01:29.460
+Now this isn't enough.
+
+01:29.460 --> 01:33.030
+It's almost enough of what we have to do.
+
+01:33.090 --> 01:37.950
+So basically this self delete trait will handle everything for us.
+
+01:37.950 --> 01:46.500
+You do not really have to worry how to use self deleting well how to actually implemented because in
+
+01:46.500 --> 01:55.800
+the next lecture I will show you how we can query models with that are were deleted and also fetch models
+
+01:55.800 --> 02:06.380
+that were only deleted etc. But first we of course need a migration so let's run Peach Pit artisan make
+
+02:07.190 --> 02:18.500
+migration and we can call it art self delete to blog posts tabled.
+
+02:18.620 --> 02:24.250
+Now let's open up this migration and in this case it's again pretty simple.
+
+02:24.360 --> 02:29.220
+We do not have to add the column manually or worry about the structure.
+
+02:29.220 --> 02:31.470
+We can just add
+
+02:34.240 --> 02:40.820
+we can just add a call to self deletes method which will insert old and necessary column.
+
+02:40.840 --> 02:45.580
+Actually only one column and in the drop we can do table
+
+02:49.130 --> 02:52.160
+drop self deletes and that's it.
+
+02:52.280 --> 03:01.160
+That's all you have to do now go to the terminal and run peach bee artisan migrate and that's it.
+
+03:01.170 --> 03:09.750
+We have solved deleting implemented inside Blocked posts so let's go to the table now and what you can
+
+03:09.750 --> 03:18.000
+see on the right is a new column called deleted at which is a timestamp so it works the same as create
+
+03:18.000 --> 03:20.800
+it out and update it out.
+
+03:20.880 --> 03:27.030
+Now let's go back to our blog post model you can see that we have commented out the event that will
+
+03:27.030 --> 03:34.500
+delete comments but we have this database constraint that when blog posts would be removed all the comments
+
+03:34.500 --> 03:37.830
+would be removed but not in this case.
+
+03:37.830 --> 03:44.560
+Now since we aren't actually deleting the blog post we are just setting our delete a date on it.
+
+03:44.850 --> 03:46.280
+Let's see what happens.
+
+03:46.350 --> 03:55.140
+So let's click delete on couple of blog posts and now inside the blog posts table you can see that on
+
+03:55.140 --> 04:05.040
+those couple of blog posts we now have deleted art set as a date and also you can see that those blog
+
+04:05.040 --> 04:06.800
+posts doesn't exist anymore.
+
+04:06.870 --> 04:08.310
+So if you haven't noticed.
+
+04:08.340 --> 04:11.750
+Let's see this strange blog post title.
+
+04:11.800 --> 04:20.100
+Let's press delete and now you can see that we are fetching all the models inside our controller which
+
+04:20.100 --> 04:32.190
+is post controller and in our index when we use whip count or if we use blog post hole it would ignore
+
+04:32.280 --> 04:38.610
+everything that was deleted but we'll get to that in the next lecture when I will show you how we can
+
+04:38.910 --> 04:48.000
+query the models that use self deletes and also how we can fetch those models that were deleted and
+
+04:48.000 --> 04:55.740
+how we can restore the models that were deleted which would mean they would be available again and visible
+
+04:55.740 --> 04:57.300
+to a lot of other queries.

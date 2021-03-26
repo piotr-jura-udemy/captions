@@ -1,0 +1,583 @@
+WEBVTT
+
+00:01.260 --> 00:07.640
+In the last lecture I've tried to explain how the registration works inside Lara.
+
+00:07.770 --> 00:11.760
+Now let's see how we can log in and log out.
+
+00:11.970 --> 00:16.370
+So we are currently logged in and redirected to their home page.
+
+00:16.380 --> 00:19.840
+As I explained in the last lecture how it works.
+
+00:20.130 --> 00:21.450
+So that's the default page.
+
+00:21.450 --> 00:25.260
+We are redirected to when we register.
+
+00:25.410 --> 00:28.230
+So this is this simple home page.
+
+00:29.530 --> 00:37.150
+It is just displaying this simple view and part of this layout created by Lara is also this nice box
+
+00:37.150 --> 00:40.090
+here where you can log out.
+
+00:40.090 --> 00:46.240
+So let's press it now and now you can see that we are redirected to some page and then immediately to
+
+00:46.240 --> 00:50.170
+log in to log in again because it is being protected.
+
+00:50.170 --> 00:53.730
+So that's our home which we are also redirected.
+
+00:54.160 --> 00:57.830
+And it is being protected by this our middleware.
+
+00:57.940 --> 01:04.750
+Now there is another controller created for us by law although it also lives inside HDP controllers
+
+01:04.930 --> 01:14.260
+out and it is called Log In controller so it is also pretty simple it you can see that it only has a
+
+01:14.260 --> 01:23.080
+field called redirect to and as the description says that's the place you will be redirected to when
+
+01:23.440 --> 01:25.360
+you will log in.
+
+01:25.360 --> 01:28.080
+So this is one where you can configure that.
+
+01:28.300 --> 01:36.640
+So sometimes you would like to lead users to a certain page and lets say different users that maybe
+
+01:36.640 --> 01:42.460
+have different permissions you would like to lead them to a different page maybe to the last page they
+
+01:42.460 --> 01:50.470
+visited before bank logged in and also this is a good idea how you can configure it because this works
+
+01:50.470 --> 01:57.310
+the same as I explained before so you can either have this protected to redirect to field or you can
+
+01:57.310 --> 02:04.660
+have a method in which you will decide where to actually you redirect the user so by default it is redirecting
+
+02:04.660 --> 02:06.230
+to hold.
+
+02:06.250 --> 02:14.050
+Now another interesting thing is this constructor inside this log in controller as you can see it also
+
+02:14.290 --> 02:22.420
+is using the middleware guest which means the authentication is not required but it is not required
+
+02:22.570 --> 02:30.430
+for older end points that this or all the actions that this controller has except for the logout because
+
+02:30.460 --> 02:31.560
+this makes sense.
+
+02:31.570 --> 02:40.540
+You can only log out when you are previously authenticated so by the way this is also a way you can
+
+02:40.540 --> 02:46.270
+specify individual actions that certain middleware has to apply to.
+
+02:47.080 --> 02:52.750
+Lets say you would like to authenticate some of the actions inside the home controller.
+
+02:52.750 --> 02:59.320
+Let's imagine we do not have it but let's imagine we have the contact method here and we only want out
+
+02:59.320 --> 03:00.340
+A.K. the home.
+
+03:00.340 --> 03:03.220
+So what you will do except
+
+03:05.690 --> 03:12.130
+contact so we only would have authentication required for this index action.
+
+03:12.260 --> 03:13.750
+So this works both ways.
+
+03:13.760 --> 03:20.130
+It can work for any middleware and this just specifies which actions the middleware should be applied.
+
+03:20.840 --> 03:23.800
+So this should be pretty simple now.
+
+03:23.830 --> 03:33.290
+And the logging controller is actually also using this trait that comes from LA travel and you can see
+
+03:33.290 --> 03:41.240
+that it has this show logging form which simply shows the logging form and let's find it.
+
+03:41.240 --> 03:43.560
+It's actually defined here.
+
+03:43.880 --> 03:50.630
+So you of course do not have to write this action because if you will just create a view inside this
+
+03:50.630 --> 03:51.660
+folder.
+
+03:52.170 --> 03:55.490
+Let's find it out of logging.
+
+03:55.490 --> 03:57.490
+So we will do that ourselves later.
+
+03:57.620 --> 04:02.960
+Then you wouldn't have to even create this action you can just use this authenticates users straight
+
+04:03.020 --> 04:10.430
+inside your logging controller and you're all set mind that it also is using this redirects users the
+
+04:10.430 --> 04:19.020
+same as with the registration controller and that's the one responsible for this redirect puff so we
+
+04:19.020 --> 04:24.080
+can define the method redirect to all the field redirect to.
+
+04:24.450 --> 04:32.170
+Now let's go back to this trade it was closed let's open it again now.
+
+04:32.190 --> 04:34.410
+So we have the logging methods.
+
+04:34.590 --> 04:41.240
+So it actually is doing a couple of things and I've prepared a diagram for it.
+
+04:41.240 --> 04:48.840
+So let's try to see how the authentication flow is actually looking.
+
+04:48.840 --> 04:53.160
+So first we have this authentication log in controller.
+
+04:53.160 --> 04:59.900
+And the first thing that this controller or actually this trade is doing is it is verifying the user
+
+04:59.900 --> 05:05.080
+name and password input using the validate logging method.
+
+05:05.130 --> 05:13.080
+So if you go to this method here you can see that it is using the validator to verify if the user name
+
+05:13.110 --> 05:16.820
+and password is present and it is a string.
+
+05:17.070 --> 05:25.500
+And by the way it is using this this user name method here instead of specifying the field that should
+
+05:25.500 --> 05:32.690
+be used for user name because you can configure it as I've said in the last lecture you can configure
+
+05:32.840 --> 05:34.220
+it here.
+
+05:34.640 --> 05:40.790
+So get the log in user name to be used by the controller and it is by default e-mail you can change
+
+05:40.790 --> 05:41.160
+it.
+
+05:41.210 --> 05:48.140
+For example user name or any other any other field of the User model.
+
+05:49.070 --> 05:50.700
+So this is the first place.
+
+05:50.720 --> 05:57.290
+If this forum that you send the logging and password from would have something valid data it would be
+
+05:57.290 --> 05:59.420
+out to magically redirect it.
+
+06:00.230 --> 06:05.750
+Now there is also this additional part which we won't explain in detail right now but it is just checking
+
+06:06.260 --> 06:11.120
+if you have tried to log in too many times with invalid data.
+
+06:11.150 --> 06:15.680
+So this will log that account for some time.
+
+06:15.680 --> 06:17.050
+So this is what it is doing.
+
+06:17.050 --> 06:19.460
+It's checking for previous failed attempts.
+
+06:19.520 --> 06:23.600
+If there are too many it will just log to account for some time.
+
+06:23.630 --> 06:28.350
+We'll get to that later and let's not complicate things right now.
+
+06:29.000 --> 06:38.830
+Now the final thing it is trying to do is attempting to log in so that's it attempt logging and this
+
+06:39.400 --> 06:43.980
+method is actually using the Guard component attempt method.
+
+06:44.320 --> 06:48.000
+And it is specifying their credentials.
+
+06:48.040 --> 06:55.900
+So this attempt method accepts an array of credentials which you can see here the request.
+
+06:55.900 --> 07:02.230
+It's getting the data from request and only would get only those two fields specified so the user name
+
+07:02.410 --> 07:07.150
+whatever the field you define it to be and the password.
+
+07:07.150 --> 07:12.040
+So if it will succeed it will just return true.
+
+07:12.040 --> 07:18.660
+Now additionally it has the option to support remembering the logged in users using cookies.
+
+07:18.670 --> 07:24.200
+But while of course let's not complicated further we'll get to that later.
+
+07:24.610 --> 07:27.830
+So you can see that's there attempting to log in.
+
+07:28.180 --> 07:34.960
+And also this guard method is returning the default configured Guard component.
+
+07:34.960 --> 07:37.660
+So we haven't explained guards yet.
+
+07:37.660 --> 07:39.460
+We'll do that in just a second.
+
+07:40.510 --> 07:44.890
+Now guards attempt tries to authenticate user with given credentials.
+
+07:44.890 --> 07:51.370
+Of course this credentials returns the names of the fields from the request that should be used.
+
+07:51.370 --> 07:54.570
+So their user name or password you can also configure that.
+
+07:54.580 --> 07:56.110
+By the way.
+
+07:56.110 --> 08:04.570
+And then the final step is the sent logging response so let's see inside the code what this is actually
+
+08:04.600 --> 08:05.050
+doing.
+
+08:05.080 --> 08:08.490
+Let me find that sent logging response.
+
+08:08.500 --> 08:16.210
+So if they attempt logging was successful it is sending their response which you can see is regenerating
+
+08:16.470 --> 08:22.240
+this session it's clearing any previous failed attempts to logging.
+
+08:22.240 --> 08:31.180
+And finally it is redirecting to the path which you have specified so that's this step and that final
+
+08:31.180 --> 08:36.910
+step is to redirect the user to the path that was specified.
+
+08:36.910 --> 08:43.480
+Now I was mentioning this Guard component a couple of times and now let's see.
+
+08:43.480 --> 08:50.240
+Maybe by a simple diagram what this what sorry what this Guard component looks like.
+
+08:50.410 --> 08:58.540
+So you can have many Guard components specified but each of this Guard components has a driver and the
+
+08:58.540 --> 09:00.100
+user provider.
+
+09:00.100 --> 09:05.500
+Those are basically the properties of each individual Guard component.
+
+09:05.500 --> 09:08.740
+Now the driver could be one of two.
+
+09:09.220 --> 09:12.610
+So it is either this session or the token.
+
+09:12.700 --> 09:20.500
+So the session would keep the user logged in using the BHP session mechanism and the token is used for
+
+09:20.500 --> 09:21.400
+the API.
+
+09:21.430 --> 09:26.200
+Which would install the user session as you know it or not.
+
+09:26.200 --> 09:35.920
+The HDP protocol is stateless so it doesn't really allow anyone to keep any state in between requests.
+
+09:36.010 --> 09:44.470
+So this is the wider P2P session mechanism is used for traditional pagers and a token mechanism is used
+
+09:44.470 --> 09:50.470
+for API is because when you are using API is you always sent next requests.
+
+09:50.470 --> 09:55.720
+So your first log in you get the token back and then you have to include the top token with each next
+
+09:55.720 --> 09:59.760
+request which then authenticates you again.
+
+09:59.980 --> 10:08.590
+And the second component of this Guard component is the user a provider so user provider decides where
+
+10:08.800 --> 10:11.270
+and how the users should be fetched.
+
+10:12.040 --> 10:15.730
+So the user provider component has a driver property.
+
+10:15.820 --> 10:17.910
+And this is also one of two.
+
+10:18.010 --> 10:22.540
+It's either an eloquent model or just database driver.
+
+10:22.540 --> 10:27.080
+So eloquent would just use one of your lock and models.
+
+10:27.130 --> 10:34.870
+And in our case we are of course using the user model and the database will let you just use simple
+
+10:34.870 --> 10:37.890
+plain queries to fetch the users.
+
+10:37.900 --> 10:42.310
+So basically that means you can fetch users from different places.
+
+10:42.310 --> 10:49.120
+It doesn't have to be the default connection that you have and you are using for your models you can
+
+10:49.240 --> 10:52.630
+fetch users from basically any storage.
+
+10:52.630 --> 10:59.440
+It could even be different database or it could even be fetched for HDP requests.
+
+10:59.440 --> 11:07.840
+So that's why it is being separated into components you can create your own user providers.
+
+11:07.900 --> 11:16.440
+So now you do not really have to configure all that because by default everything regarding authentication
+
+11:16.530 --> 11:18.720
+is pre configured for you.
+
+11:18.720 --> 11:20.540
+So let's find it.
+
+11:20.580 --> 11:26.080
+So you have to go to the conflict folder and find that file.
+
+11:26.100 --> 11:31.860
+So our BHP file so it has some defaults.
+
+11:31.860 --> 11:38.650
+So as I've said there is a default and Guard component and the default Guard component is web.
+
+11:39.420 --> 11:43.890
+So there is also passwords property which is used for resetting passwords.
+
+11:43.910 --> 11:46.230
+But let's ignore it for now.
+
+11:46.470 --> 11:55.360
+And now we have our out integration guards defined so as I've said the Guard component has driver and
+
+11:55.360 --> 11:56.710
+provider.
+
+11:56.710 --> 11:58.990
+So there are two guards defined by default.
+
+11:58.990 --> 12:00.300
+One is called Web.
+
+12:00.670 --> 12:06.220
+And the second API so the web Guard is using the session driver.
+
+12:06.220 --> 12:11.800
+So this is how you are used to in older traditional pages that it works.
+
+12:11.800 --> 12:18.610
+You have a session you send log in and password through the forum and then on each individual page.
+
+12:18.610 --> 12:26.350
+This credentials are taken from the session so you don't have to log in again and provider means that
+
+12:26.380 --> 12:29.220
+this user's provider should be used.
+
+12:29.290 --> 12:31.170
+And it is also defined below.
+
+12:31.180 --> 12:32.470
+So we'll see that in a bit.
+
+12:33.160 --> 12:41.050
+And then this API Guard is using driver token which means that tokens should be included in each individual
+
+12:41.140 --> 12:42.860
+HP to be request.
+
+12:43.000 --> 12:48.120
+We haven't touched on the writing API yet so this might seem a little bit confusing.
+
+12:48.130 --> 12:55.630
+But of course you will probably understand it better when we'll create our first simple API.
+
+12:56.200 --> 12:59.040
+So now let's go to the user providers.
+
+12:59.110 --> 13:01.910
+So here we have the provider as defined.
+
+13:02.170 --> 13:09.940
+So as you see the users doesn't relate to the users table on our database it is actually their own name
+
+13:09.940 --> 13:13.540
+that you can give to all of your providers.
+
+13:13.540 --> 13:19.980
+So this actually means the name of the user provider you can define as many user providers as you like
+
+13:19.990 --> 13:27.130
+for example you can just copy that and specify users to and here specify for example a different model
+
+13:27.280 --> 13:29.820
+that you would like to use.
+
+13:29.890 --> 13:34.210
+Now as I've said the user provider has a driver.
+
+13:34.330 --> 13:35.420
+So let's see that again.
+
+13:35.440 --> 13:36.360
+It has a driver.
+
+13:36.370 --> 13:38.620
+It's either eloquent or database.
+
+13:39.220 --> 13:47.560
+So by default by default it is using eloquent and specifying our well-known User class as being the
+
+13:47.560 --> 13:49.450
+model to use.
+
+13:49.450 --> 13:53.980
+So basically why this is split into all these components.
+
+13:54.100 --> 14:02.500
+It is done because it lets you create authentication components using different methods of authentication.
+
+14:02.500 --> 14:08.920
+So let's imagine you would like to use tokens and then you can use the same components like you can
+
+14:08.920 --> 14:15.520
+use guard attempt methods to log in a user and you don't really have to worry how it is being handled
+
+14:15.550 --> 14:23.220
+inside because we can of course write this logic ourselves without the Guard component at all.
+
+14:23.320 --> 14:29.860
+You can just for example make a simple query to the database you do not have to really use this components
+
+14:30.460 --> 14:35.830
+but it really helps you organize the code and logic into single blocks.
+
+14:35.830 --> 14:44.290
+That's why I've put our boxes here to see to signal that it is basically components and the main is
+
+14:44.290 --> 14:51.790
+Guard which has some smaller boxes inside of it and then you can just use their simple methods from
+
+14:51.790 --> 14:59.500
+GA to verify if the user is authenticated to actually log in a user and a lot of other things.
+
+14:59.650 --> 15:03.990
+And then what is behind it like how users are fetched.
+
+15:04.120 --> 15:12.000
+You do not really have to worry about it because you use it as like you would connect like you would
+
+15:12.010 --> 15:13.730
+connect Lego blocks.
+
+15:13.750 --> 15:20.770
+So you just connect whatever you need whenever you need like different user provider different drivers
+
+15:20.830 --> 15:28.690
+for the Guard components and it just all works using one single guard interface.
+
+15:29.420 --> 15:31.430
+So those were the user providers.
+
+15:31.430 --> 15:38.270
+So as I've said you can define as many as you need and the final section from this configuration file
+
+15:38.360 --> 15:41.610
+is how you would reset users.
+
+15:41.630 --> 15:43.850
+It also has its own name.
+
+15:43.850 --> 15:45.890
+So that's why we had to specify it here.
+
+15:46.230 --> 15:55.850
+So this is not the user stable it's the name of the mechanism to reset passwords and it is using the
+
+15:55.910 --> 15:59.770
+user provider user's specified here.
+
+15:59.770 --> 16:02.150
+So it's called users everywhere.
+
+16:02.170 --> 16:08.890
+It might be confusing but it is actually the on OWN the name of this provider if you would rename it.
+
+16:09.610 --> 16:14.560
+Let's say X X X you will specified here like that.
+
+16:14.560 --> 16:19.190
+So that might be a bit confusing why it's users everywhere.
+
+16:19.450 --> 16:26.200
+And then it specifies which table should be used for password resets and when do they expire.
+
+16:26.200 --> 16:29.010
+So it's specifying that time.
+
+16:29.050 --> 16:32.610
+So this is how the logging in would work.
+
+16:32.650 --> 16:40.450
+And now I think we have enough basics to understand how all these components work so we can reset this
+
+16:40.450 --> 16:47.380
+code or at least I can do it because I hope you haven't run the BHP make off command and then we can
+
+16:47.380 --> 16:56.470
+see how that works step by step and do this logging and registration form ourselves in our own layout.

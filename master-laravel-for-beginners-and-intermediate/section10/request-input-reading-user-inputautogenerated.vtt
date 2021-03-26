@@ -1,0 +1,127 @@
+WEBVTT
+
+00:01.480 --> 00:09.390
+Apart from the root parameters, you can accept arbitrary input as the Querrey parameters data sent
+
+00:09.400 --> 00:14.640
+through an HTML form or request body interface and format.
+
+00:16.230 --> 00:23.460
+Before we talk forms and sending Jason, so let's cover simple query parameters example.
+
+00:26.020 --> 00:30.560
+Input is accessible using the request object methods.
+
+00:31.150 --> 00:34.870
+But first, how do we get access to the request object?
+
+00:35.740 --> 00:45.040
+There are two ways, either using the request function or by type printing argument with the request
+
+00:45.040 --> 00:45.550
+klutzes.
+
+00:47.690 --> 00:52.880
+When using type hinting, make sure you import proper request glass.
+
+00:54.160 --> 01:01.730
+From exactly this namespace, this might be confusing as there are more request classes than just this.
+
+01:02.110 --> 01:04.420
+Make sure you just import the correct one.
+
+01:09.510 --> 01:15.150
+Now, both ways are correct, we will stick with using the function.
+
+01:19.420 --> 01:28.960
+The old method will give us access to all the inputs, but not the actual root parameters, if you have
+
+01:28.960 --> 01:29.290
+any.
+
+01:30.280 --> 01:34.050
+Let's try it out on the post listing route.
+
+01:35.230 --> 01:43.950
+Try adding some coded parameters like page and limit, often used to populate results.
+
+01:46.590 --> 01:53.700
+So this is how you add query parameters that are the limit and page parameter.
+
+01:54.720 --> 02:04.620
+Now, to actually see that this input is being available, we will use the function dedi function can
+
+02:04.620 --> 02:06.750
+be used to quickly dump data.
+
+02:11.890 --> 02:18.740
+It's a shortcut for dump and dye, the data will go on screen and execution will stop.
+
+02:19.150 --> 02:21.880
+So let's Dedede request all.
+
+02:23.790 --> 02:25.500
+Now, refresh this page.
+
+02:27.700 --> 02:33.910
+And there are this, all the input in form of the query parameters that we have passed to disrupt.
+
+02:35.650 --> 02:45.370
+Now, you've probably noticed that the old method returns an array, now individual fields can be retrieved
+
+02:45.370 --> 02:49.990
+using their request object input method.
+
+02:52.410 --> 03:01.440
+It allows you to specify a default value to ask the second parameter, let's try it out with Page.
+
+03:02.930 --> 03:04.890
+Sure to comment out the first line.
+
+03:05.240 --> 03:09.290
+This actually stops execution, let's refresh.
+
+03:10.340 --> 03:13.630
+So now the page is provided and it is five.
+
+03:13.750 --> 03:18.140
+Notice how it is actually a string, even though you pass a number.
+
+03:18.980 --> 03:25.240
+But then when you remove this parameter from the query, you get a default value, which is one.
+
+03:25.670 --> 03:33.980
+So if you care about types and probably in 2020, you should you actually should always cast those values
+
+03:33.980 --> 03:34.930
+to a number.
+
+03:34.970 --> 03:39.290
+If you care for a number, then with default you've got a number.
+
+03:39.290 --> 03:43.250
+And also when you pass the value, you've got a number.
+
+03:46.300 --> 03:53.770
+Now, since all and input methods work with all possible input, whether it is a query parameter or
+
+03:53.770 --> 04:03.380
+request body, there is a special query method if you want to get the value only from a query parameter.
+
+04:04.240 --> 04:05.680
+So let's try it out.
+
+04:06.820 --> 04:08.240
+The query method.
+
+04:09.400 --> 04:13.360
+Well, it essentially works the same as the input method does.
+
+04:13.560 --> 04:19.930
+As I said, input will look for the names in all the possible input.
+
+04:19.930 --> 04:29.650
+Sources like Query Parameters, Data Center, a form or Jason and query is specifically for query parameters
+
+04:29.650 --> 04:30.160
+only.

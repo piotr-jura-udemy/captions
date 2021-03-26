@@ -1,0 +1,82 @@
+WEBVTT
+
+00:01.380 --> 00:10.200
+So, you know, you can use that as a helper to include assets, sometimes people add suffixes to the
+
+00:10.200 --> 00:18.090
+asset file names after changing them to make sure browsers will fetch the updated assets instead of
+
+00:18.090 --> 00:19.500
+serving the cached ones.
+
+00:20.250 --> 00:26.700
+Laravel Meeks does that for you automatically, but you need to make some changes in the mix config
+
+00:26.850 --> 00:27.900
+file first.
+
+00:29.390 --> 00:33.050
+So open the Watpac Meeks, James.
+
+00:36.090 --> 00:45.450
+The mix variable contains the Laravel mix object, one of its methods called version will make sure
+
+00:45.450 --> 00:54.060
+your assets get a unique hash appended to the acid filenames every time you make changes to those files
+
+00:54.750 --> 00:57.030
+after they are re compiled.
+
+00:58.380 --> 01:06.120
+It's good to know this feature is only really usable in production, so we can conditionally enable
+
+01:06.120 --> 01:06.390
+it.
+
+01:08.350 --> 01:15.880
+By first checking if we are in production mode, by calling mix in production method.
+
+01:19.640 --> 01:23.150
+So you would do if mix in production.
+
+01:27.240 --> 01:30.960
+And only then we will call Meek's version.
+
+01:33.400 --> 01:41.620
+The final step is to replace the Assad helper with the mix helper in the blade template.
+
+01:46.090 --> 01:52.000
+It's the mix helper function job to figure out the proper filename with the suffix.
+
+01:56.070 --> 02:03.660
+Since the versioning will only work in production to compile production assets, we need to run NPM
+
+02:03.660 --> 02:05.280
+run PRAD Command.
+
+02:10.340 --> 02:17.330
+Notice how the output files are significantly smaller in size than when compiling for the development
+
+02:17.350 --> 02:18.350
+environment.
+
+02:19.460 --> 02:25.400
+Then let's switch to the browser and make sure you refresh the page.
+
+02:26.840 --> 02:36.320
+Then take a look at the network tab and the file names now have an ID parameter added that makes the
+
+02:36.320 --> 02:39.230
+names unique after they are changed.
+
+02:40.530 --> 02:47.610
+So in summary, if you do use versioning, you need to remember to use the mix Helbert to include your
+
+02:47.610 --> 02:48.530
+assets.
+
+02:48.870 --> 02:52.380
+If you don't want this feature, stick to the asset function.
+
+02:53.010 --> 02:55.890
+I would recommend using the versioning feature.

@@ -1,0 +1,280 @@
+WEBVTT
+
+00:01.350 --> 00:10.210
+Now that we have our profile and our models created and migrations run let's open the terminal and large
+
+00:10.210 --> 00:17.440
+it's a little bit and let's start playing around with our one to one relation using thinker.
+
+00:17.460 --> 00:24.300
+So Ron peach bee artisan thinker into the terminal and let's see what we can do.
+
+00:24.330 --> 00:30.710
+So first we will create a new outer model.
+
+00:30.920 --> 00:39.230
+We will save it mind that I am using the does the outer class name without the app.
+
+00:39.250 --> 00:39.860
+Perfect.
+
+00:39.870 --> 00:46.530
+So if your version of Tinker doesn't like this you will have to type new app slash outer.
+
+00:47.010 --> 00:51.770
+Okay so we have our outdoor we can see the contents of it.
+
+00:51.800 --> 00:56.390
+It is stored inside the database with the I.D. one.
+
+00:56.390 --> 00:59.860
+Now let's create a new profile model.
+
+01:00.140 --> 01:07.860
+So we create a new instance of the profile the profile doesn't have anything yet because we haven't
+
+01:07.860 --> 01:08.630
+started.
+
+01:08.670 --> 01:14.280
+And the ideas and times times are assigned at the time when it is stored.
+
+01:14.310 --> 01:21.960
+Now if we have an out or and we want to assign our profile to it to it and maybe like in our case the
+
+01:21.960 --> 01:24.360
+profile is not yet saved.
+
+01:24.420 --> 01:32.700
+What we can do is we can access the profile as a method so that the outer has the profile method.
+
+01:33.090 --> 01:36.630
+You can see that here the profile method.
+
+01:36.630 --> 01:39.250
+Now let's see what this profile method would return.
+
+01:39.270 --> 01:49.220
+So it returns an object of type has one and to assign a profile to an out or will use this objects safe
+
+01:49.260 --> 01:52.350
+method to which you will have to find.
+
+01:52.470 --> 02:00.270
+You will have to pass the actual profile model so let's call it and you can see that the result of that
+
+02:00.300 --> 02:04.280
+is the new profile model which happens to have idea free.
+
+02:04.380 --> 02:13.450
+And it also has the outer I.D. automatically assigned with the value of one which happens to be the
+
+02:13.450 --> 02:16.830
+I.D. of the out or that we assign it to.
+
+02:16.840 --> 02:22.910
+Now let's check the database and you can see that the profile is being saved i.e. free and the outer
+
+02:22.920 --> 02:23.290
+I.D..
+
+02:23.290 --> 02:26.650
+Here is one.
+
+02:26.740 --> 02:30.350
+Now let's see how we can assign them the other way.
+
+02:30.370 --> 02:37.630
+So this time we want assign profile to the outer but we'll assign outer to the profile.
+
+02:37.720 --> 02:40.870
+So let's create a new instance of the profile.
+
+02:40.870 --> 02:44.760
+We can even assign it to the same variable names that we used.
+
+02:44.800 --> 02:46.740
+So it's not saved yet.
+
+02:47.080 --> 02:51.880
+And now let's create out or using this static create method.
+
+02:51.880 --> 02:59.260
+It does the same that like you would create first in the new instance of the outer and then call save
+
+03:00.900 --> 03:09.450
+so you can see it ultimately saved this outer and now the outer the sorry the profile has the outer
+
+03:09.450 --> 03:15.470
+method which is the relation and this relation is belongs to.
+
+03:15.510 --> 03:18.980
+So it also has a method called associate.
+
+03:20.310 --> 03:26.720
+And that way you can associate an outer to the profile and then you'll have to call save on it.
+
+03:28.120 --> 03:38.530
+So it is true so let's see what this profile contains and you can see that the new outer idea of free
+
+03:38.560 --> 03:45.570
+was assigned to this profile to verify that we can see what was the idea on the outer it was free.
+
+03:45.920 --> 03:52.060
+And now let's check also the database so you can see that we have two profiles assigned to different
+
+03:52.150 --> 03:52.930
+outers
+
+03:55.930 --> 03:58.900
+case so far so good.
+
+03:58.920 --> 04:01.310
+Now I will show you the third way to do it.
+
+04:01.340 --> 04:06.090
+So let's first clear the screen.
+
+04:06.090 --> 04:09.990
+So let's create another instance of the profile
+
+04:12.710 --> 04:17.680
+and now maybe we'll also create another outer.
+
+04:17.750 --> 04:22.910
+So we use out or create.
+
+04:22.910 --> 04:28.130
+So we have the outer created and already stored inside the database.
+
+04:28.130 --> 04:30.890
+Now we see that the outer I.D. is for.
+
+04:30.890 --> 04:39.080
+And as I've told you this relation is basically existing because of the outer I.D. column on the profile
+
+04:39.080 --> 04:39.720
+model.
+
+04:40.520 --> 04:48.350
+So we have our profile and we can directly access this outer I.D. so it doesn't do anything magical.
+
+04:48.530 --> 04:49.760
+It's not like that.
+
+04:49.760 --> 05:00.160
+Lara Val can only be used to manage relations using the associate or the say.
+
+05:00.200 --> 05:09.110
+The problem the safe method on the relation on the outer model you can directly modify the column that
+
+05:09.320 --> 05:17.200
+is basically holding the whole relation so we can assign therefore as the I.D. of the outer into the
+
+05:17.210 --> 05:18.980
+profile.
+
+05:18.980 --> 05:22.760
+Now let's see how the profile looks like.
+
+05:22.760 --> 05:34.060
+And if I was saved a profile it also works so the profile has the outer I.D. of for
+
+05:36.770 --> 05:40.840
+and you can see that this relations exists inside the database.
+
+05:40.850 --> 05:47.630
+And then you will be able to properly fetch that relation using Lara either in the next lecture.
+
+05:47.630 --> 05:51.260
+But now let's also try one more thing.
+
+05:51.770 --> 05:57.550
+So we have free outdoors and free profiles.
+
+05:57.920 --> 06:02.340
+So maybe we can fetch one of the profiles that we had before.
+
+06:02.380 --> 06:05.640
+Maybe the one with the I.D. free.
+
+06:05.690 --> 06:08.270
+So let's do that.
+
+06:08.390 --> 06:17.900
+We'll assign it to the profile variable using the Find static find method of the profile model.
+
+06:17.900 --> 06:28.610
+So we had that and now we'll try to assign the outer I.D. to that profile which would be something that
+
+06:28.670 --> 06:30.830
+is already inside the database.
+
+06:30.830 --> 06:41.420
+So we want to modify this to be let's say for so that outdoor I.D. We want to set it to four
+
+06:44.330 --> 06:53.280
+and now let's try to save changes to the profile model and now what you can see is that integrity constraint
+
+06:53.350 --> 06:55.350
+vote violation.
+
+06:55.390 --> 07:01.900
+And it says that there is a duplicate entry for for the key and that's the foreign key that we have
+
+07:01.900 --> 07:02.470
+defined.
+
+07:02.470 --> 07:13.270
+So it is preventing us to assign the same profile to two or more outer rows inside the outers database
+
+07:13.570 --> 07:22.240
+on the database level because well we wanted one to one relation and this is how we can protect ourselves
+
+07:22.510 --> 07:32.620
+in the database level from assigning more than one model on the one to one relation.
+
+07:32.620 --> 07:35.190
+Also let's try one more thing.
+
+07:35.260 --> 07:37.510
+So we'll create another profile
+
+07:40.070 --> 07:44.580
+and now we want assign outer I.D. in any way.
+
+07:44.840 --> 07:47.930
+And let's try to save it.
+
+07:48.060 --> 07:53.640
+So you see another error that the field outer I.D. doesn't have a default value.
+
+07:53.880 --> 07:59.430
+And since this is foreign key it really has to have value.
+
+07:59.430 --> 08:07.020
+So one thing is that this value has to be unique across the tables so there can't be two records with
+
+08:07.020 --> 08:15.060
+the same outdoor I.D. but also you cannot save a profile without a signed out or because it just cannot
+
+08:15.060 --> 08:16.650
+live on itself.
+
+08:18.410 --> 08:18.700
+OK.
+
+08:18.710 --> 08:24.500
+That would be it about the creating the relation in the next lecture.
+
+08:24.500 --> 08:28.700
+We will see how we can fetch those those relations from the models.
+
+08:28.700 --> 08:35.320
+So we'll see how we can fetch that profile by having an outdoor model and the vice versa.
+
+08:35.360 --> 08:42.220
+Of course you can also read the more detailed examples on the Vicki page that the link for is included
+
+08:42.230 --> 08:43.130
+to this lecture.

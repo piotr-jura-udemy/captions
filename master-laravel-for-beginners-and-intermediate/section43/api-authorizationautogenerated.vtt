@@ -1,0 +1,529 @@
+WEBVTT
+
+00:01.290 --> 00:08.130
+The last thing that we haven't yet done with our API End Point is the alteration part.
+
+00:08.130 --> 00:18.090
+That means that we shouldn't allow everyone to modify other people's comments and delete them so everyone
+
+00:18.090 --> 00:21.060
+is allowed to add new comments to read them.
+
+00:21.060 --> 00:25.530
+But deleting and updating is only reserved to the outer.
+
+00:25.530 --> 00:33.840
+Of particular comment and for this will remind ourselves a little bit about that model policies how
+
+00:33.840 --> 00:35.520
+they work how to define them.
+
+00:35.610 --> 00:44.040
+So let's go and remind ourselves and create a new policy for comments so let's locate the folder where
+
+00:44.060 --> 00:48.230
+we have the policies defined and open that blog post.
+
+00:48.230 --> 00:57.430
+Policy now this is the class that we have generated using the Peach Pit artisan make policy comment
+
+00:57.620 --> 01:02.060
+for the particular model which is blog post.
+
+01:02.140 --> 01:05.950
+Now let's remind ourselves how this works.
+
+01:06.100 --> 01:09.070
+So you are getting instances of two models.
+
+01:09.190 --> 01:15.130
+So first is the user and then you had the model that you check rights against.
+
+01:16.210 --> 01:23.920
+So your job is to verify whether this user can do something with this blog post and that action name
+
+01:24.040 --> 01:33.870
+is basically telling you what is this specific ability so in this case we can either allow or deny viewing
+
+01:33.870 --> 01:43.050
+something then creating something and updating something so that simple we in this case we are just
+
+01:43.050 --> 01:49.010
+checking if the user I.D. is matching the blog post user I.D..
+
+01:53.320 --> 02:00.120
+Now you have to register those policies and you do that inside that our service provider.
+
+02:00.250 --> 02:05.710
+That's the file located inside the provider's folder.
+
+02:05.710 --> 02:12.760
+So whenever you create a new policy you have to register it like that by specifying it under the policy's
+
+02:12.760 --> 02:14.630
+property.
+
+02:14.650 --> 02:21.060
+The key is the model name and the value is the policy class.
+
+02:21.070 --> 02:24.220
+Now how did we verify user abilities.
+
+02:24.220 --> 02:33.880
+We used the simple helper method in controller called this out rise and we provided the model instance.
+
+02:33.880 --> 02:43.570
+So let's take a look at how our rice works so it accepts a parameter ability and some additional arguments.
+
+02:43.570 --> 02:52.210
+So since we only provided the model we haven't provided any additional arguments so we haven't explicitly
+
+02:52.210 --> 02:57.980
+specified that we want the editing ability or updating ability.
+
+02:58.270 --> 03:04.940
+Lovell was able to out to magically figure out what is your intention.
+
+03:05.590 --> 03:13.580
+So if you will take a look at the sparse ability and arguments method then you can see that it does
+
+03:13.580 --> 03:22.310
+some checks and well actually if you only provide model it will get to this point where a lot of it
+
+03:22.310 --> 03:24.950
+is just checking from the stock Trace.
+
+03:24.950 --> 03:32.390
+It's like a stock of all the methods functions that were called in peach pit so it's kind of a meta
+
+03:32.390 --> 03:38.680
+programming but anyway it is figuring out the name of the controller method.
+
+03:38.720 --> 03:41.890
+As you can see here this is exactly what this is doing.
+
+03:42.620 --> 03:52.820
+So now that it knows that you only provided a model it figures out what is the controller action name.
+
+03:53.090 --> 04:01.700
+So after it figures out the controller action name it is trying to match the action name as you see
+
+04:01.760 --> 04:08.610
+in this let's say table to the ability method like view create.
+
+04:08.610 --> 04:17.180
+So Stories create edit is update and if you will take a look at the example block policy policy class
+
+04:17.180 --> 04:20.730
+you can see that we had those methods defined here.
+
+04:21.740 --> 04:29.650
+So this is how it works are sure to reminder after this short reminder I think you should be able to
+
+04:29.650 --> 04:35.470
+create this comment policy yourself and consider it an exercise.
+
+04:35.470 --> 04:40.220
+But if you are not feeling adventurous then just follow along.
+
+04:40.240 --> 04:41.250
+So this is how you do it.
+
+04:41.280 --> 04:47.470
+So we generate our new policy class speech by artisan make policy.
+
+04:47.470 --> 04:50.840
+You provide a name so that's comment policy.
+
+04:50.890 --> 04:58.480
+That's the name of the class and there is additional parameter model which we can use to quickly generate
+
+04:58.540 --> 05:03.280
+a policy class for a specific model.
+
+05:03.280 --> 05:04.660
+So let's close the terminal.
+
+05:04.750 --> 05:14.770
+And this is our new comment policy so we can very quickly implement that so everyone should be allowed
+
+05:14.800 --> 05:17.200
+to view a comment.
+
+05:17.230 --> 05:22.290
+Everyone should be allowed to create one.
+
+05:23.380 --> 05:25.120
+Then with updating.
+
+05:26.560 --> 05:35.520
+Well only the users that have actually created it should be able to modify it so we check whether that
+
+05:35.520 --> 05:43.720
+comment user I.D. is matching the user the User model of the currently authenticated user I.D..
+
+05:45.110 --> 05:49.210
+Now we can use the same for deleting
+
+05:52.630 --> 05:59.200
+and restoring Well we don't use self deletes on comments so let's just return false
+
+06:02.270 --> 06:02.780
+and that's it.
+
+06:02.780 --> 06:05.120
+You have that policy implemented now.
+
+06:05.260 --> 06:06.410
+That's not everything.
+
+06:06.410 --> 06:11.730
+Remember that you have to register it at least in not of five point seven.
+
+06:13.310 --> 06:23.960
+So there is up comment and then up policy's comment policy.
+
+06:24.000 --> 06:31.350
+Now this is registered and now everything you have to do is called this out to Rice on every method
+
+06:31.800 --> 06:41.830
+inside your new API endpoint No there is a reason why I said you have to register policies manually
+
+06:42.040 --> 06:49.570
+at least in light of all five point seven and versions before that because since a lot of our five point
+
+06:49.630 --> 06:53.560
+eight you don't have to do that under some conditions.
+
+06:53.680 --> 07:01.920
+So actually this course was recorded when a lot of the five point seven was the fresh larval version
+
+07:02.380 --> 07:09.760
+but since then there is five point eight version which has some new features and this is actually documented
+
+07:09.790 --> 07:11.040
+in larval docs.
+
+07:11.530 --> 07:19.310
+So this is the standard way of registering policies but there is also an option to have the policy out
+
+07:19.570 --> 07:29.290
+discovery so how it works is if you follow a lot of old conventions which we do so you will create your
+
+07:29.290 --> 07:37.150
+models and that's a good example if you will create a user model and then inside the policies folder
+
+07:37.210 --> 07:45.640
+you will create a class called exactly user policy then lot other will out to discover this policy so
+
+07:45.640 --> 07:53.220
+you won't have to register it so you won't need this entries for every new policy that you create.
+
+07:53.980 --> 08:00.280
+So you can read closely what are the rules and how to use our policy out of discovery.
+
+08:00.520 --> 08:06.820
+But well since I've started this course on a lot of five point seven I'm not sure which versions you
+
+08:06.820 --> 08:08.030
+guys might be using.
+
+08:08.120 --> 08:17.470
+So just so you know up until five point eight you had to define policies explicitly manually like I
+
+08:17.470 --> 08:24.520
+have I have shown you just a second ago but since five point eight if you follow this conventions you
+
+08:24.520 --> 08:27.660
+don't have to do that.
+
+08:29.060 --> 08:39.890
+Okay so now let's go to our method and call this out to Rice on the comment.
+
+08:40.070 --> 08:49.880
+So notice that this is an update action so there already is a comment inside the database and also let's
+
+08:49.880 --> 08:56.650
+call it inside that destroy method because those are the two that we have specific policies for.
+
+08:56.960 --> 09:03.530
+But if you want if you really want you can also add this to the show method or to the store method
+
+09:07.210 --> 09:09.520
+but obviously that's up to you.
+
+09:11.050 --> 09:18.550
+So of course in case of story you want to provide the comment instance because there isn't yet any you
+
+09:18.550 --> 09:22.650
+will provide the class name so we will do something like this.
+
+09:23.240 --> 09:23.830
+Comment
+
+09:27.310 --> 09:27.660
+class.
+
+09:27.690 --> 09:33.880
+So this will give a fully qualified class name and then lover will also guess what are you trying to
+
+09:33.880 --> 09:34.150
+do.
+
+09:35.300 --> 09:35.580
+OK.
+
+09:35.590 --> 09:39.580
+So save the changes and now all our end points are protected.
+
+09:39.580 --> 09:42.340
+So we should always verify that.
+
+09:42.340 --> 09:45.690
+So let's take a look.
+
+09:45.730 --> 09:52.600
+We are in post man and that's the outer recession key of the John Doe user I guess.
+
+09:52.600 --> 10:00.230
+But let's also verify that because you want to check with different API tokens so to be sure just copied
+
+10:00.230 --> 10:02.710
+a token from John Doe.
+
+10:02.770 --> 10:07.640
+You can just do it from the database and create a new comment.
+
+10:07.810 --> 10:13.370
+So also mind the body you have to provide some body.
+
+10:13.430 --> 10:18.590
+Now we have a response so the idea was three hundred eight.
+
+10:18.590 --> 10:20.750
+And now let's try deleting this
+
+10:25.560 --> 10:30.900
+so first we might try without authentication.
+
+10:31.170 --> 10:33.770
+So we got a proper response 401.
+
+10:33.870 --> 10:36.240
+And authenticated.
+
+10:36.240 --> 10:37.490
+And now let's try.
+
+10:37.580 --> 10:38.340
+We have tokens.
+
+10:38.370 --> 10:41.310
+So will we use a token from different user.
+
+10:41.310 --> 10:45.030
+Because he shouldn't be able to delete this comment by John Doe.
+
+10:45.060 --> 10:47.410
+So let's try the user number two.
+
+10:47.490 --> 10:51.650
+The name isn't important because it is outage generated.
+
+10:51.960 --> 10:56.970
+So let's baste the token of user with the 82 and tried to delete
+
+11:04.230 --> 11:09.010
+that you could you could see that this was actually deleted and sorry for that.
+
+11:09.010 --> 11:10.990
+This was my stupid mistake.
+
+11:11.020 --> 11:14.640
+And of course this shouldn't be an assignment.
+
+11:14.650 --> 11:16.350
+This should be a comparison.
+
+11:16.380 --> 11:18.760
+So you should always take a look at that.
+
+11:18.790 --> 11:22.870
+And that's why in the next section we'll be writing tests for that.
+
+11:22.870 --> 11:26.710
+By the way so let's make sure everything is correct.
+
+11:27.160 --> 11:27.400
+OK.
+
+11:27.400 --> 11:30.150
+So let's quickly show it again.
+
+11:30.160 --> 11:34.080
+So we will create a new comment.
+
+11:34.450 --> 11:38.730
+So this time I happened to have taken off John Doe.
+
+11:38.800 --> 11:44.340
+So always verify that now let's copy the idea.
+
+11:44.540 --> 11:48.550
+To this end point and here there is a different token.
+
+11:48.550 --> 11:51.730
+So why I know because I just remember I've changed it.
+
+11:51.730 --> 11:55.230
+But you can see that that's a different token of a different user.
+
+11:55.230 --> 11:59.530
+So John Doe added the comment and someone else is trying to delete it.
+
+12:01.980 --> 12:06.940
+And now you can see that this action is about arised.
+
+12:06.970 --> 12:23.020
+So this is also a field that we can modify using our exception handler not to get exceptions like this.
+
+12:23.050 --> 12:28.450
+So as you can see in our handler class we have handled cases like this before.
+
+12:28.810 --> 12:37.870
+So if the client expects to get Jason back and there was an exception of specific kind we responded
+
+12:37.870 --> 12:42.430
+with a specific response in this case we just redirected to the fallback route.
+
+12:42.970 --> 12:49.120
+But in this case this is a different scenario so if you will again take a look at the parent render
+
+12:49.840 --> 12:55.840
+you can see that a lot of it is handling a couple of specific cases and this includes authentication
+
+12:55.840 --> 12:57.660
+exception validation exception.
+
+12:57.670 --> 12:59.880
+But when you are about to rise.
+
+12:59.920 --> 13:05.590
+This is a different kind of exception so some different class is being returned.
+
+13:05.590 --> 13:10.010
+Now before we figure out what is this class let's also take a look at this.
+
+13:10.060 --> 13:11.010
+I'm authenticated.
+
+13:11.020 --> 13:16.430
+So if the request expects Jay some lot of it is simply returning.
+
+13:16.460 --> 13:23.010
+Jason the response at this point we've asked that the scope and the exception message so it doesn't
+
+13:23.020 --> 13:30.700
+contain all this stacked raised that you have inside the postmark before us as you have seen all the
+
+13:30.760 --> 13:32.800
+details about your code.
+
+13:32.800 --> 13:33.790
+You don't want that.
+
+13:35.350 --> 13:41.950
+So what we can do is we can figure out what is the actual class name of this exception.
+
+13:42.610 --> 13:50.770
+So you can do that using a get class exception because you might have wondered how do they figure out
+
+13:51.430 --> 13:52.840
+what should be the exception.
+
+13:52.840 --> 13:56.440
+Name here to catch and to return specific response.
+
+13:56.440 --> 13:58.280
+Well this is how you can do that.
+
+13:59.320 --> 14:03.470
+So you just do dump and die and you get the class.
+
+14:03.520 --> 14:05.040
+So let's go to post mom.
+
+14:05.050 --> 14:08.800
+Send it again and see the preview.
+
+14:08.800 --> 14:13.660
+So in this case that is actually alteration exception from this namespace.
+
+14:13.660 --> 14:24.780
+So why wouldn't we copied out and just move it at the top of our handler other use statement.
+
+14:24.800 --> 14:30.750
+Now we can copy just that alteration exception class name so this part this is probably not feasible
+
+14:30.760 --> 14:31.620
+it's all red.
+
+14:31.650 --> 14:33.660
+But anyway you will see that in a second.
+
+14:34.590 --> 14:40.250
+So if a request expects J some.
+
+14:40.350 --> 14:41.620
+That's the first condition.
+
+14:41.640 --> 14:49.200
+And second is whether expect exception is instance of outer reception exception.
+
+14:49.320 --> 14:53.370
+Well we simply return response.
+
+14:53.430 --> 14:54.270
+Jason
+
+14:57.240 --> 15:04.680
+and then we can add a message which could be exception get message.
+
+15:04.680 --> 15:12.280
+So this will be the default exception message and the status code to be 400 free.
+
+15:12.630 --> 15:19.050
+So that's the area or stop this code whenever user is unable to rise to do something.
+
+15:19.770 --> 15:24.410
+And this is a standard way to return this code in HDP.
+
+15:24.510 --> 15:32.700
+So whenever you have a dilemma of what the HBP status code for this kind of errors out or reception
+
+15:32.760 --> 15:42.090
+errors should be it is 400 free now say the changes and let's go back to postman to see if this has
+
+15:42.090 --> 15:42.520
+worked.
+
+15:42.530 --> 15:47.510
+So let's send this request and this is what we get.
+
+15:47.520 --> 15:49.280
+This action is an outer.
+
+15:49.310 --> 15:55.840
+So we can of course modify this message but we just use the defaults default message from lot of
+
+15:58.670 --> 16:06.320
+now that you know how to outcries actions authenticate actions in your API and implement basically fully
+
+16:06.320 --> 16:08.660
+functional end point which covers.
+
+16:08.750 --> 16:12.630
+Well I would say most of the needs that you will have.
+
+16:13.070 --> 16:17.620
+Let's get to the next section when we'll see how to test our API is.

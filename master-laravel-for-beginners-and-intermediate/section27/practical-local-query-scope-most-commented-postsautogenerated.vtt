@@ -1,0 +1,313 @@
+WEBVTT
+
+00:00.540 --> 00:07.980
+Now last time I told you that the best way to learn about use the query scope is to have some practice.
+
+00:08.010 --> 00:11.070
+So I will give you this practice right now.
+
+00:11.070 --> 00:16.830
+So in the next couple of lectures we'll try to do something cool with our application.
+
+00:17.040 --> 00:24.330
+So as the first example what we'll do is instead of just displaying this boring list of all the blog
+
+00:24.330 --> 00:32.850
+posts on our application we'll try to display another box which would show what blog posts are the most
+
+00:32.850 --> 00:35.230
+commented ones.
+
+00:35.280 --> 00:36.990
+So let's see how we can do that.
+
+00:37.020 --> 00:38.610
+Let's go to the blog post.
+
+00:39.450 --> 00:44.690
+So this is our first local scope and we'll add next.
+
+00:44.760 --> 00:50.230
+So we are having public function starting with the scope as always.
+
+00:50.340 --> 00:51.990
+And let's call this scope.
+
+00:51.990 --> 00:54.640
+Most commented.
+
+00:55.110 --> 01:00.230
+Now we have one argument which is the query builder.
+
+01:01.040 --> 01:01.520
+All right.
+
+01:01.530 --> 01:03.660
+Now let's see how we can get that.
+
+01:03.660 --> 01:14.610
+So you know that we can use the wave count method to fetch the count of particular relation us additional
+
+01:14.610 --> 01:21.450
+field that is being selected from the query so we can do with count comments.
+
+01:21.450 --> 01:29.760
+And I'm not sure if you remember that or not but using whip count with our relation name will produce
+
+01:29.850 --> 01:34.760
+a field called comments count.
+
+01:34.750 --> 01:41.220
+Now what we can do with this is now since it is being selected we can order by it.
+
+01:41.850 --> 01:50.850
+So let's add order by comments count and we'll do that in descending order.
+
+01:50.850 --> 01:58.410
+So we want to show first all the blog posts that have at most comments added to them.
+
+01:59.210 --> 01:59.570
+OK.
+
+01:59.580 --> 02:09.460
+Now let's say the changes and let's open the terminal and run the artisan Tinker So BHP artisan thinker
+
+02:09.700 --> 02:13.250
+this way will verify if that actually works.
+
+02:13.270 --> 02:24.110
+So we are using a blog post we can call most commented.
+
+02:24.200 --> 02:30.830
+Now we'll just get the actual query and to make results actually readable on the screen.
+
+02:30.830 --> 02:37.670
+We'll use the method of the collections that we have used before which is called pluck which means we
+
+02:37.670 --> 02:42.860
+would like to only take a couple of properties or actually we want just one.
+
+02:42.860 --> 02:53.380
+So we want the comments count and what we did is we made sure that we got results ordered by the comments
+
+02:53.380 --> 02:53.800
+count.
+
+02:53.800 --> 02:57.490
+So the most commented blog post has 12 comments.
+
+02:57.490 --> 03:00.300
+Second one is also with 12.
+
+03:00.370 --> 03:04.650
+And then you see less and less now.
+
+03:04.970 --> 03:05.280
+OK.
+
+03:05.290 --> 03:10.170
+This works we are sure that our query scope is working properly.
+
+03:10.170 --> 03:12.210
+Now let's actually implement that.
+
+03:12.210 --> 03:15.850
+So it is visible inside the application.
+
+03:16.180 --> 03:22.530
+So let's proceed with implementing this inside the view where we display all the blog posts.
+
+03:22.540 --> 03:28.480
+So you will have to open a view from the views posts indexed BHP.
+
+03:28.480 --> 03:32.570
+So here is a list of all our blog posts.
+
+03:32.920 --> 03:42.250
+And as you can see it is being rendered inside the layout inside a div class container.
+
+03:42.250 --> 03:49.160
+So what we can do for that is we can use the grid system from bootstrap.
+
+03:49.300 --> 03:58.180
+So we'll have to add our role and some columns into it so let's go ahead and do that.
+
+03:58.190 --> 04:10.410
+So inside that section content will add div class with the CSX class row.
+
+04:10.570 --> 04:17.720
+We'll have to close it at the end.
+
+04:17.740 --> 04:23.370
+Now what we display here in the four ls directive block inside it.
+
+04:23.470 --> 04:30.670
+So all the blog posts will have a column with with eight
+
+04:36.790 --> 04:38.510
+so this would be the bigger one.
+
+04:39.220 --> 04:46.880
+And will also display our special box with that column with four.
+
+04:46.890 --> 04:50.760
+So this would be like two thirds one third split
+
+04:54.190 --> 05:03.160
+here will display some extra box that will show the most commented blog posts at the current time.
+
+05:03.160 --> 05:09.990
+So for that we'll use our card element from the bootstrap so let's copy this quite big.
+
+05:10.000 --> 05:13.290
+Example we'll have something like this.
+
+05:13.540 --> 05:18.280
+So copy this and paste into here.
+
+05:18.280 --> 05:25.930
+Now it's not really properly formatted so we'll have to do some work to make it look a little bit better.
+
+05:25.930 --> 05:26.230
+Okay.
+
+05:26.260 --> 05:29.050
+So let me format that really quickly.
+
+05:29.410 --> 05:29.700
+Okay.
+
+05:29.710 --> 05:33.900
+We won't need an image and now we can change the title.
+
+05:33.910 --> 05:49.650
+So most comment that and the subtitle to something what people are currently talking about now we will
+
+05:49.650 --> 05:53.760
+also we won't need those links at the bottom.
+
+05:53.760 --> 06:02.670
+But here is a list of all the blog posts that are supposed to be the most commented at the current time.
+
+06:02.730 --> 06:10.320
+Now inside this view we have access to the posts the variable that we have passed here.
+
+06:10.320 --> 06:12.450
+Now we will have to pass another one
+
+06:16.340 --> 06:17.490
+so let's call it.
+
+06:17.490 --> 06:25.040
+Most Commented and we will fetch that using blog post most comment at
+
+06:28.170 --> 06:31.920
+and um maybe we won't need too much.
+
+06:31.920 --> 06:35.670
+So let's use take five and get
+
+06:39.480 --> 06:39.800
+now.
+
+06:39.820 --> 06:42.310
+Let's see if all of that works.
+
+06:43.670 --> 06:53.310
+So yes it is being displayed here properly sized US one third two thirds split.
+
+06:53.320 --> 06:55.600
+Now let's go back to the index template.
+
+06:59.980 --> 07:03.730
+And here we can use that for each directive
+
+07:07.470 --> 07:16.290
+so well maybe well it's actually renamed up to better names so most comment that we've this type of
+
+07:16.290 --> 07:26.670
+case almost most comment that US post let's close the for each using end for each.
+
+07:26.920 --> 07:34.070
+And obviously we will only have to display one element inside of this loop.
+
+07:34.780 --> 07:39.830
+So let's echo the post title.
+
+07:39.990 --> 07:40.540
+All right.
+
+07:40.660 --> 07:47.300
+Now let's see what people are currently talking about.
+
+07:47.310 --> 07:49.590
+And we have five posts.
+
+07:49.590 --> 07:55.020
+So apparently this one is the one that people talk about most often.
+
+07:55.020 --> 07:56.000
+So let's find it.
+
+07:56.080 --> 08:00.120
+And while this makes sense it actually has 12 comments.
+
+08:00.240 --> 08:04.960
+So with him it seems that it is actually working properly.
+
+08:05.190 --> 08:08.940
+Now let's also go ahead and style it a little bit better
+
+08:12.270 --> 08:23.650
+so we'll change this paragraph to age 6 header and let's also modify the classes to use card subtitle
+
+08:25.290 --> 08:37.030
+and some marking at the bottom end of text muted and maybe also will reformat that so it is clearly
+
+08:37.030 --> 08:39.010
+visible on the screen.
+
+08:39.280 --> 08:47.680
+And what we can also additionally do here is we can create a link to those particular most commented
+
+08:47.740 --> 08:49.660
+blog posts.
+
+08:49.660 --> 08:55.070
+So it is root posts show.
+
+08:56.300 --> 09:00.920
+Now we'll have to specify that I.D. us post Heidi
+
+09:08.180 --> 09:10.530
+inside it would be the post title.
+
+09:10.970 --> 09:14.670
+And let's close the core element.
+
+09:14.750 --> 09:19.010
+So let me check if I did that properly.
+
+09:19.190 --> 09:22.850
+The parameter name is actually are post not I.D..
+
+09:22.850 --> 09:23.240
+All right.
+
+09:23.270 --> 09:27.800
+Now let's save the changes and verify if this actually works.
+
+09:27.800 --> 09:36.780
+So let's refresh this page so we have this most commented books what people are currently talking about.
+
+09:37.020 --> 09:40.620
+And we have the links to the most popular our blog posts.
+
+09:40.620 --> 09:45.220
+You can see that they all have a lot of comments.
+
+09:45.330 --> 09:47.970
+So that was the one example.
+
+09:47.970 --> 09:54.930
+And in the next lecture we'll see some more interesting examples that you can use for our application.

@@ -1,0 +1,172 @@
+WEBVTT
+
+00:00.730 --> 00:06.740
+The Visual Studio Code is the recommended editor to use during this course vote.
+
+00:06.790 --> 00:11.320
+There are other options available and it's not a strict requirement.
+
+00:11.560 --> 00:15.430
+I highly recommend using voice code notice.
+
+00:15.580 --> 00:23.050
+This lecture is optional and everything's shown in it is just a recommendation not required to complete
+
+00:23.050 --> 00:26.970
+the course at all and definitely not a prerequisite.
+
+00:27.760 --> 00:35.110
+You are totally fine to skip this lecture and go back to it whenever you wish if you'd like to set up
+
+00:35.110 --> 00:37.120
+videoscope the way I did.
+
+00:38.260 --> 00:46.720
+Sylvia's code is a free ed from Microsoft available on all operating systems, you can grab it from
+
+00:46.720 --> 00:50.400
+this website, please download and install it.
+
+00:50.410 --> 00:56.620
+Now I suggest posing the video now and getting back when you are done installing.
+
+00:58.500 --> 01:03.660
+Let's have a quick overview of the program on the left side, there's the activity bar.
+
+01:04.020 --> 01:06.690
+There you can see old files from your project.
+
+01:07.020 --> 01:08.750
+You can search through files.
+
+01:09.510 --> 01:14.400
+Users control Likit and install additional extensions.
+
+01:15.580 --> 01:23.080
+In the center, there is the main area of the Kodaly Dora, the power of the code comes mostly from
+
+01:23.080 --> 01:25.560
+the vast library of extensions available.
+
+01:26.020 --> 01:31.580
+I recommend so many not mentioning all of them would probably take half an hour.
+
+01:32.230 --> 01:33.040
+We are fortunate.
+
+01:33.040 --> 01:37.330
+Vote very cold, lets you quickly get the list of extensions I use.
+
+01:38.020 --> 01:42.630
+Just download their zip file attached to this lecture resources.
+
+01:43.840 --> 01:46.690
+The quick trick I'm going to explain next is optional.
+
+01:47.230 --> 01:51.030
+If it's too much for you or it does not work anymore, don't worry.
+
+01:51.310 --> 01:53.590
+There is another way shown right after.
+
+01:56.310 --> 02:03.540
+The code lets you have a workspace, specific settings, the settings are kept in a separate folder
+
+02:03.540 --> 02:12.480
+in your project name to dot the code, I've exported mine, including a list of all recommended extensions
+
+02:12.480 --> 02:13.410
+to install.
+
+02:15.660 --> 02:20.070
+Please pause the video and download this files now.
+
+02:22.760 --> 02:28.590
+Then unpack them to any folder, then open this folder in the editor.
+
+02:29.000 --> 02:33.650
+This can be quickly done by dragging the folder into the code icon.
+
+02:36.660 --> 02:40.950
+Next, create a folder called DOT.
+
+02:42.100 --> 02:47.320
+These code moved the two files into this folder.
+
+02:53.610 --> 02:55.740
+And then quit the cold.
+
+02:58.690 --> 03:04.390
+Reopen this folder again by dragging onto the cold ICAM.
+
+03:07.980 --> 03:12.900
+From the view menu, select the command bulette or use the shortcut.
+
+03:14.500 --> 03:23.290
+And type show recommended this should be enough to see this command click on the command presented.
+
+03:30.560 --> 03:38.120
+It will show you the least of all extensions I recommend installing now, you will need to go through
+
+03:38.120 --> 03:40.400
+each one of them and press install.
+
+03:51.500 --> 03:57.800
+Now, alternatively, just download this zip file and open the extensions, Jason file.
+
+03:59.950 --> 04:04.930
+From recommendation's copy to code names of plugins.
+
+04:10.390 --> 04:14.710
+And paste them into the search on the extension Staab.
+
+04:21.070 --> 04:24.510
+You will have to do that one by one, but it will work.
+
+04:27.690 --> 04:37.140
+The FEMA use is called Umbra, it has great contrasts and the fonts I recommend is Cascadia Code Fira
+
+04:37.150 --> 04:40.110
+Code Operator Mörner or Mennel.
+
+04:40.740 --> 04:43.530
+Most can be downloaded online for free.
+
+04:44.040 --> 04:46.290
+Some are installed on your system.
+
+04:49.930 --> 04:54.280
+You can open the terminal inside the passcode.
+
+04:56.960 --> 05:02.240
+And run command in the currently open project to Route The View.
+
+05:03.420 --> 05:09.780
+Terminal menu will also show the shortcut you can use, we will sometimes use that feature.
+
+05:11.320 --> 05:14.260
+They're already mentioned command pallette.
+
+05:16.930 --> 05:22.480
+Is useful to run some voice code commands, like to format the currently open file.
+
+05:26.450 --> 05:28.480
+Make sure you remember this shortcut.
+
+05:28.690 --> 05:29.780
+It's very handy.
+
+05:30.850 --> 05:33.310
+Then they go.
+
+05:35.030 --> 05:36.350
+Go to five menu.
+
+05:38.580 --> 05:40.330
+Is something we'll use a lot.
+
+05:40.650 --> 05:49.130
+It lets you quickly jump to a file also noticed a shortcut for this comment on your system.
+
+05:49.140 --> 05:51.120
+It would be useful to remember.

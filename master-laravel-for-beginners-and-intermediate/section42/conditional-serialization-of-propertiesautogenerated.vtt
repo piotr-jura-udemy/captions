@@ -1,0 +1,100 @@
+WEBVTT
+
+00:00.570 --> 00:07.230
+In the last lecture you have seen how you can conditionally show a relationship only when this relationship
+
+00:07.230 --> 00:08.770
+is being loaded.
+
+00:08.790 --> 00:16.220
+And now let's see how we can add some data to particular resource depending on some condition.
+
+00:16.980 --> 00:24.060
+So let's say that we have our API here which displays the information about the outer of the comment
+
+00:24.690 --> 00:28.350
+but it only displays that I.D. and a name.
+
+00:28.350 --> 00:36.690
+So if the user that is being called dedicated is an admin you might want to also display an email of
+
+00:36.690 --> 00:39.080
+this users through the API.
+
+00:39.330 --> 00:46.380
+So I cannot really show you that exact working example of that because we haven't worked on a real API
+
+00:46.380 --> 00:55.090
+yet nor we don't handle that out indication inside this API so notice that I'm only creating this end
+
+00:55.090 --> 01:00.710
+point inside a normal controller that is inside the web roots.
+
+01:00.750 --> 01:08.070
+So we'll handle creating our specific API endpoints later which will also include authentication but
+
+01:08.070 --> 01:11.160
+just so you can see right now how this works.
+
+01:11.160 --> 01:21.090
+Let's go to this comment user and include a field called email which should only be serialized if certain
+
+01:21.090 --> 01:29.250
+condition is true so we can achieve that using this when and the first parameter that you have to pass
+
+01:29.340 --> 01:35.490
+is a condition that will evaluate to abolish one which means true or false.
+
+01:35.550 --> 01:43.650
+So let's just put a true constant here because if you would like to check for user you would do of using
+
+01:43.650 --> 01:47.850
+the alpha seed which you would have to import here.
+
+01:47.850 --> 01:57.200
+So mind this import that was added of user which would give you the currently authenticated user which
+
+01:57.200 --> 02:00.230
+then has is admin attribute.
+
+02:00.500 --> 02:09.050
+And then the second field is either the value which you can do as this email or you can the closure
+
+02:09.320 --> 02:12.290
+here that will return something.
+
+02:12.290 --> 02:19.580
+So this actually won't work right now because we are not authenticated through this API because for
+
+02:19.580 --> 02:25.440
+every request we get a new cookie all of the lot of the session.
+
+02:25.640 --> 02:31.720
+So this will display error unfortunately because the user is not an object.
+
+02:31.730 --> 02:34.220
+So we are not how authenticated here.
+
+02:34.280 --> 02:41.430
+So let's do a simpler example right now and just make this a constant.
+
+02:41.460 --> 02:46.790
+So set true.
+
+02:46.810 --> 02:52.040
+So now you can see that every user now has an email included.
+
+02:52.300 --> 02:58.130
+And if you will set this to false that you may won't be included.
+
+02:58.670 --> 03:08.120
+So we'll handle creating API a proper way to be in accordance with how Lara is suggesting to do that
+
+03:08.510 --> 03:10.360
+in the next section.
+
+03:10.370 --> 03:18.080
+So just so you know this is how you can conditionally decide which attributes should be serialized or
+
+03:18.080 --> 03:21.680
+not depending on some additional factors.

@@ -1,0 +1,424 @@
+WEBVTT
+
+00:00.810 --> 00:08.220
+Now that we have fixed our tests so they can also simulate running as an authenticated user we will
+
+00:08.220 --> 00:16.770
+finally create a relation between the blog post and a user and this would be a one to many relationship
+
+00:17.040 --> 00:24.450
+where one user can have many blog posts but obviously first we'll start with our migration.
+
+00:24.450 --> 00:32.070
+So let's make sure the terminal is clear and we'll run the migration first to see a possible problem
+
+00:32.100 --> 00:38.240
+that you will encounter when you will make changes like we are going to make in a second.
+
+00:38.550 --> 00:49.620
+So we'll run peach bee artisan make migration to generate a migration for us so we can call it add user
+
+00:50.220 --> 00:55.420
+to blog posts table.
+
+00:56.960 --> 01:05.080
+Okay so we have our migration it figure out that we are going to modify the blog posts tables so that's
+
+01:05.080 --> 01:06.920
+nice.
+
+01:07.220 --> 01:12.730
+And now let's create a field that will relate to our user.
+
+01:12.730 --> 01:21.340
+So you might remember that we will be adding an unsigned integer field so always remember that when
+
+01:21.340 --> 01:24.750
+you are creating our foreign key inside.
+
+01:24.740 --> 01:33.400
+Then my sequel database the field you are creating are key for the following key for needs to be of
+
+01:33.400 --> 01:39.220
+the exact type that this foreign key is relating to.
+
+01:39.220 --> 01:41.530
+So if that sounds complicated.
+
+01:41.530 --> 01:48.790
+Let's put it in simple words the user I.D. column on the blog post needs to be of exactly the same type
+
+01:49.000 --> 01:53.410
+as the idea column on the user users table.
+
+01:53.560 --> 02:01.450
+So we have unsigned integer and we'll leave it like that and then you will see in a second what's a
+
+02:01.450 --> 02:03.520
+problem with this approach.
+
+02:03.520 --> 02:05.780
+Now let's are the foreign key.
+
+02:07.030 --> 02:10.050
+So it'll be called the same as the field name.
+
+02:10.060 --> 02:21.870
+So user I.D. and it references their I.D. column on user stable.
+
+02:21.880 --> 02:24.940
+So we have this user stable already.
+
+02:24.940 --> 02:34.220
+It was created initially with larval and now we should also implement that down the method to bring
+
+02:34.220 --> 02:37.160
+back this change to the previous state.
+
+02:37.160 --> 02:47.860
+Now you can drop a column and offering key So first we'll have to drop a column so we can use this drop
+
+02:47.860 --> 02:59.960
+column and use the name of the column and there is also a method called drop for grain and you also
+
+02:59.960 --> 03:03.940
+have to specify the name of the foreign key.
+
+03:04.280 --> 03:12.800
+So it's the name of the foreign key is not exactly the same as the field name and the difference is
+
+03:12.800 --> 03:17.570
+that larval generates the names for the foreign keys automatically.
+
+03:17.990 --> 03:26.910
+And if you will go to the database to the comments table you can see that in structure so foreign key
+
+03:26.910 --> 03:34.370
+is an index by default and you can see that the key name in the case of the comments table is comments
+
+03:34.490 --> 03:46.250
+underscore blog posts I.D. index so it's not just the blog post I.D. so to tell LA of all that you want
+
+03:46.250 --> 03:56.030
+to remove a foreign key that is created on this column you can just use an array notation.
+
+03:56.030 --> 04:02.630
+And thanks to that it will know that it shouldn't delete a foreign key with this name but instead it
+
+04:02.630 --> 04:10.160
+should find a foreign key that was created on this field and it will figure out the proper name of this
+
+04:10.160 --> 04:13.040
+foreign key to delete it.
+
+04:13.820 --> 04:16.450
+OK so this is clear so far.
+
+04:16.460 --> 04:21.050
+Now let's see what will happen if we all run this migration.
+
+04:21.050 --> 04:23.610
+And I will give you a hint.
+
+04:23.810 --> 04:33.770
+Now since we are creating a column this is fine but then we are creating our foreign key and we already
+
+04:33.770 --> 04:37.600
+have some data inside the blog post table.
+
+04:37.730 --> 04:40.620
+So we do not provide a default value.
+
+04:40.640 --> 04:44.440
+So there is no default user and this would be a problem.
+
+04:44.450 --> 04:55.030
+So let's see BHP artisan migrate and we can see that there is integrity constraint violation.
+
+04:55.310 --> 05:03.740
+And what that means is when you are the foreign key it is to make sure that your data is integral.
+
+05:03.740 --> 05:05.920
+So it requires.
+
+05:05.930 --> 05:14.390
+So you are adding the foreign key to make sure that everything that is inside the blog post table that
+
+05:14.390 --> 05:22.380
+has a user I.D. is actually referencing our record inside our users table.
+
+05:22.430 --> 05:32.780
+So since we haven't added default value to those records then they do not have a valid user I.D..
+
+05:32.780 --> 05:37.880
+And if we want to add a foreign key for this particular field.
+
+05:37.880 --> 05:40.970
+This makes my sequel fail.
+
+05:41.120 --> 05:43.960
+So it just can't do that.
+
+05:44.240 --> 05:47.510
+Now how we can work around this problem.
+
+05:47.510 --> 05:49.810
+So first let's see what was executed.
+
+05:49.820 --> 05:56.870
+So you can see that we actually do not have the migration that we have run inside the migration stables
+
+05:56.900 --> 05:58.300
+so it failed.
+
+05:58.520 --> 06:03.490
+And actually you haven't added this migration so we have to solve that first.
+
+06:03.500 --> 06:11.980
+You can see the name is are the user to blog posts table but now let's see what has happened inside
+
+06:11.980 --> 06:20.890
+the blog post so you can see that we actually have the user I.D. column but when you go to the structure
+
+06:20.890 --> 06:27.500
+you can see that the foreign key wasn't created only the column was created.
+
+06:27.500 --> 06:38.300
+So there are two ways we can solve this so let's first remove this remove this field from the blog posts
+
+06:38.480 --> 06:46.910
+table so you can do that in peach be my admin by just selecting this field and clicking drop and confirming
+
+06:46.910 --> 06:47.870
+with yes.
+
+06:47.990 --> 06:52.310
+So we are just bringing back this change because the migration has failed.
+
+06:52.310 --> 07:01.640
+Actually now we have two possible solutions to the problem with adding are foreign key to our table
+
+07:01.640 --> 07:07.040
+that is actually existing and has some data already inside it.
+
+07:07.040 --> 07:11.180
+It's very important that it has some data already.
+
+07:11.330 --> 07:19.220
+So the first solution would be to make this column new level by chaining method called to low level.
+
+07:19.220 --> 07:28.250
+And what will this do is all the existing records from this table will have the user I.D. set us no
+
+07:28.730 --> 07:35.990
+which isn't perfect in our case because we would like to assume that all the blog posts have to have
+
+07:36.110 --> 07:41.480
+a user assigned because they have to be authenticated to add a blog post.
+
+07:41.870 --> 07:49.250
+So it's very inconvenient for us to add a new level field and then check each time if the blog post
+
+07:49.250 --> 07:52.810
+has have an outer assigned or not.
+
+07:52.820 --> 07:54.170
+But this will make it work.
+
+07:54.170 --> 08:01.460
+So let's see now to apply this change first of course you need to save this migration file and then
+
+08:01.460 --> 08:10.640
+run P2P artisan migrate you can see that we were successful so this was that user idea column and their
+
+08:10.640 --> 08:11.720
+migration.
+
+08:11.720 --> 08:14.600
+Sorry the foreign key was also added.
+
+08:14.600 --> 08:20.590
+So there is the user I.D. now with the key symbol and you can see that here's our foreign key.
+
+08:21.320 --> 08:28.670
+So let's now browse the data and you can see that we have this problem that older existing data have
+
+08:28.670 --> 08:30.880
+user I.D. us no.
+
+08:30.950 --> 08:39.380
+So will either have to assign it somehow either using a query or manually or Well we will have to check
+
+08:39.860 --> 08:45.470
+in our application if blog posts have an outer or not.
+
+08:45.470 --> 08:52.640
+Which would be quite cumbersome as it would be best to just assume that every blog post has to have
+
+08:52.670 --> 08:55.760
+a user associated.
+
+08:55.760 --> 09:02.740
+So since we are just developing our application and it's not in the production environment yet.
+
+09:02.750 --> 09:10.280
+So in case of the production environments when you already have users and data you will probably use
+
+09:10.370 --> 09:18.130
+this select solution so you will have to add some foreign key that'll be just new level.
+
+09:18.410 --> 09:23.430
+But there is also another way we can do that when we are still developing.
+
+09:23.510 --> 09:33.890
+But before I show you this we will have to fix this down method because I actually wrote it incorrectly.
+
+09:33.890 --> 09:37.280
+The first thing is that we have to drop the foreign key first.
+
+09:37.280 --> 09:41.360
+Only then column because we don't want to just work.
+
+09:41.360 --> 09:44.170
+We can't just drop a column which has a key.
+
+09:44.180 --> 09:46.440
+So first we are removing the foreign key.
+
+09:46.700 --> 09:49.840
+Then a column and another thing is I.
+
+09:49.880 --> 09:57.220
+I have used this and I who should have used that table which is being passed inside the closure.
+
+09:57.780 --> 10:06.050
+Okay we have that fixed and now let's go back to another method we can use and there is a command called
+
+10:06.140 --> 10:16.280
+peach bee artisan migrate refresh and what this will do is well it's quite complicated.
+
+10:16.280 --> 10:24.200
+It will roll back all the migrations that we have and then run them again from in the order they were
+
+10:24.200 --> 10:24.980
+created.
+
+10:25.010 --> 10:33.800
+So this is a way of basically recreating your database which of course you should never do on your production
+
+10:33.800 --> 10:35.240
+environments.
+
+10:35.240 --> 10:39.790
+So let's see what will happen now.
+
+10:39.870 --> 10:48.850
+The error we are seeing right here in the terminal that the blob text column type content cannot have
+
+10:49.110 --> 10:58.580
+a default value is because we have made this change specifically for the Eskil light which required
+
+10:58.590 --> 11:06.160
+the default value and we have this obscure light database used for our tests.
+
+11:06.160 --> 11:18.430
+So to actually solve this problem we can use a little hack so we can read an environment variable using
+
+11:18.430 --> 11:29.860
+the end function and the environment variable is the D.B. connection so if you check the database configuration
+
+11:29.980 --> 11:38.650
+inside the config file database HP you can see that we have many connections specified so this is our
+
+11:38.650 --> 11:40.200
+my sequel connection.
+
+11:40.240 --> 11:49.510
+The main one which we use for the up and there is also Eskew a light testing and the default db connection
+
+11:49.600 --> 11:56.550
+is my askew URL so this way we can verify it here.
+
+11:56.610 --> 12:01.410
+We don't even actually need this variable so we can add an if statement.
+
+12:01.410 --> 12:12.470
+So if db connection equals Askew a light testing will add this field with default value.
+
+12:13.900 --> 12:22.860
+Other ways we will add it without a default value so we can even copy that and remove this default.
+
+12:24.810 --> 12:35.370
+So let's make sure we do not have any other migrations which has a field of type text and up default
+
+12:35.370 --> 12:36.510
+value provided.
+
+12:36.510 --> 12:41.040
+So we have profiles we have comments
+
+12:45.730 --> 12:51.850
+and we can maybe do the same for our comments table.
+
+12:51.880 --> 12:56.860
+So let's do that immediately to save us from any further trouble.
+
+12:56.860 --> 13:03.790
+You can see that those are even called the same so this shouldn't be a problem.
+
+13:03.790 --> 13:04.020
+OK.
+
+13:04.030 --> 13:06.600
+We have fixed the problem now.
+
+13:06.640 --> 13:11.590
+Let's clear the terminal and rerun our command again.
+
+13:11.590 --> 13:17.520
+So this was peach bee artisan migrate refresh but maybe let's do one more thing.
+
+13:17.530 --> 13:25.720
+So I've said that this low level should be used when we actually work with existing database with existing
+
+13:25.720 --> 13:26.330
+data.
+
+13:26.650 --> 13:33.550
+And as I've said then migrate to refresh will remove all the data from the database because we will
+
+13:33.550 --> 13:34.900
+actually recreate it.
+
+13:34.900 --> 13:44.260
+So we do not need a new level here or maybe I will just keep it as a comment out line so you can just
+
+13:44.680 --> 13:50.660
+look it up for the reference but will remove this new level from the actual column.
+
+13:51.370 --> 13:59.470
+Okay now let's finally refresh the database and you can see that all the migrations were run correctly
+
+13:59.480 --> 14:04.680
+so first it rolled back everything and then run again all the migrations.
+
+14:05.050 --> 14:10.200
+So now let's check the database and you can see that we have all the tables.
+
+14:10.230 --> 14:16.590
+They're all empty but now the structure is as we want that as we need that.
+
+14:16.840 --> 14:25.690
+Now the problem is that we do not have any blog posts and we also do not have any users that we have
+
+14:25.900 --> 14:27.700
+created previously.
+
+14:27.700 --> 14:35.950
+But you shouldn't worry about that because there is also a way in lot of URL which lets you load all
+
+14:35.940 --> 14:39.190
+the users using a single command.
+
+14:39.220 --> 14:44.740
+It's called database seeding and you will see how to do that in the next lecture.

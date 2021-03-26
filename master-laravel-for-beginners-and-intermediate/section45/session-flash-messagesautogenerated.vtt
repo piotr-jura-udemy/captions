@@ -1,0 +1,151 @@
+WEBVTT
+
+00:01.690 --> 00:08.140
+Let's think of a way that we can signal to the user that actually something has happened and we've started
+
+00:08.200 --> 00:11.920
+the new blog post into the database or otherwise.
+
+00:11.920 --> 00:15.640
+If something went wrong and we weren't able to save it.
+
+00:16.120 --> 00:23.950
+So there is a concept called flash messages which would be stored inside the user session and only would
+
+00:23.950 --> 00:26.710
+be visible for the next direct request.
+
+00:26.740 --> 00:34.990
+So the next request that will come after the one we are storing it inside a flash message so you can
+
+00:34.990 --> 00:44.470
+do that using the request session flash.
+
+00:44.540 --> 00:56.840
+So here you specify the key of your flash variable can be status and we can say that blog post was created.
+
+00:56.860 --> 01:03.370
+Now we only care about the successful status because we haven't get to the validation of the data yet.
+
+01:03.380 --> 01:04.660
+We'll do in a bit.
+
+01:04.660 --> 01:13.480
+So currently we only signal that something actually was successful and we will create this status variable
+
+01:13.540 --> 01:16.120
+inside the session which can be done read.
+
+01:16.150 --> 01:18.490
+And after that we'll be destroyed.
+
+01:19.300 --> 01:22.960
+So let's think of where we can actually displayed up.
+
+01:23.020 --> 01:28.750
+I think that for our simple application which looks like this there is only one labeled and couple of
+
+01:28.750 --> 01:32.830
+links we probably have to do that inside the layout.
+
+01:33.220 --> 01:41.680
+So here we have our menu and the yield content where we display all the content so we can use the if
+
+01:41.680 --> 01:45.370
+statement that we've learned about before.
+
+01:45.370 --> 01:48.340
+So let's create a scaffold for the if statement.
+
+01:48.550 --> 01:55.090
+And now we can check if the status variable is actually inside the session.
+
+01:55.090 --> 01:59.940
+So for this we can use their session helper function and it has a has method.
+
+02:00.610 --> 02:02.980
+So let's see if a session has status.
+
+02:03.160 --> 02:05.740
+So that's the variable we have created.
+
+02:05.740 --> 02:15.120
+We can additionally render something maybe we can even style it with green color of course later.
+
+02:15.170 --> 02:21.370
+I'll show you how to use bootstrap but for now let's just do it this way.
+
+02:21.550 --> 02:31.720
+And here will just echo the session and to read this variable that we have to start the flash message
+
+02:31.770 --> 02:38.560
+we will use the get method so get in the variable name is status.
+
+02:38.630 --> 02:45.260
+So now after starting a brand new blog post we'll be creating this stuff to the variable this flash
+
+02:45.260 --> 02:51.160
+variable and then reading it only once inside our layout only if it exists.
+
+02:51.190 --> 02:56.330
+So we'll only render that if this variable does exist.
+
+02:56.450 --> 03:04.880
+So let's post a new blog post created and you can see that our message that the blog post was created
+
+03:05.120 --> 03:08.530
+after you refresh it is being deleted.
+
+03:08.540 --> 03:11.690
+So it's no longer there now.
+
+03:11.690 --> 03:18.140
+There might also be a case where you would like to store this flash variable for more than one request
+
+03:18.140 --> 03:24.260
+for like next subsequent request and will not keep that inside the app.
+
+03:24.290 --> 03:26.710
+But I will just show you how you can do that.
+
+03:27.140 --> 03:36.090
+So we'll need a request object here because we will do that inside our show action and here we have
+
+03:36.090 --> 03:45.900
+access to the request which has session and we can do the re flash method call and this will keep the
+
+03:47.100 --> 03:49.980
+flash variable for the next request.
+
+03:49.980 --> 03:57.780
+So mind not cold out in loops because if you will always call re flash this will be stored forever and
+
+03:57.810 --> 04:00.080
+we do not want that.
+
+04:00.090 --> 04:02.270
+So now let's check if that works.
+
+04:02.280 --> 04:07.190
+So let's add a new blog post doesn't.
+
+04:07.340 --> 04:10.800
+So now let's check if that works and create a new blog post.
+
+04:10.800 --> 04:13.670
+Doesn't really matter what we type here.
+
+04:13.850 --> 04:15.590
+Now it is being created.
+
+04:15.590 --> 04:22.100
+We see our flash message and then if you will go to the least of blog posts you still see them as such
+
+04:22.280 --> 04:26.180
+but after you refresh it's no longer there.
+
+04:26.180 --> 04:31.820
+So I will remove that or maybe comment that out but just so you know how you can keep on message for
+
+04:31.820 --> 04:33.230
+one more request.

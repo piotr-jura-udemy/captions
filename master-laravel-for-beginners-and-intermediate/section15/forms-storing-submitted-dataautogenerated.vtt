@@ -1,0 +1,91 @@
+WEBVTT
+
+00:02.430 --> 00:10.830
+Let's see the simplest way to store data sent through a form, it is possible that if you would give
+
+00:10.830 --> 00:18.840
+it a little bit of effort, you will be able to write the code yourself as everything you need was already
+
+00:18.840 --> 00:19.410
+covered.
+
+00:20.490 --> 00:27.010
+First, to store the data, we need to create its model instance.
+
+00:27.660 --> 00:34.620
+So let's make a new blog post model.
+
+00:38.510 --> 00:42.150
+And assign it to the post variable.
+
+00:42.800 --> 00:50.360
+Also, make sure that inside this post controller class, you are importing this model.
+
+00:56.280 --> 01:05.080
+Now assigned to the title and content properties, reading input, using the request object input method.
+
+01:08.160 --> 01:14.790
+So first the title we have to request object passed as a parameter.
+
+01:15.120 --> 01:22.570
+We can use the input method to get the title and we will do the same with the content.
+
+01:24.180 --> 01:27.390
+So request input content.
+
+01:30.570 --> 01:39.990
+Then let's call the save method on the model object to start the new record in the database.
+
+01:41.480 --> 01:50.540
+Now you have a choice whether to show the user the success message or redirect to another page, usually
+
+01:50.540 --> 01:52.640
+the redirect is the better option.
+
+01:53.060 --> 02:00.100
+You can either redirect back to the list of posts or to the newly created post page.
+
+02:00.890 --> 02:04.380
+So let's redirect to the blog post page.
+
+02:05.060 --> 02:12.900
+You should also know how to do it in the redirect responses lecture you've learned.
+
+02:12.920 --> 02:21.140
+You need to return the result of the call to redirect object.
+
+02:22.020 --> 02:23.010
+Route method.
+
+02:25.690 --> 02:36.280
+And then the root name now, after you saved a model, it's idee, property gets assigned so you can
+
+02:36.280 --> 02:39.250
+pass it to the root method.
+
+02:43.460 --> 02:50.390
+The parameter name for this route is post, and we pass the post I.D. to it.
+
+02:52.370 --> 03:01.190
+OK, now let's verify how this works once again, so go to the forum page and type some input.
+
+03:01.430 --> 03:06.800
+Doesn't really matter what and press create, make sure your database is running.
+
+03:07.730 --> 03:08.540
+And there it is.
+
+03:08.570 --> 03:10.310
+Everything is as expected.
+
+03:10.850 --> 03:16.310
+After sending the data, you are being redirected to the new post page.
+
+03:17.730 --> 03:24.830
+Just need to make sure to fill out the inputs, because validating data is a topic of another lecture.
+
+03:25.500 --> 03:30.740
+As a final note, that's not the one and only way to store new models.
+
+03:31.230 --> 03:34.760
+We will see different options throughout the course.

@@ -1,0 +1,175 @@
+WEBVTT
+
+00:00.750 --> 00:08.310
+In this section will learn how to create and work with a Many to Many relationship in eloquent which
+
+00:08.310 --> 00:13.620
+is polymorphic in our application and throughout this course.
+
+00:13.710 --> 00:20.880
+We already have created a Many to Many relationship and this was a relationship between blog post and
+
+00:20.880 --> 00:21.440
+tag.
+
+00:21.870 --> 00:29.910
+So let's quickly remind ourselves what is a Many to Many relationship so you can see that one blog post
+
+00:30.480 --> 00:35.250
+can have a list of many tasks associated with it.
+
+00:35.250 --> 00:37.440
+But the difference between one too many.
+
+00:37.950 --> 00:44.910
+Let's take a look at the diagram we created one too many polymorphic relationships for comments and
+
+00:44.910 --> 00:52.170
+the difference is that all the comments associated with a blog post are unique to this specific blog
+
+00:52.170 --> 00:53.680
+post.
+
+00:53.680 --> 00:56.860
+That's not the case with many to many relationship.
+
+00:56.970 --> 01:05.100
+In this case blog posts can have many tags but those same tags can be also associated to different blog
+
+01:05.100 --> 01:06.900
+posts.
+
+01:06.900 --> 01:14.910
+So what we would like to achieve is we would like to make tags a sign of all not only to blog posts
+
+01:14.970 --> 01:17.040
+but also to other models.
+
+01:17.040 --> 01:24.420
+And in this example we'll work with comments so comments can have tags and blog posts can have tags
+
+01:24.810 --> 01:32.310
+and as it is with many to many relationship the same tag can be associated with different models.
+
+01:32.310 --> 01:40.540
+Whether that our different blog posts or different comments traditionally let's first take a look at
+
+01:40.540 --> 01:45.870
+the current situation so there is a blog post model.
+
+01:46.000 --> 01:53.200
+There is the tag model and between them seats the pivot or intermediate table.
+
+01:53.200 --> 01:59.550
+This table is used to create a relationship between blog posts and the tide.
+
+01:59.710 --> 02:07.150
+So for each relationship that has to be created between blog post and tag there will be another row
+
+02:07.240 --> 02:09.430
+inside that pivot table.
+
+02:09.550 --> 02:14.740
+So let's ignore for a second how this pivot table is actually called.
+
+02:14.920 --> 02:19.990
+We will just use this example of pivot intermediate table.
+
+02:20.230 --> 02:27.880
+Now inside each of those people tables there is a blog post ideas related to blog post and tag I.D.
+
+02:28.120 --> 02:29.610
+related to the tag.
+
+02:29.770 --> 02:38.080
+So to remove an association between blog posts and a tag we just remove a record from that pivot table
+
+02:38.380 --> 02:43.990
+or other records to the pivot table to create this relationship.
+
+02:44.020 --> 02:46.490
+So what would be different.
+
+02:46.780 --> 02:56.030
+So we would like both the blog post and comment models to be possible to associate tax to them.
+
+02:56.110 --> 02:59.770
+So what will change is actually the pivot table
+
+03:02.570 --> 03:11.340
+so instead of just having a blog post I.D. will now have those morph columns as you see here.
+
+03:11.450 --> 03:18.710
+We have come up with a taxable name so there will be targetable Ida and tugboat type which will specify
+
+03:18.710 --> 03:29.030
+what is the actual model name so tangible I.D. can be either blog post I.D. or the comment I.D. and
+
+03:29.060 --> 03:37.160
+the targetable type would be the model name either up comment or app and blog post and finally there
+
+03:37.160 --> 03:38.580
+is the tag idea column.
+
+03:38.630 --> 03:46.280
+And this actually doesn't change there will still be a relation from tag I.D. to that tag I.D. inside
+
+03:46.280 --> 03:49.360
+that tax table.
+
+03:49.370 --> 03:56.600
+So what we will achieve throughout this section is we will not only learn how to create a Many to Many
+
+03:56.690 --> 03:58.810
+polymorphic relationship.
+
+03:59.120 --> 04:08.090
+We will also learn how to move all the code and functionality related to assigning tags to both blog
+
+04:08.090 --> 04:16.530
+posts comments or any other model to a specific chunk of code which would actually be our trade.
+
+04:16.760 --> 04:21.430
+And we have used trade before but they all came from the Lavell.
+
+04:21.590 --> 04:30.440
+So if you remember we've added soft delete functionality to blog posts and comments and all we had to
+
+04:30.440 --> 04:39.110
+do is just ah the trade to our specific model and magically it had this solved deal its functionality.
+
+04:39.110 --> 04:42.210
+And this time we'll do that ourselves.
+
+04:42.770 --> 04:51.170
+So instead of defining all the relationships on specific model and caring about all of that that has
+
+04:51.170 --> 04:52.540
+to be set up.
+
+04:52.670 --> 05:01.610
+What you will have to do is you will only use a specific trade on a model and this model will immediately
+
+05:01.940 --> 05:10.880
+be able to add tags and you won't even have to specify the tags yourself because we were created so
+
+05:11.480 --> 05:18.850
+that the tags will be associated out magically based on the content field of a model.
+
+05:19.220 --> 05:24.540
+So you can see that both blog post and comment have the content model.
+
+05:24.830 --> 05:32.270
+So we will add specific syntax for the users so they will be able to specify what tasks have to be associated
+
+05:32.270 --> 05:35.140
+with this blog post or a comment.
+
+05:35.360 --> 05:38.110
+And this will all happen in the background.
+
+05:38.270 --> 05:43.460
+So you will see how great that is and what possibilities Lavell has.
+
+05:43.460 --> 05:47.420
+So stay tuned we'll all learn that in this section.

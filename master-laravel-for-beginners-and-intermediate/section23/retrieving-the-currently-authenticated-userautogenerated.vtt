@@ -1,0 +1,148 @@
+WEBVTT
+
+00:00.960 --> 00:07.960
+In this lecture we will see how we can retrieve some information about the currently authenticated user.
+
+00:08.370 --> 00:15.660
+So what I have here is the Visual Studio code on the left with the home controller active and on the
+
+00:15.660 --> 00:20.080
+right there is our Web site with the home page active.
+
+00:20.250 --> 00:28.590
+So if you guys are wondering how I achieved this split screen it's just a mark feature where I can split
+
+00:28.590 --> 00:33.280
+the two applications into one screen anyway.
+
+00:33.330 --> 00:40.110
+First let's log out and then make sure that you logging using some of the existing accounts or you can
+
+00:40.110 --> 00:44.680
+just register because we have already implemented that and it works.
+
+00:44.850 --> 00:51.160
+But I have an account so I will just log in and go to the home page.
+
+00:51.220 --> 00:57.800
+Now the two fetch the currently authenticated user will use that our phosphate class.
+
+00:57.810 --> 01:00.600
+So first will import it.
+
+01:00.600 --> 01:11.750
+So it can be found inside Illuminate Support for phosphates.
+
+01:12.040 --> 01:15.110
+So that's the class we will use.
+
+01:15.250 --> 01:21.520
+And now it has a couple of static methods so the first one that might be interesting is ideas.
+
+01:21.820 --> 01:30.210
+So let's surrounded with DDA to dump this idea of the currently authenticated user or the new value.
+
+01:31.090 --> 01:32.330
+So let's see what it gets.
+
+01:32.330 --> 01:34.260
+So we are receiving free.
+
+01:34.300 --> 01:39.300
+And this happens to be the I.D. of the user that I am authenticated out.
+
+01:39.610 --> 01:44.650
+So we will use that to fetch the I.D. of the currently authenticated user.
+
+01:44.650 --> 01:55.370
+Or you can just open this health class by clicking it with the alt key pressed and you can see all the
+
+01:55.370 --> 01:58.550
+possible methods that this failsafe can return.
+
+01:59.600 --> 02:02.310
+So let's see our I.D. method.
+
+02:02.330 --> 02:09.560
+So the I.T. method can return an integer which would be the idea of the user or no.
+
+02:10.490 --> 02:19.550
+Alternatively there is the user method and the user method would return model of the currently authenticated
+
+02:19.580 --> 02:20.410
+user.
+
+02:20.450 --> 02:25.790
+So as you can see on the attributes it contains all the attributes of myself.
+
+02:25.790 --> 02:29.310
+So the currently authenticated user.
+
+02:29.570 --> 02:35.970
+Now the first useful method of this hourglass is check.
+
+02:35.990 --> 02:43.450
+So this would just return a bullion of whether the current user is authenticated or not.
+
+02:43.460 --> 02:46.700
+So this might also be useful.
+
+02:46.770 --> 02:47.030
+So.
+
+02:47.030 --> 02:47.340
+OK.
+
+02:47.390 --> 02:49.400
+Now let's remove that.
+
+02:49.400 --> 02:58.030
+Or alternatively I can just store that so you will know later how to use these comments and what is
+
+02:58.030 --> 02:58.630
+available.
+
+02:58.630 --> 03:04.570
+I will comment that out and commit that to the repository so we can always find this.
+
+03:04.660 --> 03:08.590
+But now let's see how we can actually do something useful.
+
+03:08.590 --> 03:20.670
+So let's open our layout so it would be inside resources views lay out the blade BHP so inside the layout
+
+03:20.730 --> 03:27.600
+we can try to show the user name so maybe the only way we can put the user name might be inside the
+
+03:27.600 --> 03:28.770
+logout button.
+
+03:28.830 --> 03:35.920
+We can just surrounded with parentheses and inside it showed the current user name.
+
+03:36.420 --> 03:43.320
+So in this case we can be pretty certain that the user is authenticated because this is what the guest
+
+03:43.320 --> 03:45.060
+directive is doing.
+
+03:45.090 --> 03:52.530
+So this would be only rendered when the user won't be authenticated and everything after else up to
+
+03:52.530 --> 03:57.990
+there and the guest is only rendered when user is authenticated.
+
+03:57.990 --> 04:08.370
+So here we can also interpolate safely using the South for Sayed and using the user function.
+
+04:08.490 --> 04:14.320
+So user has this named field that we can display here.
+
+04:14.340 --> 04:21.780
+So now let's go to the right side and refresh maybe now let's enlarge that a little bit and you can
+
+04:21.780 --> 04:24.080
+see that this part was rendered.
+
+04:24.090 --> 04:29.850
+So now inside the logout button we see the name of the current user.

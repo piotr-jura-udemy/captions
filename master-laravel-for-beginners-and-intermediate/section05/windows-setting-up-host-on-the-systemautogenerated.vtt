@@ -1,0 +1,40 @@
+WEBVTT
+
+00:00.390 --> 00:06.390
+Configuring the local domain is super easy, go to the sea windows.
+
+00:07.630 --> 00:08.920
+System 32.
+
+00:13.430 --> 00:14.420
+Drivers.
+
+00:17.290 --> 00:19.840
+ETEK folder in the Explorer.
+
+00:22.040 --> 00:27.680
+Now, drag the hosts file onto the V as code.
+
+00:30.870 --> 00:39.180
+Then go to the very bottom of this file and on the left, type 127 oh oh one.
+
+00:41.440 --> 00:50.020
+Which is your localhost IP address and on the right side, separated by any number of spaces, type
+
+00:50.020 --> 00:53.920
+the domain name, which would be Laravel Dot Test.
+
+00:55.780 --> 01:04.000
+Press control is to save changes, changing this fire that requires the admin privileges salvias code
+
+01:04.000 --> 01:09.910
+will ask you to retrain as an admin gretry as admin and the changes will be saved.
+
+01:12.560 --> 01:14.180
+You can now close this file.
+
+01:20.130 --> 01:30.450
+So now when you make sure that our party is running, you should be able to visit HTP Laravel that test
+
+01:30.450 --> 01:35.400
+in your browser and you would be directed to your application.

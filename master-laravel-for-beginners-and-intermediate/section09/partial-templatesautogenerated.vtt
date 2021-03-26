@@ -1,0 +1,106 @@
+WEBVTT
+
+00:01.700 --> 00:09.440
+When your application gets bigger, also the HDMI in your templates gets more clunky with time, it
+
+00:09.440 --> 00:12.110
+might feel it's getting less and less manageable.
+
+00:13.240 --> 00:19.780
+Sometimes you might also feel you are repeating yourself in your blade templates far too often.
+
+00:20.770 --> 00:29.830
+This is what include directives after I said directives are there actually is a whole family of those
+
+00:29.830 --> 00:37.840
+directives, they let you create some views and partial views which can be reused across different layouts
+
+00:37.840 --> 00:38.720
+and pages.
+
+00:39.430 --> 00:47.230
+They also help you extract parts of your templates into smaller chunks, which is easier to manage in
+
+00:47.230 --> 00:48.010
+the long term.
+
+00:51.090 --> 00:58.680
+Let's see an example, we can extract a blog post on the list to an external partial template, since
+
+00:58.680 --> 01:04.220
+this particular partial template will only be used once and in a specific place.
+
+01:04.620 --> 01:07.130
+It's not really a reusable code.
+
+01:07.620 --> 01:15.060
+It is rather for making our individual template files smaller and focused.
+
+01:15.690 --> 01:23.400
+In such cases, it's a good idea to keep partial folder that is specific to the domain.
+
+01:23.970 --> 01:27.230
+In this case, the domain is posts.
+
+01:29.010 --> 01:34.710
+So let's create a new Parshall's folder inside the posts.
+
+01:36.940 --> 01:42.660
+Now, let me create a new partial file and call it post blade BHP.
+
+01:45.820 --> 01:54.280
+Let's move all the content from within the four hours directive into this new partial.
+
+01:59.640 --> 02:03.150
+Now, the include the directive itself.
+
+02:07.530 --> 02:15.720
+You just need to specify the template name, so this would be posts Parshall's Post.
+
+02:19.190 --> 02:22.070
+You might be wondering if it will work.
+
+02:22.940 --> 02:30.470
+How does the partial template know about the loop variable or the post variable?
+
+02:32.160 --> 02:40.110
+Well, don't worry, include inherits all the variables that were available in the place where it was
+
+02:40.110 --> 02:40.690
+called.
+
+02:41.670 --> 02:49.740
+So if that was within a four hour slope, every variable that was available within the loop will be
+
+02:49.740 --> 02:52.230
+available inside the partial.
+
+02:56.920 --> 02:58.890
+So you can see this still works.
+
+03:00.500 --> 03:08.660
+Notice if you would use this partial template outside the loop, it will break down.
+
+03:14.010 --> 03:21.360
+As basically it is expecting variables that are not normally available and just happen to be available
+
+03:21.360 --> 03:22.860
+inside this loop.
+
+03:30.050 --> 03:37.790
+So the partial template that is rendered using the include directive will inherit all the variables
+
+03:37.790 --> 03:46.400
+from within the context where it was used, but also it is possible to pass some additional variables
+
+03:46.400 --> 03:48.040
+to the include directive.
+
+03:48.410 --> 03:55.840
+So this would be the second parameter and an array of keys and values representing those variables.
+
+03:55.850 --> 03:59.460
+Exactly like you pass data inside the roots.
+
+04:00.230 --> 04:07.070
+So in such cases, you might be able to provide this look variable or the post variable.

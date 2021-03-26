@@ -1,0 +1,367 @@
+WEBVTT
+
+00:00.840 --> 00:07.110
+In the last lecture we have other this box on the right side of our blog post least which shows the
+
+00:07.110 --> 00:12.740
+most commented blog post which means blog posts which have at most comments.
+
+00:12.900 --> 00:18.390
+And we achieved that using local queries scopes inside a blog post model.
+
+00:18.540 --> 00:20.840
+So let's continue with this example.
+
+00:20.910 --> 00:30.180
+But this time will add a local query scope to the user model and we will fetch users that have the most
+
+00:30.180 --> 00:32.700
+blog post written.
+
+00:32.700 --> 00:36.950
+So let's go ahead and go to the user model.
+
+00:37.560 --> 00:38.740
+So you see it up.
+
+00:38.760 --> 00:41.960
+It has a relation to a blog post model.
+
+00:42.420 --> 00:44.810
+So let's now add a local query scope.
+
+00:44.820 --> 00:55.920
+So this would be a function which name starts with scope and the scope name could be with most blog
+
+00:55.920 --> 00:57.660
+posts.
+
+00:57.660 --> 01:05.260
+And the argument that each it receives is a query builder mind that you do not really have to type and
+
+01:05.280 --> 01:07.140
+it with the object type.
+
+01:07.170 --> 01:14.490
+But while it's useful if you are using ideas or even individuals to your code it can give you some hints
+
+01:14.910 --> 01:17.210
+at what are the available methods.
+
+01:17.760 --> 01:18.680
+So let's try it out.
+
+01:18.680 --> 01:20.400
+This would be a query builder.
+
+01:20.400 --> 01:21.900
+So it's a builder object.
+
+01:22.500 --> 01:29.540
+And it should be somewhere on the list it is from the namespace illuminate database query builder.
+
+01:29.550 --> 01:31.790
+So be sure to choose the correct one.
+
+01:31.800 --> 01:39.540
+Now press enter and we'll have it ultimately added to their use statement list.
+
+01:39.940 --> 01:40.260
+OK.
+
+01:40.260 --> 01:43.170
+Let's go ahead with implementing our scope.
+
+01:44.640 --> 01:53.080
+So this should also be pretty straightforward.
+
+01:53.280 --> 01:58.020
+So what we can do is query with count.
+
+01:58.170 --> 01:59.710
+So we want this.
+
+01:59.820 --> 02:05.210
+We want to fetch users with their account of the blog posts.
+
+02:05.340 --> 02:15.830
+Relation and finally will order by and the name of this new field that will be returned along with the
+
+02:15.830 --> 02:28.460
+users is blog posts count and we want to sort that in descending order so we get the users with at most
+
+02:28.460 --> 02:32.260
+blog posts written first.
+
+02:32.270 --> 02:37.370
+Now let's go to that post controller and we'll pass another parameter
+
+02:42.750 --> 02:45.330
+let's call it most active
+
+02:48.060 --> 02:51.120
+and we'll fetch that from user.
+
+02:51.120 --> 02:55.030
+Let's see what was the method name with most blog posts.
+
+02:55.090 --> 03:01.310
+Ok so we can do user with most blog posts.
+
+03:01.530 --> 03:10.200
+We'll also take five or basically will take at most five because when you use take it basically limits
+
+03:10.200 --> 03:14.560
+the query so it is adding Eskew will limit statements.
+
+03:14.580 --> 03:19.490
+So it will only fetch utmost five items might be less of course.
+
+03:20.100 --> 03:24.740
+And finally get to execute the query and get the result.
+
+03:24.780 --> 03:30.690
+Now minds that we might not have the User model imported in post control or so let's do that now use
+
+03:30.750 --> 03:32.250
+up user
+
+03:35.900 --> 03:37.770
+now let's go to the template.
+
+03:37.940 --> 03:48.050
+So this is our car that we have added for the most commented blog posts but since now we'll have another
+
+03:48.050 --> 03:48.420
+one.
+
+03:48.440 --> 03:58.250
+It might be a good idea to add a container class so we can use the bootstrap grid system.
+
+03:58.420 --> 03:59.810
+Now try to follow me.
+
+03:59.830 --> 04:04.390
+Might be a little bit confusing to look up all this HDMI mail.
+
+04:04.400 --> 04:10.960
+So that's why I always comment all the changes that you make after each lecture so you can see how this
+
+04:10.960 --> 04:14.830
+should look exactly and you won't make any mistakes.
+
+04:14.920 --> 04:16.920
+So this is the right column.
+
+04:16.960 --> 04:19.730
+Inside it will put up another container.
+
+04:19.840 --> 04:25.740
+So then we can put each individual card into a separate row.
+
+04:25.750 --> 04:28.960
+So let's do that div class roll
+
+04:37.600 --> 04:38.010
+OK.
+
+04:38.020 --> 04:41.120
+Now we will have to indent that card.
+
+04:41.140 --> 04:46.270
+Maybe let's also change the style to be with hundred percent.
+
+04:46.270 --> 04:48.860
+Take the whole screen.
+
+04:49.060 --> 05:01.980
+And now what we can do is we can select this roll and just based on other one because we will also display
+
+05:01.980 --> 05:10.800
+the most active users in our card which will be well below this one with the most commented blog posts.
+
+05:10.800 --> 05:25.340
+So lets out some title most active and will say that users with most posts written.
+
+05:25.480 --> 05:33.490
+Now here we are iterating over most comment that now we should iterate over most active most active
+
+05:33.610 --> 05:36.760
+US user as this is not a post anymore.
+
+05:36.760 --> 05:41.020
+And since we currently do not have any profile pages of the user.
+
+05:41.080 --> 05:44.480
+This won't be a link we'll just display the user name.
+
+05:44.710 --> 05:48.100
+So we will simply echo the user name
+
+05:51.430 --> 05:52.570
+well this should be.
+
+05:52.570 --> 05:59.370
+Basically we also you can also notice that this template is starting to grow.
+
+05:59.470 --> 06:01.210
+So it is really unreadable.
+
+06:01.240 --> 06:03.430
+And we have a lot of code inside it.
+
+06:03.520 --> 06:09.510
+But don't worry just after we finish our lectures about the quarry scope we'll work with that and you
+
+06:09.510 --> 06:12.670
+will learn how you can create larval blade components.
+
+06:12.700 --> 06:18.860
+So stay tuned and don't worry about a little bit messy HDMI all right now.
+
+06:19.060 --> 06:19.290
+OK.
+
+06:19.330 --> 06:24.960
+Let's save the changes and see if that works by refreshing the page.
+
+06:25.720 --> 06:35.310
+It seems that I have important the wrong class so I should have imported illuminate database query builder
+
+06:36.000 --> 06:37.990
+and I have imported now.
+
+06:38.020 --> 06:38.520
+Sorry.
+
+06:38.580 --> 06:43.650
+The other way this should be important and I've imported a different one.
+
+06:43.650 --> 06:46.070
+So let's fix that quickly.
+
+06:47.730 --> 06:54.120
+So it complains about this import a lot of classes with builder name and you have to look out for the
+
+06:54.240 --> 06:55.500
+proper import.
+
+06:56.130 --> 06:59.750
+So that should be the correct one.
+
+06:59.760 --> 07:01.160
+Make sure you fix that.
+
+07:01.170 --> 07:04.650
+Now let's refresh and this is what we get.
+
+07:04.720 --> 07:09.100
+Those are the users which happen to have utmost posts.
+
+07:09.100 --> 07:18.610
+So it's really hard to see that when you have so many blog posts on the index page so we can also open
+
+07:18.640 --> 07:23.240
+Tinker and verify if that actually works.
+
+07:23.250 --> 07:31.240
+So I will enlarge the terminal a little bit and let's start BHP artisan Tinker
+
+07:34.380 --> 07:38.280
+and fetch users with most blog posts
+
+07:41.510 --> 07:43.100
+and let's see.
+
+07:43.100 --> 07:50.870
+So it should be now ordered by the amount of blog posts that user users have and what we can see at
+
+07:50.870 --> 07:53.360
+the top is at least in my database.
+
+07:53.360 --> 08:00.380
+It happens to be Canada on my Glenn with six posts and then there is John Doe our admin with four posts.
+
+08:00.380 --> 08:02.450
+So let's see that much as well.
+
+08:02.450 --> 08:03.840
+It seems that it does.
+
+08:03.920 --> 08:07.690
+Obviously the names can be different on your system us.
+
+08:07.700 --> 08:10.390
+We are just generating them using seeds.
+
+08:10.520 --> 08:12.000
+So it might be different.
+
+08:12.020 --> 08:14.900
+Even the numbers can be different so remember about that.
+
+08:15.490 --> 08:15.790
+OK.
+
+08:15.800 --> 08:20.920
+So it seems to be working perfectly now.
+
+08:20.940 --> 08:30.090
+Let's go back to the template and another thing we can fix with that is so we can add some marking at
+
+08:30.090 --> 08:34.380
+the top so empty two means marking top two.
+
+08:36.120 --> 08:40.140
+Well maybe let's at four because it doesn't add enough spacing.
+
+08:40.540 --> 08:40.790
+OK.
+
+08:40.800 --> 08:43.650
+Now it should be more clear.
+
+08:43.830 --> 08:52.140
+So that was another example of what we can do with the query scopes and you might see couple of problems
+
+08:52.170 --> 08:53.800
+that we are having right now.
+
+08:53.820 --> 08:54.200
+So.
+
+08:54.480 --> 09:01.290
+Well there aren't really a big or pressing problems but first one is that our index template for the
+
+09:01.290 --> 09:08.140
+blog posts seem to be having too much stuff inside it and we'll solve that in the next section.
+
+09:08.370 --> 09:16.470
+And another one might be that for every time we visit our list of the blog posts we fetch older blog
+
+09:16.470 --> 09:18.240
+posts from the database.
+
+09:18.240 --> 09:26.750
+Then we also execute queries for fetching most comment and blog posts and then we fetch another user.
+
+09:26.860 --> 09:30.850
+We do another query to fetch the most active users.
+
+09:31.200 --> 09:39.660
+So this can take quite a big load on the database especially if it is being executed each time you see
+
+09:39.660 --> 09:47.610
+a list of the blog posts and active users and most comment and blog posts even if they don't change.
+
+09:47.610 --> 09:51.020
+So we'll also solve that in the next section.
+
+09:51.030 --> 09:57.390
+I'm not saying next lecture but next section when we will introduce a lot of old blade components and
+
+09:57.420 --> 09:58.080
+caching.
+
+09:58.710 --> 10:03.750
+So stay tuned for the next lecture when we'll work more with the query scopes.

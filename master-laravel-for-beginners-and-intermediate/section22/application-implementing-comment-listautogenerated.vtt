@@ -1,0 +1,211 @@
+WEBVTT
+
+00:00.660 --> 00:07.950
+Now let's take a quick break from Terry and actually implement the view for comments inside an individual
+
+00:07.950 --> 00:14.700
+blog post so you can see that we are already displaying the amount of comments under each blog post
+
+00:14.730 --> 00:16.290
+on the blog post list.
+
+00:16.740 --> 00:22.560
+But when you go into our particular blog post we can't really read those comments.
+
+00:22.830 --> 00:27.840
+And we know that we have some because we can see that there are at least six comments for the first
+
+00:27.840 --> 00:31.390
+blog post which happens to have ideas of two.
+
+00:31.530 --> 00:37.830
+So it will all depend on your actual database and how you insert that this blog post.
+
+00:37.830 --> 00:45.240
+So mind that you really have to use the ideas that you have inside the database and you can easily check
+
+00:45.240 --> 00:51.870
+that out using BHP my admin or any other client that you are using.
+
+00:51.870 --> 00:56.430
+So now let's go back to the Visual Studio code and open the terminal.
+
+00:56.430 --> 00:57.750
+You can use the shortcut.
+
+00:57.780 --> 01:02.850
+You can see on the screen and let's enlarge it using this button.
+
+01:02.850 --> 01:09.780
+So we will run thinker to see if how we wanted to do it actually works.
+
+01:09.780 --> 01:19.990
+So we can fetch a blog post with the comments using that with static methods and we specify what relation
+
+01:19.990 --> 01:22.180
+do we want and it's comments.
+
+01:22.180 --> 01:31.360
+If you remember that the blog post actually has this relation so it's defined here comments and then
+
+01:31.440 --> 01:37.370
+let's open the post controller and now let's check out how we actually fetch this blog post.
+
+01:37.370 --> 01:46.400
+So in this case we use the find or fail static method which if you remember is trying to fetch a blog
+
+01:46.400 --> 01:50.830
+post or any other model using the specified I.D..
+
+01:51.050 --> 01:59.720
+But if it won't find this model in the database it will just read the redirect you to the 404 not found
+
+01:59.930 --> 02:03.770
+page so we can actually use that.
+
+02:03.800 --> 02:10.700
+So we can try to fetch the blog post together with comments so we won't have to make another query when
+
+02:10.700 --> 02:19.220
+we will actually be displaying these comments on their blog posts view and call find or fail.
+
+02:19.400 --> 02:26.010
+So let's try to fetch a blog post that actually has comments in our case it's blog post with I.T. too
+
+02:26.060 --> 02:29.460
+might be different on your machine so check that out.
+
+02:30.110 --> 02:38.940
+Find out failed to and voila you can see that we have the blog post fetched and actually it immediately
+
+02:38.940 --> 02:41.220
+has fetch the comments relation.
+
+02:41.220 --> 02:45.390
+So we have all the comments and it's all done at once.
+
+02:45.810 --> 02:48.420
+So we will actually implement that.
+
+02:48.480 --> 02:52.020
+So let's modify this show method
+
+02:54.730 --> 03:03.270
+so we are fetching the blog post with comments and then using find or fail to actually get it from the
+
+03:03.270 --> 03:05.490
+database.
+
+03:05.490 --> 03:13.920
+Now let's go to our viewer so views are inside their resources views posts folder specifically for our
+
+03:13.920 --> 03:22.410
+posts and we have that inside our show show blade BHP that's our template to display our particular
+
+03:22.410 --> 03:23.740
+blog post.
+
+03:23.740 --> 03:32.490
+Now let's also take a quick look at the index template where we use this for else directive to iterate
+
+03:32.580 --> 03:38.690
+over all the elements from the collection and additionally to display a message.
+
+03:38.850 --> 03:45.780
+When it was empty because it might happen that there are no comments yet added for our particular blog
+
+03:45.780 --> 03:48.830
+post.
+
+03:48.840 --> 03:50.830
+OK so let's start doing that.
+
+03:50.840 --> 03:58.680
+So we should probably start with a header saying that there are comments.
+
+03:58.830 --> 04:00.080
+Now let's take a look.
+
+04:00.150 --> 04:02.610
+If that still works so we have this header
+
+04:05.500 --> 04:14.630
+and then we'll use our directive for LS and since we have fetch the comments together with our blog
+
+04:14.630 --> 04:24.260
+post we can immediately use comments property which already has the collection preloaded so we use for
+
+04:24.260 --> 04:28.250
+each post comments us comment.
+
+04:28.250 --> 04:31.820
+And here will echo Holder comments.
+
+04:31.820 --> 04:41.250
+But if this would be empty we can echo some additional message like no comments yet
+
+04:45.020 --> 04:46.770
+and let's close this using.
+
+04:46.770 --> 04:54.950
+And for Ellis now when we actually have some comments we need to display them.
+
+04:55.020 --> 04:57.170
+So let's use paragraphs for that
+
+05:03.410 --> 05:08.100
+and now this would be very simple since our comment only has content.
+
+05:08.240 --> 05:14.630
+Let's display it and we can additionally display that date where this was added.
+
+05:15.500 --> 05:23.270
+So comment create it out mind that we are just using the standard time stamps that we get added to all
+
+05:23.270 --> 05:32.270
+of our models and now we'll use the same method of the carbon object which is always used as the date
+
+05:32.630 --> 05:42.410
+for our models and we'll use this nice diff for humans method to display this as how much time has passed
+
+05:42.410 --> 05:46.130
+since that comment was added.
+
+05:46.130 --> 05:51.210
+Okay let's save the changes and now see if we can see a list of all the comments.
+
+05:51.230 --> 06:00.000
+Refresh this page and we have that so we have a list of all the comments with the content that was added
+
+06:00.000 --> 06:00.380
+to it.
+
+06:00.840 --> 06:09.150
+So if it if it's not really readable and it doesn't look like it is we can additionally add the date
+
+06:09.270 --> 06:11.390
+to a second paragraph.
+
+06:11.700 --> 06:14.210
+So let's cut and paste it here.
+
+06:17.800 --> 06:26.910
+And since we are already using Bootstrap we can use this class text method which will make this text
+
+06:28.210 --> 06:32.510
+Gray.
+
+06:32.530 --> 06:34.570
+Now it looks a little bit better.
+
+06:34.930 --> 06:37.990
+So now you should be much more readable.
+
+06:37.990 --> 06:41.760
+Let's also check other blog posts and yes it is working.
+
+06:42.340 --> 06:48.010
+And also for the blog post that do not have any comments yet we get this message.
+
+06:48.010 --> 06:49.630
+No comments yet.

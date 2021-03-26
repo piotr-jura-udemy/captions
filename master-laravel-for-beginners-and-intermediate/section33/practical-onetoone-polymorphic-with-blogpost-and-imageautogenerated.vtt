@@ -1,0 +1,397 @@
+WEBVTT
+
+00:00.830 --> 00:09.330
+Now let's finally modify the user controller update action to actually modify the user's avatar so we
+
+00:09.330 --> 00:18.260
+will associate our new image using one to one polymorphic relationship with a particular user.
+
+00:18.260 --> 00:25.610
+So before we do that let's go back to the post controller store action or the update action and let's
+
+00:25.610 --> 00:32.930
+see that we actually use our specific request object so the input is being validated before we even
+
+00:32.930 --> 00:34.340
+get to this action.
+
+00:34.340 --> 00:44.150
+So we we can also optionally validate the input inside the action but we have this store post request
+
+00:44.240 --> 00:49.030
+class and we can make the same for the user controller.
+
+00:49.040 --> 00:49.900
+So let's do that.
+
+00:49.900 --> 00:54.910
+Peach B artisan make request.
+
+00:55.010 --> 00:58.520
+This is actually update user
+
+01:01.260 --> 01:06.660
+we can call it update user because we do not really have any user creation.
+
+01:06.660 --> 01:18.860
+This is handled by registering so modify this to true and now inside the rules will specify some rules
+
+01:18.860 --> 01:28.170
+for the Avatar field so we'll reuse what we actually have inside the store post.
+
+01:28.210 --> 01:33.990
+Now we just need to rename this as the field as we know is called Avatar.
+
+01:34.060 --> 01:38.870
+So this has to be an image of those specific types.
+
+01:39.400 --> 01:42.890
+The maximum file size is 1 megabyte.
+
+01:43.210 --> 01:49.910
+But since I've said we want this image to be exactly with exact width and hate.
+
+01:49.930 --> 01:57.260
+Let's specify them so with has to be exactly hundreds 28.
+
+01:57.970 --> 02:04.540
+And also the hate has to be exactly hundred twenty eight.
+
+02:04.550 --> 02:13.100
+Now inside the user controller instead of passing this request object using the request class we use
+
+02:13.670 --> 02:20.840
+update user notice that we need this class to be imported.
+
+02:27.190 --> 02:29.590
+Now let's implement the actual logic
+
+02:32.330 --> 02:43.850
+so we do what we did inside the post controller so we first check if the request contains a file and
+
+02:43.850 --> 02:46.360
+the file should be inside the avatar field.
+
+02:46.370 --> 02:49.920
+Only then we'll try to update it.
+
+02:50.000 --> 02:53.060
+Now we have to store that path.
+
+02:53.060 --> 02:59.410
+So we do request file the field name which is Avatar.
+
+03:00.530 --> 03:11.150
+And we use the storage by simply using this convenient store method to just store this file inside avatars
+
+03:11.270 --> 03:12.140
+folder.
+
+03:12.140 --> 03:18.840
+So we are doing exactly the same thing as we did with blog post thumbnail images.
+
+03:19.040 --> 03:22.810
+So the name of the file will be ultimately generated.
+
+03:23.050 --> 03:31.040
+That extension would be also ultimately added to the file name based on the mind type of this file.
+
+03:31.040 --> 03:34.110
+It will use the public disk by default.
+
+03:34.490 --> 03:39.160
+But here we store those images inside the thumbnails folder.
+
+03:39.170 --> 03:42.980
+Now we'll do that inside the avatars folder.
+
+03:44.420 --> 03:44.750
+Ok.
+
+03:44.790 --> 03:50.330
+So the next step is to verify if the user.
+
+03:50.510 --> 03:54.200
+We already have the model because of the route model bending.
+
+03:55.220 --> 04:06.320
+If the user image is set because this means we have previously added an image to this user model in
+
+04:06.320 --> 04:16.230
+those instances we just modify that path to the new one and we save changes to the image.
+
+04:16.770 --> 04:17.520
+Otherwise
+
+04:20.500 --> 04:23.260
+we do user image.
+
+04:23.260 --> 04:28.880
+So this is our new relation 1 1 2 1 polymorphic relationship on the user.
+
+04:29.110 --> 04:38.770
+And this is how you save that one to one relation either polymorphic or not so we call save and us before
+
+04:39.710 --> 04:42.970
+we will call make on the image model.
+
+04:42.980 --> 04:45.620
+Also notice that import that was added
+
+04:49.260 --> 05:03.980
+so we do make we only specified that path but by mass assignment to be path and basically you can also
+
+05:03.980 --> 05:12.620
+create just our new image instance and assign the path as you would assign it to an object properties
+
+05:12.620 --> 05:16.550
+something like this you can do image and then image
+
+05:20.810 --> 05:28.640
+as we did above but I prefer this this convention because it makes code shorter.
+
+05:28.700 --> 05:29.840
+So basically.
+
+05:30.170 --> 05:36.380
+Well if I have to write two lines and this is clear enough what this is doing I just prefer to use a
+
+05:36.380 --> 05:40.530
+one liner.
+
+05:40.550 --> 05:47.960
+Now this is basically all this is all of our logic and well we should see if this has actually worked.
+
+05:47.960 --> 05:57.500
+But before we do that we have to modify the views for for when we see the form for updating user avatar.
+
+05:57.560 --> 05:59.620
+And when we display the user profile.
+
+05:59.810 --> 06:06.830
+So this image has to be displayed there so we can see the changes that have actually worked or not.
+
+06:06.860 --> 06:07.920
+So let's do that.
+
+06:10.000 --> 06:14.450
+So let's go to the views folder inside resources views.
+
+06:14.510 --> 06:17.330
+Users first let's open the edit.
+
+06:17.330 --> 06:18.730
+Blade BHP.
+
+06:19.250 --> 06:22.460
+This is our image.
+
+06:22.460 --> 06:32.740
+Now let's modify the SLC attribute of this image now we'll first check if the image is actually assigned
+
+06:32.770 --> 06:44.170
+to the user if it is we'll call user image your URL method which is defined on the image model.
+
+06:44.170 --> 06:46.720
+And this will generate the proper you URL.
+
+06:47.410 --> 06:53.760
+Otherwise we will just leave it as empty so it won't look fine without image associated.
+
+06:53.770 --> 06:56.550
+We can handle that later.
+
+06:56.560 --> 06:59.920
+Now let's just copy this to the show template to
+
+07:03.810 --> 07:04.890
+reformat
+
+07:07.920 --> 07:11.710
+now we are ready to verify if this actually works.
+
+07:11.850 --> 07:19.590
+But before we do we need some profile images and we need some place to get them from so we can try uploading
+
+07:19.620 --> 07:23.880
+an image which is a hundred twenty eight by 128 pixels.
+
+07:23.880 --> 07:27.470
+But I know you might have issues finding that image.
+
+07:27.630 --> 07:30.270
+So not to worry too much about that.
+
+07:30.270 --> 07:37.170
+There is this great site diverse UI where you can actually download some profile images to use them
+
+07:37.200 --> 07:39.270
+on your mockups on when you are testing.
+
+07:39.270 --> 07:41.560
+For example you have Michio Kaku here.
+
+07:41.730 --> 07:43.990
+So let's just you know select some.
+
+07:44.010 --> 07:52.720
+Then you can click select that it will download them all in a file and then you can just use them.
+
+07:52.830 --> 07:56.240
+And here you can see we have specified the size that we want.
+
+07:56.370 --> 07:59.330
+That will pass our validation rules.
+
+07:59.490 --> 08:05.100
+So go ahead download some profit profile images I've already have some.
+
+08:05.970 --> 08:12.210
+So before we actually create a link to user editing I am authenticated as John Doe which happens to
+
+08:12.210 --> 08:16.690
+have an idea of one without an image.
+
+08:16.710 --> 08:21.890
+Now I will just directly go to the URL for editing this profile.
+
+08:22.140 --> 08:27.100
+And here we see the form so not these that we currently ignore the name changing.
+
+08:27.180 --> 08:36.350
+So nothing will happen with this but let's upload image press safe changes and actually.
+
+08:36.710 --> 08:45.880
+Well I forgot to do one more thing which is to do redirect so let's do that right now.
+
+08:49.610 --> 08:58.250
+So I have to return redirect response using this helper function but now instead of directly storing
+
+08:58.250 --> 09:06.350
+our flash message like we did here using request session flash what you can also alternatively do is
+
+09:06.820 --> 09:13.900
+the redirect will actually return our response object which has this method where you can use with and
+
+09:14.010 --> 09:22.580
+something to actually add something to the response so you can do with status which will add a flash
+
+09:22.580 --> 09:25.640
+message with the key status.
+
+09:25.650 --> 09:28.380
+So essentially this will do exactly the same.
+
+09:28.380 --> 09:42.420
+What we are doing in this line with status and let's say profile image was updated.
+
+09:42.550 --> 09:49.110
+Now if I will send this again method to with status does not exist.
+
+09:51.690 --> 09:54.320
+So actually I made a mistake.
+
+09:54.330 --> 09:59.610
+So not just a return redirect but we also have to call back
+
+10:03.240 --> 10:05.890
+and then we can call with status.
+
+10:05.940 --> 10:15.430
+So let's save the gingers again and refresh and you can see that I now have a profile picture if you
+
+10:15.430 --> 10:21.430
+will visit the John Doe profile Well there was his name and the profile picture.
+
+10:21.490 --> 10:22.840
+Now let's try that again.
+
+10:22.870 --> 10:29.340
+So we have John Doe type that edit the URL if I tried to upload something else.
+
+10:29.340 --> 10:38.620
+Well there are some other things we have to do so let's go to the edit blade BHP and maybe below the
+
+10:38.710 --> 10:46.210
+submitting meeting button or maybe above it will add the errors components or errors and errors so we
+
+10:46.210 --> 10:49.080
+can actually see validation errors.
+
+10:49.150 --> 10:56.880
+Now I will try to upload something that has a different size you can see that our image has invalid
+
+10:56.880 --> 11:01.310
+dimensions if we will try to modify it to something else.
+
+11:01.380 --> 11:03.670
+That's another image I already had.
+
+11:03.810 --> 11:07.980
+We see the flash message image is being changed.
+
+11:08.100 --> 11:10.290
+It is visible under a profile.
+
+11:10.410 --> 11:13.670
+And now let's go to the database.
+
+11:13.910 --> 11:21.320
+You can see that only one item was inserted because I am also still modifying the same actual image.
+
+11:21.320 --> 11:24.620
+Instance there is the outer generated path
+
+11:28.290 --> 11:31.120
+so we can see it is avatars.
+
+11:31.320 --> 11:38.610
+The outer generated name and the jpg extension that was added and also here immeasurable type.
+
+11:38.610 --> 11:45.570
+The first one has blog post second one the user I.D. and also this is the actual user I.D. of John Doe
+
+11:45.600 --> 11:47.040
+which is one.
+
+11:47.040 --> 11:49.890
+So everything works perfectly.
+
+11:49.890 --> 11:53.430
+Now finally let's also go to the storage.
+
+11:53.790 --> 11:55.670
+The other folder public.
+
+11:57.150 --> 12:01.220
+And here we can see the new avatars folder that was created for us.
+
+12:01.260 --> 12:08.470
+So we have avatars and thumbnails and notice that we didn't have to do anything with that public folder.
+
+12:08.970 --> 12:15.990
+And this is because we have a similar thing to this storage folder to storage public inside our public
+
+12:15.990 --> 12:20.920
+folder so here you can see we have the same files.
+
+12:21.040 --> 12:23.450
+We then have to modify anything.
+
+12:23.560 --> 12:30.700
+So now we have just implemented one to one polymorphic relationship with an example of an image that
+
+12:30.820 --> 12:36.400
+in the same table can hold a relation for both blog posts and images.
+
+12:36.400 --> 12:43.480
+So you can always use that if you have some well kind of information that you would like to store which
+
+12:43.990 --> 12:51.230
+doesn't really make sense to create two models that will basically do the same thing as we did here.
+
+12:51.250 --> 12:57.160
+It only has to store a path so it wouldn't make sense to create two tables.
+
+12:57.160 --> 13:01.930
+And this is one of the use case examples of the polymorphic relationships.

@@ -1,0 +1,175 @@
+WEBVTT
+
+00:00.780 --> 00:08.260
+So in the last lecture you've seen how we can hide certain fields from being returned back as a Jason.
+
+00:08.880 --> 00:13.080
+And now let's see how we can also include the relations.
+
+00:13.080 --> 00:21.690
+So what I mean by that is currently we only have our user I.D. returned but that might not be very useful
+
+00:21.710 --> 00:29.550
+to then make another query or another request for a particular user to get the user name to display
+
+00:29.580 --> 00:30.500
+on a comment.
+
+00:31.260 --> 00:37.140
+So instead of the user I.D. You might want the user I.D. and the user name.
+
+00:38.040 --> 00:39.960
+So let's see how we can do that.
+
+00:40.560 --> 00:46.630
+So now by using the comments field we return it as a collection.
+
+00:46.680 --> 00:53.600
+So if we all use the method now we have a query so we can add something to it.
+
+00:53.910 --> 01:00.060
+And we know that there is there with method which allows us to include certain relation.
+
+01:00.060 --> 01:02.160
+And in this case this is user.
+
+01:03.000 --> 01:12.590
+So when you have a query as we have right now you have to always call get on it now save the changes
+
+01:12.590 --> 01:17.500
+and let's go back to Bozeman and see what do we have.
+
+01:17.510 --> 01:23.020
+So now we not only have the user I.D. but we also have the user itself.
+
+01:23.690 --> 01:31.420
+But the problem is that we have the I.D. the name email but also thinks that you probably would not
+
+01:31.420 --> 01:34.650
+like to show anyone like email verified.
+
+01:34.660 --> 01:41.940
+Art is the user I mean or even his preferences that are stored on the model.
+
+01:41.980 --> 01:49.390
+So first we first think we would like to do here is probably to hide the user I.D. as we do not wants
+
+01:49.390 --> 01:54.300
+to make this information display twice.
+
+01:54.490 --> 02:01.760
+So on the comment you would hide the user I.D. save the changes.
+
+02:01.930 --> 02:03.950
+And now let's see what we have.
+
+02:03.970 --> 02:10.600
+So now we don't have the user I.D. but still we got too much information about the user.
+
+02:11.710 --> 02:20.240
+So we have to go to their user model and add those fields here so we do not want to show the user email
+
+02:20.530 --> 02:24.020
+us this is private information.
+
+02:24.250 --> 02:25.540
+Definitely not this.
+
+02:25.540 --> 02:30.380
+So we are not showing when the user has verified an email.
+
+02:30.550 --> 02:37.510
+Also when the user was created or updated it's not even necessary in this case as we are just showing
+
+02:38.010 --> 02:43.350
+comment and also this information definitely shouldn't be shown
+
+02:46.200 --> 02:48.410
+so let's also hide local.
+
+02:49.370 --> 02:49.860
+OK.
+
+02:49.920 --> 02:53.490
+Now save the changes and let's see what we have right now.
+
+02:54.920 --> 02:57.350
+So now this looks a little bit better.
+
+02:57.350 --> 03:03.520
+So we have a list of comments and then the information about the user.
+
+03:03.550 --> 03:10.830
+All the necessary information is the I.D. so we can create a link to that user profile and we can also
+
+03:10.830 --> 03:13.950
+display this user's name.
+
+03:13.950 --> 03:21.720
+So this might seem like a great way to specify how your models should be serialized but now let's imagine
+
+03:21.720 --> 03:30.870
+that you have a different situation in which you actually want to show different data for example of
+
+03:30.870 --> 03:36.860
+a user or a comment depending on the end point that is being called.
+
+03:36.990 --> 03:40.030
+So this might be a good example.
+
+03:40.020 --> 03:48.070
+So in case of comments we only need the user I.D. and the user name and this is the enough information
+
+03:48.070 --> 03:53.200
+for a comment but from end point that was show our user profile.
+
+03:53.230 --> 04:01.180
+If this would also be fetch the byte API let's just imagine that it is you might want some more information
+
+04:01.180 --> 04:10.090
+about the user maybe an email can be displayed if the user allows that and wants that and now you have
+
+04:10.090 --> 04:16.720
+a problem because suddenly you have a fixed place where you define to what should be serialized and
+
+04:16.720 --> 04:17.970
+what not.
+
+04:18.250 --> 04:18.850
+And then.
+
+04:18.850 --> 04:24.760
+Well it's we have no way to modify that depending on the places where we need that.
+
+04:24.790 --> 04:35.440
+So in my mind that the hidden property is always deciding how this model would be converted to array
+
+04:35.620 --> 04:36.890
+and then to Jason.
+
+04:36.920 --> 04:45.520
+Possibly but sometimes you are converting a model to Jason not only because you want this to be displayed
+
+04:45.550 --> 04:54.010
+publicly on an API but you might story it somewhere let's say in your internal database like Redis or
+
+04:54.730 --> 05:02.380
+let's say QS for whatever reason and then suddenly you lose the benefit of easily converting all your
+
+05:02.380 --> 05:10.540
+model data to an array because you have ignored certain fields or in this case of a comment you have
+
+05:10.540 --> 05:16.750
+ignored this fields that might be useful internally by your application where you don't display this
+
+05:16.750 --> 05:27.520
+data publicly and there is a way to make this better in Lavell and this is the resource objects which
+
+05:27.520 --> 05:35.160
+you can create while you can create many resource objects for our specific model or class and then those
+
+05:35.170 --> 05:42.760
+resource classes will specify individually what should be serialized for a given model and we'll cover
+
+05:42.760 --> 05:44.350
+that in the next lecture.

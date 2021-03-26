@@ -1,0 +1,265 @@
+WEBVTT
+
+00:01.200 --> 00:06.830
+In the post controller we have a simple counter that counts the users that have visited the page at
+
+00:06.840 --> 00:09.540
+certain time namely in the last minute.
+
+00:10.170 --> 00:16.530
+So let's imagine that we might want to reuse that code for example in the user controller to also show
+
+00:16.530 --> 00:19.920
+how many people are currently seeing our profile.
+
+00:19.920 --> 00:27.450
+So this now makes it very hard to make it reusable as this code is directly inside the post controller.
+
+00:27.450 --> 00:33.300
+Now what we can do with this is we can create a specific service a plain peach B class that can contain
+
+00:33.300 --> 00:39.900
+this functionality which we then can reuse in both of those controllers and possibly even more in the
+
+00:39.900 --> 00:40.530
+future.
+
+00:41.760 --> 00:47.610
+So what we can do with that is we can create a new service so let's go ahead and create a new namespace
+
+00:47.640 --> 00:56.370
+inside the app folder and call it services and then inside this namespace create a new counter BHP file
+
+00:58.070 --> 01:05.760
+so let's give it BGP starting tag and declare a class code counter.
+
+01:05.880 --> 01:07.730
+Of course we also have the namespace.
+
+01:07.740 --> 01:15.390
+So this would be namespace up slash services.
+
+01:15.480 --> 01:18.330
+Now let's think what this counter does need.
+
+01:18.500 --> 01:25.340
+So its basic purpose is to read some data from the cache under our specific key.
+
+01:25.340 --> 01:31.400
+So it needs a unique key which we have here as a blog post idea and in the user we might need something
+
+01:31.400 --> 01:31.760
+else.
+
+01:31.760 --> 01:35.000
+So definitely this needs some methods.
+
+01:35.000 --> 01:42.370
+So the method could be public function increment as we wants to increment the counter and then return
+
+01:42.380 --> 01:45.640
+its value so it accepts a string.
+
+01:46.520 --> 01:47.000
+Key
+
+01:50.020 --> 01:57.880
+and actually since we sometimes wants to use tags it might accept some tax to make it easier to flash
+
+01:57.880 --> 01:58.990
+the cash later.
+
+01:58.990 --> 02:05.050
+So another parameter is tags which might be optional so we set it by default to law.
+
+02:05.380 --> 02:12.910
+And this increment method has to return an integer because we actually want the number of users on the
+
+02:12.910 --> 02:15.240
+page currently.
+
+02:15.370 --> 02:21.340
+Now what we can do is we can copy all this code from the post controller so let's do that now we can't
+
+02:21.340 --> 02:27.400
+even cut that and paste everything inside the increment method.
+
+02:27.580 --> 02:31.560
+What we only need to do is to import the cash for sale here right now.
+
+02:31.690 --> 02:33.400
+So make sure you have this import.
+
+02:33.520 --> 02:42.760
+Add that up and now instead of having this blog post I.D. stored inside our service let's actually use
+
+02:42.760 --> 02:43.550
+that here.
+
+02:43.550 --> 02:52.210
+So now what we will do is we can create a new counter class directly by just instantiating a new counter
+
+02:52.630 --> 02:55.470
+from app services counter.
+
+02:55.710 --> 02:58.170
+Notice that you will need this import here.
+
+02:59.830 --> 03:09.410
+So let's go to the show method and now counter can call that incremental method which accepts a key
+
+03:09.980 --> 03:12.720
+so we can paste that blog post idea.
+
+03:12.770 --> 03:16.550
+That would be the key and also it accepts stock.
+
+03:16.560 --> 03:19.940
+So we want this to be blog post
+
+03:23.290 --> 03:23.800
+like that.
+
+03:24.530 --> 03:24.960
+OK.
+
+03:24.970 --> 03:31.990
+So now from our common class we can remove something so definitely the counter key is no more blog post
+
+03:31.990 --> 03:32.640
+idea.
+
+03:32.950 --> 03:38.810
+It has to depend on the past value so the past value is key.
+
+03:38.840 --> 03:48.360
+It's also the same in this case and also we should use tax but well let's leave it like that for a second
+
+03:48.390 --> 03:50.490
+because well this might also be optional.
+
+03:50.490 --> 03:51.810
+We'll get to that later.
+
+03:51.810 --> 03:55.600
+So we used just the blog post doc just for now.
+
+03:56.220 --> 03:56.520
+OK.
+
+03:56.550 --> 04:02.640
+Finally we of course have to return the current counter value which happens to sit inside this counter
+
+04:02.640 --> 04:12.700
+variable so after those changes now we can use the counter on post controller and user controller easily.
+
+04:12.730 --> 04:14.980
+So let's also add this to user controller.
+
+04:15.040 --> 04:19.900
+Let's create a new instance of the counter so new counter
+
+04:23.150 --> 04:26.250
+so let's make sure we have an import.
+
+04:26.470 --> 04:29.600
+Okay so scroll to the top see if you have this import.
+
+04:29.630 --> 04:36.890
+If not you need to it and to the view we can now pass the result of the increment.
+
+04:36.920 --> 04:43.880
+But specifically for our user profile so let's also call this view variable counter and called counter
+
+04:44.600 --> 04:45.910
+increment.
+
+04:45.950 --> 04:47.040
+The key would be.
+
+04:47.180 --> 04:50.210
+Now then let's say a user
+
+04:53.330 --> 04:54.470
+with a user I.D..
+
+04:54.470 --> 04:59.670
+So this is specific to a particular user account and we want to use tax.
+
+05:00.100 --> 05:07.940
+Now let's open the view by left clicking it with the Alt key and display our simple message of how many
+
+05:07.940 --> 05:20.380
+users are currently viewing this profile so currently viewed by counter other users.
+
+05:20.380 --> 05:28.840
+Now well let's close the paragraph and let's try to refresh this page so you can see in Spanish that
+
+05:28.870 --> 05:31.140
+this is now being viewed by one person.
+
+05:31.150 --> 05:37.990
+But if you will go to your own profile you can also see that it's being viewed by one person if you
+
+05:37.990 --> 05:40.720
+will open that in the new incognito window.
+
+05:40.720 --> 05:48.210
+Of course you have to log in first so it apparently works if you will go to the blog post.
+
+05:48.210 --> 05:50.910
+You can also see that the counter works.
+
+05:50.910 --> 05:53.520
+So what we have created is called a service.
+
+05:53.550 --> 05:59.850
+So we created a class that can perform some some operations for us and we can configure what it does
+
+05:59.850 --> 06:05.510
+and how he does it by providing a key as a string parameter and then optionally tags.
+
+06:05.520 --> 06:06.900
+We will get to that later.
+
+06:06.900 --> 06:09.780
+Don't worry about it right now.
+
+06:09.780 --> 06:10.530
+So the problem.
+
+06:10.560 --> 06:16.370
+The only problem we have is that every time we need the counter we created well explicitly.
+
+06:16.380 --> 06:23.730
+So we have to instantiate this class using new and well this might be a problem whenever we would like
+
+06:23.730 --> 06:26.430
+to make the counter more configurable.
+
+06:26.430 --> 06:31.470
+And also when the counter would also would need some dependencies on itself.
+
+06:32.340 --> 06:35.870
+So actually counter might need some other classes.
+
+06:35.880 --> 06:38.540
+Now it depends on the for sale.
+
+06:38.560 --> 06:40.920
+So it's easier to use for seats.
+
+06:40.920 --> 06:48.170
+We do not have to declare what counter needs we do not have to add a constructor pass anything to it.
+
+06:48.390 --> 06:51.960
+It is just fetching what it needs by itself.
+
+06:51.960 --> 06:57.960
+But in the next lecture we'll actually see how we can pass some parameters to the counter and reuse
+
+06:57.960 --> 07:04.160
+it having the same settings and the same other dependencies by using the dependency injection.
+
+07:04.200 --> 07:06.450
+And I think called a service container.

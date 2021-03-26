@@ -1,0 +1,316 @@
+WEBVTT
+
+00:00.920 --> 00:07.790
+The purpose of this lecture is to show you how you can create something like this so you can add a prefix
+
+00:07.880 --> 00:16.520
+of the desired language of the user to the URL without modifying the lateral application itself and
+
+00:16.700 --> 00:20.510
+modifying any roots and their definition in Lavell.
+
+00:20.570 --> 00:28.100
+So what we wanted to achieve is that if there is a language prefix before all of our normal routes like
+
+00:28.100 --> 00:32.860
+posts there home page specific post or user profile.
+
+00:33.080 --> 00:40.850
+This is redirecting to the actual travel route but with additional query parameter specifying what is
+
+00:40.850 --> 00:44.210
+the actual desired locale of the user.
+
+00:44.240 --> 00:47.360
+So what language does he wants to see.
+
+00:47.360 --> 00:54.230
+And that's why we initially added that inside our local middleware that we are checking for.
+
+00:54.230 --> 01:03.120
+This query parameter the local and then setting it into the session if it is present now going back
+
+01:03.120 --> 01:05.940
+to the DOT HD access file.
+
+01:05.940 --> 01:13.110
+So this file contains some additional configuration to the Apache web server and this will only apply
+
+01:13.110 --> 01:16.920
+to the directory when this fire file is being found.
+
+01:17.310 --> 01:24.900
+And since this is our public directory where we have our index BHP file to which older traffic is directed
+
+01:24.990 --> 01:34.380
+in light of all application it basically applies to our whole lot of application.
+
+01:34.410 --> 01:40.090
+Now this file came as it is with the brand new lot of our setup that we've created.
+
+01:40.170 --> 01:48.360
+So we haven't modified anything in here and I will also want go into details of what all of those options
+
+01:48.420 --> 01:48.870
+do.
+
+01:49.500 --> 01:56.760
+So this is a quite complicated topic and well it's something that we could talk about for hours on how
+
+01:56.760 --> 02:03.800
+to configure Apache but just to let you know you can read about that if you are interested.
+
+02:03.810 --> 02:10.740
+So there are those free links that I will include to this lecture which explain how to use the mode
+
+02:10.800 --> 02:14.230
+rewrite module of Apache.
+
+02:14.260 --> 02:21.150
+There are a couple of examples in this particular page so we might read it to see what you can achieve
+
+02:21.150 --> 02:23.490
+with that and well how it works.
+
+02:23.520 --> 02:26.010
+What's the syntax.
+
+02:26.030 --> 02:34.310
+Now we will also use regular expressions to match the actual you URL with that language like this and
+
+02:34.400 --> 02:41.330
+it might be useful to take a look at this page and read about regular expressions in Apache configuration
+
+02:41.330 --> 02:47.060
+file so we understand what of all those symbols will do and what they are for.
+
+02:47.060 --> 02:55.810
+I also want explained that you can just go to this link and read that in case you have any doubts now
+
+02:55.810 --> 02:57.200
+finally there is this.
+
+02:57.220 --> 03:04.930
+Well I would say biggest link word that a lot of information about their specific directives what options
+
+03:04.930 --> 03:11.010
+they have what variables can be passed and how to use them and what all of those symbols mean.
+
+03:11.110 --> 03:13.150
+What are those options for
+
+03:16.690 --> 03:23.170
+so you might have a better understanding of what's happening inside all of those specific rules.
+
+03:23.290 --> 03:25.470
+But now let's get to the point.
+
+03:25.480 --> 03:33.070
+So our change would actually be a one liner and what we want to achieve is what we want to create a
+
+03:33.070 --> 03:34.300
+redirect.
+
+03:34.300 --> 03:40.990
+If we find that there is a language prefix from the language that languages that we support we want
+
+03:40.990 --> 03:44.380
+to redirect that to the actual lot of route.
+
+03:44.470 --> 03:47.420
+But with the additional query parameter.
+
+03:47.500 --> 03:54.430
+So as I've said since this is our one liner we'll use the redirect March directive to redirect to the
+
+03:54.430 --> 03:55.940
+proper page.
+
+03:56.230 --> 03:59.400
+So there are two parts that we need to specify here.
+
+03:59.410 --> 04:05.530
+The first one is that you are L that has to be matched and we need to get some parameters from it namely
+
+04:05.890 --> 04:13.480
+the language that the user wants and then we'll redirect that to the new URL converting this language
+
+04:13.960 --> 04:17.430
+to a query parameter called local.
+
+04:17.440 --> 04:22.570
+So we'll be using regular expressions in this first argument.
+
+04:22.570 --> 04:28.510
+So we start with well beginning of the query string then we will create a group.
+
+04:28.510 --> 04:30.340
+So we need this parameter.
+
+04:30.370 --> 04:32.020
+So we need you need a group for it.
+
+04:32.050 --> 04:36.310
+So we can reference that later in this second argument.
+
+04:36.370 --> 04:47.090
+So this can be either English or German or Spanish and of course before it we need to match slash because
+
+04:47.090 --> 04:53.460
+well basically this whereas as you can see they really have to start with a slash.
+
+04:53.470 --> 04:59.790
+All right then next part is well there might be an additional slash after the language.
+
+04:59.870 --> 05:01.790
+So let's take a look at this example.
+
+05:01.790 --> 05:06.350
+So here there isn't any and this means just go to their home page.
+
+05:06.350 --> 05:14.880
+But in all other examples there is a slash after the language so we can match it optionally the question
+
+05:14.880 --> 05:21.540
+mark Matt means that the previous expression or while the previous literal text should be matched or
+
+05:21.540 --> 05:21.890
+not.
+
+05:21.920 --> 05:25.860
+So it doesn't really matter if it's matched or not.
+
+05:25.920 --> 05:32.410
+And now we have a second group which means that we will need this parameter for the rewrite.
+
+05:32.790 --> 05:37.590
+And this is basically everything which the DOT character is for so much.
+
+05:37.590 --> 05:39.100
+Any character.
+
+05:39.450 --> 05:45.870
+And then we are the quantity fire which means how many times we want to match this any character.
+
+05:46.230 --> 05:50.320
+And using this symbol it means match it zero or more times.
+
+05:50.330 --> 05:55.350
+So that might be an empty string or a string of length a hundred.
+
+05:56.520 --> 06:03.990
+So we see and close those two things in groups because we will have to reference that back in the second
+
+06:04.110 --> 06:04.840
+argument.
+
+06:04.860 --> 06:06.860
+Well also this year L is optional.
+
+06:06.870 --> 06:09.380
+So we need to ask this question mark.
+
+06:09.430 --> 06:15.240
+Slash is optional and then this one is also optional.
+
+06:15.240 --> 06:19.320
+Now what we redirect that to is a slash.
+
+06:19.320 --> 06:23.280
+Then we reference a group using a dollar sign and a number.
+
+06:23.280 --> 06:27.580
+So the groups are numbered from 1 2.
+
+06:27.600 --> 06:31.580
+And any additional groups will have the corresponding numbers.
+
+06:31.620 --> 06:38.970
+So we reference the actual you around the actual valid lot of value URL and then we just add a query
+
+06:38.970 --> 06:49.720
+parameter and this references the group one which happens to contain the language so using this read
+
+06:49.740 --> 06:56.890
+redirect March directive we will we will achieve exactly what you see in those examples here.
+
+06:56.940 --> 07:03.990
+So we have to match a slash then one of the supported languages then optionally another slash and then
+
+07:04.050 --> 07:11.190
+after that the remaining part of the URL which would actually match a valid URL that we have defined
+
+07:11.280 --> 07:14.100
+for our roots in the lateral application.
+
+07:15.090 --> 07:24.450
+So now you just need to save the changes and basically go to the browser open our new incognito window
+
+07:24.450 --> 07:31.470
+to make sure that your browser doesn't have anything cached it just might not pick out changes and let's
+
+07:31.470 --> 07:32.790
+try the first example.
+
+07:32.790 --> 07:41.400
+So a lot of older tests large the E and we expect the home page to be displayed in German so we can
+
+07:41.400 --> 07:41.880
+see that.
+
+07:41.910 --> 07:44.040
+Well this is the expected outcome.
+
+07:44.550 --> 07:50.310
+So we are being redirected to a lot of older test with this query parameter and since this parameter
+
+07:50.310 --> 07:57.870
+is now stored on this session when you click some additional links you do not really need to pass this
+
+07:57.870 --> 08:00.930
+parameter around this local parameter.
+
+08:00.930 --> 08:08.360
+You just stay in German unless you do something else like for example you might visit the lot of that
+
+08:08.390 --> 08:11.170
+test slash e s posts.
+
+08:11.610 --> 08:14.330
+So now we expect to see the blog post least.
+
+08:14.490 --> 08:21.940
+But the page should be in Spanish and it is you can see that now everything is in Spanish.
+
+08:21.970 --> 08:28.660
+And also when you follow those links the page stays in Spanish.
+
+08:28.660 --> 08:33.540
+Now obviously when we do not specify a language we would say we would get the default.
+
+08:33.540 --> 08:36.320
+So nothing changes in this particular case.
+
+08:36.330 --> 08:44.130
+But then if you would visit this page in New Top then well you will just get whatever you have configured
+
+08:45.690 --> 08:54.290
+inside the local middleware so this happens to be the fallback local so I hope this is understandable.
+
+08:54.290 --> 09:00.680
+This is a simple change and well it works only with the Apache because this file this HD access file
+
+09:00.710 --> 09:03.950
+is just specific to the Apache web server.
+
+09:03.950 --> 09:10.820
+And since this course read commands to use stamp Well I'm showing you the configuration for Apache but
+
+09:10.820 --> 09:18.260
+of course if you are using something else like engine X or the BJP built in server this won't work for
+
+09:18.260 --> 09:26.120
+you unfortunately so well I might add some additional links on how to do that in others servers later
+
+09:26.150 --> 09:32.420
+but for now we are just showing it how it works with the default set up for this course.

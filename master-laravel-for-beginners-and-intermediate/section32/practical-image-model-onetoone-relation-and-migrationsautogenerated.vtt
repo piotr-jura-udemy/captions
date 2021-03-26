@@ -1,0 +1,268 @@
+WEBVTT
+
+00:00.150 --> 00:07.380
+During the last couple of lectures we were using the store action of the post controller to dump some
+
+00:07.380 --> 00:15.220
+information about how the storage phosphate and generally uploading and handling files work in Lavell.
+
+00:15.240 --> 00:23.760
+So now we will focus on actually implementing our working file upload so we don't need all these dump
+
+00:23.760 --> 00:24.400
+methods.
+
+00:24.420 --> 00:31.940
+We can keep it simple so you can go ahead and remove all those lines.
+
+00:31.950 --> 00:39.270
+We also do not need that has fired a variable we can simply check inside the if statement if the fire
+
+00:39.270 --> 00:42.430
+was uploaded.
+
+00:42.440 --> 00:45.450
+We also have to remove this dye method.
+
+00:46.530 --> 00:55.710
+And basically what we will do is we'll use the simple simplest possible way to store the file so we
+
+00:55.710 --> 01:00.150
+will do that using the public disk which is default.
+
+01:01.230 --> 01:09.840
+And basically we will check if the file was uploaded and if it was we will store it using the larval
+
+01:09.840 --> 01:13.760
+name generating inside the thumbnails folder.
+
+01:15.450 --> 01:21.460
+So this method the store method will return the file name to be stored.
+
+01:22.770 --> 01:30.340
+So actually this will return a full path to the file which is a relative for the given disk now at this
+
+01:30.340 --> 01:30.660
+point.
+
+01:30.670 --> 01:36.250
+We will generate a new model using P2P artisan make model.
+
+01:36.250 --> 01:44.850
+We will call this model image and we want to generate it together with the migration securities.
+
+01:44.850 --> 01:53.740
+The new migration file called create images tables so let's open that and modify it a little bit.
+
+01:54.030 --> 01:59.580
+So we want the defaults but we also want the path column so.
+
+01:59.670 --> 02:02.280
+So this should be column of type String.
+
+02:02.880 --> 02:04.230
+It will be called path.
+
+02:04.440 --> 02:12.720
+So this is where we would store the path to the saved file but also in this case we would like relation
+
+02:14.130 --> 02:15.410
+to the blog post ideas.
+
+02:15.420 --> 02:19.140
+So we want to store it on the images table
+
+02:23.380 --> 02:31.750
+and we want it to be new level because not every not every blog posts should have an image.
+
+02:31.750 --> 02:34.650
+So now this column is called the blog post idea.
+
+02:34.660 --> 02:43.360
+We will later change it so that we will use the image model for different images assigned to different
+
+02:44.080 --> 02:44.840
+models.
+
+02:44.860 --> 02:50.800
+And this is called a polymorphic relationship but it's not yet time to do that.
+
+02:50.800 --> 02:55.880
+So now let's just proceed with adding a column specifically for the blog post.
+
+02:58.210 --> 03:03.420
+So in this case we obviously do not need any migration on the other side.
+
+03:03.430 --> 03:10.440
+So there is no need to add anything to blog post because the image holds the relation to the blog post
+
+03:10.780 --> 03:17.130
+which means the blog post is their own inside of this one to one relationship.
+
+03:17.170 --> 03:18.730
+Now inside the terminal.
+
+03:18.880 --> 03:19.260
+Right.
+
+03:19.270 --> 03:29.640
+BHP artisan migrate and now after adding those migrations we need to open those two models to define
+
+03:29.730 --> 03:30.950
+our relationship.
+
+03:30.960 --> 03:41.920
+So starting with an image first will add fuel property so we want to make puff mass a sign a a.
+
+03:41.970 --> 03:45.330
+And also the blog post idea.
+
+03:45.330 --> 03:55.760
+Now let's define the relation so we are the method called blog post and one to one relation would be
+
+03:56.300 --> 03:58.060
+belongs to us.
+
+03:58.070 --> 04:00.080
+Image belongs to a blog post.
+
+04:00.110 --> 04:07.330
+So we defined a model class name which is up blog post and on the other side.
+
+04:07.640 --> 04:12.230
+On the blog post model lets out the method image
+
+04:15.600 --> 04:28.630
+and this time it has has one so it has one up image OK so we have the database modified by creating
+
+04:28.640 --> 04:30.740
+new model together with migration.
+
+04:30.740 --> 04:37.330
+We have defined the relation one to one relation between blog post and image.
+
+04:37.400 --> 04:41.120
+So blog post is the owner of this relation.
+
+04:41.120 --> 04:43.260
+It holds the image.
+
+04:43.310 --> 04:50.540
+Notice that we haven't added a foreign key and this is because in future there will be a field which
+
+04:50.540 --> 04:52.780
+will relate to other models.
+
+04:52.790 --> 04:57.160
+So it can't have a foreign key to a specific table.
+
+04:57.200 --> 05:02.790
+We'll explain all that when we'll cover polymorphic relationships.
+
+05:02.840 --> 05:08.000
+Now we can close the terminal and go back to the post controller.
+
+05:08.210 --> 05:17.150
+So here when the file is uploaded we are storing it using the default disk which this does the store
+
+05:17.150 --> 05:18.350
+method.
+
+05:18.650 --> 05:23.130
+It's using the default public these to store the file inside where.
+
+05:23.480 --> 05:28.770
+Well of course the path for this disk is defined as this is using their local driver.
+
+05:28.970 --> 05:32.970
+So we should already know where this would be stored.
+
+05:32.990 --> 05:36.610
+So now we have to create a relation.
+
+05:36.680 --> 05:41.270
+So we already have a blog post because we have created it here.
+
+05:41.360 --> 05:45.230
+So create not only creates a model but also stores it.
+
+05:46.670 --> 05:49.940
+So now we can operate on the relation.
+
+05:49.940 --> 05:53.980
+And this is how you store a one to one relationship.
+
+05:54.050 --> 05:57.560
+So you use image method of the relation save.
+
+05:57.890 --> 06:01.550
+And here you should provide a new image model.
+
+06:01.550 --> 06:10.460
+So since we have defined some feasible fields on the image like Path and blog posts I.D. we can now
+
+06:13.850 --> 06:18.870
+call the image create and specify an array of fields.
+
+06:18.870 --> 06:27.200
+So this would immediately create and store new image and the image save will associate this new image
+
+06:27.230 --> 06:29.390
+with the blog post.
+
+06:29.390 --> 06:30.830
+So we have the path here
+
+06:34.280 --> 06:36.430
+well and basically that's it.
+
+06:36.440 --> 06:44.630
+After making those changes and saving them you should be able to store a new blog post and if you happen
+
+06:44.630 --> 06:52.250
+to upload an image with it it will also store the path to this image inside the separate images table
+
+06:52.730 --> 07:01.700
+and create a relation on the blog posts so then you can read this image you URL when you will be showing
+
+07:01.790 --> 07:02.720
+a blog post
+
+07:05.490 --> 07:08.100
+so let's check the database.
+
+07:08.100 --> 07:16.530
+So here is our empty images table and our blog posts tables so let's sorted by the most recent blog
+
+07:16.530 --> 07:21.060
+posts and test that out so you have to be authenticated.
+
+07:21.090 --> 07:31.260
+Then you have to go to adding a blog post form and let us select select image press create.
+
+07:31.260 --> 07:35.070
+So we are not displaying the imagery yet will cover that in the next lecture.
+
+07:35.070 --> 07:36.960
+But now let's check the database
+
+07:41.430 --> 07:44.890
+so here's our new blog post with the idea.
+
+07:44.900 --> 07:54.340
+Fifty one the most recent one but on the images table we have path to the image.
+
+07:54.410 --> 08:01.620
+Our blog post idea specified and then if you will go to the folder inside your project directory storage
+
+08:02.490 --> 08:06.870
+up public you will find this image to be stored.
+
+08:06.870 --> 08:13.470
+Of course don't worry about how to delete this file from disk when that image should be disassociated
+
+08:13.470 --> 08:19.020
+or removed or when someone would like to edit a blog post and select another file.
+
+08:19.020 --> 08:22.410
+We will all handle that in the next lectures.

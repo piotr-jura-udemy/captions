@@ -1,0 +1,301 @@
+WEBVTT
+
+00:01.080 --> 00:04.390
+In this lecture we will work with the larval views.
+
+00:04.590 --> 00:12.120
+So first thing we'll do is we will create our forum for adding new comments to our blog post only for
+
+00:12.120 --> 00:14.360
+the authenticated users.
+
+00:14.370 --> 00:15.450
+That's nothing new.
+
+00:15.450 --> 00:23.140
+We did that before but also we will refactor existing code using what we have learned so far.
+
+00:23.160 --> 00:26.740
+So we created this forum for adding blog posts.
+
+00:26.760 --> 00:34.020
+Way before before we knew a lot of stuff that we now know and if you will try to submit it with invalid
+
+00:34.020 --> 00:41.580
+data you'll see some error messages that are not really visually appealing and will refactor that to
+
+00:41.580 --> 00:50.520
+create a common errors component which will then use on our new form for adding comments and we'll also
+
+00:50.520 --> 00:58.680
+reuse that here when we display the errors when the data for adding a blog post is somehow invalid.
+
+00:58.740 --> 01:07.040
+So let's go ahead and start working So first we'll start with adding a new form for adding the blog
+
+01:07.040 --> 01:16.050
+posts so let's go to the Visual Studio code and what we see here is our create form so we'll copy some
+
+01:16.050 --> 01:21.600
+of the code not to bother you with typing especially that those is this is nothing new.
+
+01:21.600 --> 01:29.460
+You did that before and it won't change much but also will refactor this fragment to make it a reusable
+
+01:29.460 --> 01:34.470
+component that will display errors in a more appealing manner.
+
+01:34.470 --> 01:40.500
+OK so let's go ahead now inside our resources views folder.
+
+01:40.500 --> 01:44.120
+We do not have our comments folder so let's create it.
+
+01:44.120 --> 01:44.460
+Now
+
+01:47.700 --> 01:53.290
+so this is our new view namespace for all the templates related to comments.
+
+01:53.430 --> 02:00.570
+Now since comments are only part of a blog post for now we do not have a case where they should be displayed
+
+02:00.570 --> 02:07.860
+separately will just create start with creating a partial component we'll call it underscore a forum
+
+02:08.250 --> 02:17.430
+blade BHP and this forum will be put inside the individual blog post page on the show blade BHP template
+
+02:17.460 --> 02:20.470
+of the posts to display a forum.
+
+02:20.490 --> 02:23.140
+Only four out integrated users.
+
+02:23.490 --> 02:28.680
+So since this is a party all component parts are a partial partial view.
+
+02:28.680 --> 02:36.800
+It doesn't need to extend and layout we can just copy this code from the create template to have our
+
+02:36.900 --> 02:40.010
+bases for our forum structure.
+
+02:40.050 --> 02:47.910
+Now we don't need this include but we definitely need to order CSR Rev token which would create our
+
+02:47.910 --> 02:51.850
+hidden input field with their CSR f token.
+
+02:51.870 --> 02:58.830
+Now we do not yet have a controller so no route would be specified but we can use the button so we can
+
+02:58.830 --> 03:03.750
+say at comment okay.
+
+03:03.790 --> 03:16.040
+Now we will also need a field to type in the actual comment so let's reuse what we have inside this
+
+03:16.040 --> 03:16.740
+forum.
+
+03:16.970 --> 03:24.660
+But since we want to allow some longer text let's modify this to text area.
+
+03:25.040 --> 03:28.340
+Now we also don't need a default value.
+
+03:28.880 --> 03:33.440
+And let's close this element now inside the comment model.
+
+03:33.440 --> 03:40.190
+We also have a field called content so we can reuse that but we want to use the label at all.
+
+03:40.190 --> 03:44.870
+So let's remove this from the component.
+
+03:44.870 --> 03:49.770
+Now I've said that comments could only be posted by authenticated users.
+
+03:49.850 --> 03:55.210
+So let's use the health directive.
+
+03:55.530 --> 04:03.710
+So if the user is authenticated he would only then see this forum otherwise he might see something else.
+
+04:03.740 --> 04:13.040
+But first let's wrap all of this partial component inside a DPH that will have some marking at the bottom
+
+04:13.190 --> 04:18.260
+end marking out the top let's say marking too.
+
+04:18.290 --> 04:18.820
+All right.
+
+04:18.830 --> 04:26.570
+Now let us in then that and yeah well if user is not authenticated he might see some text that well
+
+04:26.600 --> 04:36.970
+he should do something like authenticate so we can do a sign in to post comments and this could even
+
+04:36.970 --> 04:37.720
+be a link
+
+04:41.760 --> 04:45.510
+so that would be a link to our sign root.
+
+04:45.570 --> 04:54.090
+Now we can use the root helper and if you remember it or not the route to logging is called logging.
+
+04:54.090 --> 04:56.480
+Well unless you have called it differently.
+
+04:57.410 --> 04:57.990
+Okay.
+
+04:57.990 --> 05:04.090
+And well we can also add a horizontal line at the bottom.
+
+05:04.270 --> 05:13.750
+So basically now our forum for posting comments is kind of ready we can insert this inside the show
+
+05:13.840 --> 05:16.580
+template.
+
+05:16.620 --> 05:24.420
+Well I think we can put this just below the comments header section and we can use include and just
+
+05:24.420 --> 05:30.730
+include the comments don't underscore form.
+
+05:31.230 --> 05:31.630
+OK.
+
+05:31.710 --> 05:34.830
+Save the changes and let's refresh the page
+
+05:37.470 --> 05:39.120
+now after it reloads.
+
+05:39.150 --> 05:43.080
+We should see a nice form with the button to add a comment.
+
+05:43.080 --> 05:44.690
+It doesn't do anything yet.
+
+05:44.700 --> 05:46.320
+We'll handle that in a moment.
+
+05:46.350 --> 05:50.090
+But you can see that since I am authenticated I can see this form.
+
+05:50.100 --> 05:55.510
+But if I will log out and then I will visit one of the blog posts.
+
+05:55.510 --> 05:57.980
+Doesn't really matter which one.
+
+05:58.320 --> 06:08.550
+Now I should instead of the forum see the link but it apparently doesn't work and let's see why.
+
+06:08.820 --> 06:12.710
+So it seems I haven't closed the deal talk.
+
+06:12.720 --> 06:15.460
+And also I didn't even close the opening.
+
+06:15.460 --> 06:16.000
+Deep dark.
+
+06:16.000 --> 06:17.220
+So let's fix that.
+
+06:17.220 --> 06:19.130
+Save the changes and it should work.
+
+06:19.140 --> 06:23.880
+Now now after refreshing the layout should now look correct.
+
+06:23.890 --> 06:25.820
+We see the link to signing.
+
+06:25.870 --> 06:34.780
+If we are authenticated now let's work on this part that will let us display arrows using our single
+
+06:34.780 --> 06:42.510
+component by accessing these global errors variable that is bank available to all your views.
+
+06:42.520 --> 06:50.620
+If there are any validation errors so let's go ahead and create a new file inside the components folder
+
+06:50.650 --> 06:53.050
+and call it errors.
+
+06:53.050 --> 06:56.160
+Blade BHP
+
+06:58.780 --> 07:05.240
+now we can copy this fragment to verify if there actually are any errors to be displayed.
+
+07:08.740 --> 07:19.020
+Now let's go to the app service provider and register this new component with underlie us so it's components
+
+07:20.370 --> 07:27.460
+errors and we wound up under the errors alliance okay.
+
+07:27.520 --> 07:30.620
+Now we also do not want it to be displayed.
+
+07:30.620 --> 07:33.240
+Well not really visually appealing.
+
+07:33.370 --> 07:41.120
+So let's modify this code to have some margin at the top margin at the bottom using empty and end B
+
+07:41.120 --> 07:44.470
+classes and also remove list from it
+
+07:48.680 --> 07:55.370
+and now instead of displaying our list element what we will do is we'll use our bootstrap class called
+
+07:55.460 --> 08:01.730
+alert and will display it using the red color like using the danger class.
+
+08:02.000 --> 08:08.150
+So let's copy this fragment and paste that into our template
+
+08:10.370 --> 08:20.270
+reformat so we can keep those classes and only think we have to do is to echo the error variable which
+
+08:20.270 --> 08:24.080
+we iterate over all the errors.
+
+08:24.080 --> 08:24.360
+Okay.
+
+08:24.380 --> 08:35.060
+So basically there is our component now instead of doing this inside the underscore form late for posts
+
+08:37.250 --> 08:49.680
+we can do arrows and arrows let's verify if that actually works by trying to add blog post first we
+
+08:49.680 --> 08:51.360
+have to logging obviously.
+
+08:51.910 --> 08:52.460
+OK.
+
+08:52.470 --> 08:53.640
+Let's submit something.
+
+08:53.790 --> 08:54.120
+Yes.
+
+08:54.140 --> 08:55.100
+So it works.
+
+08:55.110 --> 09:01.680
+And now we'll be able to reuse this component but first we of course have to implement some logic that
+
+09:01.680 --> 09:05.450
+will add those comments and we'll do that in the next lecture.

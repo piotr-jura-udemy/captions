@@ -1,0 +1,58 @@
+WEBVTT
+
+00:00.360 --> 00:06.660
+Let's try to explain what is rooting and how it works in a typical Laravel application.
+
+00:07.440 --> 00:16.140
+So starting from scratch, someone visits your website and then they are always directed into one single
+
+00:16.650 --> 00:20.770
+file, the index in a public folder.
+
+00:21.390 --> 00:28.800
+Yes, every single request to your Laravel application goes through this single file, which might be
+
+00:28.800 --> 00:35.790
+a little bit different to what you are used to if you ever developed applications before, where typically
+
+00:36.000 --> 00:38.820
+every page had a separate file.
+
+00:41.070 --> 00:44.160
+From this point on, the router component takes over.
+
+00:44.670 --> 00:52.980
+Its job is to understand the URL and decide what to do with it next, passing it to our controller.
+
+00:55.200 --> 01:02.250
+So first, you would have to define some routes you can define in routes that are static or dynamic,
+
+01:02.730 --> 01:12.060
+static means you just march on exact text like posts or dynamic, which means you much part of the text,
+
+01:12.060 --> 01:14.820
+but then part of the route can be dynamic.
+
+01:14.850 --> 01:18.490
+For example, it can accept different numbers as parameters.
+
+01:19.230 --> 01:28.530
+So in this example that we have here, post one router would decide that this route matches and then
+
+01:28.950 --> 01:32.520
+this would execute a specific code from our controller.
+
+01:33.280 --> 01:40.110
+We'll talk about what is the controller, but generally that is a piece of code that actually handles
+
+01:40.110 --> 01:41.490
+your request.
+
+01:42.530 --> 01:49.370
+The job of Rueter is to just pass the request to a specific controller and the job of controller is
+
+01:49.370 --> 01:50.580
+to generate a response.
+
+01:51.530 --> 01:54.620
+Well, basically, that's everything about rooting.

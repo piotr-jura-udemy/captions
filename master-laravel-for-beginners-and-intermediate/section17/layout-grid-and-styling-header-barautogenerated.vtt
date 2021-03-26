@@ -1,0 +1,199 @@
+WEBVTT
+
+00:02.530 --> 00:12.910
+Finally, let's work on the layout of our application first, the main diff element should get the container
+
+00:12.910 --> 00:13.600
+class.
+
+00:16.220 --> 00:25.250
+This class is required to use bootstrap grid system container will set your main contents section to
+
+00:25.250 --> 00:33.920
+be centered and be of the specific WIFF depending on the user screen with this documentation, page
+
+00:33.920 --> 00:44.030
+explains it well, inside the container elements, you can create a grid of rows and columns, but we
+
+00:44.030 --> 00:45.680
+will be doing that later.
+
+00:47.070 --> 00:54.090
+First, let's build a navigation heather in our obligation, something like you've seen that bootstrap
+
+00:54.090 --> 00:55.020
+documentation.
+
+00:56.660 --> 01:00.680
+Let's start with a surrounding development.
+
+01:01.940 --> 01:06.080
+Then goes Heather Element with our application name.
+
+01:08.580 --> 01:14.530
+Next, a nouf element that will contain links to different pages.
+
+01:15.150 --> 01:16.320
+Let's create for.
+
+01:22.200 --> 01:23.370
+To the homepage.
+
+01:24.930 --> 01:26.610
+To the contact page.
+
+01:29.430 --> 01:36.250
+The least of the blog posts and to a forum that can create our blog post.
+
+01:38.960 --> 01:46.670
+The root helper will give these links the proper use or else, so let us feel their creative attribute
+
+01:46.670 --> 01:48.380
+of all elements.
+
+02:09.720 --> 02:10.370
+Douridas.
+
+02:13.850 --> 02:15.470
+Let's see how it's looking so far.
+
+02:18.490 --> 02:24.760
+Not the nicest design, but, hey, the links work you can navigate to every page we have.
+
+02:27.490 --> 02:34.930
+Now, let's dial the header, we will be using Fleck's box and I will type all the classes inside the
+
+02:34.930 --> 02:40.800
+chrome dev tools so you will be able to see the difference after every change.
+
+02:41.290 --> 02:44.950
+Then we will copy classes to the code editor.
+
+02:48.340 --> 02:54.730
+First, let's make the surrounding development a flex container.
+
+02:55.870 --> 02:58.270
+By adding deflects.
+
+03:01.620 --> 03:08.520
+Then Fleck's column, as we want the direction to be from top to bottom.
+
+03:11.220 --> 03:18.990
+But not always, only on smaller screens, so from medium screen end up, we want the default flex direction
+
+03:19.170 --> 03:24.060
+from left to right versus flex and roll.
+
+03:25.720 --> 03:37.150
+M.D. means more or equal 768 pixels in screen width, so this is how responsive pages are made, different
+
+03:37.150 --> 03:40.390
+styles are being applied on different screen sizes.
+
+03:42.340 --> 03:51.970
+A line items center will center items across the cross axis, whatever it currently is, then let's
+
+03:51.970 --> 03:57.340
+add some padding to this element of size free using P free.
+
+03:59.210 --> 04:04.730
+On all corners, but on bigger screens, the horizontal padding needs to be bigger, so.
+
+04:06.080 --> 04:08.030
+PEX, M.D. for.
+
+04:13.440 --> 04:18.570
+Now, let's set the white background using big white.
+
+04:21.270 --> 04:22.620
+Border on the bottom.
+
+04:23.890 --> 04:31.420
+So our border bottom class and a small shadow, so shadow s m.
+
+04:33.320 --> 04:35.120
+This is how it's currently looking.
+
+04:37.370 --> 04:47.470
+Now, let's reset the default margin on the header element by setting the margin vertical to be zero.
+
+04:52.760 --> 05:01.370
+Make this element fill the available empty space by using Ammer and the outer, but only from the medium
+
+05:01.370 --> 05:02.360
+screen size.
+
+05:06.420 --> 05:12.360
+Font should be of normal weight, so font weight normal.
+
+05:15.630 --> 05:20.070
+Then Danoff elements should get some vertical margin.
+
+05:22.920 --> 05:30.720
+But no margin from the medium screen size, so NY and zero.
+
+05:32.410 --> 05:35.500
+And a little bit bigger margin on the right side.
+
+05:37.840 --> 05:40.540
+When the screen size is medium and up.
+
+05:44.100 --> 05:51.600
+It's starting to look cool also, let's add some bottom margin to the header element.
+
+05:53.960 --> 05:55.130
+Using be free.
+
+05:57.840 --> 06:01.320
+For some spacing between their content and the header.
+
+06:05.470 --> 06:14.350
+Finally, the elements should get a general padding of size, too, and the text should be dark.
+
+06:17.310 --> 06:24.060
+So we will only change one element in here in the browser, but then we actually need to move all this
+
+06:24.060 --> 06:26.300
+changes to the code editor.
+
+06:27.120 --> 06:31.890
+So let's begin with the styles for the surrounding header element.
+
+06:32.580 --> 06:34.920
+So this styles go in here.
+
+06:37.210 --> 06:39.280
+And Heather Styles.
+
+06:43.540 --> 06:44.890
+To the other element.
+
+06:47.690 --> 06:49.880
+Navigation elements, styles.
+
+06:58.760 --> 07:06.680
+And finally, there a elliman styles, so let's paste up to every single element.
+
+07:11.620 --> 07:14.500
+Now, save the changes and when we refresh.
+
+07:15.730 --> 07:20.320
+This would be immediately styled without us having to make manual changes.
+
+07:28.790 --> 07:36.260
+Now, apparently, I've copied those elements incorrectly because this doesn't really look proper and
+
+07:36.260 --> 07:40.730
+I forgot this D to make this are Fleck's container element.
+
+07:41.480 --> 07:42.950
+Now everything should be fine.
+
+07:43.310 --> 07:49.780
+Also, notice how this header menu gets responsive when the screen is getting smaller.
+
+07:50.300 --> 07:57.050
+If you take a look at those pixels at the top of the page, you can see that the breaking point of I've
+
+07:57.050 --> 08:00.560
+described changes how the layout looks like.

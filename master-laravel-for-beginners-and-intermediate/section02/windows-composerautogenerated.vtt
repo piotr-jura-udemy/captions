@@ -1,0 +1,49 @@
+WEBVTT
+
+00:00.660 --> 00:08.130
+Composer is a tool to manage your project dependencies, for example, the lateral framework is the
+
+00:08.130 --> 00:09.570
+dependency of your project.
+
+00:10.440 --> 00:14.730
+But Laravel also depends on some other third party libraries.
+
+00:14.730 --> 00:17.250
+And to install them, it uses composer.
+
+00:18.520 --> 00:24.520
+You would like to install composer globally, not only you would be able to manage a specific project
+
+00:24.520 --> 00:30.320
+dependencies, additionally, you will be able to create new projects using it.
+
+00:31.060 --> 00:34.540
+Fortunately, that's easy on Windows.
+
+00:39.570 --> 00:43.830
+Go to the Windows installation instructions.
+
+00:45.460 --> 00:48.580
+And download the composer installer and run it.
+
+01:02.190 --> 01:09.570
+You might be asked to point to the binary, make sure you point to the example one we've just installed,
+
+01:10.080 --> 01:14.120
+if you've never installed BHB before, that should be the default choice.
+
+01:14.130 --> 01:19.110
+Anyway, keep confirming with next until done.
+
+01:24.330 --> 01:29.310
+Then restart the terminal application if it is running.
+
+01:34.560 --> 01:43.470
+Finally, inside the terminal type composer dash uppercase V, that's important, it has to be upper
+
+01:43.470 --> 01:51.120
+case and you should see the composer version, which also proves it's installed correctly and works
+
+01:51.120 --> 01:51.720
+globally.

@@ -1,0 +1,352 @@
+WEBVTT
+
+00:00.930 --> 00:09.150
+Now let's see how quickly we can scaffold the logic necessary to display the user profile and for users
+
+00:09.150 --> 00:12.230
+to be able to upload their avatar image.
+
+00:13.320 --> 00:15.830
+So we will use what we already know.
+
+00:15.840 --> 00:21.180
+So we will generate a controller using make controller artisan command.
+
+00:21.180 --> 00:27.900
+We will call it user controller and this would be our resource controller which means all the crude
+
+00:27.900 --> 00:30.280
+methods will be scaffold it.
+
+00:30.750 --> 00:36.220
+And we want to tell it that this is for the specific model for the User model.
+
+00:36.300 --> 00:39.140
+So let's just run it and explain further.
+
+00:39.180 --> 00:46.950
+When we open the file so we've got generator the controller with all the methods that you've already
+
+00:46.950 --> 00:50.400
+seen before on the post controller.
+
+00:50.400 --> 00:58.380
+But this time when you have specified the model it is using the route model building so you can go back
+
+00:58.380 --> 01:00.470
+to the lecture about route model bending.
+
+01:00.480 --> 01:03.330
+If you don't remember what this is about.
+
+01:03.330 --> 01:11.490
+But to say it's the most simple way whenever there is a model to be fetched for the action like for
+
+01:11.490 --> 01:19.950
+the show or edit when you already have a model and the idea of that model is part of the route then
+
+01:20.020 --> 01:27.180
+Lovell will fetch this model automatically for you if you will specify it by type painting.
+
+01:27.210 --> 01:36.510
+The method argument using the type you wanted to try to fetch since we want the user this is type those
+
+01:36.510 --> 01:41.980
+methods are type hinted with the user and they would be ultimately fetched.
+
+01:42.030 --> 01:51.250
+So you don't have to use user fined or fined or fail or any fetching that you might be using.
+
+01:51.630 --> 01:56.150
+Now the next thing we should do is we should generate our policy.
+
+01:56.580 --> 02:01.550
+So let's do peach bee artisan make policy.
+
+02:01.710 --> 02:10.230
+This would be user policy and we would like to generate it for the user model.
+
+02:10.230 --> 02:15.090
+So now let's find our new user policy.
+
+02:15.240 --> 02:25.140
+You can see that all the crude methods are also generated here so we can specify what can be performed
+
+02:25.350 --> 02:26.310
+by whom.
+
+02:27.480 --> 02:35.400
+So in case you use the same model as a user for example because those policies will always pass our
+
+02:35.400 --> 02:44.340
+user instance so we can verify if this user can do something in case that we have a policy for the user
+
+02:44.340 --> 02:51.960
+itself then the model that we are verifying those permissions on will be passed with their variable
+
+02:51.960 --> 02:53.170
+name model.
+
+02:54.160 --> 02:56.610
+Okay now we have generated this code.
+
+02:56.610 --> 03:00.490
+Now let's go to that of service provider.
+
+03:00.540 --> 03:08.910
+We did that before we have registered policies so let's register our policy for the User model.
+
+03:08.910 --> 03:15.490
+So this would be up policies user policy.
+
+03:15.540 --> 03:17.170
+That's the one thing.
+
+03:17.190 --> 03:20.330
+Now let's open the web BHP.
+
+03:20.580 --> 03:28.090
+We have also already defined routes for our controller and especially for resource controller.
+
+03:28.140 --> 03:32.160
+It's enough to give this resource are you url.
+
+03:32.160 --> 03:37.310
+So this will be users specify the controller name that we have just generated.
+
+03:37.530 --> 03:45.580
+User controller and as I've said we only want to display their user profile so show is enough.
+
+03:45.690 --> 03:55.970
+We want added to display the forum which we can use to provide user possibilities to upload a file and
+
+03:56.030 --> 04:00.110
+update to actually save the changes.
+
+04:00.120 --> 04:06.300
+Now let's open the terminal and run PSP artisan route least.
+
+04:06.630 --> 04:14.010
+Now on this list of the generator routes you can see free routes that we have just added it's the user
+
+04:14.010 --> 04:16.150
+show users update.
+
+04:16.290 --> 04:24.660
+Users edit they all happen to have the user parameter as part of the route because they require to fetch
+
+04:24.660 --> 04:31.690
+the User model before we do something with it either show it or modify it.
+
+04:31.980 --> 04:39.720
+And thanks to that type hinting this parameter on the actual actions a lot of it will automatically
+
+04:39.780 --> 04:48.600
+fetch a user model for us and it will have tried to find it by idea which should be specified as this
+
+04:48.720 --> 04:49.760
+route parameter
+
+04:52.820 --> 04:57.490
+now let's create a constructor inside the user controller.
+
+04:57.560 --> 05:04.680
+So we define public function construct and what we want to do is.
+
+05:04.760 --> 05:10.880
+Users would be able to view others profile only if they are authenticated.
+
+05:10.880 --> 05:18.250
+So we are adding that our middleware to this controller to all its actions.
+
+05:18.320 --> 05:25.920
+And the second thing that we would like to do is we want to how to rise certain actions and what we
+
+05:25.920 --> 05:26.950
+can do this time.
+
+05:26.970 --> 05:31.720
+We haven't tried before is to use our rice resource.
+
+05:31.770 --> 05:42.060
+So what this will let us do is you can specify that for a certain class or certain eloquent model which
+
+05:42.060 --> 05:43.580
+parameter name is.
+
+05:43.590 --> 05:53.100
+The second argument the user it will use the registered model policy for this particular model since
+
+05:53.100 --> 05:55.680
+we have created the user policy.
+
+05:55.680 --> 06:07.410
+It will try to match the names of those actions to the specific ability checks inside their user policy.
+
+06:07.620 --> 06:15.450
+Just for reference you can always try to open the post controller when I have created an array which
+
+06:15.450 --> 06:22.980
+will show you how the action names of a resource controller are actually mapped to their ability checks
+
+06:23.100 --> 06:26.610
+on that policy.
+
+06:26.680 --> 06:34.410
+So after making this change inside the user controller you can rerun BHP artisan route least.
+
+06:34.540 --> 06:42.490
+Now first let's maybe take a look at those routes those few routes that we have just generate that so
+
+06:42.730 --> 06:49.180
+on the most right side you see what Middleware is registered to vote for those routes.
+
+06:49.180 --> 06:51.130
+So now we only see web.
+
+06:51.880 --> 06:55.020
+And also take a look at this secret page.
+
+06:55.180 --> 07:04.740
+So this way if you remember we specified what ability checks should be done using this can middleware.
+
+07:04.750 --> 07:15.590
+So now let's rerun this route least to see what has changed so those are our free routes right now.
+
+07:15.610 --> 07:23.650
+So by adding that our middleware and how to raise a resource call what we have is all of those routes
+
+07:23.680 --> 07:25.510
+have the alpha middleware.
+
+07:25.510 --> 07:29.530
+So if you are an authenticated you can't visit them.
+
+07:29.530 --> 07:32.980
+And also the can Middleware is added.
+
+07:33.280 --> 07:41.800
+And the first part of the can Middleware is the action to be performed as you can see the show is the
+
+07:41.810 --> 07:52.390
+view ability on the policy and this update and edit actions are both using the update ability on the
+
+07:52.390 --> 08:01.210
+policy and separated by comma is the argument of the model that you should use to verify that and it
+
+08:01.210 --> 08:09.450
+is actually user which is part of the root parameter which a lot of those will automatically fetch our
+
+08:09.460 --> 08:11.570
+model for you.
+
+08:11.590 --> 08:16.370
+So this might be a lot but actually it is very simple.
+
+08:16.390 --> 08:23.890
+So each way you visited those routes Lavell will automatically fetch a user instance for you let's say
+
+08:23.890 --> 08:33.280
+on this show page then on the route you can see that it will use the view ability which is this one
+
+08:34.060 --> 08:41.890
+and it will use this user model specified here which is matching the parameter name and we already know
+
+08:41.890 --> 08:49.870
+this would be are eloquent model and it will be passed here so you can verify those abilities of the
+
+08:49.870 --> 08:54.980
+user if they can actually do what they want to do.
+
+08:55.040 --> 09:02.580
+Now let's close the terminal and let's actually implement this user policy.
+
+09:02.580 --> 09:09.840
+So here we would like to return true so everyone can view a user because we already check if the user
+
+09:09.900 --> 09:17.070
+is authenticate it then no one can create a user because we have registering for that.
+
+09:17.250 --> 09:25.830
+Now when someone will try to update the user we only allow them to edit their own avatars.
+
+09:26.040 --> 09:35.280
+So we'll check if the currently authenticated user which is that one has the same I.D. as the model
+
+09:35.430 --> 09:39.650
+which was passed from the root model building by Laura.
+
+09:39.650 --> 09:46.540
+Well now no one can delete users so we return false.
+
+09:46.690 --> 09:56.110
+We do not use self delete so also false and obviously no one can permanently delete a user in our application.
+
+09:56.110 --> 10:07.020
+So this is also false Now let's go to the user controller to those actions that we want and let's try
+
+10:07.170 --> 10:10.680
+to just use D.D. to dump the user.
+
+10:10.680 --> 10:16.950
+We will see this way if we were actually able to get to those actions.
+
+10:16.950 --> 10:22.710
+So do that in show in edit and insight update.
+
+10:22.890 --> 10:29.610
+So there is one more thing we'll have to do because I am currently authenticated as admin and we have
+
+10:29.610 --> 10:35.430
+this override that we allow admin to always perform update and delete.
+
+10:35.490 --> 10:38.090
+So let's comment that out for a second.
+
+10:38.130 --> 10:46.890
+Save the changes now let's try testing this by manually entering the EU or else.
+
+10:46.890 --> 10:54.330
+So I am currently authenticated as the John Doe which is the admin with the user I.D. one so I'm viewing
+
+10:54.450 --> 10:59.530
+his profile it's actually users not user.
+
+11:00.070 --> 11:03.660
+And you can see that I see the user instance here.
+
+11:03.670 --> 11:12.750
+Now if I would try to modify it and view the user two or three it all works because everyone who is
+
+11:12.750 --> 11:17.350
+authenticated is allowed to actually view those users.
+
+11:17.520 --> 11:25.860
+Now I would try now editing the user so I edit the user with idea 1 which is John Doe I should be able
+
+11:25.860 --> 11:36.330
+to see this user as I am dumping him on the action but if I will modify it to user I.D. to now I am
+
+11:36.600 --> 11:45.670
+not out arised so I cannot edit user which has a different I.D. than the currently authenticated one.
+
+11:45.670 --> 11:45.900
+OK.
+
+11:45.930 --> 11:49.200
+So we can command that again.
+
+11:49.230 --> 11:55.630
+So we've seen how that works how quickly we're able to scaffold all this logic and in the next one we
+
+11:55.630 --> 12:00.390
+will actually create the forums necessary for uploading the image.
+
+12:00.420 --> 12:03.590
+We will implement the NOC the actions that we need.
+
+12:04.080 --> 12:11.640
+And then we will work with the 1 to 1 polymorphic relationship to store all the images inside inside
+
+12:11.640 --> 12:13.410
+one database table.

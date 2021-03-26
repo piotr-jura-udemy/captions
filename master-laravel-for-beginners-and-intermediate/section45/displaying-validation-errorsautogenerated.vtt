@@ -1,0 +1,223 @@
+WEBVTT
+
+00:02.010 --> 00:08.710
+In the last lecture you've seen what's the most basic way to validate the data that is being sent through
+
+00:08.710 --> 00:12.040
+the forum in sight the larval application.
+
+00:12.130 --> 00:20.920
+So we've used the request object validate method and specified the rules for the form fields.
+
+00:20.920 --> 00:23.760
+Now we haven't displayed this errors yet.
+
+00:23.770 --> 00:32.230
+So if we press create then form is being sent but then we are redirected back to the last page and the
+
+00:32.350 --> 00:37.040
+errors are somewhere but we don't know where they are.
+
+00:37.090 --> 00:43.210
+So now let's open the kernel file which you can find inside the HDP folder.
+
+00:43.210 --> 00:45.920
+And now I will just quickly explain it.
+
+00:45.940 --> 00:49.110
+Where does it happen and how does it happen.
+
+00:49.120 --> 00:57.190
+So we've mentioned the middleware before and we have a field here called middleware groups and there
+
+00:57.190 --> 01:04.840
+is a list of old and middle worst that by default is enabled for the web group's web means the routes
+
+01:04.900 --> 01:15.600
+specified inside your web peach B file so one of those middle worst is called Share errors from session.
+
+01:15.600 --> 01:18.510
+So let's open it now.
+
+01:18.510 --> 01:25.550
+So let's for a minute ignore the fact that we do not really know exactly how middleware works.
+
+01:25.560 --> 01:30.960
+I've explained it a little bit but we'll get to that in some future lectures.
+
+01:30.960 --> 01:39.800
+I will explain middle whereas in detail will create our own but each middleware has this handle method
+
+01:39.840 --> 01:44.220
+and you can also see examples of middle whereas inside the Vicky already.
+
+01:45.510 --> 01:54.450
+And what this does is that if there are any validation errors that they are being stored as a session
+
+01:54.450 --> 02:03.900
+variable and this session variable is always called arrows and Lavell has a way to share some data with
+
+02:04.020 --> 02:05.540
+all the views.
+
+02:06.090 --> 02:13.860
+So we have a variable that is ultimately available in all your larval blade views.
+
+02:13.860 --> 02:22.730
+So the way it works is that if the session contains a variable called errors it will share it with all
+
+02:22.750 --> 02:24.990
+the views using this method.
+
+02:24.990 --> 02:26.790
+This view share.
+
+02:27.660 --> 02:32.490
+So that's everything that this middleware does.
+
+02:32.490 --> 02:37.800
+So let's close it now because we'll talk about that later.
+
+02:38.190 --> 02:40.750
+And now let's go back to our create.
+
+02:40.770 --> 02:41.960
+Blade peach bean.
+
+02:41.970 --> 02:47.070
+So this is the template which we used to display a form.
+
+02:47.070 --> 02:52.910
+So we have our fields there and to display any possible errors.
+
+02:52.910 --> 03:02.410
+After that forum is sent we can check if the variable arrows contains any values.
+
+03:02.570 --> 03:05.940
+So there is the method on the arrows.
+
+03:05.990 --> 03:13.310
+It's actually an object and any will return true if there is at least one error.
+
+03:13.310 --> 03:16.460
+So we already know how to use if statements.
+
+03:16.460 --> 03:20.430
+So by surrounding this check with the if statement.
+
+03:20.840 --> 03:28.100
+Now we are sure that we will only render this part if there are at least if there is at least one error.
+
+03:28.100 --> 03:38.040
+Now let's surround everything with a D class and will display all the errors inside or there at least.
+
+03:38.420 --> 03:40.360
+So we'll use another directive.
+
+03:40.370 --> 03:43.530
+We already know that for each.
+
+03:43.580 --> 03:48.000
+And we will iterate over all the errors that are there.
+
+03:48.140 --> 04:00.180
+So there is another method of the errors object called all so let's iterate over it and have each individual
+
+04:00.180 --> 04:06.060
+error available ask the error variable and close the for each using.
+
+04:06.390 --> 04:17.810
+And for each right now we can display each individual error inside a list element so we'll render it
+
+04:18.590 --> 04:20.180
+using curly braces
+
+04:23.560 --> 04:33.910
+All right now let's go back to our forum and try to submit it if submitted with empty data.
+
+04:33.930 --> 04:36.320
+Now you can see two arrows.
+
+04:36.480 --> 04:41.990
+The title field is required and the content field is required.
+
+04:42.150 --> 04:49.830
+Now if we will go back to our controller you can see that we only wants those two fields to be present.
+
+04:50.100 --> 04:52.450
+So that's what's required is doing.
+
+04:52.950 --> 04:57.060
+And we want the title to be maximum hundred characters.
+
+04:57.060 --> 05:04.860
+Now let's also require it to be at least five characters and maybe let's do the same with content.
+
+05:04.860 --> 05:11.780
+So we use vertical bar to add more constraints to our validation.
+
+05:11.810 --> 05:14.880
+And this maybe should be at least 10 characters.
+
+05:14.900 --> 05:21.650
+So save the changes and maybe type a single letters in all of them.
+
+05:21.650 --> 05:28.460
+And now you see our errors that the title must be at least five characters and the content has to be
+
+05:28.790 --> 05:30.920
+at least 10 characters.
+
+05:30.920 --> 05:36.380
+But if you specify type something that is longer.
+
+05:36.620 --> 05:42.500
+Now we have created a brand new blog post.
+
+05:42.550 --> 05:47.080
+Now let's also go back to the forum and let's see our validation rules.
+
+05:47.350 --> 05:54.100
+So it is important to know that the rules are being checked from left to right in the order they were
+
+05:54.100 --> 05:54.770
+defined.
+
+05:55.180 --> 06:02.420
+So the first rule would be the required Max the maximum and then the minimum length.
+
+06:02.620 --> 06:07.030
+So if will move this rule as the first one.
+
+06:07.210 --> 06:14.830
+So first we check if the text is minimum of has the length of minimum five characters and only then
+
+06:14.830 --> 06:15.640
+four required.
+
+06:15.670 --> 06:20.590
+Let's see what happens if we send an empty form.
+
+06:20.590 --> 06:25.060
+So you see that for the title we got the two arrows.
+
+06:25.150 --> 06:33.230
+So if you'd like to stop checking when the first rule Rule failed you can add a bail constraint.
+
+06:33.820 --> 06:40.730
+So with bail whenever the first rule would fail it won't validate the others.
+
+06:40.730 --> 06:48.230
+So this makes sense if you have some time consuming rules of your or you have too many and you just
+
+06:48.230 --> 06:49.790
+don't want to call them all.
+
+06:50.000 --> 06:53.390
+So now let's see what happens after we've added bail.
+
+06:53.660 --> 07:02.090
+So we'll see that it just stops checking the rules from four set on field after the first rule it encountered
+
+07:02.210 --> 07:03.350
+has failed.

@@ -1,0 +1,397 @@
+WEBVTT
+
+00:01.230 --> 00:07.460
+In the last section of this course you have learned how to convert your eloquent models to adjacent
+
+00:07.500 --> 00:12.980
+data so we can return them as Jason from your API and points.
+
+00:13.080 --> 00:21.390
+And in this section we'll learn and understand why a lot of oil keeps separate files for defining traditional
+
+00:21.540 --> 00:30.540
+Web site and points in the web BHP file and the API and points in the API pdb file.
+
+00:30.720 --> 00:38.680
+But before we try to understand what is inside this diagram let's go to the Visual Studio code and open
+
+00:38.790 --> 00:41.460
+open all the necessary files.
+
+00:41.460 --> 00:49.470
+So what I mean by that is the Web page be fired from The Roots folder their API BHP from routes folder
+
+00:50.250 --> 00:58.980
+their route service provider from up providers which is responsible for registering all these routes
+
+01:00.180 --> 01:09.390
+then open the kernel BHP file because we'll be also talking about middleware and middleware groups and
+
+01:09.390 --> 01:18.720
+finally open that out of BHP from settings to understand the basics of what are the differences between
+
+01:18.810 --> 01:27.690
+authenticating your normal and points the web and points and API and points.
+
+01:27.830 --> 01:29.870
+So first let's head to the Web.
+
+01:29.880 --> 01:34.350
+BHP file to remind ourselves the basics of fruiting.
+
+01:34.770 --> 01:43.980
+So we already know that we can use that HDB verbs like get or post to register our root for a specific
+
+01:44.130 --> 01:52.590
+URL and then specify which controller method is responsible for that or define our closure directly
+
+01:52.590 --> 01:54.410
+in the root file.
+
+01:54.420 --> 02:01.310
+We also know that we can give a name to our route and we can apply some middleware.
+
+02:01.470 --> 02:09.300
+This can even be an array or a comma separated list of parameters which then with the names of the middle
+
+02:09.300 --> 02:18.390
+whereas we also know that we can use either that only or exclude method to specify which methods we
+
+02:18.390 --> 02:25.890
+would like from resource controllers which in turn register the standard set of the possible things
+
+02:25.890 --> 02:35.660
+you can do to a resource like index get one create shoulder form and et cetera no important thing to
+
+02:35.660 --> 02:42.560
+remember about what we see right here is that each of those individual middleware calls or the name
+
+02:42.560 --> 02:47.260
+calls only applies to the route that you are defining here.
+
+02:47.300 --> 02:57.200
+So this name will only be applied to that route and this middleware can home secret will only be applied
+
+02:57.410 --> 03:02.270
+to the route which has the URL slash secret.
+
+03:02.270 --> 03:04.340
+So you have to digest it.
+
+03:04.340 --> 03:05.240
+That's important.
+
+03:05.330 --> 03:14.060
+It's only applied to this route now if you will go to the route service provider you can see that defining
+
+03:14.060 --> 03:19.400
+groups using map web routes and map API routes looks very similar.
+
+03:19.970 --> 03:27.980
+But the important part is that it starts with specifying some middleware some namespace and then this
+
+03:27.980 --> 03:29.970
+group call is very important.
+
+03:30.620 --> 03:40.910
+It's important because group is a method that allows us to specify some settings for a group of routes.
+
+03:40.940 --> 03:44.690
+So in this case we are loading the routes from the file.
+
+03:44.690 --> 03:51.530
+So what it can be translated With is apply the middleware from the group Web.
+
+03:52.430 --> 03:55.310
+Let's take a quick look at what that is.
+
+03:55.520 --> 04:04.630
+It's inside kernel BHP middleware groups and a group Web is a set of this middleware.
+
+04:04.630 --> 04:15.220
+So all of those middleware will be applied then we have a namespace and namespace is basically telling.
+
+04:15.220 --> 04:19.040
+What is the controller and namespace for all of those routes.
+
+04:19.090 --> 04:28.420
+And this is also defined by default as up HDP controllers which means that by default those routes will
+
+04:28.420 --> 04:32.430
+be attempted to be find inside this particular folder.
+
+04:35.300 --> 04:41.600
+And then these groups is this group method call is telling that those settings that you have called
+
+04:41.600 --> 04:48.120
+before should be applied to everything that is being found inside the web BHP file.
+
+04:48.260 --> 04:56.120
+So instead of applying the middleware WEP call to all of those specific groups here inside where BHP
+
+04:57.320 --> 05:03.260
+using group we can apply it to a group of the routes defined.
+
+05:03.260 --> 05:08.720
+And essentially this is the same as the map API roots method works.
+
+05:09.410 --> 05:18.420
+But this time it's also calling a prefix so prefix is just adding a new URL prefix to every route.
+
+05:18.470 --> 05:25.880
+Now we are using the middleware from the API group and this is for a reason because when you have your
+
+05:25.880 --> 05:30.020
+normal traditional endpoints you might want to start a session.
+
+05:30.020 --> 05:37.220
+You might want to share some errors inside the session verify CSF tokens because you have forms that
+
+05:37.220 --> 05:38.850
+you submit.
+
+05:38.870 --> 05:47.870
+We've also created our own local middleware that keeps some data inside this session but the difference
+
+05:47.900 --> 05:57.080
+between the Web routes and basically traditional websites and API is is that the traditional one is
+
+05:57.080 --> 06:05.150
+creating and keeping a session because this is being stored inside the browser so you are creating a
+
+06:05.150 --> 06:09.230
+session and then you send back a session cookie.
+
+06:09.500 --> 06:11.630
+So browser knows about this.
+
+06:11.630 --> 06:20.410
+It keeps that for between all the requests then it transparently because users do not notice that since
+
+06:20.410 --> 06:21.790
+but this cookie.
+
+06:21.860 --> 06:28.820
+Back to the server and it is being read by your lateral application so it knows that for example you
+
+06:28.820 --> 06:35.980
+were authenticated and well basically this means that we are keeping us state.
+
+06:36.150 --> 06:38.380
+Well let's see an example of this.
+
+06:38.420 --> 06:45.830
+So that's the end point that we have created that posts comments to display the comments of a blog post
+
+06:45.890 --> 06:52.660
+and this was defined inside the web BHP file which means it has all the middleware from the Web group
+
+06:52.670 --> 06:53.750
+applied.
+
+06:53.750 --> 07:00.710
+Now if you will send this request even though we are sending it from postmen which is not a web browser
+
+07:01.070 --> 07:07.530
+you can see that you get some cookie spark and one of those is the lot of session.
+
+07:07.760 --> 07:13.880
+So this will actually generate a brand new session each time you make requests because to keep your
+
+07:13.880 --> 07:20.150
+session and will be recognized as the same person that did the initial request.
+
+07:20.270 --> 07:24.440
+You will have to send it back to the next request.
+
+07:24.590 --> 07:26.980
+And of course post month doesn't care about that.
+
+07:27.020 --> 07:33.560
+It's just calling an H GDP end point with some parameters and getting a response back.
+
+07:34.490 --> 07:42.730
+So basically if you will look closely if I will make a next request this is a little bit different so
+
+07:42.760 --> 07:53.010
+you probably have to post a video to compare but well just trust me that it is different on each request.
+
+07:53.040 --> 07:59.730
+So now let's go back to the diagram and now you can understand why those routes are defined separately
+
+08:00.150 --> 08:00.990
+in web speech.
+
+08:01.000 --> 08:07.350
+B you have the traditional routes that are being handled by your web browser which has some session
+
+08:07.440 --> 08:13.550
+some indicator of the state of who you are to track the same user.
+
+08:13.770 --> 08:21.180
+And in API those requests are stateless because as you seen from postman it doesn't care about and session
+
+08:21.180 --> 08:27.820
+cookies and this might also be the case with your javascript the front end code that dwell.
+
+08:27.870 --> 08:32.190
+You once sent the cookie back then your session is being lost.
+
+08:32.190 --> 08:38.870
+So typically if you will create some API endpoints those will be stateless.
+
+08:38.880 --> 08:47.070
+So the server won't keep track of the user so you will have to authenticate somehow or say that you
+
+08:47.070 --> 08:55.110
+are who you think you are on each individual request and that's the difference in the ID methods for
+
+08:55.710 --> 08:59.500
+normal web routes and API routes.
+
+08:59.520 --> 09:07.830
+And it is that in web you will authenticate once and then your credentials will be stored inside the
+
+09:08.070 --> 09:10.810
+session and inside the cookies.
+
+09:10.920 --> 09:18.780
+Well not actually credentials but some proof that you are actually authenticated and with API as you
+
+09:18.780 --> 09:27.120
+will have a token which might be anything some random stream that you will send on each individual API
+
+09:27.120 --> 09:36.010
+request and this will be verified each time to see if you are the person who you claim you are.
+
+09:36.010 --> 09:44.400
+Now let's also go through this methods so those who route class methods allow you to specify not only
+
+09:44.400 --> 09:49.830
+the middleware for a particular route but also to a group of routes.
+
+09:49.860 --> 09:57.390
+We also know that we can use namespace to specify what is the peach B namespace for the controllers
+
+09:57.990 --> 10:00.070
+that we will be using.
+
+10:00.060 --> 10:06.840
+And I'm mentioning this because we will be actual using a separate namespace for for our API controllers
+
+10:06.910 --> 10:17.830
+and well this is recommended in of now we have a prefix method and this method was called inside the
+
+10:17.830 --> 10:27.630
+map API routes and what this will do is this would add an API prefix to the older you URLs of all the
+
+10:27.630 --> 10:31.890
+routes that you will define inside API p p.
+
+10:32.040 --> 10:41.940
+You can see that in action if you will run beach B artisan route least we have to find one particular
+
+10:41.940 --> 10:46.780
+route that is already defined so that's closure.
+
+10:46.780 --> 10:49.080
+Is this this is this one.
+
+10:49.380 --> 10:55.680
+And you can see that the API is being added as a prefix to the you or I.
+
+10:55.680 --> 11:00.030
+Now you can also check on the right what middle where was applied and.
+
+11:00.150 --> 11:07.340
+Well this has all the middle worst from the API group.
+
+11:07.490 --> 11:13.280
+Now the name we have only used names so far to give a name to our particular route.
+
+11:13.370 --> 11:20.780
+But you can also give a kind of name prefix to all of your roots and this makes sense if you would like
+
+11:20.780 --> 11:29.900
+to define corresponding routes for traditional Web sites and API like like lets say you have post comment
+
+11:29.900 --> 11:38.520
+controller in both places then you can give some name prefix to everything let's say from the API.
+
+11:39.350 --> 11:46.310
+And finally the most important method a group which basically is saying that everything that you have
+
+11:46.310 --> 11:54.080
+called before should apply to the group of the routes that you are defining either in a file like it
+
+11:54.080 --> 12:03.710
+is being done inside the route service provider or alternatively this can be a closure so inside the
+
+12:04.010 --> 12:13.640
+API BHP you can call this method group to apply some settings to all the routes and then inside it justifying
+
+12:13.670 --> 12:16.610
+the routes directly in this file.
+
+12:16.610 --> 12:25.850
+So those are the basics of why we have this separation so why that separate web routes separate API
+
+12:25.850 --> 12:26.770
+routes.
+
+12:26.870 --> 12:31.610
+You also know where do you define them of course you can modify this methods.
+
+12:31.610 --> 12:33.860
+This is not set in stone.
+
+12:33.860 --> 12:37.100
+You can modify it you modify them as you wish.
+
+12:37.100 --> 12:42.730
+You can even change this prefix for API or not use any prefix at all.
+
+12:43.050 --> 12:49.790
+And also you should understand what are the middleware groups why they are defined and why there is
+
+12:49.790 --> 12:52.660
+something different for the API and web.
+
+12:52.670 --> 13:00.320
+For example that API doesn't have session so you don't need a middleware that starts the session and
+
+13:00.320 --> 13:07.910
+one final thing because we have opened that of BHP is how do you specify the authentication for your
+
+13:07.910 --> 13:16.700
+particular end points so you can see that in API BHP this default route created by a lot of oil has
+
+13:16.700 --> 13:26.760
+this API middleware applied which means use that of middleware and here you are specifying the guard
+
+13:26.790 --> 13:35.850
+you would like to use which is API and if you will go to our peach bee you can see those settings for
+
+13:35.850 --> 13:43.900
+defaults are that the default guard is web which means session authentication but there are also two
+
+13:43.900 --> 13:49.530
+cards defined out of the box the web one which uses the driver session.
+
+13:49.630 --> 13:57.130
+As I've explained and another one is API which is using the driver token we'll talk about the token
+
+13:57.130 --> 14:03.430
+authentication so don't worry about this right now just so we know a lot out of the box provides two
+
+14:03.430 --> 14:12.130
+possible settings for the driver which is session or token based authentication and basically this middleware
+
+14:12.160 --> 14:20.020
+here is telling that every route defined inside it if you will if we will use group or this particular
+
+14:20.020 --> 14:31.330
+route has to has to use the API guard which means token authentication so we've got some basics covered.
+
+14:31.330 --> 14:39.460
+Now let's try to actually define some routes and see how that all works in practice in the next lecture.

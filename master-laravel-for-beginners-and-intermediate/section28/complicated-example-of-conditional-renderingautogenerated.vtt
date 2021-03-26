@@ -1,0 +1,295 @@
+WEBVTT
+
+00:00.510 --> 00:07.740
+Now as promised in the last lecture now we'll create our card component which will contain an arbitrary
+
+00:07.740 --> 00:09.670
+list of elements.
+
+00:09.690 --> 00:15.950
+So this might be links but also can be text inside the list like we have here.
+
+00:16.110 --> 00:19.920
+Like who is the most active creator.
+
+00:19.920 --> 00:27.370
+So let's go ahead and add this new component inside components FOLDER WE'LL CALL IT cards.
+
+00:27.390 --> 00:38.120
+So let's create cart blade BHP and immediately let's create an alliance for our new component so this
+
+00:38.120 --> 00:39.730
+would be components.
+
+00:39.750 --> 00:46.870
+Cart and the layoffs would be cart OK.
+
+00:46.880 --> 00:56.600
+So we have those cards inside the index blade BHP which can be found on the review's posts and you can
+
+00:56.600 --> 01:01.880
+see that we have those big blocks of code that we display.
+
+01:01.910 --> 01:03.800
+Basically it's the same code.
+
+01:03.830 --> 01:06.280
+So we have free cards.
+
+01:06.440 --> 01:10.130
+But the problem is that we display the items differently.
+
+01:10.130 --> 01:13.540
+So for this particular one we display links.
+
+01:13.640 --> 01:17.600
+And here we just display our text.
+
+01:17.600 --> 01:19.490
+So let's see how we can achieve that.
+
+01:19.490 --> 01:29.690
+So for simplicity let's copy a single card inside the card template and reformat it a little bit.
+
+01:29.720 --> 01:33.010
+Now let's go ahead and create some slots.
+
+01:34.010 --> 01:39.060
+So the first slot would be definitely the title.
+
+01:39.070 --> 01:42.440
+That's the simple one.
+
+01:42.470 --> 01:49.420
+Next we would like subtitle so mind that we are making those slots mandatory.
+
+01:49.420 --> 01:52.010
+So they have to be provided.
+
+01:52.430 --> 02:01.280
+Now for this third slot instead of most commented posts or whatever we can pass here will use another
+
+02:01.280 --> 02:05.400
+slot called items.
+
+02:05.870 --> 02:15.460
+So we'll iterate over a list of the items and then we'll display something inside the least but will
+
+02:15.460 --> 02:21.010
+only echo and will only echo that item.
+
+02:21.010 --> 02:25.180
+So this is our new card component.
+
+02:25.180 --> 02:32.620
+Now let's implement it for the simple case which is our card with the names.
+
+02:33.280 --> 02:38.040
+So we'll on a card this time it will have some additional arguments.
+
+02:38.050 --> 02:43.090
+So we start with an array and and card.
+
+02:43.570 --> 02:50.410
+So the title for this particular card component is most active
+
+02:54.460 --> 02:57.910
+so let's do most active and subtitle
+
+03:00.710 --> 03:08.240
+is users with most posts written.
+
+03:08.340 --> 03:17.280
+Now if we would like to pass the items then well it might be a little bit complicated to pass those
+
+03:17.400 --> 03:19.860
+items in this array.
+
+03:19.860 --> 03:24.770
+Well basically it's not complicated to code but it it will be unreadable.
+
+03:24.810 --> 03:32.850
+So how you can additionally pass the data for the slots is using the slot directive where you specify
+
+03:32.910 --> 03:35.330
+the name of the slot.
+
+03:35.420 --> 03:43.320
+This is items and then you can pass something some additional data.
+
+03:44.050 --> 03:46.680
+Well so what can we do.
+
+03:46.680 --> 03:55.260
+We have this most active and we want to pass an array of names of those users.
+
+03:55.260 --> 04:00.150
+So it might seem a little bit complicated how we can do that but actually it would be very simple.
+
+04:00.150 --> 04:06.600
+So what we will do is we'll create a collection using collect helper function.
+
+04:06.600 --> 04:16.010
+This will create a new lot of our collection from the most active users and now we'll use our collection
+
+04:16.010 --> 04:22.460
+method which I've shown you when we use lateral thinker pluck which will only pick one property from
+
+04:22.460 --> 04:26.200
+this which is a name.
+
+04:26.450 --> 04:32.930
+Now also you do not really have to pass those parameters here inside the array.
+
+04:32.930 --> 04:41.200
+They can be also passed from within the component using slot so you can pass.
+
+04:41.810 --> 04:42.770
+Subtitle
+
+04:49.070 --> 04:56.030
+like that and instead of passing this subtitle Inside an array you can do it like that.
+
+04:58.270 --> 05:00.080
+So this might be more readable.
+
+05:00.100 --> 05:07.060
+That also depends of how long arguments you are trying to pass or how long are the is the data you are
+
+05:07.060 --> 05:10.690
+trying to pass to your components.
+
+05:10.690 --> 05:19.540
+So let's comment out this card so we can see if our component actually works properly so it should display
+
+05:19.600 --> 05:29.050
+the same thing as we see here so after refreshing you see that we still have the most active users.
+
+05:29.110 --> 05:32.650
+And the subtitle is users with most polls written
+
+05:35.440 --> 05:41.250
+if will change it to writers we can see that this works perfectly.
+
+05:41.830 --> 05:46.080
+So now we can safely remove this part.
+
+05:46.310 --> 05:54.230
+Now you can see that it is becoming much clearer and since this is essentially the same thing most active
+
+05:54.260 --> 06:00.170
+last month we can immediately copy this card paste it here
+
+06:03.050 --> 06:07.030
+and just change the data that we pass through the slot.
+
+06:07.040 --> 06:14.500
+So most active last month is the title here is the subtitle.
+
+06:14.610 --> 06:16.950
+So let's pass it here so it is readable
+
+06:19.620 --> 06:23.100
+and now these items would be most active.
+
+06:23.100 --> 06:23.940
+Last month
+
+06:27.540 --> 06:37.730
+Now let's remove this div element and what we ended up is basically our reused component so let's see
+
+06:37.730 --> 06:39.770
+if that's still works after refreshing.
+
+06:39.770 --> 06:44.870
+You can see this is basically exactly the same.
+
+06:44.870 --> 06:49.550
+So now let's go to our most comments.
+
+06:49.580 --> 06:53.080
+So this is quite a different example.
+
+06:54.380 --> 07:03.980
+So let's first paste our card element or card component and this time we'll have to modify our component
+
+07:04.040 --> 07:05.820
+a little bit.
+
+07:05.990 --> 07:13.110
+So by default we think that items should be a collection so we iterate over it using for each.
+
+07:13.130 --> 07:21.500
+And then we render the list items so we can also do it differently.
+
+07:21.500 --> 07:28.910
+Now we will always display a list inside this component but we can add an if statement and we can check
+
+07:28.910 --> 07:34.370
+what's the type of the items object using p p is a function.
+
+07:35.090 --> 07:44.120
+So items or any other slot would always be a kind of larval object and we can verify if this is a collection.
+
+07:44.120 --> 07:50.050
+So if it is Illuminate Support collection
+
+07:54.400 --> 07:57.450
+then we'll iterate over all the elements.
+
+07:57.460 --> 08:03.810
+But additionally when it is not we'll just render it as it is.
+
+08:03.810 --> 08:09.180
+So whatever was passed through items will be just rendered.
+
+08:09.190 --> 08:13.710
+So we are doing it for another case when this actually won't be a collection.
+
+08:13.720 --> 08:21.100
+But actually it would be an HDMI L that you would like to render directly by doing something else than
+
+08:21.100 --> 08:24.640
+just echoing items.
+
+08:24.640 --> 08:27.760
+Now let's go back to our index.
+
+08:27.940 --> 08:30.580
+So here we have the slope items
+
+08:35.130 --> 08:45.830
+will up and slot here and modify our title to be most commented the soup title.
+
+08:45.830 --> 08:48.290
+What people are currently talking about
+
+08:53.460 --> 09:07.020
+and now we'll get this for each loop and we'll put that directly asked the items slot.
+
+09:07.210 --> 09:14.620
+So what we will do here is since we are passing on HDMI because this will render an HDMI instead of
+
+09:14.620 --> 09:23.370
+passing our collection object as we did here so we can already remove this code.
+
+09:23.400 --> 09:26.990
+Now let's see if this will work.
+
+09:27.000 --> 09:31.360
+So after refreshing you can see that we actually are.
+
+09:31.380 --> 09:39.450
+Well this actually still works and what we did here is well if it is a collection of items then just
+
+09:39.960 --> 09:47.700
+look through them and display them as our normal text but if you want something more customized like
+
+09:47.700 --> 09:54.960
+in this case we just don't display our list element but we display a link and we need a post I.D. to
+
+09:54.960 --> 10:00.390
+generate a root and a post title so it gets much more complicated.
+
+10:00.420 --> 10:08.510
+This is how can you render it conditionally but still reuse the same simple card component.

@@ -1,0 +1,397 @@
+WEBVTT
+
+00:00.900 --> 00:04.230
+So let's pick up where we have left off after the last lecture.
+
+00:04.260 --> 00:06.920
+So we know that we can generate this subject.
+
+00:06.930 --> 00:12.480
+We know how to say which view should be used for this particular type of e-mail.
+
+00:12.510 --> 00:15.240
+Now let's implement this view.
+
+00:15.270 --> 00:22.380
+So what you have to know about e-mail sending is that you can't just use any images from your Web site
+
+00:22.410 --> 00:23.280
+or styles.
+
+00:23.280 --> 00:28.220
+You probably would have to include everything in this email itself.
+
+00:28.680 --> 00:36.370
+So this is because most e-mail clients are very restrictive to downloading resources from outside servers.
+
+00:36.420 --> 00:40.890
+So it's always best to include everything in the email itself.
+
+00:40.890 --> 00:43.800
+Also the HDR mails should be quite limited.
+
+00:43.800 --> 00:49.980
+You shouldn't use all the modern features but actually creating HD the e-mail for e-mails is a topic
+
+00:49.980 --> 00:53.760
+of on itself and not really part of this course.
+
+00:53.760 --> 00:56.150
+But anyway let's try something.
+
+00:56.370 --> 01:03.270
+So let's go ahead and add some simple styles so mind that in e-mails you can also use layouts.
+
+01:03.290 --> 01:04.350
+So it's not a problem.
+
+01:04.350 --> 01:12.540
+You can create a common e-mail layouts that you will use some common branding for all of your e-mails.
+
+01:12.540 --> 01:16.950
+Now we are specifying the body because we want to specify the font family.
+
+01:16.950 --> 01:24.360
+And we do that not to use that default font but instead we would like to use RTL and Helvetica sans
+
+01:24.360 --> 01:27.390
+serif it's a safe font for emails.
+
+01:27.390 --> 01:29.810
+Every system should have it.
+
+01:29.820 --> 01:33.710
+So what this does is it says used those fonts in order.
+
+01:33.930 --> 01:41.730
+If they are available so aerial is available on Windows probably on Unix to Helvetica a typical Mac
+
+01:41.760 --> 01:42.820
+OS font.
+
+01:42.900 --> 01:49.230
+So you are safe here and it's always better in my opinion on using the default which would be Times
+
+01:49.230 --> 01:49.920
+New Roman.
+
+01:49.950 --> 01:58.650
+If I remember correctly now we said that everything which is are public property on a Malabo class that
+
+01:58.650 --> 02:05.100
+we are using would be available inside this very view which we have for us actually rendering that e-mail.
+
+02:05.640 --> 02:18.350
+So let's go ahead and use some of this data so we can say hi comment commendable user name.
+
+02:18.410 --> 02:26.000
+So what we are doing here is that each comment has a commendable which in our case we know is a blog
+
+02:26.000 --> 02:26.650
+post.
+
+02:26.720 --> 02:30.710
+Then each blog post has a user and user has a name attribute.
+
+02:30.740 --> 02:34.830
+So we can say hello to the outer of the blog post.
+
+02:35.480 --> 02:37.100
+That would be the first paragraph.
+
+02:37.100 --> 02:47.020
+The next one would be some one has commented on your blog post.
+
+02:47.070 --> 02:51.630
+Now what we can do is we can generate a link to this particular blog post
+
+02:54.330 --> 02:55.440
+so let's do that.
+
+02:55.440 --> 02:59.220
+We can use a rude helper as we would in any other review.
+
+02:59.310 --> 03:04.890
+We know that posts show is a route to display a blog post.
+
+03:04.890 --> 03:11.310
+Now we have to specify the blog post The Post parameter which is part of the route and we can also get
+
+03:11.310 --> 03:16.100
+that from the comment it is comment commendable Heidi.
+
+03:16.200 --> 03:23.250
+So remember the comment about is the entity related in the one too many polymorphic relationship to
+
+03:23.250 --> 03:23.940
+a comment.
+
+03:23.970 --> 03:30.000
+If you do not remember how this works you have to go back to the one too many polymorphic where we have
+
+03:30.000 --> 03:31.080
+defined it.
+
+03:31.200 --> 03:34.480
+So this will essentially be a blog post I.D..
+
+03:35.170 --> 03:43.770
+Now let's close the array and the root call and inside it we will specify the title.
+
+03:43.830 --> 03:55.070
+So that title is command commendable title so it is basically a blog post comment.
+
+03:55.070 --> 03:57.800
+Now let's close this paragraph.
+
+03:57.830 --> 04:08.210
+We can also add some horizontal line and then let's add a final paragraph to our e-mail and now we'll
+
+04:08.210 --> 04:10.370
+say who added this comment.
+
+04:10.370 --> 04:12.960
+So another link each graph.
+
+04:14.000 --> 04:15.770
+Another route to be generated.
+
+04:17.210 --> 04:22.730
+So this is user so this is our route for displaying our user profile.
+
+04:22.730 --> 04:25.880
+The parameter there is called user.
+
+04:26.030 --> 04:31.350
+And now there is comment each comment has a user relation.
+
+04:31.460 --> 04:32.600
+And then there is I.D..
+
+04:34.880 --> 04:43.010
+So this is actually extremely simple we can read all the data that we need just for having a comment
+
+04:45.300 --> 04:49.290
+now we should also generate the name of the user.
+
+04:49.290 --> 04:53.530
+So this is comment comment.
+
+04:53.550 --> 04:57.630
+User name.
+
+04:58.600 --> 05:03.730
+So we already have plenty of data but let's not leave it like that.
+
+05:03.730 --> 05:09.570
+We can also we can also generate what actually was said.
+
+05:09.600 --> 05:12.430
+So this was linked like with the user name.
+
+05:12.540 --> 05:17.760
+So let's also add said semicolon what he actually has said.
+
+05:19.080 --> 05:25.680
+And now finally the sorry not content about comment content.
+
+05:25.710 --> 05:30.480
+So we will render the content of the actual comment that was made
+
+05:33.830 --> 05:34.420
+now.
+
+05:34.430 --> 05:43.950
+The last thing we have to do is we actually have to send this email from somewhere so for now let's
+
+05:43.950 --> 05:44.980
+keep it simple.
+
+05:45.030 --> 05:51.180
+Of course when we can do that using events that would be preferred preferred way to do that.
+
+05:51.450 --> 05:58.740
+And since we will cover e-mail events very deeply in the next upcoming sections for now let's just keep
+
+05:58.740 --> 06:02.230
+it simple and do that inside the controller.
+
+06:02.310 --> 06:07.180
+So we have a controller for that a very simple one post comment controller.
+
+06:07.230 --> 06:12.220
+This is where all the comments to blog posts are added.
+
+06:12.690 --> 06:15.480
+So let's see what we are doing here.
+
+06:15.540 --> 06:20.820
+We are creating our new comment and immediately relating that to our blog posts.
+
+06:20.820 --> 06:24.780
+So what actually actually gets returned is a comment.
+
+06:25.110 --> 06:29.700
+So no surprise here the comment is already saved.
+
+06:29.700 --> 06:34.960
+Now to send us an email we will use our first save the mail for Sage.
+
+06:34.980 --> 06:37.800
+So make sure you add this import
+
+06:41.220 --> 06:44.510
+now we should specify to whom this should be sent.
+
+06:44.550 --> 06:53.850
+And fortunately we can just specify our user instant instance instead of directly specifying the email
+
+06:53.910 --> 06:54.720
+address.
+
+06:54.750 --> 07:02.610
+So a lot of it is smart it can understand that and we already have a post and the Post has a user.
+
+07:02.880 --> 07:09.270
+So we want to send this email to the outer of the post that someone has commented on his email.
+
+07:09.720 --> 07:10.940
+So this is very smart.
+
+07:12.000 --> 07:21.960
+Finally there is a send the method and magically what you see it accepts an instance of the Malabo class
+
+07:23.010 --> 07:27.800
+and what comment post it happens to be extending is exactly the same.
+
+07:27.810 --> 07:30.670
+Then mail level class.
+
+07:30.750 --> 07:37.820
+So what we will do right now is we will create a new instance of the sorry.
+
+07:37.830 --> 07:38.570
+Not this one.
+
+07:38.640 --> 07:42.700
+The comment post that class that we have just created.
+
+07:42.720 --> 07:51.660
+Mind that import that was added and since we know that this class has a constructor with one argument
+
+07:51.660 --> 08:00.030
+that is required and it is a comment we now can pass our comment variable which we get from calling
+
+08:00.030 --> 08:01.210
+post comments.
+
+08:01.260 --> 08:03.490
+Create.
+
+08:03.610 --> 08:05.570
+So this is magical isn't it.
+
+08:05.590 --> 08:10.680
+That's everything that we had to do to actually send an email.
+
+08:11.200 --> 08:15.720
+So let's remove this line it's not really needed now.
+
+08:15.730 --> 08:22.060
+Important thing to know is that you probably shouldn't be sending emails directly throughout the controller
+
+08:22.780 --> 08:26.000
+because this can be done later and well.
+
+08:26.020 --> 08:28.910
+Sending email usually is pretty long.
+
+08:29.110 --> 08:32.980
+So this can take a couple of seconds even but we'll get to that later.
+
+08:32.980 --> 08:35.090
+Now let's just leave it as it is.
+
+08:35.140 --> 08:39.310
+Save the changes and let's go to any blog post.
+
+08:39.310 --> 08:43.060
+Make sure you are out antiquated and let's write a comment.
+
+08:43.480 --> 08:44.620
+Hello.
+
+08:44.710 --> 08:45.900
+Writing.
+
+08:47.470 --> 08:48.910
+This comment.
+
+08:48.970 --> 08:54.160
+To see an email you can write anything that you like here.
+
+08:54.380 --> 09:03.400
+I'll just press out comment and something actually went wrong with the route I'm using so it's not post
+
+09:03.400 --> 09:05.190
+so it's posts show.
+
+09:05.200 --> 09:06.210
+Sorry for that.
+
+09:06.460 --> 09:07.730
+Let's fix that.
+
+09:07.900 --> 09:17.310
+And just to refresh this so you can see it's already taking a little bit longer to post a comment so
+
+09:17.310 --> 09:23.450
+the comment is there but it's not something that interests us what we want to check.
+
+09:23.460 --> 09:28.980
+Is the mail drop so you can see we already have this message.
+
+09:28.980 --> 09:36.090
+You can check out the subject comment was posted on your and this is the blog post title something in
+
+09:36.090 --> 09:38.700
+Latin blog post.
+
+09:38.700 --> 09:41.020
+There we have the content which is HDMI.
+
+09:41.040 --> 09:42.600
+You can even check the source.
+
+09:42.600 --> 09:50.450
+It is exactly how we generate adult but the most interesting part is actually the HDMI out.
+
+09:50.490 --> 09:56.670
+Someone has commented on your blog post the title which also has a link we can directly go to this blog
+
+09:56.670 --> 09:58.060
+post.
+
+09:58.410 --> 10:06.170
+And then there is the John Doe link so you can go to the John Doe profile and exactly what he has said.
+
+10:06.180 --> 10:08.010
+So I actually have written this.
+
+10:08.070 --> 10:10.240
+Just seconds before.
+
+10:10.440 --> 10:15.480
+So this was everything that we needed to actually send an email.
+
+10:15.630 --> 10:19.850
+So in the next lecture we'll see much more options that we can deal with.
+
+10:19.870 --> 10:20.440
+Emails.
+
+10:20.490 --> 10:22.280
+But this is enough for now.
+
+10:22.290 --> 10:27.060
+You are actually able to send emails from your larval application.

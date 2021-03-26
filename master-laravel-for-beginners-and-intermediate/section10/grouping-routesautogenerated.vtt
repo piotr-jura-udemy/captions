@@ -1,0 +1,91 @@
+WEBVTT
+
+00:01.180 --> 00:09.160
+In the past few lectures, we have added a lot of roots and they all have the same common property,
+
+00:09.640 --> 00:15.840
+the same prefix slash farm in Laravel, you can group roots.
+
+00:16.360 --> 00:19.030
+This group Roots can share the same attributes.
+
+00:19.960 --> 00:28.930
+Groups of roots can have the same prefix, the same roots, name prefix or the same middleware applied.
+
+00:29.680 --> 00:32.140
+We haven't talked about the media word yet.
+
+00:32.950 --> 00:36.930
+So let's see an example we can understand right now.
+
+00:37.840 --> 00:45.730
+So let's give all foreign roots the same Eurail prefix and the same name prefix.
+
+00:48.390 --> 00:57.600
+Root grouping starts with calling the root class static methods, applying the common properties in
+
+00:57.600 --> 01:04.440
+our case prefix for the usual prefix, which would be fun.
+
+01:06.740 --> 01:14.550
+And name for the rude name prefix, in our case, let's use fun dots.
+
+01:16.190 --> 01:23.120
+Finally, we call a group that accepts an anonymous function.
+
+01:28.270 --> 01:35.290
+Inside this anonymous function, we now move all rude declarations that should have above parameters
+
+01:35.290 --> 01:35.980
+applied.
+
+01:43.060 --> 01:55.030
+Now, be sure to add the new statement for any variables from outside the context that post in our example.
+
+01:57.410 --> 02:04.850
+Now let's open the terminal and run a bipartisan route, at least to see all the route definitions from
+
+02:04.850 --> 02:05.550
+our up.
+
+02:07.490 --> 02:12.410
+Now you should see that all the fun routes have the fun prefix added.
+
+02:12.440 --> 02:14.990
+So now we have fun twice.
+
+02:15.830 --> 02:21.080
+And also the names have the fun dots prefix applied to them.
+
+02:21.740 --> 02:28.460
+So the final step in here would be to clean it up, which won't be fun actually, as we have to remove
+
+02:28.460 --> 02:31.670
+this fun prefix from all rude names.
+
+02:32.720 --> 02:38.150
+That's the whole point of grouping not to have to repeat the same text or same attributes.
+
+02:38.810 --> 02:43.220
+And also it would be decent to give all those roots are specific name.
+
+02:43.970 --> 02:45.860
+So I'll do that in this video.
+
+02:46.040 --> 02:47.540
+But we don't really have to watch this.
+
+02:47.880 --> 02:51.290
+You can grab the code from GitHub or just leave it as it is.
+
+02:58.410 --> 03:06.450
+Wolf, finally, so we can see this part wasn't fun, but not everything in programming is fun.
+
+03:06.660 --> 03:09.310
+So now let's see the list again.
+
+03:10.380 --> 03:15.210
+OK, now we have the prefix without specifying it explicitly for every route.
+
+03:15.210 --> 03:20.930
+And also we have the name prefix and they all look really nice right now.

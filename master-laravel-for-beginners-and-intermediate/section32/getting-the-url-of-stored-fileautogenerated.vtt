@@ -1,0 +1,316 @@
+WEBVTT
+
+00:00.840 --> 00:07.920
+Now let's see how we can get the actual you URL of the file that was uploaded and stored.
+
+00:08.670 --> 00:16.890
+So let's go to the blog post adding page make sure you are authenticated and select one image to be
+
+00:16.890 --> 00:20.330
+uploaded.
+
+00:20.340 --> 00:22.200
+Let's go to the post controller.
+
+00:22.270 --> 00:29.950
+And instead of dumping those two files which should be equivalent with the exception that they are the
+
+00:29.950 --> 00:35.480
+first line this line stores the file using the disk called public.
+
+00:35.500 --> 00:38.910
+And the second one that is called local.
+
+00:38.920 --> 00:45.550
+So here we haven't specified the disk as you might remember because we are using the default disk and
+
+00:45.550 --> 00:48.610
+the default is public.
+
+00:48.610 --> 00:57.490
+So let's assign the name that will be returned to a variable called Name one and now here instead of
+
+00:57.490 --> 01:03.650
+dumping let's assign this name to name to
+
+01:07.120 --> 01:09.560
+okay.
+
+01:09.610 --> 01:20.220
+So now to actually present this file names to the user we will use the storage your URL method so the
+
+01:20.220 --> 01:24.170
+store storage for sate your URL.
+
+01:24.190 --> 01:26.580
+Now let's display name one
+
+01:29.930 --> 01:32.590
+and this time we'll use that disk.
+
+01:32.660 --> 01:40.440
+Local and this is because we have stored this second file to the disk out.
+
+01:40.450 --> 01:43.520
+So this was put to a different place.
+
+01:43.770 --> 01:50.490
+So remember when you use local driver the directory is specified under the root directory.
+
+01:50.580 --> 01:57.120
+And additionally anything that you specify as the first argument which would be a folder thumbnails
+
+01:57.150 --> 01:59.550
+in this case.
+
+01:59.550 --> 02:01.670
+So let's go back storage disk.
+
+02:01.740 --> 02:05.280
+Local you URL.
+
+02:05.280 --> 02:08.200
+And here we display name too.
+
+02:08.280 --> 02:13.620
+So you might have noticed that when we previously dumped those names.
+
+02:13.620 --> 02:15.710
+Name one and name two.
+
+02:15.810 --> 02:24.280
+They were exactly the same so this only contained the name of their file including the folder that you
+
+02:24.280 --> 02:31.240
+have specified and the name that we have specified explicitly to the file but it didn't contain any
+
+02:31.240 --> 02:38.470
+additional information like whether it was stored in the storage app or a storage up public.
+
+02:38.530 --> 02:46.770
+That's why when you want to fetch the you URL you also have to tell it on what disk the file is stored.
+
+02:46.930 --> 02:50.230
+So let's save the changes and see what will we get.
+
+02:51.610 --> 02:53.500
+So this is the first line.
+
+02:53.650 --> 03:02.650
+So what you can see is HDD you link to a domain called local host which we haven't specified anywhere
+
+03:03.310 --> 03:04.690
+yet at least.
+
+03:04.750 --> 03:13.840
+And then there is this part storage thumbnails 89 JPEG but the second line when we specified that we
+
+03:13.840 --> 03:20.160
+want to use that disk locale this actually gives us only our relative path.
+
+03:20.170 --> 03:25.930
+So it's slash storage thumbnails 89 and JPEG.
+
+03:25.930 --> 03:34.180
+Now let's see how does it figure out what your URL should be used for that particular file on particular
+
+03:34.270 --> 03:35.870
+disk.
+
+03:35.950 --> 03:44.110
+So it is also configurable inside the file system speech p and you can see that the local disk doesn't
+
+03:44.110 --> 03:52.990
+have the user l property specified that's why it haven't added anything before the actual file that
+
+03:52.990 --> 03:54.930
+was generated when storing this file.
+
+03:54.940 --> 04:02.740
+So it only gives them the storage folder and then whatever you have provided your folder and the file
+
+04:02.860 --> 04:04.420
+name.
+
+04:04.420 --> 04:12.670
+Now the first example also contained a new URL and this was thanks to the you around property which
+
+04:12.670 --> 04:20.050
+it gets from the environment variable called up underscore your URL slash storage.
+
+04:20.800 --> 04:29.160
+So this is configured inside the DOT and the file actually it is at the very beginning of the file and
+
+04:29.160 --> 04:35.050
+you should modify this to whatever domain your site is currently on.
+
+04:35.070 --> 04:43.410
+So obviously you will provide an environment variable on any test stage or production environments but
+
+04:43.770 --> 04:47.850
+on your local machine if you have configured the domain the same as I did.
+
+04:47.880 --> 04:54.180
+So larval test you will specify larval test here.
+
+04:54.180 --> 05:03.230
+So make sure you save the changes and now let's refresh this page it should re re upload the same image.
+
+05:03.610 --> 05:11.790
+And now you can see that the first link where we have used a default public disk gives a link like this.
+
+05:11.890 --> 05:18.590
+Let's copy that link and see if we can open it you can see that we can't.
+
+05:18.730 --> 05:20.650
+We have our 404 page
+
+05:23.380 --> 05:31.300
+and this is for a reason because it will look for things inside the public folder so there is no storage
+
+05:31.300 --> 05:32.990
+folder inside it.
+
+05:33.100 --> 05:35.450
+And yet of course no fund.
+
+05:35.480 --> 05:39.640
+Nice folder inside storage folder.
+
+05:39.640 --> 05:42.420
+So now let's see what we should do.
+
+05:42.550 --> 05:49.580
+So we have the public disk which is configured to store the files inside the application storage directory.
+
+05:49.630 --> 05:52.180
+Then up folder and public folder.
+
+05:52.960 --> 05:55.510
+So that's the one you see on the left.
+
+05:55.510 --> 05:58.380
+Storage up public.
+
+05:58.630 --> 06:07.300
+But those files to be publicly served by the web server they need to be inside this public folder.
+
+06:07.300 --> 06:10.480
+You can even see that there is the indexed BHP file there.
+
+06:10.480 --> 06:19.680
+The main file of the larval application and then all the assets like CSX says James and as Fuji files.
+
+06:19.960 --> 06:26.000
+So you definitely should not copy those files over to the public folder.
+
+06:26.110 --> 06:31.200
+The way to do it is to create a so-called symbolic link.
+
+06:31.300 --> 06:40.390
+So if you are a Windows user you probably are accustomed to creating links on your desktop to files.
+
+06:40.390 --> 06:47.920
+And basically this is a link and you don't really have to run any Unix commands to create links because
+
+06:48.030 --> 06:53.410
+Lavell has a command to do that and it is called Storage link.
+
+06:53.410 --> 07:01.990
+And as you can see on the description it will create a symbolic link from that public storage to storage
+
+07:02.080 --> 07:03.250
+up public.
+
+07:04.330 --> 07:18.060
+So let's run it BHP artisan storage link as the message says the directory has been linked.
+
+07:18.090 --> 07:20.840
+So now what you see here is a link.
+
+07:20.850 --> 07:22.490
+So this is the public folder.
+
+07:22.500 --> 07:24.300
+So let's go one level up.
+
+07:25.020 --> 07:29.260
+So we had to create a link to folder which was inside.
+
+07:29.280 --> 07:39.920
+This is our main application directory storage up public and this command created this link inside the
+
+07:39.920 --> 07:40.970
+public folder.
+
+07:40.970 --> 07:48.050
+Now if you will go to this storage link folder you will see that we have the same thumbnails directory
+
+07:48.050 --> 07:52.280
+with the older files that we have so far uploaded
+
+07:54.970 --> 08:05.430
+so this was the URL of the file that was generated for the public disk so let's remind ourselves how
+
+08:05.430 --> 08:06.630
+we did that.
+
+08:06.660 --> 08:15.240
+So after uploading the file the result of this store asked method was the file name and we ask it to
+
+08:15.240 --> 08:18.910
+generate a new URL using a default disk.
+
+08:18.930 --> 08:25.830
+So this makes sense because if you would change the files to store them in different place like as free
+
+08:25.830 --> 08:32.570
+or any other storage like FTB for example then you use the same interface.
+
+08:32.580 --> 08:41.430
+And for example what you might then do is just change the default disk name and then your code can stay
+
+08:41.520 --> 08:42.610
+the same.
+
+08:42.750 --> 08:49.650
+And if you do not know that for example for the S3 it has completely different URLs and then you might
+
+08:49.650 --> 08:57.570
+just give direct your URLs for the user to let's say download some files or images or documents whatever
+
+08:57.570 --> 08:59.580
+that might be.
+
+08:59.580 --> 09:07.470
+So it's basically the best way to use this storage you url to get the actual URL for the file which
+
+09:07.470 --> 09:09.390
+has to be somehow downloaded.
+
+09:10.350 --> 09:17.130
+Now in this case it will be downloaded by by the web browser basically because we will put that on the
+
+09:17.130 --> 09:19.330
+blog post page.
+
+09:19.410 --> 09:25.710
+So now if you will copy this again or just refresh this page you should see the image that you have
+
+09:25.710 --> 09:27.890
+just uploaded.
+
+09:27.890 --> 09:35.780
+So now in this lecture we generally get accustomed we how we can get you a URL for a file depending
+
+09:35.780 --> 09:44.930
+on the disk where we have stored that and also how to configure the you URL getting for your application
+
+09:45.170 --> 09:52.160
+and well in the next lecture we will finally try to upload this file to store its name somewhere we
+
+09:52.150 --> 09:58.610
+will actually want to store the file name inside the database and then later we will see how we can
+
+09:58.610 --> 10:02.000
+display this family image on the blog post page.

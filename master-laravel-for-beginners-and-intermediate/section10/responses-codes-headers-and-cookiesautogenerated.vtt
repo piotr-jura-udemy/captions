@@ -1,0 +1,133 @@
+WEBVTT
+
+00:01.790 --> 00:10.140
+Apart from returning the text or a view rendered using blade templates, Laravel has ways to build our
+
+00:10.220 --> 00:19.610
+proper HTP response with all its features like response codes, setting cookies and setting response
+
+00:19.610 --> 00:20.240
+headers.
+
+00:22.160 --> 00:31.610
+For the purpose of this lecture, let's create Adami route with the fun slash responses you are I.
+
+00:37.190 --> 00:46.310
+Now, a lot of the way is to use its helper functions, the response function will create a new response
+
+00:46.310 --> 00:46.970
+object.
+
+00:47.450 --> 00:52.910
+This object has methods like header or kookie.
+
+00:59.620 --> 01:06.250
+The response function accepts the free parameters, all optional, first is the content to return.
+
+01:06.760 --> 01:12.490
+Second, the status code and third is an array of response headers.
+
+01:13.750 --> 01:19.450
+So why won't we return the Post's variable that we actually have in this file?
+
+01:19.480 --> 01:22.420
+But first, we need to use it for this function.
+
+01:23.020 --> 01:25.330
+So posts will be a content.
+
+01:25.870 --> 01:31.780
+Let's change the status codes to something else, maybe two hundred one and let's leave the headers
+
+01:31.780 --> 01:32.320
+empty.
+
+01:36.050 --> 01:45.230
+There, Heather Medalled says the response header like contents typed, for example, tying the browser
+
+01:45.230 --> 01:50.510
+what to expect from their content, whether it is HTML or JSON.
+
+01:50.930 --> 01:55.580
+So let's return something that would be understood as Jason.
+
+01:58.100 --> 02:01.230
+Now, Cookie says the browser cookies.
+
+02:01.910 --> 02:06.480
+Cookies are useful to keep users specific data on the browser side.
+
+02:07.220 --> 02:15.680
+This is used to implement features like User Session or are Remember Me feature of a logged in user.
+
+02:16.250 --> 02:19.410
+So let's set an example, Cookie with that.
+
+02:19.640 --> 02:29.720
+My cookie name, the value being my name and the cookie should expire after three thousand six hundred
+
+02:29.720 --> 02:31.850
+minutes, which is one hour.
+
+02:34.430 --> 02:43.340
+Now, let's get back to the status codes in all responses returned to status code, these codes have
+
+02:43.340 --> 02:53.090
+meaning the most common across the web is 200, meaning OK for all four meaning not found and 500,
+
+02:53.090 --> 02:55.190
+which is internal server error.
+
+02:56.120 --> 03:03.080
+Though with traditional websites, you'd rarely see anything but those free above when developing API
+
+03:03.120 --> 03:05.630
+is the full spectrum is useful.
+
+03:07.160 --> 03:10.520
+Take a look at the link from the Amde N.
+
+03:11.630 --> 03:17.720
+To read more about all the possible codes that you might use and encounter.
+
+03:19.410 --> 03:26.130
+So how using the response helper is different from using the view helper function, you might ask?
+
+03:27.130 --> 03:29.740
+When and why you should use which?
+
+03:30.820 --> 03:37.720
+That is simple use response helper when you need to do something extra, like setting a header or a
+
+03:37.720 --> 03:46.150
+cookie or change the response status code, by the way, the response helper function creates a response
+
+03:46.150 --> 03:54.250
+object, which also has the view method, which accepts exactly the same arguments as this separate
+
+03:54.250 --> 03:56.160
+view helper function.
+
+03:56.710 --> 04:02.860
+So you can also render blade views while adding headers cookies and changing the status code.
+
+04:04.660 --> 04:13.360
+There is also a simpler way to return Jassam done adding content type header explicitly, but will get
+
+04:13.360 --> 04:15.220
+to it in a couple lectures.
+
+04:17.600 --> 04:26.960
+Finally, let's see this in action heat, this farm slash response, says Eurorail in the browser,
+
+04:27.470 --> 04:34.730
+you won't see anything special, but if you open the network tab, you can see a different response
+
+04:34.730 --> 04:40.630
+code to the one we've sent all called response header.
+
+04:40.640 --> 04:48.740
+Is there the content type that we have said to application Jason and the cookie we've created called
+
+04:48.740 --> 04:55.550
+my cookie, which you can also verify in application type cookies on the left and during this?

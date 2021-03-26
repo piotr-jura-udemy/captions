@@ -1,0 +1,106 @@
+WEBVTT
+
+00:01.040 --> 00:08.330
+Laravel, configuration files are stored inside the config folder that's for all default.
+
+00:08.450 --> 00:11.110
+Laravel Configuration settings are kept.
+
+00:11.750 --> 00:15.660
+It's also the place where any new config files should land.
+
+00:15.710 --> 00:23.840
+If, for example, you install some third party librarian, let's open the database config file.
+
+00:24.560 --> 00:33.170
+It contains predefined config for different database systems like my school or postcrisis.
+
+00:34.280 --> 00:38.270
+It lets you configure the default connection to use.
+
+00:39.820 --> 00:48.010
+Now, apart from a literal settings values, notice how the end function is used in places, that's
+
+00:48.010 --> 00:49.030
+pretty important.
+
+00:49.210 --> 00:53.110
+Let's dig into that some settings for your app.
+
+00:53.120 --> 00:57.190
+Describe your application, general behaviour and preferences.
+
+00:58.450 --> 01:01.090
+But other settings might include credentials.
+
+01:02.500 --> 01:06.040
+Like database username and password.
+
+01:07.090 --> 01:13.870
+Some say things might be different for your application, depending on environment you run it in locally,
+
+01:14.140 --> 01:21.130
+you might use files for cash on production, you'd use something like redis.
+
+01:22.570 --> 01:30.610
+Environment specific configuration can be achieved using environment variables, there are system level,
+
+01:31.240 --> 01:38.440
+server level, environmental variables and ones that are defined in a special dot and file.
+
+01:39.600 --> 01:45.840
+Let's take a look at this diagram to understand how Laravel gets the final configuration value.
+
+01:46.260 --> 01:54.240
+So, as we have said, there are multiple configuration files and if for a certain setting, the end
+
+01:54.240 --> 01:58.680
+function is not used, we just use the literal setting value.
+
+01:59.370 --> 02:09.420
+If and if it's used well, we first check if there is an environment variable on the server level or
+
+02:09.420 --> 02:10.460
+system level.
+
+02:10.710 --> 02:15.720
+If there is, we return the server or system level value.
+
+02:16.450 --> 02:22.260
+If there is not, we check if there is a dot and file in the project route.
+
+02:23.040 --> 02:28.410
+If there is one, we read this environment variable value from this file.
+
+02:29.570 --> 02:38.330
+If there is no such file, we read the default value provided in the end of function, if, of course
+
+02:38.330 --> 02:39.290
+there is one.
+
+02:41.410 --> 02:43.000
+Now back to the code editor.
+
+02:44.130 --> 02:50.460
+The Delta and file should have been created for you when you created the Laravel project.
+
+02:51.060 --> 02:57.690
+It's always created by copying the dot and dot example file.
+
+02:58.740 --> 03:08.070
+If you don't see the dot and fail in your project created now and copied the contents from dot and dot
+
+03:08.070 --> 03:18.690
+example note, you should never commit the dot and the file to source control, only share the dot and
+
+03:18.810 --> 03:26.820
+dot example file, which might contain all environmental variables that need to be defined without really
+
+03:27.060 --> 03:31.500
+containing any values or just having some dummy defaults.
+
+03:33.080 --> 03:41.600
+You don't share that dirt and file for security reasons not to expose any potential secrets or passwords
+
+03:41.600 --> 03:44.570
+that you might have in this dot and file.

@@ -1,0 +1,277 @@
+WEBVTT
+
+00:00.330 --> 00:06.900
+In the next lecture we will create our first subscriber and will actually handle some events that are
+
+00:06.900 --> 00:09.810
+being dispatched by the light of an application itself.
+
+00:09.930 --> 00:11.790
+So some built in events.
+
+00:11.790 --> 00:18.120
+But before we do that we'll learn the basics of logging in LA though because what we will actually do
+
+00:18.120 --> 00:22.820
+will log some information when something happens in light of all.
+
+00:22.830 --> 00:29.670
+So let's first take a look at the logging peach bee inside your config folder to understand the basics
+
+00:29.730 --> 00:34.510
+of configuring the loggers inside your larval up.
+
+00:34.580 --> 00:37.880
+So first you will need to understand what logs is.
+
+00:37.880 --> 00:44.030
+And basically they are well the name should say anything but basically you will write some information
+
+00:44.030 --> 00:49.610
+about what has happened inside your application and you can even find the logs they write directory
+
+00:49.610 --> 00:51.690
+inside the storage folder.
+
+00:51.950 --> 00:57.290
+So those are simple text files that contain some information whenever something has failed.
+
+00:57.290 --> 01:03.350
+You had some errors or well you might add some additional logs saying what has happened in your application
+
+01:03.350 --> 01:09.890
+to later review that because it's always best to add some logging when you have your application working
+
+01:09.950 --> 01:16.070
+on production servers because maybe that will be the only one to figure out what actually has happened
+
+01:16.070 --> 01:17.490
+leading to an error.
+
+01:17.720 --> 01:24.020
+Or sometimes you might just log some information that you will use for calculating how your application
+
+01:24.020 --> 01:25.630
+performs things like that.
+
+01:25.630 --> 01:31.940
+So you are just saying along the way when something happens in your application what has happened.
+
+01:31.940 --> 01:36.510
+But the main benefit of logs is always checking the details.
+
+01:36.530 --> 01:40.250
+Error messages when something didn't work.
+
+01:40.280 --> 01:46.550
+So now let's take a look at the configuration so looks consists of our Fink called channels.
+
+01:46.730 --> 01:50.330
+So you specify where you would like those logs to be put.
+
+01:51.020 --> 01:57.650
+So this has to be one of those configured channels inside the channels array and the default one is
+
+01:57.710 --> 01:59.190
+stuck.
+
+01:59.310 --> 02:06.600
+So what stuck is is all those logs have our specific driver assigned to them like stuck single daily
+
+02:06.690 --> 02:07.680
+or even slug.
+
+02:07.710 --> 02:14.790
+So we can log something on a slug you can use monologue which is a great library for logging.
+
+02:14.860 --> 02:16.620
+Basically a peach bee standard.
+
+02:16.630 --> 02:17.890
+So you should always use it.
+
+02:17.890 --> 02:20.680
+And of course a lot of it is utilizing it.
+
+02:20.680 --> 02:26.650
+So there is a configuration for a paper trail tool that's our cloud slash solution for keeping logs
+
+02:26.650 --> 02:28.000
+and reading them.
+
+02:28.000 --> 02:33.860
+And also you can log to the standard error do that since log which is a Unix way of storing logs end
+
+02:33.890 --> 02:35.410
+to the error log.
+
+02:35.560 --> 02:39.850
+So whenever you configure some driver you will specify some additional parameters.
+
+02:39.850 --> 02:44.770
+The most important one is of course the driver for our channel.
+
+02:44.780 --> 02:52.180
+Then those driver might require some additional data for example the single is basically storing something
+
+02:52.210 --> 03:01.430
+in a file so Daniel specify what that path is for those files then important setting is also eye level.
+
+03:01.580 --> 03:07.940
+So it will say from which level this logs should be logged because logs have different levels some of
+
+03:07.940 --> 03:14.240
+them can information some of them can be debugging information some of them can be errors and others
+
+03:14.240 --> 03:15.110
+are critical.
+
+03:15.110 --> 03:18.050
+So something really bad has happened.
+
+03:18.110 --> 03:24.590
+For example you can see that on slack you have a default level of critical because well usually when
+
+03:24.590 --> 03:29.540
+you are using this tool slack you know that well having too many messages is just bad.
+
+03:29.540 --> 03:33.800
+So you should only see if something is really critical.
+
+03:33.800 --> 03:37.420
+Now you can also mix those configure channels and drivers.
+
+03:37.420 --> 03:44.000
+So for example basically the stack driver lets you combine some different channels together.
+
+03:44.000 --> 03:47.020
+So for example in this conflict this is very simple.
+
+03:47.090 --> 03:52.840
+So using this default stock driver actually is using the daily channel.
+
+03:52.850 --> 03:59.720
+So this would just create those daily files that you can see here inside up storage logs for every day.
+
+03:59.720 --> 04:03.140
+You will have a separate file with the suffix log.
+
+04:03.140 --> 04:04.940
+So log extension.
+
+04:05.140 --> 04:11.360
+Now you can also configure some other channels here so you can add for example slack and then whatever
+
+04:11.360 --> 04:19.880
+you are logging will be pushed to the daily whenever the error message message or the log level is at
+
+04:19.880 --> 04:25.600
+least debug and then it will also be posted to slack but using Slack settings.
+
+04:25.610 --> 04:33.470
+So whenever something is at least critical so let's remove that because we do not have the slack configured.
+
+04:33.470 --> 04:37.040
+And now let's see how we can use this logging.
+
+04:37.040 --> 04:44.150
+So let's round peach bee artisan Tinker and you can post logs using the log for seed and then log has
+
+04:44.150 --> 04:48.020
+some methods that you can use to specify what's the level of the error.
+
+04:48.020 --> 04:51.940
+So as I've said you can have info which is the lowest level.
+
+04:51.940 --> 04:58.080
+So info can be something like hello so it doesn't return anything.
+
+04:58.080 --> 05:01.910
+There is also log log warning.
+
+05:01.920 --> 05:04.080
+That's a higher level a warning
+
+05:07.060 --> 05:14.690
+or log error or something really bad.
+
+05:14.690 --> 05:16.800
+Now let's take a look at this file.
+
+05:16.910 --> 05:20.570
+You need to open the fire which matches the date when you are using this course.
+
+05:20.570 --> 05:23.610
+So for me it's for example 12th of May.
+
+05:23.870 --> 05:31.020
+And you can see I have all of those messages inside my log file so they all contain environment man
+
+05:31.040 --> 05:31.400
+name.
+
+05:31.400 --> 05:36.680
+So this would be by default used as an environment name in which we are currently working.
+
+05:36.680 --> 05:38.320
+So we are on local environment.
+
+05:38.320 --> 05:40.140
+So this is local on test.
+
+05:40.140 --> 05:44.060
+This would be probably test and on production are production environment.
+
+05:44.300 --> 05:45.560
+Then we have a log level.
+
+05:46.010 --> 05:46.990
+And the actual message.
+
+05:47.020 --> 05:49.430
+So you can see this is what I have just created.
+
+05:49.430 --> 05:54.320
+Obviously those messages that I've created do not make any sense they are useless.
+
+05:54.320 --> 05:56.660
+I just wanted to show you how this would work.
+
+05:57.830 --> 06:04.130
+So those are the basics of logging how to use that you can of course read more inside the documentation
+
+06:04.160 --> 06:09.320
+because this would only make sense when you actually start putting your application on a production
+
+06:09.320 --> 06:17.060
+server logs locally are useful but not as useful when your application works on production servers.
+
+06:17.060 --> 06:23.660
+So we know the basics of logs and now in the next lecture we will actually create a subscriber that
+
+06:23.660 --> 06:26.360
+will listen to couple of events of LA Evo.
+
+06:26.420 --> 06:31.880
+So remember that distinction between leased and are and subscriber so list and are only can handle one
+
+06:31.880 --> 06:41.320
+type of an event and subscriber can contain logic of handling a couple of types of events at once.
+
+06:41.390 --> 06:47.720
+And what we will do is we'll create a subscriber that will listen to the cash events of Lavell so we'll
+
+06:47.720 --> 06:53.540
+know whether something was actually read from the cash or read directly from the database.
+
+06:53.540 --> 06:59.030
+So then you will you can use that information for example for some analytics that you have like whatever
+
+06:59.030 --> 07:05.600
+that is Google Analytics some tools like promontory graph pharma to display some dashboards of how your
+
+07:05.600 --> 07:07.490
+application is performing.
+
+07:07.490 --> 07:09.500
+So let's see that in the next lecture.

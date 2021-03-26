@@ -1,0 +1,37 @@
+WEBVTT
+
+00:00.470 --> 00:09.470
+Sometimes you need to return only the data from the response without any HTML and in such cases most
+
+00:09.470 --> 00:12.680
+of the time you wanted in the Jason format.
+
+00:13.910 --> 00:17.210
+Let's try it out by defining our new route.
+
+00:18.910 --> 00:23.830
+Let's make this route available under fun slash Jason.
+
+00:29.150 --> 00:39.620
+Response object, Jason method is the easiest way to return a Jason response, we can return the Post's
+
+00:39.620 --> 00:42.420
+variable we have available in this file.
+
+00:42.680 --> 00:48.560
+First, we need to add the youth statement for it so it is available within this anonymous function.
+
+00:49.850 --> 00:56.250
+At the end of this course, you will find a complete section about making APIs that work with Jason.
+
+00:56.720 --> 01:04.130
+For now, let's see this in action in the browser and later in the API client called Posman.
+
+01:06.400 --> 01:10.890
+So the browser refers to let's hit this Farnsworth's Jason and Point.
+
+01:11.180 --> 01:15.130
+That's our Jason returned and now the postman.
+
+01:16.940 --> 01:18.500
+And this is our data.

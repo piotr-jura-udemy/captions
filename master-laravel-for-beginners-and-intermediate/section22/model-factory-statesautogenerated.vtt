@@ -1,0 +1,445 @@
+WEBVTT
+
+00:00.960 --> 00:09.900
+In the last lecture we introduced the concept of a model factory so model factory is supposed to generate
+
+00:10.410 --> 00:16.800
+model with random data inside it so is very useful for tests.
+
+00:16.800 --> 00:23.700
+For example where we don't really care about the content of those models we just need to generate a
+
+00:23.700 --> 00:24.930
+lot of them.
+
+00:24.990 --> 00:30.930
+And in this case we use that to generate for comments with the random content.
+
+00:30.960 --> 00:38.090
+But we only occurred to said that that post idea of this randomly generated models.
+
+00:38.220 --> 00:47.460
+So as you remember this is how the model factory looks like and you create this model factories using
+
+00:47.550 --> 00:50.170
+larval artisan command.
+
+00:50.340 --> 00:52.650
+And this one is for comments.
+
+00:52.650 --> 00:59.040
+And I was also talking about creating a model factory for blog posts.
+
+00:59.040 --> 01:05.430
+As you remember we have created this create dummy blog post method.
+
+01:06.330 --> 01:07.560
+So let's go into it.
+
+01:07.680 --> 01:14.690
+You can by the way you can go into a method if you will press out and click the name of the method.
+
+01:14.730 --> 01:15.800
+So let's do that now.
+
+01:17.400 --> 01:24.870
+And inside this method we explicitly create a new blog post instance set its content.
+
+01:24.900 --> 01:33.420
+So this means we actually care that the title is set to this specific one and also the content is set
+
+01:33.420 --> 01:34.740
+to this specific one.
+
+01:35.310 --> 01:41.130
+So let's see how we can achieve that that we can have a generic model factory.
+
+01:41.400 --> 01:53.320
+So it allows us to generate random data but also allows us to sometimes specify automatically what content
+
+01:53.400 --> 01:55.950
+we exactly would like inside this model.
+
+01:55.950 --> 02:01.530
+So what attributes we would like to set to specific ones.
+
+02:01.530 --> 02:04.830
+So this might seem a little bit confusing right now.
+
+02:04.830 --> 02:10.310
+So the example is always best to see this with your own eyes.
+
+02:10.320 --> 02:23.860
+So let's generate a new model factory using BHP artisan make factory and we'll call it blog post factory
+
+02:25.000 --> 02:32.230
+and specify that the model should be blog post.
+
+02:32.240 --> 02:39.550
+Now let's go to the database factories folder and open our new blog post factory.
+
+02:39.560 --> 02:48.470
+So the same as with the common factory inside it will defined what should be the values for the attributes
+
+02:48.560 --> 02:50.780
+of this model.
+
+02:50.780 --> 03:00.340
+So since the blog post has title will generate a new title using faker.
+
+03:00.410 --> 03:09.450
+And now let's see what we can use for that so inside the faker documentation you can see a lot of useful
+
+03:10.010 --> 03:14.550
+a lot of useful generators that you can use.
+
+03:14.550 --> 03:17.130
+One of them could be sentence
+
+03:20.000 --> 03:22.310
+so let's use sentence.
+
+03:22.400 --> 03:26.050
+You can see that it accepts parameters actually.
+
+03:26.690 --> 03:33.580
+So for example the first parameter you can specify to tell it how many words you would like to generate.
+
+03:33.590 --> 03:40.790
+And you can see an example result on the right but let's just use the default one.
+
+03:41.000 --> 03:47.970
+So this would be six by default but well maybe we can even change that to 10.
+
+03:48.050 --> 03:51.280
+Next we have the content.
+
+03:51.290 --> 03:58.910
+So a blog post is usually a little bit longer than the type titles so let's see what we can use for
+
+03:58.910 --> 04:01.480
+generating a longer text.
+
+04:01.520 --> 04:09.350
+So for example there is that paragraph method and you can specify how many sentences do you want.
+
+04:10.040 --> 04:16.280
+So the default is free or you can have paragraphs.
+
+04:16.280 --> 04:19.520
+So this will generate couple of paragraphs.
+
+04:19.520 --> 04:24.290
+And by default it will return them as an array.
+
+04:24.290 --> 04:31.610
+So if you had specified the first parameter to be let's say free as it is by default then you will get
+
+04:31.610 --> 04:35.910
+them array of free paragraphs of free strings basically.
+
+04:36.680 --> 04:41.890
+So we can use the second parameter to just let it return us.
+
+04:41.960 --> 04:47.820
+The whole text because we do not care about this array we do not want to process it later.
+
+04:47.930 --> 04:56.670
+We just want a text returned so let's use that content paragraphs
+
+05:02.870 --> 05:10.730
+let's say we would like five and now we'll specify the second parameter as true because we want this
+
+05:10.730 --> 05:13.370
+to be returned as text.
+
+05:14.600 --> 05:18.370
+So let's make sure I've typed this method correctly.
+
+05:18.470 --> 05:19.110
+Yes I did.
+
+05:19.950 --> 05:20.320
+OK.
+
+05:20.330 --> 05:23.780
+Now it's time to verify if that works.
+
+05:23.780 --> 05:30.540
+So let's do that using Tinker and now let's see.
+
+05:30.890 --> 05:38.070
+We use model factory by calling the factory function specifying the class.
+
+05:38.090 --> 05:43.610
+So this would be up blog post class
+
+05:47.060 --> 05:49.250
+and now we can easily call create
+
+05:52.690 --> 05:54.970
+so we can see that's the result of it.
+
+05:54.970 --> 06:01.210
+So we've got a pretty nice random title and couple of paragraphs of text.
+
+06:01.600 --> 06:08.900
+So let's see if we have that inside the database yes we do.
+
+06:08.960 --> 06:19.190
+Now I've said that for example in this case in our test we are verifying if the title is exactly new
+
+06:19.190 --> 06:23.240
+title and content is content of the blog post
+
+06:30.230 --> 06:41.650
+so now model factories also have things called state so by default they will try to generate random
+
+06:41.740 --> 06:47.830
+values the way you define them using their defined method.
+
+06:48.010 --> 06:55.950
+But sometimes if you would like some values to be specific you can also add so-called state.
+
+06:57.370 --> 07:07.430
+So let's do that so we call this method exactly the same as we have called define then you can just
+
+07:07.430 --> 07:14.660
+return an array or define a closure if you would like to modify for example how you would like to generate
+
+07:14.660 --> 07:15.500
+some values
+
+07:20.400 --> 07:22.950
+and actually hear the second parameter
+
+07:25.700 --> 07:27.350
+is the name of this state.
+
+07:29.420 --> 07:39.820
+So maybe let's call it using some more descriptive name maybe new post or new title because this is
+
+07:40.000 --> 07:42.460
+how we actually call that inside a test.
+
+07:43.120 --> 07:54.490
+OK now as usual we will return an array and here you can overwrite any of the parameters that you would
+
+07:54.490 --> 08:05.410
+like to be different than generated here so if we would like the title to be new title we can override
+
+08:05.410 --> 08:05.980
+it here
+
+08:10.380 --> 08:12.930
+and we will do the same with content
+
+08:16.110 --> 08:20.900
+so content would be the same as in the test.
+
+08:21.570 --> 08:27.180
+And now we have a blog post which can be generated using a model factory.
+
+08:27.180 --> 08:28.740
+We have a state.
+
+08:28.740 --> 08:35.910
+So now let's see how we can use that so we can either just replace the calls to create a dummy blog
+
+08:35.910 --> 08:42.090
+post inside all of this tests so let's see when it is used.
+
+08:42.120 --> 08:45.550
+It's another useful feature of Visual Studio code.
+
+08:45.570 --> 08:52.800
+Find all references so when you click it you can see all the places where this has been called
+
+08:55.350 --> 09:04.860
+so instead of just removing this method and using the factory we can instead just modify this method
+
+09:07.300 --> 09:18.260
+so we will generate new blog posts using the model factory but instead of getting this random values
+
+09:18.290 --> 09:19.490
+we'll use state
+
+09:22.660 --> 09:23.890
+and as we define it.
+
+09:23.950 --> 09:33.050
+One state called New title here we can be pretty certain that we will actually get our new model with
+
+09:33.050 --> 09:37.750
+the title bank exactly new title and content blend bank.
+
+09:37.760 --> 09:39.790
+Exactly what we have defined here.
+
+09:40.490 --> 09:48.360
+So maybe it's not the best example of states because it's mostly useful if you'd like to modify only
+
+09:48.360 --> 09:56.030
+a couple of values so let's say that the blog post will have 10 fields or 10 model attributes but you
+
+09:56.030 --> 10:03.670
+only want to modify two of them and then get the defaults that are out or generated here using faker.
+
+10:03.680 --> 10:12.290
+So for example if I would like only different specific title I would remove this content and then content
+
+10:12.290 --> 10:20.240
+would be outer generated using faker and only the title will always be new title if I will use this
+
+10:20.240 --> 10:27.300
+model factory with the state name defined as a second parameter.
+
+10:27.300 --> 10:32.650
+But since we want also the content let's live it like it is.
+
+10:33.300 --> 10:38.130
+OK so we are calling factory we are specifying what state do we want.
+
+10:40.110 --> 10:45.350
+And finally we call create.
+
+10:45.380 --> 10:47.600
+So now we can comment that out
+
+10:54.500 --> 10:56.200
+and let's verify if that works.
+
+10:56.200 --> 10:58.640
+So let's clear the term now.
+
+10:58.890 --> 11:02.560
+Now let's go to the terminal first.
+
+11:02.570 --> 11:08.470
+Quit Tinker by pressing control see and then let's run teach.
+
+11:08.490 --> 11:15.480
+You need to see if our tests are still passing which would mean that we get this blog post properly
+
+11:15.850 --> 11:19.470
+generated and voila everything works.
+
+11:19.500 --> 11:21.300
+And as we expected.
+
+11:21.330 --> 11:30.080
+And this means that this factory is actually generating a new blog post with this exact state.
+
+11:30.090 --> 11:37.350
+Now let's take a moment to actually try to better understand the model factory state by seeing it in
+
+11:37.350 --> 11:38.210
+action.
+
+11:38.310 --> 11:47.760
+So let's run peach bee artisan thinker inside the terminal and now as I've said if we use this factory
+
+11:47.760 --> 11:57.570
+function and specify a state as new title this values is basically what should we what each should overwrite
+
+11:57.630 --> 12:01.320
+the defaults generated inside the defined method.
+
+12:02.340 --> 12:04.580
+So let's see how that works.
+
+12:04.650 --> 12:10.930
+So we have the factory up blog post class
+
+12:14.480 --> 12:17.540
+and us exactly in the test.
+
+12:17.540 --> 12:19.210
+We have to specify the state.
+
+12:19.220 --> 12:29.710
+So this would be new title and finally call create so you can see that we have title as new title and
+
+12:29.710 --> 12:37.210
+content is the content of the blog post exactly as we have specified here inside our specific state
+
+12:39.160 --> 12:44.880
+but as I've said this only overrides the properties that are specified.
+
+12:44.890 --> 12:52.070
+If you want specify content for example we should have the content how to generate it as we did inside
+
+12:52.090 --> 12:52.300
+there.
+
+12:52.300 --> 13:00.430
+Define using this paragraphs faker method so let's save this changes and see if this is how it actually
+
+13:00.430 --> 13:00.810
+works.
+
+13:00.820 --> 13:08.570
+So we can just copy this line pasted inside the Tinker and let's see what we get.
+
+13:08.580 --> 13:16.500
+Well actually it seems we have to restart Tinker so let's restarted and paste again because probably
+
+13:16.500 --> 13:22.920
+it has to just pick up the changes that we made to the file so it probably just loaded this file file
+
+13:22.950 --> 13:25.890
+already and didn't pick up the changes.
+
+13:25.890 --> 13:27.330
+So now let's try again.
+
+13:27.330 --> 13:34.740
+So we have removed the content from the state and we are running it again expecting this to generate
+
+13:34.770 --> 13:38.130
+a new blog post model with the new title.
+
+13:38.130 --> 13:41.730
+State and this is what we expected.
+
+13:41.730 --> 13:50.160
+So since we have overridden the title we see that we have new title here and the content is out of generated
+
+13:50.550 --> 13:56.520
+from the define method of the model factory with the paragraphs faker method.
+
+13:57.780 --> 14:04.440
+So minded that when when I'm talking about the state this only relates to how the model factory should
+
+14:04.440 --> 14:04.770
+work.
+
+14:04.800 --> 14:08.690
+It's not a state of the actual blog post model.
+
+14:08.700 --> 14:11.880
+It doesn't it's not related at all.
+
+14:11.880 --> 14:19.800
+So models do not have this status in this sense that I am showing you right now it is just what should
+
+14:19.800 --> 14:23.480
+be put into the attributes of a model.
+
+14:23.490 --> 14:25.020
+As simple as that.
+
+14:25.080 --> 14:32.190
+So that's the only place where this state matters is when you actually call this factory method.
+
+14:32.190 --> 14:39.450
+You are just telling it how it should put or feel the properties of a model and then you forget about
+
+14:39.450 --> 14:39.860
+state.
+
+14:39.880 --> 14:45.660
+So it's it only applies to model factor it doesn't apply to the model.
+
+14:45.690 --> 14:51.780
+So basically that would be it for this lecture and let's continue with the next one.

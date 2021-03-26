@@ -1,0 +1,58 @@
+WEBVTT
+
+00:00.390 --> 00:04.260
+Let's begin by starting afresh fresh thinkers session.
+
+00:05.280 --> 00:15.060
+The simplest way to retrieve the single model is to use the model classes static, find the method that
+
+00:15.060 --> 00:19.390
+on the argument of this method is the idea of the model.
+
+00:20.340 --> 00:28.740
+Let's see that in Tinker, currently, we should only have one record for the blog post at least.
+
+00:29.280 --> 00:30.450
+So let's fetch it.
+
+00:37.940 --> 00:38.570
+There it is.
+
+00:39.630 --> 00:47.160
+Now you can do anything you need with this model, you can change Collum values, but if you do make
+
+00:47.160 --> 00:55.000
+sure you call the model save method afterwards, you can call models, delete method to remove it.
+
+00:55.980 --> 01:02.850
+Now, if you will specify that ID that does not exist, fine method returns null.
+
+01:09.390 --> 01:17.430
+It's useful to know us then, if you want to check if model with a given idea exists, you can compare
+
+01:17.430 --> 01:20.520
+the result of find to the null value.
+
+01:21.550 --> 01:30.190
+Often your code will depend on model existing, for example, the page for displaying the blog post
+
+01:30.190 --> 01:34.660
+assumes the post with the given I.D. does exist.
+
+01:35.200 --> 01:43.840
+Instead of checking the find method result for the null value and then returning an error, you can
+
+01:43.840 --> 01:48.550
+use the find or fail static method on the model.
+
+01:48.910 --> 01:56.380
+It would throw an exception resulting in for a four page being shown for the user if the model does
+
+01:56.380 --> 01:57.100
+not exist.
+
+01:57.580 --> 01:59.050
+So let's check it out.
+
+02:02.490 --> 02:09.480
+It, of course, works for the model that we have, but if I provide the wrong ID, there is the exception.

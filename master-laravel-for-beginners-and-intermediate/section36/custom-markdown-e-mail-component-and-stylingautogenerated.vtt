@@ -1,0 +1,226 @@
+WEBVTT
+
+00:00.800 --> 00:07.200
+Now let's actually implement this comment posted mark down class and what we will do is we will convert
+
+00:08.430 --> 00:14.390
+everything that we have inside our comment posted and this old template to markdown.
+
+00:15.180 --> 00:22.920
+So first we need our comments to be passed to this class so we can actually pass some data.
+
+00:23.580 --> 00:26.410
+So we'll also do that through constructor.
+
+00:26.460 --> 00:34.120
+We will utilize our field inside this constructor and now we also have to add public comment.
+
+00:34.130 --> 00:38.500
+So then this will be also available inside the views even though it is marked down.
+
+00:38.510 --> 00:39.470
+It's no different.
+
+00:39.470 --> 00:41.870
+It works exactly the same.
+
+00:41.870 --> 00:48.620
+Now what we are also doing in this class is we are actually creating a specific subject.
+
+00:48.620 --> 00:50.720
+So let's also do that here.
+
+00:51.110 --> 00:53.740
+We can use exactly the same code.
+
+00:53.810 --> 00:56.930
+We can also specify subject using the same method.
+
+00:58.180 --> 01:05.990
+So markdown is actually only used to tell it that it should render this e-mail using the markdown templates
+
+01:06.020 --> 01:13.400
+not any and a template that you are actually passing here using normal HDMI all without anything else.
+
+01:14.270 --> 01:20.690
+So this would be changes to the comment posts that mark down Peach Pit class.
+
+01:20.690 --> 01:25.730
+Now let's actually make some changes to the template so let's see what do we have here.
+
+01:26.570 --> 01:27.980
+So we have this message.
+
+01:28.100 --> 01:28.760
+Hi.
+
+01:28.760 --> 01:29.810
+So let's keep it up
+
+01:35.870 --> 01:47.670
+the header can be comment was posted on your blog post this can stay the same OK.
+
+01:47.680 --> 01:54.040
+Now we can add a text like that someone has posted on your blog post
+
+01:57.790 --> 02:04.780
+and then we will actually insert a link to this blog post so we can copy this route.
+
+02:04.780 --> 02:17.200
+This would be our new URL parameter of this component like that and here we can say something like view
+
+02:17.200 --> 02:21.720
+that block blog post.
+
+02:21.820 --> 02:23.880
+Now what else do we have here.
+
+02:23.890 --> 02:30.310
+There is a horizontal line we can skip that for now.
+
+02:30.420 --> 02:32.450
+Now here we have a link to the user profile.
+
+02:32.480 --> 02:43.610
+So let's also add another button component let's call it visit.
+
+02:43.660 --> 02:46.600
+This would be the user name profile
+
+02:50.110 --> 02:55.990
+so the URL to the profile let's copy that to the URL parameter of the component
+
+03:00.780 --> 03:06.210
+also mind we do not need this syntax here so it's just enough to pass it like down.
+
+03:06.220 --> 03:08.790
+So let's also remove that from this place
+
+03:12.530 --> 03:13.680
+and now the user name
+
+03:16.900 --> 03:20.160
+so the button will contain the actual user name.
+
+03:26.440 --> 03:35.590
+And finally we have what this user has actually said so we can use another component to display this.
+
+03:35.730 --> 03:47.340
+So we do component mail and we use that panel component so male panel and com parliament and inside
+
+03:47.340 --> 03:53.980
+it will just render whatever the user has said something like this.
+
+03:54.260 --> 03:54.510
+Okay.
+
+03:54.520 --> 03:55.140
+This should work.
+
+03:55.150 --> 03:59.520
+Now let's save the changes and add another comment.
+
+03:59.530 --> 04:14.570
+So hello from Mark down this time it's real OK and I forgot to actually pass this comment object inside
+
+04:14.570 --> 04:15.980
+the post comment controller.
+
+04:15.980 --> 04:17.820
+So let's weekly fix that.
+
+04:17.960 --> 04:19.910
+So this should actually be comment.
+
+04:20.270 --> 04:20.520
+OK.
+
+04:20.530 --> 04:22.850
+Now save the changes and to refresh
+
+04:27.420 --> 04:30.450
+something is wrong with one of the components.
+
+04:30.690 --> 04:38.380
+Yes I forgot this character Kay now finally save the changes and refresh.
+
+04:38.460 --> 04:40.230
+This will take a couple of seconds.
+
+04:40.230 --> 04:46.230
+Now let's refresh the mail drop to see what was actually sent.
+
+04:46.260 --> 04:48.630
+So what we have is we have this subject.
+
+04:49.350 --> 04:54.590
+So this is as we created that then we have comment was posted on your blog post the header.
+
+04:55.140 --> 05:01.350
+We say hello to the user that actually created the blog post and then there is also a link to visit
+
+05:01.350 --> 05:05.820
+the blog post and the link to visit their user profile.
+
+05:05.820 --> 05:12.240
+The one that has posted that and also a nice panel which displays what was actually said of course we
+
+05:12.240 --> 05:17.010
+can style this a little bit more a little bit better use different components.
+
+05:17.010 --> 05:23.330
+We can also create our own components like for example in those or regional e-mails that we have sent
+
+05:23.340 --> 05:28.730
+using the comment post that template and comment posted may level class.
+
+05:28.740 --> 05:31.760
+We just put that image like that.
+
+05:31.770 --> 05:39.750
+So it wasn't really styled very nice but you can create your own component here like image the corresponding
+
+05:39.750 --> 05:44.910
+one for each the email and plaintext where in plaintext you will just ignore everything because you
+
+05:44.910 --> 05:52.530
+can't really display images in plain text and then you can add some nice styling so this would also
+
+05:52.530 --> 06:01.070
+contain some of the like user avatar inside this HDMI version of the markdown may level.
+
+06:01.070 --> 06:08.310
+Now finally if you would like to style something then there is this famous folder inside the h the AML
+
+06:08.970 --> 06:13.670
+and is contained it contains all the basic default HDMI all.
+
+06:13.680 --> 06:19.980
+So as you can see since there is a folder for it called themes you can create different themes.
+
+06:20.070 --> 06:22.690
+So that's the default one provided by Lavell.
+
+06:22.920 --> 06:24.500
+It looks good in my opinion but.
+
+06:25.080 --> 06:33.450
+Well you might want to customize it so we can either change it here so modify the classes or alternatively
+
+06:33.540 --> 06:39.400
+inside there may be HP config file.
+
+06:39.600 --> 06:45.040
+There is a configuration option for markdown saying what theme should be used.
+
+06:45.150 --> 06:51.790
+And also there is the resource path where you can configure where you store all the templates.
+
+06:51.810 --> 06:55.530
+So as you can see there is views vendor mail.
+
+06:55.860 --> 07:01.650
+Now here if you would like some additional theme then you will also create another C assess file and
+
+07:01.650 --> 07:04.740
+then you will change the form named let's say dark.

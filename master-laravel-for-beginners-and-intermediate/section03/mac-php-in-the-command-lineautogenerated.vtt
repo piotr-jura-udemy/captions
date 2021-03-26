@@ -1,0 +1,130 @@
+WEBVTT
+
+00:02.710 --> 00:10.480
+BHP runs together with the Web server to run up cold, but it can also run scripts in their command
+
+00:10.480 --> 00:10.870
+line.
+
+00:11.650 --> 00:19.750
+Laravel has a huge spectrum of command line tools that can generate code, do maintains tasks or even
+
+00:19.750 --> 00:22.570
+start simple development web server.
+
+00:23.640 --> 00:32.010
+Installing Zamp is not enough to be able to use the command line, you need to add the path to the binary
+
+00:32.010 --> 00:33.090
+in your system.
+
+00:33.420 --> 00:38.820
+PAF Environment Variable Scenes Mako's Catharina Version 15.
+
+00:39.390 --> 00:47.310
+The default shell is that this age Vaastu configured their PAF variable for the current system user.
+
+00:47.640 --> 00:49.530
+You need to open the.
+
+00:51.430 --> 00:53.110
+Dot Zeta's H.
+
+00:53.120 --> 01:00.910
+Ursy file in your home folder that your old character is a shortcut to your home folder.
+
+01:01.660 --> 01:07.650
+Mark had previously used the Bosch by default to find out what show you use.
+
+01:07.960 --> 01:11.350
+Just check the title bar of the terminal up.
+
+01:12.160 --> 01:21.490
+It would say that this age or Bosch, if for some reason it says Bosch, the fire you need to open is
+
+01:21.670 --> 01:25.000
+the Bosch or instead.
+
+01:26.370 --> 01:32.700
+So open the correct file using our command line text editor called Nana.
+
+01:34.120 --> 01:45.610
+Shipped by default with the mark so type nano dot that is age HRC or nano bash Ursy depending on your
+
+01:45.610 --> 01:46.240
+cell.
+
+01:49.650 --> 01:53.740
+If you see an empty file when you run this command, it's fine.
+
+01:54.270 --> 01:56.700
+This file does not exist by default.
+
+01:57.920 --> 02:06.110
+If you see some text on the screen, as I do, it means you already had that fire in this case, you
+
+02:06.110 --> 02:11.930
+need to locate the line containing the text export perve.
+
+02:13.320 --> 02:18.330
+If you can't find it, it means it's not there, which is possible and is fine.
+
+02:19.380 --> 02:25.080
+You can use the up and down arrow keys on your keyboard to navigate.
+
+02:26.570 --> 02:31.490
+The next step is to either align with export parv.
+
+02:33.020 --> 02:34.880
+Or locate the existing one.
+
+02:37.010 --> 02:44.090
+This variable defines system wide directories in which the system should look for executable programs,
+
+02:44.940 --> 02:53.960
+entries are separated using Kolon entries are entered from the left to right, which means those on
+
+02:53.960 --> 02:55.970
+the left have the highest priority.
+
+02:57.330 --> 03:04.410
+So the first entry should be applications, for example, been.
+
+03:06.330 --> 03:13.620
+At least when you've installed Zamp in this directory, which by default, you would notice that in
+
+03:13.620 --> 03:18.970
+my case I have other entries in this file, but you don't have to worry about that.
+
+03:19.140 --> 03:27.090
+Just make sure you have a line that says Export Parv and that there is the path to this bin folder inside
+
+03:27.190 --> 03:29.490
+Daxam folder and you will be fine.
+
+03:30.390 --> 03:33.270
+Next, press control all.
+
+03:34.310 --> 03:39.140
+To save changes, confirmed the file name by hitting enter.
+
+03:40.170 --> 03:49.920
+And then press control X to quit Nannerl or remember its control or control, X, not comment or comment
+
+03:49.920 --> 03:50.370
+X.
+
+03:52.950 --> 03:57.110
+Then you might have to restart your terminal, so please do it now.
+
+03:58.100 --> 04:07.910
+After restarting run baby dash there to check diversion, and if it works at all, you should see output
+
+04:07.920 --> 04:13.320
+similar to mine and also make sure their version matches the one you've downloaded.
+
+04:13.970 --> 04:21.110
+Sometimes people have previously installed BGB and may have some older versions dangling, which potentially
+
+04:21.410 --> 04:23.090
+might cause issues.

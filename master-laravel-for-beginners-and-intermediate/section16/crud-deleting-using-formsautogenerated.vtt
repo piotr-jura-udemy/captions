@@ -1,0 +1,139 @@
+WEBVTT
+
+00:00.760 --> 00:07.380
+Since the destroy action is the only one and not enabled currently to enable it.
+
+00:07.420 --> 00:10.870
+We should remove the only method, call us.
+
+00:10.870 --> 00:15.460
+From now on, we will be using all resource controller actions.
+
+00:20.920 --> 00:27.250
+Let's take a look at the route, least by running BHP artisan route least.
+
+00:29.300 --> 00:38.780
+The only thing unique to that destroy action is the htp delete verb.
+
+00:40.170 --> 00:48.990
+You should know that all links you create on the Web use the get HDB verb and there is no other way.
+
+00:50.170 --> 01:01.450
+So to be able to hit the delete route, you need to send the form HMO forms can only use Caird or Post
+
+01:01.450 --> 01:08.380
+as their HTP method, but we already know about the Laravel method spoofing.
+
+01:09.270 --> 01:17.400
+So now we know how to hit delete route by sending a form and spoofing Domestos.
+
+01:20.230 --> 01:29.230
+So first, let's open the partial post played template responsible for rendering a single blog post
+
+01:29.560 --> 01:31.740
+on the list of posts.
+
+01:32.710 --> 01:36.250
+So you might be thinking, why make it so complicated?
+
+01:37.210 --> 01:43.300
+I could just create a normal jet route with, let's say, the delete appended to the URL.
+
+01:43.930 --> 01:46.700
+Sure you can, but this is not secure.
+
+01:47.110 --> 01:50.610
+Remember when we talked about cross site request forgery?
+
+01:51.610 --> 01:58.750
+So for security reasons alone, you should never create routes that make any changes on the server using
+
+01:58.750 --> 02:00.290
+our jet route.
+
+02:00.940 --> 02:07.660
+It's better to do a little bit more work, but make sure the website or application you create is safe
+
+02:07.660 --> 02:12.190
+for your customer and potentially your customer customers.
+
+02:12.820 --> 02:13.270
+All right.
+
+02:13.280 --> 02:17.080
+So if we know the way now, let's see how to do it.
+
+02:18.850 --> 02:31.060
+Let's assume he wants to use a button that deletes a post first, we need a form directed at the destroy
+
+02:31.060 --> 02:35.080
+route, so let's use the root helper.
+
+02:37.770 --> 02:45.690
+The action name or the route name is posts a destroy, you need to pass a parameter called post.
+
+02:46.560 --> 02:52.230
+We have the post variable which has the ID property, by the way.
+
+02:52.440 --> 02:53.510
+We made some changes.
+
+02:53.520 --> 02:55.950
+So the post is no longer on the way.
+
+02:56.700 --> 03:05.010
+It works, though, but we should change it to post title here too, and here to.
+
+03:08.240 --> 03:10.940
+All right, go back to the forum.
+
+03:13.130 --> 03:17.330
+The method of this form has to be post.
+
+03:21.830 --> 03:29.750
+Now we have to add the C srf, so crosseyed request forgery, as we have to add this directive to every
+
+03:29.750 --> 03:34.490
+form that we send negs, we need metal spoofing.
+
+03:34.490 --> 03:44.840
+So metal directive and the HTP verb is actually the elite and finally the input so lets on an input
+
+03:44.840 --> 03:46.400
+of type submit.
+
+03:47.590 --> 03:52.620
+The value would be delete, and there it is.
+
+03:52.660 --> 03:53.860
+That's our button.
+
+03:55.570 --> 04:02.080
+So we are almost ready to send this form, but first, let's go to the Post's comptroller.
+
+04:03.120 --> 04:12.660
+And in the action, let's just dump maybe the blog post I.D., so we are sure that clicking this button
+
+04:12.660 --> 04:15.510
+actually directs us to this action.
+
+04:17.900 --> 04:21.390
+Now we are ready to test those changes.
+
+04:21.410 --> 04:24.280
+So first, let's go to a post list.
+
+04:24.290 --> 04:28.770
+I know it doesn't look good at all, but we will get to that.
+
+04:29.540 --> 04:32.000
+So first, let me delete the first post.
+
+04:33.330 --> 04:39.810
+So it seems correct, we are getting the idea of the blog post and the forum indeed since correctly
+
+04:40.530 --> 04:48.390
+so when we implemented this destroy action, we should be able to actually delete our blog post or any
+
+04:48.390 --> 04:50.190
+model from the database this way.

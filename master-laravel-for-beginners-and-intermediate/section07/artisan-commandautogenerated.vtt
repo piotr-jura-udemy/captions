@@ -1,0 +1,109 @@
+WEBVTT
+
+00:01.510 --> 00:07.240
+There is one more file that we haven't covered in the last lecture, because I think it needs a separate
+
+00:07.240 --> 00:10.640
+lecture on its own Dods to artisan script.
+
+00:11.260 --> 00:16.180
+It is actually a script that will run your application on command line.
+
+00:18.290 --> 00:26.980
+Let's see what it can do, so bank in your project directory run by Artisan, and you would get a list
+
+00:26.980 --> 00:28.330
+of commands available.
+
+00:29.440 --> 00:31.470
+Those commands have different purposes.
+
+00:31.990 --> 00:38.740
+Some of them will run along with your application, for example, the ones from the Q category, they
+
+00:38.740 --> 00:43.030
+will run and processed all the background drops of your application.
+
+00:43.810 --> 00:50.860
+Other commands are informative, like at least will give you a list of all the registered routes in
+
+00:50.860 --> 00:51.910
+your application.
+
+00:52.870 --> 01:00.730
+Then there are commands which you can use to manage the database schema and a big group of commands
+
+01:00.730 --> 01:02.950
+that will let you scaffold called.
+
+01:05.020 --> 01:09.590
+Now, all those commands, they are actually written in P.
+
+01:10.530 --> 01:16.920
+Now, let me show you a documentation page from Laravel, which is about writing your own commands.
+
+01:17.160 --> 01:18.760
+It is actually very easy.
+
+01:19.200 --> 01:25.260
+You can first use Artisan to generate a scaffolding for a command, let's say send emails.
+
+01:26.300 --> 01:33.380
+And then you just implement such commands that can do some utility functions for your up, for example,
+
+01:33.530 --> 01:38.210
+in this case someone created a command up sense, some kind of emails.
+
+01:41.500 --> 01:48.590
+Now, there is also a different category of commands, for example, Tinker, that's one is very useful.
+
+01:48.610 --> 01:53.000
+So let's run it for a second puppy artisan Tinker.
+
+01:54.250 --> 02:01.270
+This will start a separate shell and will let you interact with your Laravel application through a command
+
+02:01.270 --> 02:01.600
+line.
+
+02:02.080 --> 02:03.520
+This is a great feature.
+
+02:03.520 --> 02:05.440
+Will use it a lot throughout this course.
+
+02:05.980 --> 02:09.530
+But for now, let's just kill it by pressing control.
+
+02:09.550 --> 02:16.590
+See, what we actually want to run is another command called Serve.
+
+02:17.290 --> 02:24.310
+This will start our development server with your project, so we would be able to visit it in the browser.
+
+02:25.000 --> 02:32.860
+Using puppy artisan's serve is the easiest way to develop a lot of application without setting up a
+
+02:32.920 --> 02:36.850
+complicated server like Apache or transgenics locally.
+
+02:38.020 --> 02:39.400
+Let's go ahead and run it.
+
+02:39.610 --> 02:42.430
+Be RDM serve.
+
+02:42.970 --> 02:48.540
+It should start a development server and your website should now be available at this address.
+
+02:49.180 --> 02:52.930
+Let's copy it and open it up in the browser.
+
+02:54.370 --> 02:57.580
+There it is, your newly created Laravel application.
+
+02:57.880 --> 03:00.330
+That's the main page of our up.
+
+03:00.730 --> 03:08.500
+Remember when you would like to stop this server, you just press control, see, and it will stop working.

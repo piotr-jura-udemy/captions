@@ -1,0 +1,73 @@
+WEBVTT
+
+00:01.500 --> 00:08.130
+In the last lecture we created our first the gate and then we made sure that you want to be able to
+
+00:08.130 --> 00:15.890
+edit other users blog posts and we use the gate for say to define a gate and then we have used that
+
+00:15.890 --> 00:24.040
+gate denies methods to forbid certain users to edit blog posts that were on theirs.
+
+00:24.060 --> 00:34.410
+So now let's go to the Visual Studio code and define another gate so we can copy this gate for simplicity
+
+00:34.560 --> 00:38.310
+and create another one called delete post.
+
+00:38.340 --> 00:40.500
+So the logic should be the same.
+
+00:40.500 --> 00:46.710
+So you should only be able to delete the blog posts that are your own.
+
+00:46.710 --> 00:57.600
+Now we can also copy this code and let's go to the destroy action base the same but this time we will
+
+00:57.600 --> 01:08.880
+use delete post and we will say you can't delete this blog post and we will also call board.
+
+01:08.900 --> 01:10.630
+Now let's see if this works.
+
+01:10.630 --> 01:13.940
+So this isn't a blog post by John Doe.
+
+01:13.970 --> 01:18.620
+So when you press delete you are being redirected to 400 free.
+
+01:18.620 --> 01:28.130
+So using this gate for site is kind of a general way to verify if a particular user currently out or
+
+01:28.320 --> 01:28.660
+sorry.
+
+01:28.700 --> 01:36.350
+The currently authenticated user won't be able to perform a specific action so we not necessarily have
+
+01:36.350 --> 01:46.690
+to use that this gate for site inside your controller because there is simpler way to use inside controllers.
+
+01:46.730 --> 01:51.960
+And this is called an outer Rice helper.
+
+01:52.120 --> 02:03.210
+So what you can do instead of using this gate denies is you can simply call this outer rise and specify
+
+02:03.210 --> 02:12.130
+that ability update post and the instance of the blog post which relates to this ability.
+
+02:12.150 --> 02:21.770
+So now let's copy this paste it here will comment out this gate so you later know how to do that.
+
+02:21.930 --> 02:31.960
+And finally will do delete post and also comment out this gate.
+
+02:32.100 --> 02:35.580
+So now this will give you the same capabilities.
+
+02:35.580 --> 02:43.920
+It's just shorthand it because you you are repeating yourselves by calling the gate a nice couple of
+
+02:43.920 --> 02:50.430
+times and then calling a board and it is just a shorthand helper that basically works the same.

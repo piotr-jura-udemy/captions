@@ -1,0 +1,145 @@
+WEBVTT
+
+00:00.970 --> 00:07.810
+The most convenient way of creating migrations is to create them together with the models, models can
+
+00:07.810 --> 00:12.820
+be generated using their partisan make model commands.
+
+00:14.080 --> 00:20.060
+Adding debt and flag would also generate a migration file alongside.
+
+00:20.650 --> 00:24.520
+So let's make a blog post model.
+
+00:25.750 --> 00:35.710
+So you do that by adding the model name just after their command models are classes by default, they
+
+00:35.710 --> 00:40.920
+leave since Lavallade in the App Models directory.
+
+00:41.470 --> 00:43.900
+We'll get back to models later.
+
+00:44.920 --> 00:49.090
+Now let's open the cocreator migration file.
+
+00:51.940 --> 01:02.440
+At first glance, we can see the migration boiler plate has prefilled up and down Method's buglers names
+
+01:02.560 --> 01:08.830
+should be in Studley case, also known as the Pascall case.
+
+01:11.850 --> 01:15.000
+Every word starts with uppercase.
+
+01:16.360 --> 01:25.570
+The output generated table names are in that snake case instead, meaning boards are lower case separated
+
+01:25.570 --> 01:27.220
+by underscores.
+
+01:28.700 --> 01:37.620
+Notice how create and drop even exists, schema, class, static methods are used to create and delete
+
+01:37.620 --> 01:41.560
+the table if it exists already, respectively.
+
+01:42.610 --> 01:46.750
+Every table needs to have the primary key.
+
+01:47.820 --> 01:59.280
+And the Blueprint I.D. method adds one by default, the big integer type is used for that in my school
+
+01:59.700 --> 02:02.280
+and it is an auto generated.
+
+02:03.530 --> 02:14.570
+The timestamps method will add to fields called Created Out and updated at this by convention will be
+
+02:14.570 --> 02:22.790
+updated when using eloquent models on the model creation and then every time the model is actually updated.
+
+02:25.630 --> 02:28.960
+Let's try to add some fields on our own.
+
+02:30.590 --> 02:36.590
+We might need a string type column called title.
+
+02:40.090 --> 02:44.900
+And text type column called Content.
+
+02:46.360 --> 02:53.830
+Notice how the method name defines the type of the column and the first parameter is the actual name
+
+02:53.830 --> 03:04.150
+of the column blueprint methods names obstruct the actual database types as this vary between database
+
+03:04.150 --> 03:04.810
+engines.
+
+03:05.500 --> 03:09.460
+Well, it also means migration's should be database agnostic.
+
+03:10.370 --> 03:15.040
+Finally, let's see how to apply and roll back migration's.
+
+03:16.150 --> 03:19.390
+But first, let's see the current state of the database.
+
+03:19.420 --> 03:22.060
+You should have this four tables.
+
+03:25.230 --> 03:32.130
+Now, let's run bipartisan migrate to apply the migration and see if the table was created.
+
+03:33.520 --> 03:35.050
+Everything seems to.
+
+03:36.070 --> 03:42.460
+Go find now let's refresh the view and there it is, our new blog posts, stable.
+
+03:48.350 --> 03:53.900
+Now, the artisan, my great roll back.
+
+03:55.550 --> 04:02.300
+Should be able to back off this change by deleting the table, let's run it and check out what happens.
+
+04:04.410 --> 04:06.700
+So it seems that it went fine.
+
+04:06.900 --> 04:07.740
+Now let's see.
+
+04:09.270 --> 04:11.350
+There is no blog posts table.
+
+04:11.520 --> 04:18.060
+Well, it seems it was actually deleted, so this is how you can back off from any changes you make
+
+04:18.060 --> 04:19.680
+to the database schema.
+
+04:21.370 --> 04:28.390
+Now, we actually want this table to be created, so let's round up artisan migrate again, it was just
+
+04:28.390 --> 04:32.590
+a demonstration of how to migrate and how to roll back.
+
+04:34.370 --> 04:40.580
+Finally, you might be happy to know that in the immigration section of Laravel documentation, there
+
+04:40.580 --> 04:49.160
+is this available column Times section which lists all the methods available on the blueprint class,
+
+04:49.880 --> 04:57.680
+and it lists the method names how they should be used and also what's the equivalent type that would
+
+04:57.680 --> 04:59.300
+be created on the database.
+
+04:59.330 --> 05:01.610
+So that's very useful.
+
+05:01.790 --> 05:03.350
+Be sure to check it out.

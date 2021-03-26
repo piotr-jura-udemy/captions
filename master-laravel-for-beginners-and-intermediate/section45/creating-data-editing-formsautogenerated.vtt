@@ -1,0 +1,325 @@
+WEBVTT
+
+00:02.080 --> 00:10.000
+So up to this point we were displaying our list of blog posts and we allowed users to add them so we
+
+00:10.000 --> 00:14.700
+had to create for showing a forum and store for actually saving.
+
+00:14.710 --> 00:16.420
+A new blog post A.T..
+
+00:16.930 --> 00:24.700
+But now let's remind ourselves about the resource controls so you can go to the Vicki page about the
+
+00:24.700 --> 00:25.840
+resource controllers.
+
+00:25.870 --> 00:29.630
+And here you can see the resource methods table.
+
+00:29.710 --> 00:35.380
+So this is a list of all the actions that are being automatically created.
+
+00:35.440 --> 00:41.970
+When you define your controller inside the web BHP as a resource route.
+
+00:42.700 --> 00:44.760
+So that's our post controller.
+
+00:45.070 --> 00:50.440
+But we only specified that we want this for actions.
+
+00:50.500 --> 00:59.860
+So if you will go terminal and type HP artisan on the route least you can see that we have four actions
+
+01:00.350 --> 01:04.030
+enabled For our Post controller.
+
+01:05.140 --> 01:12.100
+So now let's go back to the table and see what actions are for displaying the edit form and actually
+
+01:12.100 --> 01:16.210
+modifying an existing entity.
+
+01:16.210 --> 01:25.120
+So what we have here first is the action called EDIT So it accepts one parameter and it is using the
+
+01:25.210 --> 01:37.340
+get verb so we can also enable it inside our roots so this will display the editing form.
+
+01:37.750 --> 01:46.630
+And the last one that the one that will actually modify the post is called update.
+
+01:46.630 --> 01:52.520
+So let's add update.
+
+01:52.690 --> 01:55.890
+Now let's go back to our resource method stable.
+
+01:56.360 --> 02:02.240
+So what you might have noticed is that we have the same your eyes for different actions.
+
+02:02.270 --> 02:09.140
+So it's the same for showing individual blog posts updating and also the same for destroying.
+
+02:09.650 --> 02:16.150
+So normally if you would paste this your url to your browser browser it will automatically do I get
+
+02:16.150 --> 02:22.160
+a request but there are also different verbs that mean different things.
+
+02:22.160 --> 02:31.280
+So it's a common practice that you would use put or a path for updating resources delete for deleting
+
+02:31.340 --> 02:35.480
+and post for creating.
+
+02:36.000 --> 02:43.960
+So normally this is often used if you create web API for example arrest API that you would use with
+
+02:43.960 --> 02:54.940
+your view J.S. or react apps but Lavell also suggests this practice to use these proper verbs HDP verbs
+
+02:55.330 --> 03:03.760
+with your normal form requests so just remember that that we are using specific HDP verbs for their
+
+03:03.760 --> 03:10.980
+actions but I will learn later show you how we will actually achieve that.
+
+03:11.060 --> 03:20.830
+Let's see our current route least So now you see that we have six routes and if you would compare that
+
+03:20.950 --> 03:28.540
+with what we have inside our resource metal table you can see that there are seven possible routes so
+
+03:28.540 --> 03:33.280
+there is another way we can specify which routes we want.
+
+03:33.280 --> 03:40.840
+So currently we use only to get only those that we want but since we are using six out of seven it will
+
+03:40.840 --> 03:51.370
+be easier to use except and that way will tell the resource controller only which ones we do not want
+
+03:51.370 --> 03:54.050
+to use.
+
+03:54.160 --> 04:04.210
+So instead of those six we'll just destroy and turn the resource controller that we want everything
+
+04:04.330 --> 04:05.890
+except the Destroy.
+
+04:05.900 --> 04:10.350
+So if you will now maybe clear the screen so it's invisible.
+
+04:11.380 --> 04:18.310
+Now if you were on the route list again you see that we have all this six routes except the destroy
+
+04:18.310 --> 04:18.710
+one.
+
+04:19.030 --> 04:23.150
+So this is a matter of your preference your choice.
+
+04:23.350 --> 04:32.090
+But generally it's just shorter syntax so I'd prefer to use whatever makes more sense.
+
+04:32.240 --> 04:38.100
+Now let's go back to the post controller and actually create those new routes.
+
+04:38.320 --> 04:41.670
+So we need to add new action
+
+04:44.240 --> 04:46.090
+and it would be called edit.
+
+04:46.190 --> 04:50.920
+So this would be the action to display on editing form.
+
+04:50.930 --> 04:52.410
+So this would be simple.
+
+04:52.520 --> 04:59.060
+We'll just return our view with the Post the Post's editor view.
+
+05:00.140 --> 05:02.270
+So we didn't have that view yet.
+
+05:02.420 --> 05:04.490
+And we can simply create it.
+
+05:04.790 --> 05:17.180
+So let's create edit blade BHP and for now let's just copy the contents of the Create template later.
+
+05:17.340 --> 05:23.640
+We'll see how we can make it more efficient because a lot of these things will be the same for both
+
+05:23.640 --> 05:25.690
+creating and editing.
+
+05:25.800 --> 05:31.740
+But for now let's just use a separate separate template.
+
+05:32.250 --> 05:43.330
+And the last action we need here is the update so let's create the method for the update action.
+
+05:43.340 --> 05:53.010
+So now this edit action actually has to accept an idea of the post that we are supposed to edit.
+
+05:54.080 --> 06:00.740
+So you can see what we did inside the show action.
+
+06:00.740 --> 06:05.680
+So we actually do not need that request because we have used that for reflux.
+
+06:05.930 --> 06:16.180
+But you can see that even though on the root it is actually posts and we use that I.D. So as I said
+
+06:16.210 --> 06:19.840
+before the name of your arguments that doesn't matter.
+
+06:19.840 --> 06:22.240
+They just have to be in order.
+
+06:22.330 --> 06:29.350
+So if you will have more arguments you will just add them using comma and you can give any name to them.
+
+06:29.350 --> 06:38.920
+But it's up to you if you prefer to use I.D. or the same name that is inside the root so saying that
+
+06:38.950 --> 06:44.410
+we can do the same with edit because we need a block post.
+
+06:44.410 --> 06:54.340
+Instance here so we can do the same what we did on the show action so we can use fined or fail so let's
+
+06:54.430 --> 07:06.140
+assign it to a post variable so block post fined or fail with the I.D. and we'll have to pass this post
+
+07:06.800 --> 07:16.150
+to our view and that's because we have to show the current values of the posts of the post to the user.
+
+07:16.150 --> 07:21.650
+And also we have to generate a proper route for updating a post.
+
+07:21.700 --> 07:23.650
+So now let's just start with this.
+
+07:23.650 --> 07:35.320
+Now inside our edit template now we do not use the store but instead we will use the update so let's
+
+07:35.320 --> 07:38.770
+modify the route to posts update.
+
+07:39.040 --> 07:44.770
+And it also has to have a parameter and the parameter name is post
+
+07:47.870 --> 07:55.520
+so we'll specify a parameter inside array and we have access to the post variable which we have passed.
+
+07:56.970 --> 07:59.130
+So this is how it will look.
+
+07:59.130 --> 07:59.710
+Currently
+
+08:06.320 --> 08:16.410
+now since I told you that for the updating actions we'll use put or puff and yet this form has metal
+
+08:16.440 --> 08:22.980
+posts so there is no other way inside HD email forums to specify the method.
+
+08:23.210 --> 08:35.740
+So the method only accepts get or post so what we have to do is called The Method spoofing so we can
+
+08:35.800 --> 08:47.700
+use method directive and specify the HDP verb so method spoofing is some I somehow knew some inside
+
+08:47.700 --> 08:56.670
+the Lavell where you will send a post request for example but yet it will also include a hidden field
+
+08:56.940 --> 09:02.710
+called underscore method and then this will be treated by larval like UFOs.
+
+09:02.750 --> 09:09.120
+Yeah like if you would send an actual request with the put method.
+
+09:12.570 --> 09:17.660
+So let's save the changes and now we have our values.
+
+09:17.660 --> 09:26.040
+So we have to fetch the values that we have passed through our post variable and since we have this
+
+09:26.160 --> 09:34.650
+old helper here to display the values that didn't pass the validation it also accepts a second parameter
+
+09:35.430 --> 09:36.800
+which is a default value.
+
+09:36.810 --> 09:39.620
+So if there wasn't anything sent before.
+
+09:39.620 --> 09:42.840
+So nothing is flashed to the session already.
+
+09:42.840 --> 09:47.680
+We can provide the default value and it's a good occasion to put here.
+
+09:47.700 --> 09:50.550
+The actual post title
+
+09:53.640 --> 10:01.110
+so this was words like initially will always show the post title because nothing was said before but
+
+10:01.110 --> 10:07.410
+then if the user would send something and it won't pass the validation it he will see everything that
+
+10:07.440 --> 10:11.040
+he sent previously and it was flashed through this session.
+
+10:11.730 --> 10:16.260
+So now let's do the same with the content.
+
+10:16.260 --> 10:20.200
+So here really want that post content attribute.
+
+10:21.120 --> 10:27.960
+Now finally we have to change the label to update and we can keep this error as the same will eventually
+
+10:27.960 --> 10:31.240
+make one template out of date.
+
+10:31.320 --> 10:34.630
+Now let's go to our index.
+
+10:35.910 --> 10:41.260
+As it contains a list of all the blog posts we've a link to them.
+
+10:41.310 --> 10:53.010
+So now let's put another link to modify an existing blog post so we'll use the root and the root is
+
+10:53.130 --> 10:54.660
+as you see here it is.
+
+10:54.660 --> 10:56.110
+Edit So posts.
+
+10:56.160 --> 11:03.600
+Edit and the post is the post I d.
+
+11:13.610 --> 11:15.160
+And maybe the label would be.
+
+11:15.390 --> 11:20.580
+Edit So now let's see List of our blog posts.
+
+11:20.590 --> 11:25.420
+So we have a title and under it there is a link to edit and of course it works.
+
+11:25.420 --> 11:33.220
+You can open any blog post and you'll see the original title and content that you will be able to update
+
+11:33.490 --> 11:36.900
+but we'll do that in the next lecture.

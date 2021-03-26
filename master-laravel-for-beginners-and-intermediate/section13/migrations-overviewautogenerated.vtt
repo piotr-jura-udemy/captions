@@ -1,0 +1,85 @@
+WEBVTT
+
+00:01.290 --> 00:06.070
+Database Migration's is the tool to change the database schema.
+
+00:06.420 --> 00:14.820
+For example, every time you need to create a new table or add new columns to an existing table, you
+
+00:14.820 --> 00:17.220
+should create a new migration file.
+
+00:17.880 --> 00:21.270
+Every migration file has a very simple structure.
+
+00:21.600 --> 00:26.940
+It is a PE class with two methods called up and down.
+
+00:27.750 --> 00:34.050
+Up is responsible for making the changes forward down for rolling them back.
+
+00:34.650 --> 00:37.770
+Laravel gives you two useful classes.
+
+00:37.770 --> 00:45.710
+Schema and blueprint schema has methods to create, change and delete database tables.
+
+00:46.560 --> 00:52.290
+Blueprint is used to create or modify or delete individual table columns.
+
+00:53.040 --> 01:02.970
+Migrations are applied and rolled back using artisan commands, artisan migrate to apply outstanding
+
+01:02.970 --> 01:03.870
+migrations.
+
+01:04.740 --> 01:10.650
+Artisan migrate roll back to roll back loves to run migrations.
+
+01:11.690 --> 01:20.390
+Whenever you run Migration's Laravel checks in the special database table, it creates whether the migration's
+
+01:20.390 --> 01:21.560
+were already run.
+
+01:22.190 --> 01:24.380
+If they were not, Laravel runs them.
+
+01:24.740 --> 01:28.340
+The name of this table is configurable by default.
+
+01:28.730 --> 01:31.670
+It is surprisingly called Migration's.
+
+01:33.400 --> 01:41.560
+Let's take a look at some of the migrations that came out of the box with Laravel, as you see, all
+
+01:41.560 --> 01:46.470
+migrations are kept in the database migrations folder.
+
+01:47.410 --> 01:53.190
+Their names contain the date, time and short description.
+
+01:53.770 --> 01:55.420
+That's a useful convention.
+
+01:55.420 --> 02:03.550
+It allows Laravel to figure out the order in which migrations should be run from oldest to newest.
+
+02:03.550 --> 02:09.330
+First also noticed, the most migration files look similar.
+
+02:10.060 --> 02:14.080
+There is the are methods and down methods.
+
+02:15.440 --> 02:18.860
+Both start with a call to one of their key Mamet's.
+
+02:19.990 --> 02:28.270
+Then schema class methods often accept an anonymous function, which further using their blueprint class
+
+02:28.930 --> 02:37.390
+instance, allows for specific things to happen to a table, usually adding, modifying or deleting
+
+02:37.390 --> 02:38.740
+table columns.

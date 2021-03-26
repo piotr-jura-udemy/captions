@@ -1,0 +1,169 @@
+WEBVTT
+
+00:00.990 --> 00:06.750
+In the last lecture we have introduced the resource classes to serialize your eloquent models.
+
+00:06.930 --> 00:14.030
+And maybe you might have noticed that I've misspelled the field name here and called it updated art.
+
+00:14.040 --> 00:17.340
+So this are the things that can happen.
+
+00:17.430 --> 00:19.010
+So this should be updated.
+
+00:19.080 --> 00:24.970
+And then of course you probably should have tests for that and into world covered up later.
+
+00:25.020 --> 00:30.750
+Now we were supposed to talk about how to load our relation because previously we had some data about
+
+00:30.750 --> 00:33.810
+a user that posted this comment.
+
+00:33.810 --> 00:36.630
+So this is actually very simple.
+
+00:36.630 --> 00:46.950
+So the naive way to do that would just to include a field like user I.D. or create a new key user and
+
+00:46.950 --> 00:49.050
+then specify an array.
+
+00:49.050 --> 00:51.060
+So it's very easy to do that.
+
+00:51.060 --> 00:59.880
+You can have this as we know that there is a user attribute on this particular model the comment because
+
+00:59.940 --> 01:01.560
+it has a relation to the user.
+
+01:01.760 --> 01:03.560
+You can do something like this.
+
+01:03.630 --> 01:09.420
+This user I.D. Now let's check if that works.
+
+01:09.420 --> 01:10.470
+Of course it does.
+
+01:11.250 --> 01:19.080
+But there might be a problem with this that well obviously let's see how we have loaded this relation.
+
+01:19.200 --> 01:27.420
+So we have loaded the post comments and does not this does not include any relationships of the comments.
+
+01:27.420 --> 01:35.700
+So what we are doing here is actually this will make a separate query to load every related user of
+
+01:35.910 --> 01:38.820
+every comment so that's not very efficient.
+
+01:38.820 --> 01:40.740
+We'll handle that later.
+
+01:40.740 --> 01:49.710
+But what we should do in the first place is create a separate resource for the user that has to be serialized
+
+01:49.710 --> 01:57.360
+together with comment because that's the whole sense of creating this resource classes that sometimes
+
+01:57.420 --> 02:00.480
+you might want to serialize things a little bit different.
+
+02:01.020 --> 02:08.280
+And in the case of the user associated with a comment we only want his I.D. and a name.
+
+02:08.400 --> 02:10.920
+So let's go ahead and create another resource.
+
+02:10.920 --> 02:18.540
+Call it beach be artisan make resource and let's call it common user
+
+02:22.500 --> 02:24.710
+so let's find this new class.
+
+02:24.720 --> 02:26.240
+It's here.
+
+02:26.340 --> 02:33.960
+And notice that this class is not actually really aware of what is the type of the model that it is
+
+02:34.180 --> 02:41.370
+serialization but whatever you'll pass to this class it will just assign older attributes of this eloquent
+
+02:41.370 --> 02:43.780
+model to this resource class.
+
+02:44.310 --> 02:46.610
+So we wanted the idea of the users.
+
+02:46.620 --> 02:50.250
+So let's return this idea and the name of the user
+
+02:53.220 --> 02:54.780
+so this name.
+
+02:54.780 --> 02:56.670
+So this is our comment.
+
+02:56.670 --> 02:59.440
+User resource class.
+
+02:59.910 --> 03:04.140
+Now you can import this class inside this particular resource.
+
+03:04.140 --> 03:08.170
+So use up HDP
+
+03:10.890 --> 03:12.710
+resources.
+
+03:13.140 --> 03:13.990
+Comment.
+
+03:14.190 --> 03:16.340
+User.
+
+03:16.500 --> 03:23.160
+Now you don't really have to apply as this as a comment user resource but maybe that would be just a
+
+03:23.160 --> 03:24.220
+good practice.
+
+03:27.470 --> 03:29.240
+Ask comment user resource.
+
+03:29.300 --> 03:29.590
+OK.
+
+03:29.600 --> 03:39.290
+Now instead of specifying explicitly how the user should look like what you can do is you can create
+
+03:39.290 --> 03:42.890
+new comment or use a resource.
+
+03:42.970 --> 03:44.530
+This user
+
+03:48.680 --> 03:56.060
+and now it is being serialized exactly how you wanted that and the benefit of that is whenever you will
+
+03:56.060 --> 04:02.900
+create another resource class for a user let's say you want much more information about the user you
+
+04:02.900 --> 04:09.980
+just create another resource class and use it in the place you would like to serialize this particular
+
+04:10.010 --> 04:12.580
+eloquent model differently.
+
+04:12.590 --> 04:22.700
+So I mentioned a problem that we actually have not loaded the user relation of this all of this individual
+
+04:22.700 --> 04:27.560
+comments and then we are making an unnecessary query.
+
+04:27.560 --> 04:32.150
+So in the next lecture I will show you how to overcome this problem.

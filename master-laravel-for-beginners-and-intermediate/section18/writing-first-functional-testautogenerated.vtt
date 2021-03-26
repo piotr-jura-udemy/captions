@@ -1,0 +1,232 @@
+WEBVTT
+
+00:00.540 --> 00:07.800
+So far you should have some radical basics of how to make the tests work in LA all.
+
+00:08.310 --> 00:14.010
+And also we have already run the default provided example tests.
+
+00:14.010 --> 00:18.030
+So now let's actually test something for real.
+
+00:18.060 --> 00:27.000
+So the first thing we might try testing are the two basic pages of our application then home and the
+
+00:27.000 --> 00:28.110
+contact page.
+
+00:29.160 --> 00:36.840
+So let's go to the Visual Studio code and create a new test so you can either just create the those
+
+00:36.840 --> 00:44.430
+files manually inside the tests folder or you can use artisan to generate them.
+
+00:44.430 --> 00:52.550
+So there is this command of artisan make test where you have to only specify the name of the new class
+
+00:52.560 --> 00:55.060
+that it will create for you.
+
+00:55.110 --> 01:00.150
+So we'll be testing the home controller the home page and the contact page.
+
+01:00.150 --> 01:04.420
+So let's create our home test.
+
+01:04.840 --> 01:14.460
+So it's it gets created inside the feature tests and we already have the class set up that extends the
+
+01:14.490 --> 01:22.590
+correct based test case class and basic test basic almost empty test because it only checks if true
+
+01:22.770 --> 01:24.340
+is true.
+
+01:24.390 --> 01:32.070
+So we'll be using this traits later but for now let's just remove them because we do not need them at
+
+01:32.070 --> 01:33.930
+this point.
+
+01:33.930 --> 01:38.230
+And now let's see how we can test our front page.
+
+01:38.370 --> 01:40.800
+The the home page.
+
+01:40.800 --> 01:46.590
+So first we can start with actually getting this page.
+
+01:46.830 --> 01:48.450
+Using this get
+
+01:51.280 --> 01:58.910
+so remember that I told you about those three parts that the test usually consist of that all range
+
+01:58.990 --> 02:00.680
+asked and served.
+
+02:01.090 --> 02:08.470
+And in our case we will actually start with act because we are actually using something in this case
+
+02:08.470 --> 02:11.230
+we do not have to prepare anything.
+
+02:11.230 --> 02:20.380
+We just go ahead and fetch the home page and now by having this response we can actually do some assertions
+
+02:20.410 --> 02:21.190
+immediately.
+
+02:21.340 --> 02:25.340
+So now we are inside the search section.
+
+02:26.020 --> 02:27.730
+So let's see what we can check.
+
+02:27.730 --> 02:29.050
+It's very simple.
+
+02:29.050 --> 02:36.610
+It only displays some text so we can make sure that their home page is displaying this title.
+
+02:36.670 --> 02:43.080
+So let's copy it and create our first assertion.
+
+02:43.190 --> 02:52.490
+Now we can assert if this text can actually be seen on that page and there is a method of this response
+
+02:52.520 --> 02:58.400
+object that we get back from fetching the home page assert C text.
+
+02:58.850 --> 03:05.750
+So on the Vikki page I've included a link to all the possible assertions that you can make when you
+
+03:05.750 --> 03:13.230
+are testing your pages using the functional tests and using the HDP requests.
+
+03:13.250 --> 03:14.440
+This is just one of them.
+
+03:14.450 --> 03:15.800
+It's very simple.
+
+03:15.860 --> 03:22.400
+It is just verifying whether we can see this takes on the response that is being returned from this
+
+03:22.400 --> 03:22.970
+page.
+
+03:24.290 --> 03:27.860
+So let's go ahead and run this tests.
+
+03:27.860 --> 03:36.020
+So now we have free tests and free assertions and it is all green which means our text test was successful.
+
+03:36.470 --> 03:41.780
+Additionally we have this paragraph so we can also check if it exists on the page.
+
+03:41.790 --> 03:49.690
+So let's do response assert C text and paste this.
+
+03:49.730 --> 03:55.280
+Now let's rerun the tests and we have now four assertions and everything is green.
+
+03:55.280 --> 03:58.520
+So this really works very easily.
+
+03:58.550 --> 04:06.860
+Now let's also rename this method because we need to make sure that our test names also describe it
+
+04:06.860 --> 04:10.550
+very clearly what this test is doing.
+
+04:10.580 --> 04:17.810
+So test example doesn't really say anything so we can name it like test home page or test.
+
+04:17.820 --> 04:21.590
+Home page is working correctly.
+
+04:21.750 --> 04:29.070
+So we do not really have to worry about the long names of your tests because you won't be calling this
+
+04:29.070 --> 04:30.750
+test yourself.
+
+04:30.750 --> 04:35.510
+And this will always be just called by peach unit.
+
+04:35.550 --> 04:39.690
+So the more descriptive name you will give to our test the better.
+
+04:39.690 --> 04:47.340
+So anyone else imagine your co-workers or you after some time when you might have forgot what an actual
+
+04:47.340 --> 04:55.680
+test is doing then if you will see the test name to be very descriptive you will probably appreciate
+
+04:55.680 --> 05:02.460
+that you have used descriptive name to name this test because you will be you will know exactly what
+
+05:02.520 --> 05:05.480
+this test is doing.
+
+05:05.490 --> 05:14.670
+So now let's go ahead and create another test so other public function test contact page is working
+
+05:15.960 --> 05:25.020
+correctly so this method is just another test and we'll test another simple page.
+
+05:25.020 --> 05:33.590
+The contact page so we will also fetch this page using this get.
+
+05:34.050 --> 05:38.030
+But this time the URL is slash contact.
+
+05:38.910 --> 05:47.250
+And now we can do the same assertions so asserts C text and we expect to see contact because that's
+
+05:47.250 --> 05:55.530
+the title and we can even copy this because we know that there is also a paragraph simple paragraph.
+
+05:55.550 --> 06:03.750
+Hello this is contact or whatever you have put in there and now let's rerun the tests and now you see
+
+06:03.750 --> 06:08.570
+that we have four tests and six assertions and it is all passing.
+
+06:08.790 --> 06:15.270
+Now if you would try to test for something else like you will remove part of this text save the Test
+
+06:15.300 --> 06:17.020
+and run it again.
+
+06:17.040 --> 06:24.630
+Now you can see that it is failing so it's a pretty cool way to check whenever any changes that we have
+
+06:24.630 --> 06:33.090
+included inside our application actually break something so you won't really have to check that manually
+
+06:33.120 --> 06:39.630
+you always just run your tests and then you make sure that every change that you have made doesn't break
+
+06:39.870 --> 06:40.800
+anything else.
+
+06:40.860 --> 06:47.830
+So now let's fix this test so this would be the basics of writing our tests.
+
+06:47.830 --> 06:55.030
+You can see that this is extremely simple and in the next lecture we'll see how we can actually test
+
+06:55.090 --> 07:03.820
+the pages that interact with the database and we will see how we can rebuild our database on each test.
+
+07:03.820 --> 07:13.510
+So the database stays clean isolated and no single test will include will influence the results of any
+
+07:13.840 --> 07:14.980
+other test.
+
+07:14.980 --> 07:16.840
+So see you in the next lecture.

@@ -1,0 +1,115 @@
+WEBVTT
+
+00:01.550 --> 00:07.680
+To add or modify data in your application, you need to accept user input.
+
+00:08.030 --> 00:10.490
+This is done using HTML forms.
+
+00:11.210 --> 00:13.460
+Forms are not complicated.
+
+00:13.490 --> 00:19.030
+You need to create a view file and just put the HTML markup for the form.
+
+00:19.550 --> 00:23.750
+Let's make a view called create for the posts.
+
+00:30.270 --> 00:38.700
+The same name as the action name responsible for showing the form in the resource controller.
+
+00:40.930 --> 00:44.860
+This view will extend the base layout.
+
+00:47.150 --> 00:49.280
+And have two sections.
+
+00:52.370 --> 00:56.510
+Title and content.
+
+01:07.360 --> 01:15.940
+Forums that create data needs to send a post request, so said the method to post.
+
+01:17.950 --> 01:26.620
+Then you need forum's input, controls the text input for the title.
+
+01:32.360 --> 01:35.300
+And text area.
+
+01:38.350 --> 01:39.400
+For the content.
+
+01:42.670 --> 01:46.210
+Then I submit button is needed.
+
+01:49.110 --> 01:52.740
+To actually submit the form contents.
+
+01:57.670 --> 02:06.910
+Every form needs the Eurail, it will send the data to specified in the action attribute, we do know
+
+02:06.910 --> 02:16.810
+there your IS posts, but we won't put this Eurail in the markup directly because we use the resource
+
+02:16.810 --> 02:17.740
+controller.
+
+02:17.740 --> 02:26.590
+We know all we need to remember is the resource name bank posts in our case and the name of the action
+
+02:26.590 --> 02:28.960
+that stores data in the database.
+
+02:29.290 --> 02:31.720
+And it's called Stora.
+
+02:32.440 --> 02:43.300
+You can now print that you are using master syntax and the root helper using the root name bank posts
+
+02:43.660 --> 02:44.380
+store.
+
+02:47.130 --> 02:57.510
+Remember that we need to enable to create and store routes first onto a resource controller for posts.
+
+02:58.380 --> 03:09.420
+So you do that in the Web file where the rerouting is defined and you can create and store to the list
+
+03:09.420 --> 03:11.220
+of enabled routes.
+
+03:13.560 --> 03:21.240
+Then we also have to remember that to actually render the form, we need to tell the create action to
+
+03:21.240 --> 03:29.010
+do that by returning the view function and telling it the name of the template which is supposed to
+
+03:29.220 --> 03:29.850
+create.
+
+03:32.300 --> 03:36.590
+Let's visit the euro with the form and try to save it.
+
+03:37.790 --> 03:47.360
+The URL is post slash, create, this is our form, not the best looking form in the world, but that's
+
+03:47.360 --> 03:48.140
+not our goal.
+
+03:48.170 --> 03:53.450
+Currently, let's try to save it by putting some random data.
+
+03:54.640 --> 03:55.330
+Oops.
+
+03:56.230 --> 04:00.100
+419 error page expired.
+
+04:00.820 --> 04:01.640
+Well, don't worry.
+
+04:01.930 --> 04:10.060
+This is Laravel protection from Crosseyed request forgery Ceaser have insured and we need a separate
+
+04:10.060 --> 04:12.720
+lecture to talk about the CSA ref.

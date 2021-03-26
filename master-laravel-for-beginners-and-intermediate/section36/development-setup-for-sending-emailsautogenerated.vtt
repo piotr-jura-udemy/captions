@@ -1,0 +1,256 @@
+WEBVTT
+
+00:00.330 --> 00:07.050
+In this section we'll learn how to send e-mails with lateral and this is actually very very easy.
+
+00:07.050 --> 00:13.020
+So let's get straight to the point and first talk about the configuration options and default configuration
+
+00:13.020 --> 00:21.120
+for sending emails through Lavell so open their mail BHP file on the conflict folder and let's take
+
+00:21.120 --> 00:21.490
+a look.
+
+00:21.990 --> 00:27.520
+So the first and the most important setting we need to know about is the male driver.
+
+00:27.630 --> 00:30.930
+So this will specify how our e-mails would be sent.
+
+00:31.650 --> 00:36.240
+So you can see even here on the comment what drivers are supported.
+
+00:36.300 --> 00:43.820
+So there is the SMP P which is basically what you use when you are sending emails using your email account.
+
+00:43.980 --> 00:45.560
+Then there is send mail program.
+
+00:45.570 --> 00:51.690
+This is a program running on Unix systems and of course there are also cloud options available like
+
+00:51.690 --> 00:59.880
+male gun man the real Amazon says spark post and two other options log and array used only for development
+
+00:59.970 --> 01:06.300
+which we want to even cover because there are much better options to test sending emails on your development
+
+01:06.300 --> 01:14.240
+machine so starting with the drivers setting you can see that most or even all of the options configurable
+
+01:14.240 --> 01:18.580
+here are configured using the environment variables.
+
+01:18.650 --> 01:24.800
+So on your normal server you will have those environment variables set for your system.
+
+01:24.800 --> 01:31.700
+But here on the development machine we have everything inside the DOT and file so you can find those
+
+01:31.700 --> 01:34.990
+settings in your dot and file.
+
+01:35.120 --> 01:38.470
+Now the default mode driver is the S&amp;P.
+
+01:38.480 --> 01:40.100
+This is what we will be using.
+
+01:40.100 --> 01:46.850
+We will actually use a service called mail trap where you can send our dummy emails and then see them
+
+01:46.880 --> 01:50.130
+like you would in a normal email client.
+
+01:50.150 --> 01:55.010
+So there are also more configuration options for example you can configure the host.
+
+01:55.040 --> 01:59.180
+This will be the host for your SMP server.
+
+01:59.180 --> 02:00.350
+So don't worry about that.
+
+02:00.350 --> 02:02.890
+We will configure everything in a moment.
+
+02:02.900 --> 02:05.600
+Next option is of course the port.
+
+02:05.600 --> 02:11.550
+Now the from option lets you specify the email address and the name of that e-mail.
+
+02:11.570 --> 02:16.490
+Others from which all the emails would be sent globally using your application.
+
+02:16.490 --> 02:20.700
+So this usually would be your customer facing email.
+
+02:20.720 --> 02:22.810
+So for example we have a domain.
+
+02:22.820 --> 02:24.470
+A lot of that test.
+
+02:24.470 --> 02:29.550
+So this might be something like customer at larval test.
+
+02:29.840 --> 02:31.870
+Also the name can be well anything.
+
+02:31.880 --> 02:36.410
+Name of your application something that will be sent to the customers.
+
+02:36.430 --> 02:38.230
+So they will know where did.
+
+02:38.480 --> 02:41.710
+Who did they got got this e-mail from.
+
+02:41.740 --> 02:44.550
+Now optional you can specify the mail encryption.
+
+02:44.780 --> 02:47.370
+Let's just leave the default option for now.
+
+02:47.450 --> 02:55.190
+And then finally there is user name and password which would be used for the SMP server optional you
+
+02:55.190 --> 02:58.310
+can also configure a path to the send mail program.
+
+02:58.310 --> 03:02.770
+Don't worry about this at all because this is only applicable to Unix systems.
+
+03:02.780 --> 03:06.300
+And well we are still in development environment.
+
+03:06.300 --> 03:07.510
+We are just learning.
+
+03:08.120 --> 03:10.860
+So if you are on Windows you won't even have this.
+
+03:10.870 --> 03:13.060
+So don't worry about up.
+
+03:13.370 --> 03:22.310
+Now the next options we have is regarding markdown markdown is type of templating system letting you
+
+03:22.370 --> 03:26.970
+easily write some text which might also be visual.
+
+03:27.080 --> 03:29.090
+If you do not know what markdown is.
+
+03:29.090 --> 03:30.720
+Also don't worry about that.
+
+03:30.740 --> 03:33.240
+I will mention that later.
+
+03:33.350 --> 03:39.460
+And finally there is the log channel which specifies where every event regarding sending the emails
+
+03:39.460 --> 03:40.400
+should be logged.
+
+03:40.430 --> 03:48.210
+So by default it is logging to whatever was defined in the environment variable may look channel.
+
+03:48.290 --> 03:49.880
+Now we've covered the basics.
+
+03:49.880 --> 03:51.110
+Now let's go ahead.
+
+03:51.140 --> 03:58.280
+Set up a may trap account so we can catch all the e-mails that came out from our application and we
+
+03:58.280 --> 04:00.430
+will set this up right now.
+
+04:00.530 --> 04:05.680
+And in the next lecture we will be already sending our fairest e-mail.
+
+04:05.720 --> 04:13.640
+So obviously I will talk a little bit more about e-mails how to attach files and all related stuff regarding
+
+04:13.700 --> 04:14.150
+e-mails.
+
+04:14.150 --> 04:21.650
+But I want to get you set up as quickly as possible so we can see how easy it is to send e-mails throughout
+
+04:21.760 --> 04:29.920
+the lot of application so after talking about the basics now let's go ahead and visit this link HDP
+
+04:30.010 --> 04:38.120
+has male trap dot I O and sign up so you can also use the logging option and I suggest logging using
+
+04:38.120 --> 04:40.070
+Google account or the github account.
+
+04:40.070 --> 04:41.600
+This would be much faster.
+
+04:41.600 --> 04:42.810
+So let me do that.
+
+04:42.890 --> 04:48.170
+I will log in using my Google account and this immediately creates an account for me.
+
+04:48.170 --> 04:54.740
+So if you have any troubles then you can also sign up and choose any other registering options that
+
+04:54.740 --> 04:56.180
+mail drop requires.
+
+04:56.180 --> 04:58.060
+It's a free service.
+
+04:58.250 --> 05:04.180
+So basically we'll get a demo inbox which will be totally enough for our needs.
+
+05:04.280 --> 05:10.930
+Now if you will visit this demo inbox what you see right now is their credentials that we need to set
+
+05:10.940 --> 05:18.830
+up our SMP server so everything that we send would be sent directly to this mail trap and we will see
+
+05:18.860 --> 05:22.070
+emails on the left well their subjects.
+
+05:22.070 --> 05:27.370
+And when you click those email you will then see the preview of what was sent.
+
+05:27.380 --> 05:34.820
+So let's go ahead and first copy the host value go to the visual studio code and what we have right
+
+05:34.820 --> 05:41.700
+here is the main driver is as MVP by default we might even have SMP Pete may trap yo.
+
+05:41.780 --> 05:48.110
+But anyway let's modify that the path is to five to five which is valid.
+
+05:48.110 --> 05:50.840
+Then you need to copy your username and password.
+
+05:50.990 --> 05:52.580
+So please do not copy mine.
+
+05:52.610 --> 05:54.110
+Just use your own
+
+05:57.150 --> 06:01.590
+so email password and basically that's enough.
+
+06:01.590 --> 06:09.540
+We have the same T.P. server setup and in the next lecture we'll actually see how we create and send
+
+06:09.600 --> 06:17.100
+emails in larval and we'll send the first email which would be after someone has posted a comment on
+
+06:17.100 --> 06:21.030
+a blog post that I have written so soon the next lecture.

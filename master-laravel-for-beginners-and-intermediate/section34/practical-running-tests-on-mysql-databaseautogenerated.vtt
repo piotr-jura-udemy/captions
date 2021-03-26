@@ -1,0 +1,232 @@
+WEBVTT
+
+00:00.930 --> 00:05.350
+Now finally let's see if our tests still work.
+
+00:05.490 --> 00:11.490
+So I know that we haven't added many more tests to the older functionality that we have created since
+
+00:11.490 --> 00:14.940
+we initially wrote those tests.
+
+00:14.940 --> 00:17.940
+But let's see if they still work at all.
+
+00:18.630 --> 00:29.570
+So we are on vendor been peach bee unit and we see that there are a lot of errors and they all happen
+
+00:29.570 --> 00:31.620
+to be related to that as well.
+
+00:31.750 --> 00:32.470
+Light.
+
+00:32.850 --> 00:41.510
+So this actually might be problematic to create separate migrations just to handle all the differences
+
+00:41.630 --> 00:44.480
+that obscure light has.
+
+00:44.480 --> 00:51.970
+So actually to make our life easier because it seems it doesn't really work well for us to have Eskew
+
+00:51.990 --> 01:00.920
+applied as the database let's just modify that so we will be using the my sequel database instead of
+
+01:01.040 --> 01:04.570
+Eskew a light for the database testing.
+
+01:05.630 --> 01:13.790
+So let's go to the Peach bee my admin and create our new database let's call it larval underscore testing
+
+01:13.940 --> 01:17.640
+or whatever you came up with.
+
+01:17.660 --> 01:25.850
+Now we have to specify the collation which well should be exactly the same as we use for the application.
+
+01:25.850 --> 01:29.910
+This should be UTF and before Unicode S.I..
+
+01:30.710 --> 01:33.770
+Let's create this database Lovell underscore.
+
+01:33.800 --> 01:44.980
+Testing and now let's head to the database peach bee file where we define all of our connections.
+
+01:45.070 --> 01:54.630
+So what we used so far was this Eskil light underscore testing connection for in-memory as El database.
+
+01:54.820 --> 02:04.770
+So what we can alternatively do is copy this my secret connection which we use for the application.
+
+02:04.970 --> 02:07.320
+Call it my sequel testing
+
+02:09.940 --> 02:17.080
+we can leave all the older parameters the same the host is the same board is the same piece in our case
+
+02:17.110 --> 02:23.260
+because we have a local database index sump user name password should be the same.
+
+02:23.260 --> 02:33.860
+The only thing that changes is actually the database so this can be modified inside the P2P unique configuration
+
+02:33.860 --> 02:34.390
+file
+
+02:37.220 --> 02:44.450
+so here we have specified that the db connection should be askew allied testing actually it has to be
+
+02:45.450 --> 02:47.540
+my sequel testing.
+
+02:47.760 --> 02:50.430
+So our new connection my sequel.
+
+02:50.430 --> 02:51.030
+Testing.
+
+02:51.320 --> 02:53.270
+OK.
+
+02:53.520 --> 02:58.710
+Now we also have to pass our database name using the environment variable.
+
+02:59.040 --> 03:04.740
+So not to destroy our database that we are working on.
+
+03:05.280 --> 03:09.840
+We should create another environment variable for Peach B unit
+
+03:12.770 --> 03:22.920
+and it is called D B database and if you remember this is called larval testing
+
+03:25.910 --> 03:29.610
+that's the exact the the database name you should provide.
+
+03:30.080 --> 03:30.410
+OK.
+
+03:30.410 --> 03:38.780
+So from now on our tests will recreate this larval testing database on each test run at least.
+
+03:38.870 --> 03:46.360
+Whenever you have specify it to do so let's open the post test BHP.
+
+03:46.650 --> 03:54.280
+So if you use the refresh database straight then this will reload the database on every test run.
+
+03:54.330 --> 03:59.760
+So let's run it again to see if we have any broken tests.
+
+03:59.760 --> 04:06.180
+And now you see that we do not have many problems with the obscure light but actually we have a failing
+
+04:06.180 --> 04:07.170
+test.
+
+04:07.170 --> 04:18.610
+There is only one and it is in tests one blog post with comments so let's find this so test see one
+
+04:18.610 --> 04:21.310
+blog post with comments.
+
+04:21.910 --> 04:26.320
+And what the problem is that we are creating comments using factory.
+
+04:26.650 --> 04:33.670
+So we haven't changed that much to use seeders or anything else and we rely on the common model to have
+
+04:33.790 --> 04:38.070
+our blog post I.D. column which it doesn't.
+
+04:38.770 --> 04:45.070
+So that's another lesson for the future that whenever you write tests and you create some factories
+
+04:45.580 --> 04:53.770
+probably it's the best idea to just use the factories for the models inside tests too because you should
+
+04:53.770 --> 04:57.540
+probably update them whenever you change your application.
+
+04:57.640 --> 04:59.410
+So let's just fix this.
+
+04:59.440 --> 05:08.020
+The quickest way possible so we specify commendable idea because this is how the relation column is
+
+05:08.020 --> 05:09.190
+called now.
+
+05:09.220 --> 05:10.690
+But that's not everything.
+
+05:10.690 --> 05:15.280
+We also have to add comment and all type.
+
+05:15.280 --> 05:17.380
+So this is only for the blog post.
+
+05:17.410 --> 05:20.210
+Otherwise this won't be fetched by the blog posts.
+
+05:20.230 --> 05:30.050
+If commendable type is empty or is something different done up slash blog post now save the changes
+
+05:31.140 --> 05:33.910
+and let's rerun the tests.
+
+05:33.960 --> 05:35.420
+There is another problem.
+
+05:35.670 --> 05:43.170
+User I.D. doesn't have a default value test see one blog post with comments.
+
+05:43.170 --> 05:48.660
+So another thing is that we have to now specify user I.D. inside the comment model.
+
+05:48.660 --> 05:52.860
+And when we have created this test we didn't do that.
+
+05:52.890 --> 06:01.660
+So since it doesn't really matter what is the user I.D. we can just reuse this user help or method that
+
+06:01.660 --> 06:11.200
+we have created for our test to just create a user when we need him so we can do it like that.
+
+06:11.200 --> 06:17.820
+This should already create our user who can see this as using factor in
+
+06:20.670 --> 06:33.660
+and we can now pass the user I.D. for the comment model so user I.D. Now let's rerun the tests and they're
+
+06:33.720 --> 06:34.620
+all green.
+
+06:35.250 --> 06:37.250
+So this is not a perfect situation.
+
+06:37.260 --> 06:40.800
+Obviously we have modified our application allowed.
+
+06:40.800 --> 06:46.160
+We have created a lot of things but tests are still kind of out of date.
+
+06:46.190 --> 06:51.480
+So we do not follow our tests with whatever functionality that we create.
+
+06:51.480 --> 06:57.750
+So just so you know this is not a best practice actually you should be writing your tests first and
+
+06:57.750 --> 07:07.380
+then implement the actual logic inside the application but the only thing I'm not doing this is this
+
+07:07.380 --> 07:15.090
+would actually take quite a lot of time that we can use to learn the the vote itself.
+
+07:15.090 --> 07:22.710
+But Well definitely this is something you should know that writing tests should always follow whatever
+
+07:22.710 --> 07:27.140
+functionality you create or whatever changes you are making.

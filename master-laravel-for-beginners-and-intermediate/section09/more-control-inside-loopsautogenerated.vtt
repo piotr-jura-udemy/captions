@@ -1,0 +1,196 @@
+WEBVTT
+
+00:01.010 --> 00:07.910
+Sometimes when you need to display a collection of things, you might expect that this collection could
+
+00:07.910 --> 00:17.240
+be empty for the empty case, you might either combine, if else, with are for each directive or just
+
+00:17.240 --> 00:20.550
+more simply used a false directive.
+
+00:21.410 --> 00:25.340
+So let me show you the first case with if directive's directives.
+
+00:25.340 --> 00:34.040
+So you would use if check if posts contain anything using BHB count function, then we need an else
+
+00:34.040 --> 00:34.610
+case.
+
+00:35.030 --> 00:43.940
+Render something like no posts found and then close that with and if let's save the changes.
+
+00:44.900 --> 00:50.620
+So currently it looks like this because we actually have something inside the post array.
+
+00:51.350 --> 00:56.540
+So let's quickly comment that out so we simulate an empty array.
+
+00:57.200 --> 00:59.000
+Remember to save the changes.
+
+00:59.990 --> 01:00.680
+There it is.
+
+01:00.960 --> 01:02.140
+This is how it works.
+
+01:04.150 --> 01:06.130
+And let's see how we can simplify it.
+
+01:07.600 --> 01:15.100
+Now, let's change for each two for else, so we need to change the starting directive, also the ending
+
+01:15.220 --> 01:16.010
+directive.
+
+01:17.470 --> 01:25.840
+You don't need this if statement at the top and its closing directive and this alternative case goes
+
+01:25.840 --> 01:29.960
+inside and else has to be renamed to empty.
+
+01:31.210 --> 01:36.240
+So this is exactly an equivalent of mixing if with for each.
+
+01:37.780 --> 01:41.350
+Let's save the changes and refresh.
+
+01:41.350 --> 01:41.950
+There it is.
+
+01:41.950 --> 01:48.010
+We have the alternative text if we re-enable those entries again.
+
+01:50.260 --> 01:53.500
+Now is displaying the items it has to from the collection.
+
+01:54.780 --> 02:01.530
+Every loop can skip certain elements using their continued directive or break the loop altogether using
+
+02:01.530 --> 02:02.840
+the break directive.
+
+02:03.870 --> 02:09.420
+So let's test a break and continue directives inside the existing four hours loop.
+
+02:10.020 --> 02:16.860
+So first break one, we will check for the condition when the key equals two.
+
+02:18.510 --> 02:26.490
+Make sure to save the changes and this is how it looks, so when the second element is encountered,
+
+02:26.490 --> 02:28.300
+it basically stops the loop.
+
+02:28.320 --> 02:33.120
+Nothing else would be rendered even if they're supposed Ray would be bigger.
+
+02:34.080 --> 02:35.850
+OK, let's cut that out.
+
+02:35.850 --> 02:43.950
+And now to continue this time, we will check if key equals one.
+
+02:46.640 --> 02:53.150
+So it just keeps the first element, but if this array would contain more than one element, the remaining
+
+02:53.150 --> 02:55.460
+elements would be normally rendered.
+
+03:00.300 --> 03:07.110
+Inside every loop, you have access to the special loop variable, it has some useful info about the
+
+03:07.110 --> 03:11.850
+current loop, let's see a complete table of what is available.
+
+03:13.520 --> 03:16.980
+Remember, you can always check that intraplate documentation.
+
+03:17.840 --> 03:25.850
+Now let's use the look, even property, and give the old elements on our list a different background.
+
+03:31.450 --> 03:39.520
+So let's add if directive and check using this loop variable, if we have an even element, then we
+
+03:39.520 --> 03:41.110
+render everything, as it were.
+
+03:42.250 --> 03:51.220
+Also, let's add on else case, and this time we will modify things a little bit, maybe by adding a
+
+03:51.220 --> 03:51.840
+style.
+
+03:53.860 --> 04:04.840
+So using some simple means, we will change the background color to be silver right now, save the changes.
+
+04:07.920 --> 04:09.190
+And let's take a look.
+
+04:10.380 --> 04:17.850
+So there it is, if we would like to verify it further by adding a third element.
+
+04:19.970 --> 04:24.170
+So with index free and something like intro to go langue.
+
+04:31.760 --> 04:33.710
+Are we assured that this works?
+
+04:37.320 --> 04:43.710
+Finally, let's do an honorable mention of the for loop and the wire loop.
+
+04:44.600 --> 04:51.650
+So there is no need to code along, let me just show you the two examples, by the way, this code can
+
+04:51.650 --> 04:58.940
+be found inside The View's home index blade up and it would be available on the GitHub if you really
+
+04:58.940 --> 05:00.920
+would like to code along.
+
+05:02.170 --> 05:10.030
+First, the for loop, which is used to render certain blog and times, so this works exactly like the
+
+05:10.030 --> 05:19.390
+for loop in P, P and secondly, the Y loop that will render something unless it condition becomes true.
+
+05:19.990 --> 05:28.150
+Now you can see that we have mixed this with using the BHP directive, which basically allows you to
+
+05:28.150 --> 05:31.420
+run some PGP code inside your template.
+
+05:31.750 --> 05:35.130
+And in our case, I've created a dozen variable.
+
+05:35.500 --> 05:38.350
+Then I am checking if it is set to true.
+
+05:38.860 --> 05:49.150
+And at the end of every loop iteration I am randomizing a number to be zero or one, and if it's one
+
+05:49.150 --> 05:50.910
+I am setting down to true.
+
+05:51.700 --> 05:53.200
+So very simple thing.
+
+05:53.410 --> 05:55.140
+And it works like this.
+
+05:55.330 --> 06:03.400
+So the for loop always renders certain elements and using while loop as you can see me refreshing with
+
+06:03.400 --> 06:07.750
+every refresh we get a random number of text.
+
+06:07.750 --> 06:09.370
+I am not done rendered.
+
+06:11.140 --> 06:11.960
+So that's it.
+
+06:11.980 --> 06:13.960
+Everything about Lupe's.

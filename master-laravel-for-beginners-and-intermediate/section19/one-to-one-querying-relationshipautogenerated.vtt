@@ -1,0 +1,214 @@
+WEBVTT
+
+00:00.960 --> 00:07.540
+In the last lecture we created the association between the outdoors and the profiles.
+
+00:07.540 --> 00:12.560
+And in this lecture I will show you how we can read that relation.
+
+00:12.600 --> 00:21.930
+So first let's start by loading one out or using the Find method so maybe let's try with the outer.
+
+00:21.930 --> 00:29.460
+We find you one and what you see is being automatically returned by Lara though is only the fields that
+
+00:29.700 --> 00:32.250
+belong to the outer.
+
+00:32.250 --> 00:39.930
+So that's a very important thing to know that by default Lavell won't be loading from the database all
+
+00:39.930 --> 00:42.550
+the relations of of the model.
+
+00:42.650 --> 00:50.820
+You'll have to explicitly load them and how you can do that is to remember that we have the relation
+
+00:50.820 --> 00:55.350
+defined US profile methods on the outer model.
+
+00:55.350 --> 01:03.480
+But now if you would instead call it as a field which doesn't exist we haven't defined it explicitly
+
+01:03.480 --> 01:04.330
+anywhere.
+
+01:04.470 --> 01:12.990
+It is just the way larval works that if it will find a field name which has the same name as the method
+
+01:13.230 --> 01:22.440
+name of this relation it will use the BHP dynamic capabilities to fetch this related model from the
+
+01:22.440 --> 01:23.100
+database.
+
+01:23.130 --> 01:31.440
+So now if I press enter only then the La Belle will fetch this relation so you can see that now it shows
+
+01:31.440 --> 01:38.490
+me the profile and I did that only by typing the profile as a property.
+
+01:38.520 --> 01:44.100
+And now let's see what outer contains so after I've read that profile.
+
+01:44.280 --> 01:53.370
+Now the outer model has the I.D. the timestamps and also the profile property which is which contains
+
+01:53.400 --> 02:04.690
+the profile model so we can do the same with profiles and load the out or from the other side so let's
+
+02:04.690 --> 02:13.180
+clear this and see what profiles do we have so maybe we can load the profile with the IDA five.
+
+02:13.190 --> 02:20.710
+Of course this could be different on your setup so just check out what's inside the database and we
+
+02:20.710 --> 02:26.810
+will use that profile find method and load the profile with the number five.
+
+02:27.980 --> 02:35.690
+So what you can see here is the idea the timestamps and the outer I.D. And of course this works the
+
+02:35.690 --> 02:43.560
+other way to that if I will use the outer property on the profile model.
+
+02:43.680 --> 02:46.750
+And this is exactly how we have called our relation.
+
+02:46.760 --> 02:51.120
+So there is an outer method on the profile model.
+
+02:51.120 --> 02:59.320
+It will load the related outer and let us see the profile right now after I use this property.
+
+02:59.340 --> 03:06.900
+So each time you use it read it then it just only then makes the query to fetch the related model.
+
+03:06.900 --> 03:16.620
+Now this is how profile looks like and it also has this outdoor property with the outer model so this
+
+03:16.740 --> 03:25.490
+concept of not loading everything at once is called lazy loading you will come across this term a lot
+
+03:25.920 --> 03:34.140
+and basically it is load only the things that you need at the time and lazy loading is by default inside
+
+03:34.140 --> 03:37.520
+the larval eloquent models.
+
+03:37.560 --> 03:45.480
+Now if you would like to load an outer but you want it to be loaded immediately with the profile with
+
+03:45.750 --> 03:52.830
+let's say one query you can also do that maybe let's stop Tinker and restart it.
+
+03:53.520 --> 04:02.840
+So we won't have anything loaded and now if you would like to load the outer with the specific idea
+
+04:02.840 --> 04:06.570
+and also work that profile there is another way to do it.
+
+04:06.650 --> 04:11.690
+So instead of find we'll start with using their width method.
+
+04:12.290 --> 04:19.470
+And here you have to specify the relation name so this would be profile so not the method name but the
+
+04:19.470 --> 04:28.430
+relation name would be the method name without parentheses and now we could we have to use another method
+
+04:28.430 --> 04:39.260
+called where key where we specify what primary key we want to fetch this record by and what will this
+
+04:39.260 --> 04:47.480
+return is actually are instance of the eloquent query builder and we haven't talked about query builders
+
+04:47.510 --> 04:52.400
+yet we will soon after the section about relations.
+
+04:52.400 --> 04:58.310
+But now let's try to just load it without with the profile.
+
+04:58.340 --> 05:04.430
+So we stopped at were key and to actually execute this query.
+
+05:04.550 --> 05:06.940
+We had to call for example first.
+
+05:06.950 --> 05:13.520
+So it will fetch the first element from the query result which would be a collection.
+
+05:13.520 --> 05:18.070
+So we do not want a collection we only want one record.
+
+05:18.110 --> 05:25.980
+And the method first is allowing us to pick the first result from the collection.
+
+05:26.120 --> 05:28.430
+Apparently I've misspelled that.
+
+05:28.430 --> 05:30.430
+So let's try again.
+
+05:30.500 --> 05:32.020
+I will just copy that
+
+05:36.640 --> 05:37.680
+and fix it.
+
+05:37.750 --> 05:41.350
+Now we're a key one.
+
+05:41.470 --> 05:50.350
+And first Okay so you can see that we have fetched the out or together with profile.
+
+05:51.010 --> 05:53.830
+By this simple query.
+
+05:53.820 --> 06:00.930
+Now if you think that this just came out of nowhere this part specifically this part with were key.
+
+06:00.940 --> 06:10.080
+And first let's go to the Vicky page and here I am mentioning that the model find is actually a shortcut
+
+06:10.390 --> 06:18.310
+so click this view source and you will be taken directly to the source code of Lavell inside GitHub
+
+06:19.060 --> 06:23.230
+and you can see how the find method looks like how it was implemented.
+
+06:23.470 --> 06:25.890
+And this is exactly what it is doing.
+
+06:25.960 --> 06:31.480
+It's calling their work key and getting the first result.
+
+06:31.600 --> 06:41.830
+Now the outer only has a relation to profile but if you would like to load more than one related entities
+
+06:41.980 --> 06:49.450
+let's say that the outer might have profile might have some favorite books or blog posts then you can
+
+06:49.510 --> 06:58.680
+also do something like this so it's inside the with method you will maybe specify not one relation but
+
+06:58.710 --> 07:01.560
+two or more relations inside an array.
+
+07:01.590 --> 07:08.080
+So assuming the recent comments relation which we don't have right now but let's just assume we do.
+
+07:08.430 --> 07:16.080
+You will also be able to do something like this and then it will load the outer together with the profile
+
+07:16.230 --> 07:24.330
+and the comments relation of course it doesn't work because we don't have the comments relation on the
+
+07:24.330 --> 07:25.910
+outer model.
+
+07:26.100 --> 07:32.430
+So this is how you can simply load the model at once together with its relations.
+
+07:32.430 --> 07:37.530
+And now let's continue to the next lectures when we will talk more about the relations.

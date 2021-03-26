@@ -1,0 +1,286 @@
+WEBVTT
+
+00:00.420 --> 00:08.220
+Now that we have added a little bit of HDMI all markup to our application it's time to introduce the
+
+00:08.220 --> 00:12.000
+concept of the Lavell blade components.
+
+00:12.000 --> 00:19.950
+So first let's see what's the difference between the layouts between including some templates and a
+
+00:20.120 --> 00:22.860
+all complete components.
+
+00:22.860 --> 00:29.880
+So let's head to our visual studio code editor and take a look at the first example.
+
+00:29.880 --> 00:35.780
+So this template is the show blade BHP from The Post's namespace.
+
+00:35.790 --> 00:44.010
+And what we do here is we extend the layout which basically means that whatever is in the layout would
+
+00:44.010 --> 00:49.910
+be rendered for the page but we just modify certain section.
+
+00:50.040 --> 00:57.420
+So what we want to do is we want a boilerplate for our page everything that is contained inside the
+
+00:57.420 --> 00:58.440
+layout.
+
+00:58.620 --> 01:05.580
+But here in the specific section called content we would like to render something else something which
+
+01:05.580 --> 01:09.630
+is exactly inside this template.
+
+01:09.630 --> 01:17.310
+Now we also have an edited template that also extends a layout and put some specific content.
+
+01:17.730 --> 01:21.300
+But here we also include a template.
+
+01:21.300 --> 01:29.430
+So what how including works is we have some template which we can call partial template which doesn't
+
+01:29.430 --> 01:32.610
+really exist on its own.
+
+01:32.610 --> 01:37.440
+And how that works is we just echo whatever is inside this template.
+
+01:37.740 --> 01:46.450
+And also this template underscore form inherits every variable that is being accessible to the edit
+
+01:46.450 --> 01:47.660
+template.
+
+01:47.760 --> 01:55.650
+So since we have passed our post variable here which is being passed through the post controller it
+
+01:55.650 --> 01:59.830
+also has an access to this variable that post.
+
+02:00.000 --> 02:07.620
+But if you would include this form template anywhere place else in any other template this would just
+
+02:07.620 --> 02:15.840
+give you an error because this basically is like a chunk that can only be added to either the edit template
+
+02:16.230 --> 02:19.020
+or the create template where we also include that.
+
+02:19.020 --> 02:20.940
+So it is very specific.
+
+02:20.970 --> 02:28.260
+It depends on the other templates and well basically the case with layout is the same.
+
+02:28.260 --> 02:37.560
+So what are larval blade components are like the most reusable chunks of your templates where you create
+
+02:37.560 --> 02:40.430
+something that you can put anywhere.
+
+02:40.650 --> 02:47.590
+And it should work because you are actually specifying what should be rendered inside it.
+
+02:47.610 --> 02:48.020
+All right.
+
+02:48.030 --> 02:55.530
+So if this sounds a little bit more complicated the best way to see what is the difference and how components
+
+02:55.530 --> 02:57.830
+work is to see an example.
+
+02:57.840 --> 03:06.660
+So let's start with our simple example so let's head back to our application and add a brand new blog
+
+03:06.660 --> 03:12.810
+post with well whatever the title content doesn't really matter.
+
+03:12.810 --> 03:19.770
+But what we can see after adding this blog post is that we have this new text which isn't really a batch
+
+03:19.800 --> 03:28.560
+it's not really visible but this thing is can be can look much better so let's see what we can do with
+
+03:28.560 --> 03:29.480
+this.
+
+03:29.490 --> 03:36.960
+So this is being displayed in the post that we have other it is at least was added in the last five
+
+03:37.200 --> 03:38.460
+minutes.
+
+03:38.580 --> 03:48.630
+So instead of just surrounding it with a strong tag we can add something else like div class and we
+
+03:48.630 --> 04:01.130
+can use the we can use the botched class botch success so those are the classes from the good strap.
+
+04:01.310 --> 04:04.780
+And now let's see how this might look like.
+
+04:04.850 --> 04:13.370
+So now we have a much better batch but what if we would like to use those budgets anywhere else inside
+
+04:13.610 --> 04:14.480
+our code.
+
+04:14.840 --> 04:22.070
+So we would like to make this think reusable and only pass that text that has to be displayed inside
+
+04:22.130 --> 04:22.700
+the box.
+
+04:22.700 --> 04:31.250
+So we basically do not want to repeat ourselves with adding the same HDMI all in every place where we
+
+04:31.250 --> 04:35.270
+would like to show some kind of a badge.
+
+04:35.300 --> 04:43.740
+So what we can do is we can create a component so to create a component you need to add a new view.
+
+04:43.940 --> 04:54.650
+So let's add now our view inside the views folder and call it batch blade BHP.
+
+04:54.650 --> 04:59.550
+So this is our new component.
+
+04:59.710 --> 05:06.300
+Now let's copy this fragment into the barge.
+
+05:06.350 --> 05:19.650
+So now what we can do is we can use this component so instead of using this code here we can use that
+
+05:19.650 --> 05:29.490
+component directive and the component name is batch the same as the name of the template which is in
+
+05:29.510 --> 05:33.840
+the main namespace of our reviews.
+
+05:34.380 --> 05:37.530
+And you have to end it with and component
+
+05:40.510 --> 05:44.470
+now save the changes and let's see if we have it displayed.
+
+05:44.480 --> 05:48.120
+So yes it is still there.
+
+05:48.230 --> 05:54.970
+Now what if you would like to modify the text that should be displayed inside the batch.
+
+05:55.280 --> 06:00.650
+So components have a special variable which is called slot
+
+06:04.060 --> 06:13.470
+so if you echo slot now your component makes much more sense because everything what you put between
+
+06:13.470 --> 06:24.220
+those two directives component and and component will be available inside your component as a slot variable.
+
+06:24.240 --> 06:28.140
+So let's say the changes and let's see if that works.
+
+06:28.140 --> 06:34.720
+So we have new but we can also specify something else like brand new post
+
+06:37.830 --> 06:39.640
+and you can see that it works.
+
+06:39.810 --> 06:42.870
+I can even add this somewhere else.
+
+06:48.460 --> 06:54.010
+Obviously this particular example doesn't make much sense but you see what we can do.
+
+06:54.010 --> 07:00.650
+So basically we created our chunk of code which we can add some specific properties to.
+
+07:00.670 --> 07:01.260
+So.
+
+07:01.300 --> 07:08.820
+Now let's remove that from this place because obviously in this place this doesn't make much sense.
+
+07:09.010 --> 07:15.120
+Now that's the default slot of the component.
+
+07:15.340 --> 07:22.970
+So whatever you put between component and end component is available has the variable name slot.
+
+07:22.990 --> 07:33.250
+Now if you would need some additional slots or data to be passed to your component let's say in this
+
+07:33.340 --> 07:41.340
+example we are using the batch success class but you might want to add as well.
+
+07:41.380 --> 07:46.940
+You might want your body to look specific depending on the context.
+
+07:47.020 --> 07:51.460
+So what we can do is we can use another slot
+
+07:55.940 --> 08:00.080
+and then we'll just have to provide our specific name when we use this component.
+
+08:00.080 --> 08:02.440
+So let's do something like this.
+
+08:02.450 --> 08:08.000
+If that type is specified we echo whatever is inside the type.
+
+08:08.000 --> 08:17.740
+If it's not we use the default success so we'll be just manipulating the classes of bootstrap this way.
+
+08:17.740 --> 08:22.810
+Now how can you set this additional extra parameter.
+
+08:22.810 --> 08:26.260
+So let's say this changes and see if that still works.
+
+08:26.320 --> 08:33.730
+So this post is now more than five minutes old so let's modify 20 so we can continue working on it.
+
+08:33.790 --> 08:35.970
+So we have brand new post.
+
+08:36.170 --> 08:36.570
+All right.
+
+08:36.580 --> 08:45.830
+Now we want to change the type of this batch so to pass additional parameters you can add second argument
+
+08:45.860 --> 08:47.960
+to the component directive.
+
+08:48.220 --> 08:52.380
+And here you'll specify the name of this slot and its value.
+
+08:52.480 --> 08:54.750
+So let's use primary.
+
+08:54.880 --> 08:59.170
+That's another class from budgets inside bootstrap
+
+09:02.120 --> 09:08.120
+and you can see that it is now blue and this is because we have specified an additional parameter and
+
+09:08.120 --> 09:14.360
+inside the component we are checking if the type is specified.
+
+09:14.480 --> 09:18.080
+If it's not we use the default value.
+
+09:18.080 --> 09:25.070
+So that would be the basics very basic component and well let's see the next lecture when we will see
+
+09:25.490 --> 09:32.540
+how we can make much more useful and interesting components that will have much more slots.

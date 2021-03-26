@@ -1,0 +1,256 @@
+WEBVTT
+
+00:01.390 --> 00:06.060
+Now let's see what else can we fetch at once using eloquent.
+
+00:06.580 --> 00:14.000
+So for example take a look at the show action inside the post controller and the way we fetch the blog
+
+00:14.000 --> 00:23.290
+post model together with some relations so you can see that we are fetching a blog post together with
+
+00:23.290 --> 00:32.870
+tags with the user that created this blog post but the problem is that we fetch comments but comments
+
+00:32.900 --> 00:39.180
+also have an out or who created this blog post and this isn't fetched at once.
+
+00:39.260 --> 00:47.240
+So whenever we iterate over a list of comments in the show template then the user of well the outer
+
+00:47.240 --> 00:52.130
+of the comments is actually being fetched from the database.
+
+00:52.130 --> 00:55.160
+So this is that template.
+
+00:55.160 --> 01:02.600
+And at the bottom when we started reading the name of the user who added a comment we aren't fetching
+
+01:02.600 --> 01:11.420
+this at once we're using with method and then it causes it to read that user from the database.
+
+01:11.420 --> 01:21.320
+So to see that let's first run peach bee artisan D.B. seed this will refresh our database and also we'll
+
+01:21.320 --> 01:29.990
+clear all the potential cache for the blog posts so confirm with yes and do everything as usual
+
+01:33.580 --> 01:35.620
+so we have recreated the database.
+
+01:35.620 --> 01:41.230
+Now let's refresh and go to the first blog post.
+
+01:42.400 --> 01:45.220
+So now you can see that seven queries are made.
+
+01:45.220 --> 01:53.020
+So this is always made while those queries are always made when there is no cached blog post.
+
+01:53.020 --> 02:01.390
+Now let's refresh but still you see that we have free queries and actually they are made for the comments
+
+02:01.390 --> 02:03.400
+that are here.
+
+02:03.490 --> 02:06.570
+Now you can see where those queries are made.
+
+02:07.120 --> 02:14.680
+So the first one on the top is made by the eloquent user provider which means it is being made full
+
+02:14.860 --> 02:19.090
+fledged a user name that we are showing on the header.
+
+02:19.090 --> 02:26.300
+But those two remaining queries are made inside the view posts that show.
+
+02:26.320 --> 02:32.350
+So they are directly made from the template and they are marching with the numbers number of comments
+
+02:32.380 --> 02:34.840
+that we have on this blog post.
+
+02:34.840 --> 02:41.860
+So if we will have like hundred comments this would cause it to make hundred queries.
+
+02:41.860 --> 02:50.800
+So what we will do right now is we will fetch nested relationships or I would say deeply nested relationships
+
+02:50.800 --> 02:57.690
+because here we are fetching a blog post with comments with tags and with the user relationship.
+
+02:57.700 --> 03:08.740
+But what you can also do is you can use with to also fetch user of the comments in relation so you can
+
+03:08.740 --> 03:13.920
+say with comments that user.
+
+03:13.930 --> 03:19.980
+Now what you see here is that dot notation which denotes unless that relationship.
+
+03:20.380 --> 03:24.370
+So comments is our relationship of the blog post.
+
+03:24.370 --> 03:26.510
+We are also fetching it here.
+
+03:26.710 --> 03:34.750
+But when you will also use dot this means that now that is our relationship of the previous relationship.
+
+03:34.750 --> 03:41.800
+So basically we are also fetching not only comments but the comments and the user relationship of the
+
+03:41.800 --> 03:52.430
+comment itself so let's save the changes and visit a different blog post that wasn't cached.
+
+03:52.520 --> 03:59.120
+So at first you will see quite a lot of queries but this time you can see five queries not seven as
+
+03:59.120 --> 04:06.560
+we've seen initially but when you refresh there is only one query made and it is actually made for the
+
+04:06.560 --> 04:11.090
+user name of the user that we display at the header.
+
+04:12.590 --> 04:18.710
+So we can also write it differently because since we want to fetch all these relationships we do not
+
+04:18.710 --> 04:27.820
+really have to use with separately you can just put them into one with method call and separate them
+
+04:27.880 --> 04:32.410
+as argument arguments to this with method.
+
+04:32.410 --> 04:36.180
+So that's do common stock tax user.
+
+04:36.790 --> 04:39.500
+And finally comments.
+
+04:39.820 --> 04:42.590
+User.
+
+04:42.660 --> 04:48.080
+So now we don't need this and save the changes.
+
+04:48.080 --> 04:50.690
+So now let's go to the first blog post.
+
+04:50.690 --> 04:53.600
+So the one that wasn't cashed yet.
+
+04:53.810 --> 04:57.270
+So we see six queries.
+
+04:57.290 --> 05:05.900
+And when you refresh there is only one query so everything was fetched at once and then it was cached
+
+05:06.080 --> 05:11.560
+under the blog post with the idea cache key.
+
+05:11.560 --> 05:14.210
+Now let's take a look at another example.
+
+05:14.350 --> 05:20.710
+You might remember that we have other tags but when you click attack you see older blog posts for a
+
+05:20.710 --> 05:22.530
+particular tag.
+
+05:22.570 --> 05:30.400
+So first let's see on our main page on the blog posts page that there are only four queries made to
+
+05:30.400 --> 05:31.210
+display.
+
+05:31.450 --> 05:37.720
+All do those blog posts together with the outer name and the tags.
+
+05:37.720 --> 05:44.890
+Now if you click one of the tags like science you see that actually now there is forty nine queries
+
+05:45.760 --> 05:52.750
+and there are plenty queries for fetching tags and queries for fetching the user.
+
+05:52.780 --> 06:01.720
+Now this is because how we created our query in this new post stock controller so the index action on
+
+06:01.720 --> 06:04.810
+the post controller looks like this.
+
+06:04.810 --> 06:13.630
+So we are fetching latest blog posts but we are also using with count to fetch the count of the comments.
+
+06:13.810 --> 06:17.410
+Then we use with user to fetch the user relation.
+
+06:17.410 --> 06:25.780
+And finally with tags to fetch the tax relation yet we did that differently on the post that controller
+
+06:25.810 --> 06:30.840
+here we fetched everything using simple blog posts attribute.
+
+06:31.960 --> 06:39.880
+So what we should do is we should use the same code for fetching blog posts on those two controllers
+
+06:39.910 --> 06:47.830
+but instead of using blog post model since we have a tag what we can do is we can relate to that relation
+
+06:48.040 --> 06:55.990
+which is blog posts and now we can use all the methods that we have used on the post controller so we
+
+06:55.990 --> 06:59.260
+can chain all those methods.
+
+06:59.710 --> 07:00.630
+So let's do that.
+
+07:02.820 --> 07:11.830
+So we fetch latest with count of the comments with user with tax.
+
+07:11.920 --> 07:17.320
+And finally we have to call get to actually execute this query.
+
+07:17.380 --> 07:19.020
+Now let's say the changes
+
+07:22.740 --> 07:26.400
+and now you see that the amount of queries were reduced.
+
+07:26.400 --> 07:30.770
+So now we only have five queries if you will go to a different tack.
+
+07:30.780 --> 07:33.090
+This also doesn't change.
+
+07:33.120 --> 07:36.960
+So there are only five queries made together.
+
+07:37.110 --> 07:42.780
+And one of them is for the user name that we display on the top of the page.
+
+07:42.840 --> 07:48.690
+So the important thing and the lesson learned is to always know what is actually happening.
+
+07:48.690 --> 07:56.310
+So you need to take that nothing is just happening by accident that you accidentally don't make much
+
+07:56.310 --> 07:59.240
+more queries than you actually should.
+
+07:59.250 --> 08:04.220
+So you should always watch what queries your application is actually making.
+
+08:04.830 --> 08:12.720
+And tools like the larval debug bar are just a great tool that you should use when developing your application
+
+08:12.720 --> 08:20.160
+to see what actually is happening because it is easy to forget about something or then make a mistake
+
+08:20.490 --> 08:27.150
+and accidentally accidentally make your application much slower than it should be and eager loading
+
+08:27.240 --> 08:30.240
+is usually usually much better choice.

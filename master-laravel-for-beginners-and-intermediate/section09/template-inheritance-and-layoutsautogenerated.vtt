@@ -1,0 +1,232 @@
+WEBVTT
+
+00:00.670 --> 00:09.280
+In this lecture, we will learn about the template, inheritance and layouts, but before we see and
+
+00:09.280 --> 00:15.580
+understand the template inheritance typically for us, let's first see the problem it will solve.
+
+00:16.620 --> 00:21.790
+So let's also create our blade template for this route, the contact page.
+
+00:22.650 --> 00:25.110
+Now the route name is home contact.
+
+00:25.140 --> 00:25.800
+Exactly.
+
+00:25.820 --> 00:29.010
+This should also be the name of our template.
+
+00:29.100 --> 00:31.440
+So let it be the contact blade.
+
+00:33.000 --> 00:35.070
+Well, what should we render inside it?
+
+00:35.070 --> 00:45.540
+We might want the same HTML5 boilerplate and just inside the body will use the H1 tag and say that that's
+
+00:45.540 --> 00:47.000
+their contact page.
+
+00:47.640 --> 00:53.040
+Now save the changes and let's render this template using the view function.
+
+00:54.900 --> 00:56.790
+The template name is home contact.
+
+00:56.790 --> 01:01.960
+If you don't pass any data to it, you don't really need to specify this second argument.
+
+01:02.790 --> 01:10.860
+Now let's save the changes refresh and let's go to the contact page so it works properly.
+
+01:10.860 --> 01:21.090
+The HDMI is rendered, but this two templates contain a lot of the same identical HD html and usually
+
+01:21.090 --> 01:26.700
+you would like the layout of your website shared among a different sites.
+
+01:27.680 --> 01:35.690
+So this is where the template inheritance can be used in Blade templating, first, let's create our
+
+01:35.690 --> 01:39.560
+layout file with some common HTML.
+
+01:40.640 --> 01:44.760
+So let's make our new folder inside resources views.
+
+01:44.780 --> 01:45.290
+Call it.
+
+01:46.710 --> 02:00.000
+Layouts and create a brand new file, let's call it ablate, BHP and inside it, let's also create this
+
+02:00.000 --> 02:02.220
+HDMI boilerplate.
+
+02:04.450 --> 02:09.650
+Now, watch me code and I will explain what I am doing in a second.
+
+02:10.300 --> 02:21.060
+So this is your Laravel AAB as a title, but will use something special directive.
+
+02:21.160 --> 02:23.780
+I will talk about that in a second.
+
+02:24.610 --> 02:27.440
+So that's the first place we use the directive.
+
+02:27.790 --> 02:37.990
+Now lets other DEVE element to that body and use this yield directive again, this time with an argument
+
+02:37.990 --> 02:39.130
+called content.
+
+02:40.000 --> 02:45.130
+So let's learn our first blade directive called Yield.
+
+02:46.050 --> 02:54.870
+Now, directives, they always start with an at sign followed by the directive name and optionally they
+
+02:54.870 --> 02:56.370
+take some arguments.
+
+02:57.240 --> 03:04.560
+For example, the Yields Directive takes the name of the section it should render in the layout file.
+
+03:05.970 --> 03:13.170
+Now, wait a minute, I haven't talked about the sections yet, but before we talk about sections,
+
+03:13.170 --> 03:20.190
+let's jump to the template we previously created and let it extend the main layout file.
+
+03:21.310 --> 03:32.740
+So just follow me, remove all this code and add a new blade directive called EXTENTS, so extending
+
+03:32.740 --> 03:40.570
+a layout is done using this extended directive, it accepts the layout template as its only argument.
+
+03:42.240 --> 03:52.230
+So in our case, this is layout's start up now let's add our age, Wantagh, with the Hello World text.
+
+03:53.120 --> 03:55.460
+Go back to the browser, let's refresh.
+
+03:55.970 --> 04:03.020
+So it seems it's rendered something, but when you will see the details, this is a little bit messed
+
+04:03.020 --> 04:03.500
+up.
+
+04:04.040 --> 04:07.310
+So we have HTML tag, then empty headstock.
+
+04:07.310 --> 04:13.550
+And inside the body there is not only our H1, but also the metatarsus.
+
+04:14.930 --> 04:23.540
+Well, what we actually wanted to do is render something within this body and this def tag.
+
+04:24.050 --> 04:29.510
+So we want to render something in a specific place, not randomly.
+
+04:30.620 --> 04:36.320
+Well, this is where the section directive comes in, that's the first and last directive we'll learn
+
+04:36.320 --> 04:37.040
+about today.
+
+04:37.970 --> 04:46.850
+So let's declare our directive section that will have an argument, its name called content.
+
+04:48.830 --> 05:00.020
+The U.S. directive actually has a corresponding closing directive called A.S. that denotes the and of
+
+05:00.020 --> 05:01.280
+a specific section.
+
+05:02.410 --> 05:11.020
+Now, inside those two directives, you can put all the HDMI and content that should be rendered from
+
+05:11.020 --> 05:12.440
+this specific template.
+
+05:13.180 --> 05:14.370
+So let's do that.
+
+05:15.360 --> 05:19.080
+We cannot H1 hello, world.
+
+05:21.980 --> 05:31.820
+So let's check how it looks like so now the head section is correct and inside the DPH element, we
+
+05:31.820 --> 05:34.280
+have our H1 Hello World.
+
+05:35.230 --> 05:40.600
+So the way it works is that Blade will render the main layout file.
+
+05:42.710 --> 05:50.270
+And the yield directive will render the content of a specific section that you have defined in your
+
+05:50.270 --> 05:51.740
+child templates.
+
+05:53.730 --> 06:02.820
+So let's do the same for their contact page, remove all this unnecessary HDMI and let it extend the
+
+06:02.820 --> 06:09.660
+main layout and in the contact, let's just specify that that's the contact page.
+
+06:12.520 --> 06:15.650
+Let's see if this works, so contact.
+
+06:16.540 --> 06:18.130
+Yes, of course it works.
+
+06:18.130 --> 06:25.570
+So you can see how much space we've saved, how much less of repetition we are doing by using template
+
+06:25.570 --> 06:27.980
+inheritance and common layouts.
+
+06:28.700 --> 06:38.140
+Now, we've used the yield twice, actually, in this layout file once for the content section and also
+
+06:38.140 --> 06:39.250
+for the title.
+
+06:41.260 --> 06:49.630
+So if you have something that's multiline and will output HTML mixed with text, you will use section
+
+06:49.630 --> 06:59.710
+and under section directive, but for simpler sections you can just use the section directive, give
+
+06:59.710 --> 07:04.790
+its name, for example, the title, and specify the value that should be rendered.
+
+07:05.350 --> 07:08.530
+So, for example, that's our homepage.
+
+07:10.740 --> 07:15.840
+And in the content, this would be the contact page.
+
+07:16.590 --> 07:24.360
+So what this would do is now whenever the main layout is rendered, apart from the Laravel up, you
+
+07:24.360 --> 07:28.650
+will get our specific title from each of those pages.
+
+07:29.710 --> 07:31.720
+Of course, we have to verify that.
+
+07:32.850 --> 07:40.110
+So on the contact page, you can see it's a specific title and also on the main page there is the homepage
+
+07:40.110 --> 07:41.290
+specific title.
+
+07:42.180 --> 07:47.190
+So this would conclude this lecture about templating Haridas and Layout's.

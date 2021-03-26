@@ -1,0 +1,325 @@
+WEBVTT
+
+00:01.070 --> 00:08.300
+In the last lecture we have added protection for certain roots of our application which includes adding
+
+00:08.330 --> 00:12.480
+and blog posts and modifying and deleting the blog post.
+
+00:12.800 --> 00:14.530
+And this has some consequences.
+
+00:14.530 --> 00:21.010
+So if you will now try to add a blog post when you are not authenticated you will see a logging form
+
+00:21.020 --> 00:24.350
+so of course you have to create an account first.
+
+00:24.500 --> 00:31.820
+But this also has some consequences for our tests because they were written with the assumption that
+
+00:31.850 --> 00:35.640
+anyone can add a blog post and then modify it.
+
+00:35.780 --> 00:43.670
+So let's go to the Visual Studio code and run the Peach Pit you need to see what has happened.
+
+00:43.670 --> 00:53.500
+So now you can see that our tests want to pass and the specific error is that we cannot see the status
+
+00:53.530 --> 00:55.390
+like the status is not there.
+
+00:55.420 --> 00:59.110
+So you can't see the message and nothing really happens.
+
+00:59.110 --> 01:00.850
+So it's a good thing and a bad thing.
+
+01:00.850 --> 01:08.230
+Good thing is that we modified the application and now that test has have catched this situation that
+
+01:08.230 --> 01:11.730
+it doesn't really work anymore so something has to be done.
+
+01:11.740 --> 01:18.920
+And in our case this would be modifying the tests to adapt them to our changing application.
+
+01:18.920 --> 01:25.930
+So this is a process which you will have to do constantly when we will be building your applications.
+
+01:25.930 --> 01:32.980
+You write tests but when you change something that will help you catch errors but you also would have
+
+01:32.980 --> 01:42.310
+to update the tests to reflect the new situation so you can see that inside the posters that we.
+
+01:42.430 --> 01:47.040
+There is no place where we actually try to authenticate first.
+
+01:47.050 --> 01:49.620
+So this is what we will do right now.
+
+01:49.690 --> 01:57.040
+We will see how we can handle this new situation which requires out indication of the users before they
+
+01:57.040 --> 02:04.020
+can add and modify blog posts so let's close the terminal and see what we can do here.
+
+02:04.040 --> 02:12.290
+So we know that for certain routes like the updating and storing the blog posts we need to the user
+
+02:12.290 --> 02:13.910
+to be authenticated first.
+
+02:14.510 --> 02:22.880
+But as you know for tests we are creating a separate database so it wouldn't matter if you already have
+
+02:23.000 --> 02:31.320
+any users inside the database because we have to create the users for this test and database first.
+
+02:31.400 --> 02:32.810
+So where we can do that.
+
+02:33.470 --> 02:40.510
+So as you might create that inside specific test like this post test.
+
+02:40.850 --> 02:42.140
+Let's think about it first.
+
+02:42.140 --> 02:47.120
+So users seem to be a very important part of the application.
+
+02:47.120 --> 02:49.910
+We might need them for testing.
+
+02:49.970 --> 02:56.570
+Adding posts managing posts and then we might also need them for comments later.
+
+02:56.570 --> 03:00.830
+So it might be a common feature of our tests.
+
+03:00.830 --> 03:09.770
+So we have this test case base class from which all our tests extend so we can see that post test is
+
+03:09.870 --> 03:14.540
+basically extending everything from the test case class.
+
+03:14.540 --> 03:23.080
+So it might make sense to actually add a method that will create users inside this particular class.
+
+03:23.120 --> 03:33.050
+So let's do that we might add a protected method which isn't publicly accessible but it is only accessible
+
+03:33.050 --> 03:37.400
+by the classes that extend this particular class.
+
+03:37.760 --> 03:42.120
+And let's simply call it user.
+
+03:42.230 --> 03:52.520
+Now we can just create a new model user first but since it has a couple of fields like let's see what
+
+03:52.940 --> 03:54.710
+does it actually have.
+
+03:54.710 --> 04:03.240
+You can see that there is the name email email verification date password to remember token and timestamps.
+
+04:03.380 --> 04:09.280
+So we have actually work with model factories before and explain them.
+
+04:09.470 --> 04:15.680
+And it happens to have the larval happens to have the user factory created by default.
+
+04:16.400 --> 04:24.260
+So we created one for profile comment and the blog post and outer too but the factory for the user was
+
+04:24.350 --> 04:25.280
+already there.
+
+04:25.580 --> 04:28.700
+So we do not really have to create one for the user.
+
+04:28.700 --> 04:30.840
+We can just use it.
+
+04:30.890 --> 04:44.200
+So what we can do is we can return factory User class create so just as a reminder.
+
+04:44.210 --> 04:52.070
+This will create a new instance of the User model as defined here so we'll use faker to generate the
+
+04:52.070 --> 05:00.850
+name email and some other data and create will create the model and immediately save it to the database.
+
+05:00.850 --> 05:07.260
+So we are just returning the model that will be actually already inside the database.
+
+05:07.300 --> 05:13.450
+Now one more important thing is if you want to use the fully qualified class name you will have to add
+
+05:13.450 --> 05:23.400
+an import like this so we are importing their user from the app namespace.
+
+05:23.750 --> 05:29.210
+Now this is now available inside all of our tests.
+
+05:29.210 --> 05:34.770
+So inside the posters we can now use this.
+
+05:34.850 --> 05:42.470
+So let's find the first test that requires authentication so this doesn't require authentication.
+
+05:42.470 --> 05:43.700
+This does need to
+
+05:47.610 --> 05:52.590
+that's the first one that will actually require authentication.
+
+05:52.590 --> 05:58.890
+So first we will create a user before this test happens.
+
+05:59.100 --> 06:01.170
+So let's do user.
+
+06:01.320 --> 06:08.100
+And now we can call this method that we have created inside test case like it is part of this class
+
+06:08.130 --> 06:11.070
+because now it actually is.
+
+06:11.070 --> 06:12.940
+So we have the user created.
+
+06:12.960 --> 06:19.470
+But how we can tell laudable that it should try to authenticate as this user first.
+
+06:20.610 --> 06:23.940
+So it's fortunately very simple.
+
+06:23.940 --> 06:35.330
+There is a method inside Lara a test case based class called Acting US where we can specify a model
+
+06:35.780 --> 06:43.580
+for which a lot of us should use to authenticate before it is it will execute the test.
+
+06:43.670 --> 06:46.790
+So let's move that maybe a little bit to the bottom
+
+06:49.720 --> 06:51.840
+and you can do something like this.
+
+06:52.090 --> 07:01.000
+This Acting US and then the lot of the world from from this point on it will treat treat it like it
+
+07:01.000 --> 07:02.160
+is authenticated.
+
+07:02.170 --> 07:08.740
+So it will be able to try and create a new user.
+
+07:08.920 --> 07:12.370
+So let's see if this actually has changed anything.
+
+07:12.370 --> 07:17.820
+So now you can see that we have 11 Tests but there are four failures.
+
+07:17.820 --> 07:27.080
+So after changing this we should have free failures so one less that you can see that it's correct.
+
+07:27.080 --> 07:35.000
+We have free failures so we fixed one of the tests and also the interesting thing is what this acting
+
+07:35.090 --> 07:36.920
+US does actual you return.
+
+07:36.920 --> 07:42.780
+You can see that from the docs that it returns an instance of this.
+
+07:42.950 --> 07:50.720
+And what that means is that you can change those calls with other methods or other methods of the test
+
+07:50.720 --> 07:51.700
+case class.
+
+07:52.520 --> 07:59.670
+So instead of running things like this you can do something else.
+
+07:59.680 --> 08:03.020
+So let's reformat that quickly
+
+08:05.950 --> 08:16.150
+you can do something like this acting us and we can even call this user here without assigning it to
+
+08:16.150 --> 08:21.900
+the variable because this would make more sense if you would need to do something with the user model.
+
+08:21.910 --> 08:22.630
+But we don't.
+
+08:22.630 --> 08:30.880
+We just want to authenticate so we don't really have to add those calls beforehand scattered all over
+
+08:30.880 --> 08:31.580
+the test.
+
+08:31.630 --> 08:42.720
+And now we can just remove those two lines and now we can fix all of the tasks that require authentication.
+
+08:42.720 --> 08:50.160
+By adding this simple line before we actually make any requests to our application so we should also
+
+08:50.160 --> 08:51.580
+do it here.
+
+08:55.400 --> 08:57.640
+We should also do that with the update.
+
+09:00.170 --> 09:01.340
+And we the delete
+
+09:05.860 --> 09:06.610
+and that should be.
+
+09:06.640 --> 09:15.370
+Now let's reopen the terminal and rerun this test so you can see now everything is passing and we have
+
+09:15.370 --> 09:16.670
+fixed our test.
+
+09:16.670 --> 09:24.350
+So let's repeat again what is happening so inside test case we created our user method which would use
+
+09:24.350 --> 09:28.840
+the model the factory to create our new instance of the User model.
+
+09:28.840 --> 09:30.740
+Save it to the database.
+
+09:30.970 --> 09:39.970
+And now when each test is running remember that we have refreshed database and it's also it's refreshing
+
+09:39.970 --> 09:49.240
+the database on each single test so we can safely create a new user using this simple acting.
+
+09:49.460 --> 09:49.900
+Sorry.
+
+09:49.960 --> 09:57.910
+Using this user method but then we tell our bravo to try to authenticate as this user with the acting
+
+09:58.270 --> 10:03.370
+US method which returns instance of this object we are currently in.
+
+10:03.850 --> 10:07.880
+So we can safely chain all the other calls.
+
+10:08.140 --> 10:09.380
+So that would be it.
+
+10:09.460 --> 10:14.250
+And in the next lecture we'll finally modify the blog post table.
+
+10:14.260 --> 10:19.230
+We create migration and relation to the user model.

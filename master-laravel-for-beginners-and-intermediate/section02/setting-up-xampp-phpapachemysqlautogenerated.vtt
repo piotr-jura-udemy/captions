@@ -1,0 +1,79 @@
+WEBVTT
+
+00:01.050 --> 00:08.250
+This lecture is only for Windows users, if you are not on Windows, please skip this lecture and skip
+
+00:08.250 --> 00:12.370
+all other lectures not related to the Windows operating system.
+
+00:13.350 --> 00:21.180
+We will learn how to install and configure some package, which is a bundle of Apache Web server, BHP
+
+00:21.480 --> 00:23.220
+and MySQL database.
+
+00:24.360 --> 00:32.700
+The first step is to download Zamp, visit the website, and on the main page, you should see the download
+
+00:32.700 --> 00:33.960
+link for Windows.
+
+00:34.260 --> 00:34.830
+Click it.
+
+00:37.630 --> 00:40.960
+When the file is downloaded, run the installer.
+
+00:46.110 --> 00:52.940
+You might be worried about the user account control, please follow the suggestion and don't insult
+
+00:53.010 --> 00:56.460
+Zamp to any other folder than the default proposed.
+
+01:01.380 --> 01:04.560
+From the components, we only need Apache.
+
+01:05.940 --> 01:14.730
+My school, BHP and Poppy, my admin rest can be unchecked unless, you know, you will need them.
+
+01:16.890 --> 01:19.020
+Please install to this default folder.
+
+01:23.850 --> 01:30.220
+Now wait for the installation process to complete, it might take a couple of minutes, so please post
+
+01:30.220 --> 01:34.770
+the video right now and resume when your installation is complete.
+
+01:43.140 --> 01:46.760
+You will be asked to start the control panel, please.
+
+01:46.810 --> 01:49.680
+Unchecked option and press finish.
+
+01:51.470 --> 02:00.170
+Now, let's run the control panel of some manually, but as an administrator on the start menu type.
+
+02:06.120 --> 02:09.720
+And press run as an administrator.
+
+02:18.050 --> 02:23.810
+If you don't run Zamp as an administrator, you might have filed permission issues.
+
+02:25.280 --> 02:27.740
+Now, start today, Apache and.
+
+02:29.060 --> 02:30.350
+MySQL server.
+
+02:39.040 --> 02:47.800
+By pressing start buttons next to them, both Apache and Maisky labels should be green, and when visiting
+
+02:49.250 --> 02:59.680
+twenty seven oh one in the browser, you should see the example dashboard if Apache did not start.
+
+03:00.960 --> 03:09.900
+It might mean the port is blocked, Skype is known for using this port in case officers make sure to
+
+03:09.900 --> 03:11.670
+stop the Skype first.

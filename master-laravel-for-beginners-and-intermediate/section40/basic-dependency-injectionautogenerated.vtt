@@ -1,0 +1,247 @@
+WEBVTT
+
+00:00.780 --> 00:07.460
+In this lecture we will talk about the dependency injection and what is a dependency injection.
+
+00:07.470 --> 00:14.190
+Well simply put it's when you inject some dependencies for a class like let's say this counter class
+
+00:14.700 --> 00:19.980
+instead of fetching something like for example using first aid.
+
+00:20.010 --> 00:26.840
+So basically phosphate is actually a static interface to the service container.
+
+00:26.910 --> 00:35.010
+So if you will go by out clicking to the cash for class what you can see is that it basically extends
+
+00:35.110 --> 00:42.320
+our base for say class and then has this method implemented get phosphate access or which returns the
+
+00:42.330 --> 00:49.230
+service name it happens to be cash for the cash for seed and for all the other facets you can see that
+
+00:49.320 --> 00:51.630
+it basically works the same.
+
+00:51.660 --> 00:59.630
+So to put it simply for seed is just a way to access service container in a simple way.
+
+01:00.120 --> 01:04.170
+But we were supposed to talk about that dependency injection.
+
+01:04.170 --> 01:11.340
+So basically you have two options in your larval application it's either using four seeds or dependency
+
+01:11.340 --> 01:12.070
+injection.
+
+01:12.090 --> 01:14.630
+So let's get straight to that point.
+
+01:14.700 --> 01:21.420
+So dependency injection as the name suggests is injecting something to a class that needs something
+
+01:21.510 --> 01:28.740
+instead the class or instead of the class asking for the dependency itself using phosphate for example
+
+01:29.310 --> 01:32.980
+or the resolve function that you see here.
+
+01:33.030 --> 01:41.400
+So typically you will pass dependencies inside the constructor and you can even typing them so we have
+
+01:41.400 --> 01:48.870
+a dependency on the counter class then we utilize this in the utilize the counter fields so this would
+
+01:48.870 --> 01:51.010
+be available in other methods too.
+
+01:51.960 --> 01:55.670
+Now let's also define this field on the controller.
+
+01:55.680 --> 02:04.830
+So private calendar and also let us do the same on the user controller.
+
+02:04.840 --> 02:12.500
+So let's modify its constructor to accept our counter parameter of the type up services counter.
+
+02:13.770 --> 02:22.360
+Let's also copy that implement the code so it will immediately as the field and define it as private.
+
+02:23.280 --> 02:32.580
+Counter now what we can do is now we can not try to resolve the dependency ourselves.
+
+02:32.580 --> 02:35.040
+Instead it has been passed to us.
+
+02:35.040 --> 02:37.840
+So this happens automatically by Lavell.
+
+02:37.860 --> 02:45.140
+So now instead of accessing counter variable which doesn't exist anymore in this context we do this.
+
+02:45.360 --> 02:46.410
+Sorry this
+
+02:48.940 --> 02:58.850
+counter and now we have access to the counter class so we will do the same on the post controller instead
+
+02:58.850 --> 03:01.490
+of resolving this dependency.
+
+03:01.490 --> 03:11.160
+It gets passed by Lavell so we do this counter and basically now we have this counter class available
+
+03:11.170 --> 03:18.490
+and it was being passed by a lot of it automatically because it can pass something when you define it
+
+03:18.820 --> 03:21.970
+as a constructor argument.
+
+03:21.970 --> 03:29.260
+It will now try to either find a service with this name on the service container which happens to be
+
+03:29.260 --> 03:32.430
+defined because we have defined that explicitly.
+
+03:32.620 --> 03:40.780
+So the service name is the full name of this class or alternatively if no service is defined explicitly
+
+03:41.470 --> 03:50.680
+Lovell will use peach bee functionality called reflection which allows you to get some meta information
+
+03:50.830 --> 03:52.340
+about your code.
+
+03:52.390 --> 04:00.040
+In this case it will be able to figure out what are the older parameters to this class constructor and
+
+04:00.040 --> 04:02.910
+what are the types of those parameters.
+
+04:02.920 --> 04:10.330
+So since we have typing that discounter as the counter class it will try to find and create a counter
+
+04:10.330 --> 04:17.700
+class or alternatively if this is a service it will try to inject the service that was defined.
+
+04:17.830 --> 04:25.390
+Now this would be problematic if you wouldn't define this service explicitly because it accepts a primitive
+
+04:25.420 --> 04:31.180
+parameter and primitive values are integers strings or arrays.
+
+04:31.180 --> 04:39.670
+So anything else than a class or an interface because with classes it can also figure out what to inject
+
+04:39.670 --> 04:46.680
+by finding those classes but then it will have no idea what you mean by timeout
+
+04:51.080 --> 05:00.290
+now the services inside the service container might need either primitive values or classes which are
+
+05:00.290 --> 05:03.830
+basically also services or both.
+
+05:03.830 --> 05:10.520
+But in this case since we only need the primitive value you can also define this differently.
+
+05:10.520 --> 05:18.170
+So instead of creating a single tone here you might just tell Lavell that whenever it needs to inject
+
+05:18.230 --> 05:24.980
+a class of a certain type it should pass a specific value for a specific variable.
+
+05:24.980 --> 05:26.380
+So you will do it like that.
+
+05:26.390 --> 05:39.490
+This up this up when now you specify the class name which is counter class needs.
+
+05:40.120 --> 05:46.960
+And here you specify the variable name that this class needs which is time out including the dollar
+
+05:47.830 --> 05:49.300
+needs timeout.
+
+05:49.570 --> 05:55.360
+Then give and we can also use the environment variable like above
+
+05:58.480 --> 06:01.570
+something like this.
+
+06:01.580 --> 06:09.650
+So now if we will do something like this D.D. on this counter
+
+06:13.320 --> 06:19.230
+and refresh the page you can see that we actually got an instance of the class with the proper value
+
+06:19.230 --> 06:20.070
+passed.
+
+06:20.100 --> 06:22.510
+But this doesn't work for singletons.
+
+06:22.530 --> 06:30.780
+So this now is not a singleton and we wanted that to be it so let's comment that out but just so you
+
+06:30.780 --> 06:37.830
+know if you're only in need to pass some primitive value like integer or string then you do not really
+
+06:37.830 --> 06:39.630
+have to define the whole service.
+
+06:39.630 --> 06:50.010
+You just can say what to pass when certain primitive value is needed.
+
+06:50.030 --> 06:51.620
+So now let's remove this line.
+
+06:51.620 --> 06:53.130
+We won't need that anymore.
+
+06:53.150 --> 07:01.610
+We can also remove this line and in the next lecture what we will learn is how we can actually replace
+
+07:01.640 --> 07:10.520
+using spades and depending on something that we have to fetch ourselves and pass all the necessary dependencies
+
+07:10.610 --> 07:13.160
+using dependency injection.
+
+07:13.160 --> 07:17.660
+In this case this would be removing the use of cash for seed.
+
+07:18.020 --> 07:20.940
+And another thing dependence on the session.
+
+07:21.110 --> 07:27.980
+So you can see that this is a helper function and it's essentially the same as using for seed.
+
+07:27.980 --> 07:37.550
+So if you will out click this method it's actually using that up method which in turn is the same as
+
+07:37.550 --> 07:38.900
+the resolve method.
+
+07:38.900 --> 07:44.030
+So you can use one of those depends on well which one you prefer.
+
+07:44.030 --> 07:51.370
+But just remember that you will stick to the one so you either use up or you either use resolve.
+
+07:51.380 --> 07:58.370
+So as I've said this session function helper function is basically resolving something from the surface
+
+07:58.370 --> 07:59.090
+container.
+
+07:59.120 --> 08:05.900
+In this case this is the session service of the service container and there is this session for sale
+
+08:05.930 --> 08:11.840
+also which does exactly the same thing but just a little bit different.
+
+08:11.930 --> 08:14.510
+So let's see that in the next lecture.

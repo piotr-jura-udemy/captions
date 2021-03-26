@@ -1,0 +1,241 @@
+WEBVTT
+
+00:01.400 --> 00:08.570
+In the last lecture we talked about the model factory states where we can create a model with specific
+
+00:08.630 --> 00:16.970
+attributes that are overridden from the generic model factory which usually is using faker to generate
+
+00:16.970 --> 00:18.470
+some random data.
+
+00:19.010 --> 00:26.900
+So we have the outer and profile models which we don't directly use inside our application but yet we
+
+00:26.900 --> 00:34.430
+will use starts to show you an example because they are related to using one to one relation in the
+
+00:34.430 --> 00:43.100
+sense that each outer has one individual profile and it might just make sense to generate outer together
+
+00:43.100 --> 00:48.870
+with a profile because it always probably would need to have a profile.
+
+00:48.890 --> 00:57.220
+So for this let's just generate model factories for those two models using peach bee artisan make factory.
+
+00:57.800 --> 01:05.480
+So we'll start with outer factory and use the flag model because it is for the outer model.
+
+01:07.100 --> 01:12.680
+And immediately let's go ahead and create a second one profile of factory
+
+01:15.200 --> 01:16.950
+for the profile model.
+
+01:17.750 --> 01:23.780
+OK so we have those two model factories inside database factories.
+
+01:23.870 --> 01:25.480
+So this is the outer factory.
+
+01:25.520 --> 01:28.830
+And this is the profile factory.
+
+01:28.840 --> 01:34.210
+Now let's take a look at the database and go to the outer stables so you can see that it doesn't have
+
+01:34.330 --> 01:41.290
+anything else than the timestamps and I.D. and the profiles also doesn't have anything else them I.D.
+
+01:41.290 --> 01:49.570
+timestamps but also it has relation to specific outer using the outer I.D. column.
+
+01:49.570 --> 01:50.910
+Now we'll leave it as it is.
+
+01:50.920 --> 01:58.060
+So we won't generate any random data but we could for example generate the dates but what are we gonna
+
+01:58.060 --> 02:04.290
+do is we'll use some additional callbacks that we can do after the model is made.
+
+02:04.570 --> 02:13.540
+Which means it is being created but not saved yet or after the model is actually saved inside the database.
+
+02:13.540 --> 02:22.820
+So what we can do is the factory can have another method and one of them is after creating sorry I've
+
+02:22.870 --> 02:33.100
+misspelled the name after creating and now the first argument it accepts is the class name which would
+
+02:33.100 --> 02:34.630
+be the same as outer.
+
+02:35.020 --> 02:37.500
+So we are working with an outer here.
+
+02:37.720 --> 02:48.500
+So we do a callback after our new outer model was created using the factory and it also has a callback
+
+02:48.710 --> 02:50.990
+which would be a closure.
+
+02:51.620 --> 02:57.820
+And the first argument of disclosure would always be an instance of the model we have just created.
+
+02:57.830 --> 03:02.850
+So obviously this would be an outer in this case.
+
+03:02.930 --> 03:05.350
+And second is faker.
+
+03:05.390 --> 03:11.180
+So the reason why we have to specify this arguments like that is because it's larval actually calling
+
+03:11.270 --> 03:16.040
+our closure and passing these arguments in this specific order.
+
+03:16.040 --> 03:24.260
+So in after creating it all it is always passing the model that was just created in the first parameter.
+
+03:24.530 --> 03:35.070
+And the second is them is the instance of the faker and now what we can do with that is we can actually
+
+03:35.130 --> 03:45.100
+assign a new profile when we create an outer so let's take a look and remind ourselves how we can assign
+
+03:45.400 --> 03:50.350
+another model in one to one relation and you can check that out inside the Vicky.
+
+03:50.350 --> 03:52.390
+The link is provided.
+
+03:52.390 --> 03:59.500
+So we'll generate the outer using the factory so we will already have the instance of it and it would
+
+03:59.560 --> 04:07.810
+already be saved because we are doing a callback after creating an in larval terms make means that mobile
+
+04:07.810 --> 04:14.410
+instances created and create means that the model instance was created and then saved
+
+04:17.310 --> 04:25.140
+so we have to create a new instance of the profile model and we can do that using the factory and then
+
+04:25.140 --> 04:36.630
+we will just create a relation between those two models so we already have outdoor and as we know outdoor
+
+04:36.670 --> 04:46.800
+has this profile method which will give us access to their relation so we do outer profile and then
+
+04:46.860 --> 04:51.120
+we have to provide our relation of this profile.
+
+04:51.150 --> 04:57.750
+So basically this would be the profile model and now we have to actually create it so we can use the
+
+04:57.750 --> 05:07.800
+factory met factory function inside the model factory and what we are gonna do is we will create a new
+
+05:07.890 --> 05:20.430
+instance of the profile model but usually we use this factory function and then called Create method
+
+05:20.430 --> 05:24.030
+on it which basically created the model and saved it.
+
+05:24.030 --> 05:28.680
+Now we don't need to save it we just need to call make.
+
+05:28.680 --> 05:36.450
+So this would just create a new instance of the profile model using model factory and then this would
+
+05:36.450 --> 05:42.810
+actually save it as a relation and also save it to the database as you can see
+
+05:46.660 --> 05:48.790
+so now we can save the changes.
+
+05:50.490 --> 05:54.490
+And let's clear this and run Tinker.
+
+05:54.780 --> 06:03.880
+So we tie peach B artisan Tinker and now let's create a new instance of the
+
+06:08.890 --> 06:09.400
+outer
+
+06:13.720 --> 06:17.740
+we call create on it because we want it to be created and saved.
+
+06:17.860 --> 06:27.270
+So we have a new instance of the outer and it happens to have ideas of five so let's read it from the
+
+06:27.270 --> 06:28.170
+database.
+
+06:28.170 --> 06:39.420
+So we have out or find ideas five as we get to return here and now we should be able to read the profile
+
+06:39.450 --> 06:44.970
+using that using the attribute of the outer model
+
+06:49.270 --> 06:57.670
+and you'll see that we've got returned the relation of the outer which is profile so it returns the
+
+06:57.670 --> 07:00.360
+instance of the profile model.
+
+07:00.400 --> 07:02.250
+So now let's clear the screen.
+
+07:02.260 --> 07:10.390
+So it is visible and let's just type outer so you can see that we have just created an instance of the
+
+07:10.390 --> 07:16.300
+outer model with which always would have our profile associated to it.
+
+07:16.600 --> 07:21.700
+So let's check that inside the database.
+
+07:21.720 --> 07:25.030
+So this is our brand new outer.
+
+07:25.270 --> 07:32.560
+And when we go to profiles you can see that there is a new profile created with the outer I.D. of 5
+
+07:32.650 --> 07:35.500
+which is just this relation that we have just created.
+
+07:36.220 --> 07:41.290
+So that's not the only callback that is available out there.
+
+07:41.290 --> 07:45.500
+We can also create another one.
+
+07:45.520 --> 07:53.890
+So this is after creating and we can also use after making so you can choose when you would like to
+
+07:53.890 --> 07:55.840
+do something extra.
+
+07:55.840 --> 08:05.650
+And in this case we'll be calling this function this closure after the new outer was created and saved.
+
+08:05.710 --> 08:13.900
+And in this case after making we'll be calling this after the new instance of the outer model was instantiated
+
+08:14.110 --> 08:17.200
+but it wasn't safe yet.
+
+08:17.350 --> 08:23.170
+So this is supposed to be actually very useful for our application right now because as I've said we
+
+08:23.170 --> 08:30.130
+are not using this outer and profile models but just so you know this is the way you can instantiate
+
+08:30.370 --> 08:38.530
+some models using model factories and then create some relations or do some additional stuff after they
+
+08:38.530 --> 08:39.400
+are created.

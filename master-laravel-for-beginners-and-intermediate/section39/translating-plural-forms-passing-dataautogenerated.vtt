@@ -1,0 +1,466 @@
+WEBVTT
+
+00:00.480 --> 00:07.230
+In the last lecture we talked about where we store the files for our translations we know that there
+
+00:07.230 --> 00:15.600
+are in resources long and then the language code and there are the BHP files which consist of a key
+
+00:16.350 --> 00:21.060
+that has to be translated and a value which is the actual translation.
+
+00:21.060 --> 00:28.770
+So now let's think where we'll store our custom messages for our application so we'll actually create
+
+00:28.770 --> 00:30.300
+files form for them.
+
+00:30.330 --> 00:34.620
+We can group them by naming those files differently.
+
+00:34.620 --> 00:41.740
+So if you do not have much translation creating a file like messages BHP is enough.
+
+00:41.850 --> 00:48.300
+This would just be a plain peach B file which will return an array.
+
+00:48.630 --> 00:51.330
+So let's return an array.
+
+00:51.840 --> 00:53.810
+And now let's take a look at our page.
+
+00:53.820 --> 00:58.040
+So for a starter that simply translate this title.
+
+00:58.050 --> 01:07.790
+So welcome to Lavell so let's create a first key let's call it welcome and then we create an English
+
+01:07.790 --> 01:16.530
+version which is Welcome to lot of all and now let's think what how we will do that in Spanish.
+
+01:16.540 --> 01:26.950
+So E as folder and we create the same exact file so messages BHP so they have to be named the same the
+
+01:26.950 --> 01:31.160
+version of translations for our different language.
+
+01:31.220 --> 01:34.750
+Now let's copy the contents of the original file.
+
+01:34.750 --> 01:36.250
+So the key would be the same.
+
+01:36.250 --> 01:41.130
+The key is the one you will use to translate.
+
+01:41.200 --> 01:45.360
+So now the Spanish version is something like that.
+
+01:45.490 --> 01:47.730
+I won't even try to read that.
+
+01:47.740 --> 01:50.780
+I have no idea how to do that.
+
+01:51.040 --> 01:59.740
+And now let's find our home template home blade BHP what you can see here is just a text inside the
+
+01:59.740 --> 02:01.600
+blade template.
+
+02:01.600 --> 02:02.730
+Welcome to LA Vo.
+
+02:02.760 --> 02:09.360
+It's in English and now to actually translate this to a different language.
+
+02:09.670 --> 02:16.280
+What you can do is well first we'll have to of course call something from Lara.
+
+02:16.320 --> 02:19.230
+Also it's not that simple.
+
+02:19.780 --> 02:23.980
+And now we have basically two possibilities to translate it.
+
+02:24.010 --> 02:31.940
+So the first is to use our helper function which is to underscores and a key.
+
+02:31.940 --> 02:34.670
+So now let's think how the key should be named.
+
+02:34.670 --> 02:37.610
+So we have this file called messages.
+
+02:37.730 --> 02:40.160
+So that's the first part of the key.
+
+02:40.430 --> 02:48.650
+So messages remember that you will always have to use this as the same as the file is named is the first
+
+02:48.650 --> 02:53.900
+part of the key and then inside it is the welcome.
+
+02:53.900 --> 02:57.280
+So all of those are on the same level.
+
+02:57.400 --> 03:08.240
+So that are the same level inside these messages file so you can use welcome messages welcome and that's
+
+03:08.240 --> 03:08.540
+it.
+
+03:09.050 --> 03:15.530
+So remember this helper function to underscores is how you will translate.
+
+03:15.560 --> 03:18.470
+So that's a very basic example.
+
+03:18.490 --> 03:29.960
+Now alternatively what you can also do is you can use the Lang directive here you will also pass messages.
+
+03:29.960 --> 03:30.710
+Welcome.
+
+03:31.100 --> 03:39.020
+So the key to be translated so it's depending on your choice how you feel better about using either
+
+03:39.020 --> 03:46.450
+the directive or just echoing the text and then using this to underscores helper function.
+
+03:46.490 --> 03:52.370
+I prefer to use that to underscore underscores myself and we'll use that throughout the rest of this
+
+03:52.370 --> 03:53.060
+section.
+
+03:53.540 --> 03:53.840
+OK.
+
+03:53.840 --> 03:56.890
+Finally let's save the changes.
+
+03:57.170 --> 03:59.710
+So first let's refresh the default version.
+
+03:59.720 --> 04:03.160
+So now you can see immediately two titles.
+
+04:03.260 --> 04:11.360
+So it seems that for English which is our default language it reads correctly that this key should be
+
+04:11.360 --> 04:17.560
+translated to welcome to LARRY Oval but now to actually see that in Spanish.
+
+04:17.840 --> 04:25.910
+Let's open that up BHP and just for a moment let's change the default language to Spanish.
+
+04:25.930 --> 04:34.240
+So E S and now when you refresh the page you will see the text in Spanish.
+
+04:34.240 --> 04:39.330
+So of course everything else is now still in English because we haven't translated it.
+
+04:39.490 --> 04:46.870
+But notice that also this text when something has changed which is used by car bomb is immediately.
+
+04:47.200 --> 04:50.210
+Well it's this carbon library for dates.
+
+04:50.380 --> 04:53.530
+This actually picks up the language of your application.
+
+04:53.530 --> 05:01.510
+And now this text is also in Spanish but everything else that we just echo as a plain text we do not
+
+05:01.510 --> 05:06.170
+use translations is in English.
+
+05:06.240 --> 05:08.970
+So now let's also see another example
+
+05:12.220 --> 05:16.570
+so let's just call it example with value
+
+05:21.210 --> 05:24.750
+and we might have something like Hello name.
+
+05:24.750 --> 05:32.760
+So how do we put any variables any additional data that we would like to sum nicely put into that translation
+
+05:37.430 --> 05:40.760
+and let's add the same for Spanish
+
+05:43.520 --> 05:47.080
+I don't know how is it in Spanish probably Ola.
+
+05:47.300 --> 05:49.120
+So let's try it out.
+
+05:49.640 --> 06:01.610
+And now inside a paragraph let's verify if that works so underscore to underscores and messages the
+
+06:01.610 --> 06:09.810
+key is an example with volume.
+
+06:09.960 --> 06:16.480
+And now to pass those parameters you will are the second arguments to this call which would be an array
+
+06:16.840 --> 06:23.630
+of arguments that has to match the names of those arguments that you have created here.
+
+06:23.650 --> 06:25.940
+So we have a name here.
+
+06:26.200 --> 06:35.590
+So we have to pass an array with an element that the key is the name and then some value.
+
+06:35.600 --> 06:40.360
+So let's just put some something doesn't really matter what that would be.
+
+06:40.390 --> 06:44.870
+So named John and this is how you pass some additional values.
+
+06:44.980 --> 06:46.480
+So let's see.
+
+06:46.480 --> 06:56.330
+So now the application is in Spanish so we can see all that John if we will change it back to English.
+
+06:56.410 --> 06:57.130
+Now it is.
+
+06:57.250 --> 07:02.530
+Hello John.
+
+07:02.540 --> 07:04.610
+Now let's see another example.
+
+07:04.610 --> 07:07.970
+And this would be a more complicated one.
+
+07:07.970 --> 07:17.390
+So let's imagine we have a parameter that has that well you should show our singular or plural form
+
+07:17.390 --> 07:19.370
+of the text depending on the volume.
+
+07:19.400 --> 07:21.910
+So let's say no comments yet.
+
+07:21.980 --> 07:27.480
+And then something like one comment two comments et cetera et cetera.
+
+07:27.770 --> 07:35.310
+So plural let's create this key plural and then let's see how we should do that.
+
+07:35.330 --> 07:40.230
+So this would be a little bit more complicated example.
+
+07:40.280 --> 07:44.770
+So first we begin by specifying an exact value.
+
+07:44.780 --> 07:51.700
+This is how you specify that for this exact value of the parameter we should display this text.
+
+07:51.980 --> 07:54.180
+So exact value would be zero.
+
+07:54.860 --> 07:58.240
+And this would be no comments yet.
+
+07:58.580 --> 08:06.020
+And then you have to split somehow the different versions for a different value of the parameter.
+
+08:06.020 --> 08:09.660
+And you do that using this character.
+
+08:10.260 --> 08:15.380
+Now the next version would be for let's say a range.
+
+08:15.600 --> 08:21.450
+So let's say when something is from one to two sorry one too.
+
+08:21.490 --> 08:29.890
+So you put everything inside square brackets and for the value of the parameter that is from one up
+
+08:29.890 --> 08:42.620
+to two you will want to display a text that is let's say comments now then you probably would also like
+
+08:42.620 --> 08:45.890
+to say how many comments are there.
+
+08:45.890 --> 08:54.440
+So by default you can use that using the count parameter because to actually display this measures you
+
+08:54.440 --> 08:57.710
+will have to pass a parameter.
+
+08:57.710 --> 09:04.320
+So this will be immediately available as with the name count so.
+
+09:04.350 --> 09:14.260
+OK let's see this example now copy it first to the Spanish I don't know how is it in Spanish but let's
+
+09:14.260 --> 09:16.840
+use no common Torrijos
+
+09:21.610 --> 09:28.270
+something like this sorry for sorry the Spanish guys but well I just have no idea how is it in Spanish.
+
+09:28.270 --> 09:30.840
+We are just doing an example.
+
+09:30.910 --> 09:31.200
+Okay.
+
+09:31.210 --> 09:34.570
+Now how would you call that in your line of old template.
+
+09:35.020 --> 09:36.450
+So this is a little bit different.
+
+09:36.460 --> 09:40.100
+Not very complicated just different.
+
+09:40.180 --> 09:41.880
+Now we also have to echo this.
+
+09:41.890 --> 09:46.950
+But instead of using double underscore you have to use trans choice.
+
+09:46.960 --> 09:51.580
+So this is a helper function in light of all.
+
+09:51.790 --> 09:55.110
+Now you will specify a key as usual.
+
+09:55.150 --> 09:59.810
+So this is messages dot plural.
+
+10:00.430 --> 10:06.130
+And now you specified the actual value so this would be zero.
+
+10:06.730 --> 10:19.410
+So let's do one example with zero then an example with one and with to so we use this parameter.
+
+10:19.410 --> 10:23.520
+So then it is being understood in this first segment.
+
+10:23.550 --> 10:26.550
+So this is much exact zero.
+
+10:26.760 --> 10:31.310
+And this is much exact one 2 up to two.
+
+10:31.530 --> 10:33.180
+So say the changes.
+
+10:33.360 --> 10:38.800
+And now let's refresh so you can see no comments yet.
+
+10:38.800 --> 10:44.020
+This is for the 0 then 1 comments and 2 comments
+
+10:46.780 --> 10:47.710
+now.
+
+10:47.890 --> 10:56.450
+This is not perfect yet so well for in this example we probably would like to display something differently.
+
+10:56.620 --> 11:02.210
+So we used a range here but actually this should also be one.
+
+11:02.590 --> 11:04.570
+And then one comment.
+
+11:04.570 --> 11:12.640
+But we can also add well many sets unlimited sets of these possibilities and well in most languages
+
+11:12.670 --> 11:17.970
+you probably have a value or specific form of text for 0.
+
+11:18.070 --> 11:26.640
+Then for one and then for everything plurality you will have the same form so to specify a range from
+
+11:26.640 --> 11:30.110
+something up to infinity you will do it like that.
+
+11:30.150 --> 11:40.200
+So this would mean from 2 up to infinity and this would be count comments.
+
+11:40.350 --> 11:48.690
+Now let's also fixed a Spanish version so here we expect an exact value which is 1 so I hope this is
+
+11:48.690 --> 11:50.640
+commentary or in Spanish.
+
+11:50.640 --> 11:52.250
+I have no idea.
+
+11:52.260 --> 12:04.540
+And then from 2 up to infinity count commentary is so we don't have to change the template just save
+
+12:04.540 --> 12:05.290
+the changes.
+
+12:05.500 --> 12:06.620
+And now let's see.
+
+12:06.670 --> 12:08.760
+So you have no comments yet.
+
+12:08.860 --> 12:16.600
+One comment and two comments if we will change it to Spanish This is also correct.
+
+12:16.600 --> 12:18.560
+So no comment areas.
+
+12:18.690 --> 12:21.650
+One commentary or two commentaries.
+
+12:21.850 --> 12:29.290
+So those are the basics of how you would use ad translation helper methods and how to define them how
+
+12:29.290 --> 12:35.370
+to parse values and how to use any plural forums now.
+
+12:35.370 --> 12:43.410
+Additionally if you would also like to pass a value to those plural text like we have this trans choice
+
+12:44.430 --> 12:45.930
+then of course you can do that
+
+12:48.950 --> 12:53.240
+so you can call that parameter additional so for short.
+
+12:53.240 --> 12:54.590
+Let's just use a
+
+13:00.130 --> 13:01.990
+now do the same in Spanish
+
+13:05.480 --> 13:08.120
+and just the same way as we did here.
+
+13:08.310 --> 13:16.860
+We pass on array where the key has to match their parameter name that we specified inside messages BHP
+
+13:16.860 --> 13:24.730
+so this was just an A and then some value whatever that might be let's say one doesn't really matter.
+
+13:24.960 --> 13:27.420
+Let's copy it out to all of the examples.
+
+13:27.480 --> 13:33.630
+Save the changes and you can see that the now message contains the parameters so whatever that might
+
+13:33.630 --> 13:37.650
+be you might pass some email a name a number anything.
+
+13:37.710 --> 13:44.760
+So those are the basics of how to basically translate the text using chlorophyll and by specifying the
+
+13:44.780 --> 13:46.860
+messages in BHP file.

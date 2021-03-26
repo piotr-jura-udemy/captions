@@ -1,0 +1,280 @@
+WEBVTT
+
+00:00.720 --> 00:04.860
+In this section we'll learn how Lavell handles files.
+
+00:05.010 --> 00:13.470
+But before we do any actual work let's try to understand the lateral obstruction for the file system.
+
+00:13.560 --> 00:20.970
+So what you see here is a diagram of the layers of how you would access and by accessing I mean storing
+
+00:21.000 --> 00:24.000
+and fetching files.
+
+00:24.000 --> 00:26.640
+So let's first consider two examples.
+
+00:26.670 --> 00:33.870
+So the first example might be that you might simply want to upload some files and in our case when we
+
+00:33.870 --> 00:42.110
+have a blog post application we might want to store let's say our family image for the blog post that
+
+00:42.120 --> 00:49.890
+user will upload when he is creating a blog post and then we want this image to be accessible for everyone.
+
+00:49.890 --> 00:57.600
+So we want to just display this image but that's not the only use case for files as let's imagine you
+
+00:57.600 --> 01:02.490
+have another application for example for handling documents.
+
+01:02.490 --> 01:10.110
+So users would have some accounts and then they will upload documents and that might be f or word to
+
+01:10.110 --> 01:18.390
+document and then you also like to store them somewhere but not necessarily for everyone to download.
+
+01:18.390 --> 01:25.800
+You might only store them so that only people that have certain rights can for example review those
+
+01:25.800 --> 01:28.400
+documents do something with them.
+
+01:29.190 --> 01:35.090
+So the first layer of this abstraction is the storage for Sade.
+
+01:35.220 --> 01:41.640
+So this way you can store and easily access files will get to the details later.
+
+01:41.850 --> 01:46.710
+Just so you know the first layer is the storage for Sade.
+
+01:47.020 --> 01:54.670
+Now then in Lovell you have some disks configured now disk is an abstract concept.
+
+01:54.690 --> 01:59.070
+It doesn't mean physical disk like on your computer.
+
+01:59.070 --> 02:01.770
+It's abstract concept.
+
+02:01.770 --> 02:10.270
+So a lot of outcomes by default with free disks defined defined and the local disk is the default one.
+
+02:10.440 --> 02:13.050
+So those are the names of the disks.
+
+02:13.050 --> 02:14.750
+Now take a look on the right.
+
+02:14.760 --> 02:21.480
+This is the file systems P2P file which you can find inside the config folder.
+
+02:21.480 --> 02:25.980
+It is a configuration for the larval file system.
+
+02:25.980 --> 02:34.950
+Abstraction no on this configuration file under the default key you specify which one of those disks
+
+02:35.070 --> 02:36.180
+should be default.
+
+02:36.960 --> 02:43.770
+So you will see that when you access anything using this storage for say when you do not specify a disk
+
+02:44.010 --> 02:45.710
+it will use the default one.
+
+02:45.720 --> 02:53.180
+That's why it is important to have the default one defined and the default one is local.
+
+02:53.190 --> 02:57.300
+So you configure that using an environment variable.
+
+02:57.510 --> 03:04.740
+So on your system you will Adam environment variable called file system driver or alternatively you
+
+03:04.740 --> 03:08.580
+will define one inside your dot and file.
+
+03:08.880 --> 03:16.500
+So let's immediately change that to public because we would like in our first example we would like
+
+03:16.500 --> 03:24.000
+to upload images that will be from thumbnails to blog posts.
+
+03:24.030 --> 03:31.640
+Now if we scroll below now you can see the configuration of the disks so we can see that it's an abstract
+
+03:31.640 --> 03:39.660
+concept and those names are just names that you give to those disks you can call them anywhere you like.
+
+03:39.680 --> 03:45.470
+Now there are free defined the local public and as free you can define more of course.
+
+03:45.470 --> 03:53.180
+But how this works is that every disk has some configuration options and the most important of them
+
+03:53.420 --> 03:56.120
+is the driver option.
+
+03:56.120 --> 04:05.750
+So driver is the final layer of this abstraction and it actually defines where those files will be stored.
+
+04:05.840 --> 04:11.400
+When you access the storage facet using certain disk.
+
+04:11.600 --> 04:14.420
+So let's say we change the disk.
+
+04:14.450 --> 04:25.340
+The default disk to public and the public disk is using the local driver the local means that the files
+
+04:25.340 --> 04:33.380
+will be stored inside the folder of your application specifically by default of course inside the storage
+
+04:33.470 --> 04:34.490
+folder.
+
+04:34.490 --> 04:43.160
+This is also configurable by The Root property so you can see that on both disks that use the local
+
+04:43.160 --> 04:44.180
+driver.
+
+04:44.210 --> 04:53.150
+There is also our root property and it is fetching this storage directory by using the storage path.
+
+04:53.180 --> 05:01.930
+Function well this could also be specified explicitly but in case you are running an application on
+
+05:01.940 --> 05:09.620
+couple of servers you might have a common disk for storage so let's not go into details but while it
+
+05:09.620 --> 05:16.520
+is it makes sense to fetch this storage path using this function.
+
+05:16.520 --> 05:25.820
+Now what that means is for example with the local disk the files would be stored on the storage path
+
+05:26.060 --> 05:29.480
+which would be storage up.
+
+05:29.530 --> 05:37.120
+So all those files will be stored inside this storage up folder and then on the public they will be
+
+05:37.120 --> 05:41.290
+stored inside the storage up slash public.
+
+05:41.290 --> 05:49.960
+So basically on the same folder where your application is now as free driver is a different thing.
+
+05:49.960 --> 05:57.580
+So it is being used by the as free disk and of course this is amazing as free and you will have to have
+
+05:57.580 --> 06:04.850
+an amazing account and will actually be quite comfortable with using amazing to use that.
+
+06:04.870 --> 06:12.370
+So we won't cover that but just so you know there are other possibilities and other disks so you might
+
+06:12.370 --> 06:21.760
+want to store your files on some FTB or as fh FHP servers or additionally the final driver that is available
+
+06:21.880 --> 06:24.030
+out of the box is the Rackspace.
+
+06:24.040 --> 06:26.670
+Of course you can define your own drivers.
+
+06:26.680 --> 06:33.760
+So let's say you would like to either store or download your files from Dropbox.
+
+06:33.970 --> 06:37.690
+You can do that by implementing Dropbox driver.
+
+06:38.920 --> 06:41.850
+So why it all makes sense.
+
+06:42.010 --> 06:52.350
+So this makes sense to use this storage for Sayed because you get single way to handle your files so
+
+06:52.350 --> 07:01.170
+you can use the same code to store files and to fetch files but then you can configure different disks
+
+07:01.230 --> 07:09.000
+which is an abstract abstract concept and then this can access files from different kinds of storage
+
+07:09.540 --> 07:12.830
+and you will be using just a single interface.
+
+07:12.840 --> 07:22.590
+So this gives us plenty of possibilities so let's say you start simply so you store files on your lock
+
+07:22.590 --> 07:29.340
+on folder but then your application grows and you need a cloud to store your files you need much more
+
+07:29.400 --> 07:35.860
+storage then you can easily switch a configuration for one of your disks.
+
+07:35.880 --> 07:43.530
+Let's say the public one and now instead of keeping your files where your application is on your storage
+
+07:43.530 --> 07:48.630
+folder all those files can be kept in as free.
+
+07:48.630 --> 07:57.150
+Also lets imagine that your application needs files from some outside source so you are let's say not
+
+07:57.240 --> 08:00.150
+storing any files but you need to download some files.
+
+08:00.150 --> 08:08.580
+There is some information provided for you and lets say that it is provided on S F HDP server then you
+
+08:08.580 --> 08:16.620
+will be able to define another disk that will use this as if HDP server and you can handle all that
+
+08:16.650 --> 08:17.040
+too.
+
+08:17.100 --> 08:24.900
+Using one single storage phosphate and an example could be that you need to copy some files from our
+
+08:24.900 --> 08:31.460
+remote server and then you can use storage facilities to both Download those files from as I've aged
+
+08:31.470 --> 08:40.620
+to be process them and maybe them then store them on let's say S3 and well thanks to the storage phosphate
+
+08:40.740 --> 08:49.350
+you can all do that using are seeing simple and single interface and well not to say that generally
+
+08:50.130 --> 08:59.340
+you probably would have to implement this differently to use all those specific storage mechanisms so
+
+08:59.340 --> 09:07.140
+there is different BHP functions and code to manage files that are local to your application that are
+
+09:07.200 --> 09:10.400
+just on the same physical storage.
+
+09:10.410 --> 09:19.690
+Done your up then there is different code to handle at f FTB s if HDP then probably you will need separate
+
+09:19.710 --> 09:23.780
+client to handle S3 etc etc..
+
+09:24.360 --> 09:27.000
+So if this is not clear yet.
+
+09:27.120 --> 09:35.460
+This probably would become clear when we start implementing our first example but just so you know this
+
+09:35.550 --> 09:40.460
+is a very powerful mechanism and a behind the scenes.
+
+09:40.500 --> 09:47.810
+It's not actually all larval code it is using a third party library called flight system.

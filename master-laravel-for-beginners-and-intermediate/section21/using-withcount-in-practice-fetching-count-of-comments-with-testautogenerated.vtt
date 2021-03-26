@@ -1,0 +1,169 @@
+WEBVTT
+
+00:01.320 --> 00:07.890
+Now that we had some terror let's go back to practice and implement what we have learned inside our
+
+00:07.890 --> 00:09.000
+application.
+
+00:09.000 --> 00:14.520
+So let us go on and open the post controller and go to our index action.
+
+00:14.730 --> 00:22.050
+As you can see we simply fetch the blog posts using all method and it only fetch the blog post model
+
+00:22.050 --> 00:24.210
+without any relations.
+
+00:24.210 --> 00:31.710
+Now that we know that we can fetch it together with comments and basically we'll start with fetching
+
+00:31.830 --> 00:33.120
+the count of the comments.
+
+00:33.150 --> 00:37.100
+So taking a look at how our list of blog posts looks.
+
+00:37.170 --> 00:43.860
+Looks like we have only the title and the buttons to edit and delete and let's say that we would like
+
+00:43.860 --> 00:48.730
+to show how many comments are written for each of those blog posts.
+
+00:48.840 --> 00:51.060
+So let's see how we can do that simply.
+
+00:51.060 --> 00:55.390
+So let's first reformat it so it's visible what I'm doing here.
+
+00:56.100 --> 01:06.180
+So instead of the all we'll use with count that that we learned in the last lectures in that will specify
+
+01:06.210 --> 01:13.740
+as an argument the name of the relation that we would like to get count for and looking at the blog
+
+01:13.740 --> 01:17.970
+post the relation name is comments.
+
+01:18.540 --> 01:30.690
+So let's specify that we want to count of their comments relation sorry comments and finally since we
+
+01:30.690 --> 01:34.650
+get our query object we need to call get on it.
+
+01:34.650 --> 01:41.610
+So we will have the same effect as we had we've all but this time it will also add a new property to
+
+01:41.610 --> 01:48.780
+the blog post model called comments the same as the relation name underscore count.
+
+01:48.840 --> 01:51.800
+So this would give us new property.
+
+01:51.810 --> 01:59.460
+We can read comments count and this will contained a number of related models for this particular blog
+
+01:59.460 --> 02:00.770
+post.
+
+02:00.780 --> 02:01.070
+OK.
+
+02:01.080 --> 02:02.780
+So we have that.
+
+02:02.820 --> 02:06.230
+Now let's actually display that.
+
+02:06.450 --> 02:16.320
+So open the index blade BHP from the posts and we can display the amount of comments just below the
+
+02:16.320 --> 02:18.230
+link to the actual blog posts.
+
+02:18.240 --> 02:21.320
+So we already know about that.
+
+02:21.360 --> 02:31.120
+If DirecTV so we can use it to check if comments count so using this DirecTV we are checking if comments
+
+02:31.120 --> 02:35.150
+count is nothing that can evaluate to false.
+
+02:35.320 --> 02:43.200
+And if you do not know then anything that is zero or false evaluates to false impeach B.
+
+02:43.630 --> 02:52.690
+So if we would have any comments then we can get into this part when we will display the amount of comments.
+
+02:52.690 --> 03:07.920
+So we'll just read post comments count and other text comments or else so this would happen when comments
+
+03:07.920 --> 03:10.230
+count evaluates to false.
+
+03:10.230 --> 03:15.780
+So that would probably mean that comments count is zero in our case because we are certain that we will
+
+03:15.780 --> 03:17.580
+have this parameter.
+
+03:17.580 --> 03:23.780
+We can display no comments yet and of course we have to add.
+
+03:23.880 --> 03:35.670
+And if so let us go back to the browser and it seems to be working almost exactly good because the last
+
+03:35.670 --> 03:42.810
+one doesn't look correctly and this is because yes I will surround that with the paragraph.
+
+03:44.100 --> 03:45.530
+Okay let's save the changes.
+
+03:45.540 --> 03:47.450
+Now it looks correct.
+
+03:47.460 --> 03:58.280
+And basically we can immediately modify one of our tests so let's open the post test feature test.
+
+03:58.890 --> 04:07.150
+And if you will run the console you can see that currently our tests should be passing and we have 27
+
+04:07.210 --> 04:14.440
+assertions so let's find that test where we test the index page where we display block post titles with
+
+04:14.440 --> 04:15.600
+comments.
+
+04:15.700 --> 04:22.000
+So as you remember we created a dummy blog post here which looks like this.
+
+04:22.000 --> 04:25.520
+So it's just title and content.
+
+04:25.520 --> 04:32.380
+And now since we created this dummy blog post it is being created without comments.
+
+04:32.370 --> 04:41.200
+So in this case in this test we can expect that we can see the new title that's that will be matching
+
+04:41.200 --> 04:49.720
+the title that we specified but we can also test if we would see the text.
+
+04:49.720 --> 04:54.040
+No comments yet.
+
+04:54.220 --> 05:00.130
+Of course we can also create a test with a blog post that will have comments and we'll do that in a
+
+05:00.130 --> 05:00.460
+bit.
+
+05:00.460 --> 05:02.710
+So let's first see this.
+
+05:02.730 --> 05:07.330
+So you can see there is one more assertion other and tests are green.
+
+05:07.330 --> 05:11.390
+So it means everything is working correctly.

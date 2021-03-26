@@ -1,0 +1,133 @@
+WEBVTT
+
+00:01.180 --> 00:08.590
+In the last lecture we have learned where we should put that out or made tests that we will create for
+
+00:08.590 --> 00:10.270
+our applications.
+
+00:10.270 --> 00:15.690
+We've also seen how we can run the tests using BHP you need.
+
+00:16.030 --> 00:22.630
+And you've also learned how the basic structure of a single test should look like.
+
+00:22.870 --> 00:31.340
+Now there is this speech unit exam l configuration file which will configure the peach you need and
+
+00:31.340 --> 00:34.370
+the section that will mostly interest you.
+
+00:34.510 --> 00:36.390
+Is this part.
+
+00:36.550 --> 00:42.970
+So this is where you can define some different environment variables for your test runs.
+
+00:43.810 --> 00:50.870
+So usually when you develop on your local environment you will store the environment variables in the
+
+00:50.870 --> 00:56.320
+dot and file and this environment is called local.
+
+00:56.320 --> 01:03.520
+But a lot of oil runs the tests in a separate environment called testing and then you will configure
+
+01:03.610 --> 01:08.600
+all the settings all the environment variables inside this BHP.
+
+01:08.640 --> 01:16.000
+You need Excel files so you can see that the upper end of here is testing and by default we have some
+
+01:16.090 --> 01:19.270
+other environment variables set.
+
+01:19.270 --> 01:27.190
+So this would be very useful when we will do tests that involve the database.
+
+01:27.190 --> 01:34.510
+So normally by default we have specified that we want to use the database connection to my school database
+
+01:34.510 --> 01:43.690
+that we run locally but for tests you would not like to use the same database as your application.
+
+01:43.720 --> 01:52.480
+So for the tests we will use another database and this could be another database on your my school server
+
+01:52.960 --> 02:03.130
+or you can alternatively use Eskew a light database or even run the tests using the Eskew light database
+
+02:03.220 --> 02:04.490
+in memory.
+
+02:04.570 --> 02:14.160
+And this is what we will do if we want our tests to run using our different database and we do want
+
+02:14.160 --> 02:24.630
+that we have to define DV connection environment variable inside the PDP unit AML and put the connection
+
+02:24.630 --> 02:24.990
+name.
+
+02:24.990 --> 02:32.970
+So let's use obscure light testing and then you might remember that connections are the find inside
+
+02:33.030 --> 02:37.110
+the config database BHP file.
+
+02:37.110 --> 02:41.910
+You can see our my sequel connection that we are actually using.
+
+02:41.910 --> 02:47.720
+And there is also a predefined Eskew a light connection that we haven't been using.
+
+02:47.850 --> 02:55.980
+But now let's create a brand new connection based on that that will call Eskew a light testing.
+
+02:55.980 --> 02:57.960
+So we do not need those two properties.
+
+02:57.960 --> 03:07.070
+And since we want this to be created in memory we specified that the database name would be memory.
+
+03:07.140 --> 03:14.390
+So it's a special keyword to tell of all that the database should be created in memory now.
+
+03:14.400 --> 03:21.670
+Finally let's talk about the problem that many people apparently are having when they are configuring
+
+03:21.730 --> 03:30.700
+are separate database connection for day their tests and this is that they have cached that configuration
+
+03:30.790 --> 03:37.570
+at one point and the configuration cache is never created automatically.
+
+03:37.570 --> 03:43.810
+You have to run a command for it and the command is BHP artisan config cache.
+
+03:43.960 --> 03:52.330
+So if you did that at one point or you just don't remember you should run this command first which will
+
+03:52.330 --> 04:01.000
+clear this configuration cache and you should do that because if you wouldn't and you have the configuration
+
+04:01.000 --> 04:10.350
+cached and you have added a new property here the db connection it might just not be picked up and Lavell
+
+04:10.360 --> 04:14.770
+might use the cache configuration variable instead.
+
+04:14.800 --> 04:20.380
+And this would be the one from your environment file which is the my sequel.
+
+04:20.380 --> 04:28.930
+So later when we will create tests that actually reset the database you might find that running your
+
+04:28.930 --> 04:36.490
+tests actually is resetting your my sequel database and you probably do not want that.
+
+04:37.270 --> 04:44.830
+So of course I will cover that later how to write tests that interact with our database but just so
+
+04:44.830 --> 04:49.020
+you know it's a typical problem that many people are having.

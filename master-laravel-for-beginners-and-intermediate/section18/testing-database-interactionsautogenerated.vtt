@@ -1,0 +1,229 @@
+WEBVTT
+
+00:00.510 --> 00:08.060
+In the last lecture we created our simple home test to test our home controller and verify that the
+
+00:08.070 --> 00:12.530
+two pages that are there contain specific text.
+
+00:12.540 --> 00:14.450
+Now let's do something more complicated.
+
+00:14.460 --> 00:17.940
+Let's generate our new test for our post controller.
+
+00:18.630 --> 00:24.150
+So this is BGP artisan make test post test.
+
+00:24.390 --> 00:27.290
+We have our test class created.
+
+00:27.600 --> 00:34.770
+Let's immediately remove this trade import we want to use it but actually this time we will use this
+
+00:34.860 --> 00:41.220
+refresh database trade so this is a very useful thing.
+
+00:41.220 --> 00:49.600
+It lets you recreate that database structure by running all the migrations on each single test run.
+
+00:49.920 --> 00:58.200
+So how this works is that let's take a look at this test for example so it will recreate the database
+
+00:58.620 --> 01:00.170
+before this test runs.
+
+01:00.190 --> 01:07.110
+So if you will create three tests that interact with the database somehow like save on your blog post.
+
+01:07.110 --> 01:14.050
+Then when you run another test this would be the database would be recreated and empty again.
+
+01:14.130 --> 01:20.650
+So whenever you create something write something to the database it won't affect other tests.
+
+01:20.670 --> 01:27.960
+I was already mentioning this in the last lecture but now let's see how that works.
+
+01:28.290 --> 01:35.970
+So first let's see potential problem that we might be having by using the Eskew a light and let's immediately
+
+01:35.970 --> 01:40.410
+run this simple test to see what do I mean.
+
+01:40.410 --> 01:52.020
+So we are running the tests by running the BHP unit and you can see the problem and it is that cannot
+
+01:52.080 --> 01:56.460
+add not no column with the default value.
+
+01:56.460 --> 01:57.100
+No.
+
+01:57.690 --> 02:06.000
+So it's a behavior of the Eskew a light that when you will have fields that are defined as not normal
+
+02:06.360 --> 02:09.160
+they need to have a default value.
+
+02:09.180 --> 02:18.510
+So here is the specific error that it complains about the blog posts table title and content fields
+
+02:19.260 --> 02:26.060
+so we can modify this migration because our development environment already has this run.
+
+02:26.160 --> 02:35.100
+So we do not really have to worry about that just for the sake of our Eskil light database.
+
+02:35.130 --> 02:39.140
+We'll modify it to contain our default value.
+
+02:39.240 --> 02:48.130
+Now if you would rerun this now you can see that everything is fine so let's go back and actually create
+
+02:48.130 --> 02:48.960
+a test.
+
+02:49.030 --> 02:56.060
+So we should start by checking if there are no blog posts that we want to see and a blog post.
+
+02:56.070 --> 03:01.230
+So we will see the text that is our default value so let's go to the browser.
+
+03:01.240 --> 03:09.240
+Delete this post and go to the blog posts so you can see that the default text is no blog posts yet.
+
+03:09.820 --> 03:15.080
+So we should definitely create a test for such scenario.
+
+03:15.270 --> 03:26.980
+You can call it no blog posts when nothing in database doesn't really matter how you call it.
+
+03:26.990 --> 03:40.490
+Now we have to fetch this end point so it's slash posts and the only assertion would be absurd C text
+
+03:40.610 --> 03:45.730
+when we'll verify if we can see this text when there are no blog posts in the database.
+
+03:45.740 --> 03:54.970
+So now let's run it and you can see that this works we have five Tests and seven assertions now you
+
+03:54.970 --> 04:01.610
+can also see that this test only contains the act part and the Assert part.
+
+04:01.610 --> 04:03.180
+So there is no French part.
+
+04:03.350 --> 04:08.380
+So let's create another test in which we'll actually have the French part.
+
+04:09.560 --> 04:20.770
+So we'll create a new method and call it test C one block post when there is one.
+
+04:20.870 --> 04:27.140
+So I come up with this very long test names but believe me it really makes sense when you then go back
+
+04:27.140 --> 04:35.150
+to this test after some time and have no clue what these tests are actually verifying.
+
+04:35.150 --> 04:42.020
+So we'll do it simply we'll create a new blog post assign a title to it
+
+04:45.810 --> 04:46.650
+the content
+
+04:54.070 --> 05:03.310
+and finally will save this blog post so we can do that in test and that is our arrange part.
+
+05:03.440 --> 05:10.580
+So before we are actually doing something we are arranging some objects we are preparing something we
+
+05:10.580 --> 05:12.050
+would like to test.
+
+05:12.080 --> 05:15.980
+So in this case we are just saving a new model inside the database.
+
+05:16.550 --> 05:18.250
+So now there is our act.
+
+05:18.250 --> 05:27.420
+Part and our act is simply fetching the least of the blog posts.
+
+05:28.220 --> 05:37.200
+And our final assault part is verifying that we can see the title of this blog post on the page so we
+
+05:37.200 --> 05:38.060
+can do.
+
+05:38.100 --> 05:49.120
+Response assert C text and we should be able to see the title of this blog post so it is new title so
+
+05:49.120 --> 05:52.540
+we should see such text on the page.
+
+05:52.540 --> 06:01.680
+Now let's run this and of course we have an error because we haven't imported the blog post.
+
+06:01.930 --> 06:11.070
+So let's other use case use up blog post say the changes and now rerun the test.
+
+06:11.080 --> 06:17.320
+So now it's passing and you can see that we've already tested that when there is one blog post it should
+
+06:17.320 --> 06:19.630
+be visible on the page.
+
+06:19.630 --> 06:26.890
+So in case you will make some changes like you wouldn't display a title on the list of all the blog
+
+06:26.890 --> 06:30.740
+posts or you will just display a part of the title.
+
+06:30.790 --> 06:38.680
+This test might just start failing so it's actually verifying a pretty important feature of our very
+
+06:38.680 --> 06:45.760
+simple application now till now you always see me using this assert seat takes us.
+
+06:45.760 --> 06:53.410
+That's pretty straightforward and simple way of checking for simple things but obviously lava comes
+
+06:53.410 --> 06:57.910
+with much more assertions and you can find that on this link.
+
+06:57.910 --> 07:05.640
+It's part of the lava documentation and here you can see all the possible assertions that you can use.
+
+07:06.220 --> 07:13.360
+Additionally we can check something directly inside the database so we can check if there is a record
+
+07:13.420 --> 07:16.790
+with a specific attribute.
+
+07:16.870 --> 07:18.220
+So let's just do it.
+
+07:18.220 --> 07:30.240
+There is this method assert database has and here will specify inside which table we would like to find
+
+07:30.240 --> 07:30.830
+something.
+
+07:31.560 --> 07:39.270
+And in this case we would like to find inside the block underscore a post table that there is a record
+
+07:39.600 --> 07:45.370
+with the title being exact of new title.
+
+07:47.250 --> 07:54.110
+So this is another assertion you can use and let's see if it works at all.
+
+07:54.110 --> 07:58.400
+So now you see that we have still 6 days but nine assertions.
+
+07:58.400 --> 08:06.440
+So this is another assertion we can use and it is very simple just tricks if inside specific table there
+
+08:06.530 --> 08:11.680
+is a record that attribute is equal to this value.

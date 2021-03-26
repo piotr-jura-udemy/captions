@@ -1,0 +1,100 @@
+WEBVTT
+
+00:00.330 --> 00:07.980
+This is a short lecture about fleg, sporks in excess, if you already understand it, you can skip
+
+00:07.980 --> 00:08.700
+this lecture.
+
+00:09.970 --> 00:15.460
+Understanding Flex, Boggs is crucial to learn how to create layouts effectively.
+
+00:16.330 --> 00:20.490
+I have created this simple page to help you understand the basics.
+
+00:21.040 --> 00:25.230
+It is available as a download in this lecture, resources.
+
+00:26.620 --> 00:28.600
+You don't have to download it right now.
+
+00:28.900 --> 00:35.380
+It's enough to just watch as we won't write any code yet, but just in case the file is there.
+
+00:36.960 --> 00:43.650
+Flex spokes layout consists of the flex container that's the one with the red border.
+
+00:44.610 --> 00:49.110
+And flex items, those are the ones with the green border.
+
+00:50.110 --> 00:57.040
+As you can see, the Flakes box is about positioning the green items inside a red item.
+
+00:59.720 --> 01:06.800
+The green items themselves can also be separate flex containers, having their own items.
+
+01:07.850 --> 01:12.800
+The basic parameter of Fleck's box container is the direction.
+
+01:14.970 --> 01:23.040
+Is either roll, so items are positioned from left to right, that's a default setting.
+
+01:24.060 --> 01:29.750
+Or column, so items are positioned from top to bottom.
+
+01:31.130 --> 01:35.000
+Each flex container has the main axis.
+
+01:36.010 --> 01:38.350
+And the cross axes.
+
+01:39.670 --> 01:46.750
+It's important to understand this as whenever you read any flex book related documentation, you will
+
+01:46.750 --> 01:50.620
+see the reference to the main axis and the cross axis.
+
+01:52.490 --> 02:00.020
+So with the default role direction, so from left to right, main axis is horizontal.
+
+02:01.070 --> 02:03.860
+And cross axis is vertical.
+
+02:05.110 --> 02:11.680
+With the column direction, so from top to the bottom is the other way around.
+
+02:13.810 --> 02:21.820
+Example, no one presents the default elements positioning on flex container with the wrong direction.
+
+02:23.460 --> 02:27.080
+Example number three with the column direction.
+
+02:28.470 --> 02:33.660
+Next, items can be aligned on both main and cross axes.
+
+02:34.650 --> 02:44.370
+The line items, property line items on the cross axes, in the example number two, you can see items
+
+02:44.370 --> 02:46.470
+are centered vertically.
+
+02:48.850 --> 02:51.340
+And in the example, number four.
+
+02:52.480 --> 02:55.390
+Items are centered horizontally.
+
+02:56.820 --> 03:02.760
+Though there is much more to flex box, you are free to explore it further by reading the great article
+
+03:02.760 --> 03:03.830
+on the end.
+
+03:04.200 --> 03:12.210
+The link can be found in lecture resources and then reading about Fleck's utility classes in Bootstrap
+
+03:12.210 --> 03:15.630
+Documentation Link is also in the resources.
+
+03:17.180 --> 03:22.490
+What you've learned so far would be enough for us to proceed with a real example.

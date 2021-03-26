@@ -1,0 +1,322 @@
+WEBVTT
+
+00:01.510 --> 00:06.730
+In the past couple of lectures we talked also about contracts.
+
+00:06.730 --> 00:15.130
+So basically a contract is up BHP interface and you can verify that by for example clicking on the session
+
+00:15.130 --> 00:17.490
+one with your out pressed.
+
+00:17.500 --> 00:21.460
+You can see that this is peach beat interface.
+
+00:21.610 --> 00:27.840
+So remember that contracts in light of all means defining an interface.
+
+00:27.850 --> 00:35.490
+Now we all know that interface only contains method definitions not the actual implementations as as
+
+00:35.530 --> 00:36.810
+you can see here.
+
+00:37.030 --> 00:44.290
+And then you need an actual class that implements this interface and provides the real functionality.
+
+00:44.320 --> 00:52.740
+So what that means is you can have multiple implementations multiple actual classes that implement the
+
+00:52.740 --> 00:57.640
+same interface which means they provide the same functionality.
+
+00:57.760 --> 01:04.720
+Of course they can provide some more or less functionality but never less than what's defined inside
+
+01:04.720 --> 01:05.470
+the interface.
+
+01:05.470 --> 01:10.090
+So all the methods of an interface have to be implemented.
+
+01:10.120 --> 01:17.500
+That's why you can call it a contract because whatever this whatever the object implementing this interface
+
+01:17.500 --> 01:25.570
+will provide additionally the minimum it has to provide is what is actually defined on an interface.
+
+01:25.570 --> 01:35.890
+That's why it's called contract so if we will now create our own contract or own BHP interface that
+
+01:35.890 --> 01:42.610
+will have one method definition the increment with this specific arguments and this specific return
+
+01:42.610 --> 01:50.650
+type then this counter service can just be one of the implementations one of the possible implementations
+
+01:51.460 --> 01:56.570
+and then we will tell Lavell that it should use this implementation or the other.
+
+01:56.580 --> 02:04.840
+So now we have now we are not depending on an actual implementation of something we depend on a contract
+
+02:04.840 --> 02:11.380
+that says what functionality has to be provided what functionality is needed.
+
+02:11.380 --> 02:18.010
+So what that means is let's imagine that here we also depend on cash on session.
+
+02:18.250 --> 02:25.630
+But you can come up with a different implementation of this counter you can store that inside the database.
+
+02:25.630 --> 02:33.550
+So if you will create our contract and the interface and then in the user and post controller you will
+
+02:33.550 --> 02:41.560
+expect a contract not a particular service implementation then you can make changes to how you implement
+
+02:41.560 --> 02:41.940
+code.
+
+02:41.950 --> 02:49.360
+Let's say there will be another implementation storing this data inside database and you wouldn't have
+
+02:49.360 --> 02:57.550
+to change any code in all the other classes that depend on this particular functionality.
+
+02:57.550 --> 03:03.340
+So that's a great thing about dependency injection and service containers.
+
+03:03.340 --> 03:13.420
+So let's go ahead and create our own contract right now so inside that up folder we will create another
+
+03:13.420 --> 03:18.050
+one called contracts of course.
+
+03:18.050 --> 03:22.250
+It doesn't have to be this folder you can create contracts whenever you want.
+
+03:22.250 --> 03:25.460
+We are just creating that for simplicity.
+
+03:25.580 --> 03:31.820
+And now let's create another file and call it counter contract BHP.
+
+03:31.820 --> 03:36.950
+Now also mind that this doesn't have to be called counter a contract.
+
+03:37.130 --> 03:43.440
+I am using this name to be obvious and to differentiate that from the service.
+
+03:43.460 --> 03:48.050
+So this would be an interface called counter contract
+
+03:50.950 --> 03:55.300
+of course before this interface definition we need a namespace.
+
+03:55.300 --> 04:03.030
+So this is up contracts now this contract will have only one method.
+
+04:03.030 --> 04:06.240
+As I've said public function interface
+
+04:09.970 --> 04:20.150
+and it doesn't contain implementation as all the interfaces do so now whenever you implement this contract
+
+04:20.190 --> 04:28.430
+this interface in one of your services you have to make sure that the method declaration method header
+
+04:28.700 --> 04:34.130
+is exactly the same on the class as it is on the interface.
+
+04:34.130 --> 04:36.810
+So how to implement an interface.
+
+04:36.980 --> 04:43.780
+It's simple just add implements to the class and specify counter contract.
+
+04:43.790 --> 04:49.590
+Notice how Visual Studio code has added an import for me out magically.
+
+04:50.090 --> 04:50.550
+Okay.
+
+04:50.570 --> 04:51.960
+Now save the changes.
+
+04:51.980 --> 04:57.680
+You don't have to change anything in here because the method is exactly the same as on the interface
+
+04:58.570 --> 05:01.250
+and now inside the user controller.
+
+05:01.250 --> 05:04.520
+We no longer depend on an actual service.
+
+05:04.550 --> 05:07.190
+Actual concrete implementation.
+
+05:07.190 --> 05:10.050
+Now we will depend on a contract.
+
+05:11.210 --> 05:18.000
+So let's typing the dependency US counter contract add this you statement.
+
+05:18.090 --> 05:20.640
+Remove the old one for the service
+
+05:23.470 --> 05:34.140
+let's do the same on that post controllers so counter contract as a type of the only argument notice
+
+05:34.210 --> 05:40.190
+the use statement and remove the old one for the service.
+
+05:40.270 --> 05:45.220
+So actually this won't work out of the box if you will refresh a blog post.
+
+05:45.400 --> 05:52.030
+You can see that target is not instantly able when while building it makes sense.
+
+05:52.030 --> 05:59.290
+So Lavell doesn't know how to create well it can't creating an interface because they are they cannot
+
+05:59.290 --> 06:07.980
+be instantiated and it also doesn't know what class did you actually mean by using this parameter.
+
+06:08.170 --> 06:14.770
+So you have to tell the devil which actual implementation you are intending to use and we will do that
+
+06:14.830 --> 06:16.570
+in app service provider.
+
+06:16.570 --> 06:23.830
+Of course you can do that in any provider but well it's I think it's a good convention to keep this
+
+06:23.920 --> 06:30.950
+in one file unless you have a lot of services then you can create another service provider.
+
+06:30.950 --> 06:39.130
+Now to tell Lavell which class to use when an interface is requested on the dependency injection you
+
+06:39.130 --> 06:47.110
+can also use BMD and what you will do now is you will specify the interface fully qualified class name.
+
+06:47.110 --> 06:57.850
+So this will be up contracts counter contract as a first argument of being and then the actual class
+
+06:57.850 --> 07:02.680
+that has to be instantiated in our case or the service name.
+
+07:02.680 --> 07:10.870
+So we happen to have defined our counter service which is using the counter service fully qualified
+
+07:10.870 --> 07:20.650
+class name using this constant so we can copy that and tell Lavell that if this interface is a request
+
+07:20.650 --> 07:27.690
+that we have to use this implementation now save the changes and after refreshing.
+
+07:27.790 --> 07:34.390
+It works because there is only one implementation and we told a lot of all that each should use this
+
+07:34.390 --> 07:36.610
+one.
+
+07:36.660 --> 07:45.570
+No I've said that using interfaces or contracts you can very easily change the implementation on which
+
+07:46.110 --> 07:47.520
+those classes depend.
+
+07:47.520 --> 07:55.500
+So now they depend on a contract and we can easily change what actually would be injected to those classes
+
+07:55.530 --> 07:59.890
+without modifying either the user controller or post controller.
+
+07:59.910 --> 08:08.880
+So this is a great thing for us not having to modify a lot of code when something changes in our application.
+
+08:08.880 --> 08:11.150
+So let's see an example.
+
+08:11.160 --> 08:15.500
+So currently we have only this counter class as a service.
+
+08:15.660 --> 08:19.650
+So let's create another one and call it a dummy counter
+
+08:22.280 --> 08:24.290
+so dummy counter BHP.
+
+08:24.290 --> 08:25.080
+BHP.
+
+08:25.250 --> 08:25.610
+Sorry.
+
+08:25.610 --> 08:36.140
+BHP Tague namespace up services and let's define another class called dummy counter which implements
+
+08:36.200 --> 08:48.400
+the counter contract and now from the counter contract we'll have to copy this method header and here
+
+08:48.400 --> 08:50.790
+we actually need the implementation.
+
+08:50.800 --> 09:00.080
+So well let's do something like Didi I'm a dummy counter not implemented
+
+09:04.550 --> 09:16.740
+and we can return 0 Okay now to use this what we have to do is only switch the counter class as a binding
+
+09:16.800 --> 09:20.040
+to this contract in light of all service container.
+
+09:20.070 --> 09:21.590
+So let's try it out.
+
+09:21.930 --> 09:25.070
+We can use dummy counter.
+
+09:27.420 --> 09:29.050
+So that's the only change we've made.
+
+09:29.060 --> 09:35.850
+Notice that we've only changed one line in the Observer's provider and this will now change how all
+
+09:35.850 --> 09:39.820
+the other classes that depend on this one behave.
+
+09:39.870 --> 09:43.110
+So this includes both controller and user controller.
+
+09:43.110 --> 09:48.960
+Now suddenly we see this text that it's not implemented yet.
+
+09:49.230 --> 09:51.950
+So of course this is not really a useful example.
+
+09:51.960 --> 09:57.630
+I just wanted to show you how you can easily switch the implementation probably you will do something
+
+09:57.630 --> 10:06.210
+like using a different database or maybe using some other logic or maybe even some different algorithms
+
+10:06.300 --> 10:08.170
+some better algorithms.
+
+10:08.280 --> 10:18.750
+So this allows you to easily prototype to test some things without modifying a lot of code in your projects.
+
+10:18.750 --> 10:25.830
+Notice that we just changed one line and then we have changed totally the implementation of what happens
+
+10:26.100 --> 10:26.900
+in our counters.
+
+10:26.910 --> 10:35.400
+So I hope you understand and see how great a tool that is to use contracts in dependency injection and
+
+10:35.400 --> 10:42.480
+then how powerful that is and how easy it is actually to use and understand.

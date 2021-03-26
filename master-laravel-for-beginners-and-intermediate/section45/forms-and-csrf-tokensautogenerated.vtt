@@ -1,0 +1,418 @@
+WEBVTT
+
+00:01.940 --> 00:09.830
+Last time we worked on two cases with our post controller first was to display a list of all the blog
+
+00:09.830 --> 00:17.510
+posts like all the records from the blog posts table using the blog post model and then to display one
+
+00:17.570 --> 00:19.000
+blog post.
+
+00:19.040 --> 00:23.570
+So here is our route definition which is our resource controller.
+
+00:23.570 --> 00:29.810
+We talked about resource controller and we'll get to this right now so you can see that we have two
+
+00:29.810 --> 00:32.380
+actions only index and show.
+
+00:32.570 --> 00:36.520
+And we did that by using the only method call.
+
+00:36.530 --> 00:43.640
+So let's now run peach bee artisan route leads to list all the routes in our up.
+
+00:43.640 --> 00:48.890
+So you see there are two routes for The Post's so index and show.
+
+00:49.250 --> 00:57.230
+And to add a new blog post which we will be doing in this lecture we would like two more routes.
+
+00:57.230 --> 01:05.630
+So let's go to the resource controllers page on the larval Vicki which is available on GitHub and remind
+
+01:05.700 --> 01:10.880
+ourselves how these routes should look in the resource controller.
+
+01:10.880 --> 01:19.690
+So what we have here is that posts create and this route will be used to display a form used to send
+
+01:19.970 --> 01:25.360
+a new blog post and another route is the post store.
+
+01:25.370 --> 01:34.610
+So this particular route and the action that is bound to this route will actually store the new blog
+
+01:34.610 --> 01:36.880
+post inside the database.
+
+01:36.920 --> 01:51.150
+So what we'll start with is we'll add those two inside our coal to the only so we add create and store.
+
+01:51.200 --> 01:53.630
+So no one will run the route least.
+
+01:53.870 --> 01:59.910
+You see that we've got two additional routes that one is create and show.
+
+01:59.960 --> 02:08.510
+Now remember that we have actually removed those methods from our controller but we can now add them.
+
+02:08.600 --> 02:14.150
+So let's add first the first one would be create.
+
+02:14.180 --> 02:22.430
+So this is the create action one where we will display the actual form and the second method would be
+
+02:22.430 --> 02:28.370
+store public function store.
+
+02:28.380 --> 02:36.090
+Now let's try to display a forum how we'll do that is we will actually only render a view so we'll render
+
+02:36.090 --> 02:39.060
+our posts create view and that's it.
+
+02:39.330 --> 02:46.380
+And the whole for logic of the forum would be just a plain HDMI out inside the view.
+
+02:46.380 --> 02:48.050
+So let's create one now.
+
+02:48.240 --> 02:53.700
+It should be called Create blade peach P by the way.
+
+02:53.700 --> 03:02.410
+You might have noticed that even though the create is a file inside the resources views posts folder
+
+03:02.470 --> 03:09.460
+I am using dots as a replacement for the directory separators so you would normally think that it should
+
+03:09.460 --> 03:13.080
+be slash but in lava blade you use dots.
+
+03:13.090 --> 03:16.220
+It's like a directory separator OK.
+
+03:16.230 --> 03:19.110
+Now let's add the markup for our forum.
+
+03:19.230 --> 03:29.070
+So this would extend the layout the same as all the other templates and will add the section called
+
+03:29.070 --> 03:29.730
+content.
+
+03:31.530 --> 03:43.660
+And inside this section we will render a form so the method for our form what we post and the action
+
+03:44.470 --> 03:51.580
+which specifies where to send this form to would be our route to posts star
+
+03:55.420 --> 04:01.840
+OK so we have our forum and now we might update the layout.
+
+04:02.020 --> 04:05.980
+So we have the least of all the blog posts here.
+
+04:05.980 --> 04:14.560
+Now let's add another link to create and call it the blog post OK.
+
+04:14.590 --> 04:17.620
+So this is just for the ease of navigation.
+
+04:17.620 --> 04:28.680
+Now let's go back to the forum and maybe we will ask to labels tax mistake here.
+
+04:28.710 --> 04:28.950
+OK.
+
+04:28.980 --> 04:43.960
+So label title and the input of the type text and name would be the title so we can close this stock
+
+04:45.740 --> 04:49.760
+and we can even close this inside a paragraph.
+
+04:49.760 --> 04:56.000
+So now we won't really bother with styling this will do that in later lectures so don't.
+
+04:55.990 --> 05:02.140
+Don't really worry about how it looks right now and we can have another input.
+
+05:03.590 --> 05:04.520
+For the content
+
+05:08.540 --> 05:13.670
+so we have two fields so it makes sense to just create two fields on the form here.
+
+05:13.940 --> 05:17.630
+And the final would be book bottom type.
+
+05:17.630 --> 05:22.730
+Submit and it would be create
+
+05:25.540 --> 05:26.040
+right.
+
+05:26.040 --> 05:29.830
+So it seems that our forum is ready.
+
+05:30.030 --> 05:34.800
+So let's go to our blog post page.
+
+05:34.800 --> 05:37.760
+So we have a forum here.
+
+05:39.860 --> 05:46.560
+Now before we actually submit this forum let's implement the store method which is the method that will
+
+05:46.560 --> 05:54.600
+handle the forum submit also whatever is sent will be sent to this action and maybe Let's echo okay
+
+05:54.690 --> 05:58.380
+if it was successful so it will just echo okay and die.
+
+05:58.380 --> 06:00.220
+That's what's Didi.
+
+06:00.390 --> 06:02.390
+Function is doing all right.
+
+06:02.400 --> 06:07.210
+Let's go back to the forum and refresh it and try to save.
+
+06:07.410 --> 06:15.030
+Now what you see is four hundred nineteen error and it is saying that sorry your session has expired.
+
+06:15.030 --> 06:16.710
+Please try again.
+
+06:16.710 --> 06:20.410
+So even if you try again you still would see the same page.
+
+06:20.700 --> 06:28.260
+And this is actually expected because Lavell has a mechanism for which will protect you against the
+
+06:28.260 --> 06:38.250
+CSR AV attacks and CSR F is a shortcut for cross site request forgery and it is to prevent other sites
+
+06:38.250 --> 06:46.180
+to take over your forums or send forums to your end points inside your application.
+
+06:46.500 --> 06:54.540
+And it does that protects you against these attacks by adding C as a rough token and you can do that
+
+06:54.540 --> 06:59.430
+simply by using this C or a directive inside the forum.
+
+06:59.430 --> 07:05.120
+So let's copy this and immediately add the token inside our forum.
+
+07:05.130 --> 07:09.670
+You can add it anywhere like that.
+
+07:09.900 --> 07:15.740
+Save the changes and let's go back to the forum and inspect it to see what has changed.
+
+07:17.370 --> 07:24.570
+So now you can see that we have a hidden field with the name underscore token and it contains some unique
+
+07:24.570 --> 07:26.410
+generated value.
+
+07:26.550 --> 07:29.130
+And this is the token that is it.
+
+07:29.400 --> 07:37.410
+It will be sent along with your forum and then Lavell will verify the stock and on the backend to check
+
+07:37.500 --> 07:39.870
+if it is the same.
+
+07:39.870 --> 07:47.370
+So now let's try to submit this form and you see our okay which is the text that we've implemented to
+
+07:47.370 --> 07:49.600
+be shown on the store method.
+
+07:50.940 --> 07:53.430
+Now before we go further let's also talk.
+
+07:53.430 --> 07:58.250
+How does those verification of the CSA token happen.
+
+07:58.260 --> 08:03.600
+So it is it is happening inside a thing called middleware.
+
+08:04.110 --> 08:06.330
+So we haven't talked about middle worse yet.
+
+08:06.330 --> 08:09.500
+And we will talk about it more a little bit later.
+
+08:09.510 --> 08:12.660
+So just simple quick introduction.
+
+08:12.660 --> 08:19.710
+So there is a middleware called verify CSR if token and Middleware is something that gets called a chunk
+
+08:19.710 --> 08:26.670
+of code that gets called before your before the request is being passed to your controller or after
+
+08:26.670 --> 08:27.690
+it is passed.
+
+08:27.690 --> 08:34.470
+So we have two examples inside the Vicky of how an example middleware class might look like but let's
+
+08:34.470 --> 08:42.330
+see where the words are stored so you can find them inside the app HDP middleware folder and there is
+
+08:42.330 --> 08:48.750
+actually the middleware that is getting cold and this is verified CSR rep token.
+
+08:48.930 --> 08:54.750
+So it actually extends a base class from a lot of value can even open it check it out see what it's
+
+08:54.750 --> 08:55.570
+doing.
+
+08:55.770 --> 09:03.930
+And one of the methods here is if token so much so we only will let the request through to your controller
+
+09:04.230 --> 09:11.460
+if the tokens much so enough about the middle whereas right now because that's a topic that requires
+
+09:11.800 --> 09:14.340
+a separate lecture at least one.
+
+09:14.340 --> 09:17.150
+So let's ignore that for now.
+
+09:17.190 --> 09:20.340
+Now let's just assume that there is some middleware and it works.
+
+09:20.880 --> 09:29.950
+Now let's see how we can read the data that is being sent through our form no mind that this is also
+
+09:29.980 --> 09:31.890
+described inside this document.
+
+09:31.890 --> 09:37.110
+You will find a link under this lecture how you can read individual values.
+
+09:37.120 --> 09:41.470
+So let's take a quick glance at what we can do.
+
+09:41.470 --> 09:50.010
+So first we have to add arguments to the store method with the argument of that type request.
+
+09:50.020 --> 09:51.270
+So this is important.
+
+09:51.370 --> 09:53.430
+It's called type hinting.
+
+09:53.530 --> 09:59.890
+So we are specifying what should be the type of the argument that would get passed to the sort of functions
+
+09:59.890 --> 10:00.340
+of course.
+
+10:00.340 --> 10:07.270
+We are not passing it ourself explicitly because Laurel is calling this function and it is passing the
+
+10:07.270 --> 10:08.620
+parameters.
+
+10:08.620 --> 10:17.530
+So if it sees a parameter with the so-called typing within a class request it will pass an instance
+
+10:17.530 --> 10:24.550
+of the request object which is very useful but one of its useful features is it allows us to easily
+
+10:24.550 --> 10:32.780
+read the data that is being sent to us the input but of course before we specify the request type as
+
+10:32.790 --> 10:36.190
+that we will have to import that class.
+
+10:36.400 --> 10:46.400
+So it is to be found inside the illuminate HDP.
+
+10:47.620 --> 10:48.740
+Request.
+
+10:48.970 --> 10:53.980
+So you have to add this you statement illuminate HDP request.
+
+10:55.100 --> 11:02.680
+Okay now let's go back to our Vicky so we can use the old method to fetch all the input values that
+
+11:02.680 --> 11:03.220
+we have.
+
+11:03.460 --> 11:04.890
+So let's do that.
+
+11:05.380 --> 11:07.660
+We can use the d d for now.
+
+11:07.660 --> 11:10.660
+So that's the request.
+
+11:10.670 --> 11:17.050
+All save the changes and go to our page.
+
+11:17.050 --> 11:17.990
+Let's try it.
+
+11:18.020 --> 11:24.810
+Re sending the form and you can see that we have all the input values that were sent.
+
+11:24.830 --> 11:30.280
+So this includes the title and content which happened to be null because we haven't provided a value
+
+11:30.970 --> 11:33.680
+and also a token.
+
+11:33.680 --> 11:41.460
+Now let's see how we can echo some individual values so let's see.
+
+11:41.460 --> 11:47.750
+We would like the title and we can get that using the input method.
+
+11:48.990 --> 11:50.940
+And specifying a name for it.
+
+11:50.970 --> 11:57.980
+So this would be the title and content would be request input
+
+12:01.300 --> 12:02.080
+content.
+
+12:06.020 --> 12:09.680
+And now let's dump those two individual variables.
+
+12:11.080 --> 12:12.190
+And refresh.
+
+12:12.430 --> 12:22.120
+So you set up the are both no but if we will specify some values you can see that they are here so we've
+
+12:22.120 --> 12:29.020
+seen how to create a forum how to work with a serif tokens and how they are verified and we also seen
+
+12:29.050 --> 12:36.040
+how we can read the data that we sent for one action for the forum and then in the next lectures we'll
+
+12:36.040 --> 12:43.030
+also talk about middleware and how to validate those data so verify it against some constraints that
+
+12:43.030 --> 12:48.990
+will define and then also how to store the data and redirect back to the previous page.
+
+12:49.020 --> 12:51.520
+But this would be the next lectures.

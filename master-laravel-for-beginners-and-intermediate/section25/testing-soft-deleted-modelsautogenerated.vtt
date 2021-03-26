@@ -1,0 +1,103 @@
+WEBVTT
+
+00:00.540 --> 00:07.410
+There is one more thing that still remains to be done about deleting models and this is our tests.
+
+00:07.410 --> 00:14.610
+So as you know in our post test we are checking if the model works was successfully deleted and what
+
+00:14.610 --> 00:20.850
+we are using is our database missing which is checking whether the record was actually deleted from
+
+00:20.850 --> 00:21.660
+the database.
+
+00:22.200 --> 00:26.240
+So since we aren't deleting it anymore we are using self delete.
+
+00:26.250 --> 00:31.170
+So it is being marked as deleted but it stays inside the database.
+
+00:31.170 --> 00:34.620
+This test will fail but we also have another problem.
+
+00:34.620 --> 00:40.800
+So let's see what that would be by running the unit tests using the command you see on the bottom in
+
+00:40.800 --> 00:46.920
+the terminal so we see quite a lot of errors.
+
+00:46.920 --> 00:53.490
+So let's scroll to the actual problem and you can see that Eskew light doesn't support dropping for
+
+00:53.490 --> 00:57.930
+in case you would need to recreate that table.
+
+00:58.020 --> 01:06.540
+And this is happening in our app method for our recent migration that we have created to basically recreate
+
+01:06.540 --> 01:15.700
+the foreign key and it complains about this line so we can use our usual trick that we did before.
+
+01:15.760 --> 01:19.190
+It's it is just checking for the environment.
+
+01:19.200 --> 01:29.280
+And in case of the Eskew a light we just want to drop this for a key so let's just copy and paste it.
+
+01:29.290 --> 01:35.140
+And in this case we want to be checking whether it is a skill light testing we'll just check if it's
+
+01:35.140 --> 01:35.500
+not.
+
+01:35.500 --> 01:38.800
+So it will only work for our usual database.
+
+01:38.800 --> 01:44.760
+My sequel but for Eskew a light it just wants to drop this foreign key.
+
+01:44.770 --> 01:53.520
+Now let's rerun the unit tests and now we see that we have one failure and it is that our data doesn't
+
+01:53.530 --> 01:55.540
+match with what we expect.
+
+01:55.570 --> 02:04.270
+So we expect we expect not to find a record and it is actually found with the deleted out date.
+
+02:04.270 --> 02:14.500
+So this is happening here inside our test delete and what we can do for our self deleted models is instead
+
+02:14.500 --> 02:22.230
+of using us a database missing we can use another method assert self to delete it.
+
+02:22.300 --> 02:28.880
+Here you also have to specify a table name and then the data.
+
+02:28.880 --> 02:30.260
+So we already have that.
+
+02:30.260 --> 02:32.050
+So this would be posed to our array.
+
+02:32.060 --> 02:34.050
+Nothing changes here.
+
+02:34.100 --> 02:40.900
+Just make sure you will comment out this line and now take a look at the terminal.
+
+02:40.950 --> 02:47.330
+We'll be running unit tests again and they should be passing right now.
+
+02:47.330 --> 02:48.320
+Of course they do.
+
+02:48.770 --> 02:55.160
+So this is what you should use when you have solved delete double models and you verified that in tests.
+
+02:55.160 --> 03:01.730
+So instead of assert the database missing we check which checks if the record was actually deleted from
+
+03:01.730 --> 03:04.790
+the database we can use assert self deleted.

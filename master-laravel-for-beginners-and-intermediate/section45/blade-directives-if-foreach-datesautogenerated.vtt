@@ -1,0 +1,571 @@
+WEBVTT
+
+00:01.970 --> 00:08.600
+After the last lecture we ended up with both controller with two metals index and show as you might
+
+00:08.600 --> 00:15.530
+remember the index will be used to display the least of all elements and thus show to show an individual
+
+00:15.530 --> 00:17.210
+blog post.
+
+00:17.210 --> 00:19.010
+So we have our Controller.
+
+00:19.040 --> 00:21.780
+Let's now check what are the rules.
+
+00:21.860 --> 00:26.510
+So let's run P2P artisan route least so we set out the route.
+
+00:26.510 --> 00:35.570
+Names have posts prefix and we previously created view for the blog post but this was for the for the
+
+00:35.570 --> 00:42.620
+way we done it previously so that's not needed anymore but we can copy the contents of that.
+
+00:42.650 --> 00:47.380
+So now let's think where we would store the views for our Controller.
+
+00:47.510 --> 00:54.140
+So I think it makes sense to use the same prefix as we used for all the roots of the related to blog
+
+00:54.140 --> 01:01.670
+posts and name the folder like that because this list can just grow without limits and it would be hard
+
+01:01.670 --> 01:07.880
+to name your templates uniquely and then find the appropriate template.
+
+01:07.880 --> 01:19.760
+So now let's go ahead and create posts folder and inside it will create two views that index blade BHP
+
+01:19.910 --> 01:30.730
+for displaying the least of the blog posts and the show blade BHP to display an individual blog post
+
+01:31.030 --> 01:34.520
+so mined and notice that it is exactly the same.
+
+01:34.540 --> 01:38.280
+The names of the templates are the same as the root names.
+
+01:38.380 --> 01:45.610
+So this way it will make it much easier to remember what template should be rendered and everything
+
+01:45.670 --> 01:47.530
+seems like to be automatic.
+
+01:47.530 --> 01:52.980
+We have an index action and we render index template show action.
+
+01:52.990 --> 01:58.870
+And here we will render the show template so let's close the terminal right now.
+
+01:59.990 --> 02:06.230
+So now let's go back to the views and let's initially set them up so we'll pace the contents of the
+
+02:06.230 --> 02:13.070
+original blog post blade template but we'll just remove everything inside the content section because
+
+02:13.070 --> 02:16.070
+that's where we'll be putting our new content.
+
+02:16.070 --> 02:24.560
+So say the changes to the same with the show blade peach B also paste the extends part that will extend
+
+02:24.620 --> 02:28.450
+our main layout and the section content save the changes.
+
+02:28.460 --> 02:35.330
+And now let us go back to controller so the index action is supposed to render a list of all the blog
+
+02:35.330 --> 02:44.020
+posts so we'll use the view function to render our view and now we don't have to think What's the view
+
+02:44.020 --> 02:49.600
+name because we know it's that Post's index the same as the action name.
+
+02:49.960 --> 02:55.180
+And this will accept parameters which would be an array and we only have one parameter.
+
+02:55.180 --> 03:06.290
+This would be posts and we fetch that using the blog post model all static method.
+
+03:06.330 --> 03:14.730
+Now let's go back to the template and see how we can render a list of our blog posts.
+
+03:14.730 --> 03:23.100
+So we have our post variable available here because we have passed it inside the controller and to iterate
+
+03:23.190 --> 03:24.420
+over a collection.
+
+03:24.420 --> 03:32.890
+A good way to do that is to use the for each directive so it looks like that for each.
+
+03:32.910 --> 03:41.120
+Now we have the posts variable us post and we finish this by the end.
+
+03:42.230 --> 03:44.410
+For each.
+
+03:44.480 --> 03:50.720
+So now we are iterating over every element from the posts collection mind that we are supposed to have
+
+03:50.720 --> 03:51.080
+to.
+
+03:51.200 --> 03:54.140
+That's what's currently inside the database.
+
+03:54.140 --> 04:02.810
+If you follow the tutorial closely at least and now we can echo what we have inside the post.
+
+04:02.810 --> 04:17.870
+So let's add the paragraph and maybe header and here will echo the post title so remember that we can
+
+04:17.960 --> 04:27.050
+access the model attributes or the columns of the database roll like a normal peach p attribute and
+
+04:27.050 --> 04:34.190
+this attribute doesn't have to be defined on the Post model it is being managed ultimately by Lavell
+
+04:36.540 --> 04:40.490
+so let's see how this will work.
+
+04:40.590 --> 04:42.300
+So we have our website.
+
+04:42.300 --> 04:45.750
+We do not have a link for blog posts yet but let's try.
+
+04:45.750 --> 04:53.000
+Posts so we can see we have the modified title and random and this is what we have inside the database
+
+04:53.000 --> 04:59.020
+so that's how we manage to display our two blog posts.
+
+05:01.680 --> 05:09.000
+Now there is another version of the for each directive and it is called for LS and how it differs is
+
+05:09.900 --> 05:19.620
+we can as we do here we can iterate over all the elements from the post collection and additionally
+
+05:19.620 --> 05:23.910
+when it happens to be empty we can add the else statement.
+
+05:24.000 --> 05:32.370
+Sorry the empty statement and if the collection happens to be empty we can display another message something
+
+05:32.370 --> 05:35.180
+like no blog posts yet.
+
+05:36.540 --> 05:42.240
+So obviously you won't see it right now because we have the posts inside the database
+
+05:47.620 --> 05:48.990
+apparently I made a mistake.
+
+05:48.990 --> 05:50.210
+This should be the end for.
+
+05:50.250 --> 05:51.370
+Oh sorry on that.
+
+05:51.430 --> 05:52.630
+Now let's refresh.
+
+05:53.380 --> 05:53.640
+OK.
+
+05:53.650 --> 05:54.940
+We have this blog posts.
+
+05:55.000 --> 05:57.820
+But if we hold for just a second.
+
+05:58.000 --> 06:04.570
+Remove the blog posts all and instead pass an empty array.
+
+06:04.600 --> 06:07.300
+You can see that it works when collection was empty.
+
+06:07.300 --> 06:08.490
+We get this.
+
+06:08.590 --> 06:12.790
+What we defined should be inside the empty block.
+
+06:13.690 --> 06:18.800
+So let's bring it back again.
+
+06:18.830 --> 06:25.370
+Now let's make it easier for ourselves to go to the least of blog posts by adding a link inside the
+
+06:25.370 --> 06:32.300
+layout so we can copy what's there and just change the label to blog posts and we can easily generate
+
+06:32.330 --> 06:36.180
+a route by using posts index.
+
+06:36.170 --> 06:40.420
+Now let's check if everything works so we have blog posts contact.
+
+06:40.550 --> 06:49.310
+So everything is fine and also inside the index template where we list all the blog posts we can insert
+
+06:49.430 --> 06:57.090
+another link to an individual blog post so we can also do that easily by adding a link.
+
+06:57.140 --> 07:05.130
+Let's move the title Inside the link and now will generate our route.
+
+07:05.210 --> 07:07.230
+So the action name is.
+
+07:07.230 --> 07:11.690
+Posts show but we will also have to pass a parameter
+
+07:15.780 --> 07:16.980
+and the parameter.
+
+07:17.400 --> 07:24.580
+Let's remind ourselves what it should be by looking inside the terminal so it's post so it's not ideal
+
+07:24.600 --> 07:30.570
+it's post and the Post should actually be the post I D.
+
+07:31.080 --> 07:41.160
+So we have a post variable which comes from the this iteration using the loop and it has an idea parameter
+
+07:42.020 --> 07:43.750
+so let's close this route.
+
+07:43.740 --> 07:44.220
+Call
+
+07:47.400 --> 07:49.410
+now let's go and test if that works.
+
+07:49.410 --> 07:56.400
+So we are on the blog post list and we get that the contents of the blog post dumped because that's
+
+07:56.400 --> 07:59.910
+what we have inside the show action.
+
+07:59.910 --> 08:07.310
+We just dump the the the model that is being fetched the using the I.D..
+
+08:07.320 --> 08:13.680
+So now let's actually render the view and we'll do it the same way as above in the index method will
+
+08:13.800 --> 08:22.170
+return the view function and the action name we know is posts show the same as the method name of the
+
+08:22.170 --> 08:24.000
+controller.
+
+08:24.000 --> 08:32.890
+And now we can pass the post to variable and we'll also fetch it using blog post find as we did before.
+
+08:32.940 --> 08:39.210
+Remember I've told you in the last lecture that there is another way that will help us also show that
+
+08:39.210 --> 08:44.820
+404 not found page were on particular blog post couldn't be found.
+
+08:44.850 --> 08:47.910
+But now let's see what we have right now.
+
+08:47.910 --> 08:49.490
+So let's refresh blog posts.
+
+08:49.500 --> 08:50.550
+1.
+
+08:51.090 --> 08:56.340
+Nothing is rendered yet because we are not rendering any thing inside the view.
+
+08:58.880 --> 09:00.870
+So now let's try to render something.
+
+09:00.860 --> 09:12.040
+Let's go to the show and here maybe we'll have a bigger header and we'll try to render the post title
+
+09:12.840 --> 09:19.040
+K save the changes and now let's see what happens.
+
+09:19.100 --> 09:27.820
+We have blog posts so here we have the first second but let's see what happens if we have deferred.
+
+09:28.820 --> 09:36.590
+So we are getting are trying to get a property title of non object and it happens because there is no
+
+09:36.590 --> 09:40.610
+blog post with the idea free that we have specified.
+
+09:40.640 --> 09:45.110
+And here we are just trying to fetch the blog post and it returns.
+
+09:45.110 --> 09:45.760
+No.
+
+09:46.490 --> 09:55.700
+So we now inside the template are accessing property of something that's not actually an object.
+
+09:55.700 --> 10:01.100
+So there is another way we can do that and it is to use the method to find or fail.
+
+10:02.570 --> 10:11.570
+So use this save the changes and now refresh the page and you see the 404 page of LA EVO so on production
+
+10:11.570 --> 10:14.510
+environment it can be configured and can be different.
+
+10:14.630 --> 10:21.630
+But now that just because we are inside the development environment we see the page prepared by Laura
+
+10:21.650 --> 10:23.810
+VO So it's much more convenient.
+
+10:23.810 --> 10:29.960
+Also inside the network top you can see that we have the 404.
+
+10:29.960 --> 10:32.860
+So this makes perfect sense.
+
+10:33.930 --> 10:42.820
+K now let's go back to the template and let's also display the contents of this blog post by using the
+
+10:43.020 --> 10:52.420
+post content and I've also told you that we have two additional properties of every blog post this is
+
+10:52.420 --> 10:54.210
+created out and updated.
+
+10:54.250 --> 10:58.090
+And it is being ultimately handled by Lavell.
+
+10:58.210 --> 11:03.440
+So now let's see how we can display our date where the blog post was created.
+
+11:04.330 --> 11:13.040
+So let's add a string at it and try to echo the post created at.
+
+11:13.200 --> 11:16.400
+Let's go back to the browser and see what happens.
+
+11:16.500 --> 11:26.520
+Maybe let's try a post that does exist so we have the default way that the though is echoing the date
+
+11:26.940 --> 11:36.250
+but the date is actually not a string and date is the object of the type car bomb.
+
+11:36.460 --> 11:45.010
+So this is special object that is being used inside lava and you can check the Vicki page for more information.
+
+11:45.010 --> 11:53.050
+So car bomb is a P2P library and it extends the BJP built in daytime class and it has some additional
+
+11:53.290 --> 11:58.210
+handy methods that lets you display modified dates.
+
+11:58.240 --> 12:00.670
+You have a link to the full documentation here.
+
+12:00.910 --> 12:05.660
+I invite you to check that out because possibilities are almost endless.
+
+12:07.030 --> 12:14.440
+So now let's see how lava knew that this field should be converted to date because all the other fields
+
+12:14.500 --> 12:17.320
+are basically in their roll format.
+
+12:17.320 --> 12:21.080
+So as they were stored inside the database.
+
+12:21.640 --> 12:30.060
+So on the model you can actually define this what should be cast it two dates and it is a property called
+
+12:30.120 --> 12:30.990
+dates.
+
+12:30.990 --> 12:35.190
+So by default it adds the create it up and updated that.
+
+12:35.340 --> 12:39.850
+So that's why it was ultimately converted to a date object.
+
+12:39.900 --> 12:46.470
+So we haven't we didn't have to define that on the blog post model you can see that there is nothing
+
+12:46.470 --> 12:48.120
+like this here.
+
+12:48.150 --> 12:54.870
+So if you will have any more fields that you will add and there would also be dates you can add them
+
+12:55.110 --> 13:05.000
+to the dates field you can find more information about the carbon library inside the Vicky for which
+
+13:05.000 --> 13:11.410
+the ring is included to this lecture and also inside there are links to the carbon documentation so
+
+13:12.070 --> 13:13.880
+I invite you to check that out.
+
+13:14.170 --> 13:16.570
+Now we'll do something interesting.
+
+13:16.570 --> 13:24.970
+So instead of displaying the plain data as we have it inside the database will show how much time has
+
+13:24.970 --> 13:33.250
+passed since that post was added and we can achieve that using the carbon function def for humans.
+
+13:33.250 --> 13:41.740
+So let's copy this example from the Vicky and replace what we have here with the default human same
+
+13:41.740 --> 13:42.070
+mind.
+
+13:42.070 --> 13:43.410
+This is a carbon object.
+
+13:43.410 --> 13:49.300
+That's why we can call the diff for humans method on it.
+
+13:49.380 --> 13:55.820
+Now let's refresh our post and you can see that it was added three days ago which is actually true
+
+13:58.770 --> 14:08.080
+now if will add brand new blog post it would also display more accurate data like three seconds ago
+
+14:08.170 --> 14:11.230
+out or something like this.
+
+14:11.360 --> 14:17.460
+Now let's see how we can conditionally render something so copy this example with the if directive from
+
+14:17.460 --> 14:20.300
+the Vicky and paste it to the blog posts.
+
+14:20.310 --> 14:22.050
+You can also format it.
+
+14:22.200 --> 14:24.360
+And now let's see what that is.
+
+14:24.360 --> 14:29.060
+So we can use the if statements the way we do inside normal peach code.
+
+14:29.100 --> 14:33.010
+But this time everything what's inside would just be rendered.
+
+14:33.510 --> 14:37.860
+So if the Post I.D. one will post will render this text the same.
+
+14:37.860 --> 14:39.100
+Here we have this.
+
+14:39.100 --> 14:45.080
+Else if we can add as many as we like and also the else statement and this has to end with that.
+
+14:45.130 --> 14:54.560
+And if so let's check that the blog posts post one and on the second post we have posted to.
+
+14:54.600 --> 14:56.070
+So that works.
+
+14:56.070 --> 15:02.980
+Now let's remove that and we'll change the condition and do something interesting.
+
+15:03.330 --> 15:08.800
+So we'll use carbon to verify that the post was posted.
+
+15:08.850 --> 15:16.050
+Let's say up to five minutes ago and if it was will show that it's a new post.
+
+15:16.050 --> 15:22.080
+So for this we will have to create a new carbon object from its full namespace which is carbon slash
+
+15:22.620 --> 15:23.220
+carbon.
+
+15:24.930 --> 15:28.140
+And this will hold the current date and time.
+
+15:28.140 --> 15:33.970
+So every time you create a new instance of this object it has the current date and time.
+
+15:34.170 --> 15:45.480
+Now it also has a handy method diff in minutes and you can pass another date to compare it with.
+
+15:45.480 --> 15:51.300
+So we'll compare it with post created at
+
+15:58.150 --> 16:00.190
+and now if this
+
+16:02.920 --> 16:14.680
+time difference would be less than five will display that the post is new so let's refresh our post
+
+16:16.020 --> 16:18.210
+apparently I did something wrong here.
+
+16:18.840 --> 16:24.690
+So here we create this one more curly brace.
+
+16:24.690 --> 16:27.570
+Now let's refresh and there is nothing here.
+
+16:27.570 --> 16:37.110
+You can also copy this fragment and render it to see what is the difference between now and the time
+
+16:37.170 --> 16:38.670
+where the post was created.
+
+16:38.670 --> 16:41.130
+So it is quite a big number.
+
+16:44.710 --> 16:51.310
+Now let's quickly use Tinker to add a brand new blog post so far this will open the terminal and run
+
+16:51.320 --> 16:53.740
+PJ p r t some Tinker
+
+16:56.580 --> 17:11.640
+and will create a new instance of the up blog post will set the title to brand new and the content to
+
+17:11.640 --> 17:20.690
+be something else doesn't really matter and finally we have to call BP save.
+
+17:20.810 --> 17:28.040
+So we are doing it through tinkers because we would like the dates to be out to magically updated and
+
+17:28.040 --> 17:33.080
+it won't happen if you will insert this record through database because lava is handling that.
+
+17:33.620 --> 17:36.140
+So we have our brand new.
+
+17:36.200 --> 17:43.160
+Now let's see the blog posts and you can see that it was posted zero minutes ago and we have our new
+
+17:43.160 --> 17:43.940
+tag on it.
+
+17:44.630 --> 17:56.260
+So let's also close this terminal and remove this line and maybe we can even surround that with strong
+
+17:56.260 --> 17:56.780
+dock.
+
+17:57.290 --> 18:02.420
+So it's obvious that it is a brand new post.
+
+18:02.430 --> 18:06.330
+Now let's refresh and check also the older ones so they are not there.
+
+18:06.330 --> 18:09.870
+So this is how you would do an if statement.

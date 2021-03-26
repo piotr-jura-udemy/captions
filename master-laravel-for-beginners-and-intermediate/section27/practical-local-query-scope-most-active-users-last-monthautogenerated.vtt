@@ -1,0 +1,400 @@
+WEBVTT
+
+00:00.510 --> 00:07.290
+In the last two lectures we created those two boxes where we added some queries to our models using
+
+00:07.290 --> 00:08.920
+local query scopes.
+
+00:09.030 --> 00:15.680
+So you've learned where you can put more complicated queries where to store this logic.
+
+00:15.780 --> 00:23.100
+And now we know that the best place to do that is to use a local query scopes to get some more complicated
+
+00:23.100 --> 00:26.130
+queries inside our models.
+
+00:26.130 --> 00:32.360
+So we have most commented and most active and this was actually pretty straightforward.
+
+00:32.400 --> 00:40.800
+So what we did is we used whip count and then ordered by this new field that was added to this select
+
+00:40.950 --> 00:42.390
+statement.
+
+00:42.390 --> 00:46.120
+So let's come up with a little bit more complicated example.
+
+00:46.230 --> 00:51.450
+And this time will also add this query scope to the users.
+
+00:51.720 --> 00:58.150
+And this time will fetch the users that were most active in the last month.
+
+00:58.590 --> 01:02.670
+So seems like a much more complicated thing to do.
+
+01:02.760 --> 01:10.050
+So we'll call that with most blog posts last month.
+
+01:10.140 --> 01:14.380
+We will also need query builder here.
+
+01:15.080 --> 01:15.410
+OK.
+
+01:15.430 --> 01:18.130
+So let's think how we can approach that.
+
+01:18.160 --> 01:25.450
+So to begin with this seems to be the good idea to do the same thing as we did above.
+
+01:25.480 --> 01:30.980
+So we need the amount of blog posts so let's do that.
+
+01:30.980 --> 01:35.090
+And we definitely need to order by this new column.
+
+01:35.090 --> 01:43.500
+So blog posts count in descending order.
+
+01:43.610 --> 01:43.940
+All right.
+
+01:43.940 --> 01:48.830
+So this would do exactly the same what this does.
+
+01:48.830 --> 01:56.690
+So now let's see how can we verify that those blog posts were written in the last month.
+
+01:57.740 --> 02:04.700
+So as you've seen before you can add some additional queries to the whip count because this is fetching
+
+02:04.910 --> 02:07.420
+every element from the relation.
+
+02:07.490 --> 02:14.780
+So we have to now somehow filter the blog posts of particular user that we want to take into account
+
+02:14.840 --> 02:16.660
+that we wants to count.
+
+02:16.670 --> 02:23.630
+So you've seen that already that we can do that by changing the parameter to an array where the key
+
+02:23.660 --> 02:27.380
+is the relation name and the value is
+
+02:30.150 --> 02:39.920
+closure which accepts our query builder and inside it will also further modify this query.
+
+02:40.440 --> 02:45.690
+So disclosure relates to this blog posts relation.
+
+02:45.690 --> 02:50.670
+So now we can do something with the blog posts.
+
+02:50.670 --> 03:00.510
+So what we can do is the query builder has a method called were between and the field name that we want
+
+03:00.510 --> 03:10.620
+to filter by is created out mind that what I'm doing here is since there is are static constant defined
+
+03:10.740 --> 03:19.290
+on every model that you can override which just contains a name of the timestamp field created out so
+
+03:19.380 --> 03:23.630
+you can also do created art.
+
+03:23.630 --> 03:31.970
+This is fine but if you want to create more modular code that you can reuse easily and be more configurable
+
+03:32.000 --> 03:35.570
+it's better to use these constants by the way.
+
+03:36.080 --> 03:44.060
+If you do not know that the static is used to access static members of a class and constant is a static
+
+03:44.060 --> 03:48.630
+member it doesn't change in between model instances.
+
+03:48.650 --> 03:57.200
+That's why it is static and this is the operator to access the static members of a class that's different.
+
+03:57.220 --> 04:05.090
+Well well this operator is different because it is used to access instance metals or fields but using
+
+04:05.090 --> 04:09.970
+this double dot operator you access static members.
+
+04:10.070 --> 04:10.550
+All right.
+
+04:10.550 --> 04:14.550
+So we would like to filter the created up date.
+
+04:14.600 --> 04:16.880
+Now how can we get a date.
+
+04:16.880 --> 04:18.380
+We have we're between.
+
+04:18.380 --> 04:24.730
+So we have to pass two parameters like two boundaries the first boundary where the dates should start.
+
+04:24.740 --> 04:29.150
+And the second one where the date is the final date.
+
+04:29.180 --> 04:37.490
+So what we can do is we can create instance of the Date object which in larval by default it is using
+
+04:37.580 --> 04:46.130
+the carbon which is a great library on top of the default BHP daytime object and there is a helper function
+
+04:46.130 --> 04:47.900
+called now.
+
+04:48.170 --> 04:53.210
+And as you can see in the description it creates a new carbon instance for the current time.
+
+04:53.240 --> 04:55.920
+So we'll get current time by by calling.
+
+04:55.940 --> 05:01.220
+Now you can do the same for the set first our second argument.
+
+05:01.670 --> 05:09.680
+So what we want to do is we want to fetch blog posts that are at least one month old but well maybe
+
+05:09.680 --> 05:10.370
+another way.
+
+05:10.460 --> 05:14.560
+We want to fetch blog posts that were created during last month.
+
+05:14.570 --> 05:22.750
+So they created the odd date has to be equal or bigger than and now minus one month.
+
+05:22.880 --> 05:25.830
+And between now so two boundaries.
+
+05:25.970 --> 05:33.620
+Now how do we modify this now which would return a new instance of the carbon with the current dates.
+
+05:33.620 --> 05:45.210
+So we have to subtract the date somehow and inside carbon you have a method called sup month or up months
+
+05:45.860 --> 05:53.370
+I use sub moms because you can modify then and see other examples like you might want to have a blog
+
+05:53.370 --> 05:56.930
+post that was created let's say three months ago.
+
+05:56.940 --> 05:59.160
+So we will do sub month's free
+
+06:02.100 --> 06:02.430
+now.
+
+06:02.430 --> 06:08.730
+This should be enough to fetch the blog posts that know them now.
+
+06:08.850 --> 06:16.570
+This should be enough to fetch the users that have at most blog posts created in the last month.
+
+06:16.680 --> 06:23.880
+But let's think about how much blog posts we actually have because it's not much everything.
+
+06:23.950 --> 06:26.060
+What we have we can see on this page.
+
+06:26.070 --> 06:35.130
+It is about 50 blog posts so we might have users that for example have one blog post and they probably
+
+06:35.130 --> 06:42.210
+shouldn't be displayed here as top writing users in the last month because while writing a single blog
+
+06:42.210 --> 06:48.670
+post isn't really much activity so we can further filter them.
+
+06:48.800 --> 06:58.980
+So what we can do is in the outside query not when we filter the relation we can add another clause
+
+06:59.940 --> 07:12.520
+so we can up having blog about blog posts count which would be larger or equal down to.
+
+07:12.630 --> 07:15.970
+So now let's reformat this query.
+
+07:16.410 --> 07:21.090
+Now why I am using having instead of where.
+
+07:21.120 --> 07:32.570
+So let's see what will happen if I were to use where So let's open Tinker P2P artisan thinker and let's
+
+07:32.580 --> 07:37.440
+see users with most blog posts
+
+07:40.400 --> 07:42.210
+last month.
+
+07:42.620 --> 07:45.650
+And finally get to execute the query.
+
+07:46.430 --> 07:50.030
+Well the problem is it says the column was not found.
+
+07:50.030 --> 07:53.640
+So blog post count was not found in the word close.
+
+07:53.690 --> 07:57.550
+So let's see how the actual query looks like.
+
+07:57.560 --> 08:03.860
+Well maybe I will just copy the Square because it's not really visible inside
+
+08:06.500 --> 08:07.540
+inside this terminal.
+
+08:07.550 --> 08:09.550
+So I'll open a new document.
+
+08:10.150 --> 08:14.400
+So let's see what that does.
+
+08:14.420 --> 08:23.770
+So it is fetching all the users and then it is doing are sub query to fetch the count of all the users.
+
+08:23.820 --> 08:28.590
+And it is fetching it as alliance as you can see hear us.
+
+08:28.950 --> 08:30.650
+And the alliance name.
+
+08:30.780 --> 08:38.070
+Now the problem with that is that when you fetch something as an alliance so it is not a real column
+
+08:38.160 --> 08:40.710
+inside a table.
+
+08:40.710 --> 08:44.120
+You cannot use it in the word close.
+
+08:44.130 --> 08:48.650
+So this is the query that was generated by Lavell and.
+
+08:48.810 --> 08:55.470
+Well you can't just use this new alliance which is the blog post posts count inside the workflows.
+
+08:55.560 --> 08:59.500
+You have to use that having statement.
+
+09:00.600 --> 09:11.940
+So instead of where we should do having now it will restart to incur and copy this statement.
+
+09:12.450 --> 09:21.810
+So user with most blog posts last month get now you can see that we have happened to have free users
+
+09:21.870 --> 09:26.820
+and the most active one in the last month was also cannot Yammer green.
+
+09:26.820 --> 09:29.150
+She seems to be very active on our page.
+
+09:29.520 --> 09:33.390
+But other than that we have two more users.
+
+09:33.390 --> 09:41.880
+So even if you would like to take five will only get free because we are limiting it to a maximum of
+
+09:41.880 --> 09:46.160
+five but it might be less so since we don't have much blog posts.
+
+09:46.170 --> 09:48.890
+It is only fetching for users.
+
+09:49.160 --> 09:49.460
+Okay.
+
+09:49.470 --> 09:51.010
+So we have the query.
+
+09:51.030 --> 09:52.860
+It is working properly.
+
+09:52.920 --> 10:00.690
+Now let's go on to our post controller and add another variable to the template.
+
+10:00.690 --> 10:14.310
+Most active less last month and will fetch user with most blog blog posts.
+
+10:14.310 --> 10:15.990
+Last month
+
+10:18.790 --> 10:25.180
+we'll take five elements at most five elements and execute the query using get.
+
+10:25.270 --> 10:28.280
+And finally we have to go back to the template.
+
+10:28.510 --> 10:31.600
+And fortunately now we can copy this fragment
+
+10:35.630 --> 10:42.200
+so let's copied and pasted on that at the end of this template.
+
+10:42.790 --> 10:44.040
+And let's change the time most.
+
+10:44.080 --> 10:51.580
+Most active last month users with most posts written in the last month.
+
+10:51.580 --> 10:53.980
+So this would be a subtitle.
+
+10:53.980 --> 10:59.330
+And the variable name is most active last month.
+
+10:59.950 --> 11:03.810
+So we also only leased the user names here there are no links.
+
+11:03.850 --> 11:05.310
+So this should be enough.
+
+11:05.320 --> 11:14.980
+Now let's say the changes and go back to our Web site and what you can see here is now we have most
+
+11:14.980 --> 11:16.420
+commented blog posts.
+
+11:16.420 --> 11:24.940
+Most active users and most active users within the last month since only three users have posted more
+
+11:24.940 --> 11:26.290
+than two blog posts.
+
+11:26.290 --> 11:28.030
+We only showed them.
+
+11:28.030 --> 11:32.770
+Well if we ignore those that have other at least only one blog post.
+
+11:33.550 --> 11:40.750
+So this is another example of how we can create more complicated queries for your models and where you
+
+11:40.750 --> 11:42.280
+should store them.
+
+11:42.310 --> 11:51.370
+So in the next lecture we will also see what might be an actual good example of the global query scope
+
+11:51.430 --> 12:00.490
+because we created one example but then we learned it's not really a good idea to use this kind of global
+
+12:01.210 --> 12:09.120
+query scopes and we used to use that to create the latest blog posts or latest items.
+
+12:09.130 --> 12:15.760
+So now in the next lecture we'll actually see are much better example of using global query scopes.

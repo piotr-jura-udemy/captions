@@ -1,0 +1,238 @@
+WEBVTT
+
+00:00.720 --> 00:06.510
+So in the last lecture we have created a simple test that verified that for a new blog post that we
+
+00:06.510 --> 00:13.200
+have added using model factory when we call an endpoint for the comments we'll get a proper HP resp
+
+00:13.260 --> 00:13.980
+Response.
+
+00:13.980 --> 00:21.840
+The JASONs structure will contain specific elements and that other data element there will be zero entries.
+
+00:21.840 --> 00:30.780
+So now let's make another test and will this time check whether our blog post has 10 comments.
+
+00:30.780 --> 00:38.100
+Of course we will generate those comments beforehand so we can reuse this factory call to generate a
+
+00:38.100 --> 00:45.420
+blog post and then we can use each method on the collection because this actually creates our collection
+
+00:46.490 --> 00:55.920
+and for each blog post we will generate some comments so we can also use some model factories for that
+
+00:56.250 --> 01:05.840
+but will save them using their comments relationship save many method.
+
+01:05.940 --> 01:13.500
+So now you go factory on that comment so make sure you import the correct one from the app comment namespace
+
+01:14.770 --> 01:23.460
+always verify this and now the second argument to the factory method is the amount of the models you
+
+01:23.460 --> 01:24.530
+would like to create.
+
+01:24.540 --> 01:30.210
+So you can see that in this case we just called factor and blog post which created a single blog post
+
+01:30.270 --> 01:33.350
+and now we want 10 of those.
+
+01:33.480 --> 01:41.780
+Now we can use the make method which will create the model in memory but won't save it yet because what
+
+01:41.780 --> 01:48.050
+we need to do with the comment is we also have to specify a user I.D. and for that what we can do is
+
+01:48.050 --> 01:54.880
+you can also call their user method from our base test case class and specify their I.D..
+
+01:59.060 --> 02:01.430
+Now let us also the semicolon.
+
+02:01.550 --> 02:05.100
+And now let's explain what we actually did here.
+
+02:05.210 --> 02:12.500
+So we have created our blog post using the model factory and immediately we have called Create which
+
+02:12.870 --> 02:20.240
+actually stored this inside the database and to the methods like create and make you can pass some additional
+
+02:20.240 --> 02:26.440
+parameters so we had to pass user I.D. because Lavell wouldn't know for which user you'd like to save
+
+02:26.440 --> 02:26.570
+it.
+
+02:26.570 --> 02:33.320
+And since we have a constraint on a database this will prevent saving this blog post without a user
+
+02:33.350 --> 02:34.280
+I.D..
+
+02:34.490 --> 02:36.380
+Now for each blog post generated.
+
+02:36.380 --> 02:44.000
+And as I've said we have only one we iterate over those blog posts and for the specific post using the
+
+02:44.000 --> 02:47.120
+comments relationship and its method save many.
+
+02:47.300 --> 02:55.220
+We generate a collection of comments 10 comments and we use make method and you might remember the difference
+
+02:55.240 --> 03:03.170
+they create creates the model in memory and then saves saves it to the database but instead make only
+
+03:03.170 --> 03:04.940
+creates that in memory.
+
+03:04.940 --> 03:11.510
+And the reason we have to do that is well first we also have to specify the user I.D. but also thanks
+
+03:11.510 --> 03:19.490
+to this using the Commons relationship and safe manner all of those comments will actually automatically
+
+03:19.490 --> 03:28.790
+have the commendable idea said to this blog post a lot of us will just know to which to which bar and
+
+03:28.790 --> 03:34.400
+model you'd like to save it because if you wouldn't do it do it this way you wouldn't call the Commons
+
+03:34.400 --> 03:41.840
+relationship and it's save many method then instead you would like to create this factory and for each
+
+03:42.230 --> 03:49.930
+of those make calls you will have to add a commendable idea and commendable type keys inside there's
+
+03:49.940 --> 03:56.730
+a right to lateral to tell travel to which model this comment should be associated.
+
+03:56.780 --> 03:59.840
+So I hope this is understandable.
+
+03:59.840 --> 04:08.210
+And now what you can do is you can also copy this code so let's do that because as I've said the refresh
+
+04:08.210 --> 04:14.990
+database trade that we use here will reset that as database on each test so it doesn't matter that we
+
+04:14.990 --> 04:21.530
+have created a blog post here it will it will just disappear after we run this test.
+
+04:21.560 --> 04:27.480
+So in this case we also would like to verify that there is like 200 Coulter returned.
+
+04:27.560 --> 04:35.380
+We also would like to verify that the adjacent structure contains those top elements but this time we
+
+04:35.380 --> 04:39.770
+would like to check whether a data contains 10 elements.
+
+04:39.790 --> 04:48.810
+So now let's run it now you can see that we have got the error that states there is 404.
+
+04:48.850 --> 04:51.970
+When we tried to get the comment with I.D. one.
+
+04:52.150 --> 04:59.230
+And even though I said we have the refresh database straight which will reset the database before each
+
+04:59.230 --> 05:05.540
+test actually it removed the elements and well the indexes start with two now.
+
+05:05.560 --> 05:08.650
+So actually the order of tests matter.
+
+05:08.680 --> 05:16.590
+So if you will just try to get the next one from the poll which is the I.D. two and run the tests again
+
+05:16.630 --> 05:19.360
+you can see everything is passing.
+
+05:19.390 --> 05:21.450
+So this is a simple test.
+
+05:21.460 --> 05:28.030
+We check whether we have ten elements but if you will go to the postman you can see that there is actually
+
+05:28.030 --> 05:32.170
+some structure inside those data elements.
+
+05:32.230 --> 05:39.790
+And now let's see how we can verify if it actually contains every element that we would like it to have.
+
+05:40.930 --> 05:46.480
+So how we can do that is we can extend this as a Jason structure a little bit
+
+05:49.910 --> 05:56.900
+and for data we would be checking whether this contains some elements and you can do that using the
+
+05:56.990 --> 05:58.430
+asterisk.
+
+05:58.880 --> 06:08.810
+And what that means is well it contains some elements which structure should contain those keys and
+
+06:08.810 --> 06:20.400
+we want I.D. We want the content created at updated art.
+
+06:21.080 --> 06:32.410
+And then there is the user which itself has to have an I.D. and a name so safety changes.
+
+06:33.290 --> 06:39.420
+And now let's rerun this test and you can see that it's all green.
+
+06:39.420 --> 06:41.660
+So this might seem a little bit complicated.
+
+06:41.670 --> 06:47.730
+And the problem is that it's not really well documented in light of all but how you can read that is
+
+06:47.730 --> 06:51.800
+that you want an Jason element with the key data.
+
+06:52.500 --> 06:57.180
+And now this element should contain a lot of other elements.
+
+06:57.180 --> 07:04.440
+In this case we would like it to have this element contains other objects inside.
+
+07:04.470 --> 07:11.640
+So we assume it's an array and we use this notation with the key with an asterisk and then an array
+
+07:11.640 --> 07:19.030
+to check whether those elements all of those elements inside the data actually contain objects with
+
+07:19.380 --> 07:24.880
+which has those keys like I.D. content et cetera.
+
+07:25.110 --> 07:27.510
+So if you will take a look again you can see that.
+
+07:27.540 --> 07:32.190
+Well this is actually matching the structure that we got from this end point.
+
+07:32.190 --> 07:40.710
+And if you make a slight this change like change the contents like that and rerun this test you will
+
+07:40.710 --> 07:43.120
+see that this actually has break.
+
+07:43.290 --> 07:49.560
+And it's saying that failed asserting that an airy array has the key content.
+
+07:49.650 --> 07:56.720
+So this is how you can verify whether the Jason response has some specific data are not necessarily
+
+07:56.850 --> 08:01.740
+exact values but some data in some specific structure.
+
+08:01.740 --> 08:07.530
+And also if the count of those elements is matching the expected numbers.

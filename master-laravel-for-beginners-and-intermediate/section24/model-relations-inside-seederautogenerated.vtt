@@ -1,0 +1,286 @@
+WEBVTT
+
+00:00.330 --> 00:08.490
+In the last lecture we have changed our database Cedar from using the D.B. first state to use that data
+
+00:08.520 --> 00:16.570
+defined statically inside our database cedar to the model factories that we already have for our models.
+
+00:16.770 --> 00:22.550
+So you can also remove this use statement for the DB for said us we are not using it anymore.
+
+00:22.560 --> 00:27.530
+And even if he tries to code highlights it as being not used.
+
+00:27.750 --> 00:30.560
+So that's an unnecessary import.
+
+00:30.600 --> 00:37.950
+So let's remove that now and now let's go back to our seeder and see how we can insert all the older
+
+00:38.160 --> 00:43.220
+models that we have in our application which is the block posts and comments.
+
+00:43.320 --> 00:51.030
+But first let's take a look at our users so we know that currently the block poster requires to have
+
+00:51.090 --> 01:00.120
+a user I.D. column specified so that each blog post is created by a specific user so we can make it
+
+01:00.150 --> 01:04.430
+easier for ourselves and use collections in here.
+
+01:04.440 --> 01:13.260
+So what I mean by that is we can create a single collection from those models created in this two steps
+
+01:13.500 --> 01:20.670
+and then iterate over this collection and then create the necessary blog posts for each user.
+
+01:20.670 --> 01:22.510
+So let's see what I mean.
+
+01:22.560 --> 01:30.780
+First we'll assign those calls to specific variables so we will create a DOE variable for the John Doe
+
+01:31.620 --> 01:43.620
+and maybe else for all the other users so let's call D.D. and see what we got here because we will get
+
+01:45.990 --> 01:52.020
+model instance from this call because we are creating only one model you can see we are not specifying
+
+01:52.050 --> 01:56.550
+how many models we want created using this specific state.
+
+01:56.550 --> 02:04.540
+So this create function create method will return a single user model and that's not the case with the
+
+02:04.540 --> 02:12.420
+second call because we have specified that we want 20 models so it will return a collection so we can
+
+02:12.420 --> 02:17.190
+use this data to dump the class name of those results.
+
+02:17.190 --> 02:18.550
+So let's do that now.
+
+02:18.590 --> 02:23.920
+Deedee get glass DOE and get glass for.
+
+02:24.050 --> 02:33.210
+Else now Let's rerun the migrate refresh command with this seed flag and you can see that the first
+
+02:33.210 --> 02:38.230
+one we have the user model and for the second one we have a collection.
+
+02:38.280 --> 02:45.120
+So now to make a single collection of all these models we can create another variable and call it users
+
+02:46.130 --> 02:54.840
+so seems the LS is already a collection we can use Comcast to add element to it.
+
+02:55.110 --> 02:59.610
+So this would have to be an array and we can add this single dough.
+
+03:01.050 --> 03:08.250
+So now that we have this collection object inside user as a variable we can check if it actually keeps
+
+03:08.280 --> 03:15.320
+this 21 user models inside it and we can call the count method on this collection.
+
+03:15.330 --> 03:23.340
+So collection is basically a wrapper for arrays but in state instead like it is with a race to modify
+
+03:23.340 --> 03:30.660
+an array or use it you will call a peach B functions from the array category and pass on array to it
+
+03:31.110 --> 03:38.820
+and collections instead give you an object which you which holds the data inside an array and then lets
+
+03:38.820 --> 03:44.280
+you call methods directly on this object like the count for example.
+
+03:44.400 --> 03:52.470
+So let's rerun peach B artisan migrate refresh with seed flag to see if we actually have 21 elements
+
+03:53.070 --> 03:56.460
+so we can see in the bottom that we actually have.
+
+03:56.880 --> 03:59.070
+So this works great.
+
+03:59.380 --> 04:05.910
+Now let's remove this line as we won't need it anymore and the next most sensible step would be to add
+
+04:05.910 --> 04:12.330
+some blog posts and this is because we cannot create any comments at this point because every comment
+
+04:12.360 --> 04:19.560
+has to have a blog post I.D. assigned so obviously without any blog post we wouldn't be able to save
+
+04:19.590 --> 04:20.920
+any comments.
+
+04:22.370 --> 04:31.010
+Now we can assign this blog post to the posts variable as we will use it later for the comments and
+
+04:31.010 --> 04:38.390
+we can also use their factory function to create some blog posts the same as we did with the users and
+
+04:38.480 --> 04:41.710
+maybe we will like to create 50.
+
+04:41.930 --> 04:50.510
+So now we can't just call the create method because every blog post has to have user I.D. assigned and
+
+04:50.510 --> 04:58.030
+we haven't done that in any place so let's see what would happen if we will call this right now.
+
+04:58.040 --> 05:05.800
+Now we have that that error that filled the user I.D. doesn't have a default value and we haven't provided
+
+05:05.800 --> 05:06.160
+any.
+
+05:06.220 --> 05:09.520
+So the comment failed.
+
+05:09.730 --> 05:17.840
+Now instead of using create here which creates a new model and immediately saves it we can call make.
+
+05:18.040 --> 05:25.370
+So make will just create instances of the blog post models but it won't save it yet.
+
+05:25.620 --> 05:33.160
+Now scenes make will create a collection because we have specified that we want 50 elements we can iterate
+
+05:33.310 --> 05:36.820
+over this collection using the collection methods.
+
+05:37.030 --> 05:45.610
+And there is on each method which allows you to do something on every element of this collection so
+
+05:45.640 --> 05:47.050
+it accepts a closure
+
+05:50.880 --> 05:56.310
+and inside disclosure will get every single post from this collection.
+
+05:56.340 --> 06:06.300
+Now to assign a user I.D. will use this user's collection but to use variable from the outside outside
+
+06:06.300 --> 06:08.640
+scope of this closure.
+
+06:08.670 --> 06:17.950
+We need to add I use so normally you cannot access any variable that haven't been passed to a closure
+
+06:18.340 --> 06:23.110
+or is from outside scope like from outside the closure.
+
+06:23.290 --> 06:28.310
+So you have to add this use statement.
+
+06:28.330 --> 06:38.570
+Now we can simply said the user I.D. property of the post and use our users collection.
+
+06:38.760 --> 06:46.050
+And now what we would like to do is we would like to randomize the way we assign users to blog posts
+
+06:46.980 --> 06:52.080
+and collections has another useful method called random.
+
+06:52.080 --> 07:00.270
+So what this would do is from the list of the 21 users that we have it will pick a random one.
+
+07:00.300 --> 07:05.180
+So since this will return are user model we can use that idea.
+
+07:05.220 --> 07:08.620
+Property of that model.
+
+07:09.300 --> 07:17.010
+And as we have used make not create those blog post models are are not safe yet at this point.
+
+07:17.010 --> 07:23.730
+So we have to call save at the very end of this closure.
+
+07:23.870 --> 07:31.130
+And now let's take a look at the terminal and we'll run them migrate refresh again and see if that works.
+
+07:31.140 --> 07:33.950
+So everything seems to be successful.
+
+07:33.960 --> 07:42.060
+And now refresh the blog posts and you can see that there are a couple of pages of the blog posts specifically
+
+07:42.090 --> 07:48.430
+50 blog posts and each of them have random user I.D. assigned.
+
+07:48.480 --> 07:55.410
+So if you will now go to the posts on our application you can see that there is quite a lot of blog
+
+07:55.410 --> 07:58.800
+posts but without any comments.
+
+07:58.890 --> 08:06.160
+So now let's go back to our visual studio code and see how we can add comments.
+
+08:06.510 --> 08:13.980
+So obviously we'll use the same method as we did with users and blog posts.
+
+08:13.980 --> 08:17.910
+Maybe we can create even a hundred fifty.
+
+08:18.160 --> 08:27.310
+We'll use make again because every comment has to have a blog post assigned before it is saved will
+
+08:27.520 --> 08:35.280
+the closure that will get passed our comment which obviously is every single instance from this collection.
+
+08:35.620 --> 08:45.290
+And this time we have to use that posts variable so maybe close this window so it is clearly visible.
+
+08:45.350 --> 08:53.570
+So now on every single comment we can specify the blog post I.D. which would be our relation to a blog
+
+08:53.570 --> 08:57.680
+post and we can do the same as we did with the users.
+
+08:57.680 --> 09:07.190
+We can pick our random blog post and get an I.D. of this random blog post and finally call save on the
+
+09:07.190 --> 09:10.520
+Comment Comment model.
+
+09:10.550 --> 09:18.610
+So now let's clear the terminal and rerun the migrate refresh and refresh the page.
+
+09:18.610 --> 09:25.030
+Now we can see that we have different titles for those blog posts because they get regenerated every
+
+09:25.030 --> 09:31.570
+single time with the random text using faker inside the model factory.
+
+09:31.570 --> 09:36.520
+You can see that every blog post has a different amount of comments.
+
+09:36.850 --> 09:46.350
+Also inside the database you can see that every comment have a random blog post assigned so what you
+
+09:46.350 --> 09:52.470
+see here is the simplest approach to creating seeders inside your letter of application.
+
+09:52.470 --> 10:00.270
+We have just put everything what we need inside the single run method of our database cedar class.
+
+10:00.510 --> 10:07.950
+And another way is to create specific cedar classes for different models and we can also accept some
+
+10:08.010 --> 10:09.580
+input from the users.
+
+10:09.600 --> 10:15.120
+For example they can specify how many specific models they would like to create.
+
+10:15.480 --> 10:19.140
+And we will see how to do that in the next lecture.

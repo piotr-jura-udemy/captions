@@ -1,0 +1,262 @@
+WEBVTT
+
+00:00.600 --> 00:05.370
+Let's find another example where we reuse the same markup.
+
+00:05.460 --> 00:10.820
+So the good example would be to show when the post was added and by whom.
+
+00:11.160 --> 00:14.250
+Because we also use that inside the Post's view.
+
+00:14.250 --> 00:21.750
+So let's find one post which has comments like this one there is the same text here without an out or
+
+00:21.750 --> 00:23.060
+so we can add it.
+
+00:23.130 --> 00:29.340
+And also since we do not have our users assigned to the comments yet and well we do not have the form
+
+00:29.340 --> 00:31.800
+for adding comments at all.
+
+00:31.800 --> 00:38.270
+We also display when this was added but we doubt an outer.
+
+00:38.280 --> 00:46.050
+We also know that we have timestamps so well we can also display when the comment was actually updated
+
+00:47.490 --> 00:52.700
+so we can create a reusable component for this purpose.
+
+00:52.890 --> 01:02.310
+So let's create a brand new file and we can call it something like updated blade BHP
+
+01:05.200 --> 01:11.170
+and now let's head to the index template which we have created for displaying all the blog posts.
+
+01:11.200 --> 01:18.550
+And initially we'll copy this code chunk which displays when the blog post was added using this for
+
+01:18.550 --> 01:27.930
+humans and the name of the outer so moved that into this updated template.
+
+01:27.970 --> 01:40.940
+Save the changes for now and are the new component alliance so blade component components updated and
+
+01:40.950 --> 01:46.460
+let's call it update it doesn't really matter how you call it you can use whatever alliance you want.
+
+01:46.480 --> 01:53.720
+So it doesn't have to be the same as the component last part of the component name.
+
+01:53.790 --> 01:54.120
+All right.
+
+01:54.120 --> 01:57.040
+So we have our component defined.
+
+01:57.240 --> 02:07.230
+Now we have to create some slots inside it so we'll definitely need a date because all of those use
+
+02:07.230 --> 02:08.910
+cases have a date.
+
+02:08.940 --> 02:12.150
+So this won't be a default slot.
+
+02:12.150 --> 02:15.670
+This would be our date.
+
+02:16.200 --> 02:23.210
+Now we might want to use this component differently so it might be that we want to show the text under
+
+02:23.210 --> 02:26.910
+it but we might also use updated.
+
+02:26.910 --> 02:29.400
+So let's add a condition here.
+
+02:29.430 --> 02:30.510
+So if
+
+02:33.800 --> 02:38.840
+well we'll do it differently so we'll display slot if it is defined.
+
+02:38.840 --> 02:41.660
+So the default value that you will pass to a component
+
+02:44.400 --> 02:51.090
+if it's not passed will just display added by default with our space.
+
+02:51.090 --> 02:53.610
+So it would be readable.
+
+02:54.450 --> 02:56.160
+And then we'll add a condition
+
+02:59.530 --> 03:07.650
+so if the name was specified we'll display the name here.
+
+03:08.790 --> 03:13.130
+So that's another slot.
+
+03:13.230 --> 03:14.810
+Now let's take a look at this component.
+
+03:14.820 --> 03:21.540
+So the default value the default slot if it won't be provided will just use at it but it might be something
+
+03:21.540 --> 03:24.780
+else like updated or deleted or whatever.
+
+03:24.780 --> 03:27.220
+Now we'll add another slot date.
+
+03:27.240 --> 03:31.950
+So this is mandatory and then an optional slot called name.
+
+03:32.130 --> 03:42.600
+So if it is provided will displayed and it all will be inside a paragraph with a text muted.
+
+03:42.640 --> 03:46.920
+Now let's go to our index and use this component.
+
+03:46.930 --> 03:57.940
+So we do updated and updated now we won't pass any default slot here so we can ignore that.
+
+03:57.970 --> 04:08.460
+But we will have some additional parameters that would be a date and a date would be post created art.
+
+04:09.640 --> 04:17.170
+And actually what we can do is since we always want to display are difference for few months we'll just
+
+04:17.170 --> 04:18.850
+move it to the template.
+
+04:18.850 --> 04:25.450
+So instead of just echoing the date and calling this diff for humans everywhere we'll call it inside
+
+04:25.450 --> 04:30.570
+the component.
+
+04:30.580 --> 04:35.290
+So now what we can do is we can just pass the date US post created ARGs
+
+04:38.140 --> 04:48.920
+and then additional parameter name would be post user name.
+
+04:48.930 --> 04:55.890
+Now we can remove that part or at least comment it out and say let's see if that still works.
+
+04:55.890 --> 05:02.410
+Now you can see that even if we have we haven't provided our default value for the slot it actually
+
+05:02.430 --> 05:04.950
+does not display the text that we wanted.
+
+05:04.950 --> 05:06.660
+So this one other one.
+
+05:06.870 --> 05:14.790
+Well it is actually because whatever you have between updated and and updated is being passed to the
+
+05:14.790 --> 05:18.290
+component as the default slot variable.
+
+05:18.360 --> 05:21.290
+So this in this case is an empty text.
+
+05:21.290 --> 05:26.820
+So this condition will never work because it is actually a defined variable.
+
+05:26.820 --> 05:28.370
+It's not normal.
+
+05:28.380 --> 05:32.850
+So what we should do instead is we should check if it's empty.
+
+05:32.850 --> 05:35.100
+And also three meet.
+
+05:35.190 --> 05:45.020
+So if the dream slot is empty then we'll display other otherwise we'll display the slot
+
+05:47.690 --> 05:50.030
+so save the changes and refresh it.
+
+05:50.030 --> 05:52.080
+Now it works as expected.
+
+05:52.100 --> 06:01.760
+So let's reuse this component in the other places so we can now remove this part.
+
+06:01.910 --> 06:10.490
+Well we can even shrink this component to be more to be shorter basically.
+
+06:10.490 --> 06:16.880
+Now let's go back to our individual blog post and let's see where we can reuse that.
+
+06:17.000 --> 06:20.850
+So we have it here.
+
+06:21.110 --> 06:29.180
+What we have here a post created up and we haven't displayed name before but now we will because we
+
+06:29.180 --> 06:36.780
+actually have a post which has a user so we can read the user name save the changes.
+
+06:36.780 --> 06:43.260
+Now let's go to a blog post maybe let's find some that actually has a comment.
+
+06:44.310 --> 06:44.620
+OK.
+
+06:44.640 --> 06:45.890
+We have it where.
+
+06:46.200 --> 06:52.620
+When it was uttered and by whom it was added and we use the same markup as we did on the index page
+
+06:52.650 --> 06:55.110
+which displays all the blog posts.
+
+06:55.110 --> 07:01.970
+And finally we can even use that for comments but this time we only have a date.
+
+07:01.980 --> 07:03.310
+We do not have a name.
+
+07:03.420 --> 07:13.030
+So we just want to provide name only the date but actually it has to be a comment created that.
+
+07:13.500 --> 07:14.730
+Now let's see.
+
+07:15.810 --> 07:19.990
+And you can see that we have used this same code.
+
+07:20.040 --> 07:32.420
+Now if you would also like to display when the blog post was updated you can use updated art.
+
+07:32.480 --> 07:38.900
+And while this time we won't use the name because we actually do not keep who updated the post only
+
+07:38.930 --> 07:47.060
+when it was updated so we can display it here save the changes refresh.
+
+07:47.060 --> 07:56.660
+And this time we actually have to specify the text so it was updated.
+
+07:56.720 --> 08:03.620
+Now you can see that this was added three weeks ago and updated 20 hours ago.
+
+08:03.620 --> 08:08.420
+So we reuse the component at least four times right now.
+
+08:08.480 --> 08:16.130
+Now in the next lecture will finally get to our cards on the right and we'll use a little bit more complicated
+
+08:16.130 --> 08:18.800
+examples of larval blade components.

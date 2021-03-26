@@ -1,0 +1,337 @@
+WEBVTT
+
+00:00.420 --> 00:07.920
+Now let's imagine that we would like the counter class to have some configuration options and then whenever
+
+00:07.920 --> 00:15.000
+we use this class if that's supposed controller a user controller or any other place we would like to
+
+00:15.000 --> 00:22.290
+make sure that it has the same configuration and then well we wouldn't even like to create this class
+
+00:22.350 --> 00:23.990
+ourselves.
+
+00:24.090 --> 00:25.630
+So we have a tool for that.
+
+00:25.650 --> 00:28.680
+And in light of all it is called a service container.
+
+00:28.710 --> 00:36.180
+So this class can be called a service and service container is just a tool that lets you configure how
+
+00:36.180 --> 00:44.150
+certain classes should be created and how any parameters or dependencies to it should be passed.
+
+00:44.160 --> 00:49.250
+So let's go to their counter class and see what might be such a parameter.
+
+00:49.290 --> 00:56.040
+So this is definitely the timeout at which the user is considered to be still on the page.
+
+00:56.040 --> 01:03.790
+So in the class code it is just one minute but you might want to be globally configurable so we'll add
+
+01:03.790 --> 01:09.450
+that using a parameter that is being passed through to the constructor.
+
+01:09.450 --> 01:17.250
+So this is an integer called timeout so let's initialize a field called timeout so we can later keep
+
+01:17.250 --> 01:20.150
+this value.
+
+01:20.330 --> 01:20.690
+Okay.
+
+01:20.700 --> 01:28.170
+And then also let's define a private field called timeout so it can't be modified outside of this class
+
+01:29.780 --> 01:36.140
+now since this is now a required parameter we'll have to change how we create this class in every possible
+
+01:36.140 --> 01:38.810
+place where this class is being used.
+
+01:38.810 --> 01:46.730
+So this introduce introduces some problems because well if you have great tools like some I.D. You might
+
+01:46.730 --> 01:54.310
+want to find all the references of this class where it is being used for example using Find all references
+
+01:54.320 --> 01:59.400
+even in Visual Studio code of course BHP storm also has options like that.
+
+01:59.690 --> 02:05.750
+But then whenever you actually modify something with this class then you have to change it in every
+
+02:05.750 --> 02:06.350
+place.
+
+02:06.350 --> 02:08.390
+This class was used.
+
+02:08.420 --> 02:12.760
+Now we are quite lucky because it is being used only in two places.
+
+02:12.770 --> 02:20.120
+But let's imagine that there are other 10 classes depending on the counter and you modify the counter
+
+02:20.720 --> 02:23.600
+and then you have to modify all those 10 classes.
+
+02:23.600 --> 02:27.940
+So this seems like a nightmare.
+
+02:28.040 --> 02:36.100
+So surface container is basically one place where you specify how your classes should be created.
+
+02:36.110 --> 02:41.990
+What should be passed to them and then you resolve something out of the service container
+
+02:44.840 --> 02:45.370
+so you would.
+
+02:45.380 --> 02:52.130
+You would usually register your own services in the service container inside the app service provider
+
+02:52.130 --> 02:59.270
+file but of course you can also create another provider class and then register different services.
+
+02:59.270 --> 03:04.970
+So let's keep it simple and see how we can register our first service in service container.
+
+03:04.970 --> 03:14.530
+Right now no on the every service provider you have access to this app which basically is an instance
+
+03:14.560 --> 03:18.160
+of the application and also a service container.
+
+03:18.160 --> 03:28.550
+And it has the method called BMD which allows you to register a binding with the container so it accepts
+
+03:28.640 --> 03:30.280
+a name of the service.
+
+03:30.290 --> 03:37.880
+So this can be either let's say counter if we want a service for the counter class but you can also
+
+03:37.880 --> 03:44.720
+provide class name or interface name the fully qualified name I mean and this is usually a preferred
+
+03:44.750 --> 03:45.960
+option.
+
+03:46.070 --> 03:52.550
+So what you will do right now is you will register a service using the fully qualified counter class
+
+03:52.550 --> 03:56.150
+name mind that import that was added here.
+
+03:56.300 --> 04:02.570
+So that's the name second parameter is a closure which accepts an instance of the app.
+
+04:02.600 --> 04:04.280
+And basically the service container.
+
+04:04.280 --> 04:10.450
+So in case you would like to pass something to this counter then you have access to the app.
+
+04:10.460 --> 04:15.860
+So the app will always be passed by a lot of help to disclosure so you don't have to worry about that
+
+04:18.030 --> 04:23.250
+and now basically inside disclosure you specify how this class should be created.
+
+04:23.970 --> 04:26.910
+So we do return new counter
+
+04:31.170 --> 04:32.160
+and basically that's it.
+
+04:32.190 --> 04:38.670
+So since this actually accepts one parameter which is a timeout you can pass something here so let's
+
+04:38.670 --> 04:42.400
+say this would be five like five seconds.
+
+04:42.450 --> 04:50.850
+So now that we have this parameter timeout inside the counter we can modify this constant to be this
+
+04:51.950 --> 04:52.830
+time out
+
+04:55.730 --> 05:05.640
+and also here this time out so we have registered something with the service container.
+
+05:05.640 --> 05:11.430
+Now let's see how we can actually fetch this or resolve it from the service container.
+
+05:11.430 --> 05:16.860
+So instead of trying to create a new instance of this class we can now resolve it.
+
+05:16.890 --> 05:21.910
+So let's see how we can do that now instead of creating this class ourselves.
+
+05:21.970 --> 05:28.270
+We can resolve it using the re solve helper function from the service container and this accepts the
+
+05:28.270 --> 05:32.680
+service name which happens to be a class name so we can use counter class.
+
+05:33.370 --> 05:38.620
+We've already imported this class so it should be available to us and then we can do the same thing
+
+05:38.680 --> 05:41.020
+in the user controller.
+
+05:41.020 --> 05:46.030
+So now we don't have to really worry about what is being passed to the counter how it is created.
+
+05:46.090 --> 05:52.690
+There is a one place where this is created with the same settings and we just resolve it whenever we
+
+05:52.690 --> 05:54.450
+we need that.
+
+05:54.490 --> 05:58.740
+So say the changes and let's verify if that still works.
+
+05:58.870 --> 06:02.660
+So you can see that everything is working fine nothing did break.
+
+06:02.680 --> 06:05.530
+We see the message that there is one person on the page.
+
+06:05.530 --> 06:07.240
+So everything is fine.
+
+06:08.990 --> 06:15.890
+Sometimes you might only want that one instance of a class is being created and then can be resolved
+
+06:16.010 --> 06:17.230
+globally.
+
+06:17.240 --> 06:23.390
+So what I mean by that is for example we have to always pass a five to this counter because we want
+
+06:23.390 --> 06:23.650
+that.
+
+06:23.660 --> 06:30.260
+We want this to be let's say five minutes since the user is considered expired.
+
+06:31.280 --> 06:35.840
+But then let's see what happens if we will resolve this multiple times.
+
+06:36.200 --> 06:44.210
+So inside both controller let's add a couple of dumps with the call to resolve maybe we can do that
+
+06:44.320 --> 06:45.170
+three times
+
+06:48.470 --> 06:48.800
+okay.
+
+06:48.810 --> 06:55.120
+Now inside the app service provider instead of passing five let's pass our random end which will generate
+
+06:55.150 --> 07:03.430
+a random integer from zero to let's say 100 and now let's see what happens so let's refresh the document
+
+07:03.610 --> 07:05.730
+and I will zoom it so we can see.
+
+07:06.610 --> 07:12.910
+So we called Resolve three times and with every call we get a different number pass.
+
+07:12.940 --> 07:16.720
+So eighty seven eighty nine and forty seven.
+
+07:16.750 --> 07:24.340
+So what this is actually doing is it's each time you resolve this from the service container it's actually
+
+07:24.340 --> 07:31.810
+creating a brand new instance of the counter sometimes you might want that but we don't want the same
+
+07:31.810 --> 07:38.500
+class because it doesn't hold any important data other than a configuration which we would like to be
+
+07:38.500 --> 07:39.730
+global.
+
+07:39.760 --> 07:43.710
+So instead of BMD you can use another method called single dom.
+
+07:45.130 --> 07:52.390
+And if you do not know single is just designed pattern when you have one instance of the class created
+
+07:52.420 --> 07:56.690
+and then the same instance is available everywhere.
+
+07:56.740 --> 08:02.230
+So if you will do single Don and well let's not changed in this parameter right now.
+
+08:03.010 --> 08:09.850
+And when you refresh now you can see that it was created once with a random value of 52 but then it
+
+08:09.850 --> 08:10.980
+stays 52.
+
+08:10.980 --> 08:16.060
+The next time we resolve this service from the surface container.
+
+08:16.060 --> 08:21.320
+So let's return that to normal size and plus the value that we want it.
+
+08:21.340 --> 08:22.930
+So this was five.
+
+08:23.110 --> 08:31.120
+Now since we are actually using configuring this class or this service in one place we can also use
+
+08:31.120 --> 08:31.920
+something else.
+
+08:31.920 --> 08:40.060
+So instead of passing five here we have some configuration files and additionally our environment variables
+
+08:40.660 --> 08:43.780
+and also the DOT and file for the development.
+
+08:43.780 --> 08:47.910
+So this is where we keep settings and configuration options.
+
+08:48.070 --> 08:56.910
+So why not define a variable inside dot in the file let's say counter time out to be five
+
+09:00.260 --> 09:07.170
+and now we can get this from environment variable using and provide the name.
+
+09:07.400 --> 09:12.920
+And now instead of having a constant in your code that then would be maybe hard to find you wouldn't
+
+09:12.920 --> 09:16.910
+know why it's five where to find this configuration.
+
+09:16.910 --> 09:23.360
+Now everything is inside and Dot and file or environment variable on your server.
+
+09:23.720 --> 09:30.890
+It's also created once in one place with the specific configuration and then everywhere you will need
+
+09:30.890 --> 09:38.300
+this class you can use resolve to fetch the same instance of this class which basically is fine for
+
+09:38.300 --> 09:43.890
+us because we only need one instance with one configuration option.
+
+09:43.970 --> 09:46.340
+So this would be about the service container.
+
+09:46.340 --> 09:51.950
+Let's follow to the next lecture when we'll learn a little bit more about service containers dependency
+
+09:51.950 --> 09:55.100
+injection and things of this topic.

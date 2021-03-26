@@ -1,0 +1,175 @@
+WEBVTT
+
+00:00.820 --> 00:07.580
+Now let's begin the first practical lecture of this section about localization by explaining how this
+
+00:07.580 --> 00:10.970
+is configured inside a lot of application.
+
+00:10.970 --> 00:18.890
+So open your up peach bee file inside the config folder and scroll but scroll down to the interesting
+
+00:18.890 --> 00:25.820
+part which starts at the time zone which you might configure depending on where most of your customers
+
+00:25.880 --> 00:28.910
+or visitors to your website are.
+
+00:28.910 --> 00:32.540
+So default is UTC it might you might have a different time zone.
+
+00:32.540 --> 00:34.910
+So this is where you configure that.
+
+00:34.910 --> 00:42.200
+This will be used by the BHP data functions and day time functions and then we go to the interesting
+
+00:42.200 --> 00:45.040
+part which is the local parameter.
+
+00:45.230 --> 00:49.490
+And this is your local language of your application.
+
+00:49.490 --> 00:53.210
+So this is are two character language codes.
+
+00:53.210 --> 00:55.710
+Default is e n US English.
+
+00:55.850 --> 01:03.980
+You can change is the Spanish or German or Polish or whatever is your language and then additional parameter
+
+01:04.010 --> 01:12.500
+is their fallback locale which is the local or language that will be used whenever there is no translation
+
+01:12.530 --> 01:20.180
+in the other language so well that also depends what's the main or starting language default language
+
+01:20.210 --> 01:21.570
+of your application.
+
+01:21.620 --> 01:28.310
+It should be the one that you have your translations initially done in so your page let's say starts
+
+01:28.310 --> 01:31.990
+in Spanish so then you only translate to English.
+
+01:32.000 --> 01:35.080
+So their fallback should be Spanish.
+
+01:35.150 --> 01:38.840
+So let's start with English because that's probably the most common language.
+
+01:38.870 --> 01:41.070
+Every one of you knows.
+
+01:41.400 --> 01:46.170
+And additionally there is this another setting for the Fake Faker local.
+
+01:46.310 --> 01:53.360
+And if you remember the faker is a tool or a library that we used for our database seeder to generate
+
+01:53.360 --> 01:56.780
+the names addresses and things like that.
+
+01:57.080 --> 02:04.370
+So we can also configure that to be of your local language whether this would be german french spanish
+
+02:04.370 --> 02:06.820
+polish whatever that might be.
+
+02:06.980 --> 02:15.600
+You can also change that to work with more familiar sounding names and things like that.
+
+02:15.620 --> 02:17.600
+So this is about configuration.
+
+02:17.600 --> 02:23.720
+Now let's see where are where are all those translations stored.
+
+02:23.720 --> 02:32.300
+So you can find them inside the resources long folder and what you initially would have with Lara Lavell
+
+02:32.390 --> 02:40.430
+when installing Lara Vale in the first place is the e end folder for English and it consists of the
+
+02:40.430 --> 02:43.100
+basic BHP files.
+
+02:43.100 --> 02:45.190
+So let's open maybe this validation.
+
+02:45.200 --> 02:48.270
+It's the most complicated one.
+
+02:48.830 --> 02:51.860
+So those files are pretty straight forward.
+
+02:51.890 --> 02:58.490
+There will be also a way to put your translation strings in a J some file will see that in the next
+
+02:58.490 --> 02:59.150
+lectures.
+
+02:59.150 --> 03:04.910
+Now let's explain what this is how it looks like and what is it for.
+
+03:04.910 --> 03:09.660
+So basically you will return an array where the key would be.
+
+03:09.680 --> 03:16.430
+Well the key that you will use for translation so you will call that using the translation help or metals
+
+03:16.430 --> 03:18.600
+we'll get to that in the next lecture.
+
+03:18.800 --> 03:19.940
+But this will be a key.
+
+03:19.940 --> 03:26.360
+So what has to be translated a message to be translated and then the value is the actual translation
+
+03:26.360 --> 03:29.850
+the text in English Spanish German or whatever.
+
+03:30.410 --> 03:36.780
+Additionally it can contain some attributes that you will pass to this translation messages.
+
+03:36.830 --> 03:43.490
+So if you need to put some variables like numbers e-mails and stuff you will achieve that by using this
+
+03:44.240 --> 03:49.100
+column and the name of the attribute of course I will show you how to do that.
+
+03:49.100 --> 03:51.710
+Don't worry about it just yet.
+
+03:51.710 --> 04:00.410
+And then you see that for example you have the validation messages of the lot of old validator and they
+
+04:00.410 --> 04:01.730
+are all in English.
+
+04:01.940 --> 04:09.800
+So to have them have them in Spanish or in German you will just create another folder with the language
+
+04:09.800 --> 04:10.180
+code.
+
+04:10.190 --> 04:11.720
+So let's do that right now.
+
+04:11.720 --> 04:24.770
+So this would be D E and E as for Spanish and then you will create some files and have all those messages
+
+04:24.860 --> 04:32.050
+in the language of your choice or any other language that you want to make available for your application.
+
+04:32.330 --> 04:34.610
+But we'll get to that in the next lecture.
+
+04:34.610 --> 04:36.560
+So don't worry about that.
+
+04:36.620 --> 04:39.710
+I will explain everything step by step.

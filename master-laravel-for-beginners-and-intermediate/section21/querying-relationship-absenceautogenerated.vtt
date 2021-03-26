@@ -1,0 +1,109 @@
+WEBVTT
+
+00:00.660 --> 00:04.580
+In the last lecture we have queried the relationship existence.
+
+00:04.590 --> 00:10.170
+Now we'll do the opposite think will query the relationship absence.
+
+00:10.170 --> 00:18.720
+What that means is let's get first older blog posts that exist inside the database so you see that we
+
+00:18.720 --> 00:25.710
+have free so clear the screen and now what we would like to do is we would like to get all the blog
+
+00:25.710 --> 00:26.210
+posts.
+
+00:26.220 --> 00:36.300
+That does not have any comment on it so we would do a blog post and instead of has will do doesn't have
+
+00:40.220 --> 00:44.580
+and we want to check for comments so doesn't have comments get.
+
+00:44.720 --> 00:47.270
+You can see how expressive this syntax is.
+
+00:47.270 --> 00:55.520
+It's like writing sentences in English plus a couple extra characters and what we get back is actually
+
+00:55.520 --> 01:03.950
+an empty collection because all of our blog posts do have comments and you can check that by adding
+
+01:04.110 --> 01:08.420
+a new blog post like for 1
+
+01:14.040 --> 01:17.370
+and typing anything that will just pass the validation.
+
+01:17.370 --> 01:27.970
+So now we have four and let's repeat that we can even copy this and paste it here so you can see it
+
+01:27.970 --> 01:28.990
+is what we expected.
+
+01:28.990 --> 01:35.620
+We have the fourth one the one we have just just added and it doesn't have a single comment.
+
+01:35.620 --> 01:39.410
+That's why we got it back OK.
+
+01:39.410 --> 01:45.800
+Let's clear this and now let's imagine that you want to find blog posts which are actually commented
+
+01:45.800 --> 01:52.100
+by people using some meaningful comments not just dummy text like ABC.
+
+01:52.100 --> 01:56.450
+Like all this free last comments.
+
+01:56.450 --> 02:03.500
+So let's query for that we want all the blog posts that someone had something meaningful meaningful
+
+02:03.500 --> 02:13.510
+to say in so we'll get posts using blog post and now since we want to write a query will do.
+
+02:13.560 --> 02:15.330
+Where does it have instead.
+
+02:15.330 --> 02:21.060
+Not just that doesn't have and we are checking their comments.
+
+02:21.180 --> 02:32.610
+And this time will also have closure to which Lara will pass a query object and now inside our closure
+
+02:32.610 --> 02:38.080
+will do query where content like
+
+02:41.430 --> 02:50.100
+and we do not want anything that has ABC inside it.
+
+02:50.160 --> 02:58.890
+Don't forget the semicolon closed the function and now close the method call to where doesn't have.
+
+02:59.010 --> 03:07.610
+And finally we have to call get to actually execute this query and this is what we got.
+
+03:07.620 --> 03:16.050
+So we get our first blog post which has five comments that doesn't have ABC and also we got our last
+
+03:16.140 --> 03:21.030
+five fifth blog post which doesn't have any comments at all.
+
+03:21.300 --> 03:31.550
+So as you can see we can make pretty complicated queries using very simple object oriented syntax so
+
+03:31.580 --> 03:34.720
+in the next lecture We'll also cover making queries.
+
+03:34.730 --> 03:40.580
+But this time we'll see how we can get the count of that related model.
+
+03:40.790 --> 03:47.240
+So we'll see how we can fetch that count of comments together with all the blog posts which probably
+
+03:47.240 --> 03:53.360
+will be very useful if you would like to display it on the main page where you display a list of blog
+
+03:53.360 --> 03:55.870
+post which is a very common scenario.

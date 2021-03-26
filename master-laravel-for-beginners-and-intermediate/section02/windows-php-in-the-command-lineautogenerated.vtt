@@ -1,0 +1,70 @@
+WEBVTT
+
+00:00.330 --> 00:09.530
+BHP runs together with the Web server to run BHP code, but it can also run scripts in the command line.
+
+00:10.170 --> 00:18.840
+Laravel has a huge spectrum of command line tools that can generate code, do maintenance tasks or even
+
+00:18.840 --> 00:21.090
+start a simple development web server.
+
+00:21.840 --> 00:26.600
+Installing SAP is not enough to be able to use the command line.
+
+00:27.090 --> 00:32.010
+You need to add the path to the IP binary in your system.
+
+00:32.010 --> 00:34.020
+PAF environment variable.
+
+00:37.100 --> 00:42.080
+Search for the advanced system settings.
+
+00:45.180 --> 00:53.310
+Or the equivalent name in your language, you should see a window from the control panel, press the
+
+00:53.310 --> 00:55.530
+environment variables button.
+
+00:57.830 --> 00:59.780
+A new window will pop up.
+
+01:01.310 --> 01:11.720
+On the list of current users of variables, the top one find the path variable and press edit.
+
+01:13.670 --> 01:18.110
+Now, remind yourself where you have installed Zamp.
+
+01:19.780 --> 01:28.330
+And press the new button and typed the path to the B folder inside Daxam installation folder.
+
+01:29.670 --> 01:32.130
+By default, this would be sea.
+
+01:34.890 --> 01:37.770
+Zamp slash BHB.
+
+01:40.870 --> 01:47.890
+Then selected this new entry on the list and price move up until it is on top.
+
+01:49.010 --> 01:51.170
+Confirmed twice with AK.
+
+01:53.870 --> 01:59.780
+Then make sure you restart the terminal application that you have running, whether this is a command
+
+01:59.780 --> 02:03.260
+prompt power cell or Windows terminal.
+
+02:07.520 --> 02:19.220
+Then Ron B, Dash V to check the version number of BHP, and if it works at all, you should see output
+
+02:19.220 --> 02:26.930
+similar to mine and also make sure the version you see matches the one you've downloaded, because sometimes
+
+02:26.930 --> 02:33.740
+people have previously installed BHP and might have some older versions dangling, which might potentially
+
+02:33.740 --> 02:34.700
+cause issues.

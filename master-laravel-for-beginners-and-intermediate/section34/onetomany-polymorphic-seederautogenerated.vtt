@@ -1,0 +1,229 @@
+WEBVTT
+
+00:00.720 --> 00:08.400
+Now let's also see if we depend anywhere inside our application on that blog post I did column on the
+
+00:08.400 --> 00:11.630
+comment model which we know doesn't exist anymore.
+
+00:11.660 --> 00:20.010
+As now this relationship is polymorphic so go to the search function inside the Visual Studio code specify
+
+00:20.030 --> 00:25.160
+the blog post I.D. files to include dot slash.
+
+00:25.200 --> 00:30.050
+So we find so we can find it inside every possible folder.
+
+00:30.150 --> 00:34.950
+So what you see is mostly migrations which really shouldn't concern us.
+
+00:34.950 --> 00:41.960
+But you can also see that inside comment tables cedar we depend on the blog post I.D..
+
+00:41.970 --> 00:45.090
+So this would never be catched by any test.
+
+00:45.090 --> 00:49.420
+Even if you write it because this is a cinder you don't test a cedar.
+
+00:49.470 --> 00:54.830
+It is supposed to work outside of your application generating some data.
+
+00:55.620 --> 00:57.940
+So let's see what we can do here.
+
+00:58.140 --> 01:02.150
+So you can see we are fetching all the blog posts anyway.
+
+01:02.160 --> 01:09.600
+We also fetch all the users and now we know that comments can also be added to the user so we can move
+
+01:09.600 --> 01:15.290
+that to the top.
+
+01:15.410 --> 01:17.330
+So first we fetch blog posts.
+
+01:17.330 --> 01:26.090
+Then users and what we can do is we can immediately check if there are any blog posts or users that
+
+01:26.090 --> 01:28.390
+we can add comments to.
+
+01:28.430 --> 01:43.610
+So if posts count is zero or users count equals zero we say we will say that there are no blog posts
+
+01:44.720 --> 01:46.070
+or users.
+
+01:46.070 --> 01:50.200
+So no comments will be added.
+
+01:50.210 --> 01:55.910
+Now we can ask using the same question for how many comments would you like.
+
+01:56.510 --> 02:02.690
+Then we are using the factory and iterating over the posts first.
+
+02:02.690 --> 02:05.380
+So now this is not blog post idea.
+
+02:05.390 --> 02:13.980
+It is commendable idea where we will select our random post for obviously.
+
+02:15.390 --> 02:23.370
+You probably have guessed out that we need our commendable type 2 which would be up blog post because
+
+02:23.400 --> 02:28.200
+currently we are generating those comments for our blog post.
+
+02:28.230 --> 02:36.900
+Now what we can also do is we can generate the same amount of comments for users too so let's copy this
+
+02:38.870 --> 02:47.860
+so here will just use the same code and generate the comments for the users so this time we actually
+
+02:47.860 --> 02:50.320
+want need posts just the users
+
+02:53.250 --> 03:01.460
+now we select our random user commendable type is up user.
+
+03:01.460 --> 03:08.660
+Also the user I.D. we can use the same users to generate who have commented on a blog post sorry on
+
+03:09.050 --> 03:14.540
+who added a comment on our user and basically that's it.
+
+03:14.870 --> 03:21.770
+And we'll save those comments so we'll generate the same amount of comments for the users and for the
+
+03:21.860 --> 03:23.570
+blog posts.
+
+03:23.570 --> 03:25.480
+So those are the changes we had to make.
+
+03:25.490 --> 03:34.100
+So commendable ideas have to be specified either as a blog post I.D. or user I.D. the column name of
+
+03:34.100 --> 03:37.820
+course has changed previously instead of blog post I.D..
+
+03:38.210 --> 03:42.170
+And also we had to add a commendable type for both of them.
+
+03:42.200 --> 03:50.130
+So Lavell will know that those comments are for the blog post and those are for the user.
+
+03:50.180 --> 03:58.310
+So before we run our fixed seeder and what we also know is that when we are running a cedar we also
+
+03:58.310 --> 04:02.420
+would like to regenerate that database all the time.
+
+04:02.420 --> 04:10.130
+Now we might have a problem with the most recent migration and what it happens when we actually run
+
+04:10.130 --> 04:17.330
+our cedar is that it regenerates the database by first rolling back all the migrations and then running
+
+04:17.330 --> 04:18.230
+them again.
+
+04:18.230 --> 04:26.060
+So it runs all the down methods of older migration starting from the most recent one and then runs the
+
+04:26.120 --> 04:30.050
+up method of older migration starting from the oldest one.
+
+04:31.130 --> 04:39.170
+So the problem we will be having is since we we are working on an existing data inside that database
+
+04:40.070 --> 04:46.130
+this might actually break here because we are adding our foreign key on a column that doesn't have a
+
+04:46.130 --> 04:47.000
+default value.
+
+04:47.000 --> 04:52.430
+So when this is created it will have a null value and then we create a foreign key.
+
+04:52.430 --> 04:56.050
+So this with this would actually fail on the database level.
+
+04:56.060 --> 05:04.670
+So we can't have a foreign key which is not movable but then you provide unknown value so you can either
+
+05:04.970 --> 05:13.790
+provide that this column should be new level or you should specify some default value like one because
+
+05:13.790 --> 05:21.680
+at this point the problem is you have data inside the database and yet you are recreating a column that
+
+05:21.800 --> 05:23.600
+cannot be new level.
+
+05:23.600 --> 05:26.660
+And then you are trying to
+
+05:29.500 --> 05:37.770
+and then you are trying to add a field which cannot have unknown value so we had to fix that first.
+
+05:38.100 --> 05:50.090
+Only then we can run peach bee artisan D.B. seed say yes because we want to refresh the database and
+
+05:50.120 --> 05:54.710
+only now it runs and everything works properly.
+
+05:55.340 --> 05:56.830
+So let's check the database.
+
+05:56.840 --> 05:58.490
+Let's see the comments.
+
+05:58.550 --> 06:01.040
+You should see free hundreds rows here.
+
+06:01.040 --> 06:02.780
+So this is correct.
+
+06:03.200 --> 06:10.280
+Some of those should be part of some of those comments should be assigned to a blog post but then you
+
+06:10.280 --> 06:13.920
+should also have some assigned to a user.
+
+06:13.940 --> 06:18.850
+So this is a change that we had to make not to break our current cedar.
+
+06:19.070 --> 06:26.750
+So obviously that might not have been a problem on your actual application you do not always like to
+
+06:26.750 --> 06:29.540
+refresh the database when you see the data.
+
+06:29.540 --> 06:34.280
+I'm just showing you a potential problem that you might be having.
+
+06:36.080 --> 06:44.100
+So we have fixed our seeder and basically our application is now using one too many polymorphic relationship.
+
+06:44.330 --> 06:48.950
+So we only had to make some minor changes inside the application itself.
+
+06:48.950 --> 06:56.570
+Mostly the database schema and how we define the relationships but I haven't explained anything different
+
+06:56.570 --> 07:03.380
+about those relationship because actually it is essentially the same as a normal one to many relationship
+
+07:03.380 --> 07:05.510
+that we have already covered.
+
+07:05.990 --> 07:13.220
+So it's only mostly difference in database schema and how you define the relationship and then you have
+
+07:13.500 --> 07:16.580
+one too many polymorphic out of the box.

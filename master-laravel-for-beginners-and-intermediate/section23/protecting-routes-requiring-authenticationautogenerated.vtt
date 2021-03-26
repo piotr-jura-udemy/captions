@@ -1,0 +1,181 @@
+WEBVTT
+
+00:00.690 --> 00:06.250
+Now let's see how we can protect certain routes from being accessible to everyone.
+
+00:06.390 --> 00:14.430
+So we have seen previously that we can attach the middle were to certain routes and we can also attach
+
+00:14.430 --> 00:19.990
+the guest middle where to force that those routes can be accessible by everyone.
+
+00:20.010 --> 00:26.430
+So the first way to attach this off middle middleware to require authentication on a specific route
+
+00:26.460 --> 00:33.840
+would be inside our route definition file namely inside web BHP or the API BHP.
+
+00:33.900 --> 00:38.540
+If you are developing an API but we are into it.
+
+00:38.790 --> 00:47.100
+So you can just change another method call at the end of the route definition and add middleware.
+
+00:47.100 --> 00:55.470
+So if we will are done me meter were for this home controller home page which is what you see on the
+
+00:55.470 --> 00:56.880
+right.
+
+00:56.880 --> 00:58.340
+Save the changes here.
+
+00:58.950 --> 01:02.060
+And now let's refresh the page on the right.
+
+01:03.030 --> 01:08.840
+So you can see that I wasn't authenticated because there my name wasn't displayed.
+
+01:08.910 --> 01:13.080
+And now if I go to the contact page I can still see it.
+
+01:13.230 --> 01:18.600
+But if I go to the home page I am being redirected to the logging forum.
+
+01:18.600 --> 01:24.630
+Of course this doesn't make sense to protect this route but it is just an example of how you can do
+
+01:24.630 --> 01:25.130
+it.
+
+01:25.140 --> 01:26.460
+So that's the first way.
+
+01:26.760 --> 01:35.770
+So let's maybe we can move that to the next line so you will know how to do that and save the save it
+
+01:35.770 --> 01:37.480
+and keep it.
+
+01:37.480 --> 01:45.940
+And now if you are using controllers and we are using controllers so this way I show you shown you before
+
+01:45.940 --> 01:46.800
+can work.
+
+01:46.810 --> 01:52.990
+Also if you are defining your routes as closures and basically that's the only way if you are using
+
+01:52.990 --> 01:59.800
+closures but if you are using controllers we might do that inside post controller.
+
+01:59.800 --> 02:04.690
+This would make much more sense to protect certain routes inside it.
+
+02:04.930 --> 02:11.910
+You can define a typical PDB constructor using underscore a construct.
+
+02:12.280 --> 02:15.100
+Of course we need to function keyword here
+
+02:17.980 --> 02:25.210
+and now inside the controller constructor we can call this middleware.
+
+02:26.340 --> 02:31.760
+So this would protect every single route from this post controller.
+
+02:31.770 --> 02:37.170
+So now if I will go to the blog posts I am required to be authenticated.
+
+02:37.170 --> 02:41.530
+So I am being redirected to the logging page the same with adding.
+
+02:42.150 --> 02:49.980
+So nothing really is accessible to me right now or of course if I will log in you can see that I can
+
+02:49.980 --> 02:57.660
+see both the form for adding and the blog posts and editing everything works for me.
+
+02:57.660 --> 02:59.820
+Now let's see how we can do that.
+
+02:59.850 --> 03:02.790
+If we only want to protect certain routes.
+
+03:02.790 --> 03:06.300
+So for this I've said that before.
+
+03:06.300 --> 03:16.920
+But let's remind ourselves we can use either only or accept methods so only can accept string.
+
+03:16.920 --> 03:17.620
+So.
+
+03:17.640 --> 03:20.300
+Well it's up to you how do you like to define this.
+
+03:20.310 --> 03:29.840
+But we can use only with an array and specify the method names that we would like to protect.
+
+03:29.840 --> 03:36.590
+So we want to protect the index because we probably would like everyone to read our blog posts the same
+
+03:36.590 --> 03:45.290
+with show but certainly we do not want to let anyone add blog posts if there are not authenticated.
+
+03:45.380 --> 03:50.510
+So let's out create first save the changes.
+
+03:50.510 --> 03:53.050
+And now let's see we can read blog posts.
+
+03:53.120 --> 03:55.800
+A single one and the list of them.
+
+03:56.330 --> 04:00.090
+But when you press hard you can't see the form.
+
+04:00.230 --> 04:02.990
+Obviously that's not everything.
+
+04:02.990 --> 04:12.090
+We should also protect store added update and destroy so let's at that store.
+
+04:12.840 --> 04:15.720
+Edit Update
+
+04:18.310 --> 04:20.500
+destroy.
+
+04:20.640 --> 04:26.400
+So now all those routes are protected if you will go to the blog post list and Press Edit you can see
+
+04:26.400 --> 04:29.100
+that you are being redirected the same with delete.
+
+04:29.100 --> 04:30.890
+You can't do that.
+
+04:31.050 --> 04:38.730
+You can only view blog posts so that's a pretty simple way you can also do that when we will later implements
+
+04:38.750 --> 04:40.460
+come implement commenting.
+
+04:40.530 --> 04:41.960
+But this is the second way.
+
+04:41.970 --> 04:49.290
+And for me it is the preferred way to decide how to protect certain routes inside.
+
+04:49.290 --> 04:50.100
+Controllers
+
+04:53.180 --> 05:00.600
+so let's save the changes and then we will see how we can actually attach users to certain models.
+
+05:00.600 --> 05:08.250
+So when someone is being out integrated he is being assigned to a certain blog post so we can see who
+
+05:08.260 --> 05:10.590
+altered our certain blog post.

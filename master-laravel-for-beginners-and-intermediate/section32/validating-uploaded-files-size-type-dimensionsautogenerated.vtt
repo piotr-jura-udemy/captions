@@ -1,0 +1,199 @@
+WEBVTT
+
+00:00.960 --> 00:08.650
+The last thing that we need to cover on uploading files is validating what is actually being uploaded.
+
+00:09.300 --> 00:13.860
+So let's try another example when we will submit a blog post.
+
+00:14.490 --> 00:17.980
+But this time we will send a text file.
+
+00:18.000 --> 00:25.270
+This is actually our real text file so if you do not have any you can just prepare one.
+
+00:25.450 --> 00:33.580
+Now what you can see here is there is no image but you can see that there is a link to the actual text
+
+00:33.580 --> 00:43.420
+file and worst thing is that it was actually being uploaded and we are trying to display this particular
+
+00:43.540 --> 00:44.470
+image.
+
+00:44.470 --> 00:46.630
+So it's obviously no good.
+
+00:46.630 --> 00:50.050
+We need to somehow validate that.
+
+00:50.050 --> 00:57.870
+Now inside the Update method and the store method we use the same request glass the store post.
+
+00:58.090 --> 01:04.870
+So let's open it now and there is no validation rule for the farm or any of field.
+
+01:04.870 --> 01:06.270
+So let's add it now.
+
+01:06.280 --> 01:07.180
+So fun.
+
+01:07.180 --> 01:12.510
+Nail no scenes that image is not required.
+
+01:12.510 --> 01:20.270
+We do not have to add the required validation but the most basic one we can add is image.
+
+01:20.310 --> 01:29.700
+So this will actually verify if the uploaded file is an image so let's try it another time.
+
+01:30.010 --> 01:39.430
+So provide some values that would work and try to upload a text file so this time you see that the front
+
+01:39.450 --> 01:42.100
+now must be an image.
+
+01:42.100 --> 01:51.090
+So now we do not allow users to upload anything else than image but also image can mean different things.
+
+01:51.130 --> 02:01.130
+So let's say we only want to allow users to upload a J pic file so the validator for this is called
+
+02:01.160 --> 02:02.160
+mimes.
+
+02:02.210 --> 02:08.180
+Let's specify j peg as the only type which can be uploaded.
+
+02:08.180 --> 02:16.640
+This will actually guess it on the mind type of the field file so it's not based on the extension.
+
+02:16.640 --> 02:18.360
+Save the changes.
+
+02:18.650 --> 02:22.580
+And now let's try to upload our PMG file.
+
+02:22.580 --> 02:29.010
+This is actually a small Avatar image so let's try it.
+
+02:29.180 --> 02:33.970
+And now you see that this cannot be uploaded.
+
+02:34.030 --> 02:34.300
+OK.
+
+02:34.310 --> 02:44.190
+So we might actually wants to allow users to upload PMG and even gifs or as G files.
+
+02:44.240 --> 02:45.200
+So this is fine.
+
+02:45.200 --> 02:56.260
+We just learned how to filter that but then we might not want users to upload files that are too big
+
+02:57.410 --> 03:05.810
+so you can do that by specifying the max validation rule the same as we did with the length of the text
+
+03:05.810 --> 03:14.000
+fields but in case of the files and in turn in case of images this is actually specifying the maximum
+
+03:14.000 --> 03:16.720
+size in kilobytes.
+
+03:17.060 --> 03:24.180
+So let's specify it as one megabyte and then we'll try to upload a bigger file.
+
+03:24.260 --> 03:28.190
+So this one seems to be bigger than one megabyte
+
+03:32.050 --> 03:40.720
+and now you see that the family may not be greater than one megabyte okay now.
+
+03:41.140 --> 03:46.240
+So we actually filter that this is an image of specific type.
+
+03:46.560 --> 03:50.900
+And that also the size is not bigger than one megabyte.
+
+03:51.120 --> 03:58.650
+But since this is actually a blog post and we have some rules that will make this blog post title with
+
+03:58.650 --> 04:02.540
+the hate of at least five hundred pixels.
+
+04:02.700 --> 04:08.910
+Let's make sure that the domain dimensions of this image are smaller than that.
+
+04:09.240 --> 04:16.740
+So to verify the dimensions of an image and notice does that this validator is only for images we can
+
+04:16.740 --> 04:18.470
+use it dimensions
+
+04:20.970 --> 04:28.470
+and now you can specify a couple of parameters so you can specify the minimum with the maximum width
+
+04:28.560 --> 04:29.540
+of an image.
+
+04:29.550 --> 04:39.750
+The minimum hate maximum hate exact with exact haIf or ratio and the ratio is there with divided by
+
+04:39.870 --> 04:41.490
+hate.
+
+04:41.490 --> 04:43.620
+So let's specify the first one.
+
+04:43.620 --> 04:54.450
+So we want dimensions and incited the minimum hate should be five hundred.
+
+04:54.470 --> 04:58.720
+Now let's try to upload a file which has different dimensions.
+
+04:58.730 --> 05:01.010
+So I have one prepared here.
+
+05:01.100 --> 05:05.480
+This is actually with the hate of a hundred 28 pixels
+
+05:08.950 --> 05:18.450
+and you can see that the family image has invalid image dimensions so alternatively you can also specify
+
+05:18.450 --> 05:21.020
+something like Marks hate.
+
+05:21.030 --> 05:24.890
+The same with with so minimum with maximum hate.
+
+05:25.080 --> 05:30.340
+Or if you need exact measurements you can do with hate.
+
+05:30.360 --> 05:38.830
+You can also combine them and finally there is ratio so ratio could be something like this.
+
+05:38.880 --> 05:45.010
+So the with should be free parts and hate two parts or other natively.
+
+05:45.010 --> 05:47.290
+You can specify it like that.
+
+05:47.680 --> 05:56.060
+So we've divided by hate would be to at least half the time line larger than it is.
+
+05:56.270 --> 05:56.670
+OK.
+
+05:56.680 --> 06:03.340
+So we only need the minimum height so let's keep it like that but just in case you would like to figure
+
+06:03.340 --> 06:11.140
+out more options that you have with the validation then obviously please check out the lot of documentation.
+
+06:11.140 --> 06:15.950
+It has a great page about all the possible options that you can use here.
+
+06:16.060 --> 06:17.680
+The link is included.

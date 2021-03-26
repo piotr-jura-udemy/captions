@@ -1,0 +1,325 @@
+WEBVTT
+
+00:00.780 --> 00:07.200
+In this section we will learn about the much more robust way of serialize izing your eloquent models
+
+00:07.230 --> 00:11.900
+to J Some and this is called La avail resources.
+
+00:11.910 --> 00:15.510
+So first let's remind ourselves what we have right now.
+
+00:15.510 --> 00:21.000
+So we've created a simple API endpoint that returns all the comments of a blog post.
+
+00:21.090 --> 00:27.210
+What we have also achieved is we have hit in some fields that we do not want to be returned.
+
+00:27.360 --> 00:32.700
+And also we have included user relations so it's our domestically serialize.
+
+00:32.700 --> 00:39.780
+And we've achieved all that using the simple one liner where we just fetch the query and let a lot of
+
+00:39.900 --> 00:41.310
+do all the magic.
+
+00:41.460 --> 00:49.170
+And then we've used this hidden protected field to specify which columns we wants to be shown and which
+
+00:49.170 --> 00:50.660
+we would like to be hidden.
+
+00:50.670 --> 00:56.270
+So basically everything that's inside hidden property is not being displayed.
+
+00:56.280 --> 01:03.270
+So now let's go and see how we can achieve it much better and robust way using lot of our resources.
+
+01:05.630 --> 01:08.920
+So let's take a look at this resource concept.
+
+01:09.200 --> 01:11.620
+So it's actually extremely simple.
+
+01:11.960 --> 01:18.040
+So you will generate a class called the resource for every eloquent model that you have.
+
+01:18.170 --> 01:20.350
+You will generate at least one resource class.
+
+01:20.360 --> 01:27.560
+You can have many because what resource does it is deciding how to serialize your model and you are
+
+01:27.560 --> 01:31.260
+in full control of how you would serialize a model.
+
+01:31.460 --> 01:39.110
+For example you can not only decide how you will call the keys of this serialized object like here we
+
+01:39.110 --> 01:42.580
+are using just the attribute names of eloquent model.
+
+01:42.890 --> 01:44.750
+So you can modify that.
+
+01:44.930 --> 01:48.050
+You can also modify the values.
+
+01:48.740 --> 01:56.390
+So let us go ahead and create our first simple resource for the comment model.
+
+01:56.390 --> 01:59.960
+As usual a lot of it has a command to generate this code.
+
+01:59.960 --> 02:01.700
+So let's go ahead and do that.
+
+02:02.600 --> 02:13.080
+Open the terminal and run peach pea artisan make resource and let's call it comment so it was created
+
+02:13.080 --> 02:19.230
+successfully and now you can find those resource classes inside that up folder.
+
+02:19.260 --> 02:21.450
+Page GDP resources.
+
+02:21.450 --> 02:23.460
+Let's open up the comment resource.
+
+02:23.460 --> 02:29.730
+This is how it looks like it only contains one method to array in which you will define how you want
+
+02:29.790 --> 02:32.200
+your resource to be serialized.
+
+02:33.420 --> 02:40.500
+Now before we will modify this method let's first see how you should even use those resource classes.
+
+02:41.010 --> 02:46.380
+So let's go back to the post comment controller and the first thing you will have to do is to import
+
+02:46.380 --> 02:47.500
+this new class.
+
+02:47.640 --> 02:58.630
+So use up h DDP resources comment and it's a convention to import these resource classes.
+
+02:58.630 --> 03:06.510
+We found Elias us comment resource in case you will be using the eloquent model comment.
+
+03:06.510 --> 03:10.130
+This will let you avoid the naming conflict.
+
+03:12.080 --> 03:20.750
+Now let's go ahead and try to immediately use this new resource so mind that first we will try to serialize
+
+03:20.750 --> 03:28.540
+a single comment so I know that we are returning multiple comments but now let's try with a single one.
+
+03:28.670 --> 03:37.760
+So we return a new comment resource so you create this class and the only parameter it expects is the
+
+03:37.760 --> 03:39.040
+actual model.
+
+03:39.200 --> 03:41.750
+So it will then know how to serialize it.
+
+03:41.750 --> 03:53.870
+So we do post comments first so this will just give us the first element of the collection.
+
+03:53.880 --> 03:59.010
+So the first comment say the changes and now let's see what we got.
+
+03:59.070 --> 04:03.390
+So you might have noticed that it has changed a little bit.
+
+04:03.390 --> 04:11.670
+So the most important difference is now that the data is bankrupt inside our data field.
+
+04:11.670 --> 04:14.520
+So this is being added when you use resources.
+
+04:14.520 --> 04:20.220
+I will show you how to get rid of that later but that's the most important change and it is done for
+
+04:20.220 --> 04:20.720
+a reason.
+
+04:20.730 --> 04:29.070
+Because using the resources it's very easy to add some additional parameters like metadata or some links.
+
+04:29.250 --> 04:34.560
+And this is useful when you have collections because sometimes you might want to provide additional
+
+04:34.560 --> 04:41.490
+information how many items are in the collection and what are the links to get the next elements of
+
+04:41.490 --> 04:42.510
+this collection.
+
+04:42.630 --> 04:44.160
+We'll see that in a second.
+
+04:45.210 --> 04:52.130
+So you can see that currently we have the same data that we will have when we would normally serialize
+
+04:52.140 --> 04:57.560
+on the eloquent model by just returning it as an array from the end point.
+
+04:57.780 --> 05:01.580
+And this is because it is using the defaults that we have.
+
+05:01.590 --> 05:06.390
+So this will call to array on this element.
+
+05:06.390 --> 05:12.870
+So this element I mean that eloquent model that we have passed through the constructor so to overwrite
+
+05:13.140 --> 05:22.350
+how you serialize things we will return an array and now how to access the attributes of an eloquent
+
+05:22.350 --> 05:22.920
+model.
+
+05:23.280 --> 05:31.400
+So it is actually very easy you can access them using this so if you would like to return an I.D. you
+
+05:31.400 --> 05:33.220
+can use this I.D..
+
+05:34.280 --> 05:41.910
+So every attribute that is out there in your eloquent model is now available under this.
+
+05:42.380 --> 05:43.600
+So let's check that out.
+
+05:45.100 --> 05:50.950
+So now we would like to serialize only the ideas of the resource and you can see that it works perfectly
+
+05:50.950 --> 05:53.400
+we have only serialized that I.D..
+
+05:55.530 --> 05:59.730
+So let's also add content.
+
+05:59.730 --> 06:03.440
+This is also available under this content.
+
+06:05.440 --> 06:07.000
+Created art
+
+06:10.250 --> 06:26.150
+which is this created art and may be updated art which is this updated art now.
+
+06:26.160 --> 06:28.640
+Let's try this.
+
+06:29.190 --> 06:35.070
+Now you might have noticed something unexpected that now the dates are being serialized as an object
+
+06:35.130 --> 06:38.430
+because they are actually carbon objects.
+
+06:38.430 --> 06:43.800
+And this was automatically converted to string before but now it's not.
+
+06:43.830 --> 06:49.590
+So you are in full control here and you can decide how you can return your dates.
+
+06:50.280 --> 06:58.530
+So to just return this as string you can cast these attributes to a string using this simple type casting
+
+06:58.530 --> 06:59.750
+of BHP.
+
+06:59.820 --> 07:04.110
+So this will use the carbon date to string magic method
+
+07:07.380 --> 07:10.110
+and now you have it as you had before.
+
+07:10.110 --> 07:14.590
+So this is converted to a string OK.
+
+07:14.620 --> 07:21.310
+But here we are just realizing one eloquent model and this end point is about comments not a single
+
+07:21.310 --> 07:21.850
+comment.
+
+07:21.880 --> 07:26.370
+So how you can easily return a collection of elements.
+
+07:26.470 --> 07:31.800
+So there are some specific objects that you can create called Resource collections.
+
+07:31.870 --> 07:39.780
+But we have before we get to that it's also possible with just this simple comment resource class.
+
+07:39.790 --> 07:48.270
+So our resource class for a particular model and instead of creating a new instance of this model what
+
+07:48.270 --> 08:00.270
+you would do is you would call a static method called collection and it accepts our collection of something.
+
+08:01.010 --> 08:01.670
+In this case.
+
+08:01.670 --> 08:05.420
+This is not post comments first but post comments.
+
+08:05.420 --> 08:09.480
+So every element now let's save the changes.
+
+08:09.470 --> 08:12.410
+You can also comment out this line for clarity.
+
+08:12.490 --> 08:21.660
+And now let's see what do we have so we have our collection of all the comments for this blog post too
+
+08:21.660 --> 08:28.920
+wrapped inside the data with the attributes attributes that we want it and how we want it then we are
+
+08:28.920 --> 08:35.700
+in full control of course we do not have a user data we'll get to that in the next lecture.
+
+08:36.060 --> 08:43.260
+But now let's also see that it is actually possible to control how this element is being returned if
+
+08:43.260 --> 08:45.510
+you will go back to the comment resource.
+
+08:45.690 --> 08:54.690
+And for example you might want to return this US comment I.D. not just that I.D. as the attribute is
+
+08:54.690 --> 09:03.500
+called in that eloquent model you can do that now you can see there is a comment I.D. as the object
+
+09:03.650 --> 09:07.400
+element key not that I.D. us in that eloquent model.
+
+09:07.400 --> 09:10.150
+So this is how you can control that of course.
+
+09:10.160 --> 09:16.670
+Well you don't really need to do that but in case you would like to customize their property names of
+
+09:16.670 --> 09:18.320
+the adjacent objects.
+
+09:18.380 --> 09:20.050
+This is how you can do that.
+
+09:20.060 --> 09:22.620
+So you are in full control.
+
+09:22.940 --> 09:30.020
+So in the next lecture we will see how we can work with the relations of a particular resource and control
+
+09:30.140 --> 09:32.150
+what properties of our user.
+
+09:32.240 --> 09:34.490
+We would also like to serialize.

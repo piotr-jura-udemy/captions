@@ -1,0 +1,100 @@
+WEBVTT
+
+00:00.840 --> 00:07.710
+All front and libraries you need are configured inside the package JSON file of your project.
+
+00:08.810 --> 00:12.440
+It's like a composer, Jason, but for the front end.
+
+00:13.780 --> 00:18.460
+To install this, libraries, run, npm, install.
+
+00:19.740 --> 00:27.450
+This would download all libraries in their specified version to the node modules folder, and later
+
+00:27.450 --> 00:30.210
+it would create a package log file.
+
+00:35.030 --> 00:43.640
+Then to compile all the assets for the first time, run npm, run death, but not just yet, please
+
+00:43.640 --> 00:45.680
+wait until the end of the lecture.
+
+00:46.550 --> 00:53.950
+AMPM Run Command lets you run custom NPM actions defined in the package.
+
+00:53.960 --> 00:54.950
+Jason file.
+
+00:57.880 --> 00:59.840
+You can find death.
+
+01:01.330 --> 01:04.100
+Proud watch and more.
+
+01:04.540 --> 01:13.120
+And also, you can create your own the deduction compiles your assets in development mode so there are
+
+01:13.120 --> 01:18.520
+not minified it makes it easier to debug JavaScript or styles.
+
+01:19.930 --> 01:28.150
+Production is for production, so assets are minified and compiled in production mode for the fastest
+
+01:28.150 --> 01:32.610
+performance, that's not useful in your development environment.
+
+01:35.710 --> 01:43.750
+The watch action is like running the dev action, but it keeps watching for changes and recompile everything
+
+01:43.750 --> 01:44.930
+automatically for you.
+
+01:45.580 --> 01:47.530
+This is the preferred way to work.
+
+01:48.920 --> 01:58.010
+Installing and running nodes and NPM is not always painless, sometimes actions fail for strange reasons,
+
+01:58.010 --> 01:59.640
+especially on Windows.
+
+02:00.260 --> 02:06.260
+Your best bet is to make sure you run node version 12.
+
+02:08.300 --> 02:14.540
+Also, when you see errors and even though you made sure you've followed the instructions closely,
+
+02:15.080 --> 02:23.030
+don't panic, try removing the node modules folder in your project first and running NPM install again,
+
+02:23.810 --> 02:28.310
+maybe also try to look inside the Q&amp;A under the lecture.
+
+02:29.620 --> 02:37.480
+And most importantly, try copy pasting that area into Google, most of the time, you are not the only
+
+02:37.480 --> 02:39.220
+one having a specific issue.
+
+02:39.850 --> 02:46.290
+Make sure not to copy everything, though, just something that describes the error from the error log.
+
+02:47.400 --> 02:52.320
+Finally, let's run NPN run deve.
+
+02:56.280 --> 03:00.880
+If everything is fine, you will see a happy output from the terminal.
+
+03:01.710 --> 03:10.320
+You might also get a notification depending on your system and in the public folder, you will see the
+
+03:10.350 --> 03:16.200
+updates and up S.O.S files in their respective folders.
+
+03:17.780 --> 03:24.920
+This means the assets are compiled and we are now ready to include them inside our Laravel application,
+
+03:25.340 --> 03:27.710
+which is the next thing we are going to do.

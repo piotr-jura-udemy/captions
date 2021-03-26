@@ -1,0 +1,355 @@
+WEBVTT
+
+00:00.330 --> 00:07.360
+Now we have enough knowledge to finish all the remaining end points of this API controller.
+
+00:07.530 --> 00:13.670
+So we have started with displaying a list of elements then how to store an element and authenticate
+
+00:13.690 --> 00:16.220
+and the point that requires authentication.
+
+00:16.230 --> 00:19.200
+So some user has to be authenticated.
+
+00:19.200 --> 00:20.430
+Now there is a simple one.
+
+00:21.030 --> 00:24.570
+So the show end point is to just return a single resource.
+
+00:24.570 --> 00:28.980
+So in this particular scenario with comments we don't need that.
+
+00:29.340 --> 00:31.850
+But let's see how to do that anyway.
+
+00:31.980 --> 00:34.610
+So immediately let's add this blog post.
+
+00:34.620 --> 00:39.780
+You should already know why we are doing that because we want to use a route model binding and that's
+
+00:39.780 --> 00:42.580
+the name of the parameter in the root.
+
+00:43.110 --> 00:46.820
+So this one will be a very simple one.
+
+00:46.860 --> 00:50.460
+So we have a blog post but also we have our comment
+
+00:53.690 --> 00:56.420
+so make sure that you have the comment imparted.
+
+00:56.450 --> 01:07.480
+So in this case we import only the resource so let's import the comment model so this would be this
+
+01:07.480 --> 01:11.050
+one from the top comment namespace.
+
+01:11.050 --> 01:13.290
+Make sure you have this use statement.
+
+01:14.260 --> 01:23.320
+And now let's open the terminal and run peach bee artisan the route least grep API or find as the R
+
+01:23.620 --> 01:25.540
+on the windows.
+
+01:28.060 --> 01:31.400
+And that's the end point for fetching one comment.
+
+01:31.400 --> 01:34.050
+So let me find it.
+
+01:34.090 --> 01:36.960
+This one is for getting leased.
+
+01:37.960 --> 01:41.050
+Yes this one is for getting one individual to comment.
+
+01:41.080 --> 01:49.120
+That's why we can use the variable argument name on the show method called comment and this would be
+
+01:49.130 --> 01:54.250
+ultimately fetch the using group model binding us the actual comment.
+
+01:54.250 --> 02:02.280
+Now what you have to do in this end point is very simple you just return new comment resource and you
+
+02:02.280 --> 02:04.280
+are passing the comment here.
+
+02:04.300 --> 02:15.040
+Save the changes and now we have created this comment so you can copy the URL and the euro would look
+
+02:15.040 --> 02:15.980
+like this.
+
+02:16.000 --> 02:26.230
+So api v1 posts posting the X1 comments and comment I.D. which is 306 and then you can fetch one individual
+
+02:26.230 --> 02:32.870
+resource from the API so showing one resource was simple.
+
+02:32.870 --> 02:35.540
+Now let's see how we can handle updating.
+
+02:35.810 --> 02:42.750
+So when someone wants to change the result in this case they would like to modify the comment so we
+
+02:42.750 --> 02:45.630
+also need those two arguments here.
+
+02:47.220 --> 02:51.020
+So the blog post the comment because they are defined inside the rules.
+
+02:51.030 --> 02:55.360
+So we need those and then we will need the store comment.
+
+02:55.380 --> 03:00.790
+This is the same kind of request and we want the validation.
+
+03:00.810 --> 03:03.670
+So now you have the comment already fetched.
+
+03:03.990 --> 03:07.800
+So what you can do is you can assign the content.
+
+03:07.800 --> 03:15.480
+That's the only variable that we are changing here and request input content.
+
+03:15.570 --> 03:17.960
+This is everything that we have to do.
+
+03:18.180 --> 03:22.760
+We want to modify the user because it is already set.
+
+03:22.790 --> 03:30.990
+Now you can simply return you comment resource comment.
+
+03:31.120 --> 03:35.800
+So a lot of it will take care whether this comment already exists or not.
+
+03:35.800 --> 03:39.430
+So let's verify if that works.
+
+03:39.460 --> 03:47.920
+So we do the same you out let's open the new tab and for updating you WILL SEND UP PUT request.
+
+03:48.490 --> 03:52.450
+So that's the standard of doing that in RESTful API.
+
+03:52.450 --> 04:00.610
+But you can also verify that there is this route for modifying the comment accepts either put or path
+
+04:00.740 --> 04:01.270
+but.
+
+04:01.390 --> 04:07.530
+Well I suggest using just put so we need a body here.
+
+04:07.530 --> 04:09.270
+So let's go to body type.
+
+04:09.270 --> 04:12.560
+Select ro application Jason.
+
+04:12.840 --> 04:16.790
+Make sure you specify the accept header as application.
+
+04:16.790 --> 04:17.280
+Jason.
+
+04:17.280 --> 04:19.340
+I've already explained that before.
+
+04:19.380 --> 04:22.260
+So you should already know why we are doing that.
+
+04:22.290 --> 04:25.820
+And then only modify the content sorry.
+
+04:25.840 --> 04:28.890
+This has to be lower case content us.
+
+04:29.230 --> 04:32.400
+Something else.
+
+04:32.460 --> 04:38.780
+Now we of course need the authorization token so no that's not basic.
+
+04:38.770 --> 04:45.240
+Our dads bureau token notice how postman keeps your recently used tokens so we don't really have to
+
+04:45.240 --> 04:48.630
+copy that from other requests like from here.
+
+04:48.780 --> 04:53.300
+If you recently stored any token it will automatically add it here.
+
+04:53.520 --> 04:57.740
+So we are modifying the resource three hundred six.
+
+04:58.020 --> 04:59.840
+And we have just fetch it from here.
+
+04:59.850 --> 05:00.810
+It has the content.
+
+05:00.820 --> 05:09.190
+Hello and we want to modify it to something else so let's send this request.
+
+05:10.280 --> 05:17.390
+And you can see that it returns back the resource we've I.D. 306 and then modified content which now
+
+05:17.480 --> 05:19.700
+is something else.
+
+05:20.990 --> 05:27.830
+Well you can see that it returns proper response that well it was modified because we have modified
+
+05:27.920 --> 05:32.540
+the actual model but the think I forget to do is.
+
+05:32.540 --> 05:37.190
+Well you might have guessed this but if you didn't I forgot to call save.
+
+05:37.340 --> 05:45.470
+So you always have to call save and I figured this mistake because we should have automatically updated
+
+05:45.530 --> 05:49.450
+at well the updated art column should ultimately change.
+
+05:49.460 --> 05:51.430
+And it didn't.
+
+05:51.470 --> 05:53.380
+So let's try something else.
+
+05:54.800 --> 06:01.620
+And now you can see that the content was returned with their modified changes and also the updated update
+
+06:01.650 --> 06:03.610
+has also changed.
+
+06:03.750 --> 06:06.630
+So why it return then your results.
+
+06:06.630 --> 06:13.590
+Well basically it just serialized the model that we have changed so we have changed the content and
+
+06:13.590 --> 06:16.080
+just serialize it but didn't save it.
+
+06:16.110 --> 06:21.610
+That's why it's returned to the new values but it actually was it's changed.
+
+06:21.780 --> 06:28.050
+And finally probably the simplest one which is destroy to delete our resource from the database.
+
+06:28.050 --> 06:30.970
+So we also need blog post and comment.
+
+06:30.990 --> 06:35.450
+And of course this is because those parameters are in the rules.
+
+06:35.460 --> 06:41.160
+So this is how it looks like it has post and it has comment.
+
+06:41.340 --> 06:42.690
+So bye bye.
+
+06:42.690 --> 06:43.110
+Just.
+
+06:43.590 --> 06:48.150
+I think this parameters to the method Lovell will fetch them.
+
+06:48.150 --> 06:51.350
+So what you can do is comment delete.
+
+06:53.280 --> 07:04.120
+And in case of that delete end point what you should return is a new response so you can do return response.
+
+07:04.180 --> 07:06.640
+No content.
+
+07:06.880 --> 07:12.850
+So when you are deleting model from the database deleting a resource well you won't be returning this
+
+07:12.850 --> 07:14.660
+resource back to the browser.
+
+07:14.830 --> 07:15.310
+You will.
+
+07:15.670 --> 07:18.540
+Well that's the standard way to handle an API.
+
+07:18.910 --> 07:22.630
+You return an empty response with specific status code.
+
+07:22.630 --> 07:24.340
+And this is what this method is doing.
+
+07:24.340 --> 07:25.240
+No content.
+
+07:25.300 --> 07:28.820
+It's setting the status code to 204.
+
+07:29.680 --> 07:41.660
+So let's try that out in postman so we can simply use the same top and select the delete method.
+
+07:41.690 --> 07:50.360
+Now let's send this request and you get the empty body and the status quo two hundred for no content.
+
+07:50.360 --> 07:52.560
+This is what that means.
+
+07:52.580 --> 07:54.850
+Now this is correct and it looks good.
+
+07:54.920 --> 08:03.050
+But if you will try to fetch this deleted resource again what you will actually see is h the email with
+
+08:03.050 --> 08:04.600
+404 code.
+
+08:04.610 --> 08:09.590
+And this is not something you will handle nicely in your API.
+
+08:09.590 --> 08:15.200
+So the first thing you could do is of course you have to add except header because this is how you are
+
+08:15.200 --> 08:17.750
+telling a lot of value what you expect back.
+
+08:17.780 --> 08:19.800
+So we expect that Jason.
+
+08:19.880 --> 08:21.240
+So let's try that with.
+
+08:21.290 --> 08:25.010
+Accept headers set to application Jason.
+
+08:25.310 --> 08:28.500
+And also this is not a very nice result.
+
+08:28.520 --> 08:34.970
+You get some back the stack trace of all the methods that were run and this message.
+
+08:34.970 --> 08:42.020
+No query results for upcoming it is so well showing too much details about your implementation.
+
+08:42.170 --> 08:44.390
+So we're in the next lecture.
+
+08:44.390 --> 08:51.050
+We'll see how we can handle this area was better that the model wasn't found and the return are better.
+
+08:51.050 --> 08:53.480
+Jason the response for those cases.

@@ -1,0 +1,178 @@
+WEBVTT
+
+00:00.270 --> 00:02.790
+In this lecture we'll do three things.
+
+00:02.790 --> 00:07.760
+First will generate migration for our new target model.
+
+00:07.890 --> 00:14.640
+Then we'll create another migration which will define the pivot or intermediate table that will actually
+
+00:14.640 --> 00:19.590
+hold those relation between the target model and the blog post model.
+
+00:19.590 --> 00:24.400
+And the first thing we'll create are we will actually create the tag model.
+
+00:24.570 --> 00:31.170
+And on the next lecture we will see how we can define the relation between those two models on the models
+
+00:31.170 --> 00:32.080
+themselves.
+
+00:32.550 --> 00:38.700
+So the first thing would be to create migration for our new tag model.
+
+00:38.700 --> 00:45.930
+The second thing would be to create a migration for the intermediate or people table that will be created
+
+00:45.930 --> 00:52.680
+to hold the relation between an existing block posts model and the new tag model.
+
+00:52.680 --> 00:54.990
+So let's go ahead and do the first thing.
+
+00:54.990 --> 00:59.040
+So we'll create our migration for our tag model.
+
+00:59.070 --> 01:00.940
+You should already know how to do that.
+
+01:00.990 --> 01:09.220
+We call appear to be artisan make migration and call it create tax table.
+
+01:09.300 --> 01:11.670
+Now let's open the migration.
+
+01:11.670 --> 01:18.030
+So we have already a boiler plate with the idea and the timestamps only think we will have to define
+
+01:20.680 --> 01:24.510
+is our stream column which could be called name.
+
+01:24.520 --> 01:30.820
+As we said before it can have the default land but usually tax should have a shorter name so let's limit
+
+01:30.820 --> 01:33.040
+it to 40.
+
+01:33.040 --> 01:35.290
+So let's execute the migration right away.
+
+01:35.450 --> 01:41.930
+Be artisan migrate and let's check if it is inside the database.
+
+01:43.000 --> 01:50.890
+So we have tax table with the name column which is 5 char and timestamp so so far so good.
+
+01:50.890 --> 02:04.200
+Now let's create another immigration BHP artisan make migration and call it create block post talk table
+
+02:06.510 --> 02:09.720
+so here is our new migration.
+
+02:09.720 --> 02:15.120
+And this is our default name that you should use when you are relating to models using Many to Many
+
+02:15.120 --> 02:16.510
+relationship.
+
+02:16.620 --> 02:24.510
+So the name of this table by default should be the same as the model name but you convert the uppercase
+
+02:24.780 --> 02:33.000
+letters inside the model name to lower case and when there is when the new uppercase letter starts we
+
+02:33.000 --> 02:40.320
+just put an underscore and then after another underscore there is the name lower case name of another
+
+02:40.380 --> 02:52.840
+model so this intermediate pivot table will contain an idea and also the timestamps but also it has
+
+02:52.840 --> 03:00.400
+to contain two columns that will be related to both the blog posts so it will contain a blog post idea
+
+03:00.670 --> 03:02.900
+and also the tag idea.
+
+03:03.070 --> 03:05.330
+So let's go ahead and add them.
+
+03:05.560 --> 03:14.680
+So we want to add to unsigned integers because ideas are never negative first one is the blog post idea
+
+03:17.550 --> 03:25.930
+we can add index which should already be added when we will are the foreign keys so let's do that foreign
+
+03:27.160 --> 03:43.880
+blog post 18 it references the IDF field on their block post table and we can do what we already know
+
+03:44.150 --> 03:47.720
+that we can make Cascade delete.
+
+03:47.750 --> 03:56.700
+So whenever the model is removed we'll also remove this relation from the blog post talk table.
+
+03:56.930 --> 04:02.790
+So we do on delete cascade OK.
+
+04:02.820 --> 04:05.850
+So that would be the first column for the blog post idea.
+
+04:05.860 --> 04:13.890
+Now you can copy that so we can immediately define a relation for the tag tag model.
+
+04:14.090 --> 04:20.190
+So let's modify that to tag I.D. do the same with the foreign key.
+
+04:20.330 --> 04:23.690
+It will reference that idea on the tax table.
+
+04:23.720 --> 04:25.010
+So basically that's it.
+
+04:25.070 --> 04:31.750
+That's how our new blog posts table should look like blog post stock table.
+
+04:31.760 --> 04:34.890
+Now before you run this migration I've made a mistake here.
+
+04:34.900 --> 04:39.560
+This table is actually blog posts not a blog post.
+
+04:39.590 --> 04:44.970
+So now we can run this migration using peach B artisan migrate.
+
+04:45.980 --> 04:47.270
+Okay it's done.
+
+04:47.300 --> 04:52.650
+Now let's go to the database structure and we have our new table blog post tag.
+
+04:53.570 --> 04:55.130
+Let's see the structure.
+
+04:55.160 --> 05:00.470
+It has an I.D. which is out to incremented and also we have two foreign keys that block post I.D. and
+
+05:00.470 --> 05:02.630
+tax I.D. and timestamps.
+
+05:03.520 --> 05:04.300
+Okay.
+
+05:04.460 --> 05:13.520
+So we have the migrations and now let's clear the terminal and create the actual tag model so we can
+
+05:13.520 --> 05:18.840
+also do that using artisan command BHP artisan make model tag.
+
+05:18.890 --> 05:24.430
+You should already be familiar with this.
+
+05:24.440 --> 05:30.570
+So now this should create a new tag class inside our up namespace.
+
+05:30.660 --> 05:36.730
+And now let's go ahead and see how we can define our relation between those two models.

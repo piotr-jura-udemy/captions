@@ -1,0 +1,208 @@
+WEBVTT
+
+00:00.870 --> 00:05.860
+In this lecture you will see how we can query the self deleted models.
+
+00:06.000 --> 00:11.510
+So for this lecture to be useful to you you will have to have your database seated.
+
+00:11.520 --> 00:17.880
+SO MAKE SURE YOU HAVE RUN THE DBC command and you have some blog posts and also some of them should
+
+00:17.880 --> 00:18.590
+be deleted.
+
+00:18.600 --> 00:23.290
+So they have to have deleted out column with some dates.
+
+00:23.290 --> 00:28.530
+So if you do not have any blog posts deleted make sure you press delete a couple of times.
+
+00:28.530 --> 00:32.260
+But of course you have to be logged in first.
+
+00:32.260 --> 00:39.010
+So now let's go to the Visual Studio code and open the terminal make sure it's bigger or enlarged by
+
+00:39.010 --> 00:41.780
+pressing this button.
+
+00:41.800 --> 00:49.870
+Now let's run PSP artisan thinker because we'll be using it to make some queries on the self deleted
+
+00:49.870 --> 00:50.530
+models.
+
+00:51.700 --> 00:59.020
+As I've said previously when you solve the delete model or it is solved delectable the record itself
+
+00:59.110 --> 01:07.840
+stays inside the database its just gets assign are deleted art column and those records will not show
+
+01:07.840 --> 01:11.260
+up by default in larval queries.
+
+01:11.260 --> 01:20.470
+So let's see that when you will do a blog post all so it should fetch all the models from the blog posts
+
+01:20.580 --> 01:21.660
+table.
+
+01:22.030 --> 01:26.170
+You shouldn't see the blog posts that were deleted even vote.
+
+01:26.170 --> 01:32.680
+They actually are inside the table since this will give us a pretty long results with all the fields
+
+01:32.680 --> 01:34.730
+like title and content.
+
+01:34.840 --> 01:40.050
+We'll use our collection method from larval collections called pluck.
+
+01:40.750 --> 01:46.620
+So it's a pretty simple method that you can use to pick only one property from the collection.
+
+01:46.630 --> 01:53.380
+So all the models they have different properties they have I.D. title content and we will use this method
+
+01:53.410 --> 01:55.230
+to only get the idea.
+
+01:55.750 --> 01:57.100
+So let's see what we have.
+
+01:57.940 --> 02:05.440
+So this is a list of all the ideas of the models and you can see that those do not include the models
+
+02:05.470 --> 02:07.870
+that we have actually deleted.
+
+02:07.870 --> 02:15.340
+You can either verify that by taking a look at the list inside your database you can see that for example
+
+02:15.430 --> 02:23.780
+I did 10 wasn't included or let's see how we can query those.
+
+02:24.280 --> 02:31.170
+How can query the blog posts table to also include models that were deleted.
+
+02:32.310 --> 02:35.130
+So inside posts we have everything
+
+02:38.700 --> 02:45.620
+and now if you will assign the result of log posts we've trashed.
+
+02:47.520 --> 02:54.750
+So we are telling it to include also the trashed models so Lavell is calling those models that were
+
+02:54.750 --> 03:02.190
+self deleted the trashed models so they are like kind of moving things in your system to the recycle
+
+03:02.190 --> 03:04.800
+bin so you can restore them.
+
+03:04.800 --> 03:11.340
+Now we should use get to get a collection because that we've trashed method is starting a new instance
+
+03:11.340 --> 03:20.310
+of the query builder so to get the result we have to call get and now we'll also use pluck to get the
+
+03:20.350 --> 03:21.160
+ideas
+
+03:24.300 --> 03:30.840
+so we can see the list is significant land the bigger and it also includes the ideas that we do not
+
+03:30.840 --> 03:33.210
+have here like 17 18 19.
+
+03:33.210 --> 03:40.920
+It starts with those ideas and when we include also the trashed the models it starts with those that
+
+03:40.920 --> 03:45.320
+we have actually deleted now.
+
+03:45.360 --> 03:55.470
+There is also a way to fetch models only the models that were trashed and the method for this would
+
+03:55.470 --> 03:59.980
+be blog posts only trashed.
+
+04:00.070 --> 04:07.660
+It's also a query builder in stone so we'll use get and then we'll use block to only get the I.D. so
+
+04:07.660 --> 04:11.070
+you can get a list of all the deleted models.
+
+04:11.230 --> 04:20.500
+Of course since I have said that only trashed returns an instance of the query builder you can use that
+
+04:20.500 --> 04:23.640
+to build a further more complicated queries.
+
+04:23.640 --> 04:27.940
+So for example we can check or we can fetch only one records.
+
+04:27.970 --> 04:31.960
+Let's say that it would have an I.D. for 18
+
+04:35.970 --> 04:42.630
+so you can see that you can use further query methods on the only trust because it starts with our query
+
+04:42.630 --> 04:45.130
+builder.
+
+04:45.150 --> 04:48.390
+Now let's also fetch older models.
+
+04:48.390 --> 04:51.970
+Once again we can assign it to the all variable.
+
+04:51.990 --> 04:57.990
+So let us do a blog post with trashed get.
+
+04:58.480 --> 05:02.570
+So we are now fetching the complete model we are and doing the plug.
+
+05:02.590 --> 05:05.560
+So to get our single property.
+
+05:06.910 --> 05:15.450
+And now there is also a method on the individual models so lets maybe I'll clear the screen first so
+
+05:15.450 --> 05:17.160
+it's visible.
+
+05:17.160 --> 05:20.580
+Let me fetch one model from those collection.
+
+05:21.480 --> 05:29.070
+So I sign into the post variable and now inside all we already have fetched all the blog post models
+
+05:29.100 --> 05:36.620
+including those trashed ones and a lot of our collections since of course all variable is our larval
+
+05:36.720 --> 05:44.580
+collection also contains a find a method which by default will try to find an element by I.D..
+
+05:45.000 --> 05:54.180
+So my case some of the deleted or trashed models let's say they have I.D. 14 because that's the case
+
+05:54.450 --> 06:05.100
+in my example might be different in yours so I'm fetching a model that has deleted art dates set and
+
+06:05.100 --> 06:10.050
+then you can figure out if a model was deleted by using trust methods.
+
+06:10.920 --> 06:23.360
+So let's see post trashed and it should return true if I will fetch something else let's say that post
+
+06:23.370 --> 06:25.390
+with I.D. wasn't deleted.
+
+06:25.830 --> 06:29.790
+You can see on the screen that it doesn't have our deleted update.
+
+06:30.030 --> 06:37.180
+Now if I were right post trashed it should return false.

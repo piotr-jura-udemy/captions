@@ -1,0 +1,349 @@
+WEBVTT
+
+00:00.300 --> 00:07.590
+Now let's think what to do when a particular job or background job that we wanted to execute has actually
+
+00:07.590 --> 00:08.660
+failed.
+
+00:08.910 --> 00:16.620
+So let's run HP artisan and so far everything that we have done runs smoothly but of course you have
+
+00:16.620 --> 00:23.730
+to prepare that something will just go wrong that one of the jobs that you put into the queue will fail.
+
+00:23.730 --> 00:31.950
+For whatever reason whether this would be a code error or any other error and well with requests and
+
+00:31.950 --> 00:38.610
+testing on the browser it's simple because you can see what is an actual error usually when you do something
+
+00:38.610 --> 00:41.240
+wrong and we've cuz it's different.
+
+00:41.250 --> 00:45.380
+It's hard to tell what has actually happened how to debug that.
+
+00:45.540 --> 00:48.160
+So there is a way to solve that in a lot of VO.
+
+00:48.360 --> 00:55.910
+It's to have the fail job stable and then to retry the failed jobs.
+
+00:55.920 --> 01:01.050
+So first we will have to create a migration using queue failed table command.
+
+01:01.590 --> 01:02.840
+So let's run it.
+
+01:02.940 --> 01:05.610
+BHP artisan Q failed.
+
+01:05.610 --> 01:06.120
+Table.
+
+01:06.120 --> 01:15.450
+This will create this new migration so you have to run P2P artisan migrate and now let's see the list
+
+01:15.450 --> 01:17.060
+of commands again.
+
+01:17.280 --> 01:25.200
+So there is some additional command you can run to get the least of all the jobs that have failed for
+
+01:25.200 --> 01:26.680
+some reason.
+
+01:26.810 --> 01:27.560
+So let's run.
+
+01:27.570 --> 01:31.020
+Peach bee artisan Q failed.
+
+01:31.020 --> 01:41.530
+You can see that there are no failed jobs now if you will go to your database table refresh it now instead
+
+01:41.530 --> 01:49.300
+of only the jobs stable you see there is also failed the job stable where all the jobs that failed for
+
+01:49.300 --> 01:56.650
+any reason will be kept along with the exception so you can check out what has actually happened.
+
+01:56.770 --> 02:05.620
+Now when running the Q worker so peach bee artisan Q work you can also specify how many times it should
+
+02:05.620 --> 02:13.010
+try to attempt to execute a particular job before it puts start to the failed job stable.
+
+02:13.030 --> 02:18.760
+So basically it will stop processing this job it will just put it away.
+
+02:18.760 --> 02:25.810
+So let's say we'll specify it using this parameter free so remember that while you might have different
+
+02:26.200 --> 02:32.920
+couple of processes running your Q worker on different servers but on the simplest example let's assume
+
+02:32.920 --> 02:40.540
+that we just have one Q worker process so this is how you would specify the limit where it should just
+
+02:40.540 --> 02:45.390
+give up and forget about a particular job.
+
+02:45.430 --> 02:51.170
+So now the Q worker is started and it will try to attempt something three times.
+
+02:51.250 --> 02:57.600
+So now this worker will attempt to process every job three times if it fails three times it will move
+
+02:57.600 --> 03:00.010
+the to the failed jobs table.
+
+03:00.370 --> 03:07.420
+So to test that out let's stop this worker using control C and let's actually introduce a braking change
+
+03:07.450 --> 03:14.080
+but before we do that let's make sure this is put to be processed on the Q immediately so we can see
+
+03:14.080 --> 03:14.670
+that.
+
+03:14.680 --> 03:22.330
+So let's use Q instead of later and now on the comment posted markdown let's do something that will
+
+03:22.330 --> 03:23.750
+actually make it break.
+
+03:23.850 --> 03:30.860
+So it's not some simple example let's create a new instance of the blog post.
+
+03:32.080 --> 03:36.880
+But let's make sure that you haven't added an import for this class.
+
+03:36.910 --> 03:43.870
+So basically this will be a peach error it won't find the blog post in this current namespace up mail
+
+03:44.290 --> 03:45.860
+and this would break.
+
+03:46.780 --> 03:54.340
+So save the changes restart the worker with the three free attempts.
+
+03:54.340 --> 04:00.160
+And now let's try to add a comment so you can see the comment was added.
+
+04:01.700 --> 04:07.690
+And now when you will check out the Q worker inside the terminal you can see that it tried to process
+
+04:07.690 --> 04:11.760
+a job three times and then it failed.
+
+04:12.070 --> 04:17.630
+And now let's go back to our job stable.
+
+04:17.640 --> 04:19.140
+You can see there is nothing there.
+
+04:19.320 --> 04:21.880
+So this was moved to the failed jobs.
+
+04:22.080 --> 04:26.280
+And here is where you can check what has actually happened.
+
+04:27.060 --> 04:29.040
+So this is what I've said.
+
+04:29.100 --> 04:33.660
+It says that class obsolete in a blog post not found.
+
+04:33.660 --> 04:37.560
+And that makes perfect sense because we haven't other than import for it.
+
+04:37.650 --> 04:42.120
+So that's why it just couldn't find this class and the job has failed.
+
+04:43.660 --> 04:49.660
+Now let's go back to the terminal and open another top using common T or control T.
+
+04:49.690 --> 04:56.470
+If you are on Windows well depending you can you also open just a new window of the power show depending
+
+04:56.470 --> 04:59.370
+what you are using.
+
+04:59.370 --> 05:05.790
+Now let's run peach artisan and you can see that there is this queue failed command.
+
+05:05.860 --> 05:07.870
+We talked about that before.
+
+05:08.110 --> 05:15.460
+So let's run peach B artisan queue failed and this is what what you see so we can check out which job
+
+05:15.550 --> 05:17.460
+has failed when it failed.
+
+05:17.470 --> 05:18.540
+What's the connection.
+
+05:18.550 --> 05:29.460
+And on which cue this job was so let's see what are our options right now.
+
+05:29.470 --> 05:36.210
+So what we can do is we can run CU retry so let's do that.
+
+05:36.210 --> 05:44.040
+This will attempt to retry a failed job but actually you have to specify an I.D. Sorry I forgot about
+
+05:44.040 --> 05:44.520
+that.
+
+05:45.330 --> 05:47.470
+So let's do that again.
+
+05:47.490 --> 05:48.450
+Que failed.
+
+05:48.750 --> 05:53.310
+So the idea is one now let's try to retry this job.
+
+05:53.610 --> 05:59.340
+So what this will actually do is it won't immediately Randy's job.
+
+05:59.580 --> 06:08.670
+This command moved this job from failed jobs to the job stable so this can be processed by the queue
+
+06:08.670 --> 06:10.890
+worker running into some other top.
+
+06:11.640 --> 06:20.080
+But since we haven't fixed this class so we can see it was attempted three times again and then it failed
+
+06:20.190 --> 06:20.760
+again.
+
+06:23.950 --> 06:32.230
+So now let's see if we would be able to fix that by simply removing this code that has broken this.
+
+06:32.710 --> 06:34.470
+So let's save the changes not this.
+
+06:34.480 --> 06:38.320
+This won't be processed immediately as this is now a failed job.
+
+06:38.560 --> 06:42.940
+So we have to query the table for the failed jobs first.
+
+06:42.970 --> 06:45.570
+So this now has I.T. too.
+
+06:45.580 --> 06:49.160
+So let's try to put it back on the queue.
+
+06:49.360 --> 06:57.060
+So it has been put on the queue again and now actually what you see is that this was attempted three
+
+06:57.080 --> 06:58.750
+times and also failed.
+
+06:59.360 --> 07:07.070
+Even though we have just fixed this comment posted markdown class so that it shouldn't complain about
+
+07:07.070 --> 07:15.770
+this blog post that is not in the namespace but what actually has happened is that the queue worker
+
+07:15.890 --> 07:18.280
+is basically using the BJP.
+
+07:18.440 --> 07:25.040
+Well they have a version of your project or every code that was available there when it was started.
+
+07:25.040 --> 07:27.350
+So this is a long running process.
+
+07:27.350 --> 07:34.700
+So whenever you make changes it won't ultimately pick up all of your changes or any of your changes
+
+07:34.760 --> 07:36.480
+in the mother.
+
+07:36.500 --> 07:44.330
+So basically to when you make changes in your code what you will have to do is you will have to restart
+
+07:44.420 --> 07:45.740
+your queue worker.
+
+07:45.740 --> 07:49.540
+So this would usually happen when you deploy your application.
+
+07:49.880 --> 07:54.010
+But alternatively you might try to run a command.
+
+07:54.110 --> 07:56.770
+So let's see again what do we have here.
+
+07:58.240 --> 08:03.810
+So you might try to run this peach bee artisan queue restart.
+
+08:04.030 --> 08:04.860
+Let's try it out.
+
+08:04.870 --> 08:06.080
+Peach artisan.
+
+08:06.080 --> 08:07.450
+Q restart.
+
+08:08.320 --> 08:14.540
+No by the name of this command you might think that this will actually attempt to restart your Q Walker
+
+08:14.930 --> 08:23.750
+but it did end and what it actually did is it killed or your Q worker processes but it also tried to
+
+08:23.750 --> 08:29.930
+do that gracefully so they will only quit after they have processed their current job.
+
+08:30.140 --> 08:37.370
+So when we are developing and we are just running those processes manually the Q worker process then
+
+08:37.490 --> 08:39.170
+well nothing will restart.
+
+08:39.170 --> 08:46.340
+So basically what this does is it kills or your Q workers and basically that's it.
+
+08:46.340 --> 08:53.570
+So on your servers on your production development well any remote server you will have some tools that
+
+08:53.570 --> 08:58.620
+will gracefully restart those processes like super supervised D.
+
+08:59.180 --> 09:03.950
+But here in our development environment we just had to run it again
+
+09:06.850 --> 09:13.480
+so we've run it again it's not working the queue is empty because well the last job has failed it has
+
+09:13.480 --> 09:17.940
+been moved to their failed jobs.
+
+09:18.080 --> 09:27.230
+So now what we will have to do is we'll have to least those failed jobs again so peach B artisan Q failed
+
+09:28.970 --> 09:30.380
+retried the job.
+
+09:30.410 --> 09:31.840
+The idea is now free.
+
+09:31.880 --> 09:40.570
+So it has been put again on the queue and now it is being processed and processed successful successfully
+
+09:42.380 --> 09:44.570
+so now on the jobs you won't see anything.
+
+09:44.570 --> 09:47.950
+Also on the fate of the jobs you won't see anything.
+
+09:48.020 --> 09:53.090
+And additionally you should now see email that was being sent.

@@ -1,0 +1,64 @@
+WEBVTT
+
+00:00.450 --> 00:07.140
+Now let's proceed with implementing the first example that I mentioned in The Last Lecture which would
+
+00:07.140 --> 00:11.510
+be to upload an image together with a blog post.
+
+00:11.580 --> 00:15.810
+So we already have a forum for adding blog posts.
+
+00:15.810 --> 00:23.610
+But the important thing about making your forums be able to send files is you need to add up specific
+
+00:23.610 --> 00:31.410
+property to the forum tag which is ethnic type and the value of this has to be multipart form data.
+
+00:31.440 --> 00:34.710
+That's the value that has to be there.
+
+00:34.770 --> 00:38.670
+If you are trying to send any files.
+
+00:38.790 --> 00:41.720
+OK so this would be for the create forum.
+
+00:41.730 --> 00:46.710
+But we also have an update form where we modify the blog post.
+
+00:46.710 --> 00:54.210
+So this has to be added here to remember this property has to be added to all the forms which you use
+
+00:54.600 --> 00:58.320
+to submit files.
+
+00:58.330 --> 01:10.590
+Now we also need a field that the user can use to select a file from the disk and then upload it so
+
+01:10.590 --> 01:15.220
+we'll add some usual styling to our form.
+
+01:15.240 --> 01:24.430
+We can even copy the label and the input element so let's call this file thumbnail
+
+01:28.930 --> 01:38.600
+now in case of the files the type of the field is actually file the name could be thumbnail.
+
+01:39.280 --> 01:46.240
+Also in case of the files you wouldn't use the normal bootstrap foreign control but instead the phone
+
+01:46.240 --> 01:55.730
+control file and we do not have to provide any value OK so save the changes.
+
+01:55.730 --> 01:59.620
+And now let's see how this form looks like now.
+
+01:59.720 --> 02:04.660
+It also has the button that you can click and then pick a file from your disk.
+
+02:04.670 --> 02:11.090
+So this is basically all about preparing a forum to be able to upload the files in the next lecture
+
+02:11.090 --> 02:16.970
+will proceed with actually implementing some logic for the file uploads.

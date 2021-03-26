@@ -1,0 +1,367 @@
+WEBVTT
+
+00:01.610 --> 00:09.320
+In the last lecture I showed you that tool called thinker which really used to interact with our models
+
+00:09.770 --> 00:11.980
+directly from the terminal.
+
+00:12.080 --> 00:19.810
+And we've also created our first model for our application that is using their blog and their score
+
+00:19.830 --> 00:22.280
+post table by convention.
+
+00:22.280 --> 00:29.760
+We've also managed to change the database table because it wasn't correct with their conventions.
+
+00:29.870 --> 00:40.030
+Now let's rerun that tinker and play around more with the model you might remember that we tried to
+
+00:40.090 --> 00:50.110
+read all the records from the blog posts table using our model all method and it was empty.
+
+00:50.110 --> 00:58.720
+So now let's see how we can create a brand new blog post so we can do that by just instantly eating
+
+00:59.100 --> 01:04.040
+a brand new instance of the blog post model.
+
+01:04.930 --> 01:11.950
+So now we have an empty blog post mind that just creating this new class doesn't save anything into
+
+01:11.950 --> 01:12.820
+the database.
+
+01:12.820 --> 01:19.370
+If you would refresh this you can see that there is no data inside the table.
+
+01:19.600 --> 01:31.090
+And now how we will modify their specific columns of the blog post so we can access them by using the
+
+01:31.090 --> 01:41.440
+properties so the property names correspond to the column names of the blog post table so we can manage
+
+01:41.590 --> 01:43.620
+title and content.
+
+01:43.780 --> 01:45.410
+We want to manage ideas.
+
+01:45.430 --> 01:52.810
+We want modified because it is being ultimately assigned to our record when the record is being saved
+
+01:52.840 --> 01:58.770
+into the database and actually the same is we've created out and updated that.
+
+01:58.780 --> 02:01.150
+But we'll get to that later.
+
+02:01.180 --> 02:07.090
+So let's go back and said the title to new title
+
+02:09.710 --> 02:18.030
+and do the same with that content said it us new content.
+
+02:18.070 --> 02:21.080
+Now let's see how our post model looks like.
+
+02:21.280 --> 02:25.020
+So it has two attributes the title and content.
+
+02:25.180 --> 02:35.930
+And now to actually store this model inside the database we have to call that blog post model safe method.
+
+02:35.950 --> 02:39.370
+So every eloquent model has this method.
+
+02:39.670 --> 02:47.350
+So every time you modify a property of the existing model or of the brand new model that you create
+
+02:47.410 --> 02:52.130
+you have to call save so the result is true.
+
+02:52.140 --> 02:54.740
+So apparently it was successful.
+
+02:54.750 --> 03:00.530
+Now let's browse the contents and you can see that we have also generated ideas.
+
+03:00.930 --> 03:09.260
+And also the created update is the current date and the updated that is also the current date.
+
+03:09.270 --> 03:11.820
+It wasn't changed yet.
+
+03:11.880 --> 03:17.290
+Now the title and the content is as we said it.
+
+03:17.410 --> 03:18.640
+So this is fine.
+
+03:18.640 --> 03:23.830
+Now let's go back to the Visual Studio code and enlarge the terminal.
+
+03:24.400 --> 03:35.820
+So let's try fetching the blog posts again using the old static method of the blog post model.
+
+03:35.850 --> 03:40.290
+So now we should see that the collection contains one element and that's correct.
+
+03:40.290 --> 03:48.840
+And we have the exact data that we have previously added but if you would like to fetch only one model
+
+03:49.110 --> 03:56.070
+note the collection of everything that's eaten inside the table you can do that like that.
+
+03:56.820 --> 04:01.360
+So let's add a new variable and call it maybe post two.
+
+04:02.640 --> 04:11.790
+And now we can use our block post model and it has a method to find so find.
+
+04:11.790 --> 04:20.520
+We'll try to fetch the model the data from the database using the primary key in our case by default.
+
+04:20.520 --> 04:26.400
+The primary key is called I.D. and it is an output incremented number.
+
+04:26.400 --> 04:36.630
+So let's try to fetch it and we can see we are successful and we were able to fetch our blog post model
+
+04:36.720 --> 04:46.620
+by I.D. now Let's echo what we have inside the blog post that we have fudged using a defined method
+
+04:46.980 --> 04:49.410
+and see how we can modify it.
+
+04:49.680 --> 04:57.060
+So it's pretty simple we just modify the property that corresponds to the column name.
+
+04:57.060 --> 05:01.780
+So let's modify the title to be modified.
+
+05:01.790 --> 05:08.910
+Title also you can see that this doesn't do anything when we refresh.
+
+05:08.910 --> 05:14.980
+The title is still new title and we have to save it first.
+
+05:15.180 --> 05:18.330
+So let's call save on the post too.
+
+05:18.940 --> 05:24.920
+And now when we will refresh we can see that the title is modified title.
+
+05:25.170 --> 05:32.580
+But another interesting thing is you can see that the created out and updated art differs.
+
+05:32.670 --> 05:41.400
+So the updated art is the later date and that's what I said that that's when I said that Lara will be
+
+05:41.400 --> 05:45.090
+managing those two columns automatically for us.
+
+05:45.120 --> 05:46.430
+It actually does.
+
+05:46.470 --> 05:52.920
+So the way it works I won't go into much detail but the way it works it just checks whether those two
+
+05:52.920 --> 06:00.660
+columns are defined inside your model and they are because we created a migration for them
+
+06:03.790 --> 06:06.870
+using that timestamps method.
+
+06:07.600 --> 06:13.030
+And those column names are also configurable but let's not worry about that.
+
+06:13.180 --> 06:21.190
+But in general it works started checks if those columns exist and when they do when you save or update
+
+06:21.250 --> 06:26.120
+the model it updates those days inside the database too.
+
+06:26.140 --> 06:33.700
+Now let's go back to the Visual Studio code and create our first or actually second blog post.
+
+06:33.730 --> 06:45.820
+So let's do post free equals new app blog post and we will also set up title to be random or whatever
+
+06:45.850 --> 06:50.250
+doesn't really matter and the content to be whatever.
+
+06:52.120 --> 06:58.620
+Now let's see what we will get when we will call the all method of the model.
+
+06:58.930 --> 07:00.700
+So let's assign it to posts
+
+07:08.030 --> 07:11.270
+and of course we have only one model because we haven't saved it.
+
+07:11.270 --> 07:24.620
+So now let's first save our new model and now run it again post equals up blog post Oh and now you see
+
+07:24.620 --> 07:27.140
+we have two models.
+
+07:27.410 --> 07:36.830
+So when we are fetching the elements using all it will fetch us all elements but there is also another
+
+07:36.830 --> 07:48.400
+way we can fetch for example if you would like only those two models you can fetch them using the blog
+
+07:48.400 --> 07:51.250
+post model.
+
+07:51.250 --> 07:52.090
+Find a method.
+
+07:52.120 --> 07:58.580
+But this time we won't specify the key as the only parameter so the primary key.
+
+07:58.690 --> 08:02.810
+Which means that Ida property but we can also use array.
+
+08:03.670 --> 08:11.860
+So if you write something like this it will fetch us the collection of all the models or the records
+
+08:11.860 --> 08:16.030
+that match the primary key with those two parameters.
+
+08:16.030 --> 08:24.250
+As I previously said we can also work with this collection objects like we've a plain array so you can
+
+08:24.250 --> 08:26.350
+see it has two elements.
+
+08:26.380 --> 08:33.520
+So we should be able to access the individual elements like you would access an array.
+
+08:33.520 --> 08:39.290
+So the first element with the index 0 should be the blog post with I.D. 1.
+
+08:39.610 --> 08:48.880
+And of course it is working the same with the blog post with I.D. too which has index 1 us in a typical
+
+08:48.880 --> 08:49.590
+array.
+
+08:49.720 --> 08:58.390
+And obviously if I try to use a index out of French we get on notice.
+
+08:58.390 --> 09:06.400
+Now we can also iterate over the collection as you would do over our normal array so we can use for
+
+09:06.400 --> 09:07.000
+each.
+
+09:07.600 --> 09:15.310
+So do for each post US post and we'll just echo the title.
+
+09:15.310 --> 09:21.850
+So we use this special syntax to call the properties of objects inside string.
+
+09:21.850 --> 09:30.410
+So we have post title surrounded with currently braces and other new line character.
+
+09:30.430 --> 09:39.630
+Mind that you have to use double quotes for this to work and the semicolon and you can see we have titles
+
+09:39.750 --> 09:42.900
+of all of our models printed.
+
+09:44.720 --> 09:51.540
+Finally in this lecture I will tell you about some of the commands that the collections have.
+
+09:51.710 --> 10:00.020
+So let's see what's inside the posts so you can remember that we have access the post by indexes like
+
+10:00.050 --> 10:05.560
+you would do with an array but it's not entirely an array.
+
+10:05.570 --> 10:10.200
+It also has its methods because it's basically a peach pea object.
+
+10:10.730 --> 10:17.900
+So one of the most useful methods that you will use very often is the first method to get the first
+
+10:17.990 --> 10:19.480
+element of the collection.
+
+10:19.520 --> 10:26.620
+So let's call it now and you can see that we have the blog post with ideas 1.
+
+10:26.690 --> 10:31.460
+There is also our last method so we can get.
+
+10:31.460 --> 10:40.410
+Last element of their collection and also finally will do a very simple query.
+
+10:40.410 --> 10:44.880
+Of course I will explain queries in detail later.
+
+10:45.150 --> 10:54.840
+But now let's create a very simple query so we'll access our block post object and we'll do our work
+
+10:54.840 --> 10:55.470
+query
+
+10:59.270 --> 11:02.290
+so we would like to fetch older elements.
+
+11:02.570 --> 11:06.530
+Which title is random and we know that we have one.
+
+11:07.310 --> 11:14.750
+So after writing a query to get the actual elements we should call that get made out because otherwise
+
+11:14.750 --> 11:18.590
+we'll get an instance of the query object.
+
+11:18.590 --> 11:21.520
+So that's not what we want.
+
+11:21.650 --> 11:25.870
+So let's see what will this return.
+
+11:26.270 --> 11:31.410
+And you can see that we have a collection object returned and it is.
+
+11:31.880 --> 11:39.560
+It contains one blog post which actually has this random title and that's where you can for example
+
+11:39.560 --> 11:47.270
+use the get if you create queries so you fetch something more complicated that just all the records
+
+11:47.270 --> 11:48.720
+from a table.
+
+11:48.890 --> 11:51.350
+So let's write it again.
+
+11:51.350 --> 12:00.600
+So you would do up blog post where title is random.
+
+12:00.700 --> 12:08.650
+Now we use gets to actually execute the query and you can even change it with the first because the
+
+12:08.650 --> 12:13.450
+GED will execute the query and return the collection object.
+
+12:13.450 --> 12:20.590
+So now we can call first on the collection to get not the collection object as a result of this but
+
+12:20.620 --> 12:22.530
+instead the model.
+
+12:22.600 --> 12:23.860
+So let's see.
+
+12:23.890 --> 12:33.430
+And you can see that we executed our first simple query where we found a blog post which has a random
+
+12:33.640 --> 12:34.260
+title.

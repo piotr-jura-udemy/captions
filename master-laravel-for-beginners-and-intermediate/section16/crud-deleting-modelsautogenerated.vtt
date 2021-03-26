@@ -1,0 +1,100 @@
+WEBVTT
+
+00:00.690 --> 00:08.880
+Let's implement destroy action that is responsible for deleting models from the database, so to actually
+
+00:08.880 --> 00:14.050
+remove the record from the database table, you need a model instance.
+
+00:15.360 --> 00:25.620
+So use the blog post, find or fail method to get the model as we have the I.D. parameter passed to
+
+00:25.620 --> 00:26.150
+us.
+
+00:27.060 --> 00:30.630
+You just need to call the delete method.
+
+00:33.700 --> 00:42.250
+And that table record will be gone forever, Laravel supports so-called soft deletes, allowing to mark
+
+00:42.250 --> 00:46.030
+models as deleted without physically deleting them from the database.
+
+00:46.510 --> 00:48.550
+This would be talked about later.
+
+00:49.760 --> 00:59.420
+Finally, let's tell users their reaction was successful and redirect to the list of posts previously
+
+00:59.420 --> 01:01.730
+when we wanted to add a flash message.
+
+01:02.030 --> 01:09.350
+We used the request object that was passed to the request method here in the destroy method.
+
+01:09.710 --> 01:12.800
+It is not passed, but that's no problem.
+
+01:12.830 --> 01:15.560
+There are many ways you can access the current session.
+
+01:16.220 --> 01:20.930
+So one of the ways would be to justifying that request object.
+
+01:22.110 --> 01:30.000
+As this method parameter and a lot of us will know that it needs to insert the current request object
+
+01:30.000 --> 01:35.580
+into this method, that would be one way to access the request and thus the session.
+
+01:36.270 --> 01:38.260
+But you don't really have to do it this way.
+
+01:38.760 --> 01:45.960
+You can also access the session using the session helper function and the same applies to request.
+
+01:45.990 --> 01:48.900
+There also is a request.
+
+01:50.680 --> 01:54.620
+Helper function that well, basically does the same thing.
+
+01:55.180 --> 01:59.860
+OK, we just need this session, so let's access it using the helper function.
+
+02:00.250 --> 02:09.320
+And then Flash said the status message to be blog post was deleted with an exclamation mark.
+
+02:10.000 --> 02:15.420
+And finally, let's do a redirect not to the blog post this time us.
+
+02:15.430 --> 02:18.550
+We've just deleted it this time.
+
+02:18.580 --> 02:23.860
+This would be, to the least of all posts, save the judges.
+
+02:24.190 --> 02:26.500
+And now it's time to check it out.
+
+02:28.060 --> 02:34.410
+So we are back on our not so beautiful list of blog posts, let me try with the last one.
+
+02:35.540 --> 02:41.390
+This seems to work, we have the flash message that we can just click on them and delete them from the
+
+02:41.390 --> 02:42.110
+database.
+
+02:43.130 --> 02:45.520
+Well, maybe we should also fix the flash message.
+
+02:46.190 --> 02:48.110
+It was deleted.
+
+02:50.810 --> 02:54.710
+That's the last time when you saw our website looking so ugly.
+
+02:55.770 --> 02:59.610
+From the next lecture, we will be working on styling it.

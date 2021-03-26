@@ -1,0 +1,241 @@
+WEBVTT
+
+00:00.860 --> 00:08.220
+So in the last lecture we have covered how contracts work in Louisville and we've even created one of
+
+00:08.250 --> 00:14.620
+our own but still in some of our controllers we use phosphates.
+
+00:14.640 --> 00:19.020
+And as I've said previously using phosphates is just fine.
+
+00:19.020 --> 00:27.060
+There are testable the same as injecting something to the constructor so you can as easily test something
+
+00:27.060 --> 00:36.600
+in your unit test using phosphates and dependency injection.
+
+00:36.720 --> 00:44.370
+So let's now see how those four seeds actually work by creating one of our own.
+
+00:44.940 --> 00:52.660
+So we will create our first aid to our counter so let's create a new folder in the app folder.
+
+00:52.770 --> 01:01.050
+Call it first seeds and create a new file and let's call it counter for seed.
+
+01:01.090 --> 01:08.530
+So of course you can see that typically phosphates in Latvia are and called with the first aid suffix.
+
+01:08.530 --> 01:10.960
+I'm just doing that for clarity.
+
+01:10.960 --> 01:12.430
+So let's define the namespace.
+
+01:12.430 --> 01:19.740
+This would be up for sates and this would be a class counter for seed.
+
+01:19.810 --> 01:26.940
+This time we have to extend an object and it is actually fast say the base class from this namespace.
+
+01:26.950 --> 01:30.590
+So Illuminate Support phosphates for seed.
+
+01:30.700 --> 01:31.660
+That's the one.
+
+01:31.660 --> 01:41.140
+So not the import that was added at the top now for seed only has to have one method which is static.
+
+01:41.140 --> 01:42.160
+So let's define it.
+
+01:42.160 --> 01:55.250
+Public function sorry public static function and the name should be get for seed access or now.
+
+01:55.260 --> 02:01.290
+This method is supposed to return the service name from the service container.
+
+02:01.560 --> 02:09.690
+And then when you will use this for seed and call any method statically larval will route all those
+
+02:09.690 --> 02:12.720
+calls using peach bee magic methods.
+
+02:12.720 --> 02:18.670
+It's not actually a very complicated implementation to the actual service.
+
+02:19.230 --> 02:25.740
+So if we will return a service and for this we want to return a contract
+
+02:28.890 --> 02:34.830
+so then larval will pick up whatever was defined for that contract on the service container.
+
+02:34.830 --> 02:41.640
+So we are also not linking this for seed to anything from service container which is a class we are
+
+02:41.970 --> 02:50.910
+saying that this is for seed access or for this contract and then whatever is said on the app service
+
+02:50.910 --> 02:58.740
+provider that should be used for this particular contract or interface will be accessible through first
+
+02:58.740 --> 03:00.150
+aid.
+
+03:00.870 --> 03:02.930
+So now basically that's enough.
+
+03:02.970 --> 03:10.010
+That's everything you have to do to create your own first seed but it's a good pattern to add some peach
+
+03:10.010 --> 03:11.250
+bee dog blocks.
+
+03:11.280 --> 03:20.040
+This is just commenting BHP so that's not actual code but it can be read read by some editors to add
+
+03:20.040 --> 03:21.550
+some code completion.
+
+03:22.260 --> 03:31.080
+So what you can do is you can say that this class will contain a method that is static that returns
+
+03:31.110 --> 03:34.140
+an integer is called increment
+
+03:36.830 --> 03:41.000
+and that it has arguments the same as our interface.
+
+03:41.030 --> 03:43.700
+So the key and the dogs
+
+03:46.310 --> 03:53.660
+which is no by default so not is that it differs a little bit from the from how you define this method
+
+03:53.720 --> 03:55.550
+on the contract itself.
+
+03:55.700 --> 04:03.410
+And this is just because it is a peach bee dog syntax which I will include a link to this lecture so
+
+04:03.410 --> 04:07.200
+you can read more about the syntax of this documentation.
+
+04:07.370 --> 04:09.040
+So this doesn't do anything.
+
+04:09.080 --> 04:17.600
+You can write anything inside this particular comment something like Sade to contract.
+
+04:17.600 --> 04:19.800
+This is just for documenting purposes.
+
+04:19.800 --> 04:27.710
+Originally this was created to generate documentation of your code but now it also has some useful tasks
+
+04:27.770 --> 04:36.080
+and it's been used for years by many developers to document their code and then to use that in the editors
+
+04:36.080 --> 04:44.670
+like BHP storm or visual studio code with some plugins to get some help in the code completion tools.
+
+04:45.080 --> 04:52.820
+OK so now save the changes and what we will do now is we'll switch back from using dependency injection
+
+04:52.880 --> 04:55.580
+to using first aid.
+
+04:55.640 --> 05:03.230
+So what we will do is now those two controllers won't have any dependencies injected nothing will be
+
+05:03.380 --> 05:05.360
+utilized in constructors.
+
+05:05.360 --> 05:11.530
+There will be no fields we don't even need this contract anymore.
+
+05:11.720 --> 05:21.930
+And now how you can access the counter is instead of this counter you can use counter for seed and instead
+
+05:21.930 --> 05:28.440
+of calling this method on an object seems counter if I say we accessed it here statically by using the
+
+05:28.440 --> 05:38.760
+class name we use the static operator and then you can call increment notice that there isn't an increment
+
+05:38.790 --> 05:41.040
+method defined on this facade.
+
+05:41.040 --> 05:49.590
+So as I've said using this base for seed object larval will actually try to root this to a specific
+
+05:49.590 --> 05:51.480
+service and execute this method.
+
+05:51.480 --> 05:56.010
+So it contains a little bit of magic but it's not really complicated.
+
+05:56.010 --> 06:02.650
+So there is no method like that yet when you type counter phosphate you get this method.
+
+06:02.670 --> 06:09.840
+Thanks to this dog block that we have added at the top of the counter phosphate this one.
+
+06:09.940 --> 06:10.280
+Okay.
+
+06:10.290 --> 06:18.300
+So now you can call it like that counter phosphate increment and do the same in the post controller.
+
+06:18.300 --> 06:21.120
+So instead of injecting dependencies
+
+06:24.510 --> 06:27.390
+let's also remove the usage of this contract.
+
+06:27.420 --> 06:32.730
+We can now safely use it using phosphate.
+
+06:33.690 --> 06:43.380
+So removing this one counter for say static access or and calling increment also notice that in both
+
+06:43.380 --> 06:50.670
+controller classes you need to add the import for the counter phosphate.
+
+06:50.980 --> 06:51.300
+Okay.
+
+06:51.310 --> 06:55.690
+Now say the changes and after you refresh you can see that nothing changes.
+
+06:55.690 --> 07:00.500
+It works the same because it is accessing exactly the same thing.
+
+07:00.550 --> 07:07.130
+So if you'll take a look at the profile it also works.
+
+07:07.250 --> 07:13.990
+And now to prove that the phosphate is actually getting what it needs from the service container.
+
+07:14.050 --> 07:21.950
+Let's go to the service container and switch back from using this actual counter class as implementation
+
+07:21.950 --> 07:24.610
+to the dummy counter.
+
+07:24.680 --> 07:28.500
+So save the changes now and you can see that we get this.
+
+07:28.550 --> 07:29.770
+I am dummy counter.
+
+07:29.810 --> 07:35.210
+Not implemented yet message and we are not using dependency injection.
+
+07:35.210 --> 07:43.610
+We are using Forsyte now and well this proves that the four seeds are basically a static access or to
+
+07:43.610 --> 07:45.920
+something from the service container.

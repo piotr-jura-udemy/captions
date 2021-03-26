@@ -1,0 +1,253 @@
+WEBVTT
+
+00:00.450 --> 00:07.590
+In the last lecture we have implemented the view to display older blog posts that are tagged with a
+
+00:07.590 --> 00:09.500
+particular tag.
+
+00:09.510 --> 00:16.050
+Now we have encountered a problem that we cannot display the most commented most active and most active
+
+00:16.050 --> 00:23.610
+users last month simply because we'll have to calculate this data somehow fetch it from the database
+
+00:23.610 --> 00:31.170
+or cache or basically just copy this code which we have inside the post controller to the post stat
+
+00:31.170 --> 00:32.820
+controller so we can pass it.
+
+00:32.850 --> 00:36.230
+So we have no place to fetch this data from.
+
+00:36.510 --> 00:43.530
+And this is our problem and we've also talked that when you would like to add this sidebar to the blog
+
+00:43.530 --> 00:52.200
+post view this would also possibly require us to fetch this code again even though we already have our
+
+00:52.200 --> 00:56.590
+show action that is actually quite too long.
+
+00:56.590 --> 01:03.030
+Now fortunately Lara VO is not to make our life harder it is to make our life easier.
+
+01:03.360 --> 01:07.230
+So it already has a solution for a problem like this.
+
+01:07.230 --> 01:09.960
+So our problem is let's describe it.
+
+01:10.440 --> 01:15.300
+We want to make some data available to particular views.
+
+01:15.450 --> 01:23.490
+In this case we would like to make some data available all the ways for The Post's index view and posts
+
+01:23.550 --> 01:25.860
+show view.
+
+01:25.860 --> 01:33.660
+So instead of calculating reading or fetching this data in all the controller actions and then passing
+
+01:33.690 --> 01:42.180
+it explicitly to the view we can use a component called view composers and this would do just that.
+
+01:42.180 --> 01:51.000
+It will make some data available under particular names to all of our views that we specify.
+
+01:51.000 --> 01:52.980
+So what we need is we need this.
+
+01:52.980 --> 02:01.560
+Most Commented most active and most active last month variables field with data on particular views
+
+02:01.890 --> 02:08.480
+so we won't have to pass this data explicitly inside controllers.
+
+02:08.850 --> 02:13.520
+So the view composers composer is basically a class.
+
+02:13.550 --> 02:21.270
+So you have to create them and the suggested place to create those view composer classes is inside your
+
+02:21.350 --> 02:24.350
+up HDP namespace.
+
+02:24.450 --> 02:29.230
+So let's go ahead and create a new folder which would be a namespace.
+
+02:29.340 --> 02:34.700
+Call it view composers and inside it.
+
+02:34.730 --> 02:35.220
+Let's go.
+
+02:35.240 --> 02:44.250
+Let's create our first composer class so we can call it activity composer.
+
+02:44.290 --> 02:50.500
+This creates us new empty BHP files so we have to start with BHP tag.
+
+02:50.620 --> 02:59.040
+Since it's a class we have to define a namespace which would be an up HDP view composers.
+
+02:59.110 --> 03:06.610
+So it basically has to match the folder structure so everything inside the up folder starts with up
+
+03:07.060 --> 03:09.610
+and then we follow the folder structure.
+
+03:09.610 --> 03:20.710
+So HDP view composers now let's define a class which has to have the same name as their file so activity
+
+03:20.740 --> 03:21.370
+composer.
+
+03:21.370 --> 03:25.900
+That way it can be out loaded by the peach be outer loader.
+
+03:26.020 --> 03:34.850
+Now those view composer classes has to have one method which is public and it is called compose.
+
+03:35.050 --> 03:39.630
+It accepts one argument of type view.
+
+03:39.640 --> 03:45.120
+That's the namespace of this object illuminates slash of you slash view.
+
+03:45.130 --> 03:51.620
+If you press entering this code it should be ultimately added as an import.
+
+03:52.150 --> 03:57.070
+And now the argument name doesn't really matter.
+
+03:57.070 --> 04:04.900
+So now inside this method we can define what we need for our particular variable name.
+
+04:04.900 --> 04:09.260
+So what we will do is we'll copy this code from that post.
+
+04:09.260 --> 04:10.000
+Controller
+
+04:12.850 --> 04:20.050
+now mind that we have used some classes that we haven't imported yet to this class.
+
+04:20.070 --> 04:33.480
+So that's cash so unique to this import and we also have to use up blog post and use up user because
+
+04:33.480 --> 04:38.100
+we are referencing those two classes to fetch some data
+
+04:42.230 --> 04:51.680
+now what we can do is this view argument that is being passed has our with method and the first argument
+
+04:51.710 --> 05:00.650
+of this with method is the name of the variable that is available inside the The View template which
+
+05:00.650 --> 05:07.570
+would be in our case most commented most active and most active last month.
+
+05:09.400 --> 05:15.300
+So that's the name and the data data for this variable is the second argument.
+
+05:15.310 --> 05:27.970
+So let's use most commented and we will do the same for all the two remaining variables so most active
+
+05:28.000 --> 05:28.900
+last month
+
+05:31.950 --> 05:36.450
+and most active now it's not everything.
+
+05:36.470 --> 05:41.960
+We created our view composer and I have misspelled the method name.
+
+05:41.960 --> 05:43.610
+Actually it's not composer.
+
+05:43.610 --> 05:50.420
+It is compose so it has to be called compose.
+
+05:50.800 --> 05:54.640
+And now we can open the up service provider.
+
+05:54.640 --> 06:02.770
+We've registered some blade components here before and what we have to do here is we can call the view
+
+06:02.830 --> 06:08.410
+helper function and call the composer method.
+
+06:10.940 --> 06:18.290
+And the first argument that it expects it's for what views you would like to make some data available
+
+06:18.290 --> 06:20.180
+from a particular composer.
+
+06:20.570 --> 06:30.940
+So at this point we only need it for posts index and the composer we and the composer we will use here
+
+06:30.940 --> 06:34.310
+is the activity composer.
+
+06:34.360 --> 06:39.070
+So if you will type the class name you have a suggestion to import it.
+
+06:39.100 --> 06:40.600
+So press enter.
+
+06:40.600 --> 06:49.910
+This would add an import as you statement for this class and using this syntax for accessing static
+
+06:49.910 --> 06:51.340
+members of this class.
+
+06:51.350 --> 06:56.940
+We can get the class constant which will give us the fully qualified class name.
+
+06:57.170 --> 07:10.340
+So we are doing this instead of typing a string with the up HDP view composers activity composer.
+
+07:10.340 --> 07:15.590
+So it's much shorter to just use the class constant.
+
+07:15.590 --> 07:18.800
+Now the magic happens.
+
+07:18.800 --> 07:24.290
+We can remove this code from our index action.
+
+07:24.290 --> 07:32.630
+We don't really have to posit to the view right now and also inside postdoc controller we don't need
+
+07:32.630 --> 07:41.470
+this empty arrays because the data for those variables for the specific specified view in our case doubts
+
+07:41.470 --> 07:49.970
+that only posts index view will always be available thanks to that activity composer.
+
+07:49.970 --> 07:57.620
+So lateral refresh this page and you should see what I see on the right or some other titles of the
+
+07:57.620 --> 08:03.740
+blog posts or and user names because you will just have different data and you can see that we haven't
+
+08:03.740 --> 08:07.510
+passed anything from the post that controller yet.
+
+08:07.550 --> 08:15.640
+The data is available to this particular view because we render the blog posts that are associated with
+
+08:15.640 --> 08:21.950
+a tag using the same view as we do that on the blog post index page.
+
+08:21.950 --> 08:26.570
+That's exactly the same view that posts index.
+
+08:26.570 --> 08:34.970
+Also when you will go back to the list of all the blog posts is also displayed on the right and it is
+
+08:35.000 --> 08:38.600
+also getting this data from the view composer.

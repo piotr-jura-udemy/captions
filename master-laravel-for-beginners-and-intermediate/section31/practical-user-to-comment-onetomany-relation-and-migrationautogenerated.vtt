@@ -1,0 +1,202 @@
+WEBVTT
+
+00:01.020 --> 00:07.710
+Now in this section which could be called our practice section because we want to introduce many new
+
+00:07.710 --> 00:15.090
+concepts we'll mostly practice what we already know will add the ability for the authenticated users
+
+00:15.090 --> 00:17.540
+to comment on the blog posts.
+
+00:17.760 --> 00:26.300
+So we actually have the comment model and it is related to the blog post using them one to many relationship
+
+00:26.640 --> 00:33.090
+but what we are missing is the relation between the comments and the users.
+
+00:33.090 --> 00:40.530
+So this is I think we already have we have blog posts that each blog post has one to many relationship
+
+00:40.590 --> 00:46.380
+where the user can have many blog posts so we'll do the same with the user.
+
+00:46.380 --> 00:50.790
+Also we'll need a migration to modify the comments table.
+
+00:50.790 --> 00:58.980
+We'll have to modify the seeder to include the user I.D. when comments are generated and also will add
+
+00:59.040 --> 01:02.430
+a relation on the User model itself.
+
+01:02.430 --> 01:09.420
+And then in the next lectures of this section we'll actually implement this functionality to add comments
+
+01:09.660 --> 01:14.070
+which will need to learn more concepts in the next section.
+
+01:14.070 --> 01:16.790
+So let's go ahead and do what we have to do.
+
+01:18.190 --> 01:22.840
+Now let us start by adding a user idea field to the comments table.
+
+01:22.870 --> 01:25.750
+Fortunately we already have our migration.
+
+01:25.780 --> 01:33.490
+When we did that and we also included a trick to modify the table differently for the Eskew allied testing
+
+01:33.490 --> 01:39.110
+connection and provide a default value so we can reuse that.
+
+01:39.130 --> 01:42.580
+So what you have to do is create the migration.
+
+01:42.580 --> 01:57.480
+You can use P2P artisan make migration and we'll call it similarly so will do add user to comments table.
+
+01:57.540 --> 02:02.860
+Now let's open this migration file.
+
+02:03.060 --> 02:07.950
+Now you can close the terminal because we won't be running the migration straight away.
+
+02:08.110 --> 02:16.750
+We'll just seed our database after we'll also modify the seeder so we have copied and pasted this code
+
+02:16.780 --> 02:21.270
+because this is essentially the same we can even do that with the down method.
+
+02:23.030 --> 02:29.870
+So let's copy and paste and you can see that this is this isn't very specific to the blog post to model
+
+02:29.900 --> 02:37.340
+because we are just adding user idea column defining it ASM for a key and then on the down method we
+
+02:37.340 --> 02:38.990
+remove that foreign key.
+
+02:39.020 --> 02:45.720
+So nothing specific to blog posts here we can use that for comments too and it will work.
+
+02:45.850 --> 02:54.350
+Okay so we have the migrations defined let's save it make sure it is saved and now let's close those
+
+02:54.350 --> 02:57.720
+migrations and take a look at the User model.
+
+02:57.950 --> 03:05.480
+So it is referencing the blog post the model using one to many relationship and let's define the same
+
+03:05.480 --> 03:14.600
+relationship for comments since we require users to have an account to are the blog post will do the
+
+03:14.600 --> 03:16.220
+same with comments.
+
+03:16.220 --> 03:20.530
+So this would be one too many to up comment.
+
+03:22.930 --> 03:32.190
+So we defined one side of this relation on the User model and on the comment model will add other side
+
+03:32.190 --> 03:33.140
+of the relation.
+
+03:33.180 --> 03:38.250
+You can even copy that from the blog post because this will belong to our user
+
+03:42.330 --> 03:42.650
+okay.
+
+03:42.670 --> 03:47.070
+So we have them migration and we have the relation defined.
+
+03:47.150 --> 03:49.670
+Now let's take a look at the seeder.
+
+03:49.670 --> 03:59.570
+So what we do here is we create some comments using factory and assign our random blog post to particular
+
+03:59.570 --> 04:00.590
+comment.
+
+04:00.590 --> 04:02.640
+So let's do the same thing.
+
+04:02.780 --> 04:11.040
+But first let's open the seeder for the blog posts so blog post tables cedar.
+
+04:11.060 --> 04:20.270
+Now what you see here is we are fetching the users and then then taking random user using random method
+
+04:20.330 --> 04:23.180
+and assigning this to blog posts.
+
+04:23.180 --> 04:25.250
+So we'll do the same for the comments
+
+04:30.670 --> 04:32.740
+so here we fetch the user
+
+04:35.520 --> 04:41.390
+now we need to use this variable so we not only have to use the post because obviously this doesn't
+
+04:41.400 --> 04:53.200
+have access disclosure won't have access to this variable so let's use users and then you can copy this
+
+04:53.200 --> 04:53.770
+code.
+
+04:58.520 --> 05:06.030
+And now each individual comment will have the user I.D. assigned and we'll pick a random user who wrote
+
+05:06.120 --> 05:09.140
+the comment.
+
+05:09.170 --> 05:18.290
+Now let's open the terminal and instead of running the migration we'll do peach bee artisan D.B. seed
+
+05:19.820 --> 05:28.010
+say yes and we'll just run all the migrations and add the blog posts comments and talks at once
+
+05:31.810 --> 05:33.610
+OK so we are done.
+
+05:33.680 --> 05:35.970
+Now let's go to the database structure
+
+05:39.160 --> 05:46.690
+and now you can see that all the comments have a user I.D. assigned and inside the database structure.
+
+05:46.690 --> 05:53.530
+Now the comments have our user I.D. field which is a foreign key to the user's table.
+
+05:53.530 --> 06:01.250
+So we are done with modifying our database structure and we also have defined a one to many relationship.
+
+06:01.330 --> 06:08.410
+Now what we can also immediately change is that you can see on the view of one individual blog post
+
+06:08.680 --> 06:16.030
+you can see not only when the blog post was added but also by whom and we can do the same with comments
+
+06:16.060 --> 06:20.710
+because now we have our user I.D. associated to the comments.
+
+06:21.100 --> 06:29.740
+So let's find this view which displays a blog post and here we have this Lavell blade component called
+
+06:29.830 --> 06:30.670
+updated
+
+06:33.800 --> 06:41.900
+and we can provide the name parameter to it too but it's obviously not from the post it is from comment
+
+06:44.990 --> 06:49.330
+so just see the changes refresh
+
+06:55.450 --> 06:59.470
+and now you will see the name of the comment outer.

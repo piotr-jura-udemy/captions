@@ -1,0 +1,361 @@
+WEBVTT
+
+00:01.150 --> 00:07.270
+In this section we'll cover events of the larval application in detail.
+
+00:07.270 --> 00:12.560
+So let's start with the events that we already know which are model events.
+
+00:12.580 --> 00:19.090
+So if you remember on blog post and on comment we created some model events.
+
+00:19.540 --> 00:24.670
+So whenever something happens to our model lot of it is dispatching a specific event.
+
+00:24.670 --> 00:32.140
+For example we have our deleting event here which is being dispatched before a model is being deleted.
+
+00:32.170 --> 00:39.070
+Then there is updating restoring and we also have a creating event on the comment model.
+
+00:39.070 --> 00:46.840
+We mostly use that to simply clear the cache that we have previously created for a specific blog posts.
+
+00:46.840 --> 00:53.620
+Now let's also imagine that there might be times when you will have to add some handlers to much more
+
+00:53.620 --> 01:01.780
+events of a particular model or that for any reason those even start to be much more complicated and
+
+01:01.870 --> 01:04.020
+contain a lot of logic.
+
+01:04.150 --> 01:12.790
+And this would make this hard to read and not really a good practice to put all those code into specific
+
+01:12.790 --> 01:15.670
+closures on a particular model.
+
+01:15.670 --> 01:23.320
+So compare it to creating our routes and closures inside your web page.
+
+01:23.650 --> 01:31.750
+So if we have what we actually have right now all our controllers would be inside the web BHP those
+
+01:31.750 --> 01:33.470
+file would be unreadable.
+
+01:33.490 --> 01:35.110
+It would be too long.
+
+01:35.890 --> 01:45.010
+So there is a way to do it differently in travel and you can compare it like creating the closures and
+
+01:45.010 --> 01:52.630
+the routes inside your work BHP and creating controllers and for the Model Events.
+
+01:52.630 --> 01:59.860
+The thing is called an observer so you can create those observer classes that will have methods defined
+
+01:59.920 --> 02:06.130
+that match the names of the events that are being dispatched on the model.
+
+02:06.130 --> 02:09.670
+So let's go ahead and create our first observer.
+
+02:09.670 --> 02:14.010
+As usual we can do that easily using an artisan command.
+
+02:15.490 --> 02:21.600
+So the name is BHP artisan make server so let's create the blog post.
+
+02:21.640 --> 02:25.930
+Observer we need to specify for which model this is.
+
+02:25.960 --> 02:29.020
+So it's for the blog post.
+
+02:29.160 --> 02:37.290
+Now this was created successfully and now there is the new directory in our app directory called observer's
+
+02:37.410 --> 02:41.000
+and this is where all the observer classes would go.
+
+02:41.280 --> 02:44.190
+So let's open up the blog post observer.
+
+02:44.310 --> 02:52.980
+You can see that Lara has put some events in there so we have created updated they all have the methods
+
+02:53.010 --> 02:59.370
+which get passed an instance of the model to which this event relates.
+
+02:59.370 --> 03:05.020
+So let's move our logic from the model itself to an observer.
+
+03:05.730 --> 03:08.580
+So the first one would be the deleting event.
+
+03:08.940 --> 03:11.040
+So we cannot find it.
+
+03:11.040 --> 03:11.750
+It's not there.
+
+03:11.780 --> 03:18.150
+But that's not a problem we can define this event because it's one of the valid model events.
+
+03:18.150 --> 03:21.060
+So it's deleting blog post
+
+03:23.930 --> 03:28.870
+and that we can handle all the logic inside this particular observer.
+
+03:28.880 --> 03:40.570
+So let's move that so we can copy this method here also make sure that you have the cash for say import
+
+03:40.630 --> 03:43.130
+here inside this blog post observer.
+
+03:43.210 --> 03:48.340
+It's always important to remember that especially if you are copying some code.
+
+03:48.340 --> 03:55.350
+So we are essentially doing the same thing as we did on the closure but now every logic regarding a
+
+03:55.390 --> 03:59.770
+particular model events is in one single class.
+
+03:59.920 --> 04:01.160
+So what do we have next.
+
+04:01.160 --> 04:06.520
+The updating so there is only updated.
+
+04:06.520 --> 04:12.370
+So lets you then copy this method and create another one up.
+
+04:13.300 --> 04:14.050
+Updated
+
+04:18.510 --> 04:20.900
+sorry this is actually updating.
+
+04:21.000 --> 04:25.230
+I keep writing it wrong so it's updating.
+
+04:25.330 --> 04:25.790
+OK.
+
+04:25.800 --> 04:31.440
+And what we want to do here is just clear that cache element for a blog post.
+
+04:31.440 --> 04:38.580
+We already have the cash for seed imported and then the rest restoring for restoring our self deleted
+
+04:38.640 --> 04:39.830
+model.
+
+04:39.930 --> 04:42.040
+So there is only a restart here.
+
+04:42.060 --> 04:46.540
+So let's create restoring public function restoring
+
+04:49.020 --> 04:58.620
+blog post as a parameter and there it is so you can either keep those methods so well you won't have
+
+04:58.620 --> 05:06.210
+to define them in the future or other natively you can just remove those that are not implemented because
+
+05:06.210 --> 05:11.250
+they are not mandatory that you only have to define those that you want to handle.
+
+05:12.930 --> 05:19.880
+So removing all those methods and now it might be much clearer.
+
+05:19.880 --> 05:28.990
+So it depends on your needs because well defining those events inside the boot method is also fine.
+
+05:29.030 --> 05:33.770
+But it all depends how complicated and long they are getting.
+
+05:34.070 --> 05:36.650
+Now that's not everything that you have to do.
+
+05:36.740 --> 05:39.140
+So defining this class is not enough.
+
+05:39.140 --> 05:47.600
+You also have to tell Lara though that it should use our specific observer class to observe our particular
+
+05:47.600 --> 05:50.360
+blog particular model events.
+
+05:50.360 --> 05:54.790
+Well you can do that inside an app service provider.
+
+05:55.910 --> 06:02.660
+So at the bottom of the boot method of this class we can do blog post
+
+06:05.180 --> 06:09.270
+observe and blog post.
+
+06:09.570 --> 06:12.940
+Observer class.
+
+06:13.330 --> 06:17.730
+So we are calling the static observe method on the model.
+
+06:17.740 --> 06:22.180
+And then we have to parse the fully qualified class name of the observer class.
+
+06:22.180 --> 06:28.300
+That's why I'm using the class constant and since we have used those two classes we might need to make
+
+06:28.300 --> 06:32.880
+sure that they are important as a use statement.
+
+06:32.920 --> 06:40.150
+Now the other thing you should know is that if you will have those events both defined on the boot method
+
+06:40.560 --> 06:42.180
+so you will have them as closures.
+
+06:42.190 --> 06:49.370
+They will always be called first only then Lavell will call the events of your observer.
+
+06:49.510 --> 06:52.930
+So if you need both for any reason just so you know that.
+
+06:53.530 --> 06:58.330
+But anyway since we now have an observer we can clear it up a little bit.
+
+06:59.640 --> 07:07.290
+So the boot method stays because here we are also registering scope but for the comment basically we
+
+07:07.290 --> 07:08.820
+do not need anything else.
+
+07:08.820 --> 07:12.000
+We just would need an observer class.
+
+07:12.000 --> 07:23.340
+So let's go ahead and also create one for the comments or make observer comment observer and model is
+
+07:23.730 --> 07:26.110
+comment okay.
+
+07:26.110 --> 07:28.440
+It should also create another observer.
+
+07:28.440 --> 07:28.980
+Class
+
+07:32.110 --> 07:37.240
+so let's go ahead and remove all those methods that we once support.
+
+07:37.240 --> 07:47.250
+We only need actually one and it is creating so not created but creating and inside it.
+
+07:47.340 --> 07:54.940
+If the commendable type is the blog post we clear the cache so let's also move this logic into this
+
+07:54.940 --> 07:58.160
+observer class.
+
+07:58.180 --> 08:03.550
+Now we of course have to make sure that we are importing the cash for sale here.
+
+08:03.550 --> 08:09.670
+And since we are real relying on the class constant of the blog post we need to use it.
+
+08:09.700 --> 08:20.280
+So up use up blog post and of course you will have to register this observer so comment absurd.
+
+08:23.560 --> 08:27.180
+And comment observer
+
+08:32.170 --> 08:34.310
+now the same applies to this fire.
+
+08:34.320 --> 08:45.460
+So we have to use up command and we have set up comment and we have to use up observer's comment up
+
+08:45.490 --> 08:46.240
+server
+
+08:50.510 --> 08:55.730
+so you can see how this might make your application cleaner.
+
+08:55.730 --> 09:02.200
+So whenever you will need anything to end it to handle any events related to our model.
+
+09:02.210 --> 09:07.850
+Then you can just use the server classes make sure you registered them in any provider.
+
+09:07.910 --> 09:13.860
+The best way is probably to use up service provider it's recommended by a lot of all.
+
+09:13.910 --> 09:17.870
+So now our booth method is simpler so our model is shorter.
+
+09:17.870 --> 09:25.630
+It only contains whatever is essential to this model like relations and query scopes but method is simple
+
+09:25.640 --> 09:32.910
+because here we just register our scope and now inside that comment we do not need this method at all.
+
+09:33.350 --> 09:39.290
+So we can remove the booth matter because we have only created it to register as some events so this
+
+09:39.290 --> 09:47.090
+makes our comment even simpler and we can also remove this cache for seed so it has less dependencies.
+
+09:47.100 --> 09:48.790
+The model class itself
+
+09:53.720 --> 10:01.340
+now to make sure that this is actually run the those blog posts observers and comment observers actually
+
+10:01.430 --> 10:02.410
+are wrong.
+
+10:03.650 --> 10:05.750
+So let's do something like didi
+
+10:10.100 --> 10:11.960
+i n delete it.
+
+10:12.280 --> 10:14.260
+We'll just put a temporary here
+
+10:17.110 --> 10:28.870
+ending the comment server will add d d I am create it so save the changes and now Let's attempt to delete
+
+10:28.960 --> 10:31.700
+our blog posts so we can see I am deleted.
+
+10:31.700 --> 10:34.180
+So this was called correctly.
+
+10:34.180 --> 10:36.880
+Now go on the blog post and try to add a comment
+
+10:41.230 --> 10:42.860
+and you can see I am created.
+
+10:42.880 --> 10:48.640
+So exactly what we are dumping inside our Model Observers so we can.
+
+10:48.730 --> 10:51.130
+Now we are sure that they are actually working.
+
+10:51.130 --> 10:56.770
+So save the changes comment that out and in the next lecture of this section we'll learn about other
+
+10:56.770 --> 11:04.840
+types of events that larval application can produce and also how we can create our own events and then
+
+11:04.840 --> 11:05.620
+handle them.

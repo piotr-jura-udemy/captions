@@ -1,0 +1,58 @@
+WEBVTT
+
+00:01.030 --> 00:05.890
+Let's begin this lecture by starting a fresh thinker session.
+
+00:07.540 --> 00:14.290
+To get all records from a table, you can use the old method of darts table model.
+
+00:15.620 --> 00:26.240
+Let's assign the result of blog post static all method Cole to the Post's variable all night, not like
+
+00:26.240 --> 00:34.340
+many other querying methods that can return more than one model to return of value, which is of the
+
+00:34.340 --> 00:35.810
+type collection.
+
+00:37.970 --> 00:43.310
+Collection class is a powerful lot of rubber on array type.
+
+00:44.290 --> 00:51.370
+Collections have a lot of handy methods that allow easy filtering, sorting and other array specific
+
+00:51.370 --> 00:58.360
+tasks, collections can be accessed like a using the square brackets syntax.
+
+00:59.320 --> 01:09.940
+They have methods like first to get the first element from the collection or count to count the elements,
+
+01:09.940 --> 01:10.840
+for example.
+
+01:11.680 --> 01:19.650
+Actually, there are so many possibilities, it would take a couple hours to go over each one of them.
+
+01:20.350 --> 01:24.790
+If you are keen to read about them now, go to this page.
+
+01:26.160 --> 01:30.900
+If you are keen to read about them now, go to this page.
+
+01:31.910 --> 01:39.470
+Collection class is widely used in lot of a legal system, not only in eloquent, you don't have to
+
+01:39.470 --> 01:44.990
+go and read this now, but eventually that's a really good idea to do it.
+
+01:46.340 --> 01:59.000
+Finally, it's possible to fetch couple models at once by their ID because you can pass an array to
+
+01:59.000 --> 02:02.270
+the find method specifying the IDs that you want.
+
+02:03.440 --> 02:11.510
+But in case of this method, it will only return the models which were found, so in our case, that
+
+02:11.510 --> 02:14.690
+would only be a collection with one model.

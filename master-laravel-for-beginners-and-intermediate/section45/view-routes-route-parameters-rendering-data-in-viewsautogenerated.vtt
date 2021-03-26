@@ -1,0 +1,394 @@
+WEBVTT
+
+00:02.970 --> 00:09.600
+Let's continue where we left off in the last lecture which is we have defined two simple roots.
+
+00:09.600 --> 00:16.260
+The home page and the contact page and the only thing they did was to return the result of the view
+
+00:16.260 --> 00:24.120
+function which itself is rendering the contents of the template the contact template and the home.
+
+00:24.330 --> 00:30.510
+And they both extend the common layout and we can do that even simpler.
+
+00:30.520 --> 00:38.710
+So we have defined and get root and uh returned the result of view function from the closure we can
+
+00:38.710 --> 00:46.050
+use another method of the root object which is the view and the view only accepts two parameters.
+
+00:46.060 --> 00:50.830
+The first one is the URL so the same as you see above.
+
+00:51.070 --> 00:54.720
+And the second one is the template name.
+
+00:54.760 --> 01:02.770
+So this is essentially doing exactly the same as we do here because we are not passing any data we just
+
+01:02.770 --> 01:11.170
+want to render a page so we can comment that out and do the same with the contact page.
+
+01:11.170 --> 01:23.340
+So route view we specify the URL as contact and the template name is contact.
+
+01:23.360 --> 01:30.420
+Now we can also comment that out and let's go to the browser and check it out.
+
+01:30.430 --> 01:37.120
+So a lot of Voltaire's displays the whole page and slash contact displays our contact template
+
+01:39.990 --> 01:48.330
+what we did so far were are very straightforward examples we just rendered simple pages for a simple
+
+01:48.330 --> 01:51.450
+euros like contact and home.
+
+01:51.450 --> 01:59.400
+Now let's do a more complicated example and this would be defining our route with our parameter.
+
+01:59.400 --> 02:09.800
+So we'll create a get route and we want to display a blog post and the blog post needs an I.D. So let's
+
+02:09.800 --> 02:14.320
+define a parameter and call it I.D..
+
+02:14.790 --> 02:26.570
+Now it would have to have a closure and we'll pass this parameter to our closure and simply return this.
+
+02:26.570 --> 02:35.420
+So we'll return I.D. Now let's go back to the browser and try to enter that your URL so block post 1
+
+02:36.350 --> 02:39.230
+you can see that we echo whatever we pass here.
+
+02:39.230 --> 02:45.790
+So 1 2 free will also work because that's how we defined our function.
+
+02:45.860 --> 02:52.540
+Now inside the you URL you can use as many parameters as you want.
+
+02:52.760 --> 02:57.190
+And they have to be enclosed inside Cali braces.
+
+02:57.290 --> 03:00.440
+So this means are parameter.
+
+03:00.440 --> 03:05.030
+So there are some restrictions on what you can use for the parameter name
+
+03:09.570 --> 03:14.670
+they need to contain alphabetic characters and underscores.
+
+03:14.670 --> 03:18.750
+So for example you can't do something like this
+
+03:21.750 --> 03:30.320
+but with underscores it's fine so let's check that example if it still works.
+
+03:30.400 --> 03:39.580
+So that still works and you might have noticed that I now rename the parameter in the URL to the block
+
+03:39.580 --> 03:47.470
+post I.D. but the function parameter is still called I.D. And this is because it doesn't really matter
+
+03:47.470 --> 03:56.770
+how you call your parameters in the you or else they are just taken from left to right and marched with
+
+03:56.770 --> 03:59.380
+the closure arguments.
+
+03:59.410 --> 04:07.870
+So if you will add another parameter let's say outer It doesn't matter.
+
+04:07.870 --> 04:23.570
+We can add another parameter and we can call it outer so let's concatenate those two variables.
+
+04:23.730 --> 04:29.520
+You can see that this works and we can even call it out or name.
+
+04:29.550 --> 04:33.210
+So it's completely different than what we defined inside the URL.
+
+04:33.420 --> 04:36.920
+And this would still work.
+
+04:37.100 --> 04:40.260
+You can see that we get the same result.
+
+04:41.530 --> 04:47.580
+Now let's see what happens if we will change the parameter name to use dash character as well.
+
+04:47.950 --> 04:49.660
+And we know we can't do that.
+
+04:49.660 --> 04:57.100
+So after refreshing we see the 404 page which means that this specific route could not be found
+
+05:00.250 --> 05:04.380
+so let's recap the roots we've required parameters.
+
+05:05.080 --> 05:09.650
+So if you specify a required parameter that's how you specify it.
+
+05:09.730 --> 05:16.990
+Inside the curly braces you specify a parameter name which has to contain an alphabetic character and
+
+05:17.110 --> 05:18.390
+an underscore.
+
+05:18.400 --> 05:20.590
+So this one is invalid.
+
+05:20.590 --> 05:27.910
+And also the name of the parameter inside root and the variable name or argument name of the closure
+
+05:27.910 --> 05:32.920
+function does not meet too much with the parameter name of the url.
+
+05:32.950 --> 05:41.530
+It's just taken in order from left to right and passed to the function.
+
+05:41.540 --> 05:44.910
+Now let's see how we can pass the data to the view.
+
+05:44.960 --> 05:52.670
+So first we will simplify this rule by removing the second parameter from both the URL and the US the
+
+05:52.730 --> 06:03.430
+function argument and now let's create a brand new view and call it a block post late BHP.
+
+06:03.470 --> 06:12.770
+It will also extend the layout and it will have a section called content.
+
+06:13.400 --> 06:16.550
+So we also need to end section
+
+06:19.630 --> 06:29.510
+okay that's enough for now so we have the I.D. Now let's define are simple variable code pages which
+
+06:29.510 --> 06:37.930
+would be an array or it will actually be un associative array and the Keys would represent the data
+
+06:37.930 --> 06:38.680
+to be rendered.
+
+06:38.680 --> 06:46.420
+So each element of disarray will have the key as the I.D. and the data might contain for example the
+
+06:46.420 --> 06:53.590
+take the title which might be hello from page 1.
+
+06:54.130 --> 07:04.290
+And now for simplicity we can just copy that and under the key to it would be hello from page 2.
+
+07:04.300 --> 07:13.240
+Now here we are returning this data and we have to change it to use the view function that will render
+
+07:13.240 --> 07:15.570
+the block post view.
+
+07:16.270 --> 07:19.930
+And now how to pass our parameter.
+
+07:19.930 --> 07:30.570
+So we have the I.D. And we have this pages array so the second argument as you can see here is the data
+
+07:30.810 --> 07:37.370
+array and it consists of the key which which would represent the variable name.
+
+07:37.380 --> 07:49.230
+We want to pass to their view let's call it data and now we'll pass the pages with the index specified
+
+07:49.230 --> 07:50.580
+by I.D.
+
+07:53.320 --> 07:57.770
+So we'll be passing the data depending on the I.D. of the root
+
+08:01.630 --> 08:01.970
+now.
+
+08:01.980 --> 08:06.080
+Let's refresh that.
+
+08:06.530 --> 08:10.520
+So it's empty because our template is currently empty.
+
+08:10.610 --> 08:14.060
+So we've passed the data but we haven't rendered it yet.
+
+08:14.580 --> 08:23.000
+So how do you render data inside the view you should use double currently braces and use the variable
+
+08:23.000 --> 08:29.680
+name that was passed so in our case the variable name is data
+
+08:32.380 --> 08:39.700
+so let's try to render it so everything you put inside the double curly braces will be rendered.
+
+08:39.700 --> 08:44.920
+So if you are passing data to the view that's how you render it in the view.
+
+08:44.920 --> 08:45.940
+Let's refresh
+
+08:48.690 --> 08:58.370
+and you can see an error because we have passed an array and it has to be a string so we wanted to render
+
+08:58.370 --> 09:06.800
+an array and instead we've passed an array which has only one key which is title so we can we can render
+
+09:06.800 --> 09:11.180
+it as this data title
+
+09:15.230 --> 09:18.640
+and now we can see hello from page 1.
+
+09:18.860 --> 09:24.530
+And when you modify the URL you can see hello from page to
+
+09:27.720 --> 09:32.120
+now we've handled a simple case with the required parameter.
+
+09:32.130 --> 09:39.090
+Now let's see how we can do the same with the optional parameter so forth this will decide that we want
+
+09:39.090 --> 09:44.220
+to display different welcome message depending on the second parameter.
+
+09:44.250 --> 09:53.070
+So not always hello but maybe something like welcome to or hello to depending on the second parameter
+
+09:55.900 --> 10:02.790
+so let's define our new variable call it welcome which would be an array and for one it could be.
+
+10:02.790 --> 10:03.330
+Hello
+
+10:06.190 --> 10:13.120
+and the second one would be welcome to maybe let's add an additional space
+
+10:15.750 --> 10:18.480
+modify this page's array.
+
+10:19.020 --> 10:28.110
+And now let's add an optional parameter so the optional parameter is also defined inside curly braces.
+
+10:28.350 --> 10:30.430
+Let's call it welcome.
+
+10:30.530 --> 10:37.500
+But to mark an optional parameter you have to add a question mark at the end of the parameter name.
+
+10:38.190 --> 10:45.310
+Now inside the function definition will add another welcome.
+
+10:45.360 --> 10:50.280
+So maybe let's modify this array name to welcomes.
+
+10:50.280 --> 10:53.220
+And we have to add our default value.
+
+10:54.390 --> 10:58.340
+So maybe the default value would be 1.
+
+10:58.920 --> 11:04.370
+And now we have to pass this parameter to the view so let's call it.
+
+11:05.220 --> 11:18.650
+Come and we'll pass it as an index of the welcomes array.
+
+11:18.800 --> 11:26.350
+Okay so now how it will work is if you would specify your second parameter it will just look for it
+
+11:26.380 --> 11:28.030
+inside the welcomes.
+
+11:28.030 --> 11:31.710
+If you don't it will just use the default one.
+
+11:31.750 --> 11:36.330
+So let's also modify the template and render a second value.
+
+11:39.780 --> 11:42.800
+We've called the parameter welcome.
+
+11:42.860 --> 11:46.040
+So now we can render are welcome variable
+
+11:50.680 --> 11:55.060
+we can also reformat it to be a little bit more visible
+
+12:00.910 --> 12:05.440
+and now let's go to the page and refresh.
+
+12:05.440 --> 12:06.760
+So now nothing's changed.
+
+12:06.760 --> 12:10.480
+We are using the default parameter.
+
+12:10.480 --> 12:19.220
+And now let's add the second parameter so you can see that the second parameter with index to modifies
+
+12:19.220 --> 12:27.990
+the welcome message to welcome to you can also specified as one so then you see there.
+
+12:28.300 --> 12:36.130
+Hello but also the default one was specified with index 1 and the index 1 is hello.
+
+12:36.130 --> 12:45.850
+So now we can all meet the second parameter to this URL and we still are able to display this page.
+
+12:45.870 --> 12:52.410
+Now let's go to the terminal again and rerun our P2P artisan route list.
+
+12:53.130 --> 12:56.220
+So now you can see how our new route looks like.
+
+12:56.220 --> 13:01.080
+So it has required parameter and an optional parameter
+
+13:04.260 --> 13:10.350
+the final thing you will need to know after this lecture is that every data that we pass through the
+
+13:10.480 --> 13:18.800
+lava blade view is being escaped using h the email special char speech be built in function.
+
+13:18.900 --> 13:26.700
+So this is to prevent the cross site scripting attacks and for example if you would like to surround
+
+13:26.700 --> 13:37.780
+this hello message to make it bold this would be escaped and you can see the HDL code in here.
+
+13:37.780 --> 13:39.630
+Let's check out the page source.
+
+13:39.670 --> 13:43.210
+And now you can see that this was bank escape.
+
+13:43.210 --> 13:48.370
+So if you will pass a javascript for example it would also be escaped.
+
+13:49.030 --> 13:57.400
+Now if you want to actually render it as it is explicitly and you know what you are doing then there
+
+13:57.400 --> 13:58.900
+is a way for this.
+
+13:58.960 --> 14:07.270
+So instead of using the double curly braces we can use a single curly braces and add two exclamation
+
+14:07.270 --> 14:12.260
+marks to the beginning and the end of the curly brace.
+
+14:12.520 --> 14:14.160
+Save this changes.
+
+14:14.410 --> 14:22.660
+And now when you refresh you can see that it was being rendered explicitly including the HD AML or the
+
+14:22.660 --> 14:29.380
+javascript code that you will pass to the data through the data to the blade the view.

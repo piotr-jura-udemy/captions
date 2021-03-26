@@ -1,0 +1,241 @@
+WEBVTT
+
+00:00.630 --> 00:08.040
+In the last lecture we've learned about the concept of view composers and thanks to that we made some
+
+00:08.040 --> 00:16.200
+data available under a particular variable names inside view templates to specific views.
+
+00:16.260 --> 00:23.070
+In our case we made that available to the Post's index view.
+
+00:23.070 --> 00:32.060
+We set that inside the app service provider that The View posts index should use the activity composer
+
+00:32.100 --> 00:39.720
+which in turn is fetching their most active users most commented blog posts and most active users last
+
+00:39.720 --> 00:44.330
+month and under those names those variable names.
+
+00:44.370 --> 00:50.430
+It is now available inside every inside this post's index view.
+
+00:50.430 --> 00:58.260
+Now I have also said that we would like to make this available on the right side when you see one blog
+
+00:58.260 --> 00:59.430
+post.
+
+00:59.430 --> 01:04.550
+So let's see how we can approach that using everything that we have learned so far.
+
+01:04.560 --> 01:07.520
+So we are not introducing anything new.
+
+01:07.520 --> 01:10.830
+We will use everything that we should already know
+
+01:13.730 --> 01:14.030
+now.
+
+01:14.030 --> 01:22.280
+Previously we created our forum for editing and adding a blog post and we've used that include directive
+
+01:22.700 --> 01:32.000
+which allowed us to display some content inside particular views and just display everything that was
+
+01:32.090 --> 01:34.690
+inside our particular helper template.
+
+01:34.700 --> 01:41.630
+Let's call it a HAMP helper template underscore a forum and it also inherited all the variables that
+
+01:41.630 --> 01:44.070
+this power interview had.
+
+01:44.090 --> 01:55.010
+Now we can use the same technique for our index blade that actually this view is called Post index and
+
+01:55.010 --> 02:01.790
+now we have also this show blade BHP where we display our one blog post.
+
+02:01.790 --> 02:09.370
+So first let us go ahead and create a new helper template inside the Post's namespace.
+
+02:09.410 --> 02:16.150
+We can call it activity blade BHP or underscore activity blade BHP.
+
+02:16.340 --> 02:23.600
+That's a good convention to call your help our templates that you only include somewhere starting with
+
+02:23.600 --> 02:24.690
+an underscore.
+
+02:25.420 --> 02:35.010
+Okay press enter and now what we will do is let's open this index template for posts.
+
+02:35.710 --> 02:41.960
+And here we decided previously that we'll use some columns of the bootstrap.
+
+02:41.960 --> 02:53.060
+And here we inserted our container to put this data into separate rows so let's just cut all this content.
+
+02:54.810 --> 03:02.610
+From that index template and moved that to the activity template.
+
+03:02.710 --> 03:09.080
+Now we might reformat that to be more clear what is inside this template.
+
+03:09.100 --> 03:09.990
+OK.
+
+03:10.180 --> 03:16.630
+So we are assuming that in every template that will include this activity partial template it will have
+
+03:16.660 --> 03:20.500
+access to those variables.
+
+03:20.500 --> 03:22.410
+So let's go ahead and do that.
+
+03:23.050 --> 03:30.950
+So we can call include posts activity.
+
+03:31.150 --> 03:36.940
+Now we do not have to pass anything else as you've seen inside the create dot.
+
+03:37.060 --> 03:43.750
+We only have to add the include directive the name of the partial template and every variable that was
+
+03:43.780 --> 03:52.730
+available to this post's index view will be available also inside that posts underscore activity.
+
+03:52.780 --> 04:01.750
+Now this made this template a lot shorter but what we are missing is inside the show blade BHP.
+
+04:01.750 --> 04:13.930
+We do not have the columns system that we have other to the index template so let's add it here to.
+
+04:14.180 --> 04:17.090
+Now we will need to reformat this a little bit
+
+04:23.190 --> 04:23.640
+OK.
+
+04:23.650 --> 04:26.590
+Let's close the deal with the first column
+
+04:31.280 --> 04:39.210
+and here will add another column that let's say would be of the with for so deep.
+
+04:39.210 --> 04:44.630
+Class call for and close this deal.
+
+04:45.650 --> 04:53.420
+Now what we will do inside this show template is exactly what we did inside index templates so we are
+
+04:53.420 --> 04:56.630
+just including a partial template
+
+04:59.770 --> 05:00.850
+now save the changes.
+
+05:00.850 --> 05:03.090
+That's not everything that we will have to do.
+
+05:03.340 --> 05:05.530
+But now let's see what do we get.
+
+05:05.800 --> 05:10.960
+So first let's go to the blog post list to see if that still works.
+
+05:10.960 --> 05:20.350
+Also let's find our tag click it to see if we can still see this panel on the right so we can.
+
+05:20.350 --> 05:24.090
+Now let's go to the blog post.
+
+05:24.150 --> 05:26.640
+Now wait until it loads and.
+
+05:27.160 --> 05:30.100
+Well what we see is undefined variable.
+
+05:30.100 --> 05:31.350
+Most commented.
+
+05:31.420 --> 05:42.760
+So actually I expected this and to solve it you have to define another view that will be to which this
+
+05:42.850 --> 05:47.260
+variables from this activity composer will be available.
+
+05:47.320 --> 05:53.950
+So as I've said the composer method specifies two world views those data would be available.
+
+05:53.980 --> 05:58.210
+So instead of just passing a string you can pass an array
+
+06:00.840 --> 06:08.010
+and add the missing view which is posts show and that's it.
+
+06:08.020 --> 06:10.280
+Now you just have to save the changes.
+
+06:10.360 --> 06:17.040
+Refresh this page and after it loads will see the same thing.
+
+06:17.070 --> 06:20.280
+What we had inside the least of blog posts.
+
+06:20.310 --> 06:30.960
+So on the right we have this panel that is fetching the data from the same place from the activity composer.
+
+06:30.960 --> 06:32.040
+And it's also cached.
+
+06:32.040 --> 06:39.320
+So basically we are not doing any more queries to fetch these data now using composers is a great idea
+
+06:39.360 --> 06:46.850
+and also specifying inside one of your service providers of course don't worry about service providers
+
+06:46.860 --> 06:47.480
+right now.
+
+06:47.490 --> 06:50.090
+I haven't really explained them yet.
+
+06:50.110 --> 06:52.200
+We'll do that later.
+
+06:52.260 --> 06:58.410
+Now inside the app service provider we've listed the only views that we want this data to be available
+
+06:58.410 --> 07:06.000
+in because well this makes sense sometimes you might want all the data to be shown on all the templates
+
+07:06.480 --> 07:11.460
+but in our example we do not want that on a home page or contact page.
+
+07:11.460 --> 07:19.350
+And specifically we do not want that on the register or logging page now but if you would like to make
+
+07:19.350 --> 07:27.810
+this available for all their views what you will do instead is you will call this method.
+
+07:27.810 --> 07:33.920
+This composer method with one string argument and an asterisk.
+
+07:34.020 --> 07:42.870
+So this will make data from activity composer available in every single larval view that you will create.
+
+07:42.870 --> 07:46.170
+So let's comment that out because we want need that.
+
+07:46.680 --> 07:54.150
+But anyway this is the way you would make this available only to specific views instead of just passing
+
+07:54.150 --> 07:57.990
+a string you will pass an array of the few names.

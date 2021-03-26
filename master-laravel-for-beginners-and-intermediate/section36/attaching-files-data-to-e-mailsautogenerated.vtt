@@ -1,0 +1,172 @@
+WEBVTT
+
+00:00.330 --> 00:07.560
+Now let's think about Another use case we might have when we are sending emails now for example.
+
+00:07.560 --> 00:13.590
+Currently we send that email with the link to their user name to the blog post and the content of the
+
+00:13.590 --> 00:14.250
+comment.
+
+00:14.790 --> 00:23.380
+But let's imagine you would also like to supply the image of the person that has written the comment.
+
+00:23.430 --> 00:29.000
+So first let's go to the profile so we can do it with the John Doe profile.
+
+00:29.010 --> 00:37.020
+I happen to have an image but if you don't and you won't have it if you have run then my database cedar.
+
+00:37.380 --> 00:41.880
+Let's go ahead and upload some image doesn't really matter what that is.
+
+00:41.880 --> 00:47.650
+Remember where to get those e-mails from from the lectures about image uploading.
+
+00:47.790 --> 00:54.710
+Now John Doe has a profile image so we can go to a blog post and try to comment.
+
+00:54.720 --> 01:01.500
+But first let's think about how we should actually attach this image.
+
+01:01.500 --> 01:10.140
+So I've said that we shouldn't use any direct public view URLs to any of our services or domains because
+
+01:10.150 --> 01:16.530
+the email clients are quite restrictive about this they may filter out those images.
+
+01:17.010 --> 01:19.780
+So we should attach this e-mail somehow.
+
+01:20.550 --> 01:29.790
+So how we will actually do that is there is a specific variable available inside all of your e-mail
+
+01:29.790 --> 01:33.780
+templates and it is called a message.
+
+01:33.780 --> 01:43.370
+Now the message has a method called embed and basically what we will do right here is we will specify
+
+01:43.370 --> 01:50.180
+that you are L to the image that we want to attach and then lot of oil will attach this image and it
+
+01:50.180 --> 01:54.080
+will be displayed inside this image tag.
+
+01:54.080 --> 01:58.190
+So actually this is pretty cool stuff.
+
+01:58.250 --> 02:11.730
+Now what we know about our comment is that it has a user and now each user has an image which is one
+
+02:11.730 --> 02:17.180
+to one polymorphic and it relates to an image model.
+
+02:17.370 --> 02:25.560
+Now image model we know that we store image paths and this will have your URL method that will give
+
+02:25.560 --> 02:29.070
+us the proper you URL to the actual path to the image.
+
+02:29.070 --> 02:31.660
+Thanks to this storage your URL method.
+
+02:32.070 --> 02:42.300
+So we will get the avatar image of the user that has added this comment so we can just call this method
+
+02:42.330 --> 02:42.720
+here.
+
+02:43.470 --> 02:52.260
+So comment user your URL mind that it has to be used using message embed.
+
+02:52.540 --> 02:54.830
+And now let's see the magic.
+
+02:54.830 --> 02:58.640
+So I am writing as John Doe that has our profile image.
+
+02:58.640 --> 03:12.520
+It's important that you did that before and let's say something with that image now post this and I've
+
+03:12.520 --> 03:14.740
+made a mistake somewhere here.
+
+03:15.040 --> 03:26.770
+Well actually I forgot to close the parentheses so fixed out save the changes and now refresh.
+
+03:26.810 --> 03:34.730
+Well apparently I also forgot that the user has an image but there is no you or L on the user model.
+
+03:34.770 --> 03:36.160
+Actually there's comment.
+
+03:36.170 --> 03:41.060
+Comment has user user has image and only then we can call your URL.
+
+03:41.060 --> 03:43.520
+Now let's refresh this finally
+
+03:46.440 --> 03:46.720
+now.
+
+03:46.730 --> 03:47.420
+This was sent.
+
+03:47.420 --> 03:51.800
+Let's get to the mail drop and it's magical.
+
+03:51.800 --> 03:58.760
+So what you see is the title all the content that we had but we also have our user profile image.
+
+03:58.760 --> 04:04.150
+So of course you can style it a little bit better not to be just plain as it is right now.
+
+04:04.340 --> 04:07.370
+But now let's inspect this element.
+
+04:07.520 --> 04:12.890
+So what you see is that this image is actually uploaded on the male trap.
+
+04:12.920 --> 04:17.120
+So it's not directly linked from our domain.
+
+04:17.120 --> 04:23.540
+It would be impossible for anyone to read it anyway because what we have right here is lot of our dot
+
+04:23.550 --> 04:27.320
+test which only runs from our development machine.
+
+04:27.320 --> 04:34.880
+It's nowhere available publicly on the Internet so this image was actually attached and then Lara VO
+
+04:35.390 --> 04:39.080
+generated a proper you URL and everything looks perfect.
+
+04:39.470 --> 04:47.300
+So this is how you would send any images or content though that you might need to include in your emails
+
+04:47.330 --> 04:50.370
+which might be some kind of images.
+
+04:50.810 --> 04:58.130
+And in the next lecture we'll also see how we can actually attach our normal attachments that then user
+
+04:58.160 --> 05:00.140
+would be able to download.
+
+05:00.200 --> 05:01.720
+So this could be anything.
+
+05:01.850 --> 05:08.150
+If you have some kind of shops you can send some attachments with some PDA documents things like that
+
+05:08.960 --> 05:15.860
+but we do not have anything which is other than image in our application so you will just see how you
+
+05:15.860 --> 05:18.860
+can attach an image to an email.
+
+05:19.160 --> 05:20.930
+So see you in the next lecture.

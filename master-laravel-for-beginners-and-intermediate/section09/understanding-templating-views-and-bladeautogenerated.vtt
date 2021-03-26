@@ -1,0 +1,157 @@
+WEBVTT
+
+00:00.570 --> 00:08.450
+In the first lecture, we will talk about how do you return HTML from your roots and the spoiler alert
+
+00:09.150 --> 00:13.380
+we will be doing that using the blade templating engine.
+
+00:13.410 --> 00:22.470
+But before we get to what is our templating engine, let's look at the naive way it can be done so you
+
+00:22.470 --> 00:31.170
+can try to surround the text you are returning using HTML, for example, with an H1 tag, save the
+
+00:31.170 --> 00:34.850
+changes refresh and indeed that works.
+
+00:34.860 --> 00:38.930
+The whole page text is now surrounded with an H1 tag.
+
+00:41.170 --> 00:48.220
+Now, I will tell you immediately that this is not a good idea in 2020, you care about the separation
+
+00:48.220 --> 00:54.340
+of concerns and generating HTML is our responsibility of the view.
+
+00:55.150 --> 00:56.180
+So what is the view?
+
+00:56.380 --> 00:59.240
+Let's take a look at the diagram that we have here.
+
+00:59.770 --> 01:02.840
+So it all starts with a request to your website.
+
+01:03.340 --> 01:05.020
+So there is a request.
+
+01:05.770 --> 01:08.220
+It gets routed to our controller.
+
+01:08.470 --> 01:12.130
+So, controller, that's your function here.
+
+01:14.080 --> 01:21.040
+And then controller is using both model and view, model is some kind of data abstraction, usually
+
+01:21.040 --> 01:24.290
+on the database and view in our case.
+
+01:24.310 --> 01:27.280
+Well, this is a blade templating engine.
+
+01:30.830 --> 01:37.930
+So the view layer is responsible for generating output or more specifically, generating the HDMI and
+
+01:38.180 --> 01:39.840
+your pages render.
+
+01:40.400 --> 01:45.710
+So we said that that blade is a powerful templating engine in Laravel.
+
+01:46.310 --> 01:53.930
+And those templates let you use special template language that works well inside HTML.
+
+01:54.410 --> 02:03.100
+Do, for example, conditionally render use loops or to have common layout on different pages.
+
+02:03.470 --> 02:11.210
+So it's much more practical and easy to use than mixing up logic with HTML directly.
+
+02:12.230 --> 02:20.270
+Now, separating the view layer makes it easy to change what is being rendered without making any changes
+
+02:20.630 --> 02:23.550
+to the model and controller logic.
+
+02:24.440 --> 02:30.650
+Now, you should also know that the blade templates are compiled and cached until you make any changes
+
+02:30.650 --> 02:31.130
+to them.
+
+02:31.250 --> 02:36.410
+So they give almost zero overhead by convention.
+
+02:36.410 --> 02:46.910
+Blade templates are stored inside resources reviews folder and they are basically HTML5 with extra blade
+
+02:46.910 --> 02:56.450
+syntax called directive's and they should be given a Blade BCP extension to render a response using
+
+02:56.450 --> 03:06.500
+the Blades template return the result of the view function with the template name as the first parameter.
+
+03:09.270 --> 03:15.270
+And optionally and the extra data that you might want to pass through the template in the second parameter
+
+03:15.270 --> 03:19.860
+that is unary, will get to plussing data to templates later.
+
+03:20.760 --> 03:31.050
+Now, the view function assumes that the template name you give is based inside the resources views
+
+03:31.110 --> 03:31.770
+folder.
+
+03:33.070 --> 03:40.410
+And when specifying our template name, make sure not to add the Blade BHB extension.
+
+03:42.110 --> 03:49.610
+Now, here is a hint, you should name your plate templates exactly the same as are the names of the
+
+03:49.610 --> 03:52.810
+routes in which they are used later.
+
+03:53.150 --> 03:57.770
+This would be very easy to figure out which template belongs to which route.
+
+03:58.940 --> 04:04.440
+So we need to create our template file that we have referenced here, the home index.
+
+04:05.330 --> 04:11.360
+Now, you should know that when you are using DOT in the name of the blade template, this actually
+
+04:11.360 --> 04:14.290
+means that there is some nested folder structure.
+
+04:15.110 --> 04:25.100
+So instead of creating column DOT Index Dot Blade HP, we would create a home folder inside the views
+
+04:25.100 --> 04:32.570
+folder and in it we will make an index, a sort of index blade file.
+
+04:33.750 --> 04:39.240
+There it is now let's have some HTML boilerplate.
+
+04:41.270 --> 04:52.640
+And inside the body, let's put H1 and Hello World, or whatever you would like, save the changes and
+
+04:52.640 --> 04:59.500
+now the contents of this blade template should be rendered whenever we go to this page.
+
+04:59.690 --> 05:03.950
+So let's save all the changes, go back to the browser.
+
+05:04.670 --> 05:06.160
+And indeed, there it is.
+
+05:06.180 --> 05:12.080
+You can see some additional attacks that were added and also the structure of the document.
+
+05:13.500 --> 05:18.420
+So that was the introduction to the blade template, we will be, of course, talking about all the
+
+05:18.420 --> 05:24.780
+aspects of using and creating blade templates in your applications in the next lecture's.

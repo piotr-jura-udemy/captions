@@ -1,0 +1,100 @@
+WEBVTT
+
+00:01.650 --> 00:07.650
+In the couple of last lectures we've seen how we can validate the input from the user that is being
+
+00:07.650 --> 00:09.270
+sent through the forum.
+
+00:10.020 --> 00:16.940
+And also we've seen how we can simplify the validation by using the forum requests.
+
+00:16.950 --> 00:25.110
+So when we get to the store method the store action we can immediately assume that we have the valid
+
+00:25.110 --> 00:26.690
+data here.
+
+00:26.700 --> 00:28.860
+Now let's see another example.
+
+00:28.860 --> 00:32.280
+And another useful feature flown from Lara.
+
+00:32.310 --> 00:40.950
+So imagine that you wrote something and it is incorrect but you would like to keep this data inside
+
+00:40.950 --> 00:41.790
+the forum.
+
+00:41.790 --> 00:44.960
+When redirect happens after repress create.
+
+00:45.240 --> 00:52.110
+In this case we see that the title has to be at least five characters and the content has to be at least
+
+00:52.350 --> 00:52.960
+10.
+
+00:53.700 --> 01:04.500
+So let's write something like hey and content something that is less than the minimum required for title
+
+01:04.530 --> 01:05.580
+and content.
+
+01:05.700 --> 01:14.790
+So to give the user a chance to fix whatever he has written if you will press create it just gets lost.
+
+01:14.790 --> 01:21.180
+So there is a way we can handle that in Lavell and it is called the old helper.
+
+01:21.180 --> 01:28.950
+So when the data is being sent it is being flashed and is incorrect so invalid it is being flashed to
+
+01:28.950 --> 01:29.950
+the session.
+
+01:29.970 --> 01:37.170
+So we talked about flushing to the session before it happens ultimately with errors for example when
+
+01:37.440 --> 01:44.400
+the validator will encounter any errors it will flash it to their errors variable that is that is then
+
+01:44.490 --> 01:51.760
+accessible throughout all your blade templates so the same happens with input.
+
+01:51.810 --> 01:57.100
+Now if you will go to the create blade BHP file you can specify.
+
+01:57.110 --> 02:06.190
+Additionally value and the value would be the result of the old helper method and its only parameter
+
+02:06.190 --> 02:07.990
+would be the field name.
+
+02:07.990 --> 02:17.040
+So the old title and for the content will use the old helper with the content value.
+
+02:17.550 --> 02:23.630
+So the good thing about this old helper is that you can use it whenever you need to.
+
+02:23.640 --> 02:29.440
+So sometimes you might not want to use it for example for passwords or any sensitive data.
+
+02:29.640 --> 02:38.310
+But in this case it's safe to let users correct whatever they have typed like the blog post title and
+
+02:38.310 --> 02:39.510
+the content.
+
+02:39.510 --> 02:44.160
+So let's save the changes and see what we get.
+
+02:44.160 --> 02:54.250
+So let's type the title and the content now press create and you can see that if we have invalid fields
+
+02:54.290 --> 03:01.630
+or both are invited in this case but we still give users the chance to fix this and send the correct
+
+03:01.690 --> 03:02.430
+values.

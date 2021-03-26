@@ -1,0 +1,55 @@
+WEBVTT
+
+00:00.690 --> 00:08.270
+You already know Laravel uses a session to give validation errors on forms submission for the next pages.
+
+00:09.030 --> 00:17.280
+You can also use this session for keeping short messages between pages, also called flush messages.
+
+00:18.030 --> 00:26.400
+Flash messages are called so as they are one time messages, they are created, displayed once and then
+
+00:26.400 --> 00:35.600
+immediately deleted using request variable session method flash.
+
+00:36.510 --> 00:41.130
+You can store a message under a specific name like status.
+
+00:41.700 --> 00:47.250
+And for this case the message can be the blog post was created.
+
+00:50.830 --> 00:57.430
+Scenes flash messages are not really page specific, you can render them in the layout.
+
+01:01.460 --> 01:05.330
+Reading them is like reading validation errors in Blady.
+
+01:06.930 --> 01:13.710
+Calling the session function with the expected variable name will help us check if it is defined at
+
+01:13.710 --> 01:19.800
+all so we can do if session status.
+
+01:23.090 --> 01:36.140
+Then let's add a development with some styling like red background and white text so we can clearly
+
+01:36.170 --> 01:37.690
+see the message.
+
+01:42.550 --> 01:52.120
+And finally rendered a flash message using the session call again with their status as we want to read
+
+01:52.120 --> 01:54.460
+a variable called status from the session.
+
+01:55.540 --> 01:56.440
+Safe, Cengiz.
+
+01:58.020 --> 02:01.980
+And let's go to the forum and try to send it with the correct input.
+
+02:03.480 --> 02:11.910
+There it is, our session message, if I would refresh this page to flush message disappears as it is
+
+02:11.910 --> 02:13.860
+deleted from the session.

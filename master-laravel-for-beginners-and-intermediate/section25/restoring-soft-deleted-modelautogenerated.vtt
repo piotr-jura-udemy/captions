@@ -1,0 +1,343 @@
+WEBVTT
+
+00:00.630 --> 00:07.680
+Now what you should also know is that by making one model soft deliverable in our case this was blog
+
+00:07.680 --> 00:08.660
+post.
+
+00:08.750 --> 00:15.200
+If it contains some relations there they are and may solve delectable by default.
+
+00:15.300 --> 00:19.060
+And in this case they won't be deleted at all.
+
+00:19.170 --> 00:25.790
+And this is because for example we have this deleting event commented out.
+
+00:25.800 --> 00:33.420
+So this won't do anything to the comments so they will be readable using all the queries flung from
+
+00:33.420 --> 00:42.540
+larval like they would normally exist but also if you old and command this fragment then when we will
+
+00:42.540 --> 00:48.550
+try to delete a model then they would be permanently deleted from the database.
+
+00:48.570 --> 00:57.210
+So since we have made blog posts self delete all we probably do not want this to happen with comments
+
+00:57.220 --> 01:04.860
+so because otherwise if we would like to bring back our blog post it would be of course restored but
+
+01:04.860 --> 01:08.640
+without any comments because they will be deleted.
+
+01:08.640 --> 01:11.240
+So we should make comments.
+
+01:11.250 --> 01:12.880
+Also self debatable.
+
+01:12.990 --> 01:14.010
+So let's do that.
+
+01:14.010 --> 01:27.180
+Let's run BJP artisan make migration art soft deletes two comments table so work quickly create our
+
+01:27.180 --> 01:31.350
+migration for comments to also be solved delectable.
+
+01:31.380 --> 01:34.520
+You should already know how to do that.
+
+01:34.770 --> 01:44.400
+You only have to call self deletes in the app method for this table and then drop self deletes for the
+
+01:44.400 --> 01:47.400
+down method and random migration.
+
+01:47.400 --> 01:51.320
+So BGP artisan migrate.
+
+01:51.450 --> 01:56.330
+Sorry I've misspelled the command peach bee artisan migrate.
+
+01:56.860 --> 02:01.570
+OK this migrated and final step is too hard.
+
+02:02.070 --> 02:11.930
+The self deletes trade inside the comment model and of course don't forget to import this class as visuals
+
+02:11.940 --> 02:12.760
+to your code.
+
+02:12.770 --> 02:17.230
+Did that import for me ultimately.
+
+02:17.370 --> 02:26.190
+So now when we have the blog post model and it is listening to then deleting models so before the blog
+
+02:26.190 --> 02:31.050
+post is being deleted it will first delete all the comments.
+
+02:31.050 --> 02:34.740
+But this time they won't be removed permanently from the database.
+
+02:34.740 --> 02:43.260
+They will also get the deleted art column said so they will stay in the database but they won't be visible
+
+02:43.290 --> 02:49.290
+to the larval queries at least when you are not using with trashed.
+
+02:49.290 --> 02:55.830
+Now students since we have changed that command stable then all the blog posts that we have previously
+
+02:55.830 --> 02:57.950
+deleted won't have the comments.
+
+02:57.960 --> 02:58.990
+Also solved.
+
+02:59.000 --> 02:59.920
+Delete it.
+
+03:00.090 --> 03:08.280
+There would be normally sitting inside the database so let and let's enlarge the terminal and run the
+
+03:08.280 --> 03:11.650
+artisan tinker again.
+
+03:12.000 --> 03:19.230
+Now what we will do is we will try to fetch our blog posts that have some comments since we do not want
+
+03:19.230 --> 03:21.240
+to search for it manually.
+
+03:21.240 --> 03:30.360
+We can use what we already know about the larval querying or eloquent querying specifically so to fetch
+
+03:30.480 --> 03:34.660
+a blog post that has at least one comment we can use.
+
+03:34.660 --> 03:40.520
+The static has method which will create an instance of the query builder.
+
+03:40.890 --> 03:44.760
+So we are just querying for relationship existence.
+
+03:44.760 --> 03:47.390
+So we already have a lecture about that.
+
+03:47.520 --> 03:51.730
+If you don't don't remember I invite you to check that out.
+
+03:51.900 --> 03:57.590
+So this would fetch us all the blog posts that have at least one comment.
+
+03:57.690 --> 04:05.540
+So now we can use get and then first to just pick up the first model doesn't really matter which one
+
+04:05.760 --> 04:09.640
+but it would have at least one comment.
+
+04:09.870 --> 04:13.530
+So it happens to be our blog post with ideas 17.
+
+04:13.530 --> 04:23.890
+In my case and now what we will do is we will delete this blog post remember that we have uncommitted
+
+04:24.150 --> 04:29.520
+deleting events so it will self delete also all the comments.
+
+04:30.120 --> 04:38.670
+So maybe I'll clear the screen so the variable was post and now our run delete on it it returns true
+
+04:38.670 --> 04:43.520
+which means the blog post was deleted it.
+
+04:43.560 --> 04:51.040
+Have it returned true so that means that the blog post was deleted.
+
+04:51.070 --> 04:55.270
+Now let's go to the database and see what has happened.
+
+04:55.270 --> 04:58.290
+So here is this post that the D 17.
+
+04:58.300 --> 05:01.120
+It has a deleted art date.
+
+05:01.210 --> 05:02.860
+Now let's go to comments
+
+05:05.560 --> 05:06.620
+and find a blog.
+
+05:06.760 --> 05:11.610
+Find the comments that have this blog post that I assigned to this blog post.
+
+05:11.620 --> 05:15.830
+So it should be here in the blog posts ideal.
+
+05:15.880 --> 05:24.250
+You can see that the comments with the blog post I.D. 17 also have deleted at date so they are also
+
+05:24.250 --> 05:28.960
+self deleted and are not visible to the larval queries.
+
+05:28.960 --> 05:37.630
+Now to actually restore this model we will have to restart Tinker so type peach bee artisan Tinker.
+
+05:37.750 --> 05:46.990
+And now to fetch that model since it is being deleted we have to use blog post only trashed and then
+
+05:46.990 --> 05:54.970
+find the blog post with Ida 17 you can see that the deleted art date is there.
+
+05:54.970 --> 06:06.850
+Now let's clear this screen and you can run post restore to restore this particular blog post now you
+
+06:06.850 --> 06:10.440
+can see that there is no deleted date and it should be fined.
+
+06:10.480 --> 06:13.270
+It should be found by lava queries.
+
+06:13.270 --> 06:21.280
+So let's go to the database and find our blog post with I.D. 17 or any other that you happened to find
+
+06:21.310 --> 06:24.160
+when we are looking for any post with a comment.
+
+06:24.190 --> 06:28.030
+So it doesn't have to have that I.D. 17.
+
+06:28.030 --> 06:34.030
+Now let's go to comments and the comments for this blog post are on the next page.
+
+06:34.090 --> 06:37.930
+And you can see that they are still self deleted.
+
+06:37.930 --> 06:40.560
+They haven't been restored automatically.
+
+06:41.020 --> 06:45.900
+And this is how it works in Lavell so it won't happen automatically.
+
+06:45.940 --> 06:50.340
+You have to do that explicitly or manually.
+
+06:50.350 --> 07:01.650
+So what we should do is we should subscribe to another event and it is called Restoring so we'll also
+
+07:01.650 --> 07:04.200
+have the closure for this.
+
+07:04.200 --> 07:15.640
+And what we will do here is when we are restoring a blog post you can also call blog posts comments
+
+07:17.320 --> 07:18.510
+restore.
+
+07:18.520 --> 07:25.780
+So this way you will restore all the blog posts or all the comments of this particular blog post.
+
+07:25.780 --> 07:32.920
+And if your model has more relations and you'd like to self delete then let's say that comments might
+
+07:32.920 --> 07:37.720
+have started that blog post might have comments or votes.
+
+07:38.020 --> 07:46.300
+So you would want to delete them here and then you will also like to restore those to relations explicitly
+
+07:46.570 --> 07:48.920
+in this particular place.
+
+07:48.940 --> 07:56.950
+So we would also like to subscribe to that restoring event of the model that contains some additional
+
+07:56.950 --> 08:01.750
+relations that you would like to be self deleted and then restart
+
+08:05.250 --> 08:08.240
+now let's enlarge the terminal again.
+
+08:08.250 --> 08:14.430
+So I will clear the screen and we'll run the tinker for the last time.
+
+08:14.850 --> 08:18.090
+Now we'll also fetch a blog post.
+
+08:18.090 --> 08:25.740
+May be the same one or anyway will fetch something with comments so we'll find post
+
+08:28.470 --> 08:30.820
+something that has comments.
+
+08:33.170 --> 08:36.440
+And we'll get the first element that has some comments.
+
+08:36.440 --> 08:39.950
+Happens to be a blog post with I.D. 18.
+
+08:39.950 --> 08:48.140
+In my case and now if you do not want to soft delete a model that is marked as soft delectable by the
+
+08:48.140 --> 08:55.700
+trade you would like to permanently deleted from the database like non reversible.
+
+08:55.850 --> 09:06.760
+Then you can do post force delete and what this will do is it will actually delete this blog post from
+
+09:06.760 --> 09:09.850
+the database entirely.
+
+09:09.850 --> 09:13.360
+Now if you will go to the blog posts table
+
+09:16.910 --> 09:25.580
+you can see that there is no blog post with I.D. 18 so we have only with 17 and 19 and that I 18 was
+
+09:25.580 --> 09:28.010
+permanently deleted.
+
+09:28.010 --> 09:37.110
+Now if you will go to that comments table you can also see that they were deleted and you might understand
+
+09:37.110 --> 09:43.230
+how it happened that we have deleted a blog post so larval instead of setting the deleted out they'd
+
+09:43.860 --> 09:48.740
+have deleted the record entirely from the database.
+
+09:48.930 --> 09:51.260
+But now how the comments were deleted.
+
+09:51.540 --> 09:59.100
+So you might remember our migration when we have said the cascade for own delete event on the following
+
+09:59.100 --> 09:59.800
+key.
+
+09:59.850 --> 10:08.100
+So this time we have used the database configuration or database foreign key constraints and when the
+
+10:08.190 --> 10:16.200
+record is deleted for this foreign key thanks to this fragment when the blog post or parent model is
+
+10:16.200 --> 10:24.180
+deleted that this foreign key is referencing it also have deleted all the child references or the child
+
+10:24.180 --> 10:26.370
+relations of this model.
+
+10:26.370 --> 10:34.170
+So this is how old the comments were also permanently deleted from the database so of course when you
+
+10:34.530 --> 10:38.310
+call forced delete on a model there is no coming back.
+
+10:38.370 --> 10:41.430
+So it is being deleted permanently.

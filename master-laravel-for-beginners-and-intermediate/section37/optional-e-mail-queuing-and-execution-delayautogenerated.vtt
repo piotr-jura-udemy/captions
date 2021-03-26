@@ -1,0 +1,175 @@
+WEBVTT
+
+00:00.450 --> 00:07.160
+In the last lecture we have other that shoot queue interface to the comment posted markdown class.
+
+00:07.200 --> 00:14.820
+So whenever you send this email it will always be first put on the queue and then only executed in the
+
+00:14.880 --> 00:15.600
+background.
+
+00:16.410 --> 00:23.430
+So this is a very good example because basically sending email is one of the best examples you can come
+
+00:23.430 --> 00:26.220
+up with for a background job.
+
+00:26.220 --> 00:28.640
+So this is basically supported out of the box.
+
+00:28.650 --> 00:37.140
+But let's think of cases where you do not always want to send something as a background job sometimes
+
+00:37.140 --> 00:41.130
+it might be really important to send the email immediately.
+
+00:41.730 --> 00:47.050
+Well of course this doesn't only apply to emails but let's work with this example.
+
+00:47.580 --> 00:50.470
+So sometimes you might want something to be on the queue.
+
+00:50.520 --> 00:51.900
+Sometimes you don't.
+
+00:51.900 --> 00:56.010
+Sometimes you want to just process this immediately.
+
+00:56.010 --> 00:57.160
+So we've mails.
+
+00:57.270 --> 00:59.370
+We have help and we have an option to do that.
+
+00:59.400 --> 01:07.970
+So first we remove this implements from the Malabo class so it no longer implements this interface.
+
+01:07.980 --> 01:17.520
+What this would do is now whenever you call sand this will immediately tried to send that email.
+
+01:17.660 --> 01:22.340
+Now you have another option to basically put the email on a queue or not.
+
+01:23.600 --> 01:30.230
+So the first option would be to call send and this would try to send this email immediately which means
+
+01:30.290 --> 01:32.720
+throughout this request.
+
+01:33.170 --> 01:42.560
+But what you can alternatively do is that email for proceed will have queue method and you also passed
+
+01:42.580 --> 01:44.090
+our Malabo class to it.
+
+01:44.630 --> 01:50.420
+So while this would do is now you can optionally decide whether you want to send something immediately
+
+01:50.540 --> 01:55.120
+or put it on a queue so this would work the same.
+
+01:55.180 --> 02:00.480
+So make sure that you have this process working all the time or started again.
+
+02:00.500 --> 02:07.890
+BHP artisan queue work Now let's add another comment.
+
+02:10.150 --> 02:12.690
+And this should also be put on a queue.
+
+02:12.770 --> 02:15.730
+So you've seen the Request request was pretty fast.
+
+02:17.160 --> 02:24.150
+Now if you will take a look at the terminal you will see that there was a job created inside the database.
+
+02:24.150 --> 02:29.960
+It's already removed because this was processed and then you will see an email sent
+
+02:33.490 --> 02:39.880
+now sometimes you might also want to put something on a queue but not for immediate processing so it
+
+02:39.880 --> 02:42.690
+shouldn't be picked up as soon as possible.
+
+02:42.730 --> 02:46.540
+You might want to do that in actually let's say 10 minutes.
+
+02:46.550 --> 02:53.650
+We are setting something for later or even you can decide that this should be done in let's say one
+
+02:53.650 --> 03:01.680
+week so we can do that we can create a new instance of the date using now function.
+
+03:01.680 --> 03:06.330
+Let's add some time to it like using the add minutes.
+
+03:06.330 --> 03:15.680
+For example one minute now instead of queue what you will do is there is another method on the mail
+
+03:16.610 --> 03:26.020
+and this is called later so later accepts two parameters which is the delay and we'll use our when date
+
+03:26.560 --> 03:29.020
+and the mail label class.
+
+03:29.020 --> 03:39.600
+So what you will do now is pass when and the mail class itself so let's comment about for a second and
+
+03:39.610 --> 03:41.490
+now let's add another comment.
+
+03:41.680 --> 03:46.730
+So hello from the future
+
+03:50.050 --> 03:57.430
+so you can see that the request was pretty fast but if you will go to the running process or you can
+
+03:57.430 --> 04:05.170
+see that it doesn't process this immediately now check the database table you will see the job and now
+
+04:05.170 --> 04:06.820
+you can see that it was created.
+
+04:06.820 --> 04:14.230
+This is actually a UNIX timestamp and the available at parameter specifies when this job should actually
+
+04:14.230 --> 04:15.220
+be executed.
+
+04:15.730 --> 04:23.690
+So from now on you will have to wait one minute and only then this would be picked up by the queue process
+
+04:23.690 --> 04:25.030
+or so.
+
+04:25.560 --> 04:27.750
+Well there is no other way for us.
+
+04:27.750 --> 04:33.960
+Just you have to wait one minute and then you will see that the job was processed.
+
+04:33.960 --> 04:37.320
+Well actually I've added it some time ago.
+
+04:37.320 --> 04:44.730
+Explain something in the meantime and you actually so life that it was processed after one minute only
+
+04:45.030 --> 04:53.220
+after some time has passed and only then you will see an email inside the made up inbox you can even
+
+04:53.220 --> 04:55.690
+see a few seconds ago that.
+
+04:55.710 --> 05:04.100
+Well actually we've posted that comment a minute ago and we received that email only after one minute.
+
+05:04.160 --> 05:07.160
+So this is how you will do do that in an email.
+
+05:07.160 --> 05:14.090
+Of course you can also create different jobs that will be processed later not necessarily related to
+
+05:14.160 --> 05:17.630
+email but we will see that in the next lectures.

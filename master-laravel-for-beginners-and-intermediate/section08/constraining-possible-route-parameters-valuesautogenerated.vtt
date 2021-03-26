@@ -1,0 +1,151 @@
+WEBVTT
+
+00:00.830 --> 00:07.610
+Sometimes it would make sense to check what people are actually passing in your route parameters, for
+
+00:07.610 --> 00:16.160
+example, with this post route, you might expect this idea to be a number so you can verify that.
+
+00:16.400 --> 00:24.260
+And by verifying, I mean specifying unconstrained that if something else done the number would be passed,
+
+00:24.680 --> 00:26.970
+then this route won't be matched.
+
+00:27.590 --> 00:29.120
+So let's see how we can do it.
+
+00:29.750 --> 00:31.730
+For every route parameter.
+
+00:31.730 --> 00:33.540
+You can define such constraints.
+
+00:33.560 --> 00:40.850
+But first you have to add our work function call, which accepts an array and in disarray.
+
+00:40.850 --> 00:48.180
+You will specify keys as the route parameters and constraints would be the values of those keys.
+
+00:48.830 --> 00:52.340
+So in this example, we have an idea route parameter.
+
+00:52.940 --> 00:55.640
+So the value should be a regular expression.
+
+00:56.150 --> 01:02.450
+Now, if you don't know much about regular expressions, I'll give you some links where you can learn
+
+01:02.450 --> 01:03.320
+more about them.
+
+01:03.650 --> 01:10.200
+It's a very, very popular feeling to match strings anyway, to check if something is a number.
+
+01:11.030 --> 01:18.830
+We will define a set of characters from zero to nine and use plus to identify something that should
+
+01:18.830 --> 01:20.660
+have a length of at least one.
+
+01:21.380 --> 01:23.840
+This would essentially match a number.
+
+01:24.740 --> 01:26.480
+Now, let me save the changes.
+
+01:26.780 --> 01:30.020
+Go back here when I refresh.
+
+01:30.020 --> 01:32.520
+This works perfectly because five is a number.
+
+01:32.570 --> 01:32.900
+Sorry.
+
+01:32.900 --> 01:34.290
+Does not this route.
+
+01:34.310 --> 01:34.730
+All right.
+
+01:34.730 --> 01:36.860
+So post slash one.
+
+01:37.270 --> 01:38.890
+OK, so this works.
+
+01:38.900 --> 01:40.250
+That is a number.
+
+01:40.640 --> 01:46.450
+But if I would specify something like this, we don't have a route march.
+
+01:47.210 --> 01:55.300
+So when you put constraints like this, then you wouldn't have to verify inside your function if someone
+
+01:55.310 --> 02:02.750
+has passed and the correct value for the route parameter that we expect, you can just do that using
+
+02:02.870 --> 02:06.950
+these constraints before it even gets to the function body.
+
+02:08.900 --> 02:15.380
+Now, sometimes there might be cases where you are certain and specific route parameter should always
+
+02:15.380 --> 02:21.110
+have the same constraint, for example, very often I.D. a number.
+
+02:21.590 --> 02:29.390
+So it might make sense to just specify this constraint in one single place, not in every case where
+
+02:29.390 --> 02:32.930
+you would use Unidine inside route parameter.
+
+02:33.990 --> 02:42.240
+So to define this globally, you will open another file, you can do that using Command P on Mac or
+
+02:42.390 --> 02:44.830
+control P on Windows.
+
+02:45.600 --> 02:51.560
+This should show this window and find a route service provider.
+
+02:52.230 --> 02:56.750
+That's this one in app providers find the boots method.
+
+02:56.760 --> 02:59.000
+It should be around this line.
+
+02:59.310 --> 03:10.160
+Go to the bottom and here you can use the root glass and it's static pattern method to define such constraints.
+
+03:10.440 --> 03:18.930
+So we are saying that whenever you see a root parameter called I.D., you should use this specific constraint
+
+03:18.930 --> 03:19.350
+for it.
+
+03:19.380 --> 03:22.030
+So we expect it to be a number.
+
+03:23.640 --> 03:33.000
+Now, if you go back to the Web file, you can now comment about this fragment using command, forward
+
+03:33.000 --> 03:36.690
+slash or control, forward slash, save the changes.
+
+03:37.470 --> 03:44.460
+And now this this constraint is in place for every root parameter called Idy.
+
+03:44.910 --> 03:51.540
+You now don't really have to add this work call, so let's verify that it works for a number.
+
+03:51.900 --> 03:57.920
+But if you try using a string, you will have 404 not found.
+
+03:58.710 --> 04:06.300
+Also, you might want to check out this website is very interesting and useful for trying out regular
+
+04:06.300 --> 04:09.170
+expressions, if you would like to learn more about them.

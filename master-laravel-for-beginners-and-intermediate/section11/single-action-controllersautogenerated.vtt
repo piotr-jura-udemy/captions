@@ -1,0 +1,61 @@
+WEBVTT
+
+00:00.730 --> 00:07.780
+While controller classes are great for grouping related logic using actions, you can also create a
+
+00:07.780 --> 00:13.250
+controller for a single action to create a single action controller.
+
+00:13.270 --> 00:18.400
+You just add the method, underscore, underscore, invoked to it.
+
+00:19.000 --> 00:22.170
+It would be the only action of the controller.
+
+00:22.960 --> 00:25.540
+Let's make an example about controller.
+
+00:26.110 --> 00:33.460
+So Ron Partisan make controller about controller.
+
+00:35.920 --> 00:38.050
+Now let's open this up.
+
+00:39.400 --> 00:42.310
+Let's add the invoke methods.
+
+00:45.830 --> 00:50.810
+And just returned the text single from it.
+
+00:57.620 --> 01:04.550
+Now, the route is defined similar to how you would point to a controller class action, though, you
+
+01:04.550 --> 01:07.210
+just need to give the class name.
+
+01:08.480 --> 01:10.190
+So route get.
+
+01:11.400 --> 01:14.580
+Let's do this under the single year I.
+
+01:15.740 --> 01:25.690
+And now the class name, which is about controller and we are using the class constant defined in all
+
+01:25.700 --> 01:30.770
+PE classes, also make sure to add this you statement.
+
+01:31.280 --> 01:39.410
+Remember that with controller class that had many actions, you had to provide an array with class name
+
+01:39.410 --> 01:43.300
+and action name in single action controllers.
+
+01:43.310 --> 01:46.620
+It's enough to just provide their class name.
+
+01:47.000 --> 01:49.740
+Finally, let's verify this route.
+
+01:51.110 --> 01:55.850
+So let's go to the euro single and there it is, the text single.

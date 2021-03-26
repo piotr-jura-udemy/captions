@@ -1,0 +1,187 @@
+WEBVTT
+
+00:00.750 --> 00:08.400
+In the last two lectures we created two tests and both were testing the storm method of our post controller.
+
+00:08.490 --> 00:13.910
+Once with the followed parameters when we expected everything to go fine.
+
+00:14.460 --> 00:16.670
+And then secondly we create.
+
+00:16.680 --> 00:24.330
+We created a test that verified that when we provide invalid parameters we get validation errors.
+
+00:24.330 --> 00:34.410
+So as I said previously now we will create a brand new test for testing the Update method of our post
+
+00:34.410 --> 00:35.810
+controller.
+
+00:36.030 --> 00:44.520
+So we will be testing if we sent the valid parameters for an existing blog post that it gets modified
+
+00:44.970 --> 00:52.660
+properly so let's create a new method called Test update valid.
+
+00:54.480 --> 00:59.000
+So now in this case we will have to prepare something in advance.
+
+00:59.040 --> 01:02.100
+So this is our orange section.
+
+01:02.100 --> 01:12.040
+We can copy this blog post because we first have to create a blog post inside that database and only
+
+01:12.040 --> 01:17.100
+then we will verify if it actually gets modified.
+
+01:17.300 --> 01:23.420
+So what we can also use here is this assertion assert database has
+
+01:26.640 --> 01:34.770
+so as I said previously we can use this assertion to verify that inside specific database table we can
+
+01:34.770 --> 01:38.940
+find our record by specific columns.
+
+01:38.940 --> 01:47.460
+So in this case we are searching for a blog post which will have the title new title but alternatively
+
+01:48.060 --> 01:59.710
+you can also use the method of the log quant models which is to array and this will convert all the
+
+01:59.710 --> 02:09.480
+attributes which means columns of this blog post instance to an array and then we can try to find it
+
+02:09.510 --> 02:16.440
+exactly by all the columns that this particular instance of the blog post does have.
+
+02:17.740 --> 02:24.710
+So let's go ahead and run this test to see if everything works OK.
+
+02:24.730 --> 02:34.420
+So we have passed the new assertion last time we had 16 associates so it works so far so we have now
+
+02:34.420 --> 02:42.520
+verified that we have a blog post and that it is actually inside the database.
+
+02:42.520 --> 02:47.170
+So now we will make a request with the parameters we can.
+
+02:47.200 --> 02:50.800
+For simplicity we can just copy this part of code
+
+02:54.100 --> 03:00.700
+and now we should invent some title and content that will modify this original one to
+
+03:04.130 --> 03:07.840
+so we can go with anything that is valid.
+
+03:10.880 --> 03:22.010
+OK so those are the parameters that we are gonna send to that posts end point but this time we would
+
+03:22.010 --> 03:24.350
+have to use another end point of course.
+
+03:24.350 --> 03:33.140
+We do not create a new blog post we modify the existing one so we have to modify the you URL
+
+03:35.850 --> 03:40.840
+so this would be posts but with the post I D.
+
+03:41.960 --> 03:53.610
+So we can actually use the post that we have stored and fetch that I d column of it and also let's around
+
+03:53.610 --> 04:05.310
+peach be artisan route least use our update action and as you can see we have to use either poot or
+
+04:05.370 --> 04:07.160
+puff H CTP verbs.
+
+04:07.170 --> 04:12.360
+So let's use sport so it's not a post HDP request.
+
+04:12.420 --> 04:21.300
+It will be put H TTP request and this stays the same because we expect this end point to redirect to
+
+04:21.420 --> 04:22.380
+the blog post.
+
+04:22.470 --> 04:27.720
+But with the changed data and we do not expect errors.
+
+04:27.730 --> 04:31.490
+Instead we expect this status to be present.
+
+04:35.810 --> 04:48.520
+Now we can also use our existing assertion to verify the content of this status message so let's recap.
+
+04:48.520 --> 04:54.970
+We are doing a put request to modify the blog post that we have just created.
+
+04:54.970 --> 04:58.810
+First we verified that it actually exists inside the database.
+
+04:58.810 --> 05:02.830
+So this blog post with the new title as a title.
+
+05:03.310 --> 05:12.320
+Then we specify parameters that we want to modify it and we make a put request to this blog post you
+
+05:12.330 --> 05:12.780
+url.
+
+05:12.780 --> 05:14.780
+We expect the 302.
+
+05:14.790 --> 05:24.430
+So we expect it to be redirected to the blog post page and we want the status to beta but obviously
+
+05:24.430 --> 05:26.530
+it won't be the blog post was created.
+
+05:26.530 --> 05:31.410
+It was something else so let's see how does it do.
+
+05:31.480 --> 05:37.930
+Now we have one failure and this was expected because our message wasn't blog post was created.
+
+05:37.930 --> 05:47.960
+Actually it was a blog post was updated so we can copy that from the terminal and modify this message.
+
+05:47.950 --> 05:57.070
+Now let's rerun the test and now everything is fine so it seems that our update endpoint is working
+
+05:57.190 --> 06:02.880
+properly but now we can do even more assertions.
+
+06:02.930 --> 06:14.230
+So first we did this asset database has so let's copy the but this time we can use another assertion
+
+06:14.230 --> 06:25.150
+called assert database missing and what we are doing here is after we have verified that this endpoint
+
+06:25.150 --> 06:32.330
+went through properly that we see the message we should now check that the original blog post with the
+
+06:32.330 --> 06:37.240
+title new title and this content couldn't be found.
+
+06:37.240 --> 06:44.150
+So that would mean that this was actually modified so let's run this.
+
+06:44.410 --> 06:45.430
+So it is passing.
+
+06:45.460 --> 06:51.700
+So it means that it can't find a blog post with this title which is what we expected.
+
+06:52.030 --> 07:01.520
+And if we want we can also check if we can find the blog post we've Daniel title
+
+07:05.220 --> 07:10.170
+so the new title is our new named title
+
+07:13.220 --> 07:19.860
+so paste it here and now we basically check everything so nothing can go wrong.

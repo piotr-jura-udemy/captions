@@ -1,0 +1,364 @@
+WEBVTT
+
+00:00.920 --> 00:04.460
+Now let's see how we can associate the two models together.
+
+00:04.470 --> 00:09.610
+The blog post and tag and then how we can query those relations.
+
+00:09.720 --> 00:15.670
+So first we'll have to run BHP artisan Tinker inside your terminal.
+
+00:16.620 --> 00:20.790
+And we need to create some TAC models because we haven't previously.
+
+00:20.790 --> 00:26.820
+And also we do not yet have a model factory and tax are not seeded.
+
+00:26.940 --> 00:30.240
+So let's go ahead and create a new tag.
+
+00:30.420 --> 00:36.990
+So starting with Tag 1 let's create an instance of the up tag model.
+
+00:37.110 --> 00:41.880
+We have to associate a name to this model so let it be science
+
+00:44.750 --> 00:49.160
+and save this new tag and we'll do that once more.
+
+00:49.310 --> 00:58.980
+So we'll be creating our new target model this tag too can have the name let's say politics.
+
+00:58.980 --> 01:01.850
+So that's it.
+
+01:01.860 --> 01:06.340
+And then we obviously have to save it.
+
+01:06.390 --> 01:08.090
+Now we have to tax now.
+
+01:08.280 --> 01:12.370
+Let's see how we can associate them to our blog post.
+
+01:12.690 --> 01:14.800
+So let's fetch one blog post.
+
+01:16.170 --> 01:20.580
+We can do that using a blog post model find.
+
+01:20.580 --> 01:22.940
+So let's fetch one with the idea.
+
+01:23.000 --> 01:23.910
+1 OK.
+
+01:23.910 --> 01:25.290
+It is being fetched.
+
+01:25.290 --> 01:29.420
+Let's clear the screen now so we can see what is happening.
+
+01:30.210 --> 01:38.550
+So we have our blog post which has the tags relations so we access this relation using the tax method
+
+01:38.610 --> 01:44.710
+which will return the relation object which in turn has the attach method.
+
+01:44.730 --> 01:49.700
+So that's the method you will use to attach tag to a blog post.
+
+01:49.710 --> 01:53.130
+And of course the vice versa will see that in a moment.
+
+01:53.160 --> 01:55.110
+So we have two tasks that we have created.
+
+01:55.110 --> 01:56.730
+Tag one and talk two.
+
+01:57.150 --> 02:04.580
+Now let's see how we can attach a single tag to the tax relation so we can call it like that.
+
+02:04.590 --> 02:06.970
+You just pass a tag to the other.
+
+02:07.030 --> 02:10.280
+You just pass our tag one to the attach method.
+
+02:10.290 --> 02:14.200
+And this actually has created our relation at this point.
+
+02:14.220 --> 02:21.330
+Now let's see that inside the database so you can see it is there with the output generated IDM and
+
+02:21.330 --> 02:27.390
+blog post I.D. 1 and tag I.D. is one that matches with the tax that we have created.
+
+02:27.390 --> 02:31.850
+So we just added a science stock to it.
+
+02:31.920 --> 02:40.740
+Now if you would like to attach a couple of tax to a blog post you can do it almost the same way you
+
+02:40.740 --> 02:42.480
+also use the attach method.
+
+02:42.780 --> 02:51.510
+But this time you pass an argument which is under way and not only the model instance but this time
+
+02:51.510 --> 02:53.820
+you will provide ideas of those models.
+
+02:53.820 --> 03:00.000
+So we need ideas of both the tag one and tag to.
+
+03:00.180 --> 03:07.900
+Now this also has saved the relation and let's see what do we get.
+
+03:08.050 --> 03:14.160
+Now you might have spotted the potential problem or two problems that we have right now.
+
+03:14.290 --> 03:21.000
+So we have free relations are that and you can see that they are all added to the blog post with ideas
+
+03:21.000 --> 03:21.740
+one.
+
+03:22.090 --> 03:26.230
+But the duck idea we have duplicated the tag basically.
+
+03:26.290 --> 03:32.460
+So we have added the same tag to the same blog post.
+
+03:32.560 --> 03:37.080
+So this will always happen if you will simply call the attach method.
+
+03:37.090 --> 03:40.400
+It doesn't care about what you are passing to it.
+
+03:40.690 --> 03:48.040
+Now if you do not want to duplicate the relations so in our case it doesn't make much sense to assign
+
+03:48.040 --> 03:50.740
+the science stock twice to our blog post.
+
+03:50.740 --> 03:53.650
+Obviously it's a nonsense.
+
+03:53.680 --> 04:02.520
+So if you want to only attach a tag that's this unique or a relation that would be unique.
+
+04:02.680 --> 04:05.500
+There is of course a way to also achieve that.
+
+04:06.970 --> 04:09.440
+So let's create another tag.
+
+04:09.670 --> 04:16.290
+So tax free New up tag let's assign a name to it.
+
+04:16.360 --> 04:26.870
+So tag name would be let's say sport save this dog and now let's see how we can attach that.
+
+04:26.970 --> 04:33.520
+So we'll do blog post tags and now we'll use a new method.
+
+04:33.630 --> 04:46.160
+This is called since without detaching it also accepts an array of elements and we have to provide the
+
+04:46.160 --> 04:49.850
+ideas of the models so we all do.
+
+04:49.850 --> 04:52.210
+Tag one idea.
+
+04:52.280 --> 05:04.110
+Dark to ideas and a new tag free I.D. now closed Del Rey and let's run it.
+
+05:04.210 --> 05:08.980
+So what we see here is it actually returns an array as a result.
+
+05:09.040 --> 05:12.300
+And let's see how the database looks like.
+
+05:12.970 --> 05:21.520
+So you can see that even though we have passed free tag I.D. It only has that first one.
+
+05:21.700 --> 05:25.310
+So the tag with Ida free the new one.
+
+05:25.540 --> 05:29.140
+So what's the difference between attach and sync.
+
+05:29.140 --> 05:36.260
+Is that when you use attach it will it won't care what you are attaching if the relation is duplicated.
+
+05:36.310 --> 05:41.300
+So in our case you might assign the same tag to the relation twice.
+
+05:41.350 --> 05:43.420
+Sometimes of course you might want to do that.
+
+05:43.420 --> 05:45.760
+That's why you have this attach method.
+
+05:45.880 --> 05:53.380
+But if you care about the uniqueness of those relations so you would only add wants to have one particular
+
+05:53.380 --> 05:57.950
+tag of one type of one kind assigned to a blog post.
+
+05:58.030 --> 05:59.040
+This is how you do it.
+
+05:59.050 --> 06:06.710
+You call sense without detaching.
+
+06:06.750 --> 06:11.040
+So now there is also another method that you can use.
+
+06:11.130 --> 06:17.130
+So let's see you can do tags and just code sync.
+
+06:17.160 --> 06:25.800
+So the difference between sense without sync without detaching and sync is that the sync method will
+
+06:25.860 --> 06:32.040
+only leave the relations on the blog post model that you have specified here.
+
+06:32.040 --> 06:47.820
+So let's say I want only tag 1 I.D. and talk to I.D. execute dot and it shows what actually was detached
+
+06:48.060 --> 06:56.060
+so it didn't add any new relations because this blog post already had all those free tags.
+
+06:56.190 --> 07:01.190
+And if we would we would at this point create task for and posit here.
+
+07:01.440 --> 07:08.600
+It would be added and you would see that inside the result array attached key.
+
+07:08.670 --> 07:15.240
+But the difference between sense and seemed sink without detaching is that if you haven't provided one
+
+07:15.240 --> 07:22.510
+of the relations that you wonder and it already exists that on the table it actual you remove that.
+
+07:23.010 --> 07:28.440
+So in this case it has removed the tag with Ida free.
+
+07:28.470 --> 07:32.810
+Now let's see how the database looks like.
+
+07:32.840 --> 07:42.270
+So now you can see that we only have one blog post which has two tracks with the idea 1 and I.D. 2.
+
+07:42.320 --> 07:43.490
+Now we have this duplicate.
+
+07:43.490 --> 07:44.470
+We won't need that.
+
+07:44.470 --> 07:48.750
+So we can manually remove that.
+
+07:48.770 --> 07:54.420
+So now we are left with one blog post model that is being associated to two tracks.
+
+07:54.620 --> 07:55.920
+The tag with Ida.
+
+07:55.970 --> 07:57.860
+And I did too.
+
+07:57.860 --> 08:03.220
+Now let's see how we can detach our particular tag from a blog post.
+
+08:03.590 --> 08:14.880
+So you might do a blog post dogs and then you can call detach and specify that you want to detach our
+
+08:14.890 --> 08:18.980
+tag one so it returns one.
+
+08:19.230 --> 08:21.040
+And let's see.
+
+08:21.180 --> 08:25.050
+And it actually was detached.
+
+08:25.060 --> 08:30.210
+So now let's associate this tag again so we can see something else.
+
+08:30.250 --> 08:32.230
+So let's do a blog post dogs
+
+08:35.870 --> 08:36.560
+attach
+
+08:39.440 --> 08:44.930
+and we'll attach let's say tag free.
+
+08:45.140 --> 08:47.500
+Now let's see what we have.
+
+08:47.630 --> 08:53.620
+So we have blog posts one with two tracks with either two or three.
+
+08:53.630 --> 09:01.520
+Now if you would like to remove all the associations from the blog post tags what you can do is you
+
+09:01.520 --> 09:12.470
+can call detach without passing any arguments and it says that it's removed to associations so let's
+
+09:12.470 --> 09:13.370
+see if that's true.
+
+09:13.580 --> 09:19.220
+Yes the table is empty so mind that it is not removing any morals from the table.
+
+09:19.220 --> 09:22.070
+It's just removing controls on this pivot.
+
+09:22.070 --> 09:24.960
+Intermediate blog post stock table.
+
+09:25.100 --> 09:30.020
+And that way it doesn't have any relations.
+
+09:30.020 --> 09:36.060
+So now we have this example that we have attached to tags so let's run it again.
+
+09:36.060 --> 09:38.040
+Let's clear the screen first.
+
+09:39.730 --> 09:50.530
+Now we have again are two tags you can see out blog post with I.D. one that has two tags and now another
+
+09:50.530 --> 09:59.620
+way to actually remove those associations is to call sync because if you will pass an empty array to
+
+09:59.620 --> 10:06.910
+the sink which as we know also is attaching and attaching the models that you have passed inside array
+
+10:07.330 --> 10:11.360
+and detaching those that you haven't passed inside the array.
+
+10:11.380 --> 10:19.690
+So if you will pass an empty one it will actually detach everything and you can verify that inside the
+
+10:19.690 --> 10:20.530
+database.
+
+10:20.530 --> 10:22.350
+Now it doesn't have anything.
+
+10:23.140 --> 10:23.410
+OK.
+
+10:23.440 --> 10:30.880
+So that was it about attaching and detaching models in the next lecture we will see how we can query
+
+10:30.910 --> 10:34.930
+those relations to fetch all the related models.

@@ -1,0 +1,295 @@
+WEBVTT
+
+00:01.110 --> 00:08.600
+In the last lecture we talked about global worries scopes which lets you at some part of the rescue
+
+00:08.760 --> 00:17.610
+query to all the queries that level will execute for a particular model without even telling that Lavell
+
+00:17.700 --> 00:19.100
+explicitly.
+
+00:19.110 --> 00:27.150
+So for example in our post controller when we fetched all the blog posts by adding the latest scope
+
+00:27.540 --> 00:35.340
+like that to a blog post we made it that all the blog posts that were fetched were ultimately ordered
+
+00:35.390 --> 00:37.820
+by the created out date.
+
+00:37.890 --> 00:44.100
+So I've told you that we'll also see why this is not always the best idea.
+
+00:44.970 --> 00:54.240
+So let's start by randomization that created at the date of our blog posts and comments.
+
+00:54.600 --> 01:04.080
+So go to the database folder of our application and open the blog post factory and comment factory.
+
+01:04.170 --> 01:12.240
+Now since we aren't specifying that created ad column value inside our model factories for both comments
+
+01:12.480 --> 01:18.470
+and blog posts the created ad would be the current date and time.
+
+01:18.660 --> 01:25.820
+So if we want a bigger spectrum of the dates what we might use is from the faker.
+
+01:25.830 --> 01:34.740
+There is this date time between method and you can specify what date it should start with and what date
+
+01:34.770 --> 01:36.660
+it should end with by default.
+
+01:36.680 --> 01:37.550
+It's now.
+
+01:38.540 --> 01:46.300
+So let's use the day time between method and specify what should they created art be.
+
+01:46.530 --> 01:59.070
+So we can the creator that faker takes time between let's say that we want the comments to be from three
+
+01:59.070 --> 02:00.090
+months ago.
+
+02:00.210 --> 02:08.400
+Up until now so we haven't have to specify the second argument and let's do the same for the blog posts.
+
+02:08.430 --> 02:15.800
+So save the changes and also paste the same here as the column name is exactly the same.
+
+02:15.810 --> 02:22.470
+Now what we can do is we can reload those blog posts and comments.
+
+02:22.470 --> 02:23.390
+So let's do that.
+
+02:23.390 --> 02:26.970
+Beach b r d d b c.
+
+02:28.010 --> 02:34.960
+We will say yes because we want to refresh the database let's generate 20 users what may be around a
+
+02:34.960 --> 02:40.180
+hundred blog posts and 500 comments so we'll have more.
+
+02:41.880 --> 02:46.550
+Okay now let's see if we have been successful.
+
+02:49.200 --> 02:49.470
+Okay.
+
+02:49.500 --> 02:55.410
+So you can see that the blog posts are sorted properly by the time when they were created.
+
+02:55.410 --> 03:04.230
+Now since I've said we have this global latest scope and it can be applied to any model.
+
+03:04.410 --> 03:07.200
+So now it is applied to a blog post.
+
+03:08.010 --> 03:19.740
+So let's try to apply it to the comments so let's keep it simple we'll just copy this but methods pasted
+
+03:19.740 --> 03:25.390
+inside the comments remove those two codes because they are not needed here.
+
+03:25.410 --> 03:26.660
+Everything stays the same.
+
+03:26.670 --> 03:32.460
+So this is booting the comment model and we are adding their latest scope.
+
+03:32.460 --> 03:41.190
+Of course we do not have an import here so you can either type it explicitly or just press enter when
+
+03:41.190 --> 03:43.590
+it is proposing the name so obvious to the.
+
+03:43.890 --> 03:50.910
+Maybe just your code will add this use statement to the comment of course save the changes.
+
+03:51.160 --> 03:54.840
+And now let's see what is the potential problem.
+
+03:55.020 --> 04:04.440
+So let's first find a blog post that has a lot of comments so maybe this one it has 10 comments.
+
+04:04.500 --> 04:11.700
+Now this seems to work perfectly here too with sorting comments as you see the newest comments first
+
+04:12.180 --> 04:14.570
+and the oldest are last.
+
+04:14.580 --> 04:21.450
+So this global scope is also automatically applied for the comments which are fetch together with a
+
+04:21.450 --> 04:24.900
+blog post as our relation.
+
+04:25.020 --> 04:35.140
+Now let's see what will happen if we will now go to the blog post least So what you see here is actually
+
+04:35.140 --> 04:37.150
+a my sequel error.
+
+04:37.420 --> 04:44.960
+And it says that mixing group columns like minimum maximum count with no group columns is illegal.
+
+04:45.010 --> 04:48.130
+If there is no group by close.
+
+04:48.160 --> 04:58.270
+So what that means is by default then my sequel has the setting called only fool group by which is of
+
+04:58.270 --> 05:01.510
+course as I said enabled by default.
+
+05:02.080 --> 05:11.510
+And what this does is it will reject queries that have are having condition or in our case an order
+
+05:11.510 --> 05:13.340
+by condition.
+
+05:13.570 --> 05:23.500
+And if this order by refers to columns that are non aggregated columns which means they aren't used
+
+05:23.560 --> 05:28.180
+with an aggregate function like minimum maximum or count.
+
+05:28.240 --> 05:35.770
+So if you will take a look at this sub query you can see that we are only using aggregate to get a count
+
+05:35.830 --> 05:45.400
+of all the elements from the comments table and then we are ordering by created art but we are not grouping
+
+05:45.400 --> 05:46.510
+by created that.
+
+05:46.810 --> 05:50.670
+So this is what my sequel doesn't like.
+
+05:50.680 --> 05:56.970
+So if you would think that this is only a problem with the those comments.
+
+05:57.250 --> 05:59.600
+Let's see another example.
+
+05:59.710 --> 06:05.050
+But this time we'll run that inside larval thinker.
+
+06:05.170 --> 06:16.090
+So first let's go to the Visual Studio code and open our user model so you can see that user has a relation
+
+06:16.090 --> 06:19.690
+to up blog posts by the way.
+
+06:19.720 --> 06:27.130
+If we are specifying are full class we can do that as a string OK.
+
+06:27.150 --> 06:32.510
+Now let's go back to the Save the changes and let us go back to Lavell Tinker.
+
+06:32.510 --> 06:38.400
+So let's run it inside a terminal window so peach B artisan Tinker.
+
+06:39.150 --> 06:46.220
+So since user has a relation to blog posts as you can hear you can see here we can do the same.
+
+06:46.220 --> 06:56.950
+What we did with blog posts and comments we can fetch all the users with count of the blog posts.
+
+06:57.330 --> 07:02.370
+So let's see what will happen if we will fetch it like that rim like that.
+
+07:02.370 --> 07:11.430
+Remember that the global scope is added to the blog posts so it will attempt to add this order by inside
+
+07:11.700 --> 07:22.320
+the blog post query for the created that field and you can see that we have an exact Li the same problem.
+
+07:22.320 --> 07:24.090
+Now what you can do with that.
+
+07:24.810 --> 07:33.600
+So the simplest solution would be to open the database BHP config file and find my sequel connection
+
+07:34.840 --> 07:39.620
+and set this strict option to force.
+
+07:39.840 --> 07:45.930
+So it will basically disable this my sequel option that I've mentioned before.
+
+07:45.930 --> 07:54.750
+The only fool group by and then when you refresh you can see that you no longer have this problem.
+
+07:54.800 --> 08:03.230
+So blog posts are properly sorted by the date using this global scope and also comments are properly
+
+08:03.230 --> 08:06.680
+sorted by the newest first.
+
+08:06.680 --> 08:13.640
+Also if you will copy disk were inside the Tinker so let's copy that and restart Tinker.
+
+08:13.640 --> 08:18.170
+So it picks up the configuration change that we did.
+
+08:18.170 --> 08:27.140
+Now let's paste up and you can see that we are also able to fetch the users with the blog posts.
+
+08:27.170 --> 08:34.740
+Even when this has sought by which is not grouped by column.
+
+08:35.020 --> 08:42.200
+Now let's also take a look at the documentation of this obscure my ask you all option only for group
+
+08:42.230 --> 08:51.560
+buying so you can see that it wasn't the default behavior up until 5 7 5 version of the my ask you our
+
+08:51.560 --> 08:58.580
+server and having this option disabled might lead to some bugs in your code.
+
+08:58.640 --> 09:07.060
+The results of the queries might be non deterministic which means they might lead to unexpected results.
+
+09:07.220 --> 09:16.430
+So actually setting this option strict to false is basically like hiding the problem under the carpet.
+
+09:16.520 --> 09:24.710
+So just that it doesn't work well with what you have in larval or basically any other framework disabling
+
+09:24.710 --> 09:32.360
+some security options that should make everything work better doesn't seem to be a good solution.
+
+09:32.360 --> 09:34.530
+I hope you will agree with me.
+
+09:34.640 --> 09:41.020
+So what I propose you to do is just enable the default options for the server.
+
+09:41.030 --> 09:48.710
+You can also read more about why this option was enabled by default by just googling this option and
+
+09:48.740 --> 09:51.920
+asking why it is enabled by default.
+
+09:52.340 --> 09:59.450
+Obviously this course is not about that my ask you all specifics and details as this might seem too
+
+09:59.450 --> 10:05.220
+complicated thing especially that this course is for beginners.
+
+10:05.330 --> 10:13.460
+So you've seen what problems adding are global queries scopes my calls.
+
+10:13.580 --> 10:21.770
+So now in the next lecture let's see how we can handle it all nicer by using the local query scopes
+
+10:22.160 --> 10:32.850
+and using this behavior of the query scopes only where we actually need them and well to tell Larry
+
+10:32.960 --> 10:39.260
+specifically that you would like to actually use them in this specific query.

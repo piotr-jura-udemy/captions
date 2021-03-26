@@ -1,0 +1,136 @@
+WEBVTT
+
+00:00.980 --> 00:06.170
+In this lecture I will explain one to one polymorphic relationship.
+
+00:06.590 --> 00:13.910
+So the first thing you need to know is that polymorphic is just a very fancy word for a pretty simple
+
+00:13.910 --> 00:14.510
+thing.
+
+00:15.590 --> 00:17.720
+So let's take a look at this example.
+
+00:17.720 --> 00:22.550
+So those squares represent models and relations between them.
+
+00:22.760 --> 00:25.700
+So this is a one to one relationship.
+
+00:25.700 --> 00:30.100
+And on the left we see two blog post models and then a user model.
+
+00:30.830 --> 00:33.450
+And this is what we will achieve.
+
+00:33.500 --> 00:42.020
+So we have a single image model which can be light related by one to one relationship to either blog
+
+00:42.020 --> 00:45.090
+post or user.
+
+00:45.140 --> 00:47.180
+So this is our current situation.
+
+00:47.180 --> 00:50.540
+This is how the database schema looks like.
+
+00:50.540 --> 00:56.120
+And this actually prevents us from assigning an image to a user.
+
+00:56.840 --> 01:02.860
+And this is because this image model and image table or image are stable.
+
+01:02.870 --> 01:13.490
+I would say have a blog post IDF field which basically relates it to a blog post inside the database.
+
+01:13.490 --> 01:16.270
+So this is what we have currently.
+
+01:16.280 --> 01:24.710
+What we would like to have is those blog posts and user models that just wants change but instead the
+
+01:24.800 --> 01:33.560
+image instead of having a specific relation to one another model which would be blog post it will have
+
+01:33.830 --> 01:41.990
+now two fields where one would represent ideas of the relation which can related either to blog post
+
+01:42.710 --> 01:44.880
+or to the user.
+
+01:45.140 --> 01:49.720
+And then there is another field which is the imaginable type.
+
+01:50.150 --> 01:58.490
+And inside this field which would be a string we will specify the actual model name to which it is related.
+
+01:58.490 --> 02:00.410
+So it is a very simple idea.
+
+02:00.890 --> 02:07.940
+So for example you can have rows inside the table where the idea could be either a blog post idea or
+
+02:08.090 --> 02:16.420
+user I.D. but then there is this another field that actually specifies what kind of model that is.
+
+02:16.460 --> 02:20.430
+So this imaginable is not.
+
+02:20.450 --> 02:23.930
+You have well not a name you have to give to this field.
+
+02:23.930 --> 02:27.470
+This is just a larval convention.
+
+02:27.570 --> 02:36.420
+So basically this was the image and this able suffix is just a convention you would give to those kind
+
+02:36.420 --> 02:38.640
+of fields.
+
+02:38.640 --> 02:45.540
+Now you can see that you always would have those two fields so there will be one field with a name.
+
+02:45.540 --> 02:46.840
+This could be magical.
+
+02:46.860 --> 02:54.180
+This could also be just anything else you can come up with but then you will always have this underscore
+
+02:54.180 --> 02:59.190
+I.D. suffix to actually have the idea of the related model.
+
+02:59.190 --> 03:07.810
+And then there is this type to specify what is the actual type of dose related model.
+
+03:08.300 --> 03:10.280
+So this should be pretty simple.
+
+03:10.280 --> 03:12.490
+So now let's just implement.
+
+03:12.510 --> 03:16.880
+So you will see what actually will have inside the database.
+
+03:16.880 --> 03:24.560
+So our goal is to keep image as stable as it is except that instead of blog post idea we now have two
+
+03:24.560 --> 03:33.200
+fields one for specifying the idea of a related model and another one to specify the type of this related
+
+03:33.200 --> 03:42.520
+model and that's basically all the risks about this magic polymorphic word you just use one table which
+
+03:42.520 --> 03:50.650
+then you can relate to couple of different models without having a field like blog post I.D. or user
+
+03:50.650 --> 03:53.650
+I.D. because this will just not make sense.
+
+03:53.650 --> 04:01.930
+And instead we have just one field which basically is two fields but one of those fields holds I.D.
+
+04:02.000 --> 04:05.080
+another holds the type of that related model.

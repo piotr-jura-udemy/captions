@@ -1,0 +1,178 @@
+WEBVTT
+
+00:02.220 --> 00:07.660
+Loops can be used to iterate over arrays are like objects in blade.
+
+00:08.190 --> 00:13.640
+It's important to know loops in blade templates work the same as loops in PHP.
+
+00:14.490 --> 00:20.610
+We will begin with that for each type of loop, as I think it would be the one you will most often use.
+
+00:23.260 --> 00:28.840
+To work with realistic example, we will make use of their posts as a variable.
+
+00:29.350 --> 00:34.390
+Our goal is to prepare a new page that will list old blog posts, titles.
+
+00:35.800 --> 00:41.860
+First off, we need to move posts as variable out of this function.
+
+00:43.210 --> 00:47.710
+We want to create a new route for displaying the lists of posts.
+
+00:55.730 --> 01:04.070
+For this roots controller functions to have access to the post variable, now we add the use statements
+
+01:04.550 --> 01:13.520
+after the function, the header inside the statement, you should list all variables that are not declared
+
+01:13.520 --> 01:15.480
+inside the anonymous function.
+
+01:15.920 --> 01:18.500
+So in our example, this is posts.
+
+01:22.000 --> 01:31.000
+If you want or need to know more about anonymous functions in Puchi, go visit PPY documentation, page
+
+01:31.180 --> 01:34.390
+the link you see on the screen on the resources.
+
+01:40.600 --> 01:51.610
+Let's create a new route using the static jet method that you or I, we want our new page under is supposed
+
+01:53.230 --> 01:55.990
+there are no arguments to disrupt.
+
+01:57.980 --> 02:10.510
+It should render the Post's index template we are yet to create and the data pass to it is the Post's
+
+02:10.670 --> 02:12.830
+right now.
+
+02:12.830 --> 02:20.330
+To use this Post's variable, we actually have to add a used statement after the function header, the
+
+02:20.330 --> 02:21.890
+same as we did previously.
+
+02:24.300 --> 02:30.570
+At this point, I should mention that disarray can be generated using a shortcut in BHP.
+
+02:31.160 --> 02:33.290
+Let me just paste it for you.
+
+02:33.860 --> 02:41.030
+So if you called a BHP built in compact function, then it will produce an array where there will be
+
+02:41.030 --> 02:47.960
+a key with the name exactly the same as the variable name and the value of the variable will be assigned
+
+02:47.960 --> 02:48.670
+to that key.
+
+02:49.370 --> 02:55.910
+So whenever you would like to be explicit and define the array or use the compact function is completely
+
+02:55.910 --> 02:56.540
+up to you.
+
+02:57.050 --> 03:02.340
+I prefer to be verbose, so I will stick to defining the full array.
+
+03:03.320 --> 03:06.230
+You can read more about the compact function in the link.
+
+03:10.750 --> 03:17.350
+Now, let's create the new template, The Post's index blade.
+
+03:18.330 --> 03:27.820
+So essentially, this means creating an index blade profile file inside the posts folder to speed things
+
+03:27.820 --> 03:28.060
+up.
+
+03:28.070 --> 03:31.210
+We'll copy over the other template contents.
+
+03:35.990 --> 03:41.450
+And just remove everything, what is inside the section content?
+
+03:47.600 --> 03:57.590
+Now they're for each sentence is quite intuitive, first goes the array to iterate over, then they're
+
+03:57.620 --> 04:07.430
+ASCII word and Furt is the variable name of the current element in the loop, the loop itself and swift
+
+04:07.430 --> 04:09.740
+and for each directive.
+
+04:11.920 --> 04:18.850
+Between the loop directives, we can now render the content of the current iteration variable, in our
+
+04:18.850 --> 04:21.130
+case, it's an individual post.
+
+04:22.200 --> 04:30.420
+So let's add a development and using their master syntax, let's output the post title now before we
+
+04:30.420 --> 04:38.370
+go test it, we have to fix to the actual page title as we can't use the supposed variable outside the
+
+04:38.370 --> 04:39.570
+scope of a loop.
+
+04:39.870 --> 04:42.880
+It doesn't exist in here and this would cause an error.
+
+04:43.080 --> 04:53.880
+So let's change it to just normal static text like blog posts and now save the changes and let's verify
+
+04:54.120 --> 04:55.560
+it in the browser.
+
+04:55.890 --> 05:00.090
+So the new URL should be just posts.
+
+05:00.630 --> 05:01.310
+There it is.
+
+05:01.320 --> 05:05.220
+We have the titles of our two blog posts.
+
+05:07.660 --> 05:14.860
+As I've mentioned before, therefore, each directive works exactly the same as the for each loop.
+
+05:15.430 --> 05:23.140
+So this means if you would also like to get the key of every element you iterate over and if we would
+
+05:23.140 --> 05:30.820
+like to remind ourselves this array actually has keys explicitly specified, you can do that like you
+
+05:30.820 --> 05:38.220
+would in which is you will specify another variable for the key and use the arrow.
+
+05:39.010 --> 05:42.940
+Then we can output the key using mustache as well.
+
+05:43.120 --> 05:49.840
+And maybe let's add a dot after it now, say the changes and let's see what this would output.
+
+05:50.410 --> 05:51.420
+So there it is.
+
+05:51.430 --> 05:53.790
+We can also get the keys this way.
+
+05:55.000 --> 05:59.290
+So the summary now, there is more to learn about loops.
+
+05:59.470 --> 06:07.550
+And in the next lecture's you will learn about other types of loops, how to stop the loop or skip elements.
+
+06:08.440 --> 06:16.000
+We will also talk about a special loop variable, which has a lot of useful info about the loop itself,
+
+06:16.450 --> 06:18.340
+like the current loop index.

@@ -1,0 +1,559 @@
+WEBVTT
+
+00:00.420 --> 00:07.200
+In the last lecture we have created this custom job to notify older users that someone else has also
+
+00:07.200 --> 00:08.970
+commented on a blog post.
+
+00:09.480 --> 00:16.500
+So what this job will do is it will first fetch older users that have also commented and then will also
+
+00:16.500 --> 00:21.210
+dispatch another email to be sent to those users.
+
+00:21.240 --> 00:28.140
+So what we will need is we need to create another email level class so let's run peach artisan make
+
+00:28.350 --> 00:34.110
+mail and we can call that comment posted on post watched.
+
+00:34.140 --> 00:42.420
+Doesn't really matter how we called up and specify a markdown template which would be emails posts comment
+
+00:42.990 --> 00:45.810
+posted on watch.
+
+00:45.870 --> 00:47.990
+So this is our template name.
+
+00:48.000 --> 00:55.280
+It's also not really important how we call out so comment posted on post watched.
+
+00:55.350 --> 01:03.520
+This is our new class which is male level will reuse what we did before so we'll implement the shoot
+
+01:03.540 --> 01:04.760
+Q interface.
+
+01:04.770 --> 01:09.640
+So this would always be put on the queue.
+
+01:09.700 --> 01:12.750
+Now what we will need here is the comment instance.
+
+01:12.760 --> 01:15.000
+So let's add up comment.
+
+01:16.530 --> 01:18.560
+And also a user instance.
+
+01:18.570 --> 01:25.740
+So make sure you add up user because this email would be different to every other user because we have
+
+01:25.740 --> 01:30.870
+to provide him a name say something like hello and provide the user name.
+
+01:30.870 --> 01:33.570
+So make sure you add those to imports.
+
+01:33.600 --> 01:38.880
+And now this also requires the fields to be available to the view.
+
+01:39.600 --> 01:46.920
+So this comment is command and this user is user.
+
+01:47.010 --> 01:54.360
+So now those would be a variable as variable names to this particular view which of course is created
+
+01:54.450 --> 02:02.880
+inside the resources view so let's open it now let's open this template and while you can see that it's
+
+02:02.880 --> 02:07.940
+not here inside the directory at least Visual Studio code cannot find it.
+
+02:08.100 --> 02:11.730
+Well it has to be refreshed somehow it doesn't pick up the changes all the time.
+
+02:11.730 --> 02:18.630
+If you have the same problem just open it using comment P or control p on windows and type the file
+
+02:18.630 --> 02:22.070
+name which is comment posted it should find it.
+
+02:22.080 --> 02:24.570
+Now enter and you can open it.
+
+02:25.680 --> 02:33.440
+And what will basically do is we'll reuse whatever we have inside the commented mark down blade template.
+
+02:35.840 --> 02:37.920
+So let's copy the contents.
+
+02:37.920 --> 02:41.970
+This would be almost the same with some exceptions.
+
+02:44.510 --> 02:46.570
+So introduction would be different.
+
+02:46.580 --> 02:51.430
+This would be comment was posted on post.
+
+02:51.440 --> 02:53.560
+You are watching.
+
+02:53.750 --> 02:59.240
+Well no one is actually watching opposed but let's assume that people that have commented on a post
+
+02:59.240 --> 03:03.010
+are interested in other people comments.
+
+03:03.020 --> 03:11.000
+So now we have this user view variable which we can use to get the name of this actual user.
+
+03:11.170 --> 03:17.860
+So let's remove this tax will also provide the link to the blog posts and everything stays the same
+
+03:17.860 --> 03:23.710
+as we also have the common variable here that will save the changes and well let's leave it like that.
+
+03:23.710 --> 03:30.220
+So basically will notify someone that someone else has also commented on a blog posts so it's almost
+
+03:30.220 --> 03:34.620
+the same ask their notification for the blog post out or above.
+
+03:34.750 --> 03:41.170
+This doesn't really matter so much what is written inside this particular email.
+
+03:41.230 --> 03:50.680
+Now let's think of how we can fetch all those users that have also commented on a blog post so since
+
+03:50.680 --> 03:58.540
+we will be adding a query on the user it might be a good idea to just add a local query scope to the
+
+03:58.540 --> 04:05.830
+user model itself because we might have to reuse that later so it might be usable not only for this
+
+04:05.830 --> 04:07.130
+particular job.
+
+04:07.300 --> 04:14.450
+So we won't write the query inside the job but we could if we wanted we can use all the models of lava
+
+04:14.530 --> 04:22.270
+inside it so you can for example use the User model comment model fetch any data you want from the database
+
+04:22.750 --> 04:32.920
+directly from the handle method of this job but we will create a query scope so we create a public function
+
+04:33.340 --> 04:46.260
+starts with a scope and let's call it that has commented on post so we need an instance of builder object.
+
+04:46.260 --> 04:54.000
+So this is our query builder and now something we probably haven't done yet inside our application.
+
+04:54.000 --> 05:01.780
+So additional parameter to the query scope so this would be a blog post.
+
+05:04.510 --> 05:09.670
+Now of course make sure that you have added the blog post to be important here.
+
+05:09.670 --> 05:18.400
+So use up blog posts or actually you didn't have to do that because we are in the same namespace.
+
+05:18.400 --> 05:25.710
+I forgot about that so blog posts can be used because it is in the same namespace as the User class.
+
+05:25.720 --> 05:28.000
+So sorry for that.
+
+05:28.000 --> 05:30.550
+Now will have to write this query.
+
+05:30.550 --> 05:41.740
+So what we can use is there is this were has so we can do something on the relationship of this user
+
+05:41.740 --> 05:42.530
+model.
+
+05:42.790 --> 05:47.270
+So we know that it has comments relationship.
+
+05:47.390 --> 05:55.310
+You can even scroll up to see that this user has comments relationships of which whenever he wrote any
+
+05:55.310 --> 06:02.480
+comments those all would be available under this relationship.
+
+06:02.480 --> 06:07.990
+So since comments can be comments on blog posts or users.
+
+06:08.390 --> 06:12.340
+Now we have to actually add some specific query.
+
+06:13.820 --> 06:24.670
+So this would contain a closure which also accepts query and we have to use post because it is from
+
+06:24.670 --> 06:29.580
+the outside scope and we won't be able to access that.
+
+06:29.680 --> 06:42.800
+Now what we will do is we will add some query to that so query and we are the We're close so were commendable
+
+06:42.890 --> 06:43.540
+iodine.
+
+06:44.330 --> 06:46.330
+So mind what we are using here.
+
+06:46.340 --> 06:51.190
+So we are making sure that that comment.
+
+06:51.350 --> 06:53.870
+So we are working on the comments relationship.
+
+06:53.870 --> 07:03.720
+So each comment has a commendable idea field so if comment or boil I b equals the post idea.
+
+07:03.860 --> 07:15.470
+So that's the first condition so we only want to fetch the comments relation of our user where those
+
+07:15.470 --> 07:20.160
+comments are actually associated with a specific blog post.
+
+07:20.210 --> 07:25.520
+So we know that now it's this field is not called blog posts ideas but commendable ideas.
+
+07:26.090 --> 07:28.730
+So that's the first condition.
+
+07:28.730 --> 07:39.360
+Now another one is commendable type has to be well has to be blog post b because we do not want to fetch
+
+07:39.510 --> 07:49.320
+any comments on a user so blog post class or alternatively you can write just inside a string absolute
+
+07:49.350 --> 07:57.350
+blog post and we might have optionally filter out the person who actually posted this comment but we'll
+
+07:57.350 --> 08:01.130
+do that later because there is basically no way to do that here.
+
+08:01.160 --> 08:07.640
+If we just post the blog post we will have to know what is the most recent comment out there so let's
+
+08:07.640 --> 08:08.570
+leave it like that.
+
+08:08.570 --> 08:13.850
+We can also return this here but not required.
+
+08:14.210 --> 08:19.370
+Now let's open the terminal and run Tinker so we'll test out this queries.
+
+08:19.400 --> 08:28.610
+So first let's find some blog posts so up blog posts find could be even the first one.
+
+08:28.670 --> 08:31.570
+So we have that now inside the post variable.
+
+08:32.360 --> 08:42.490
+And now what we can do is on user we can call this particular method that has commented on post.
+
+08:43.190 --> 08:45.920
+So not is that there is our parameter here.
+
+08:45.920 --> 08:48.020
+Previously we just added a builder.
+
+08:48.020 --> 08:54.320
+This is also always handled by lot of else so you don't really have to pass this parameter but if you
+
+08:54.320 --> 09:00.530
+will add any additional one then this is a mandatory parameter that you will have to pass when you are
+
+09:00.530 --> 09:05.720
+using this local query scope so we can past post to it.
+
+09:05.720 --> 09:11.320
+And finally we have to run get to actually execute this query.
+
+09:11.330 --> 09:17.990
+Now what you can see is that we actually go to users and those are older users that have commented on
+
+09:17.990 --> 09:19.640
+a blog post.
+
+09:19.640 --> 09:26.690
+So this basically won't contain well every user that has at least one blog post.
+
+09:26.690 --> 09:34.640
+We have actually filter that so we get all the unique users that has created comment on a particular
+
+09:34.640 --> 09:35.240
+blog post.
+
+09:35.240 --> 09:36.680
+So this works great.
+
+09:36.680 --> 09:44.630
+We can now use that inside our job so now let's close the terminal and we can go to the actual job.
+
+09:44.630 --> 09:48.600
+So we already have a comment based at here.
+
+09:48.620 --> 09:54.740
+Now let's see how we should implement this so we can call user.
+
+09:54.740 --> 09:57.150
+This is our app user.
+
+09:57.410 --> 10:02.780
+So let's add an import for it this time we actually have to do that up user.
+
+10:02.780 --> 10:06.610
+We do not want to use the full namespace.
+
+10:06.920 --> 10:17.720
+Now this has that has well I've already forgot what's the scope name that has commented on post it has
+
+10:17.720 --> 10:21.070
+to start with lower case.
+
+10:21.080 --> 10:26.600
+Now how do we get this blog post from we actually get that from comments.
+
+10:26.630 --> 10:31.560
+So this comment commendable.
+
+10:31.610 --> 10:32.990
+So there it is.
+
+10:33.050 --> 10:35.620
+This is our blog post.
+
+10:35.960 --> 10:39.710
+Now we could get to actually execute this query.
+
+10:39.800 --> 10:46.280
+Now what would what we do with these is we get all the users that have commented on our blog post and
+
+10:46.280 --> 10:49.180
+well we do not actually want that.
+
+10:49.220 --> 10:57.740
+So let's use the collection filter to filter out the user that has actually posted that comment so filter
+
+10:57.890 --> 11:01.190
+all those would be users.
+
+11:01.190 --> 11:08.190
+So all elements of this collections are collection are actually users.
+
+11:08.220 --> 11:18.660
+So what we have to do inside this filter method is we'll have to check whether the user I.D. is different
+
+11:19.140 --> 11:22.760
+mind that I have this strange characters I'm using this different font.
+
+11:22.770 --> 11:29.310
+It's actually an asterisks with two equal sides so not equal to check.
+
+11:29.310 --> 11:39.400
+Also the types of these variables just for the safety it's always the best practice and we can verify
+
+11:39.430 --> 11:43.420
+if this is any different than that comment.
+
+11:43.450 --> 11:53.500
+User I.D. so not is that previously when we used the when created closures and we wanted to access a
+
+11:53.500 --> 12:02.020
+variable from the outside scope we have to use but this is not the case with the fields of the class
+
+12:02.170 --> 12:08.080
+on which you are the closure because they are always available to any closure on that class.
+
+12:08.080 --> 12:14.140
+So that's why we were able to access this comment without adding any use statement.
+
+12:14.770 --> 12:21.790
+Now so this filter method will basically remove the user that has actually posted the comment and now
+
+12:21.790 --> 12:24.980
+additional magic of larval collections.
+
+12:25.030 --> 12:28.050
+There are all those methods you can call them.
+
+12:28.240 --> 12:31.750
+It's basically it even has a name it's functional programming.
+
+12:31.750 --> 12:38.280
+If you are interested and well I really love to do this in any language is not just peach bee.
+
+12:38.350 --> 12:39.580
+Now there is the map.
+
+12:39.670 --> 12:43.240
+So we map every user object to something
+
+12:46.000 --> 12:50.690
+so we need another closure.
+
+12:51.440 --> 12:54.250
+And now with every user that was left.
+
+12:54.260 --> 13:00.620
+So except the one that actually added the comment now we'll finally use the mail for seed.
+
+13:00.660 --> 13:11.270
+So also mind that you need this import statement we'll send this email to user because we want to call
+
+13:11.270 --> 13:20.660
+that for every user that has commented on a blog post and we can just call send because this message
+
+13:20.840 --> 13:21.440
+is.
+
+13:21.860 --> 13:24.910
+Well actually we can't call send because it's not cute.
+
+13:24.920 --> 13:32.150
+So that's at Q and we'll make sure that this email sending is also cued
+
+13:35.380 --> 13:37.870
+or sorry no mistake in here.
+
+13:37.870 --> 13:48.220
+So this particular Malabo class actually implements should Q Sorry for that send is enough.
+
+13:48.270 --> 13:51.530
+Now we have to of course create a new instance of that class.
+
+13:51.540 --> 13:56.900
+And if you remember it accepts a comment and a user.
+
+13:57.100 --> 14:05.450
+So we have access to the comment from this comment and the user is available through the closure.
+
+14:05.800 --> 14:11.390
+So it complains about something comment posted on post watched.
+
+14:11.650 --> 14:15.200
+This is actually a movable maybe there is no.
+
+14:15.220 --> 14:15.610
+Yes.
+
+14:15.640 --> 14:21.640
+So I also haven't added an import comment posted on post watched.
+
+14:21.640 --> 14:27.830
+So it's always better to use visual studio code when it tries to help me.
+
+14:27.920 --> 14:28.180
+OK.
+
+14:28.210 --> 14:30.970
+So mind you also have other this import here.
+
+14:30.970 --> 14:32.020
+OK.
+
+14:32.320 --> 14:41.020
+Now finally save the changes also inside our post comment controller make sure that you dispatch this
+
+14:41.020 --> 14:42.170
+job.
+
+14:42.190 --> 14:45.410
+First let's make sure we have started our a worker.
+
+14:45.520 --> 14:53.680
+And now finally we should see everything that's posted anything doesn't really matter.
+
+14:54.780 --> 14:55.150
+OK.
+
+14:55.150 --> 14:58.660
+Now you see that the first job is bank process.
+
+14:58.660 --> 15:04.350
+So this sends an e-mail to the outer of the blog post.
+
+15:04.360 --> 15:08.560
+Then it tries to process our custom job notify users.
+
+15:09.100 --> 15:16.720
+And this job actually fetches older users that have commented on a blog post and then creates another
+
+15:16.720 --> 15:23.090
+jobs creates this Malabo class which is always put on queue comment posted on post watch.
+
+15:23.110 --> 15:30.120
+You can see that one has been successful and one has actually failed because it was retried free times.
+
+15:30.160 --> 15:32.270
+So let's see what happened.
+
+15:32.270 --> 15:40.270
+So inside the failed jobs you can see swift transport exception 550 too many e-mails per second.
+
+15:40.270 --> 15:42.820
+So we actually didn't do anything wrong.
+
+15:42.820 --> 15:48.580
+It's just made trap who refused to accept so many emails at a time.
+
+15:49.180 --> 15:55.410
+So what you can do actually is delay those emails not send them immediately.
+
+15:56.440 --> 16:03.900
+So you can see this is the first post and then it was sent to all the ferry which happens to be an altar.
+
+16:03.910 --> 16:10.240
+Well the e-mail is different but the name is Nya Cummings for.
+
+16:10.260 --> 16:13.350
+So all those strange names anyway.
+
+16:13.560 --> 16:21.630
+It's also sent to Karen had some DNS yes which happened to have commented on this blog post and well
+
+16:21.660 --> 16:25.010
+obviously it didn't even try to send it to John Doe.
+
+16:25.020 --> 16:28.440
+And well one of those jobs has failed.
+
+16:28.440 --> 16:36.920
+So it might be a good idea to not try to send them all at once but instead modified this email.
+
+16:36.990 --> 16:44.130
+So they want to implement should cue and instead we will delay this with couple seconds so we might
+
+16:44.130 --> 16:46.410
+try to do this in the next lecture.
+
+16:46.590 --> 16:49.280
+So we make sure that may drop won't fail.
+
+16:49.290 --> 16:53.580
+Normal e-mails sending servers shouldn't fail with this amount of e-mail.
+
+16:53.580 --> 16:54.350
+It's not much.
+
+16:54.360 --> 16:56.230
+It's just too.
+
+16:56.280 --> 16:58.560
+But you know this is some free mail trap account.
+
+16:58.560 --> 16:59.610
+So this has happened.
+
+16:59.970 --> 17:04.620
+We didn't do anything wrong so let's figure it out on the next lecture.

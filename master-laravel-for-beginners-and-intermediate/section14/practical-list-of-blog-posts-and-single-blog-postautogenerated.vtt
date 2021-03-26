@@ -1,0 +1,94 @@
+WEBVTT
+
+00:01.010 --> 00:09.050
+With what you know already, you should be more than ready to replace the damaged posts array with the
+
+00:09.050 --> 00:15.410
+real data from the database, lets you remove the posts filled first.
+
+00:17.060 --> 00:21.590
+The index action can now apply the blog post all.
+
+00:25.830 --> 00:37.140
+Make sure to import the model class, remember that the all method will return all table records from
+
+00:37.140 --> 00:40.350
+oldest to newest, first by default.
+
+00:41.660 --> 00:50.270
+Remember, if you need something different than defaults used to CareerBuilder, for example, the order
+
+00:50.270 --> 00:53.180
+by created out.
+
+00:54.740 --> 00:57.170
+Sorted in descending order.
+
+00:59.600 --> 01:04.160
+This would return blog posts from the newest first.
+
+01:06.180 --> 01:11.400
+You can also use query builder methods like the take method.
+
+01:13.350 --> 01:21.780
+To limit how many items you want to be returned, this would add a limit close to the executed rescuable.
+
+01:22.260 --> 01:28.680
+So you have to specify a number like five to only get five elements back from the query.
+
+01:31.210 --> 01:39.520
+Just remember that some metals exist in both the quarry builder, but also in the collection of models
+
+01:39.520 --> 01:41.460
+after the quarry is executed.
+
+01:42.460 --> 01:52.390
+Take is an example in the query builder, it would add a limit clause, but adding it after the get
+
+01:52.390 --> 01:57.800
+call that runs the query, it would operate on the ResultSet.
+
+01:58.540 --> 02:02.650
+This means you might accidentally run inefficient queries.
+
+02:03.190 --> 02:08.710
+Also, remember that the best way to learn is to try out queries by yourself.
+
+02:08.980 --> 02:13.140
+And for this, the best way is to run them in Tinker.
+
+02:13.990 --> 02:18.610
+Anyway, let's bring back this to be a simple old query.
+
+02:19.750 --> 02:26.770
+Now, to get one result, we can simplify our current show methods.
+
+02:28.040 --> 02:38.720
+To be a one liner, so we know this blog post find or fail method that would return four or four page
+
+02:38.720 --> 02:40.990
+if the model is not found in the database.
+
+02:41.840 --> 02:45.340
+So there is no need to use the abort if helper.
+
+02:46.310 --> 02:47.480
+Let's comment that out.
+
+02:48.450 --> 02:55.980
+And instead, in this place, let's do a blog post, find or fail, Heidi.
+
+02:58.930 --> 02:59.680
+Finally.
+
+03:00.870 --> 03:03.060
+Let's see if this actually works.
+
+03:04.160 --> 03:12.050
+So that's the page with posts currently we only have one inside the database, so we should be able
+
+03:12.050 --> 03:15.760
+to visit post with one and there it is.
+
+03:15.800 --> 03:18.560
+This is directly read from the database.

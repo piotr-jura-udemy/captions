@@ -1,0 +1,157 @@
+WEBVTT
+
+00:01.600 --> 00:08.830
+You might remember that two lectures ago when we have ran the peach bee artisan migrate to refresh command
+
+00:09.490 --> 00:10.720
+it to recreate it.
+
+00:10.750 --> 00:16.620
+The whole structure of our database so it reran all the migrations again.
+
+00:16.840 --> 00:24.850
+But the side effect of running this is that we've lost all the data that we have added manually to our
+
+00:24.940 --> 00:31.540
+application database so there is no blog posts no comments and no users.
+
+00:31.690 --> 00:39.520
+Fortunately there is a comment inside Lara that you can run to load some fake generated data into your
+
+00:40.060 --> 00:41.310
+application database.
+
+00:41.320 --> 00:50.350
+So this command is Peach Pit artisan D.B. seed so it says that it has completed successfully but it
+
+00:50.410 --> 00:56.510
+actually haven't done anything because we have to create those seedier seeders manually.
+
+00:56.650 --> 01:04.890
+So inside the database folder there is the seats folder that has only one class in their database cedar
+
+01:05.470 --> 01:11.100
+and that's are kind of main entry point of this cedar process.
+
+01:11.170 --> 01:17.540
+It starts with this database Cedar Run method inside this database.
+
+01:17.560 --> 01:27.040
+Cedar Run method you can either manually insert some records into the database or use what we already
+
+01:27.040 --> 01:34.660
+have which are the model factories we happen to have the model factories for every possible model of
+
+01:34.750 --> 01:36.280
+our application.
+
+01:36.490 --> 01:43.480
+But before we will use the model factories let's first try to insert some records manually so you will
+
+01:43.480 --> 01:51.730
+see what I mean by inserting them and manually so to insert our record we will use the DP for sale.
+
+01:51.760 --> 01:59.020
+So we have to import it from the Illuminate Support for seeds.
+
+02:00.200 --> 02:12.190
+So that's the class name and it has some static methods so we can use D.B. the static method table to
+
+02:12.190 --> 02:20.230
+specify on which table we'll be working on and we will be working on users and then it has another method
+
+02:20.230 --> 02:28.030
+called insert and this is very simple you will use an array where key of the array element is the column
+
+02:28.030 --> 02:32.160
+name and the value is the value you you'd like to insert.
+
+02:32.470 --> 02:39.670
+So to make it a little bit easier for us not to write too much code we can copy the array from the user
+
+02:39.790 --> 02:45.700
+factory so paste it inside this Insert method code.
+
+02:45.710 --> 02:47.760
+Don't forget the semicolon.
+
+02:47.930 --> 02:55.620
+Of course we do not have access to faker here so we'll have to come up with some user name and with
+
+02:55.640 --> 03:03.050
+some email so you can see that we are just inserting start static data basically here we'll have to
+
+03:03.050 --> 03:12.320
+write our specific code to this table insert for each individual record we would like to insert.
+
+03:13.340 --> 03:14.180
+So let's try.
+
+03:14.180 --> 03:25.710
+Lara although the test as an email and now inside the terminal let's around peach P2P artisan D.B. seed.
+
+03:25.940 --> 03:33.850
+So that's the command that we run this database seeder and load the data to the database so you can
+
+03:33.850 --> 03:41.410
+see it has completed successfully and now let's refresh the database and you can see that we have a
+
+03:41.410 --> 03:44.860
+user inserted so everything else is empty.
+
+03:44.860 --> 03:52.820
+We still do not have blog posts and comments and there is just one user.
+
+03:53.010 --> 04:00.120
+Now what will happen if you will write this round this common comment again is will actually get an
+
+04:00.210 --> 04:07.350
+error because it doesn't clear that data before rerunning this database cedar.
+
+04:07.350 --> 04:10.140
+It just adds to the existing data.
+
+04:10.140 --> 04:19.230
+So that's why we cannot run it again successfully because we already have a user by this e-mail inside
+
+04:19.230 --> 04:21.180
+the database table.
+
+04:21.180 --> 04:29.370
+So if you would like to refresh the whole database and also run the cedar you can run the command that
+
+04:29.370 --> 04:30.380
+we already know.
+
+04:30.390 --> 04:37.960
+So let's first clear the terminal and the command is beauty be artisan migrate refresh.
+
+04:38.130 --> 04:46.170
+You can remember that it recreates the whole database schema using migrations but you can add additional
+
+04:47.160 --> 04:53.150
+modifier called seed so you can see migrations were run.
+
+04:53.200 --> 05:01.600
+And also it has added the data the only record that we are actually inserting right now the user with
+
+05:01.600 --> 05:09.900
+the name John Doe so we can run this subsequently because this recreate the database.
+
+05:10.270 --> 05:12.390
+So let's see if we can run it again.
+
+05:12.430 --> 05:16.140
+It just recreates that database and inserts inserts.
+
+05:16.150 --> 05:18.050
+This one single record.
+
+05:18.730 --> 05:22.720
+So those are the basics of running a cedar in the next lecture.
+
+05:22.750 --> 05:32.200
+We will see how we can use our model factories to insert a lot of records to our database at once using
+
+05:32.380 --> 05:35.920
+database seeders and model factories.

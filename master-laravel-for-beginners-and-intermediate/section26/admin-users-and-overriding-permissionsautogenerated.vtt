@@ -1,0 +1,391 @@
+WEBVTT
+
+00:00.510 --> 00:03.330
+So far we have defined two abilities.
+
+00:03.480 --> 00:11.000
+Update posts and delete posts and they can be used to verify a particular user can edit or delete a
+
+00:11.010 --> 00:17.260
+blog post and he can only do that when he's out or off a particular blog post.
+
+00:17.310 --> 00:21.630
+But what if we'll have AI users which should have more permissions.
+
+00:21.630 --> 00:26.290
+Like administrators of this website.
+
+00:26.400 --> 00:34.980
+So currently we have this checks whether the user I.D. matches the post user I.D. but seems there can
+
+00:34.980 --> 00:43.860
+be an admin we can override all of those abilities or particular abilities and allow specific users
+
+00:43.950 --> 00:45.270
+to do more.
+
+00:46.230 --> 00:50.430
+So first we will generate a migration for our user
+
+00:54.210 --> 01:03.510
+so we can make particular users admins so currently inside our database we do not have anything that
+
+01:03.510 --> 01:09.460
+will denote that that the user is an admin so let's generate a migration.
+
+01:09.470 --> 01:24.040
+So we write peach bee artisan make migration add is either mean to users tabled OK we can find this
+
+01:24.040 --> 01:33.520
+new migration inside migrations folder and now let's define a new boolean column so we can specify that
+
+01:33.520 --> 01:44.980
+certain users should be admins so we'll add a new column of boolean type and the name would be is admin
+
+01:45.940 --> 01:54.480
+and we'll provide our default value which would be false that's the safest thing to do and of course
+
+01:54.480 --> 01:57.360
+in the down will just drop column
+
+02:00.810 --> 02:08.080
+column name is is admin and now let's execute this migration BGP artisan migrate
+
+02:10.820 --> 02:21.080
+so we do not actually have ways to register admins and manage users so we should somehow change our
+
+02:21.320 --> 02:33.420
+model factories so let's open the user factory so here we have our user factory for everyone and we
+
+02:33.420 --> 02:41.310
+should provide is admin field and this would be false obviously we actually don't have to provide it
+
+02:41.340 --> 02:47.700
+because we have defined a default value to be false and we'll make John Doe on admin
+
+02:51.240 --> 02:53.650
+so set to true.
+
+02:54.060 --> 03:03.480
+Now let's go back to the terminal and round Peach Pit artisan D.B. seed to reload our database with
+
+03:03.480 --> 03:04.980
+this data.
+
+03:05.400 --> 03:13.780
+So let's confirm that we want to refresh the database and apparently we have an error in some of our
+
+03:13.780 --> 03:15.080
+migrations.
+
+03:15.190 --> 03:23.890
+So I'd assume that would be the one when we fixed that test to check if the connection is askew or light
+
+03:24.010 --> 03:25.830
+testing.
+
+03:25.950 --> 03:26.510
+All right.
+
+03:26.530 --> 03:30.790
+So I see the obvious error we first negate this environment.
+
+03:30.790 --> 03:37.300
+DB connection where instead we should do something like this so it's a very trivial mistake sorry for
+
+03:37.300 --> 03:37.660
+that.
+
+03:38.440 --> 03:40.270
+So let's fix it up now.
+
+03:40.300 --> 03:42.250
+Save the changes.
+
+03:42.250 --> 03:44.970
+Clear the screen again and rerun.
+
+03:44.980 --> 03:47.950
+Peach bee artisan D.B. seed.
+
+03:48.130 --> 03:49.090
+Confirm with.
+
+03:49.120 --> 03:50.560
+Yes.
+
+03:50.980 --> 03:53.080
+And just go with the defaults.
+
+03:56.030 --> 03:59.790
+Now let's see if our John Doe is actually on.
+
+03:59.820 --> 04:03.390
+I mean so yes he is.
+
+04:03.670 --> 04:09.970
+Is arming us one because bully ounce will actually be stored as numbers in my sequel.
+
+04:09.990 --> 04:15.200
+This should be a tiny integer so that's correct.
+
+04:15.210 --> 04:17.950
+It's a tiny integer.
+
+04:17.980 --> 04:24.220
+All right let's go back now we can close this migration.
+
+04:24.220 --> 04:27.280
+We can also close this model factory.
+
+04:27.340 --> 04:30.520
+Now let's go back to the service provider.
+
+04:30.610 --> 04:38.650
+So we have two gate checks defined here with that update post ability and delete post ability which
+
+04:38.650 --> 04:47.260
+you use to verify users permissions by using the gate for site allows or denies mattered or using the
+
+04:47.320 --> 04:50.420
+outer Rice helper inside the controller.
+
+04:51.690 --> 04:59.100
+Now if you will have a user which would be an admin person which would have much more privileges than
+
+04:59.100 --> 05:05.730
+a normal user what you might want to do is to intercept a gate check.
+
+05:05.760 --> 05:14.400
+So let's see how we can implement that concept so we can define before handler for our gate which does
+
+05:14.400 --> 05:16.030
+not have a name.
+
+05:16.260 --> 05:24.540
+It only has closure which accepts our user and ability as a second parameter.
+
+05:24.540 --> 05:27.150
+So let's explain what this does.
+
+05:27.720 --> 05:35.780
+So that before handler would be called before any of these other gate checks would be called.
+
+05:35.790 --> 05:40.250
+So that gate before is always called first.
+
+05:40.260 --> 05:46.880
+So what you get here is the currently authenticated user which is provided by Lavell.
+
+05:47.160 --> 05:55.640
+And the second parameter ability is the name of that ability that is gonna be checked next.
+
+05:55.650 --> 06:06.650
+So in our case this might be update post or delete post so you can apply something globally to old abilities
+
+06:06.780 --> 06:15.120
+but you can also do this like you can make I not mean that can only override certain rights but now
+
+06:15.210 --> 06:20.640
+let's keep it simple and let's first override everything for an admin.
+
+06:20.850 --> 06:31.740
+So we have an user and our new field is admin and currently this would be only true for our John Doe
+
+06:31.740 --> 06:43.100
+user which we created inside the cedar and from within this method we can do either return true or false.
+
+06:43.640 --> 06:46.390
+So then it would never get to the other gates.
+
+06:46.400 --> 06:48.210
+This would just be the result.
+
+06:48.320 --> 06:51.120
+For for this particular admin user.
+
+06:51.260 --> 07:00.950
+But if you want to return anything then it will fall to the actual gate checked verified user permissions.
+
+07:00.950 --> 07:10.070
+So this simple case will return true for older users that are other means which means now they can perform
+
+07:10.190 --> 07:17.390
+any action that we have at least those actions that we protect by defining some gate checks.
+
+07:17.420 --> 07:20.990
+So let's see how this works in practice.
+
+07:20.990 --> 07:26.690
+So save the changes and let's go to the browser to verify that.
+
+07:26.710 --> 07:30.060
+Now take a close look at what I am doing here.
+
+07:30.310 --> 07:38.530
+So I am authenticated as John Doe which happens to be the only admin inside our application and you
+
+07:38.530 --> 07:43.180
+can see that there is a blog post by someone else.
+
+07:43.240 --> 07:45.480
+Now I am able to modify it
+
+07:48.720 --> 07:53.290
+I can modify the title and you can see that it was modified.
+
+07:53.290 --> 08:01.680
+Now if I go back to the least of blog posts you can see that the title was changed and I am also able
+
+08:01.680 --> 08:05.650
+to delete this blog post completely even vote.
+
+08:05.790 --> 08:10.660
+I wasn't the outer of this because I am authenticated as John Doe.
+
+08:10.800 --> 08:18.360
+So basically this is how our overriding or intercepting the gate checks works.
+
+08:18.420 --> 08:26.820
+So this is called before we even gate you before we even get to the particular gate to check for certain
+
+08:26.910 --> 08:31.210
+ability we always return true.
+
+08:31.210 --> 08:34.590
+Now let's see another example.
+
+08:34.620 --> 08:44.500
+So another case when we would only give certain abilities to the admin so we can use in array.
+
+08:44.700 --> 08:54.670
+The simplest way to implement that and will check if the ability is in the least of the abilities that
+
+08:54.670 --> 08:58.230
+we have given to the you to the admin users.
+
+09:03.690 --> 09:11.670
+So as it looks right now we are checking if the user is an admin and then if the ability that we are
+
+09:11.730 --> 09:22.170
+overriding is in a list of the abilities that the administrator can perform so he would be able to update
+
+09:22.170 --> 09:25.850
+the post and delete the post.
+
+09:25.880 --> 09:28.880
+Now let's remove one of those abilities.
+
+09:28.950 --> 09:35.880
+So now we only allow other means to update posts but not to delete them.
+
+09:35.970 --> 09:43.460
+Let's go and verify that so we can see there is another post by someone else not the person I am authenticated
+
+09:43.470 --> 09:44.600
+us.
+
+09:44.790 --> 09:46.860
+So let's see.
+
+09:46.860 --> 09:48.660
+I should be able to modify it.
+
+09:53.720 --> 09:54.720
+And I am.
+
+09:54.730 --> 10:01.720
+It was modified but now let's see what happens if I try to delete this blog post.
+
+10:01.720 --> 10:09.100
+So we get the 400 free page that we are not out to rise to perform this action.
+
+10:09.100 --> 10:16.660
+So that would be the simplest implementation you can give to your website when you have normal users
+
+10:16.750 --> 10:21.940
+that can only perform certain actions on the content that they have created.
+
+10:22.690 --> 10:31.710
+And this is also the way you can create special admin user that can perform a little bit more obviously.
+
+10:31.750 --> 10:35.790
+That's a very naive implementation in the real world.
+
+10:35.800 --> 10:42.900
+You probably would implement it using the roll system or action control list.
+
+10:43.000 --> 10:47.310
+There are different names for this and it would go like.
+
+10:47.380 --> 10:56.160
+Users would have rows and then you will verify if certain user has a role that is able to perform a
+
+10:56.200 --> 10:57.300
+specific action.
+
+10:57.760 --> 11:03.910
+So you do not really have to implement this road system in light of all by yourself.
+
+11:03.910 --> 11:09.490
+There are great libraries that will do that for you but we'll get to that later.
+
+11:10.620 --> 11:13.950
+Now before we end this lecture.
+
+11:13.950 --> 11:18.420
+The b4 gate interception is one way you can do that.
+
+11:18.450 --> 11:26.100
+Another way is to use the after so after is almost exactly the same as before.
+
+11:26.100 --> 11:34.290
+In terms of how the code should look like with the difference that before is being called before you
+
+11:34.320 --> 11:38.300
+even get to that gate check for certain ability.
+
+11:38.430 --> 11:48.210
+So this overrides everything completely and after has one more argument called the result and it works
+
+11:48.330 --> 11:49.020
+differently.
+
+11:49.020 --> 12:02.220
+So let's take a look now after would be called actually after the gate check was called and then the
+
+12:02.220 --> 12:08.780
+result will be passed by a Lavell so we can see what was the result of the gate check.
+
+12:08.790 --> 12:18.210
+So in this case for example if we are thinking about our John Doe admin user if he will try to update
+
+12:18.240 --> 12:21.510
+a blog post that was created by someone else.
+
+12:21.510 --> 12:26.030
+This would return false and you can see that inside this argument.
+
+12:26.040 --> 12:28.300
+This would return false.
+
+12:28.410 --> 12:31.440
+So you can use that to do some further checks.
+
+12:31.440 --> 12:36.930
+So it's like a different way of overriding the gate checks.
+
+12:36.930 --> 12:45.560
+In this case it is run before we even get to the gate check and after is after we get to the gate check.
+
+12:45.570 --> 12:51.590
+But you can still modify the result so you can do whatever you like.
+
+12:51.600 --> 12:55.850
+Depending on this argument or you can ignore it altogether.
+
+12:55.860 --> 13:03.030
+But that's just another way you can intercept and modify the gate check result.
+
+13:03.780 --> 13:09.990
+So let's comment about because we won't be using that just so you know there is another way to do that.

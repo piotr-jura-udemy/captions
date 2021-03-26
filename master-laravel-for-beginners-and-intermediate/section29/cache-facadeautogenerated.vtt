@@ -1,0 +1,121 @@
+WEBVTT
+
+00:00.630 --> 00:10.230
+Now let's open the terminal and run BHP artisan thinker so we'll learn about some more methods of cash
+
+00:10.230 --> 00:18.610
+manipulation so we can use cash for say here and the first method would be on how to store items.
+
+00:18.630 --> 00:25.110
+So we already know about cash remember but there is also a simple method where you can just store some
+
+00:25.110 --> 00:25.700
+data.
+
+00:26.130 --> 00:32.330
+So the first argument is the key name so low the anything like Data.
+
+00:32.400 --> 00:35.880
+Now the second argument would be what would you like to store.
+
+00:35.880 --> 00:39.360
+This can be anything.
+
+00:39.440 --> 00:46.740
+Now we can store some tax like hell from cash and the first argument would be the time for which you
+
+00:46.740 --> 00:53.880
+would like to store this item in cash in minutes or if you will use the date time object or carbon object
+
+00:54.180 --> 00:57.460
+then you can specify some detailed time.
+
+00:57.510 --> 01:02.850
+Now if you will do it like that this cash item would be stored forever.
+
+01:02.970 --> 01:10.140
+And what that means is it would be stored as long as the cash server is running or in case of files.
+
+01:10.170 --> 01:12.770
+As long as the files exist there.
+
+01:12.780 --> 01:21.900
+So they are not removed and to delete this item from the cache you will have to explicitly delete it
+
+01:22.200 --> 01:28.360
+and to remove this item from cache you will have to explicitly delete it using the forget method.
+
+01:28.890 --> 01:33.730
+But let's store it for five minutes now.
+
+01:33.740 --> 01:35.410
+It returns normal.
+
+01:35.660 --> 01:44.680
+But now let's see how we can check if certain item already exists in cache so we can use the Hess method
+
+01:45.140 --> 01:46.700
+and we have to provide a key.
+
+01:46.820 --> 01:49.230
+So that's the only argument.
+
+01:49.460 --> 01:56.660
+Now you can see that it returns true if we will use has for something else like Data to.
+
+01:57.020 --> 02:02.600
+It returns false because it wasn't stored in the cache before.
+
+02:02.600 --> 02:08.150
+Now we can also retrieve data from the cache using cache get
+
+02:11.070 --> 02:16.860
+so you can do cache get data and you see that we got the message Hello from cache
+
+02:19.580 --> 02:19.930
+now.
+
+02:19.950 --> 02:26.520
+If you will like to retrieve data to which we know is not inside the cache you will get no.
+
+02:26.880 --> 02:36.360
+But alternatively you can do cache get data too and as a second argument provide a default value
+
+02:40.190 --> 02:46.310
+so it's not like remember it won't store this value inside the cache it is just providing a default
+
+02:46.400 --> 02:50.070
+if the item cannot be found inside the cash.
+
+02:50.390 --> 02:57.590
+Now there are also additional methods and they might be very useful and they are called increment and
+
+02:57.620 --> 02:58.880
+decrement.
+
+02:58.880 --> 03:08.910
+So what that does is for a particular cache item let's say counter we can incremented an integer value
+
+03:11.530 --> 03:17.590
+so for example I already had an element called counter and it has incremented it to 2.
+
+03:17.590 --> 03:25.930
+Now if I'll find something that I didn't have in cash let's say free x you can see that it is 1.
+
+03:25.930 --> 03:28.340
+So it assumes it starts with 0.
+
+03:28.390 --> 03:35.890
+If nothing is in cache but then it can increment it also we can do cache decrement
+
+03:42.270 --> 03:43.970
+and now it is zero.
+
+03:44.010 --> 03:51.670
+So we've learned some basic methods of the cache for safe to manipulate our cash and now let's use it.
+
+03:51.720 --> 03:59.670
+Use that as an example when on the blog post page will implement a Basic counter of how many people
+
+03:59.730 --> 04:03.570
+are reading this blog post in current time.

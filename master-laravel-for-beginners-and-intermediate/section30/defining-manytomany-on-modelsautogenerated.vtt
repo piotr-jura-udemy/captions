@@ -1,0 +1,124 @@
+WEBVTT
+
+00:00.750 --> 00:08.010
+In the last lecture we have created two migrations one for the new tack model and also we have created
+
+00:08.030 --> 00:16.910
+a migration for our pivot or intermediate table that will hold hold the relation between those two models.
+
+00:16.950 --> 00:21.300
+Now let's define the relation on the models itself.
+
+00:21.300 --> 00:25.680
+So a lot of us can query and associate those two models.
+
+00:25.680 --> 00:31.510
+So first we'll add method on the blog post and call it tags.
+
+00:31.530 --> 00:36.000
+So this implies that this will hold multiple models.
+
+00:36.000 --> 00:38.880
+Now will redefine return this.
+
+00:39.030 --> 00:46.710
+And the method you should use for the many to many relationship is belongs to many.
+
+00:46.890 --> 00:50.010
+The first argument is the model it is related to.
+
+00:50.880 --> 00:54.090
+So we will just use up tag.
+
+00:54.360 --> 00:56.700
+Now you should also define this relation.
+
+00:56.700 --> 01:02.280
+On the other side inside the tag models so let's add the public function.
+
+01:02.280 --> 01:12.670
+This will relate to multiple blog posts and also on the other side will do belongs to many and this
+
+01:12.670 --> 01:16.340
+relates to up slash blog posts.
+
+01:16.930 --> 01:21.670
+So notice how we define our Many to Many relationship on both models.
+
+01:21.670 --> 01:25.070
+You are using that belongs to many method.
+
+01:25.240 --> 01:30.010
+Now this belongs to many method has some additional arguments.
+
+01:30.010 --> 01:37.060
+So the first one is of course the model name of the relation but the second one is the table name.
+
+01:37.180 --> 01:40.080
+And this refers to the pivot table name.
+
+01:40.120 --> 01:43.300
+The one that we created our migration for.
+
+01:43.300 --> 01:51.520
+So by default lot of us will try to guess the name of those table that should be given and based on
+
+01:51.520 --> 01:58.090
+their model names how it converts them to underscores where there is another uppercase letter starting
+
+01:58.690 --> 02:05.050
+and then adds an underscore for the next model and also all the models have the lower case singular
+
+02:05.050 --> 02:06.490
+names.
+
+02:06.490 --> 02:12.010
+Now if you need something else you for example would like to name your table differently.
+
+02:12.010 --> 02:14.970
+You can define that using the second argument.
+
+02:15.010 --> 02:22.450
+So here you can give a different table name if you created a migration with a different table name.
+
+02:22.450 --> 02:24.020
+Now the next arguments.
+
+02:24.160 --> 02:29.650
+First one is the foreign pivot key and another one related pivot key.
+
+02:30.130 --> 02:39.700
+So this refers to the column names on the pivot table so as we see we have defined those using what
+
+02:39.700 --> 02:43.660
+larva will try to guess which is first is the blog post idea.
+
+02:43.900 --> 02:48.490
+And second is the tag idea if you need to call them differently.
+
+02:48.490 --> 02:54.520
+This is where you configure that so for the first argument you will specify something else than blog
+
+02:54.520 --> 02:55.480
+post idea.
+
+02:55.510 --> 03:00.370
+For example a blog idea or post idea whatever you like.
+
+03:00.370 --> 03:08.350
+And as the fourth argument you will specify something instead of the default tag idea that can be whatever.
+
+03:08.350 --> 03:15.160
+Now if you will specify those arguments so you want something different than the default on the first
+
+03:15.160 --> 03:18.130
+relation inside the blog post model.
+
+03:18.130 --> 03:24.810
+You will also have to do that on the another side of the relation inside the tag model.
+
+03:24.880 --> 03:31.600
+Now in the next lecture we will see how we can associate those two models and how we can query those
+
+03:31.600 --> 03:35.860
+relationships from both the blog post and tag models.

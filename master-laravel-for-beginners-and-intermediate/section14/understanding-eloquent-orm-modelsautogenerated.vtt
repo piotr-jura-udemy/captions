@@ -1,0 +1,52 @@
+WEBVTT
+
+00:00.640 --> 00:08.940
+Let's take a closer look at models, we will use the blog post model we have already created as an example.
+
+00:09.610 --> 00:15.550
+First and foremost, every model is coupled with one database table.
+
+00:16.450 --> 00:20.960
+Every database table should have its own model of class.
+
+00:21.640 --> 00:27.810
+The model is a PE class that always extends the base model class.
+
+00:28.630 --> 00:34.810
+You should no doubt AP classes have static and instant's methods.
+
+00:36.130 --> 00:46.270
+Static methods belong to a class and instant's methods belong to a specific class instance, static
+
+00:46.270 --> 00:56.440
+methods in model are used to query the database, which returns model instances or to create new models,
+
+00:57.010 --> 00:59.830
+which also returns instances.
+
+01:00.580 --> 01:07.590
+You can say that model static methods represent the whole database table.
+
+01:08.580 --> 01:16.860
+Now, you can say the model instance matters represent an individual table role.
+
+01:17.710 --> 01:27.610
+So Save Method will create or update the table record, delete method will remove the table record.
+
+01:28.870 --> 01:34.840
+Model instance properties are directly marched to the database columns.
+
+01:36.050 --> 01:45.890
+As an example, take a look at the blog posts, stable, I'd title content are both the column names
+
+01:46.430 --> 01:49.040
+and the class instance properties.
+
+01:49.700 --> 01:55.100
+Model instance properties are used to read and modify the column values.
+
+01:55.820 --> 02:03.440
+You should also note that models have relationships to other models and also events.
+
+02:03.860 --> 02:06.950
+We will talk about that in details later.

@@ -1,0 +1,217 @@
+WEBVTT
+
+00:00.480 --> 00:07.350
+So far you have seen that we have passed this Tris parameter to the Q. Walker and this specified how
+
+00:07.350 --> 00:10.840
+many times our job should be tried to be executed.
+
+00:10.850 --> 00:13.930
+Until this is moved to the failed jobs.
+
+00:14.070 --> 00:17.150
+So this is a global barometer for all of your jobs.
+
+00:17.160 --> 00:20.880
+But you can also specify it per specific job.
+
+00:20.880 --> 00:24.300
+And this if you will specify this on a job like that.
+
+00:24.330 --> 00:29.170
+So you have to specify a public tries property let's say 5.
+
+00:29.490 --> 00:35.920
+Then this will always override whatever you have specified for your Q inside the worker.
+
+00:35.940 --> 00:38.710
+So if you have some jobs that are more crucial.
+
+00:38.730 --> 00:44.970
+Well you can even give it like 15 times to be attempted before it dies out and then have to be pushed
+
+00:44.970 --> 00:46.740
+on the queue again.
+
+00:46.890 --> 00:52.530
+Now there is also another parameter called timeout which is basically time based and it means how many
+
+00:52.530 --> 00:54.150
+seconds this job.
+
+00:54.240 --> 00:58.440
+This particular job should run before it also times out.
+
+00:58.440 --> 01:06.720
+So if you have processes that are longer jobs that have to take much more time to process you are calculating
+
+01:06.720 --> 01:09.090
+something whatever that might be.
+
+01:09.090 --> 01:16.950
+You can also specify that both on the class using that public timeout let's say 10 seconds and then
+
+01:16.950 --> 01:21.780
+you can also are the global parameter like that on your Q Walker itself.
+
+01:21.780 --> 01:26.550
+So let's say here this would be 15 and four crucial jobs.
+
+01:26.550 --> 01:32.850
+It might be 30 seconds or even 100 20 seconds so whatever you might be requiring.
+
+01:33.540 --> 01:38.610
+So those are two parameters you can also use and then they are different.
+
+01:38.610 --> 01:47.200
+Q So for example when we'll check our database now that we have switched to poof everything to Redis
+
+01:47.920 --> 01:49.030
+anyway.
+
+01:49.290 --> 01:52.620
+There is also a Q parameter which is always default.
+
+01:52.650 --> 02:02.890
+If you do not provide any other but what you can do is this fraught old male class is using our Q ABL
+
+02:02.970 --> 02:10.770
+trade and if you haven't noticed this is also the case with the older you make classes it also have
+
+02:10.770 --> 02:11.380
+queue up.
+
+02:11.400 --> 02:18.540
+That's why you can push those mid-level classes to the Q and what you can do is for every class that
+
+02:18.540 --> 02:25.800
+is using this trade you can additionally call on connection so you can specify word where the jobs should
+
+02:25.800 --> 02:26.260
+be run.
+
+02:26.280 --> 02:33.000
+So you can have many connections specify at once and that would mean like database or Redis or anything
+
+02:33.000 --> 02:40.640
+else or Amazon ask us and you can tell a lot of effort directly on which connection this should be executed.
+
+02:40.680 --> 02:45.360
+Also you can tell it that it should execute something on are specific.
+
+02:45.370 --> 02:54.390
+Q So let's say that this one would be executed on the high Q notice that you do not really have to specify
+
+02:54.420 --> 03:00.410
+those Q names anywhere you just getting a name and this one can also run on a different.
+
+03:00.410 --> 03:10.470
+Q So on Q and let's say this is low now why are we calling it like that is we are using it to actually
+
+03:10.770 --> 03:14.220
+prioritize which jobs should be executed first.
+
+03:14.880 --> 03:21.830
+So I'm just calling it high and low to be clear and the lateral documentation is doing the same thing.
+
+03:22.440 --> 03:31.030
+But then when you run your Q workers you should you can specify in which order those Q processes or
+
+03:31.140 --> 03:34.240
+those jobs should be run and then.
+
+03:34.310 --> 03:38.260
+Laura Well we'll just process those which were given first.
+
+03:38.270 --> 03:42.090
+First and well everything else after that.
+
+03:42.090 --> 03:44.720
+So let's see how it works in practice.
+
+03:47.650 --> 03:49.920
+So first let's go to our worker.
+
+03:50.080 --> 03:57.940
+And then there is this additional parameter called Q So you can specify high default low.
+
+03:58.480 --> 04:05.650
+So how this would work is then when the this worker is bank start 30 to first process every job that
+
+04:05.650 --> 04:12.220
+was put on the high queued and default which is default if you do not specify on which Q you actually
+
+04:12.220 --> 04:16.490
+want this job to be processed and then lo.
+
+04:16.510 --> 04:22.390
+So now let's run this worker and try I think a comment any comment is fine
+
+04:25.700 --> 04:32.360
+and now let's see what is inside the worker so you can see that first we have this throttled male and
+
+04:32.360 --> 04:39.140
+only then we have notify user supposed was commented and all the other throttled male jobs that this
+
+04:39.140 --> 04:42.840
+one is dispatching so this makes sense.
+
+04:42.840 --> 04:45.040
+We wanted to make that high.
+
+04:45.150 --> 04:45.920
+This was low.
+
+04:45.930 --> 04:48.060
+So it was processed later.
+
+04:48.210 --> 04:49.380
+But now let's change it.
+
+04:49.410 --> 04:52.620
+So you can actually see a difference here.
+
+04:52.620 --> 05:01.220
+So say the changes so now you can see that this actually has stopped.
+
+05:01.270 --> 05:03.040
+So it processed everything.
+
+05:03.190 --> 05:09.300
+So since this is actually happening happening inside the controller we won't have to restart the worker.
+
+05:10.210 --> 05:14.750
+So notice that last one was processed are 14 13.
+
+05:14.800 --> 05:16.130
+So this is for adult male.
+
+05:16.130 --> 05:24.650
+Now let's stop this worker and we'll run it again so we can clearly see the difference.
+
+05:24.650 --> 05:28.250
+So let's add another comment
+
+05:31.690 --> 05:38.560
+and now let's check out the worker so you can see that this time the first job that was dispatched Well
+
+05:38.560 --> 05:41.110
+actually first job that was dispatched was this one.
+
+05:41.110 --> 05:48.610
+But anyway the first process one was notify users post was comment that and this is because it was put
+
+05:48.670 --> 05:50.710
+on the queue called high.
+
+05:50.830 --> 05:57.310
+And this was on the low and the way we started our worker we told it that first we wanted to process
+
+05:57.310 --> 06:03.610
+the jobs from the high Q So you can use that for any jobs that have higher priority are crucial to your
+
+06:03.610 --> 06:11.920
+system and always have to be run first and maybe others are not really so important and can be run later
+
+06:11.920 --> 06:13.660
+with lower priority.

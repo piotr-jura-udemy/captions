@@ -1,0 +1,163 @@
+WEBVTT
+
+00:00.450 --> 00:06.720
+In the last lecture you have seen the first method of deleting the related models from a particular
+
+00:06.720 --> 00:16.680
+model by subscribing to an event inside the model static boot method and handling this by just deleting
+
+00:17.150 --> 00:18.990
+all the related models.
+
+00:19.020 --> 00:22.860
+Now another way to do that is on the database level.
+
+00:22.860 --> 00:28.080
+And for that we'll have to change the structure of the comments table.
+
+00:28.200 --> 00:32.190
+So let's start by generating a new migration.
+
+00:32.400 --> 00:45.040
+We can run P2P artisan make migration and the migration would be called up Cascade delete two comments
+
+00:45.280 --> 00:49.380
+table.
+
+00:49.490 --> 00:53.440
+Now this gets generated inside our migrations folder.
+
+00:53.540 --> 01:00.170
+And thanks to the name I've given it we have already set up the bullet boiler plate that is already
+
+01:00.170 --> 01:03.380
+allowing us to work on the comments table.
+
+01:03.380 --> 01:11.420
+Now what we'll have to do is we will modify the foreign key that relates to the lock post I.D. on the
+
+01:11.420 --> 01:13.610
+comments table.
+
+01:13.700 --> 01:21.630
+So what you actually have to do is you will have to delete the foreign key first.
+
+01:21.660 --> 01:32.740
+We can do that by relating to the table drop foraging method and instead of providing the actual foreign
+
+01:32.750 --> 01:40.870
+key name which you might remember isn't actually called blog posts idea it has a different name.
+
+01:40.920 --> 01:50.060
+Outer generated bi lateral but if you will instead and close it inside an array you can specify the
+
+01:50.060 --> 01:57.630
+column name as block post I.D. and Lara a will know what's the name of the foreign key to be deleted.
+
+01:57.740 --> 02:04.670
+Now we will just recreate this a key so it's stable flooring.
+
+02:06.060 --> 02:08.620
+Blog post I.D..
+
+02:10.490 --> 02:11.720
+So it will be us.
+
+02:11.720 --> 02:16.450
+We did it before it references I.D..
+
+02:17.900 --> 02:25.940
+On blog posts and now is that part that will be different.
+
+02:26.320 --> 02:34.200
+So additionally we are adding a cascading operation so when this record would be deleted or the parent
+
+02:34.200 --> 02:37.640
+would be deleted we want it to cascade.
+
+02:38.850 --> 02:46.920
+So we'll do what this will do is whenever a blog post is deleted that the comments would be deleted
+
+02:46.980 --> 02:48.470
+on the database level.
+
+02:48.510 --> 02:53.680
+And it is all thanks to this foreign key definition.
+
+02:54.060 --> 02:58.680
+Now we should also provide a way to roll back from this migration.
+
+02:58.680 --> 03:08.470
+So let's copy what we have here inside the down meetup and what we will do again is will drop the following
+
+03:08.470 --> 03:16.270
+key which in this case would have that cascading operation on delete and we'll just leave it without
+
+03:16.270 --> 03:16.420
+it.
+
+03:16.420 --> 03:20.280
+So we'll bring it back to the previous state.
+
+03:20.280 --> 03:23.640
+Now let's run P2P artisan migrate
+
+03:26.620 --> 03:34.990
+now let's go to our blog post model and comment out this part which subscribes to the deleting event
+
+03:35.260 --> 03:37.800
+and deletes all the related comments
+
+03:41.460 --> 03:48.950
+saved it changes and now let's see how our comments tables structure looks like.
+
+03:48.950 --> 03:58.160
+So in the P2P my admin and probably in any of your database clients that you might use there is a way
+
+03:58.160 --> 04:01.160
+to see how the structure changed.
+
+04:01.160 --> 04:09.500
+So here we have this relation view and you can see that there is a foreign key constraint and it contains
+
+04:09.500 --> 04:10.850
+dumped on delete.
+
+04:10.850 --> 04:18.380
+It should cascade Additionally if you do not know that you can set this value to law.
+
+04:18.410 --> 04:24.920
+So for example a comment would be without a blog post but in our case it of course doesn't make sense.
+
+04:24.920 --> 04:32.450
+Now let's go back to our application and you can see that now even though we have disabled there events
+
+04:32.460 --> 04:40.400
+subscriber so it doesn't subscribe to the deleting event and doesn't explicitly delete any comments.
+
+04:40.400 --> 04:42.020
+It still works.
+
+04:42.020 --> 04:48.920
+And that's because we have this foreign key constraint cascading and whenever a blog post is deleted
+
+04:49.580 --> 04:52.520
+all the comments are deleted along it.
+
+04:52.580 --> 04:55.160
+So you might use both methods.
+
+04:55.160 --> 05:03.800
+This depends on how you'd like to do it but in the next lecture I will show you another way of deleting
+
+05:04.310 --> 05:09.840
+elements deleting models and its relations called soft deletes.
+
+05:09.920 --> 05:16.460
+So this won't actually remove models from the database but will just mark them as deleted so we can
+
+05:16.460 --> 05:19.190
+late later revert them bring them back.
+
+05:19.190 --> 05:21.320
+But this would be in the next lecture.

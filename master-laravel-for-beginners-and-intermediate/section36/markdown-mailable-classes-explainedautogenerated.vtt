@@ -1,0 +1,163 @@
+WEBVTT
+
+00:00.480 --> 00:06.790
+In this lecture and the next one we will learn about another great feature of LA travel which are the
+
+00:06.790 --> 00:12.730
+marked down may levels now what you may ask what markdown actually is.
+
+00:13.230 --> 00:16.800
+So essentially you can compare markdown to HDMI all.
+
+00:16.890 --> 00:23.430
+It is a markup language or markup syntax which lets you style some text.
+
+00:23.430 --> 00:31.440
+So the difference between HD AML and the markdown is basically in HD the AML you have the example tax
+
+00:31.770 --> 00:34.870
+and markdown syntax is much simpler.
+
+00:34.890 --> 00:43.620
+For example you can see how to define R headings with markdown and also you see the HDMI all counterpart.
+
+00:43.620 --> 00:49.370
+So this also means that you can compile markdown to an HD Mel.
+
+00:49.380 --> 00:51.000
+So let's see more examples.
+
+00:51.000 --> 00:52.330
+You can have paragraphs.
+
+00:52.350 --> 00:59.310
+Line breaks and also you can check this great page where it gives you a lot of examples so you can see
+
+00:59.760 --> 01:03.870
+how to use the markdown syntax to create some elements.
+
+01:03.870 --> 01:12.420
+So basically what markdown is it is just another markup language and it's actually a little bit simpler
+
+01:12.660 --> 01:13.900
+than HDR Mel.
+
+01:14.190 --> 01:23.280
+And then it can be compiled to HDMI all actually if you are a user of GitHub you can see that mostly
+
+01:23.520 --> 01:33.440
+or maybe all of the read me files of those GitHub repositories are actually written in markdown syntax.
+
+01:33.450 --> 01:39.070
+Now you might think I have HDMI well why do I need another markup language now.
+
+01:39.180 --> 01:45.690
+The answer to that might be simple basically markdown has a very straightforward syntax and it can be
+
+01:45.720 --> 01:49.280
+easily learned or used by people that are non coders.
+
+01:49.290 --> 01:50.760
+Let's say designers.
+
+01:50.760 --> 01:58.160
+They might not really know how to use HDMI properly and markdown will just then compile two HDMI out
+
+01:58.200 --> 02:03.570
+but will provide also less verbose and simpler syntax.
+
+02:03.570 --> 02:09.780
+Now you might think that if someone would have to learn markdown then they can as easily learn HDL.
+
+02:09.900 --> 02:18.030
+And this is true but the biggest benefit of using markdown inside lot Mailer eyeballs is that we already
+
+02:18.030 --> 02:21.860
+have a set of reusable blade components.
+
+02:21.930 --> 02:27.410
+They are already prepared and you can just use them out of the box.
+
+02:27.650 --> 02:31.230
+Now the markdown component consists of two parts.
+
+02:31.350 --> 02:35.280
+So there are two representations of those components.
+
+02:35.280 --> 02:38.410
+The first will be used to render the plaintext.
+
+02:38.430 --> 02:43.140
+This is useful for the email clients of the person that you are sending this email to.
+
+02:43.140 --> 02:49.530
+That doesn't support or for any reason want to display h the email so this will let you just write an
+
+02:49.530 --> 02:57.390
+email that will be sent with a plain text and then there is HDMI all part of those components which
+
+02:57.390 --> 03:05.190
+contains some pre-built HD AML with some nice CSF styling that you can even customize and then additionally
+
+03:05.220 --> 03:13.560
+is also passing the markdown syntax to output the HDMI URL so it will combine some pre pre added HDMI
+
+03:13.560 --> 03:20.220
+all of that components with whatever the markdown is and this markdown will be compiled to h the email
+
+03:20.220 --> 03:21.460
+too.
+
+03:21.630 --> 03:28.050
+So if this sounds a little bit confusing right now don't worry we'll see an example of that in the next
+
+03:28.050 --> 03:30.900
+couple lectures.
+
+03:30.900 --> 03:37.620
+So even though rare usability and simplicity of using the markdown may levels won't convince you then
+
+03:37.620 --> 03:39.010
+maybe this will do.
+
+03:39.060 --> 03:45.690
+It's actually built in in LA well it provides us a lot of stuff that we have out of the box.
+
+03:45.750 --> 03:52.890
+It's very easy to use those components to style them and to create your own and then you save yourself
+
+03:52.950 --> 03:57.770
+a lot of time creating the same markup for different email templates.
+
+03:58.020 --> 04:00.660
+You can make those templates much simpler.
+
+04:00.720 --> 04:07.410
+Use the common branding that you have created for your e-mails across all of your different kinds of
+
+04:07.470 --> 04:09.890
+emails whatever they are about.
+
+04:10.050 --> 04:16.080
+And basically this works great with travel and well the experience should show you that it's always
+
+04:16.080 --> 04:22.220
+best to use what Lavell has created for you because this usually just works great.
+
+04:22.920 --> 04:28.250
+But that's enough talking because I know that at this point you are probably very confused.
+
+04:28.260 --> 04:34.950
+I was talking about some markdown some new kind of syntax and some larval blade components that are
+
+04:35.100 --> 04:36.810
+already available.
+
+04:36.810 --> 04:43.510
+So probably the best thing to do is now to see an example of how this works how to create those made
+
+04:43.510 --> 04:52.440
+labels and immediately see the effect of them and how great and simple they can make your email templates.
+
+04:52.440 --> 04:54.800
+So let's see that in the next lecture.

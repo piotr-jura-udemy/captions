@@ -1,0 +1,79 @@
+WEBVTT
+
+00:01.050 --> 00:07.460
+In this section we'll learn how to implement a one to many polymorphic relationship.
+
+00:07.560 --> 00:12.420
+So we already know what a one to many relationship is.
+
+00:12.420 --> 00:14.900
+It is one model of one kind.
+
+00:14.910 --> 00:20.880
+In this example the blog post can be related to many models of different kind.
+
+00:20.880 --> 00:28.470
+In this example comments from the last section you should also understand what a polymorphic relationship
+
+00:28.500 --> 00:29.570
+is.
+
+00:29.610 --> 00:37.950
+It is a situation when model of one kind is not limited to be related to only another specific model
+
+00:37.950 --> 00:38.860
+of different kind.
+
+00:38.860 --> 00:46.920
+Like blog post in this situation the polymorphic relationship lets us associate comments to blog posts
+
+00:47.130 --> 00:50.100
+to users or basically any other model.
+
+00:50.100 --> 00:53.530
+You can also add this to images if you like.
+
+00:53.550 --> 00:55.610
+Now this is our current situation.
+
+00:55.650 --> 00:59.820
+We have BLOG POSTS table and comments table on the comments table.
+
+00:59.820 --> 01:07.680
+There is the blog post IDI field which basically late lets us relate comment only to the blog post and
+
+01:07.680 --> 01:09.850
+this is what we would like to achieve.
+
+01:09.870 --> 01:13.840
+So now the comments table will have two fields.
+
+01:13.920 --> 01:17.250
+Commendable ideas and commendable type.
+
+01:18.060 --> 01:23.730
+So as I've said in the last section this prefix commendable is up to you.
+
+01:23.730 --> 01:29.860
+You can come up with any name that you like but then there is a deal which basically holds the ideas
+
+01:29.880 --> 01:38.100
+of the related model either blog post I.D. or user I.D. and there is the column with the type suffix
+
+01:38.220 --> 01:39.710
+which holds the model name.
+
+01:39.720 --> 01:46.110
+So that could be a blog post user or image or any other model that you would like to create.
+
+01:46.110 --> 01:50.530
+This relation to so basically that's it.
+
+01:50.540 --> 01:54.690
+This is really a very simple concept so let's go ahead.
+
+01:54.770 --> 01:59.260
+Do not waste any more time and let's see how to create a migration for it.
+
+01:59.300 --> 02:03.050
+The relations and then implement this inside our application.

@@ -1,0 +1,100 @@
+WEBVTT
+
+00:01.080 --> 00:07.530
+Sometimes your templates also need some logic, for example, only if certain condition is true, you
+
+00:07.530 --> 00:08.950
+want to display some content.
+
+00:09.600 --> 00:15.170
+This condition might, for example, be that the current user is logged in in Blade.
+
+00:15.180 --> 00:22.470
+You can achieve that using directive's if directives reflect the way you would achieve it using plain
+
+00:22.550 --> 00:25.350
+ppy if control structure.
+
+00:28.860 --> 00:40.320
+First, let's add a new property to our dummy posts array, let's call this property is new and send
+
+00:40.320 --> 00:43.230
+it to true for the first block post.
+
+00:46.920 --> 00:50.190
+And two falls in the second blog post.
+
+00:53.660 --> 00:58.010
+Go to the template responsible for displaying our blog post.
+
+00:59.720 --> 01:05.810
+To render content based on a condition, we will use the if directive.
+
+01:09.320 --> 01:12.290
+The condition here goes within parenthesis.
+
+01:14.850 --> 01:18.800
+So let's check if Post is new is actually true.
+
+01:21.590 --> 01:27.440
+The if statement in Blade is closed by a corresponding and if directive.
+
+01:30.520 --> 01:37.150
+Now, if the above condition is true, everything inside the directive will be rendered, otherwise
+
+01:37.150 --> 01:37.900
+it will not.
+
+01:38.890 --> 01:47.740
+So let's add something, our development saying our new blog post using if, say, the changes, and
+
+01:47.740 --> 01:52.090
+let's switch back to the browser to verify that this actually works.
+
+01:52.360 --> 01:55.840
+Notice I've zoomed in a little bit around four times.
+
+01:56.410 --> 01:58.780
+Let's refresh this blog post.
+
+01:58.780 --> 02:01.990
+And indeed, we see that this is our new blog post.
+
+02:02.470 --> 02:03.850
+Check the second one.
+
+02:03.850 --> 02:05.950
+And this text is not present.
+
+02:09.900 --> 02:17.400
+For alternative cases, you can use El's if or the ALS directive exactly like you'd be.
+
+02:18.300 --> 02:22.320
+Let's try displaying alternative message with Ifirst.
+
+02:23.520 --> 02:31.320
+So else if the condition goes inside parenthesis, so let's try the negative post is underscore new
+
+02:32.310 --> 02:40.500
+and let's render a message blog post is old using URLs if.
+
+02:42.010 --> 02:48.020
+Save the changes and let's go to the browser, so that's a blog post one.
+
+02:48.690 --> 02:52.900
+And in the second one, we indeed see the alternative message.
+
+02:55.620 --> 03:02.070
+Now, that's a simple case because the Post is new, is actually a Bolian, so we don't really need
+
+03:02.070 --> 03:08.880
+as if just showing you that you can use it in other scenarios, maybe in this one.
+
+03:09.060 --> 03:13.070
+Actually, the better way is to just add an alert directive.
+
+03:13.320 --> 03:15.450
+So just the opposite case.
+
+03:19.590 --> 03:25.320
+Say the changes again and let's verify that it still works.

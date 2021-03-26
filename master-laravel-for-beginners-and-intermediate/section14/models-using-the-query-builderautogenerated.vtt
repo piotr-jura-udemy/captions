@@ -1,0 +1,106 @@
+WEBVTT
+
+00:00.960 --> 00:06.980
+At the beginning of this lecture, let's make sure that you have a fresh thinker session started.
+
+00:09.410 --> 00:18.320
+If you need to fetch models by more criteria than just a model ID, then you need to use the query builder.
+
+00:19.010 --> 00:27.140
+CareerBuilder lets you build ESKIL queries using object oriented way by fluently calling methods.
+
+00:28.070 --> 00:32.290
+Their model classes have a built in query builder.
+
+00:32.960 --> 00:36.670
+The query builder itself is a class called builder.
+
+00:36.980 --> 00:44.630
+It has methods like were select or join, which are basically Ezekial keywords.
+
+00:45.410 --> 00:51.440
+So whatever you'd expect from a school can be found as a query builder method.
+
+00:52.600 --> 01:00.040
+Before we go further, we would need to create some more models in the database as otherwise it might
+
+01:00.040 --> 01:06.400
+be harder to really get how what we will explain works.
+
+01:07.900 --> 01:11.900
+For this, I need you to type in Tinker.
+
+01:12.100 --> 01:13.270
+What I am typing.
+
+01:17.090 --> 01:25.670
+So that's user factor count five, create and hit enter.
+
+01:27.780 --> 01:35.740
+This will create and save five user models with randomly generated data using Laravel Model Factory.
+
+01:36.330 --> 01:39.100
+We will talk about model factories later.
+
+01:39.150 --> 01:42.370
+So don't worry about this at all.
+
+01:42.390 --> 01:47.070
+Now, we just had to do it to be able to continue.
+
+01:48.120 --> 01:50.520
+Now back to the query builder.
+
+01:53.080 --> 02:02.340
+Let's start by calling the worm method on the user model, which allows to specify some query criteria
+
+02:02.980 --> 02:04.180
+so we would fetch.
+
+02:05.860 --> 02:11.860
+By BIID, where it is equal or greater down to.
+
+02:16.150 --> 02:24.550
+Every time you call query builder method on the model statically, it creates a new instance of the
+
+02:24.550 --> 02:32.800
+builder class, then calling subsequent methods on that object builds up to query.
+
+02:37.610 --> 02:42.260
+Then you might want to start using order by.
+
+02:43.200 --> 02:55.260
+By the idea, but maybe in descending order, so the tests shortcut when your quarry is done, you need
+
+02:55.260 --> 03:05.210
+to call the get method on the builder object only then the quarry is actually run against the database.
+
+03:05.490 --> 03:07.380
+That's very important to remember.
+
+03:08.130 --> 03:13.200
+Data reading queries always return a collection object.
+
+03:16.610 --> 03:17.240
+There it is.
+
+03:22.290 --> 03:26.280
+So, as you see, there is the collection as a result.
+
+03:28.230 --> 03:37.800
+Models are sorted by ideas in descending order, and we only have models that have to ID bigger than
+
+03:38.130 --> 03:40.290
+bigger or equal to.
+
+03:41.440 --> 03:47.800
+Now, the query builder is really useful when you need to build conditional queries.
+
+03:49.100 --> 03:58.400
+For example, to allow users to sort or filter a specific blog posts, you might combine query parameters
+
+03:58.400 --> 04:02.120
+with calling specific where rebuilder methods.
+
+04:03.160 --> 04:11.470
+This is much simpler and much more elegant than stitching together strings with Roskill.

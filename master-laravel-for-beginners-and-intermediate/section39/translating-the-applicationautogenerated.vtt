@@ -1,0 +1,286 @@
+WEBVTT
+
+00:00.780 --> 00:07.770
+In this lecture we will try to translate some parts of our application but will only work with a couple
+
+00:07.770 --> 00:13.910
+of simple examples and then those most interesting or complicated ones.
+
+00:13.920 --> 00:20.790
+Well basically what we also need for this lecture is older translation files field with the text in
+
+00:20.790 --> 00:22.470
+three languages.
+
+00:22.500 --> 00:26.450
+Obviously I won't force you to write it down yourself.
+
+00:26.490 --> 00:34.380
+There are files available for download under this lecture which will give you the message as BHP files
+
+00:34.380 --> 00:41.700
+for free languages English Spanish and German with two entries inside and then the Jason files with
+
+00:41.700 --> 00:44.700
+much more entries inside.
+
+00:44.700 --> 00:49.250
+So before you continue you actually have to download them.
+
+00:49.320 --> 00:55.950
+So let's go ahead and download them under this lecture now or grab them from GitHub the link is also
+
+00:55.950 --> 00:58.530
+included.
+
+00:58.530 --> 01:04.740
+Now if you have posed the video and downloaded the files that I asked you to download and now if you
+
+01:04.740 --> 01:05.910
+will go to the home page.
+
+01:05.940 --> 01:07.630
+This is what you will see.
+
+01:07.650 --> 01:14.670
+So instead of the translated text you only see the keys for the translation entries like messages welcome
+
+01:14.670 --> 01:19.320
+and messages plural here but not start with Jason.
+
+01:19.320 --> 01:20.160
+It's different.
+
+01:20.760 --> 01:24.830
+So last time we have changed the language the default language to be Spanish.
+
+01:25.470 --> 01:29.210
+And using Jason we still see our translator text.
+
+01:29.230 --> 01:38.030
+That's not the case with the keys because how that works is if you have something as a key then if the
+
+01:38.250 --> 01:45.420
+if this is not found inside messages BHP file then well it will just simply output the key that wasn't
+
+01:45.420 --> 01:46.230
+found.
+
+01:46.230 --> 01:48.620
+So this makes no sense for us.
+
+01:48.780 --> 01:51.010
+It's basically unusable.
+
+01:51.330 --> 01:52.570
+But we've Jason.
+
+01:52.590 --> 02:00.120
+That's why most of our translations actually are in Jason files if there won't be a translation specific
+
+02:00.120 --> 02:06.870
+translation for our given language then it will just show the original key of that translation which
+
+02:06.870 --> 02:13.350
+happens to be a text to be displayed anyway but just in the original language in English.
+
+02:13.350 --> 02:15.100
+In this case.
+
+02:15.320 --> 02:21.720
+So the worst thing that will happen here is that while you will have messages in English if there is
+
+02:21.720 --> 02:29.370
+no Spanish translation and with keys well you get keys that are basically not understandable at all
+
+02:29.370 --> 02:32.100
+to the users of your website.
+
+02:32.200 --> 02:32.490
+OK.
+
+02:32.520 --> 02:34.810
+So we have that we explain that.
+
+02:34.830 --> 02:42.570
+Now let's go ahead and translate some parts of our application so maybe something simple for a start.
+
+02:42.600 --> 02:50.940
+Let's open the layout blade BHP from resources views and will translate some of the things that are
+
+02:50.940 --> 02:53.010
+displayed inside their menu.
+
+02:53.730 --> 03:01.230
+So since those are actually in Jason what we can do is to double underscore and just echo them us as
+
+03:01.230 --> 03:09.840
+the text that we have right now so this should be pretty simple so we do home contact log post
+
+03:15.070 --> 03:16.210
+this menu option
+
+03:20.540 --> 03:23.740
+and then we can also translate register
+
+03:27.130 --> 03:28.240
+the logging button
+
+03:33.730 --> 03:40.110
+and well if you are out antiquated we can also translate this one so log out bottom.
+
+03:40.120 --> 03:41.260
+Now let's check it out.
+
+03:41.290 --> 03:44.170
+So it should be in Spanish.
+
+03:44.170 --> 03:50.710
+Now everything else is still in English so let's try to see how we can translate maybe this.
+
+03:50.710 --> 03:58.660
+So the amount of comments that should be under blog posts so we remember that this might have even either
+
+03:59.020 --> 04:00.970
+singular or plural form.
+
+04:01.030 --> 04:08.500
+So the template would be index blade BHP from views posts.
+
+04:08.570 --> 04:10.420
+Now there is an interesting example.
+
+04:10.430 --> 04:14.270
+So let's take a look at the message just BHP the key comments.
+
+04:14.360 --> 04:18.100
+So we actually did it the way that when there are no comments.
+
+04:18.110 --> 04:24.650
+This would display our message on the not down no comments yet and then for one comment it will display
+
+04:24.650 --> 04:29.120
+something like this and for two and more it will have the plural forum.
+
+04:29.120 --> 04:30.850
+So comments.
+
+04:31.250 --> 04:35.090
+Now we are using an if statement here and well now we don't have to.
+
+04:35.480 --> 04:40.230
+So it's enough to that just called trans choice.
+
+04:40.270 --> 04:43.410
+Now the key is messages comments.
+
+04:43.510 --> 04:50.080
+And the second argument it doesn't have any more arguments is count and we'll be using this count also
+
+04:50.080 --> 04:52.450
+to display how many comments there are.
+
+04:52.450 --> 05:00.070
+So if you do not remember that you have to pass the actual number that will be matched against those
+
+05:00.070 --> 05:06.610
+rules that you have specified here for the approval plural strings of translations.
+
+05:06.610 --> 05:14.650
+And also this argument is available for you to display as a parameter using that column and the Count
+
+05:14.680 --> 05:15.040
+Name.
+
+05:15.050 --> 05:18.550
+So it is specifically under the name Khalid.
+
+05:19.540 --> 05:27.220
+OK so the count of comments is post comments count.
+
+05:27.260 --> 05:36.950
+So now we can remove this whole block save the changes and after refreshing you will see that in Spanish.
+
+05:37.090 --> 05:39.220
+This is an example with one comment.
+
+05:39.970 --> 05:43.090
+And let's also find the one without any comments.
+
+05:43.090 --> 05:48.260
+So this is actually in Spanish so works perfectly.
+
+05:48.330 --> 05:53.790
+Now the other plural example is how many people are currently reading our blog post.
+
+05:54.720 --> 06:04.030
+So we have that under people that reading qui so this would be inside the show blade peach B for posts.
+
+06:04.030 --> 06:11.380
+So this one so we display this inside the paragraph using the counter.
+
+06:11.390 --> 06:13.480
+So now we can remove this text.
+
+06:15.190 --> 06:19.160
+And also use trans choice.
+
+06:19.270 --> 06:21.210
+Key is the messages.
+
+06:22.210 --> 06:24.150
+People reading.
+
+06:24.160 --> 06:25.960
+Let's make sure it's exactly that.
+
+06:25.990 --> 06:32.040
+Yes people that reading and then the argument is counter.
+
+06:32.080 --> 06:39.760
+So save the changes refresh and it is in Spanish to actually verify that you will need to open an incognito
+
+06:39.760 --> 06:46.950
+window so the counter can actually work and you have that correctly so.
+
+06:46.950 --> 06:47.970
+OK to Atlanta.
+
+06:47.980 --> 06:52.500
+Well whatever that is to people so it works right now.
+
+06:53.450 --> 06:55.870
+We covered enough examples already.
+
+06:55.880 --> 07:04.280
+So I think it makes no point for me to be translating all of the possible strings here on the video.
+
+07:04.310 --> 07:07.930
+So what we will do is we'll live it as it is right now.
+
+07:08.030 --> 07:10.470
+Of course I will actually translate this.
+
+07:10.490 --> 07:16.010
+So this will be available on the Github so you will just grab that on the next lecture with everything
+
+07:16.130 --> 07:23.570
+inside the app translate it but if you wish and maybe that's a good exercise for you you can just do
+
+07:23.570 --> 07:30.470
+it yourself so we can translate the whole of the application yourself or even add some missing translations
+
+07:30.480 --> 07:32.120
+just play around with it.
+
+07:32.180 --> 07:35.060
+If you consider that a good exercise for you.
+
+07:35.060 --> 07:37.550
+Feel free to do that in a way if you don't.
+
+07:37.880 --> 07:43.760
+Then on the next lecture Be sure to first grab the changes from the gate hub so you will have the whole
+
+07:43.760 --> 07:45.950
+of the application translated.

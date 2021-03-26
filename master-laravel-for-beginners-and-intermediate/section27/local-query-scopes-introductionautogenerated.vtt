@@ -1,0 +1,304 @@
+WEBVTT
+
+00:00.600 --> 00:07.260
+So in the last lecture we talked about the potential issues that are being our global query scope to
+
+00:07.260 --> 00:10.120
+our particular model can cause.
+
+00:10.170 --> 00:16.680
+So we've disabled the strict option for a little bit to see how we can overcome this by just ignoring
+
+00:16.680 --> 00:19.650
+the standards and doing what we want anyway.
+
+00:20.220 --> 00:27.930
+But as I've said that's not the best approach to just put the problems under the carpet and ignore them.
+
+00:27.930 --> 00:37.740
+Now what we actually have if is for example we added this global query scope to order the models by
+
+00:37.740 --> 00:44.730
+their creation date for all the queries that were generated for older models so for example in this
+
+00:44.730 --> 00:51.810
+case when we wanted blog posts that were the most recent ones but we also wanted that with the count
+
+00:51.870 --> 00:53.280
+of comments.
+
+00:53.280 --> 01:00.330
+And for example you might think that it's actually doesn't make any sense to sort comments with this
+
+01:00.330 --> 01:05.610
+query when we only want to get the count of comments for each blog post.
+
+01:05.730 --> 01:11.800
+And yes it doesn't really make any sense to always add this sorting.
+
+01:12.810 --> 01:20.340
+So let's keep this strict option enabled and what we will do as we also have seen a problem with this
+
+01:20.340 --> 01:28.620
+latest scope added to the blog post when we fetch the blog posts count of blog posts added for each
+
+01:28.710 --> 01:30.290
+individual user.
+
+01:30.390 --> 01:38.670
+We will just disabled this query scope so we'll do that in blog posts and also We'll disable that for
+
+01:38.670 --> 01:39.960
+comments.
+
+01:39.960 --> 01:47.730
+And in this lecture I will show you how to add local query scopes which you have to tell Lavell to use
+
+01:47.730 --> 01:55.150
+explicitly and we'll see why it is usually and most of the time a better solution.
+
+01:56.940 --> 02:04.060
+So now let's go to our blog post model and see how we can add local query scope.
+
+02:05.010 --> 02:08.250
+So this is actually very simple.
+
+02:08.340 --> 02:17.160
+You just have to add the method to your model which starts with the name scope and then followed by
+
+02:17.160 --> 02:19.800
+the name of your local query scope.
+
+02:20.460 --> 02:24.470
+So our scope was called latest.
+
+02:24.470 --> 02:28.630
+So let's add scope latest to our blog post.
+
+02:29.130 --> 02:34.070
+And the argument would be the query actually this would be the query builder.
+
+02:34.170 --> 02:42.960
+So we can even type hint that so lets up builder and this should be illuminate database eloquent builder
+
+02:46.350 --> 02:50.080
+so that's our local query scope.
+
+02:50.100 --> 02:56.640
+You can see that this builder imports should be added automatically by Visual Studio code.
+
+02:56.640 --> 03:06.330
+If it's not then mind that you should add up here what we can do with that is we can modify the query
+
+03:08.560 --> 03:13.170
+by doing what we did with our latest scope global queries.
+
+03:13.180 --> 03:16.120
+So we'll add order by
+
+03:18.630 --> 03:22.320
+static created out.
+
+03:22.320 --> 03:31.260
+So we are using the constant which is defined as the name of that field when we use timestamps and by
+
+03:31.260 --> 03:33.120
+default we want to sort.
+
+03:33.120 --> 03:35.030
+In descending order.
+
+03:35.040 --> 03:37.820
+So the newest blog posts first.
+
+03:38.710 --> 03:39.430
+OK.
+
+03:39.450 --> 03:43.260
+So we have just defined our local query scope.
+
+03:43.260 --> 03:46.420
+Now how do we use this local query scope.
+
+03:46.500 --> 03:51.820
+So it is not applied to all the queries automatically by Laura.
+
+03:52.320 --> 03:56.490
+Now you have to explicitly call that.
+
+03:56.970 --> 03:59.220
+So let's see where we should use that.
+
+03:59.250 --> 04:09.700
+So we fetch a list of blog posts currently at least only in this place so instead of using the default.
+
+04:09.700 --> 04:18.420
+So getting all the blog posts with count of comments what we now can do is we can use this latest and
+
+04:18.420 --> 04:20.400
+we can call it as a method.
+
+04:20.400 --> 04:29.910
+So we do latest and this will return an instance of the query builder so we can add some more queries
+
+04:29.910 --> 04:30.270
+to it.
+
+04:30.270 --> 04:32.580
+Like with count.
+
+04:32.580 --> 04:35.120
+So let's save the changes.
+
+04:35.340 --> 04:38.180
+And you've seen that we had this error.
+
+04:38.190 --> 04:46.440
+And now if you will refresh the page you still see that our blog posts are properly sorted by the date
+
+04:48.780 --> 04:56.160
+but if you will go to a particular blog post now you can see that unfortunately the comments aren't
+
+04:56.160 --> 04:57.290
+sorted anymore.
+
+04:57.300 --> 05:00.450
+So here is like one from three weeks ago.
+
+05:00.450 --> 05:05.870
+Then there is one from two months ago and another one from one week ago.
+
+05:06.180 --> 05:11.150
+So we can also add local query scope to the comment.
+
+05:11.370 --> 05:12.780
+So let's do that.
+
+05:12.780 --> 05:16.050
+We can even copy this fragment to the comment model
+
+05:18.860 --> 05:21.030
+so let's paste it here.
+
+05:21.230 --> 05:27.320
+But the only thing we have to remember about is adding this builder so we can either copy that from
+
+05:27.320 --> 05:35.050
+that log post model or just selected from the list of proposed objects so Visual Studio code will add
+
+05:35.070 --> 05:38.410
+up for us.
+
+05:39.010 --> 05:45.970
+Okay so save the changes and now let's see where do we need to sort the comments by the creation date.
+
+05:46.000 --> 05:53.620
+So definitely not here because here we just want to get the count of comments but we need that in this
+
+05:53.620 --> 05:55.230
+particular place.
+
+05:55.300 --> 06:03.060
+So we are fetching one blog post but we want to fetch it together with our relation.
+
+06:03.190 --> 06:10.660
+Now on the lecture about fetching the related models I've only shown you the simple example like this
+
+06:10.750 --> 06:18.850
+using with so it just is it is just doing another askew all query to fetch all the comments that have
+
+06:18.850 --> 06:26.980
+the blog post I.D. which is exactly as the blog post that we are fetching here using find or fail but
+
+06:27.400 --> 06:29.160
+it doesn't have to be that simple.
+
+06:29.170 --> 06:36.940
+What you can do is you can supply something additional to the query so let's select this comments name
+
+06:37.180 --> 06:47.500
+and cut it and instead let's put an array where key would be the relation name and now you can additionally
+
+06:47.570 --> 06:53.080
+R the closure which will get the query object.
+
+06:53.080 --> 06:59.710
+And here you can add something extra to how this comments relation is being fetched together with the
+
+06:59.710 --> 07:12.820
+blog post so you can modify the query here so we can return query and since we have added this latest
+
+07:12.820 --> 07:16.220
+scope now we can do something like this.
+
+07:16.510 --> 07:25.120
+So save the changes and let's see if you are still able to get the comments sorted.
+
+07:25.120 --> 07:33.180
+So when you refresh our particular blog post you can see that now the comments are also properly sorted.
+
+07:35.510 --> 07:41.710
+So let's see what happened if we didn't have this particular code.
+
+07:41.720 --> 07:47.560
+So we just simply fudged the comments using simple school statement.
+
+07:47.570 --> 07:50.330
+Now you can see comments aren't sorted at all.
+
+07:50.330 --> 08:01.500
+They are in a random order but after adding this extra modifier to the query and using the local query
+
+08:01.500 --> 08:09.790
+scope for comments we modified how they're fetched and now they're sorted by the newest date.
+
+08:09.790 --> 08:12.400
+So that would be one way to solve it
+
+08:15.290 --> 08:20.960
+so I will keep that for you for reference and comment that out.
+
+08:20.960 --> 08:30.170
+But now let's also try a simpler solution so let's keep how it was before we made those changes so we
+
+08:30.170 --> 08:34.530
+simply want the comments relation to be fetched.
+
+08:34.640 --> 08:42.290
+So save the changes here and now go to the blog post model and what you can do is you can modify how
+
+08:42.290 --> 08:51.470
+the relation is being fetched by default and you can modify this comments comments method that defines
+
+08:51.470 --> 08:52.700
+the relation like that.
+
+08:53.480 --> 09:01.490
+So you can ask Lara well to use this query scope when it is just fetching our relation by default.
+
+09:01.880 --> 09:09.860
+So when using the latest here what will it do is actually you can see that we have removed this additional
+
+09:09.860 --> 09:17.560
+closure from our controller and added this to the relation that we want latest comments by default.
+
+09:17.600 --> 09:25.400
+And when you refresh you can see that they are now properly sorted and if we go to our blog post list
+
+09:25.760 --> 09:35.590
+there is no issue with the only full group buy because no sorting is added when we use aggregate functions.
+
+09:35.600 --> 09:40.520
+Now this might all seem a little bit complicated but don't worry.
+
+09:40.580 --> 09:48.290
+This of course needs practice you need to practice and write a lot of this queries Coke's global and
+
+09:48.290 --> 09:49.100
+local.
+
+09:49.100 --> 09:55.040
+And this is what we'll do in the next lecture we'll try to write some more queries scope so you can
+
+09:55.040 --> 10:00.050
+see how useful and powerful this feature can be in larval.

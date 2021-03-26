@@ -1,0 +1,247 @@
+WEBVTT
+
+00:00.810 --> 00:07.890
+In the last lectures I've called the Travel artisan make of commands to generate some views for logging
+
+00:07.920 --> 00:09.460
+in and registration.
+
+00:09.480 --> 00:15.630
+And now we are back to our own layout where we will implement those views ourselves.
+
+00:15.630 --> 00:24.120
+Now that we know how we can use the already created logging and registration controller and authentication
+
+00:24.120 --> 00:29.550
+middleware to specify which endpoints in which controllers should be protected.
+
+00:30.270 --> 00:35.850
+So now let's just go back to the Visual Studio code and implement all of this ourselves.
+
+00:36.210 --> 00:44.430
+So the first step that we need to do is to register the roots so we will have to go to the Web BHP file
+
+00:44.430 --> 00:48.040
+and call that South roots method.
+
+00:49.070 --> 00:56.960
+So that will register older routes that we need to show those forums and handle logging and registration.
+
+00:56.960 --> 01:04.250
+So let's check now with BHP aunties on the route least and you can see that we have our authentication
+
+01:04.250 --> 01:06.890
+routes at it now.
+
+01:06.980 --> 01:16.160
+Since we had those views generated they were in this particular folder of slash register for example
+
+01:16.160 --> 01:23.880
+for the registration form and have as I've said to use those code that we already have like this registers
+
+01:23.900 --> 01:29.260
+users trade will have to create our templates in the same structure.
+
+01:29.360 --> 01:39.650
+So let's go to our resources views folder and create a new folder called out and then create a new template
+
+01:39.680 --> 01:43.010
+and call it register blade BHP.
+
+01:43.430 --> 01:50.270
+So that's why we are calling it this way because we would like to use what is already written for us
+
+01:50.300 --> 01:53.440
+like this show registration form action.
+
+01:53.450 --> 01:59.560
+So it will expect that your template is called like this.
+
+01:59.660 --> 02:01.140
+Now back to our template.
+
+02:01.150 --> 02:05.300
+This would be a simple form and we would like to use our own layouts.
+
+02:05.300 --> 02:14.990
+So we use that extends directive and extend our own layout and then we have to specify the content section
+
+02:16.210 --> 02:27.760
+using the section and section directive and now inside this section directive we will simply add a form.
+
+02:27.790 --> 02:40.270
+So this form would have the method post that action would be fetch the using the root function and the
+
+02:40.270 --> 02:44.060
+root is register.
+
+02:44.470 --> 02:51.980
+So let's close the form now this route can be found inside our route list.
+
+02:51.980 --> 02:57.950
+So as you can see that's this route but we are getting it with that post method.
+
+02:57.980 --> 03:05.300
+So this one is responsible for actually registering our users so this is this one and it expects certain
+
+03:05.300 --> 03:13.040
+fields to be sent to it and the validation for those fields as we remember is specified inside the register
+
+03:13.040 --> 03:15.680
+controller validate or method.
+
+03:15.710 --> 03:20.600
+So we need those fields the name email and password.
+
+03:20.600 --> 03:23.530
+So let's go back to our form.
+
+03:23.630 --> 03:32.000
+So as with every other forum we are the CSA ref directive to prevent anyone from making cross site requests
+
+03:31.990 --> 03:40.000
+for jury attacks and then we'll add a couple of fields inside that diff element.
+
+03:40.220 --> 03:49.650
+So each of those elements will have a forum group class the bootstrap one they all need a label and
+
+03:49.890 --> 03:54.950
+all of them would need an input with a name.
+
+03:55.030 --> 04:01.450
+Some of them will have a value so in case the validation failed it will have the old name.
+
+04:01.450 --> 04:03.780
+They are all required.
+
+04:03.820 --> 04:11.080
+So we can add this a required HDMI all five validation to just prevent sending the form without the
+
+04:11.830 --> 04:19.810
+fields bank field because well let's save on the backend processing time if we can immediately check
+
+04:19.810 --> 04:26.320
+that we require that field and they are not sent and all of those fields will require this bootstrap
+
+04:26.530 --> 04:28.450
+form control class
+
+04:31.140 --> 04:33.530
+so we will need four of those fields.
+
+04:33.540 --> 04:38.490
+So let's just copy this four times now.
+
+04:38.510 --> 04:44.370
+The first one would be the user name so user name.
+
+04:44.430 --> 04:51.030
+Then we have some idea that this actually a name.
+
+04:51.030 --> 04:54.060
+So the name that will be displayed for the user.
+
+04:54.060 --> 04:57.420
+Secondly is the e-mail for these the password.
+
+04:57.540 --> 05:05.220
+And fourth is the read typed password as we expect users to type them twice.
+
+05:05.220 --> 05:12.940
+So we have to use those names inside that input names because that's how their register of control works.
+
+05:12.930 --> 05:16.160
+It expects certain data to be sent.
+
+05:16.170 --> 05:19.200
+Now the fourth third one is password.
+
+05:19.380 --> 05:25.180
+And the fourth one would be password underscore confirmation.
+
+05:25.230 --> 05:32.190
+So why we are doing this why we are calling it confirmation is because we have this confirmed the validator.
+
+05:32.280 --> 05:34.680
+Let's go back to see where it is specified.
+
+05:34.680 --> 05:38.730
+It is here for the password confirmed.
+
+05:39.240 --> 05:45.210
+So how this works is when you have a field that has this validation that will confirm to you need to
+
+05:45.300 --> 05:52.130
+add another field which would be called the same as the field plus underscore confirmation.
+
+05:52.140 --> 05:57.750
+So in case of the password you need a matching field password underscore confirmation.
+
+05:57.750 --> 06:02.850
+And the data the content of the bit of it needs to be the same as the original field.
+
+06:02.850 --> 06:07.470
+So this is how this confirmed validator works.
+
+06:07.470 --> 06:10.120
+Now back to our forum.
+
+06:10.170 --> 06:15.680
+So in those two cases with name and email we can use the old helper.
+
+06:15.750 --> 06:22.620
+So in case the data submitted would be invalid will display it again for the user to fix all the other
+
+06:22.620 --> 06:24.130
+fields that were incorrect.
+
+06:24.150 --> 06:32.660
+But we'll do not do that only with the name and email because we do not want to keep the passwords when
+
+06:32.660 --> 06:33.830
+they are invalid.
+
+06:33.830 --> 06:40.630
+So we would like this to be reset and the final thing that we need for this form is that button.
+
+06:40.660 --> 06:48.920
+So we specify button of type submit and let's do it the same way we did it with the form for adding
+
+06:48.950 --> 06:50.310
+and editing blog posts.
+
+06:50.310 --> 06:58.520
+So this would be Button Button primary and button block so it takes the whole screen and this button
+
+06:58.520 --> 07:01.400
+will have the label register
+
+07:04.380 --> 07:04.670
+OK.
+
+07:04.680 --> 07:13.070
+So we have our forum and now let's go to our application and visit manually that slash register.
+
+07:13.090 --> 07:15.770
+So it is there it should be working.
+
+07:15.870 --> 07:21.000
+So let's try to provide some values that would be invalid.
+
+07:21.000 --> 07:23.820
+And it actually sends them to the registered controller.
+
+07:23.820 --> 07:27.490
+So if they would be valid we would be registered right now.
+
+07:27.630 --> 07:34.770
+But since we provided some invalid values it failed the validation but we do not display any validation
+
+07:34.830 --> 07:35.740
+errors yet.
+
+07:35.910 --> 07:42.900
+And in the next lecture you will see how you can display more specific and elegant validation errors
+
+07:42.900 --> 07:44.280
+for your forms.

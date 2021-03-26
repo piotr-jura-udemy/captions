@@ -1,0 +1,40 @@
+WEBVTT
+
+00:01.140 --> 00:09.540
+One of the best Laravel practices is to use their resource controllers, most web applications consist
+
+00:09.540 --> 00:14.160
+of crude actions around different resources.
+
+00:15.160 --> 00:24.760
+Let's take a look at what crude is it stands for create, read, update and delete.
+
+00:28.000 --> 00:37.450
+Indeed, most of the time, this is what Web applications are all about, you create resources like
+
+00:37.450 --> 00:44.200
+blog posts, you list them, you display one blog post.
+
+00:45.480 --> 00:56.250
+But you also can edit a post and delete it additionally for creating and editing, you need to display
+
+00:56.280 --> 00:58.220
+some kind of forum.
+
+00:59.340 --> 01:05.470
+The resource controller creates all necessary routes and controller actions for you.
+
+01:06.030 --> 01:10.380
+Everything is made according to best practices and conventions.
+
+01:11.340 --> 01:16.350
+The following diagram will help you understand what routes will be created.
+
+01:16.350 --> 01:19.230
+For example, posts a resource.
+
+01:20.010 --> 01:24.940
+What would be the route names you are eyes and what is their function.
+
+01:25.470 --> 01:29.220
+You can download this diagram under this lecture.

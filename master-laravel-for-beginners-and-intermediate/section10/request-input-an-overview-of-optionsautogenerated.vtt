@@ -1,0 +1,55 @@
+WEBVTT
+
+00:00.850 --> 00:04.900
+We've covered the way you will be reading the input most of the time.
+
+00:05.320 --> 00:12.460
+There are other interesting options for starting with a body unmetered that would return true for one
+
+00:12.460 --> 00:15.200
+as a number one as a string.
+
+00:15.940 --> 00:16.630
+True.
+
+00:17.320 --> 00:18.550
+True as a string.
+
+00:18.550 --> 00:19.540
+And then on.
+
+00:19.540 --> 00:21.430
+And yes, strings.
+
+00:23.210 --> 00:32.960
+Next, you can use except our only methods as means for blacklisting or widely seeing certain values
+
+00:32.960 --> 00:33.920
+from to include.
+
+00:38.010 --> 00:47.850
+The House method is used to check if the value or values as it accepts both string and array.
+
+00:49.360 --> 00:50.860
+Is present in input.
+
+00:53.330 --> 01:00.090
+Warehouse allows to execute some logic if specific value is present in the input.
+
+01:00.780 --> 01:08.360
+Now, it's useful to note that the opposite method of hahs would be the missing method, which is also
+
+01:08.360 --> 01:09.020
+available.
+
+01:10.160 --> 01:19.400
+Finally, there is also has any method available that checks, if any of the given values is present.
+
+01:21.000 --> 01:30.990
+Finally, the field method, it will return a Bolian value, true, if value is present and is not empty
+
+01:30.990 --> 01:39.990
+in the input, and then there is also one field that would execute some logic in the anonymous function
+
+01:40.350 --> 01:43.170
+when the field condition is met.

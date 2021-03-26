@@ -1,0 +1,142 @@
+WEBVTT
+
+00:00.630 --> 00:06.430
+So far, you've seen we have put all the code inside a single Web file.
+
+00:07.200 --> 00:14.070
+While that might work for really tiny applications, it might have crossed your mind that there has
+
+00:14.070 --> 00:17.010
+to be a better way to organize and keep to code.
+
+00:17.920 --> 00:19.280
+And there is a better way.
+
+00:19.330 --> 00:21.940
+It's called Control Our Classes.
+
+00:22.900 --> 00:29.890
+These classes are kept inside their up HTP controllers folder.
+
+00:31.660 --> 00:40.090
+Let's create our own controller first opened the terminal, we will call this new controller, home
+
+00:40.090 --> 00:49.720
+controller for this run, be artisan, make call on controller, home controller.
+
+00:51.980 --> 00:55.680
+Take a look at the new class generated for us.
+
+00:56.240 --> 01:07.130
+It's empty now, but you should notice that it extends the controller class, which already existed
+
+01:07.310 --> 01:10.160
+there in the controllers folder before.
+
+01:10.740 --> 01:13.990
+It's a base class for all of your controllers.
+
+01:14.690 --> 01:22.130
+Make sure to extend it as it gives your controllers some convenience methods, like, for example,
+
+01:22.280 --> 01:28.270
+the middleware method to apply middleware to controller actions.
+
+01:29.300 --> 01:36.050
+You should understand that controller classes are not the alternative to routes your application always
+
+01:36.050 --> 01:37.190
+needs routine.
+
+01:37.550 --> 01:46.160
+Controller classes can replace the closures in rooting files instead of defining their logic right after
+
+01:46.160 --> 01:47.270
+you define roots.
+
+01:47.300 --> 01:54.960
+Now you tell a lot of a routine to call aspecific action for a root and action.
+
+01:55.280 --> 01:58.180
+So this is a new term for us.
+
+01:58.670 --> 02:03.860
+And action is a controller method bound to a root.
+
+02:04.670 --> 02:06.950
+To have the first hand understanding.
+
+02:07.250 --> 02:13.910
+We will move the homepage and the contact page to our new controller.
+
+02:17.020 --> 02:29.590
+Let's ask two methods in home control over their home methods and another one, the contact methods.
+
+02:32.330 --> 02:33.770
+They will return.
+
+02:36.370 --> 02:40.180
+The view function with the template name.
+
+02:48.200 --> 02:55.460
+Now we need to tell Laravel Rueter how to root to this controller actions, so we need to go back to
+
+02:55.460 --> 03:04.850
+webapp file and change those two routes so we will change back to using the get method instead of the
+
+03:04.850 --> 03:05.810
+view method.
+
+03:06.290 --> 03:15.140
+And since they are not simply view routes, instead of providing the template, name or anonymous function,
+
+03:15.650 --> 03:21.860
+you provide an array where first element is the controller class name.
+
+03:24.090 --> 03:33.930
+You can use their controller class constant to get that name, and the second argument is the action
+
+03:33.930 --> 03:37.770
+name, meaning the method name in that class.
+
+03:38.500 --> 03:40.980
+In our case, that's home.
+
+03:41.760 --> 03:50.070
+Let's copy this over for the second action, the contact page, and just change the action name to be
+
+03:50.070 --> 03:55.590
+contact and finally let to reformat that back.
+
+03:57.060 --> 04:04.380
+Now, since this whole controller class is actually defined in certain namespace, which is defined
+
+04:04.380 --> 04:05.340
+as such.
+
+04:06.600 --> 04:13.500
+You can't just use this class name like that, you need to add a new statement for it, and this was
+
+04:13.950 --> 04:17.850
+automatically done for me by visual studio code plugins.
+
+04:18.420 --> 04:24.060
+If you don't have such plugins or you're using something else, make sure to artist use statement at
+
+04:24.060 --> 04:24.600
+the top.
+
+04:28.090 --> 04:35.320
+Now opened the terminal and run ppy artisan route least.
+
+04:39.130 --> 04:47.830
+To see that our changed routes now reflect that they are controller based, so take a look at this line
+
+04:48.430 --> 04:52.060
+that the action is now our controller class action.
+
+04:53.110 --> 04:59.080
+Also the contact page is our controller class action.
+
+05:00.300 --> 05:05.790
+Finally, you can also verify in the browser that this would still work.

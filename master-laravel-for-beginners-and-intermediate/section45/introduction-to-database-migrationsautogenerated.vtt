@@ -1,0 +1,280 @@
+WEBVTT
+
+00:03.020 --> 00:09.580
+In the last lecture we've learned how to configure our database connection to the my sequel database.
+
+00:09.620 --> 00:16.850
+And we've also learned were all the credentials for the database and all the connection parameters are
+
+00:16.850 --> 00:21.520
+stored and that that they are stored in environment variables.
+
+00:21.680 --> 00:29.720
+And for the local development environment we use a file called Dot and to keep the values of those environment
+
+00:29.720 --> 00:30.740
+variables.
+
+00:30.800 --> 00:38.860
+And of course this is not only for the databases it's for the whole of our application.
+
+00:38.880 --> 00:44.640
+Now you can see that we have some values set for the database the user name and password.
+
+00:44.640 --> 00:47.560
+And we do not know if they are correct.
+
+00:47.580 --> 00:50.820
+And if you are using some they want to be correct.
+
+00:51.330 --> 00:58.140
+So to find out what are the credentials for example you should go to the some folder find some files
+
+00:59.280 --> 01:00.530
+and locate that peach.
+
+01:00.530 --> 01:02.020
+Be my admin.
+
+01:02.040 --> 01:04.200
+So Mike this might differ on Windows.
+
+01:04.230 --> 01:05.800
+You just need to find the speech.
+
+01:05.790 --> 01:13.230
+Be my admin folder and inside it there is that config in peach bee file so open it.
+
+01:14.160 --> 01:21.450
+And around the line 13 you shouldn't you should see the user and password so user name is Root password
+
+01:21.540 --> 01:22.500
+is empty.
+
+01:23.460 --> 01:30.840
+So let's modify the user name to route remove the password.
+
+01:30.840 --> 01:38.130
+So now it is empty and if you remember we created a database called La rather so it's not homestead
+
+01:38.190 --> 01:40.190
+it is lava.
+
+01:41.880 --> 01:47.220
+So now our connections should be configured properly and the rest of the parameters stays the same.
+
+01:47.220 --> 01:56.690
+The host is as you see on the screen and the port the typical my sequel port free free 0 6 now that
+
+01:56.690 --> 01:59.410
+we have our database connection configured.
+
+01:59.540 --> 02:03.280
+It's time to talk about the concept of migrations.
+
+02:03.560 --> 02:08.690
+So migrations lets you keep your database schema version.
+
+02:08.870 --> 02:14.990
+What that means is that whenever you would like to change your database schema like Daniel table or
+
+02:14.990 --> 02:23.120
+a field or change something you will put that into a migration file and migrations can be found inside
+
+02:23.120 --> 02:34.120
+the database migrations folder so Lavell comes with to migration files out of the box and let's take
+
+02:34.120 --> 02:40.450
+a look at the one of them so you can see that the migration file contains a class which describes what's
+
+02:40.450 --> 02:47.090
+this migration is doing and studied extends the base migration class from LA Bravo.
+
+02:47.260 --> 02:51.730
+And it has two methods the up method and down method.
+
+02:52.750 --> 03:00.790
+So what that does is whenever we change something inside our database schema we are calling the up method
+
+03:00.850 --> 03:04.600
+or basically the la la travel is calling this method.
+
+03:04.720 --> 03:10.750
+It means like when we are moving forward we create some things we would like to change some things or
+
+03:10.750 --> 03:18.720
+add a new table the app is being called but sometimes we might make a mistake and we want to revert
+
+03:18.720 --> 03:19.650
+that change.
+
+03:19.750 --> 03:27.520
+And this is what down method is doing so without going into much details right now what this code is
+
+03:27.520 --> 03:28.690
+doing.
+
+03:28.690 --> 03:36.370
+You might see that there is a call to create on schema which creates a table with some specific fields
+
+03:37.000 --> 03:41.190
+and the down method drops this table.
+
+03:41.200 --> 03:42.940
+So this is how it works.
+
+03:43.000 --> 03:49.060
+The app is always called when you move forward you will create something you modified something and
+
+03:49.090 --> 03:52.590
+if you want to reverse this change that down is called.
+
+03:52.600 --> 04:01.140
+So you should typically implement those two methods in your migrations now let's take a look at this
+
+04:01.140 --> 04:08.820
+migration that comes with Lara travel which tries to create a new users table so to run this migration
+
+04:09.120 --> 04:16.520
+you need to open the terminal and let's run peach artisan to see the list of available comments.
+
+04:16.650 --> 04:20.080
+So at the top you should see them migrate.
+
+04:20.070 --> 04:21.770
+So I'm selecting it now.
+
+04:21.800 --> 04:29.940
+Then my grid will run older my database migrations that haven't been run yet and it will call the up
+
+04:29.940 --> 04:36.960
+functions of those migration files so we'll modify our database schema forward.
+
+04:36.960 --> 04:37.910
+There is another.
+
+04:38.010 --> 04:44.090
+Another comment from the migrate namespace and it is called a rollback.
+
+04:44.130 --> 04:47.720
+And as you can see it will roll back the last database migration.
+
+04:47.730 --> 04:52.210
+So any last change that we've made we can roll back using this command.
+
+04:52.230 --> 04:57.150
+For example if you see that you that you actually made a mistake.
+
+04:57.450 --> 04:59.030
+So let's run it now.
+
+04:59.030 --> 05:09.870
+Peach P artisan migrate and you can see that we have an error and it is in the migration file provided
+
+05:09.870 --> 05:17.610
+by LA travel so you can see from the status that we have output at here that it is trying to migrate
+
+05:17.730 --> 05:25.290
+using this create user stable and that there is a syntax error or access violation that specified Key
+
+05:25.380 --> 05:35.070
+was too long and the maximum key length is seven six seven and it is happening on the user stable on
+
+05:35.070 --> 05:38.520
+the unique constraint for the email.
+
+05:38.520 --> 05:42.890
+So let's locate it now and that's this line.
+
+05:42.960 --> 05:47.860
+So we are adding an email field and making it unique.
+
+05:48.030 --> 05:56.890
+But what you have to know is that when we are using the UTF 8 character said in my sequel.
+
+05:57.300 --> 06:06.930
+Each character holds free bytes so free bytes multiplied by two hundred fifty five which is the default
+
+06:07.290 --> 06:19.440
+length of a string field which gives less than 7 6 7 but we are not using the UTF 8 and coding instead
+
+06:20.190 --> 06:29.400
+as we see inside our database config and also as we created the database we are using that UTF 8 and
+
+06:29.400 --> 06:38.900
+before which means we are using four bytes for every character and if we multiply two hundred fifty
+
+06:38.900 --> 06:47.190
+five the default length of the virtual field which is being used for the email we will actually get
+
+06:47.190 --> 06:53.150
+more than this so we'll exceed this limit for a key so to quickly fixed this.
+
+06:53.250 --> 07:03.240
+And also remember it for the future you should set the length of such fields to be the maximum of hundred
+
+07:03.340 --> 07:12.090
+ninety one so let's take a look if the other migration file might have the same problem and it does
+
+07:12.120 --> 07:20.370
+because it's also defining an email field when it is creating the new password resets table and also
+
+07:20.370 --> 07:24.020
+using the default length which is two hundred fifty five.
+
+07:24.240 --> 07:33.050
+So let's change it 291 because it's also creating an index of on that field.
+
+07:33.120 --> 07:40.350
+Now let's go back to the browser and you can see that a lot of the database already has two tables and
+
+07:40.350 --> 07:47.040
+it's because those tables were created by dos immigrations but they failed to ring it and they failed
+
+07:47.040 --> 07:53.850
+to add are constraints or keys that they wanted to add so they are incorrect not in sync with what we
+
+07:53.850 --> 07:55.860
+have inside the migration files.
+
+07:56.760 --> 08:04.770
+So let's choose the drop option after selecting those two tables and confirm with yes to delete those
+
+08:04.770 --> 08:07.110
+tables manually.
+
+08:07.290 --> 08:19.100
+And now let's go back to our terminal and again run peach bee artisan migrate and now you see that all
+
+08:19.100 --> 08:22.260
+the migrations have run successfully.
+
+08:22.680 --> 08:29.670
+So let's take a look at what we have right now inside the database so you can see free tables the two
+
+08:29.670 --> 08:38.590
+tables that we wanted to create or the larva by default create migrations for and the migrations table.
+
+08:38.700 --> 08:43.830
+So the migration stable will hold every migration that was executed.
+
+08:43.830 --> 08:48.900
+So it contains their migration name and the outer generated ideas.
+
+08:49.470 --> 08:56.600
+And also there are their tables the user stable which has all the fields that were defined.
+
+08:56.850 --> 09:00.750
+You can also see that the var chart is 191.
+
+09:00.810 --> 09:08.040
+As we define it and by default when you haven't specified the length it is two hundred fifty five and
+
+09:08.040 --> 09:12.330
+the same is with the password resets table that lava provided.
+
+09:13.620 --> 09:17.070
+So that would be about migrations in this lecture.
+
+09:17.130 --> 09:23.340
+Let's move to the next one when we will actually create our first on migration.

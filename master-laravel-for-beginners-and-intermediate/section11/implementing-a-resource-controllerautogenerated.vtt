@@ -1,0 +1,178 @@
+WEBVTT
+
+00:00.960 --> 00:09.120
+Knowing the benefits of resource controllers, let's create one for blog posts, open the terminal and
+
+00:09.120 --> 00:19.320
+run ppy artisan make controller controller name would be post controller and then other flug dash dash
+
+00:19.500 --> 00:22.290
+resource to create our resource controller.
+
+00:23.010 --> 00:25.320
+Now let's take a look at their file.
+
+00:25.530 --> 00:27.720
+So both controller.
+
+00:30.460 --> 00:34.740
+All possible crude actions are already there for us.
+
+00:40.310 --> 00:45.190
+Let's see how easy it is to define the roots for this resource controller.
+
+00:45.620 --> 00:52.820
+But first, let's come down to the roots with anonymous functions that we already have to handle posts
+
+00:53.450 --> 00:54.030
+and online.
+
+00:54.050 --> 00:58.300
+Now let's define the rooting for the new controller.
+
+00:59.420 --> 01:06.290
+So the root class has the static resource method that accepts two parameters.
+
+01:06.440 --> 01:13.060
+First would be the base, your eye and then the class name of the resource controller.
+
+01:13.070 --> 01:22.400
+In our case, that's post controller and we use the class Konstanz to get the full class name, including
+
+01:22.400 --> 01:23.240
+the namespace.
+
+01:24.320 --> 01:31.400
+And just I need to mention that you need to add this statement to import the Post's comptroller.
+
+01:36.020 --> 01:44.150
+So it's all it takes to define the whole routine for this resource controller, that's it's it's a one
+
+01:44.150 --> 01:44.720
+liner.
+
+01:46.250 --> 01:51.680
+Now let's open the terminal and run BHP artisan route, at least.
+
+01:53.720 --> 01:55.880
+And here are our roots.
+
+02:00.350 --> 02:04.940
+They all have the your eyes that are easy to predict.
+
+02:06.880 --> 02:11.290
+Their actions have the Post's prefix in their name.
+
+02:12.600 --> 02:19.920
+And also, their names are predictable, and once you remember this convention, you will immediately
+
+02:19.920 --> 02:24.210
+find your way around every Laravel project that follows conventions.
+
+02:25.960 --> 02:34.150
+But sometimes you don't need all the crude actions for a resource, let's say in our case currently
+
+02:34.150 --> 02:42.880
+at least, you can have list of posts or one posts displayed so only are from crude.
+
+02:44.010 --> 02:51.780
+You can use only or accept methods on route definition to tell Laravel which of the crude actions you
+
+02:51.780 --> 02:52.710
+actually want.
+
+02:53.220 --> 02:57.410
+Since we use only two, we will use that only method
+
+03:00.090 --> 03:06.660
+and in an array will at least index and show actions.
+
+03:07.790 --> 03:12.110
+Now, let's rerun bipartisan at least.
+
+03:13.390 --> 03:19.470
+And you can see that for this resource controller, only two actions are on the list.
+
+03:20.410 --> 03:29.170
+Now, if you would like to enable most of the actions then you might use, except then you will just
+
+03:29.170 --> 03:31.040
+disable certain actions.
+
+03:31.060 --> 03:34.540
+So let me rerun artisan route least.
+
+03:35.110 --> 03:43.210
+And now you can see that all the other actions were enabled, just those two index and so were disabled.
+
+03:43.430 --> 03:47.620
+But of course, currently we want it to be the other way around.
+
+03:47.680 --> 03:49.240
+So we use only.
+
+03:51.570 --> 03:59.490
+So our current job would be to copy over this post variable somehow to the controller, so let's do
+
+03:59.490 --> 04:00.060
+that now.
+
+04:00.060 --> 04:02.500
+Select this array.
+
+04:02.760 --> 04:06.930
+Copy it in the post controller.
+
+04:06.960 --> 04:09.360
+Add a field that would be private.
+
+04:09.390 --> 04:11.470
+Now paste the contents.
+
+04:11.520 --> 04:14.010
+You can run formating.
+
+04:15.840 --> 04:21.000
+There it is, and we have to implement two methods, index and show.
+
+04:21.980 --> 04:25.060
+That won't be much different from what we had before.
+
+04:27.570 --> 04:36.120
+So we can just copy over the implementation of the index method with the difference that now we don't
+
+04:36.270 --> 04:41.550
+refer the variable, instead we refer field, so we have to use this.
+
+04:41.950 --> 04:43.440
+I'll post.
+
+04:45.720 --> 04:52.770
+And now the action that will return one single blog post.
+
+04:55.400 --> 04:57.800
+That would be this show action.
+
+05:00.700 --> 05:07.990
+And we apply the same changes, so we refer to posts field of the current class instead of the posts
+
+05:08.170 --> 05:13.060
+variable and the radius, that's everything we had to do.
+
+05:13.150 --> 05:16.430
+Now let's go to the browser and verify if that still works.
+
+05:17.620 --> 05:19.990
+So let's go to the Post's page.
+
+05:20.650 --> 05:21.580
+It's fine.
+
+05:21.580 --> 05:24.910
+And then to individual post, which also works fine.
+
+05:25.600 --> 05:32.680
+Now, in the future, when we will implement other crude actions, we will enable them in routing file
+
+05:32.830 --> 05:36.820
+and implement specific methods in the resource controller.

@@ -1,0 +1,172 @@
+WEBVTT
+
+00:00.840 --> 00:07.470
+In the last lecture we talked about creating the flash messages to signal to the user that successful
+
+00:07.500 --> 00:15.060
+thing has happened and this is how we did that by using the request session method and the session object
+
+00:15.690 --> 00:21.780
+flash method to add a variable to the session called status with its content.
+
+00:21.780 --> 00:24.030
+The blog post was created.
+
+00:24.030 --> 00:29.200
+Now let's see how we can verify if this data is actually valid.
+
+00:29.310 --> 00:32.730
+It means the same as we expected it to be.
+
+00:32.730 --> 00:35.520
+Or at least if it's not empty.
+
+00:35.520 --> 00:42.420
+And then tell the user that it was incorrect because we expect the title to be present and content to
+
+00:42.420 --> 00:43.010
+be present.
+
+00:43.020 --> 00:48.510
+Otherwise it wouldn't make much sense to store an empty blog post.
+
+00:49.110 --> 00:56.550
+So we will also use a method from the request object that we are here in the parameters least of the
+
+00:56.550 --> 01:04.050
+store method and it has another handy method that we can use to verify the data.
+
+01:05.650 --> 01:15.490
+So we'll assign the result of this method to validated data new variable and the request has a method
+
+01:15.520 --> 01:24.710
+called validate now the validate accepts an array in which we'll specify our validation rules.
+
+01:25.030 --> 01:26.930
+So it's pretty simple.
+
+01:26.980 --> 01:35.130
+We start by using a key which will reflect the Field's name that we have sent through the form.
+
+01:35.170 --> 01:36.730
+So we have a title
+
+01:39.380 --> 01:45.990
+and then there will be a string which will specify what validation rules have to be used for the title.
+
+01:46.160 --> 01:53.200
+Since we also have a content and we expect the content to be validated let's add it right now.
+
+01:53.240 --> 01:56.710
+So now we have no validation rules.
+
+01:57.050 --> 02:04.490
+So let's add first so we'll use strings for those validation rules and I will also include a link to
+
+02:04.490 --> 02:10.490
+this lecture from the Loreto documentation where you can see all that possible validation rules.
+
+02:10.490 --> 02:18.990
+So there are plenty of them so let's just start with the simplest ones so we'll specify that the title
+
+02:19.380 --> 02:22.530
+and content is required.
+
+02:22.530 --> 02:33.560
+So to specify more rules you will separate them using vertical bar character and we might add another
+
+02:33.560 --> 02:41.970
+rule to the title specifying that its length has to be at most 255 characters.
+
+02:42.080 --> 02:45.650
+We can even specified as hundred for example.
+
+02:45.650 --> 02:51.680
+So this way we would we would separate all the rules inside the string.
+
+02:51.680 --> 02:54.920
+But now let's comment that out for a second.
+
+02:54.920 --> 03:03.180
+Save the changes and let's see what happens if we do not have any validation rules.
+
+03:03.200 --> 03:09.100
+So here we are inside our up inside on the adblock post link.
+
+03:09.440 --> 03:11.980
+Empty fields and we press create.
+
+03:12.200 --> 03:15.850
+So we get error back straight from the database.
+
+03:15.890 --> 03:27.140
+It is askew all error that the column title cannot be know and it will also be present for the content
+
+03:27.170 --> 03:30.880
+because we've also haven't specified the value for content.
+
+03:30.880 --> 03:42.670
+You can see two commas and here there are actually empty values so now if we would command this code
+
+03:43.300 --> 03:44.560
+let's see what happens.
+
+03:47.180 --> 03:53.300
+So now we are calling the request validate mind that you have to save the changes and let us go back
+
+03:53.300 --> 03:59.330
+to the forum and press create so you can see that nothing happens.
+
+03:59.330 --> 04:03.590
+Let's click it again and actually something did happen.
+
+04:03.620 --> 04:11.030
+So the way the validation works in Lavell by default and at least it works this way for traditional
+
+04:11.030 --> 04:16.870
+web applications where you would send a forum not for the objects or requests.
+
+04:17.270 --> 04:27.320
+Let's go to the network top to see this so you can see that it actually was sent to the post to the
+
+04:27.320 --> 04:33.030
+post you are using the post method and it ended up with redirect.
+
+04:33.050 --> 04:37.270
+So 302 means that it was redirected.
+
+04:37.430 --> 04:44.330
+So the way it works it validated the data the data was incorrect in our case we wanted the title and
+
+04:44.330 --> 04:46.430
+content to be present.
+
+04:46.430 --> 04:53.870
+So we added the required route and also we specified the length the maximum length of the title and
+
+04:53.870 --> 05:03.560
+the validator check this data realize that it's that those viruses are not present and larval automatically
+
+05:03.770 --> 05:10.350
+created a redirect response that will always redirect to the previous page.
+
+05:10.520 --> 05:16.770
+So you can see that now we are on the create page so lovable also.
+
+05:17.000 --> 05:22.730
+Well we should also display some errors to this forum but we'll get to that in a second.
+
+05:22.820 --> 05:31.010
+Just so you know this is the basic most basic way that you will validate your content using the request
+
+05:31.190 --> 05:40.130
+validate method and specifying the validation rules using the key the field name as a key.
+
+05:40.130 --> 05:46.530
+So I mean that's the Field's name from the form not the field from the database.
+
+05:46.760 --> 05:53.380
+And then the value of the key would be the all the rules separated by vertical bar bar.
+
+05:53.450 --> 05:56.090
+If you have more than one rule.

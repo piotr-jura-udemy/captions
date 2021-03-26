@@ -1,0 +1,499 @@
+WEBVTT
+
+00:00.480 --> 00:06.570
+In the last lecture when we tried to store our comment using our API we have encountered this error
+
+00:06.630 --> 00:11.270
+trying to get property I.D. off non object.
+
+00:11.280 --> 00:18.180
+Now this has happened because of this line and in this line we tried to get the currently authenticated
+
+00:18.180 --> 00:19.820
+user and his I.D..
+
+00:20.430 --> 00:27.690
+Now the problem with that is that we haven't specified anywhere that this end point requires authentication
+
+00:27.840 --> 00:32.540
+and also we have not authenticated in any way.
+
+00:32.580 --> 00:39.960
+Now we know that the simplest way to specify that certain end point requires out integration is by applying
+
+00:40.140 --> 00:45.310
+the middleware to this action or to the whole controller.
+
+00:45.450 --> 00:53.490
+So let's open the post controller and this is how we did it in this post controller in the constructor.
+
+00:53.490 --> 01:00.460
+We applied that of middle were to specific actions that require authentication.
+
+01:00.510 --> 01:08.660
+Now the alpha middleware can also specify which guards you should use so take a look at the Alpha BHP
+
+01:08.660 --> 01:13.470
+configuration file where we have the guards specified.
+
+01:13.970 --> 01:21.140
+Now scroll to the top so we can see that the default guard is web and now that's the reason why here
+
+01:21.140 --> 01:23.390
+we haven't specified of web.
+
+01:23.660 --> 01:32.590
+We just used ours because web is the default guard so let's go back to the configuration file and you
+
+01:32.590 --> 01:36.030
+can see that those two guards have specific options.
+
+01:36.040 --> 01:38.080
+So the first one is driver.
+
+01:38.080 --> 01:43.150
+This means how the authentication is banks handled.
+
+01:43.150 --> 01:51.760
+So basically in the web card you use the session so you authenticate using a form and then those information
+
+01:51.850 --> 02:00.800
+are stored inside your speech be session and whenever user visits the page he has a cookie returned
+
+02:00.820 --> 02:04.190
+from the server which identifies the session.
+
+02:04.210 --> 02:05.650
+So this is our session.
+
+02:05.950 --> 02:14.440
+Well session I.D. And now the browser ultimately sent Spock this cookie on every subsequent request.
+
+02:14.500 --> 02:22.680
+So a lot of us can identify the user session and then it knows whether he is out integrated or not.
+
+02:22.780 --> 02:30.770
+Now it is a different story with API ice as you can see we have a driver token now with driver token.
+
+02:30.790 --> 02:37.150
+You will have to send this token on every request and the only then Lavell will.
+
+02:37.420 --> 02:42.540
+We'll see if you are who you say you are.
+
+02:42.760 --> 02:54.280
+So now let's go to the post comment controller are the constructor here so we can specify that our middleware.
+
+02:54.280 --> 02:59.340
+So this this middleware.
+
+03:00.020 --> 03:09.240
+And this time we have to specify API which means we want to use the API card and now we can specify
+
+03:09.240 --> 03:14.520
+to which actions we would like to apply this so currently we'll be only working with store.
+
+03:14.940 --> 03:17.640
+So let's keep it like that.
+
+03:17.640 --> 03:23.280
+Now let's go back to the postman and try sending this request again.
+
+03:24.000 --> 03:26.760
+And now at least we get a normal error.
+
+03:26.760 --> 03:34.110
+The proper code which is 401 unaltered outcries this will always be returned when the user is not authenticated.
+
+03:34.110 --> 03:43.610
+This is HDP standard and lot of takes care of that and a message aren't authenticated OK so we have
+
+03:43.610 --> 03:50.890
+something we have protected the end point but now where are those tokens stored.
+
+03:50.940 --> 03:54.260
+How do you send them to the API end point.
+
+03:54.480 --> 04:01.400
+And how does larval process this tokens so this is actually very well documented.
+
+04:01.790 --> 04:10.940
+And the simplest way to achieve this is to create a new field inside the user stable called API token.
+
+04:10.940 --> 04:13.820
+This is of course configurable.
+
+04:13.820 --> 04:21.260
+And this token will be constant constant means that this will be assigned to the user once and then
+
+04:21.590 --> 04:24.580
+you will send a token specific for a user.
+
+04:24.590 --> 04:33.260
+So each user has our unique token inside the database in the user's table and a lot of URL will verify
+
+04:33.320 --> 04:39.000
+if the token you are sending matches any user inside the database.
+
+04:39.050 --> 04:44.200
+If it does then it will consider that this user is so antiquated.
+
+04:44.600 --> 04:52.230
+So of course we have to first create migration for this API token to be stored.
+
+04:52.280 --> 04:54.580
+So let's go to visual studio code.
+
+04:54.590 --> 04:56.290
+Open the terminal and run.
+
+04:56.290 --> 05:04.620
+Peach bee artisan make migration at API token to users table
+
+05:08.310 --> 05:10.320
+now let's open this new migration file.
+
+05:10.320 --> 05:18.330
+Of course it can be found inside the database migrations at the very bottom and what we can simply do
+
+05:18.330 --> 05:23.220
+is just copy the migration specified inside the documentation.
+
+05:23.220 --> 05:24.720
+This will work well.
+
+05:26.040 --> 05:32.290
+So we are adding a student field API token with the length of 18 after the column password.
+
+05:32.310 --> 05:36.150
+It has to be unique new level and the default is no.
+
+05:36.210 --> 05:44.340
+And then let's at table drop column to be able to roll back this migration.
+
+05:45.600 --> 05:54.460
+So now you can run peach bee artisan migrate and this or API token is now added to the user's table.
+
+05:54.720 --> 06:01.230
+You can verify if the column was added by opening the user's table impeach my other mean you should
+
+06:01.230 --> 06:09.660
+see the API token column with no values for every user just after the password column.
+
+06:09.660 --> 06:14.410
+Now we can't use these tokens just yet of course because this column is empty.
+
+06:14.430 --> 06:23.130
+So for our data data that we have seeded we would need to modify the user's tables seeder since the
+
+06:23.130 --> 06:28.140
+user Staples cedar is using the model factory.
+
+06:28.140 --> 06:31.370
+Let's open the user's model factory.
+
+06:31.650 --> 06:34.740
+So it is here and now let's take a look.
+
+06:34.740 --> 06:39.370
+So we have that password column the remember token it.
+
+06:39.400 --> 06:49.530
+And well we can also generate the API token so you can either use the built in peach bee as the air
+
+06:49.530 --> 06:58.650
+random or alternatively there is as the error class which has random function.
+
+06:58.740 --> 07:01.000
+So let's find that as the error class.
+
+07:01.020 --> 07:03.670
+This comes in Lavell.
+
+07:03.810 --> 07:08.550
+So the namespace is Illumina need support as the error we have to import that.
+
+07:10.740 --> 07:14.330
+So we use Illuminate Support as the are
+
+07:18.870 --> 07:23.640
+and this random method allows us to generate a random string.
+
+07:23.640 --> 07:27.510
+This is more secure than what you would get.
+
+07:27.900 --> 07:31.180
+Ultimately we've esta error random.
+
+07:31.410 --> 07:39.300
+So since our column length is 80 so let's generate that token the random token which will have the length
+
+07:39.390 --> 07:51.900
+of 80 so say that changes note on Peach bee artisan Debbie seed to reload the database.
+
+07:51.900 --> 07:54.720
+So we are using the default options as usual.
+
+07:54.750 --> 07:55.070
+Okay.
+
+07:55.080 --> 08:03.380
+It was completed successfully so let's refresh the user's table and you can see that for every user.
+
+08:03.390 --> 08:07.490
+Now you have a random token generated.
+
+08:07.500 --> 08:16.050
+So now you can double click this API token column and copy the API token so remember each user has a
+
+08:16.050 --> 08:21.120
+unique individual token by which it would be identified by Lavell.
+
+08:21.420 --> 08:28.670
+Now let's see how we can pass this token when making a request to an API endpoint in light of all.
+
+08:28.710 --> 08:33.210
+So this is actually documented and you have a couple of options.
+
+08:33.210 --> 08:43.500
+The first one is to pass it as a query string so you can just pass API token in your URL parameters.
+
+08:43.540 --> 08:46.960
+The next option is using the request payload.
+
+08:46.960 --> 08:53.170
+And in this case this would be like you would be sending a form so you aren't foreign power arms and
+
+08:53.200 --> 08:55.190
+you can specify API token.
+
+08:55.210 --> 08:56.440
+We want to use this option.
+
+08:56.440 --> 08:59.380
+This is not really useful for RESTful API.
+
+08:59.890 --> 09:06.940
+And the first option and in my opinion it's the best one is to provide an outer resolution header which
+
+09:06.940 --> 09:10.240
+would contain a beta token.
+
+09:10.240 --> 09:16.990
+So the contents of this header always start with the beta key word space followed by the token.
+
+09:16.990 --> 09:26.600
+So let's see how those options actually work and try them out in postman but before we try out sending
+
+09:26.600 --> 09:30.580
+a token fruit postman let's fix and finish this end point.
+
+09:30.830 --> 09:37.120
+So the first thing you have to do is to import the comment post that class.
+
+09:37.130 --> 09:41.440
+So mind this is this is coming from up events namespace.
+
+09:41.450 --> 09:43.070
+So with this event.
+
+09:44.060 --> 09:47.430
+So make sure you have this use statement at the top.
+
+09:48.080 --> 09:51.500
+And finally you have to return something from the end point.
+
+09:51.500 --> 10:00.050
+And in case of API endpoints it's always the best idea to return the same resource that was either created
+
+10:00.500 --> 10:01.490
+or modified.
+
+10:01.490 --> 10:04.800
+So it's a restful way of doing that.
+
+10:05.120 --> 10:11.610
+So let's return new comment resource comment.
+
+10:11.990 --> 10:19.090
+So we are not simply returning comment not to use the default way of converting our model to J some
+
+10:19.400 --> 10:27.320
+but we want to use the comment resource with some rules of how certain models should be serialized.
+
+10:27.320 --> 10:29.090
+So now you can save the changes
+
+10:32.160 --> 10:40.860
+and make sure that you have copied this token go to post mum and first let's specify the token using
+
+10:40.950 --> 10:45.170
+API query sent this request
+
+10:48.380 --> 10:51.320
+and we have some error.
+
+10:51.440 --> 10:55.420
+Yes I forgot to use the new statement.
+
+10:55.430 --> 10:58.030
+It's a class so we have to instantiate that.
+
+10:58.760 --> 11:02.290
+So let's try again and this is how it looks like.
+
+11:02.300 --> 11:04.820
+So it's not wrapped inside that data.
+
+11:04.820 --> 11:11.210
+You might have not eased up and then only the properties that you have specified in the comment resource
+
+11:11.270 --> 11:12.770
+are being returned back.
+
+11:12.770 --> 11:19.850
+So this is how new resource of type comment would look like back when you will call this from your front
+
+11:19.850 --> 11:27.470
+end or any other application and also interesting things you should notice is that usually when the
+
+11:27.470 --> 11:37.370
+operation is successful you see out 200 HDP code but the standard way when you are creating resources
+
+11:37.430 --> 11:42.290
+is to return 201 which means that the resource was created.
+
+11:42.350 --> 11:50.210
+So mind up if you will be writing your front ends and expecting 200 as a success indicator when you
+
+11:50.210 --> 11:51.590
+are creating resources.
+
+11:51.590 --> 11:56.180
+It is actually and should be 201.
+
+11:56.180 --> 11:59.150
+Now let's try another way of specifying the token.
+
+11:59.150 --> 12:03.200
+I think the most useful one through the header.
+
+12:03.200 --> 12:10.040
+So I think it's a better option not only because well you want stored the API token which doesn't really
+
+12:10.040 --> 12:14.700
+change at least right now for the user in the URL parameter.
+
+12:14.780 --> 12:20.780
+For example if you will be testing that in a browser then well this will probably saved in his story
+
+12:21.020 --> 12:24.100
+and then can be easily reused by someone else.
+
+12:24.110 --> 12:32.960
+We don't want that and additionally if you will use the or send the tokens inside the header in your
+
+12:32.960 --> 12:40.490
+front end when we will be working with you as it's actually very easy to tell the javascript library
+
+12:40.490 --> 12:48.890
+that we'll be using for making requests to the API to set this authorization header ultimately for all
+
+12:48.890 --> 12:49.890
+requests.
+
+12:50.090 --> 12:55.900
+So then you don't really have to worry about whether you should outright certain the request or not.
+
+12:55.910 --> 12:58.100
+This would make things much easier.
+
+12:58.100 --> 13:01.040
+Of course you will only see whites.
+
+13:01.070 --> 13:06.470
+Why is this a better option when will implement this but while you have to believe me for now that it's
+
+13:06.530 --> 13:08.590
+a better way.
+
+13:08.720 --> 13:15.530
+So since we have to create this alteration header it's actually very easy to do that in postman.
+
+13:15.530 --> 13:20.080
+Just copy the token from here and remove this query parameter.
+
+13:20.090 --> 13:24.160
+Go to the outer reception tab from the type.
+
+13:24.230 --> 13:29.930
+Select bureau token and paste the token here.
+
+13:30.710 --> 13:36.910
+Well at this point postman will automatically generate the authorization header for you but if you will
+
+13:36.920 --> 13:44.270
+press preview request you can preview what header is actually being sent under the temporary headers
+
+13:44.300 --> 13:44.660
+option.
+
+13:44.660 --> 13:52.100
+So there is authorization with the Bureau value space and your token so if you will send this request
+
+13:52.250 --> 13:58.160
+you will get back a successful response that the new comment was posted.
+
+13:58.160 --> 14:04.280
+Now finally the API token that you have passed through the query parameters doesn't have to be called
+
+14:04.340 --> 14:05.540
+API token.
+
+14:05.540 --> 14:14.210
+This is also configurable so if you will go to the file and find a configuration for API there are two
+
+14:14.240 --> 14:16.070
+additional options you can provide.
+
+14:16.070 --> 14:19.380
+The first is input key.
+
+14:19.610 --> 14:27.020
+This is by default API token and that would be the name of the query parameter you will be passing like
+
+14:28.070 --> 14:29.330
+this one API token.
+
+14:29.330 --> 14:36.590
+So if you will change it up to something else like simply a token now you should be passing the token
+
+14:36.680 --> 14:37.490
+like that.
+
+14:38.300 --> 14:47.330
+Additionally remember that we have created a migration which added a new column the column name was
+
+14:47.450 --> 14:51.010
+also API token and this is also configurable.
+
+14:51.050 --> 14:58.690
+You can add a storage key property under API guard and call it differently so you can also call it token
+
+14:58.970 --> 15:04.080
+but then remember that the migration should also contain the same name.
+
+15:04.280 --> 15:10.190
+So if you are making migration make sure you can figure it out and decide how to call it beforehand
+
+15:10.790 --> 15:18.770
+and then lot of ill will automatically look for a column inside the user stable exactly as the storage
+
+15:18.770 --> 15:23.180
+key here configured but of course by default.
+
+15:23.180 --> 15:28.870
+This is API token and will leave it like that just so you know how to configure that.
+
+15:28.940 --> 15:30.920
+If you need that for any reason.

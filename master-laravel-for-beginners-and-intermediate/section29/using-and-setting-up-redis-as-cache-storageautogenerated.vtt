@@ -1,0 +1,337 @@
+WEBVTT
+
+00:00.900 --> 00:06.350
+Now let's think again about the possible storage options that we have for the cash.
+
+00:06.480 --> 00:11.730
+So the default option in Lavell is to use the file system.
+
+00:11.730 --> 00:15.300
+So this has been configured inside the cash BHP file.
+
+00:15.300 --> 00:21.390
+It will use an environment variable cash driver but if it's not specified it will just use the file
+
+00:21.390 --> 00:22.260
+system.
+
+00:22.260 --> 00:28.700
+And also inside your dot and file by default the cash driver should also be file.
+
+00:28.800 --> 00:35.640
+Now if you will use the file system as your cash this will this would be actually stored inside your
+
+00:35.640 --> 00:41.580
+project directory inside the storage framework cash Data folder.
+
+00:42.120 --> 00:46.000
+So the benefits of that are basically known.
+
+00:46.260 --> 00:49.620
+The only benefit might be that you can easily get started.
+
+00:49.620 --> 00:56.190
+If you're just learning you do not have to set up any servers it just walks out of the box but downsides
+
+00:56.190 --> 00:57.310
+are plenty.
+
+00:57.360 --> 01:02.240
+The access to the disk is slower than the reading from memory.
+
+01:02.250 --> 01:08.160
+Also when you will release your applications like the next versions or whatever.
+
+01:08.250 --> 01:12.350
+So each time you will somehow put the new version of your project.
+
+01:12.360 --> 01:17.820
+You will have to keep in mind done replacing your old directory.
+
+01:17.820 --> 01:27.620
+We have a new one if you will replace or remove this data folder you will basically lose all your cache.
+
+01:27.630 --> 01:35.220
+Now another option is to use my sequel which basically is also not very beneficial because we are already
+
+01:35.220 --> 01:38.920
+using my sequel for our eloquent models.
+
+01:39.090 --> 01:43.410
+So basically this won't be a performance game anymore.
+
+01:43.500 --> 01:52.080
+And the problem with using file and my sequel is that those two storage types doesn't support the cash
+
+01:52.080 --> 01:53.120
+tax.
+
+01:53.400 --> 01:56.310
+So we haven't learned about the cash tax yet.
+
+01:56.490 --> 02:04.950
+But to say it's simply cash tax are used to signal to the lack of cash that some of the cash keys are
+
+02:04.950 --> 02:07.320
+also part of a bigger group.
+
+02:07.320 --> 02:17.280
+For example if we will on our Web site if we are cash are certain blog post or we will cash our list
+
+02:17.400 --> 02:24.900
+of most commented blog posts whenever you will change on a title of the blog post you might are the
+
+02:24.900 --> 02:29.520
+cash stuck to this page where we cash the whole content.
+
+02:29.520 --> 02:35.460
+And also you might add the same cash tag to the list of most commented blog posts.
+
+02:35.460 --> 02:41.880
+So whenever the title changes it will be both reflected on those caches because they will be basically
+
+02:41.880 --> 02:43.020
+reset.
+
+02:43.200 --> 02:44.840
+So you can do that using tax.
+
+02:44.850 --> 02:47.090
+So that's quite beneficial.
+
+02:47.100 --> 02:54.510
+So not having the tax functionality is a big downside of those two storage mechanism the file system
+
+02:54.570 --> 02:57.460
+and my Eskew well now.
+
+02:57.670 --> 03:04.050
+Now you should probably only consider using either Redis or main cast as your cash storage because they
+
+03:04.050 --> 03:05.360
+are both fast.
+
+03:05.610 --> 03:13.170
+They both will keep the data inside memory which is much faster than having to read or stored the data
+
+03:13.230 --> 03:14.300
+inside the disk.
+
+03:14.310 --> 03:24.510
+Even the SSD which basically my sequel and file storage is will do now setting up Redis or MapQuest
+
+03:24.660 --> 03:28.080
+might be quite complicated for unexperienced developers.
+
+03:28.080 --> 03:33.090
+That's why we didn't do that as our first task anyway.
+
+03:33.420 --> 03:38.310
+If you feel comfortable with setting this up you can do it on yourself.
+
+03:38.310 --> 03:45.000
+There are tools that provide Redis already bundled and this is for example larval homestead which would
+
+03:45.390 --> 03:47.520
+run as a virtual machine.
+
+03:47.520 --> 03:49.800
+And will it include Redis.
+
+03:50.030 --> 03:54.550
+And there is also a lot of valid which is only available for Mac.
+
+03:54.630 --> 03:59.840
+You can also run run run it using Docker if you know what you will be doing.
+
+04:00.300 --> 04:07.170
+But for all the other guys that are using different systems and do not really know or don't want to
+
+04:07.470 --> 04:15.000
+bother with setting up Redis just for this course the best option will be to use one of the cloud solutions
+
+04:15.060 --> 04:22.530
+and one of them is the Redis labs which provides a free account where you can grab Redis database with
+
+04:22.740 --> 04:26.470
+30 megabytes of storage for free forever.
+
+04:26.550 --> 04:30.660
+So that should be plenty for our course and our needs.
+
+04:30.660 --> 04:38.260
+So let's go ahead grab an account and I guide you through on how to set everything up.
+
+04:38.350 --> 04:44.290
+Now you can start by pressing this button and typing your e-mail address
+
+04:49.620 --> 04:56.490
+this should open a new window and then you will have to wait for an e-mail that you will get from the
+
+04:56.490 --> 05:01.110
+Redis labs to activate their account.
+
+05:01.110 --> 05:08.140
+Now after you get the email you need to open it of course and press activate now.
+
+05:08.280 --> 05:11.390
+Now you should choose the cloud option.
+
+05:11.430 --> 05:17.670
+It says that it has a 30 megabyte free trail but of course it is actually for free
+
+05:21.020 --> 05:22.400
+so let's put some details.
+
+05:22.400 --> 05:24.350
+Doesn't really matter what you will choose.
+
+05:24.350 --> 05:34.820
+You can use some real data or not real provide some password agree to the terms and continue.
+
+05:35.120 --> 05:42.910
+Well actually the password has to be complicated so let's provide something more secure apparently they
+
+05:42.910 --> 05:48.010
+want a lowercase letters uppercase letters numbers and special characters
+
+05:56.600 --> 06:00.920
+now you will have to press create your subscription and select this plan.
+
+06:00.950 --> 06:09.530
+Because this includes the free 30 megabyte megabyte plan so press select now choose the cash option.
+
+06:09.530 --> 06:14.050
+And from this list select the 30 megabyte free account.
+
+06:14.090 --> 06:16.540
+And here you will provide a database name.
+
+06:16.550 --> 06:20.540
+Let it be cash or press continue.
+
+06:24.160 --> 06:26.890
+Actually it does with subscription name so it doesn't really matter.
+
+06:26.900 --> 06:29.710
+Here we will provide our database name.
+
+06:29.710 --> 06:32.140
+So this could be cash.
+
+06:32.280 --> 06:37.530
+Now it will suggest a password which we can later see so now you can just press activate
+
+06:43.870 --> 06:44.970
+after some time.
+
+06:45.010 --> 06:49.150
+It will after some time here.
+
+06:49.150 --> 06:54.610
+Now you will have to wait and after some time you will see an end point here.
+
+06:54.760 --> 06:56.250
+We should be there address.
+
+06:56.260 --> 06:59.070
+You should use as your readies host.
+
+06:59.410 --> 07:03.160
+And then here you will see your Redis password.
+
+07:03.160 --> 07:08.020
+So this would also be used in the Redis configuration.
+
+07:08.020 --> 07:11.650
+Now we are all done basically with creating our ready server.
+
+07:11.680 --> 07:13.860
+It's actually running right now.
+
+07:13.870 --> 07:22.370
+Now let's configure Redis inside larval so what we will do is we'll just copy those credentials.
+
+07:22.370 --> 07:30.980
+So first we start with an end point that you will have to put here as a redis host.
+
+07:30.980 --> 07:32.350
+Now copy the password
+
+07:37.130 --> 07:39.560
+the port can stay the same.
+
+07:39.560 --> 07:48.050
+Now you are basically almost all set and the only thing you have to do is as it says inside the larval
+
+07:48.050 --> 07:51.630
+documentation it is using the P Redis libraries.
+
+07:51.650 --> 08:00.710
+So you have to install it so you can copy this fragment and now open the terminal inside the visual
+
+08:00.710 --> 08:08.130
+studio code and type composer require and paste the library name.
+
+08:08.210 --> 08:13.340
+Now it will take a little bit to install but after it's installed we'll continue
+
+08:19.890 --> 08:28.460
+ok the installation was successful so we can go back to the configuration and the last thing that you
+
+08:28.450 --> 08:31.150
+will have to change is the cache driver.
+
+08:31.150 --> 08:40.280
+As I've said by default it is file and we have other cache drivers inside Lavell and what we want to
+
+08:40.280 --> 08:48.740
+use is the Redis driver which is using the connection defined inside under the cash key.
+
+08:48.740 --> 08:58.100
+So let's copy the Redis paste it here and basically you are all set.
+
+08:58.100 --> 09:03.740
+Now let's go back to our application and see if that would work.
+
+09:03.770 --> 09:09.250
+Now if you see this error error DP index is out of range.
+
+09:09.380 --> 09:15.830
+It is because we are missing one setting and inside the database connection you can see that there is
+
+09:15.830 --> 09:20.120
+a setting called redis cache DP which by default is 1.
+
+09:20.180 --> 09:24.840
+And in case of the ready slap we have to set it to 0.
+
+09:24.860 --> 09:27.520
+So that's just an index of the database.
+
+09:27.530 --> 09:28.870
+So set it to zero.
+
+09:28.880 --> 09:40.010
+Inside the dot and file and now when you refresh the page you will see that the cache is actually working.
+
+09:40.280 --> 09:44.650
+Now it took a while to connect to the Redis.
+
+09:44.680 --> 09:52.600
+Now inside the blog post page you can see that our counter is working but generally using Redis is always
+
+09:52.600 --> 09:57.330
+the fastest option might not be that this free account is extremely fast.
+
+09:57.340 --> 10:06.340
+Apparently it's not very fast but if you will have ready set up on your production server it will definitely
+
+10:06.430 --> 10:10.390
+be much faster than using our file system.
+
+10:10.390 --> 10:19.450
+Now finally what you have to know is that using Redis or remain cached is required to use the tax functionality
+
+10:19.840 --> 10:25.240
+of the larval cache and we will get to that inside them next lecture.

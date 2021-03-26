@@ -1,0 +1,169 @@
+WEBVTT
+
+00:00.960 --> 00:07.960
+Now in this lecture will cover how to actually define the relationship that many to many polymorphic
+
+00:08.290 --> 00:12.660
+on older models that are part of this relationship.
+
+00:12.670 --> 00:18.520
+So the first thing we have to immediately fix is as I've mentioned or just shown you on The Last Lecture.
+
+00:18.580 --> 00:21.750
+I've made a mistake on the tax side.
+
+00:23.230 --> 00:24.520
+It's not more.
+
+00:24.520 --> 00:28.510
+To many it is actually morphed by many.
+
+00:29.230 --> 00:30.460
+So let's fix that.
+
+00:30.700 --> 00:36.230
+Fortunately it didn't affect us because we haven't used this relationship yet.
+
+00:36.250 --> 00:40.890
+Now we can remove this line as this is no longer needed.
+
+00:41.110 --> 00:48.460
+Now the fingers with those relationships many too many polymorphic that if you would like to fetch blog
+
+00:48.460 --> 00:57.820
+posts and comments from the tag model you actually have to define two relations separate for each one.
+
+00:57.850 --> 01:00.920
+So we need the blog posts and comments.
+
+01:00.970 --> 01:02.410
+We use the same method.
+
+01:02.530 --> 01:05.510
+But here we have to change it to comment.
+
+01:05.590 --> 01:11.390
+You can add or remove this optional with timestamp and us.
+
+01:11.470 --> 01:17.840
+We don't really have to use that but well let's just keep it as it is.
+
+01:17.850 --> 01:24.660
+So now on the other side we already have the tax relation on the blog post.
+
+01:24.700 --> 01:36.120
+So instead of belongs to many this time it will be morph to many.
+
+01:36.240 --> 01:44.510
+Now we more of this to the tag model using toggle morph prefix.
+
+01:44.570 --> 01:48.590
+We want that with timestamps so this can stay the same.
+
+01:48.590 --> 01:58.160
+And now let's copy this relationship and put the same one on their comment model so comments can also
+
+01:58.160 --> 02:04.910
+be associated with dogs and their relation is the same because they both relate to the actual tag model
+
+02:05.030 --> 02:11.000
+using the tag a ball morph column prefix with timestamps.
+
+02:11.000 --> 02:17.660
+So basically we have the relation defined the thing is that this will actually work the same.
+
+02:17.660 --> 02:21.530
+We do not really have to make any changes right now.
+
+02:21.530 --> 02:27.470
+The only thing that we might do right now is to regenerate regenerate the database.
+
+02:27.470 --> 02:31.910
+So let's do that now and see if our application keeps working.
+
+02:31.910 --> 02:35.420
+So obviously we do not have any tax for comments here.
+
+02:35.420 --> 02:42.080
+That's not that is not implemented inside the up but you will see that this will just work fine with
+
+02:42.140 --> 02:46.500
+all the logic that we actually already have.
+
+02:46.670 --> 02:48.680
+So let's open the terminal and run.
+
+02:48.680 --> 03:01.020
+Peach bee artisan peach B artisan D.B. seed yes we want to refresh the database and let's regenerate
+
+03:01.080 --> 03:10.150
+some data and now let's see if it still works on our application so not is that we didn't have to change
+
+03:10.180 --> 03:13.730
+any of our model factories or seeders.
+
+03:13.930 --> 03:21.850
+And if you will go to the targetable stable you see that we had some tax associated with luck posts
+
+03:21.970 --> 03:29.050
+and it actually understood what it has to do so all of those records now have targetable type specified
+
+03:29.170 --> 03:33.900
+as the blog post and also the taxable I.D. is associated.
+
+03:33.910 --> 03:41.950
+This is our blog post I.D. If we all go to the app with the refresh data we can see that we have tags
+
+03:42.010 --> 03:49.330
+associated with blog posts when we click them to see only the blog posts with the specific tag you can
+
+03:49.330 --> 03:52.690
+see everything works out of the box.
+
+03:52.750 --> 04:00.700
+So this is just the larval magic it what you only have changed is actually how the relation is defined.
+
+04:00.700 --> 04:02.570
+Names stayed the same.
+
+04:04.220 --> 04:11.500
+And by just changing the database schema and which method we used to tell Val what kind of relationship
+
+04:11.510 --> 04:12.490
+that is.
+
+04:12.530 --> 04:14.720
+Everything else works the same.
+
+04:14.720 --> 04:17.250
+We didn't really have to change anything.
+
+04:17.270 --> 04:26.120
+We still can have a blog post model and access it tax property to fetch all the related tax and it doesn't
+
+04:26.120 --> 04:29.690
+really matter to the rest of the larval application.
+
+04:29.690 --> 04:32.840
+What kind of relationship that actually is.
+
+04:32.930 --> 04:34.490
+So isn't that great.
+
+04:34.490 --> 04:41.540
+Now in the next lecture we'll see something that is even better.
+
+04:41.540 --> 04:50.780
+So what we will do is we'll now allow users to specify tax for blog posts and comments and what we will
+
+04:50.780 --> 04:56.210
+achieve is by simply adding a trait to both blog posts and comment model.
+
+04:56.290 --> 05:04.130
+All the tax would be out or magically associated to either blog post or comment by just taking a load
+
+05:04.280 --> 05:08.900
+look at what's inside the content of both the blog posts and the comment.
+
+05:09.380 --> 05:11.770
+So let's see that in the next lecture.

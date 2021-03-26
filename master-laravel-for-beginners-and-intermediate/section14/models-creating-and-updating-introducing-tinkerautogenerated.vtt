@@ -1,0 +1,88 @@
+WEBVTT
+
+00:00.630 --> 00:09.300
+Dean Kerr is a command line tool that lets you play around with parts of your Laravel up, it's useful
+
+00:09.300 --> 00:15.270
+to quickly check out how things work and will be handy to learn how mothers work.
+
+00:15.630 --> 00:24.720
+You started indeterminable bank in your project directory by running BHB Artisan Tinker.
+
+00:27.190 --> 00:34.900
+Let's see how to create and save a new model in Laravel by creating the new instance of the model,
+
+00:35.290 --> 00:42.240
+then feeling its properties, meaning its columns with data and then saving it using the safe method.
+
+00:43.220 --> 00:55.040
+So let's assign a new instance of the blog post class to a post variable, normally you'd have to specify
+
+00:55.040 --> 00:58.190
+the full class name, but Tinker is smart.
+
+00:58.520 --> 01:05.870
+It knows you meant a model from specific namespace, as Tinker is mostly used to try out things with
+
+01:05.870 --> 01:06.890
+the database.
+
+01:07.610 --> 01:11.300
+Now let's set the model title.
+
+01:16.010 --> 01:18.590
+And the model content.
+
+01:23.750 --> 01:31.650
+Typing the post variable will print them model properties, which, as you might remember, represent
+
+01:31.850 --> 01:33.030
+table columns.
+
+01:33.860 --> 01:38.480
+Finally, you can call the save method on the model.
+
+01:39.920 --> 01:41.120
+It should return.
+
+01:41.120 --> 01:41.690
+True.
+
+01:41.990 --> 01:47.300
+If you see any error, check if your database is running first.
+
+01:49.180 --> 01:56.770
+Now, you can check right now into database client that this record was actually saved.
+
+01:59.580 --> 02:05.970
+In my school workbench, you need to get the least of the tables and press this last button.
+
+02:07.300 --> 02:09.460
+And there it is, the.
+
+02:11.140 --> 02:18.820
+Interestingly, the idea was automatically assigned, but even more interesting is that the timestamps
+
+02:18.820 --> 02:20.950
+were also assigned.
+
+02:23.260 --> 02:29.110
+Now, let's wait a couple of seconds and change the title of the post.
+
+02:37.570 --> 02:42.730
+You have to call safe, so now we are actually modifying the existing model.
+
+02:43.910 --> 02:54.650
+And in the deep client, when you will run this again by pressing this funder, you can see that not
+
+02:54.650 --> 03:03.080
+only the title has changed, but also the timestamp updated art is different than created out.
+
+03:03.080 --> 03:06.230
+So it is being automatically updated by Laravel.
+
+03:06.230 --> 03:14.000
+Whenever you change the model, you can use these two columns to know when and the Laravel model was
+
+03:14.000 --> 03:16.310
+created and updated.

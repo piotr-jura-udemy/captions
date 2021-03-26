@@ -1,0 +1,64 @@
+WEBVTT
+
+00:00.270 --> 00:06.620
+A quick note for you guys, wondering if this course is for you or what Laravel version does it cover?
+
+00:07.290 --> 00:12.960
+You need to know the Laravel has recently changed the way it is versioned version.
+
+00:12.960 --> 00:24.710
+FIFO was released on February 4th, 2015, and version five eight on February 26, 2019.
+
+00:25.470 --> 00:29.940
+So the version five was out there for four full years.
+
+00:30.890 --> 00:37.600
+Now, since version six of Laravel Date has changed, the new major version is out every six months.
+
+00:38.150 --> 00:47.240
+So Version six came out September 2019 and by September 2020, we already have version eight.
+
+00:48.110 --> 00:50.480
+So what does that mean for you?
+
+00:51.350 --> 00:57.950
+Well, you can probably imagine that you can't squeeze so many changes in a software project in six
+
+00:57.950 --> 01:01.160
+months that you could in four years.
+
+01:01.940 --> 01:09.290
+Well, I'm trying to say that, as I recall, this November 2020, eight four is the most up to date
+
+01:09.290 --> 01:10.690
+version of Laravel.
+
+01:10.700 --> 01:17.000
+But if you watch this in March 2021, then nine is the most recent version.
+
+01:17.950 --> 01:19.630
+Is this completely different?
+
+01:20.200 --> 01:22.180
+Do you have an outdated course?
+
+01:22.570 --> 01:23.810
+No, not at all.
+
+01:24.250 --> 01:26.370
+Their principles stay the same.
+
+01:26.800 --> 01:31.480
+There might be slight changes here and there, but nothing that beginners should worry about anyway.
+
+01:32.350 --> 01:35.050
+So don't worry about the version of Laravel.
+
+01:35.050 --> 01:36.120
+You'll be fine.
+
+01:36.760 --> 01:39.870
+The course is updated on a regular basis anyway.
+
+01:40.420 --> 01:46.540
+It was originally recorded when version five seven was out, so I got you covered there.

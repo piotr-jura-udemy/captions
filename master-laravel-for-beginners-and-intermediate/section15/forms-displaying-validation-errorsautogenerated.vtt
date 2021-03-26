@@ -1,0 +1,61 @@
+WEBVTT
+
+00:02.760 --> 00:11.370
+Thanks to the middle, where cold share errors from session, the errors flashed through the session
+
+00:11.370 --> 00:18.600
+when validation fails are always available as the errors variable in blade templates.
+
+00:19.750 --> 00:28.930
+Let's open the create blade template to display all arrows from the form first, you can check if there
+
+00:28.960 --> 00:35.130
+are any errors using the IV directive and the object inside the arrows variable.
+
+00:35.140 --> 00:36.310
+Any methods?
+
+00:44.350 --> 00:49.600
+That area was variable, is an object of the message, but class.
+
+00:51.430 --> 00:59.320
+Let's add some mark-up inside, starting with UNDEF element and on Unordered, at least now the old
+
+00:59.320 --> 01:09.340
+method gives a list of errors that you can iterate over so you can use for each and iterate over errors,
+
+01:10.060 --> 01:22.480
+all using the error variable and then close that for each loop, then just output error variable to
+
+01:22.480 --> 01:26.590
+show users the actual error messages.
+
+01:31.630 --> 01:36.050
+Let's switch over to the browser to see if the area reporting works.
+
+01:36.760 --> 01:38.610
+Try sending an empty form.
+
+01:39.220 --> 01:46.110
+The errors are visible and as a reminder, when validation fails, redirect is made to the last page.
+
+01:46.480 --> 01:52.180
+In our case, the page with the form and the session contains the errors variable.
+
+01:55.650 --> 02:03.150
+This was good to display all errors that happened, if you want to display field specific errors close
+
+02:03.150 --> 02:07.380
+to their related field, you can use that error directive.
+
+02:11.800 --> 02:19.450
+Code around the error directive will only render when the reason there are for a specific property.
+
+02:27.520 --> 02:32.560
+Then you can print it using the special message variable.
+
+02:36.780 --> 02:38.340
+So let's see this in action.
+
+02:44.800 --> 02:47.870
+There it is, are title specific error.

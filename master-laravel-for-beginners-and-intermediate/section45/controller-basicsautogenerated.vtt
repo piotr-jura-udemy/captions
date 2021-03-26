@@ -1,0 +1,325 @@
+WEBVTT
+
+00:02.770 --> 00:10.120
+In the last couple of lectures we've learned how to define our roots and add some logic to them using
+
+00:10.180 --> 00:16.960
+closures and also how to render data inside the blade views.
+
+00:16.960 --> 00:22.200
+But there is also another way to group logic for your roots.
+
+00:22.270 --> 00:31.690
+And this is called controllers so controller is class that contains the logic for specific routes in
+
+00:31.690 --> 00:34.350
+the methods called actions.
+
+00:34.480 --> 00:41.980
+So when your application will grow significantly beyond the basics that we see here you might want to
+
+00:42.070 --> 00:49.570
+get a better organization of your code and controllers will help you achieve just that.
+
+00:49.570 --> 00:59.980
+So your controller classes will be stored inside the app HDP controllers so you can see there is also
+
+01:00.220 --> 01:06.280
+there is already something here and it is being generated automatically by Lavell.
+
+01:06.340 --> 01:08.290
+We'll get to that later.
+
+01:08.440 --> 01:12.630
+But now let's create our first controller.
+
+01:12.790 --> 01:19.080
+So you need to open a terminal and run an artisan command.
+
+01:19.080 --> 01:24.330
+So let's remind yourself what commands are available there.
+
+01:24.360 --> 01:33.990
+Of course you can create this class manually but artisan gives us a couple of handy commands for generating
+
+01:33.990 --> 01:34.440
+code.
+
+01:34.440 --> 01:46.320
+One of them is make controller so let's run peach bee artisan make controller and you have to follow
+
+01:46.320 --> 01:50.540
+that with the name of the controller class you'd like to generate.
+
+01:50.610 --> 02:00.280
+So let it be the home controller can see the controller was created successfully.
+
+02:01.760 --> 02:05.580
+And now let's check out the up H2 DP controllers.
+
+02:05.580 --> 02:15.990
+Since there is our new home controller class so you can see that now we have the namespace declaration
+
+02:16.380 --> 02:25.170
+and we have all our brand new empty home controller classes that extends the base controller class so
+
+02:25.170 --> 02:33.090
+you do not have to extend any base classes in your controllers but it gives you a couple of handy methods
+
+02:33.120 --> 02:35.330
+that we will talk about later.
+
+02:39.010 --> 02:48.730
+So as I said controllers have actions and action is nothing else but are class method inside your controller
+
+02:48.730 --> 02:49.790
+class.
+
+02:49.930 --> 02:57.460
+So let's create one now using public function and call it home.
+
+02:57.460 --> 03:08.150
+So it won't accept any parameters and it will just return a View home.
+
+03:08.170 --> 03:11.680
+Now let's modify our route that we have here.
+
+03:11.720 --> 03:18.070
+The which was just rendering of you to be a guess route with the same you URL.
+
+03:19.160 --> 03:28.370
+And the second parameter would be the name of the controller which is the home controller followed by
+
+03:28.370 --> 03:30.980
+the at sign and the action name.
+
+03:31.730 --> 03:33.910
+So our action name is home
+
+03:37.880 --> 03:40.090
+now let's test if that works.
+
+03:40.110 --> 03:44.670
+So refresh the main page and you can see that it works.
+
+03:44.670 --> 03:54.110
+So let's also modify the second route by maybe copying the first true definition and this is the route
+
+03:54.110 --> 03:59.390
+for contact and the action name would be contact.
+
+03:59.390 --> 04:02.390
+And of course the route name is contact.
+
+04:03.590 --> 04:08.300
+So for this to work we'll need another method inside our Controller.
+
+04:09.550 --> 04:16.810
+And we'll have to call it contact and it will render the contact view.
+
+04:16.840 --> 04:23.200
+So now we have already two actions and you can immediately see that it is a very good way of grouping
+
+04:23.350 --> 04:31.510
+the common logic that you will have inside your application and not putting everything inside the root
+
+04:31.510 --> 04:31.940
+file.
+
+04:32.200 --> 04:40.740
+So this looks much cleaner now if we remove the empty lines and remove this old definitions.
+
+04:40.880 --> 04:43.820
+You can see that it looks much simpler
+
+04:47.100 --> 04:48.550
+can also check if that works.
+
+04:48.550 --> 04:59.190
+So so far so good and let's also modify this further root so we have a blog post route.
+
+04:59.260 --> 05:00.190
+So let's add
+
+05:02.870 --> 05:03.740
+further action.
+
+05:03.740 --> 05:04.340
+Call it
+
+05:09.910 --> 05:11.290
+it the blog post.
+
+05:11.400 --> 05:13.670
+And now it has free parameters.
+
+05:13.710 --> 05:17.000
+The idea and welcome.
+
+05:17.190 --> 05:19.070
+Which is an optional parameters.
+
+05:19.080 --> 05:23.300
+So it looks the same as it looked inside here.
+
+05:25.900 --> 05:28.400
+And we can just move the body.
+
+05:30.250 --> 05:33.380
+To the controller so just base it here.
+
+05:35.840 --> 05:36.740
+And nothing changes.
+
+05:36.740 --> 05:38.620
+It also renders our view.
+
+05:38.630 --> 05:46.890
+But now we can simplify this file and remove the closure and just use the home controller.
+
+05:48.960 --> 05:50.010
+Blog post.
+
+05:50.070 --> 05:52.350
+So that's the same.
+
+05:52.620 --> 05:55.520
+That's their action name or the method name.
+
+05:55.540 --> 05:59.050
+Inside their home controller.
+
+05:59.180 --> 06:02.830
+Now let's also verify if this works.
+
+06:02.990 --> 06:05.500
+So yes it is fine now.
+
+06:05.540 --> 06:08.020
+Now let's also open the terminal
+
+06:10.770 --> 06:21.050
+and run peach B artisan route list and now you can see that instead of having action as a closure we
+
+06:21.050 --> 06:30.280
+have we have name of our controller and action at the end of this lecture.
+
+06:30.290 --> 06:37.850
+I like to talk about something that might seem a little bit too complicated to talk about at our current
+
+06:37.850 --> 06:43.100
+state of knowledge about LA travel but don't worry this won't take long.
+
+06:43.430 --> 06:47.540
+And also it will become much clearer later.
+
+06:47.630 --> 06:55.190
+So I wanted to talk about how Lara does know where to look for the controller classes.
+
+06:55.190 --> 06:58.200
+So we haven't added namespace part here.
+
+06:58.220 --> 07:05.270
+Just the home controller the class name if you would open the home controller you can see that it actually
+
+07:05.270 --> 07:09.220
+has a namespace that up HDP controllers.
+
+07:09.410 --> 07:14.270
+So it's not anything magical nor hard coded inside larval.
+
+07:14.390 --> 07:16.710
+It is actually configured.
+
+07:17.090 --> 07:20.030
+So you might learn a useful shortcut.
+
+07:20.030 --> 07:27.950
+Now that will help you in the future also go to the go menu and go to file so on market the shortcut
+
+07:27.980 --> 07:30.080
+is come on to be on the windows.
+
+07:30.080 --> 07:34.970
+It might be something else click that and find the clay.
+
+07:35.000 --> 07:40.280
+Find a class route service provider the one inside up providers
+
+07:42.780 --> 07:50.940
+so the service providers are a way of bootstrapping your application and it means registering some stuff
+
+07:50.970 --> 07:52.340
+configuring some stuff.
+
+07:52.350 --> 08:00.180
+It just it is just a place where you can define how certain parts of your application should behave
+
+08:00.960 --> 08:08.400
+and this particular service provider is responsible for registering all your roots of your application
+
+08:08.820 --> 08:16.990
+so you can see this class is defined inside the app provider's namespace and there is more of them here.
+
+08:17.130 --> 08:25.140
+But the interesting part inside this class is the field that protected namespace and you can see that
+
+08:25.170 --> 08:30.320
+it happens to match the namespace of our home controller.
+
+08:30.350 --> 08:35.130
+The up HDP controllers it is exactly the same.
+
+08:35.130 --> 08:41.760
+So this is the place where you would specify in which namespace your controllers can be found.
+
+08:41.760 --> 08:45.530
+That also means that you can change it to something else if you wish.
+
+08:45.660 --> 08:53.500
+When you get more advanced with flood other so each service provider has a booth method which is bootstrapping
+
+08:53.510 --> 08:53.900
+method.
+
+08:53.910 --> 08:59.170
+It's always called to initialize some settings to register some things.
+
+08:59.670 --> 09:07.830
+So the only thing you need to know is that at one point it will call the map web routes method which
+
+09:07.830 --> 09:12.890
+happens to define that the namespace defined inside this field.
+
+09:12.900 --> 09:20.430
+This namespace should be the place where it looks for controllers so I know it looks a little bit too
+
+09:20.430 --> 09:21.210
+complicated.
+
+09:21.210 --> 09:23.720
+There is some calls to middleware method.
+
+09:23.730 --> 09:31.050
+The group met up will talk about that later but I would like to slowly introduce some more advanced
+
+09:31.050 --> 09:39.960
+concepts of how lava generally works and that a lot of those things are heads of sensible defaults but
+
+09:40.080 --> 09:43.510
+are also configurable and can be changed.
+
+09:43.680 --> 09:49.590
+So it's not like it's just a magical thing that it works that way and forget it.
+
+09:49.590 --> 09:51.240
+You have to do it like that.
+
+09:51.240 --> 09:59.220
+Some things you can change and one of those places where things are bootstrapped is the service provider
+
+09:59.220 --> 09:59.870
+classes.
+
+09:59.940 --> 10:03.560
+And this happens to be responsible for your roots.

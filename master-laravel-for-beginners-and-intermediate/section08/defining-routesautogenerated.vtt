@@ -1,0 +1,85 @@
+WEBVTT
+
+00:01.560 --> 00:08.970
+We will continue to explore the topic of looting this time there will be practical exercises to so make
+
+00:08.970 --> 00:13.440
+sure you have the code editor browser and terminal opened and ready.
+
+00:14.880 --> 00:23.670
+In Laravel, routes are defined inside the routes folder and a to file and a web BHP.
+
+00:25.070 --> 00:31.400
+Before we cover the existing code in those files or learn how to define the rules ourselves, let's
+
+00:31.400 --> 00:37.280
+first discuss why the separation for Web and Abib exists at all.
+
+00:38.420 --> 00:44.990
+So that's a long lasting Laravel convention, the separation is due to different requirements of normal
+
+00:44.990 --> 00:51.900
+Web pages and API responses, which typically return just to the data in the Jasen format.
+
+00:52.460 --> 01:01.400
+Now, typical websites rely on cookies and sessions, while APIs, on the other hand, might need some
+
+01:01.400 --> 01:02.360
+rate limiting.
+
+01:04.310 --> 01:12.590
+Let's see how we can define roots ourselves, so in this Web file, we have the root class imported.
+
+01:13.510 --> 01:20.890
+And we will use this ruling class to define routes now route class has some static methods, and those
+
+01:20.890 --> 01:30.460
+static method names corresponds to the HDP verb names like GED Post put PAF or delete.
+
+01:32.190 --> 01:41.370
+This static methods accept two parameters, the first one is the use of the route we are trying to march.
+
+01:42.270 --> 01:46.630
+The second one is the controller, now the controller.
+
+01:47.040 --> 01:54.210
+This can be either name of the method in a class or as you see here, an anonymous function.
+
+01:56.430 --> 02:00.150
+Let's also clarify what is this Urai parameter?
+
+02:01.730 --> 02:05.660
+It's everything that comes after your route, Domaine.
+
+02:08.020 --> 02:15.070
+The controller ultimate responsibility is to return some kind of response, this can be either the email
+
+02:15.670 --> 02:17.590
+plaintext or an match.
+
+02:18.820 --> 02:25.780
+Before we continue, let's head back to the terminal and make sure you have run this bipartisan self-command
+
+02:25.780 --> 02:28.010
+to start up development server.
+
+02:28.960 --> 02:32.590
+So when you visit this page, you should see something like this.
+
+02:33.620 --> 02:42.290
+Now it's time for our exercise, so let's modify what is being returned from this route, so instead
+
+02:42.290 --> 02:45.380
+of rendering this HTML that we see.
+
+02:46.840 --> 02:48.720
+Let's return some plaintext.
+
+02:50.310 --> 02:52.420
+This can be homepage.
+
+02:53.660 --> 02:54.830
+Saved the changes.
+
+02:56.370 --> 03:02.430
+And refresh this page, we can zoom in to see that this text was actually returned.

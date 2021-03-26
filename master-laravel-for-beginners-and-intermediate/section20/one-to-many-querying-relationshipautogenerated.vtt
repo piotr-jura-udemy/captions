@@ -1,0 +1,175 @@
+WEBVTT
+
+00:01.160 --> 00:07.250
+In this lecture you will learn how you can easily queried the one to many relationship.
+
+00:07.250 --> 00:13.400
+But before we get started make sure that you have some records inside the database.
+
+00:13.400 --> 00:19.310
+Mainly I mean having at least one blog posts and some comments assigned to it.
+
+00:19.310 --> 00:25.430
+If you closely follow this course in the last lecture we have added some comments using Tinker.
+
+00:25.490 --> 00:28.960
+So make sure you did that of course.
+
+00:28.970 --> 00:33.900
+Better ways of providing some fake data to play around with.
+
+00:33.920 --> 00:40.550
+I'm just adding it manually each time it's called database seeding but we'll get to that in the couple
+
+00:40.550 --> 00:47.510
+of next lecture so then you will see how you can easily get a set of some data you can play around with.
+
+00:47.780 --> 00:53.120
+So till now let's just work with what we have.
+
+00:53.120 --> 00:59.480
+So first let's see how we can fetch our blog post with all its comments.
+
+00:59.720 --> 01:02.800
+So you need to start Tinker if you haven't.
+
+01:02.870 --> 01:07.840
+Then just make sure you run Peach Pit artisan thinker.
+
+01:08.090 --> 01:10.660
+And now let's fudge the blog post.
+
+01:10.670 --> 01:15.220
+So remember that I have a blog post with the idea too.
+
+01:15.260 --> 01:24.020
+But you might have different depends on what you have previously entered and deleted so we will try
+
+01:24.020 --> 01:31.310
+to fetch all the blog posts with the comments so you might remember I showed you this in the previous
+
+01:31.310 --> 01:38.600
+lectures that you might use there with method to create a query and it will fetch all the blog posts
+
+01:39.650 --> 01:41.710
+with all the comments.
+
+01:41.750 --> 01:44.640
+So let's see what we get from that.
+
+01:45.230 --> 01:51.260
+So you can see that we have one blog post inside the database and it is fetching everything into a collection.
+
+01:51.320 --> 01:59.760
+So that's why we have our collection object as a response and it already has all the comments pre fetched.
+
+01:59.870 --> 02:10.480
+So normally if you would fetch blog posts using blog posts all static method you will only get the blog
+
+02:10.480 --> 02:13.590
+post without the associated comments.
+
+02:16.320 --> 02:19.540
+Now it's also easy to fetch.
+
+02:19.870 --> 02:22.930
+Now what we did was called eager loading.
+
+02:22.930 --> 02:29.410
+So it is used for cases when you are certain that the model you are working with you need all the relations
+
+02:29.410 --> 02:34.950
+for and you want to press fetch them using one query instead.
+
+02:34.960 --> 02:37.450
+You might also fetch a blog post.
+
+02:37.480 --> 02:46.190
+Normally using the Find method and then when you have that blog post you can use the comments field
+
+02:47.030 --> 02:52.600
+so the fields are always with the same name as the method name of the relation you have defined.
+
+02:52.610 --> 02:59.420
+But instead you use them as they would be a field and this would be called lazy loading.
+
+02:59.660 --> 03:05.390
+So you will only fetch the comments when you need them and they will be loaded by just accessing this
+
+03:05.390 --> 03:13.610
+property so let's see we have access the Commons property of the post and it loaded all the related
+
+03:13.610 --> 03:16.750
+comments of that blog post.
+
+03:16.760 --> 03:23.840
+So now let's clear the screen and if I'll just echo the post again you can see that now it has all the
+
+03:23.840 --> 03:27.620
+blog post contents together with all the comments.
+
+03:27.620 --> 03:33.920
+Now let's see what comments do we have here we have one with the idea one two three four and five.
+
+03:34.610 --> 03:43.790
+So let's clear the screen and try to load a comment so we can do that using that comment find and specifying
+
+03:43.880 --> 03:45.380
+the I.D..
+
+03:46.100 --> 03:50.450
+And it is what you would expect to be inside the database.
+
+03:50.450 --> 03:56.150
+So it has all the fields the timestamps I.D. the content and also the blog post I.D..
+
+03:56.150 --> 04:02.780
+Now you can also load the related blog posts if you happen to just have the instance of this comment
+
+04:02.810 --> 04:05.570
+model which can perfectly happen.
+
+04:05.570 --> 04:13.010
+So let's see if we can log how we can load the related blog post so remember that on the blog post the
+
+04:13.010 --> 04:16.010
+relation is called the blog post.
+
+04:16.340 --> 04:17.510
+So it's a method.
+
+04:17.720 --> 04:23.660
+And if you would call it like a method then you have access to some additional querying so you can do
+
+04:23.660 --> 04:25.100
+some more complicated queries.
+
+04:25.100 --> 04:33.350
+But for now we'll do the simple one and if we'll access it as a field the larval eloquent will simply
+
+04:33.350 --> 04:37.990
+load the related blog post model so you can see it works perfectly.
+
+04:37.990 --> 04:41.400
+It has loaded the related blog post.
+
+04:41.420 --> 04:44.770
+Now let's see what is inside the comment.
+
+04:44.810 --> 04:51.260
+And you can see that we have what we have loaded previously and then what we have lazy loaded by accessing
+
+04:51.290 --> 04:58.790
+the blog post property it has the related blog post loaded so this is how you can load the other side
+
+04:58.850 --> 05:06.590
+of the relation of the one to many in this case loading the blog post from the comment so this would
+
+05:06.590 --> 05:14.120
+be how you would do very simple querying and in the next lecture I will show you in the couple of next
+
+05:14.120 --> 05:21.230
+lectures I will show you some more complicated queries that we can easily do using lava eloquent without
+
+05:21.230 --> 05:23.510
+rate writing too much code.

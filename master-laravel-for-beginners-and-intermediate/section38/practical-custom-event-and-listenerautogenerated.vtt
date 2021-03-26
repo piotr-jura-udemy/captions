@@ -1,0 +1,361 @@
+WEBVTT
+
+00:00.480 --> 00:07.020
+In the last lecture we explained what are events and what are the least honors and subscribers that
+
+00:07.020 --> 00:08.840
+then handle those events.
+
+00:08.910 --> 00:14.010
+And what are the benefits of using them inside our applications.
+
+00:14.010 --> 00:17.370
+And I've said that we are gonna now create our own events.
+
+00:17.370 --> 00:20.100
+So let's go ahead and do that.
+
+00:20.130 --> 00:23.100
+So there is always an artisan command for everything.
+
+00:23.100 --> 00:31.470
+So if you will run peach bee artisan you can see that maker commands to create an event create least
+
+00:31.540 --> 00:35.570
+under so let's create our new event.
+
+00:35.800 --> 00:42.960
+So BHP artisan make event comments posted.
+
+00:43.590 --> 00:48.970
+Now immediately you can check out that this created a new namespace inside the app directory called
+
+00:49.060 --> 00:52.150
+events and there is our event class.
+
+00:52.450 --> 00:54.010
+We'll get to that in a second.
+
+00:54.010 --> 01:02.440
+Now immediately let's go ahead and create a list enter so P2P artisan make list enter and we can just
+
+01:02.440 --> 01:03.250
+create one.
+
+01:03.250 --> 01:09.010
+So on this diagram I've shown you that we can create two least stunners and well the assumption was
+
+01:09.010 --> 01:11.950
+that each one of them would just do something else.
+
+01:11.950 --> 01:19.300
+So this one would just put throttled may on the queue that it has to notify the outer of the blog post.
+
+01:19.300 --> 01:25.810
+And this was supposed to put another finger on the cue to notify all the other users but it doesn't
+
+01:25.810 --> 01:35.030
+really matter for our example we can just create one listener so notify users about comment that can
+
+01:35.030 --> 01:38.480
+be the name of our least in our class.
+
+01:38.550 --> 01:45.830
+Alright now you can see this was also created as a class inside the least honors namespace of your app
+
+01:45.830 --> 01:51.800
+folder so let's close the terminal and take a look at those classes.
+
+01:51.860 --> 01:58.010
+So as I've said the comment posted is just a simple class that holds some data.
+
+01:58.010 --> 02:04.850
+There is also a method called the broadcast on which is used for lateral feature called Broadcasting
+
+02:04.880 --> 02:07.520
+which we will cover later.
+
+02:07.520 --> 02:11.170
+But basically this is about pushing something through web sockets.
+
+02:11.180 --> 02:12.830
+So we do not need that.
+
+02:12.980 --> 02:16.230
+So let's immediately remove that.
+
+02:16.400 --> 02:23.120
+Now what we will need here is we need to store some data that happened so the comment post that event
+
+02:23.840 --> 02:26.530
+is about comment that was posted.
+
+02:26.540 --> 02:34.700
+So make sure we are the comment from the OP comment namespace here and we will simply in utilize this
+
+02:34.700 --> 02:36.990
+comment to be comment.
+
+02:37.160 --> 02:42.490
+And also here we have two other public field comment.
+
+02:42.630 --> 02:45.030
+So now whenever we dispatch this event
+
+02:48.160 --> 02:54.060
+this can be handled by our listener OBS or subscribers so let's let's immediately do that.
+
+02:54.130 --> 03:02.800
+So there is an event helper method which as the documentation suggests dispatch on the event and call
+
+03:02.800 --> 03:03.580
+the listener.
+
+03:03.610 --> 03:05.640
+So this happens immediately.
+
+03:05.680 --> 03:10.320
+So as I've said you can make a list and are working on the queue by default.
+
+03:10.330 --> 03:17.950
+So this would be run as a background process but normally by default they are handled immediately which
+
+03:17.950 --> 03:22.660
+means they are handled throughout this very request.
+
+03:22.660 --> 03:29.290
+So how we dispatch an event we create a new instance of comments posted mine that we have a couple of
+
+03:29.290 --> 03:31.050
+classes now with this name.
+
+03:31.870 --> 03:37.840
+So we have to use the proper one from the up events namespace.
+
+03:37.840 --> 03:42.900
+Now this accepts a comment which we have inside the comment variable.
+
+03:43.000 --> 03:51.220
+So what this will replace inside this method is we'll get rid of that so we won't be throttling the
+
+03:51.220 --> 03:54.310
+mail and then dispatching another command.
+
+03:54.310 --> 03:59.350
+We will just dispatch on even something has happened and then handle that in the other place.
+
+04:01.610 --> 04:08.150
+Now we have this listener and I as I've said it has the handle method there is optionally our constructor
+
+04:08.180 --> 04:13.470
+but we won't need that for anything so we can remove that.
+
+04:13.850 --> 04:21.530
+Now as I've said this notify users about comment will only handle one type of event so we will do something
+
+04:21.650 --> 04:28.130
+in response to one type of event and this would be comment posted.
+
+04:28.130 --> 04:35.450
+So this argument can be typing that so comment posts that mind that it also has to be from the correct
+
+04:35.480 --> 04:44.900
+namespace which is up events comment posted and basically what we will do is we'll copy this logic the
+
+04:44.900 --> 04:52.010
+throttle email and notify users post was comment a job so let's cut that from this place and move this
+
+04:53.180 --> 04:55.190
+to the listener.
+
+04:55.460 --> 04:59.890
+So mind that you will need to import all these classes that we have here.
+
+04:59.900 --> 05:04.570
+So comment post that mark down
+
+05:08.510 --> 05:11.270
+and notify users post was comment at
+
+05:16.130 --> 05:16.430
+okay.
+
+05:16.430 --> 05:20.450
+Now since that comment is actually from the event.
+
+05:20.510 --> 05:21.910
+So this is not a comment.
+
+05:21.920 --> 05:24.340
+It is event.
+
+05:24.470 --> 05:24.970
+Comment
+
+05:29.290 --> 05:32.480
+so let's reformat that because those will be.
+
+05:32.500 --> 05:35.200
+This will be actually quite longer here.
+
+05:35.200 --> 05:37.540
+So there is even a comment.
+
+05:37.540 --> 05:41.830
+This is an actual comment and then the user to notify.
+
+05:41.860 --> 05:44.360
+We can read that from the comment.
+
+05:44.440 --> 05:48.220
+So this is event comment.
+
+05:48.550 --> 05:49.850
+Commendable.
+
+05:50.200 --> 05:55.440
+User well user because we need an instance of the user not the user I.D..
+
+05:55.810 --> 06:01.540
+So as you remember the second parameter to the product mail is the user to which the email should be
+
+06:01.540 --> 06:07.500
+sent and now on the notify users post was commented.
+
+06:07.600 --> 06:15.850
+We also use event comment finally let's make sure that we have added all the required imports so property
+
+06:15.900 --> 06:27.830
+mail comment posted markdown and notify users post was comment at so now we have an event and at least
+
+06:27.830 --> 06:30.560
+an hour so we can also save changes here now.
+
+06:30.610 --> 06:38.420
+Also you can see that this can using events can make our controllers shorter and generally controllers
+
+06:38.420 --> 06:45.770
+should be as short as possible down like the entry point of your application when you just generally
+
+06:45.770 --> 06:52.220
+dispatch and I don't mean dispatch in the sense of dispatching events or job but this is like well as
+
+06:52.220 --> 06:57.380
+the name suggests that controller someone does is just pressing some buttons and saying other things
+
+06:57.380 --> 07:03.620
+what they should do so you shouldn't be putting too much logic inside the controller and the less logic
+
+07:03.650 --> 07:04.990
+is inside controller.
+
+07:05.150 --> 07:07.840
+It's always best for the application.
+
+07:07.970 --> 07:14.270
+Now we can get rid of those used statements we can see that now the controller has even less dependencies
+
+07:14.300 --> 07:19.870
+and it is less tied to other parts of your application.
+
+07:19.880 --> 07:26.510
+Now finally what we will have to do is we have to say to Lavell how to handle this event.
+
+07:27.080 --> 07:36.500
+So we have comment post that from the events namespace and we are telling Lavell that when this event
+
+07:36.500 --> 07:45.960
+happens what has to happen is it should call notify users about comment and this is a list in our class
+
+07:45.990 --> 07:48.120
+so also minded those imports.
+
+07:48.120 --> 07:54.410
+Here you have to add them or otherwise you will have to specify the fully qualified class names as strings.
+
+07:55.740 --> 07:57.200
+And basically that's it.
+
+07:57.210 --> 08:04.560
+Now that whenever a comment post that happens and currently it only happens on this controller this
+
+08:04.560 --> 08:11.790
+event is being dispatched and then Lavell knows that it has to call this listener so we'll get to the
+
+08:11.790 --> 08:15.770
+handle method of this list dinner and those things will happen.
+
+08:15.800 --> 08:19.820
+So whatever we have inside this controller now it's much simpler we are.
+
+08:20.130 --> 08:26.370
+It's only responsible now for storing this comment on the database and dispatching an event and then
+
+08:26.400 --> 08:28.720
+redirecting with some flash message.
+
+08:28.740 --> 08:33.710
+So I think you can see that it's quite beneficial to use events.
+
+08:33.810 --> 08:42.430
+Finally let's save all this changes and see if it still works and everything is as it should be so let's
+
+08:42.430 --> 08:43.660
+move to the terminal.
+
+08:45.720 --> 08:52.770
+Let's run the queue Walker because we know that actually handling this event is basically putting something
+
+08:52.800 --> 08:57.960
+on the queue like throttled mail or this one that also is sending mails.
+
+08:57.960 --> 09:01.630
+Now let's make sure that you are authenticated.
+
+09:01.710 --> 09:09.250
+So logging go to any blog post doesn't really matter which one and it's on comment.
+
+09:11.880 --> 09:18.740
+And now we should see that something happens on the queue and well exactly it does because this is our
+
+09:19.430 --> 09:25.910
+list and are right now which was being called and it basically did whatever we had inside the controller.
+
+09:28.400 --> 09:30.790
+So you can even check that by doing D
+
+09:36.240 --> 09:45.650
+and I was called in response to event.
+
+09:45.700 --> 09:49.720
+Now this would be visible immediately because this happens inside the controller.
+
+09:49.870 --> 09:51.460
+So hello.
+
+09:51.460 --> 09:52.480
+Try again.
+
+09:55.750 --> 09:56.360
+And there it is.
+
+09:56.360 --> 09:58.700
+I was called in response to an event.
+
+09:58.730 --> 10:03.820
+So this happened during the request itself now.
+
+10:03.920 --> 10:10.790
+Alternatively you can also move that you can create listeners that will immediately be cued jobs the
+
+10:10.790 --> 10:12.290
+same as we did with emails.
+
+10:12.290 --> 10:19.190
+You remember that we've added this shoot queue as an interface that was implemented by the class and
+
+10:19.190 --> 10:26.450
+then immediately this was put by default on a queue and had to be processed by the queue worker.
+
+10:26.450 --> 10:29.950
+So let's see some more examples in the next lecture.

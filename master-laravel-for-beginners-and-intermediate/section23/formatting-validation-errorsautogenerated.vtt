@@ -1,0 +1,229 @@
+WEBVTT
+
+00:00.850 --> 00:05.930
+In the last lecture we created this simple forum for registering new users.
+
+00:05.950 --> 00:13.990
+And I've said that we will work now on how we can display elegantly all the validation errors that might
+
+00:13.990 --> 00:15.130
+have happened.
+
+00:15.430 --> 00:20.290
+And for this we'll use some of the bootstrap classes that are already there.
+
+00:20.290 --> 00:29.740
+So when the field will be invalid We'll market with the red border and then provide all the additional
+
+00:29.740 --> 00:33.450
+informations on why the field is invalid.
+
+00:33.640 --> 00:40.660
+So previously we just displayed all the errors below the forum and now we'll make it nicer and display
+
+00:40.710 --> 00:44.780
+all these errors just below the field it relates to.
+
+00:45.460 --> 00:50.980
+So there are a couple of classes that can be used for this purpose inside the bootstrap.
+
+00:51.460 --> 00:59.050
+And one of them is called is valid or is invalid for the fields that had to have a frame like a red
+
+00:59.080 --> 01:00.390
+or green.
+
+01:00.490 --> 01:08.830
+And additionally we can add those classes like this diff element with the valid feedback which which
+
+01:08.830 --> 01:12.970
+would display this green field like looks good.
+
+01:12.970 --> 01:19.930
+Or alternatively the one with that invalid feedback to display our possible error.
+
+01:19.930 --> 01:26.050
+Of course I'm just using a bootstrap as an example here but of course if you have your own styles and
+
+01:26.050 --> 01:33.520
+I assume you might have if you are doing something complicated front and oblique like world facing application
+
+01:33.850 --> 01:38.230
+this is how you can display errors in elegant way.
+
+01:38.260 --> 01:41.280
+So let's go back to our form.
+
+01:42.820 --> 01:53.160
+So let's start working with the name field so we have the class specified here as the form control.
+
+01:53.470 --> 02:02.080
+But now we also need to conditionally render additional class if this field is invalid so we can use
+
+02:02.080 --> 02:10.150
+the larval blade interpolation syntax and as I've said and we did that before when there are any errors
+
+02:10.180 --> 02:18.370
+in the form there is that global errors blade a variable which you have access to which is a collection
+
+02:18.460 --> 02:22.250
+of all the errors that are related to this form.
+
+02:22.390 --> 02:26.550
+So it has a couple of interesting methods.
+
+02:26.830 --> 02:28.640
+One of them is Haas.
+
+02:28.870 --> 02:35.040
+So using has we can check if there is any error with the specific name.
+
+02:35.080 --> 02:37.120
+So this would be the name of the field.
+
+02:37.120 --> 02:39.400
+The error is relating to.
+
+02:39.580 --> 02:48.280
+So if the race on error of the name field we can append a style.
+
+02:48.280 --> 02:58.870
+And as I said we will use the E dash invalid class and if there is no error we just want add anything.
+
+02:58.870 --> 03:06.720
+So that's the first thing we will add to all of our fields except the last one the password confirmation.
+
+03:06.790 --> 03:08.280
+So let's add it also.
+
+03:08.430 --> 03:08.850
+Email.
+
+03:08.850 --> 03:13.330
+Of course we need to check if there is email error here.
+
+03:13.750 --> 03:16.310
+And last one is the password.
+
+03:18.610 --> 03:20.280
+So lets based up here.
+
+03:20.290 --> 03:23.870
+And of course here we are checking for the password.
+
+03:23.890 --> 03:31.040
+We aren't adding that to the last field because it does not have any validation constraints.
+
+03:31.210 --> 03:36.920
+It's just like a part of this confirmed constraint from the password.
+
+03:36.940 --> 03:43.630
+So if the password is not correctly retyped the error would be displayed here.
+
+03:43.780 --> 03:53.890
+Now we should also display some additional errors if this actually has some text errors that we can
+
+03:53.890 --> 03:57.530
+display to the users.
+
+03:57.580 --> 04:06.880
+So now we can use the if directive and check again if the errors variable contains any errors for the
+
+04:06.880 --> 04:10.700
+name field close it with there.
+
+04:10.720 --> 04:20.740
+And if and now if it does we'll are the spun element with the class invalid feedback.
+
+04:20.740 --> 04:27.850
+So mind this is just the class name from the bootstrap if you would have your own classes for displaying
+
+04:27.880 --> 04:28.290
+errors.
+
+04:28.300 --> 04:37.170
+You will just use them here or we can even amplifies that so it's clearly visible what happens.
+
+04:37.180 --> 04:44.340
+And now we'll just get the first error from the error box if there.
+
+04:44.560 --> 04:52.720
+So now we'll just get the first error encountered so we'll get errors and use the first method on it
+
+04:52.720 --> 05:01.270
+to get the first error to be displayed and we are displaying the error for the name field.
+
+05:01.360 --> 05:11.720
+Now we can copy this fragment to all of our fields except of course the password confirmation case so
+
+05:12.170 --> 05:13.790
+let me reformat that quickly
+
+05:28.480 --> 05:35.710
+OK now we should see errors for all of those fields when there is something that we have sent which
+
+05:35.920 --> 05:38.570
+would be an invalid data.
+
+05:39.010 --> 05:41.680
+So let's verify that if this works.
+
+05:41.920 --> 05:43.450
+So let's submit something.
+
+05:43.450 --> 05:51.400
+Invite now let let's see that we have that frame over all the fields that are invalid.
+
+05:51.440 --> 06:00.140
+We also see that that e-mail address is invalid and that the password has to have at least six characters.
+
+06:00.140 --> 06:06.800
+Now if you would specify more characters and something in retype the password that is different from
+
+06:06.800 --> 06:11.590
+the password you can see that the passwords do not match.
+
+06:11.600 --> 06:17.450
+Also you might have noticed that we are typing those passwords as plaintext.
+
+06:17.600 --> 06:24.380
+So we should modified that inputs for the password to be of different type.
+
+06:24.380 --> 06:33.320
+Now the password type should be password and the same with our retyped passwords.
+
+06:34.100 --> 06:37.000
+So to type for passwords should always be password.
+
+06:37.060 --> 06:40.150
+And now when you type it it's hidden.
+
+06:40.160 --> 06:44.130
+So you do not see what the user is typing.
+
+06:44.360 --> 06:56.030
+Now if I will provide a valid e-mail like valid valid claim some valid passwords like ABC the E F and
+
+06:56.030 --> 06:58.150
+the same for the retyped password.
+
+06:58.460 --> 07:10.020
+A B C D E F and some valid name you can see that I can actually register with the one exception that
+
+07:10.020 --> 07:15.810
+we are being redirected to the slash home page which doesn't exist.
+
+07:15.810 --> 07:23.280
+And as I recently as I said when we talked about the registration controller we can configure that here
+
+07:24.300 --> 07:32.430
+so I can modify that to redirect the user to the slash page not the home one.
+
+07:32.550 --> 07:40.080
+But anyway let's see if the user is there so you can see that the user was registered it has the password
+
+07:41.040 --> 07:43.170
+and we can log into that account.
+
+07:43.200 --> 07:47.310
+But first of course we would have to create the logging form.

@@ -1,0 +1,322 @@
+WEBVTT
+
+00:00.900 --> 00:06.870
+In the last lecture we have implemented the example for the diagram dispatching the comment posted event
+
+00:06.960 --> 00:09.510
+and handling that in one single listener.
+
+00:09.540 --> 00:12.640
+So instead of two we just created one.
+
+00:12.690 --> 00:14.100
+Now let's see another example.
+
+00:14.100 --> 00:16.300
+So let's have some more practice.
+
+00:16.440 --> 00:20.650
+So we are dispatching this comment post that event when a comment is posted.
+
+00:20.730 --> 00:27.450
+But now let's also imagine that you are an admin of a blog post platform and whenever someone creates
+
+00:27.450 --> 00:29.390
+a blog post you would like to know about it.
+
+00:29.390 --> 00:35.850
+For example to proofread this blog post or ban a user that is posting some spam.
+
+00:35.850 --> 00:42.690
+So now we are inside the post controller store method which will also create our blog post and we can
+
+00:42.690 --> 00:50.680
+create a new even for that so P2P artisan make even blog post boasted sorry.
+
+00:50.770 --> 00:51.660
+This is enough.
+
+00:53.050 --> 00:53.300
+Yeah.
+
+00:53.320 --> 00:59.740
+I've read and made a spelling error and lava catch that created an event so that's great.
+
+00:59.740 --> 01:07.420
+Now let's find this event and quickly implement that so blog post post that we do not need the broad
+
+01:07.430 --> 01:16.670
+broadcasting and then it accepts our blog post from the blog post namespace.
+
+01:16.740 --> 01:27.620
+Now this is only for storing data so we assign this to our field blog post and we are adding public
+
+01:27.830 --> 01:30.270
+blog post field.
+
+01:30.290 --> 01:34.570
+Okay so we have even created it imports the proper namespace.
+
+01:34.580 --> 01:44.780
+So now inside the post controller after this is created we can dispatch an event so blog new blog post
+
+01:45.170 --> 01:53.510
+post it as we know it accepts a blog post but we already probably have an import of that inside this
+
+01:53.510 --> 01:54.930
+controller.
+
+01:55.100 --> 01:59.090
+So that's the blog post so blog post.
+
+01:59.170 --> 02:03.860
+Now we can handle some additional logic immediately after someone creates a blog post.
+
+02:03.870 --> 02:08.120
+Let's make sure we are actually importing this.
+
+02:08.270 --> 02:09.080
+Yes it is.
+
+02:09.080 --> 02:11.620
+It's first thing we have here by the way.
+
+02:11.650 --> 02:14.150
+Let's also remove this unused import.
+
+02:14.180 --> 02:17.890
+That's a great feature of business to be a code.
+
+02:18.030 --> 02:22.480
+Okay so now we have this blog post event dispatch.
+
+02:22.490 --> 02:32.340
+Now let's create a list and so peach bee artisan make the list Amor notify admin when blog post create
+
+02:32.390 --> 02:38.750
+it doesn't really matter how we called out but what we will do is we will notify the admin that the
+
+02:38.750 --> 02:47.420
+blog post was created so let's go to this particular list and I right now notify admin when blog posts
+
+02:47.440 --> 02:59.200
+create that it handles one event which is the blog post post that make sure you have this import here
+
+03:02.410 --> 03:11.950
+and now let's go ahead and create an email so peach bee artisan make mail blog post added with a markdown
+
+03:11.950 --> 03:22.380
+template emails posts blog post other so we'll make it simple because we just now want to see events
+
+03:22.380 --> 03:31.630
+so it doesn't really matter what we send inside this particular mail class so you can see it is being
+
+03:31.720 --> 03:41.800
+actually well it it definitely would need blog post but well let's ignore that for now only change the
+
+03:41.800 --> 03:42.490
+template
+
+03:45.060 --> 03:51.730
+like someone has posted a blog post.
+
+03:52.030 --> 03:58.300
+Be sure to prove read it and that's it.
+
+03:58.300 --> 04:00.310
+No components no nothing.
+
+04:00.310 --> 04:03.270
+Just a plain email without anything.
+
+04:06.000 --> 04:08.720
+OK so close this
+
+04:11.690 --> 04:21.810
+close the eyes and that's our main label class and now we should first think of how we can get all the
+
+04:21.990 --> 04:26.420
+users that are our means so we can also add Aquarius scope.
+
+04:26.430 --> 04:32.820
+So I'm doing it pretty fast so we can see how easily now it is to add some logic and not even slow down
+
+04:32.830 --> 04:37.890
+application our application because we'll move it all to background processing so we are using everything
+
+04:37.890 --> 04:39.710
+that we have learned so far.
+
+04:39.990 --> 04:47.390
+So let's click quickly create a new query scope for users scope that is admin.
+
+04:47.580 --> 04:54.200
+So what we will do here is this will let us fetch all the users that are admins.
+
+04:54.240 --> 04:57.410
+So now let's take a look at our user stable structure.
+
+04:57.420 --> 05:01.410
+So we have the simple field e admin which can be true or false.
+
+05:01.620 --> 05:05.630
+And whenever a user is sent out I mean this would be set as true.
+
+05:05.700 --> 05:16.380
+So what we can do simply is query where these are the main true so this will return all the admins older
+
+05:16.380 --> 05:21.470
+users that are admins.
+
+05:21.540 --> 05:25.060
+Now what we do here is we will also use their frontal mail.
+
+05:25.110 --> 05:30.570
+So well we have this limitation of mail drops so we are using that.
+
+05:31.020 --> 05:36.830
+Now what we can do is user from the app user namespace.
+
+05:36.840 --> 05:43.050
+So that's important user up user can see the changes.
+
+05:43.060 --> 05:50.830
+Now you don't have to use the fully qualified namespace just user that is the mean
+
+05:53.400 --> 06:02.270
+get this will return a collection of the users even if there is only one then we do map create closure
+
+06:02.670 --> 06:16.680
+so user user like that and we can create our new product mail so brutal mail dispatch and let's remind
+
+06:16.680 --> 06:18.930
+ourselves what is inside it.
+
+06:18.930 --> 06:26.160
+So there is mail and a user so level is New Blog Post
+
+06:28.950 --> 06:32.330
+added so we have all these names that we have to remember about.
+
+06:32.340 --> 06:33.630
+But don't worry about that.
+
+06:33.900 --> 06:37.030
+So this is an empty made up all we do not pass any data to.
+
+06:37.050 --> 06:40.320
+We just want to see an email doesn't really matter what's inside it.
+
+06:40.350 --> 06:40.600
+Okay.
+
+06:40.620 --> 06:42.880
+So let's ignore that for now.
+
+06:43.200 --> 06:45.030
+And we want to send that to the user.
+
+06:45.030 --> 06:51.030
+So we are iterating over all the users that we have and this will be all throttled.
+
+06:51.030 --> 06:53.910
+So this is our simple event handler.
+
+06:54.420 --> 07:00.510
+So now we could use this event to see what is actually the blog post plus all those data to their blog
+
+07:00.510 --> 07:06.240
+posts are that may level class well as to contain some information on what was actually posted to give
+
+07:06.240 --> 07:12.720
+a link to some administration panel thinks like this but we are ignoring that for now we don't need
+
+07:12.720 --> 07:14.570
+this constructor to.
+
+07:14.580 --> 07:16.080
+So basically that's it.
+
+07:17.360 --> 07:17.660
+Okay.
+
+07:17.670 --> 07:26.040
+Now close all those classes and go back to the even service provider now quickly let's register this
+
+07:26.070 --> 07:29.700
+even so blog post added.
+
+07:29.710 --> 07:37.280
+No it's a blog post post it that's their even name class.
+
+07:37.300 --> 07:39.890
+Now let's register this new listener.
+
+07:39.900 --> 07:45.510
+So notify admin when blog posts create that class
+
+07:48.290 --> 07:49.040
+and that's it.
+
+07:49.310 --> 07:58.460
+Now let's save the genders and let's go back to the application so here we have your queue workers or
+
+07:58.490 --> 08:01.910
+let's make sure we are restarting it.
+
+08:02.270 --> 08:09.220
+Male sorry I ran the wrong command to create the male does this command.
+
+08:09.270 --> 08:12.530
+OK so the queue worker is started.
+
+08:12.570 --> 08:18.330
+Now let's are the blog post load does not matter.
+
+08:18.330 --> 08:22.730
+Some content create.
+
+08:23.190 --> 08:23.460
+OK.
+
+08:23.490 --> 08:31.200
+It's being added and you can see that this job throttled male was dispatched it was processed so we
+
+08:31.200 --> 08:38.480
+can tell that this event was properly dispatched the least dumber catch that event handled that by dispatching
+
+08:38.490 --> 08:40.320
+this throttled male.
+
+08:41.010 --> 08:43.200
+And now if we'll go to the male trap
+
+08:46.660 --> 08:51.130
+to our demo inbox we can see blog post are that someone has posted a blog post.
+
+08:51.130 --> 08:57.490
+Be sure to prove read it and well we we have combined everything that we've learned so we are sending
+
+08:57.490 --> 09:06.400
+an email we throttle down through male trap limits so there are no more emails than to banks and every
+
+09:06.400 --> 09:14.410
+twelve seconds and then we just have an event being dispatched after a particular blog post is bank
+
+09:14.440 --> 09:20.740
+added and then we can add many things to it we can add some statistics you can call some AP eyes of
+
+09:20.740 --> 09:27.070
+ours like tools if you use the tools a graph on our anything to display some dashboard some statistics
+
+09:27.070 --> 09:34.090
+of your apps you can all handle that using events and then probably would be best to also utilize the
+
+09:34.090 --> 09:41.800
+Q and background processing not to slow down your actual requests because their user facing code whatever
+
+09:41.800 --> 09:48.040
+happens whenever a user click should be as fast as possible so it's great to use events for things like
+
+09:48.040 --> 09:50.560
+that and then mixed out with Qs.

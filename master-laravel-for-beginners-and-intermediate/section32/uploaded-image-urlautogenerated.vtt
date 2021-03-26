@@ -1,0 +1,211 @@
+WEBVTT
+
+00:00.870 --> 00:07.680
+Last time along with uploading the image we have stored the new instance of the image model inside the
+
+00:07.680 --> 00:15.180
+images table which contains the path which is relative to the disk that we have configured which is
+
+00:15.180 --> 00:16.230
+the public disk.
+
+00:16.260 --> 00:21.300
+So we want this to be visible to all the users inside the database.
+
+00:21.300 --> 00:24.090
+And now let's see how we can display this image.
+
+00:25.230 --> 00:31.160
+So on the show blade BHP template for the posts.
+
+00:31.350 --> 00:33.530
+Well basically we have a couple of options.
+
+00:33.540 --> 00:39.330
+Probably the simplest one would be to just display image like this.
+
+00:39.330 --> 00:46.290
+Now you might use some additional variables that you know that you have like that up your URL which
+
+00:46.380 --> 00:54.470
+is configured inside that dot and file to generate a proper path to this file so it will be displayed.
+
+00:55.200 --> 01:02.520
+But doing something like this the travel dot test we know that the folder where everything is stored
+
+01:02.640 --> 01:03.940
+is storage.
+
+01:04.350 --> 01:10.240
+And then we have thumb nails or actually this is part of the path.
+
+01:10.620 --> 01:18.310
+So you might try to do post image path.
+
+01:18.500 --> 01:23.020
+This is actually not a way I would recommend you to do.
+
+01:24.380 --> 01:26.200
+So let's see if this would work.
+
+01:26.210 --> 01:31.870
+This should actually work but it's definitely not recommended.
+
+01:31.880 --> 01:32.610
+So.
+
+01:32.630 --> 01:34.670
+Well of course it doesn't really look nice.
+
+01:34.670 --> 01:36.340
+That's not what we want to achieve.
+
+01:36.350 --> 01:40.660
+But you can see the image.
+
+01:40.820 --> 01:50.060
+Now there is also help her method in lateral called asset which is used to link to some assets that
+
+01:50.060 --> 01:52.220
+you have inside your public folder.
+
+01:52.220 --> 01:59.240
+This might be too style sheets or JavaScript but you also don't want to do that.
+
+01:59.900 --> 02:06.170
+Let's see what will be the result of the asset helper function.
+
+02:06.170 --> 02:13.110
+So we are calling asset on that path on the post image path.
+
+02:13.130 --> 02:18.830
+Now let's refresh this blog post and yes we see it is not displayed.
+
+02:18.830 --> 02:20.780
+So let's see what was the source.
+
+02:22.280 --> 02:28.560
+So the link generated was the domain basically and the farm names for folder.
+
+02:28.700 --> 02:31.460
+Yet we know that it's not where it is stored.
+
+02:31.460 --> 02:36.030
+That's where all the other assets are like java scripts and CSX.
+
+02:36.260 --> 02:46.930
+But our public disk is configured to have a symbolic link from the storage up public folder and also
+
+02:46.990 --> 02:49.990
+on the public folder itself.
+
+02:49.990 --> 02:52.210
+Let's find it.
+
+02:52.210 --> 02:54.370
+It contains a storage folder.
+
+02:54.910 --> 03:02.540
+So this acid metal doesn't know about that and well that's why it works incorrectly.
+
+03:02.590 --> 03:11.690
+Now the actual way to do it correctly when you use the storage for Sayed would be to use the storage
+
+03:11.690 --> 03:27.460
+for Sayed you were real method and then you can provide that post image buff.
+
+03:27.460 --> 03:32.950
+Now this should generate the correct url and displayed this image to
+
+03:35.820 --> 03:39.150
+so you can see that this is now generated properly.
+
+03:39.150 --> 03:46.200
+It contains the storage folder so the folder where we upload that the files and inside it there is the
+
+03:46.300 --> 03:46.910
+families.
+
+03:46.910 --> 03:52.320
+So the remaining part of the path which is stored inside the database.
+
+03:52.350 --> 03:59.670
+Now this is very useful because if you use this storage then you might store your files in different
+
+03:59.670 --> 04:07.950
+places and then when you change your storage like you do not want to store the uploaded files on the
+
+04:08.010 --> 04:14.040
+app storage folder so you basically don't want to use that public disk anymore you want to store assets
+
+04:14.040 --> 04:18.260
+like images uploaded by user to let's say as free.
+
+04:18.360 --> 04:21.840
+You basically do not change your code at all.
+
+04:21.840 --> 04:29.520
+The only thing you have to do is to configure inside that dealt and or the environment variable on the
+
+04:29.520 --> 04:35.580
+server your file system driver which is the default disk to you.
+
+04:35.580 --> 04:37.670
+So you can just change to as free.
+
+04:38.190 --> 04:40.960
+And then you don't really have to change any of your code.
+
+04:40.980 --> 04:48.330
+It will work properly maybe apart from the from the things that you will also have to have all those
+
+04:48.600 --> 04:54.600
+previously uploaded images on that as Free disk.
+
+04:54.600 --> 04:59.720
+Now let's see if there is some more convenient way to display this.
+
+04:59.790 --> 05:04.500
+You are on on the image.
+
+05:04.590 --> 05:16.410
+So basically on the image model itself you can define a method call it you URL and then you can use
+
+05:16.410 --> 05:20.670
+the storage facility here minding the import that was added
+
+05:24.260 --> 05:25.850
+and you can return this
+
+05:28.470 --> 05:29.010
+path.
+
+05:29.020 --> 05:34.540
+So this would actually generate are you URL for you.
+
+05:34.540 --> 05:41.830
+So now instead of using the storage for say directly inside template which also is not a best idea in
+
+05:41.830 --> 05:49.300
+case something changes you might want to use a different disk then you put this logic to a single place
+
+05:49.540 --> 05:53.070
+inside the you URL method.
+
+05:53.230 --> 06:01.490
+So now everything that you will have to do is you do post image your URL
+
+06:04.230 --> 06:08.660
+and image is also displayed.
+
+06:08.730 --> 06:13.920
+So this is how you would get the URL for anything that you have uploaded.
+
+06:13.920 --> 06:20.340
+Let it be image or any other file that has to be provided to the user so either browser can download
+
+06:20.340 --> 06:28.460
+it or the client itself can have a download link and in the next lecture will work around it a little
+
+06:28.500 --> 06:33.960
+bit will play around with styling so this image is displayed in a much nicer way.

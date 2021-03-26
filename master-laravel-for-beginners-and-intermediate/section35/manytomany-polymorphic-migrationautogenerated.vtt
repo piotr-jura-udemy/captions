@@ -1,0 +1,478 @@
+WEBVTT
+
+00:00.900 --> 00:08.490
+Now let's get straight to work and make the necessary database schema changes so as we said currently
+
+00:08.490 --> 00:17.400
+the pivot table has the blog post I.D. column and it has to have toggle I.D. and tag of all type.
+
+00:17.400 --> 00:23.910
+We also have to change the blog post tag table name to tag bulls.
+
+00:24.150 --> 00:27.660
+So if you are wondering why do we have to do it.
+
+00:28.260 --> 00:34.350
+I will of course explain that in this very lecture but now let's see what we have to do.
+
+00:34.380 --> 00:42.600
+So we have blog post I.D. column and this has to have targetable I.D. and our target ball type columns
+
+00:42.630 --> 00:44.560
+instead.
+
+00:44.580 --> 00:47.890
+So first let's actually create this migration.
+
+00:47.910 --> 00:53.400
+I will explain each step we have to take and why we have to take it.
+
+00:53.490 --> 00:59.940
+And then finally I will explain why the table name has to be called tag balls.
+
+01:00.060 --> 01:06.820
+Also I will show you how lot of figures out the correct table name for the pivot table.
+
+01:06.840 --> 01:15.230
+So this should be very clear at the end of this lecture so the first step we have to take is to create
+
+01:15.330 --> 01:16.750
+our new migration.
+
+01:16.820 --> 01:25.730
+So let's generated using artisan peach bee artisan make migration we will call that rename block post
+
+01:25.970 --> 01:32.790
+dark table to target walls to make sure we will have boilerplate.
+
+01:32.790 --> 01:37.640
+Let let's specify the table will be working from the beginning.
+
+01:37.640 --> 01:41.660
+This is blog post tag.
+
+01:41.810 --> 01:43.340
+Now run this generator.
+
+01:43.340 --> 01:48.130
+And what we have right now is the new migration generated for us.
+
+01:48.140 --> 01:50.900
+Let's close everything for now.
+
+01:50.900 --> 01:58.430
+So we are starting with the blog post talk table which happens to be exactly the table that we currently
+
+01:58.430 --> 01:58.820
+have.
+
+01:59.930 --> 02:06.610
+So we not only have to rename it we will also remove some columns from it.
+
+02:06.650 --> 02:12.740
+So first we drop the foreign key for the blog post using array notation.
+
+02:12.740 --> 02:14.280
+So a lot of I'll figure this out.
+
+02:14.360 --> 02:15.730
+What is that correct.
+
+02:15.730 --> 02:22.950
+The full name of this foreign key blog post I.D..
+
+02:23.140 --> 02:27.970
+Now we'll be having separate blocks of this kind schema table.
+
+02:27.970 --> 02:31.450
+And we'll do a couple of steps along the way.
+
+02:31.450 --> 02:35.780
+So why don't we first rename the table.
+
+02:35.800 --> 02:42.940
+The problem is that when you will rename the table and then you will use drop flooring with the array
+
+02:42.970 --> 02:51.610
+notation Lavell will try to use the current table name to figure out what is the actual foreign key
+
+02:51.610 --> 02:52.840
+name.
+
+02:52.900 --> 02:59.180
+So if you will rename the table well the foreign key will actually have the old name.
+
+02:59.200 --> 03:04.560
+So let's take a look how those keys or even indexes are named.
+
+03:04.690 --> 03:12.350
+So what you see here is the key name is block postdoc block post Ida index.
+
+03:12.400 --> 03:15.980
+The other key is blog posts dog I.D. index.
+
+03:16.180 --> 03:24.280
+So those names actually have to be given for my sequel database but lateral handles that for us.
+
+03:24.550 --> 03:30.270
+And when you will rename a table the name of the key won't change.
+
+03:30.280 --> 03:36.070
+And this is a problem if you would first rename the table and then try to drop a foreign key.
+
+03:36.120 --> 03:37.600
+Lot of it will get lost.
+
+03:37.630 --> 03:42.190
+It will try to delete a foreign key that doesn't exist.
+
+03:42.190 --> 03:44.220
+So I hope that's clear.
+
+03:44.530 --> 03:52.860
+Now we have to drop the column so always we drop the foreign key first then the column blog post I.D..
+
+03:53.040 --> 03:58.440
+Now at this point we have removed the foreign key and a column.
+
+03:58.550 --> 04:00.250
+So now we can rename the tables.
+
+04:00.260 --> 04:05.430
+So how do you rename a table using larval migration.
+
+04:05.510 --> 04:11.150
+So there is another method inside the schema for seed and it's called rename.
+
+04:11.150 --> 04:14.270
+So nothing scientific you might have guessed that.
+
+04:15.410 --> 04:18.390
+So we rename that block post talk table.
+
+04:18.410 --> 04:23.940
+That's the first argument the original table and the second one is the new name.
+
+04:24.050 --> 04:28.020
+So did the new name of this table would be Tiger balls.
+
+04:28.130 --> 04:34.100
+So you are probably probably wondering how did I even come up with this Tiger Woods table name.
+
+04:34.100 --> 04:41.080
+Of course I will show you that on an example why we have given this table name and how larval figures
+
+04:41.090 --> 04:44.420
+out what should be the name for the pivot table.
+
+04:44.420 --> 04:48.020
+So don't worry about this just yet.
+
+04:48.020 --> 04:53.070
+Finally we'll work with our new table.
+
+04:53.170 --> 04:56.410
+So since it is now called Tiger tangibles.
+
+04:56.780 --> 05:00.890
+We will create those two morph fields that we need.
+
+05:01.220 --> 05:09.070
+So terrible idea and Tiger bold type so let's define that closure manually.
+
+05:09.070 --> 05:13.340
+So blueprint table and our closure.
+
+05:13.750 --> 05:23.240
+And what we need to add at this point is table morphs and stackable.
+
+05:23.240 --> 05:29.960
+So this matches with the prefix of the morph columns that we have came up here.
+
+05:30.020 --> 05:37.550
+So remember that this can be anything just so you know what morph column prefix you have used for a
+
+05:37.550 --> 05:44.600
+table because we we would have to later specify that when we will be defining the relationship on the
+
+05:44.600 --> 05:46.270
+models.
+
+05:46.280 --> 05:49.400
+Now the other side of this migration.
+
+05:49.400 --> 05:54.380
+So if we would like to roll back this this is also not so simple.
+
+05:54.380 --> 05:59.410
+So let's try to implement the other side of this migration.
+
+05:59.450 --> 06:09.960
+So at this point when this migration was Rahm we no longer had a blog post doc table we have Tiger balls.
+
+06:10.000 --> 06:14.250
+So first what we will have to do is we have to drop morphs.
+
+06:14.530 --> 06:26.920
+So we do table drop morphs Tiger bowl now also notice why we are doing this specifically on the Tiger
+
+06:26.920 --> 06:35.140
+bowls table here inside the up method and not just adding the two morph columns straight ahead and then
+
+06:35.170 --> 06:37.160
+only rename the table.
+
+06:37.210 --> 06:45.520
+This is also important because then morphs also creates a key which happens to be based also on the
+
+06:45.520 --> 06:47.140
+table name.
+
+06:47.170 --> 06:56.810
+So if I would do something like this I will create those two columns immediately on the blog post table.
+
+06:56.990 --> 07:03.950
+Then if someone will roll back this migration and here I also use this helper method drop morphs it
+
+07:03.950 --> 07:08.830
+will try to figure out the index name using the table name.
+
+07:09.050 --> 07:12.480
+So if I create that those two columns.
+
+07:12.620 --> 07:20.660
+When I was working with a blog post table then of will now try to figure out what's the key name using
+
+07:20.660 --> 07:26.840
+the current table name which happens to be tugboats at this point and obviously it will fail because
+
+07:27.290 --> 07:30.980
+there won't be any index with this name.
+
+07:31.040 --> 07:39.140
+At this point so it might be complicated but I hope you agree with me that this actually makes a lot
+
+07:39.140 --> 07:40.350
+of sense.
+
+07:40.430 --> 07:46.950
+So that's the first that we have to do we had to drop this morph columns.
+
+07:47.510 --> 07:55.650
+Only then we can rename back the table from Target balls to blog post.
+
+07:55.720 --> 08:01.390
+Doug So at this point the table is already renamed.
+
+08:01.390 --> 08:08.060
+Now we'll have to recreate this blog post idea column inside our table.
+
+08:08.440 --> 08:15.200
+So not to fail with any foreign keys that will we might be having because we won't have a default value.
+
+08:15.340 --> 08:28.650
+What we can also use from the schema is we can disable foreign key constraints so we will be able to
+
+08:28.650 --> 08:30.690
+safely debug a foreign key.
+
+08:30.690 --> 08:34.620
+And even if you if would have incorrect values this just won't fail.
+
+08:34.620 --> 08:39.540
+So this isn't really a case that you will use on your production environment.
+
+08:39.540 --> 08:47.340
+I highly doubt so but we are just learning so let's just see every possibility now after disabling this
+
+08:47.340 --> 08:55.420
+foreign key checks we will have to re enable them so we do that at the very end and between those two
+
+08:55.420 --> 09:03.010
+calls will actually recreate the blog post idea column so let's copy this blog so this will be easier
+
+09:03.010 --> 09:03.740
+for us.
+
+09:03.760 --> 09:12.410
+We work on that blog post top table now.
+
+09:12.430 --> 09:22.880
+Now let's recreate the columns so it is unsigned integer blog post i.e. we're on the index.
+
+09:23.340 --> 09:28.650
+So this is how we originally have defined this column.
+
+09:28.660 --> 09:40.560
+Now we create Frankie blog post idea is the name it references the idea column on
+
+09:43.720 --> 09:51.580
+block underscore posts stable and if you remember correctly we also had our cascade rule.
+
+09:51.820 --> 09:56.710
+So when this is deleted we we should also cascade
+
+10:00.200 --> 10:02.900
+so actually when a blog posts would be deleted.
+
+10:02.930 --> 10:09.870
+This would also remove our role from the blog posts time so we won't have any dead associations.
+
+10:09.890 --> 10:13.290
+Like if our blog post had any talks previously.
+
+10:13.310 --> 10:20.300
+So now when our blog post is deleted obviously you do not need all the associations from this original
+
+10:20.300 --> 10:22.280
+blog post to our tag.
+
+10:22.280 --> 10:26.510
+So we just do our cascade on a database level.
+
+10:26.570 --> 10:33.050
+Now I know that we actually have solved deletes for a blog post but this is just good to know.
+
+10:33.050 --> 10:37.480
+Anyway we have defined this relation to be like that originally.
+
+10:37.610 --> 10:41.300
+So let's recreate it how it was.
+
+10:41.300 --> 10:48.680
+So now look let's reopen the terminal and we can run this migrations so BHP artisan migrate and now
+
+10:48.680 --> 10:52.490
+let's check if the schema has actually changed.
+
+10:52.790 --> 11:01.650
+So there is a blog post stock table but when I refresh it's now tagged bowls and it doesn't have a blog
+
+11:01.650 --> 11:03.180
+post I.D. column anymore.
+
+11:03.180 --> 11:10.920
+Instead it has tugboat type and toggle I.D. so you can see that it's all there and also the key name
+
+11:10.950 --> 11:17.100
+is proper Okay so now let's see why.
+
+11:17.110 --> 11:24.500
+I actually have called this table Tugger bowls so I will show it to you on an an example.
+
+11:24.540 --> 11:28.920
+Now let's see how we came up with this table name tag doubles.
+
+11:28.950 --> 11:32.640
+So for that let's open the target model.
+
+11:32.640 --> 11:37.550
+We see there is a relation which is old one we will modify that only in the next lecture.
+
+11:37.580 --> 11:41.790
+But just to understand where did we came up with this table name.
+
+11:41.910 --> 11:45.140
+Let's modify it right now for a second.
+
+11:45.240 --> 11:50.170
+So instead of belongs to menu will use morph to many.
+
+11:50.400 --> 11:54.060
+This is how we do it with many too many polymorphic.
+
+11:54.060 --> 11:59.460
+You can see it highlights an error because we require this morph column.
+
+11:59.460 --> 12:03.140
+So it is huggable as you can see here
+
+12:05.920 --> 12:06.240
+now.
+
+12:06.250 --> 12:08.640
+We'll have to get inside this method.
+
+12:08.650 --> 12:11.320
+So hold out key and click on it.
+
+12:14.420 --> 12:17.660
+So let's ignore everything up to this point.
+
+12:18.350 --> 12:25.030
+So now here Lavell tries to tries to figure out the table name.
+
+12:25.100 --> 12:32.960
+So actually there is a further argument inside more of too many where you can specify what is what is
+
+12:32.960 --> 12:35.180
+the actual pivot table name.
+
+12:35.420 --> 12:42.890
+But if you want to do that then Lara Val tries to figure out what should be the table name on itself.
+
+12:42.890 --> 12:51.320
+So since we haven't specified a table name what Lavell will do is it will take this second parameter
+
+12:51.410 --> 13:00.650
+the morph column prefix name and try to plurals it using the as the are class plural method.
+
+13:01.880 --> 13:06.490
+So to actually see this in action let's open Tinker.
+
+13:06.500 --> 13:10.540
+So let's round peach bee artisan thinker.
+
+13:10.700 --> 13:15.830
+So in this case we'll actually have to specify our fully qualified class name.
+
+13:16.130 --> 13:19.850
+And that's the namespace for that as the error class.
+
+13:19.850 --> 13:21.530
+Let's copy and paste up
+
+13:24.520 --> 13:26.970
+coldest this method on targetable
+
+13:30.300 --> 13:36.850
+and this is what we get Tiger bowls so this isn't actually a magical thing.
+
+13:36.850 --> 13:44.110
+This is just one of the larval internal classes that you can also use in your code.
+
+13:44.110 --> 13:50.740
+So this is how it figures out where or how it should call this table.
+
+13:50.740 --> 14:00.520
+So if you do not specify it it's it just tries to generate a plural version of the morph column prefix.
+
+14:00.520 --> 14:03.600
+Now let's also see couple of more examples of this.
+
+14:03.600 --> 14:13.240
+So paste this again and imagine that we'll have more column called Image able and this is what larval
+
+14:13.240 --> 14:19.500
+would come up with for a comment table.
+
+14:19.690 --> 14:27.820
+It will do comments bowls if you have something fancy like comment.
+
+14:27.820 --> 14:30.370
+It will generate comments.
+
+14:30.370 --> 14:31.950
+So this is how it works.
+
+14:32.020 --> 14:39.310
+It's actually it has some magic in it but just so you know whenever you are not really sure what table
+
+14:39.310 --> 14:42.850
+name to use for the migration you can just run.
+
+14:42.850 --> 14:50.740
+This is the error plural on the morph prefix and you will know what larval will assume is the table
+
+14:50.740 --> 14:51.160
+name.

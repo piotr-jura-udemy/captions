@@ -1,0 +1,139 @@
+WEBVTT
+
+00:00.760 --> 00:07.360
+Let's see how we can pass some additional data to the blade template and then how do you output this
+
+00:07.360 --> 00:11.500
+data inside the template for the purpose of this lecture?
+
+00:11.530 --> 00:17.860
+Let's define our simple poster that will hold the data we want to pass onto the template.
+
+00:18.520 --> 00:22.860
+So this code chunk is available as a download under this lecture.
+
+00:23.200 --> 00:26.590
+So download it and paste it inside the root.
+
+00:27.130 --> 00:29.260
+It's on the right holding a race.
+
+00:29.710 --> 00:37.510
+And unless Iterate also has keys, which we will try to match against the ID root parameter.
+
+00:40.740 --> 00:45.660
+Now, let's render the new template we are yet to create
+
+00:49.020 --> 00:53.490
+and pass the array containing blog post data for a given ID.
+
+01:01.090 --> 01:04.750
+Then let's create the proper template for displaying a blog post.
+
+01:05.230 --> 01:15.730
+Again, let's follow the route naming convention and create our posts folder and then show Blade B inside
+
+01:15.730 --> 01:15.970
+it.
+
+01:21.400 --> 01:26.440
+For the most part, we can copy paste from previously created templates.
+
+01:28.180 --> 01:31.150
+The difference here is the section's content.
+
+01:35.470 --> 01:43.900
+If you would, take a look at how we have passed the data, every Iraqi defined in the controller becomes
+
+01:43.900 --> 01:47.590
+Arpège variable available in the template.
+
+01:50.630 --> 01:57.560
+Now, let me coat and of course, you can coat along how we would outpoured past the data and then we
+
+01:57.560 --> 01:59.340
+will go through it step by step.
+
+01:59.990 --> 02:04.280
+So first, let's have a specific title for this page.
+
+02:04.880 --> 02:11.120
+Then I'll add an age one element for a blog, post title and paragraph for the content.
+
+02:11.960 --> 02:18.940
+Now, let's use this special syntax first to output the title.
+
+02:19.850 --> 02:23.810
+Secondly, to output the content.
+
+02:25.820 --> 02:32.730
+Now, the new thing here is the double bass syntax, sometimes also called the mustache.
+
+02:33.470 --> 02:38.600
+If you take a closer look, you can see a mustache there between this bracers.
+
+02:38.810 --> 02:43.760
+You can put any data or variables that are available in the template.
+
+02:44.420 --> 02:52.730
+Since we are passing on the rate, we can access its elements by key using bracket syntax.
+
+02:53.660 --> 03:01.490
+It's important to note that everything put through their mustache syntax is passed through HDMI special
+
+03:01.490 --> 03:10.310
+char speech function that converts special characters to HDMI entities for security reasons.
+
+03:12.010 --> 03:18.160
+You can influence how the data is rendered, though, there is a separate lecture about that.
+
+03:19.450 --> 03:29.170
+So let's try it out, go to the browser and visit post one, you should get some output and let's go
+
+03:29.170 --> 03:30.720
+visit the second blog post.
+
+03:30.730 --> 03:34.440
+It works to also the title is Being Adjusted.
+
+03:35.740 --> 03:43.150
+Finally, if you will try out what happens if you provide an invalid ID, you get an error page are
+
+03:43.150 --> 03:44.830
+pretty useful error page.
+
+03:44.830 --> 03:49.510
+So be sure to look around at what info is available here.
+
+03:53.630 --> 04:01.550
+But I don't want to let you go with a code that is unfinished, so let's go back to where you've been
+
+04:01.970 --> 04:07.310
+and you can use this handy board E Floraville helper function.
+
+04:08.150 --> 04:13.500
+What it does is it can generate an error when a condition is met.
+
+04:14.060 --> 04:19.720
+In our case, it's the missing array key for the given I.D. route parameter.
+
+04:20.120 --> 04:21.440
+So let's implement it.
+
+04:21.950 --> 04:32.870
+So if it's not set posts array with our specific ID, we could return for or for error, which means
+
+04:32.870 --> 04:33.890
+not found.
+
+04:36.450 --> 04:42.400
+Save the changes, remember this helper function as it is often coming handy.
+
+04:42.990 --> 04:45.140
+So let's finally try it out.
+
+04:46.300 --> 04:54.490
+Now, let's refresh this page with an invalid I.D. and you can see we are directed to a nice 404 not
+
+04:54.490 --> 04:55.090
+found.

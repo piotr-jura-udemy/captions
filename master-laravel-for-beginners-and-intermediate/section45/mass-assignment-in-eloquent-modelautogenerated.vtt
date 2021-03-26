@@ -1,0 +1,124 @@
+WEBVTT
+
+00:01.730 --> 00:08.840
+So at the end of the last lecture I've told you that there is another way of assigning attributes to
+
+00:09.500 --> 00:11.280
+do an eloquent model.
+
+00:11.360 --> 00:17.590
+So instead of assigning the attributes one by one we can assign them at once.
+
+00:17.660 --> 00:27.760
+It is called a mass assignment so let's remove this part we can also remove this dump.
+
+00:27.880 --> 00:37.930
+And now since we already have validated data as an array we can create a new blog post using a method
+
+00:38.200 --> 00:40.670
+of the blog post model itself.
+
+00:40.750 --> 00:53.140
+So instead of manually creating a new model and saving it we can use the static methods of the blog
+
+00:53.140 --> 00:57.320
+post and the method name is called create.
+
+00:57.340 --> 01:05.620
+So this create method will accept an array where the key is the attribute or Field's name and the value
+
+01:05.680 --> 01:10.720
+of this all right element is the value that should be stored.
+
+01:10.810 --> 01:18.730
+So you could pass validated data and then you do not have to call save because it is automatically called
+
+01:18.730 --> 01:19.240
+for you.
+
+01:19.570 --> 01:25.390
+So you can see that now our store method is much shorter and simpler.
+
+01:25.390 --> 01:29.070
+So let's save the changes and see what happens now.
+
+01:29.890 --> 01:38.740
+So let's go back to the form and try to save a model which has some valid data inside the forum.
+
+01:38.760 --> 01:41.320
+So now what we see was expected.
+
+01:42.270 --> 01:50.120
+So we have an error that we cannot store title using the mass assignment.
+
+01:50.160 --> 01:58.530
+And this is a feature of the eloquent models in light of all that to do a mass assignment like specify
+
+01:58.580 --> 02:01.020
+all the properties at once.
+
+02:01.020 --> 02:09.350
+You have to modify the block post model and you have to specify which properties are filial.
+
+02:09.390 --> 02:18.090
+So this protects you from having the properties that you do not want modified by some malicious requests.
+
+02:18.090 --> 02:23.010
+So let's take a look at how our blog post looks right now.
+
+02:23.190 --> 02:25.220
+So let's check the structure.
+
+02:25.470 --> 02:32.880
+So we have the title the content those are the properties that we want modified but we do not want the
+
+02:32.880 --> 02:40.980
+users to send the created and updated out and additionally if we'll have any other fields that we do
+
+02:40.980 --> 02:49.980
+not want to give users permission to modify it might also be modified if any data that is passed would
+
+02:50.070 --> 02:54.520
+automatically be populated to a model.
+
+02:54.690 --> 03:03.170
+So to define which properties can be changed we have to define protect that field called.
+
+03:04.380 --> 03:11.580
+And this would be an array that will specify the column names which can be modified by mass assignment.
+
+03:11.580 --> 03:16.030
+So we want this to be title and content only.
+
+03:16.190 --> 03:25.580
+Now let's save the changes and go back to our application and let's try sending this form once more.
+
+03:25.580 --> 03:34.460
+Now you can see that we have created our brand new blog post and we've only used the create method and
+
+03:34.460 --> 03:38.330
+past the array we've already validated data.
+
+03:38.530 --> 03:41.420
+So there is like two levels of security.
+
+03:41.420 --> 03:49.370
+First we validate the data if it is the way we expect it and then we must assign it.
+
+03:49.580 --> 03:56.200
+So in this case maybe you can see why we are doing that because we've only had two fields to modify
+
+03:56.210 --> 04:00.690
+but let's imagine a model that might have 10 fields.
+
+04:00.830 --> 04:07.610
+So you will basically have 10 more lines of code which basically can do the same thing automatically
+
+04:07.970 --> 04:10.090
+when you must assign this data.
+
+04:10.460 --> 04:18.800
+So remember that everything that you want to be modifiable and must assign a will actually not modifiable
+
+04:19.010 --> 04:27.530
+must assign Nabel you have to specify those fields inside the fill level property of your models.

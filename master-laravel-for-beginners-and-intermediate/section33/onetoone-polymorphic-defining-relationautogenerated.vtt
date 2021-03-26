@@ -1,0 +1,79 @@
+WEBVTT
+
+00:00.310 --> 00:05.110
+Now let's redefine the relationships on the eloquent models.
+
+00:05.280 --> 00:12.920
+So starting with an image what you see right now is a relation to our blog post specifically.
+
+00:12.960 --> 00:17.000
+So this has to be change to immeasurable.
+
+00:17.020 --> 00:20.310
+This is the same as the field name.
+
+00:20.350 --> 00:26.530
+Remember the field name is called im imaginable.
+
+00:26.650 --> 00:34.080
+Now we do not also need this blog post ideas Philo field of course because it doesn't exist.
+
+00:34.210 --> 00:36.940
+Now instead of using belongs to
+
+00:39.720 --> 00:45.110
+now we have to define this relation as morph to and that's it.
+
+00:45.120 --> 00:51.510
+This is just a method name on the one to one polymorphic relationship from the image side.
+
+00:53.650 --> 00:55.480
+Now let's go to the blog post.
+
+00:56.380 --> 00:58.980
+So we already have this immature relationship
+
+01:02.000 --> 01:07.950
+and with one to one polymorphic relationship instead of has one.
+
+01:08.120 --> 01:14.860
+We have to use more F1 and of course this stays as it was.
+
+01:14.860 --> 01:17.990
+So we have to define to which class this is related.
+
+01:18.020 --> 01:28.210
+So this is an image but there is a second parameter introduced here so that class is not enough.
+
+01:28.400 --> 01:35.720
+We have to also specify what's this field the name or at least the base name of this field that contains
+
+01:35.720 --> 01:38.720
+this information about the relationship.
+
+01:38.960 --> 01:42.300
+And this is also imaginable.
+
+01:42.320 --> 01:46.610
+Now finally let's copy this relation definition to the user.
+
+01:47.390 --> 01:56.450
+Maybe we can paste it just below comments and this relation is also called image and we also use more
+
+01:56.450 --> 02:05.470
+F1 to up image and we specify that this field that will hold the information about the relation is called
+
+02:05.500 --> 02:12.100
+immeasurable which basically means that a lot of us will know that it has to store the relation I.D.
+
+02:12.370 --> 02:21.400
+inside imaginable underscore I.D. and the name of the related model in this case user or app user inside
+
+02:21.400 --> 02:30.990
+the image of all underscore type and the same relates to the blog post model so let's save all this
+
+02:30.990 --> 02:38.100
+changes and in the next lecturer will implement this logic inside user controller and also we have to
+
+02:38.100 --> 02:42.300
+modify it inside a blog post where we upload the thumbnail.

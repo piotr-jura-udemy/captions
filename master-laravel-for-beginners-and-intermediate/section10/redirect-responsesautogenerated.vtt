@@ -1,0 +1,121 @@
+WEBVTT
+
+00:01.340 --> 00:07.080
+Sometimes the route does not really need to show and response to the user.
+
+00:07.550 --> 00:11.710
+It just needs to do something and then go to another page.
+
+00:12.510 --> 00:14.630
+An example of this might be starting.
+
+00:14.630 --> 00:19.770
+Some new data are sent through a form or deleting something in the database.
+
+00:20.540 --> 00:25.400
+Sometimes you also have a year old that was moved to some other place.
+
+00:26.000 --> 00:30.250
+In all of these cases, you can return our redirect response.
+
+00:30.890 --> 00:37.700
+This will allow you to do some logic in the route and then just redirect to a different route or review
+
+00:37.700 --> 00:40.770
+URL that might actually render some content.
+
+00:42.960 --> 00:49.540
+So let's ask simple Getrude that will do a redirect to another page.
+
+00:50.040 --> 00:50.630
+There you are.
+
+00:50.640 --> 00:51.960
+I can be fun.
+
+00:51.960 --> 00:53.730
+Slash redirect.
+
+01:03.210 --> 01:13.160
+The simplest case is to use our redirect helper function, it accepts you or I, you would like to redirect
+
+01:13.170 --> 01:17.730
+do so we can redirect to our contact page.
+
+01:20.230 --> 01:29.050
+Now, let's try it out, hit this slash fan redirect IRL, and you are to contact Page.
+
+01:30.290 --> 01:37.760
+Now, notice that the very direct response will also have a different HTP code there, frio to.
+
+01:41.990 --> 01:49.910
+Now, let's go over this route, quickly changed the urai from redirect to back and remove the body
+
+01:50.720 --> 01:55.640
+now, but helper function will redirect to the last address.
+
+01:56.090 --> 02:00.920
+It's useful with one time actions like previously mentioned for input storying.
+
+02:02.000 --> 02:09.710
+So let's try it out from the contact page, let's hit Fun Slash Bach and you are back at the contact
+
+02:09.710 --> 02:12.830
+page, the same from the home page.
+
+02:12.860 --> 02:14.720
+Let's try to go to find Bach.
+
+02:14.930 --> 02:18.020
+And you are back at the home page.
+
+02:20.540 --> 02:24.020
+Now, let's copy the route again and change this.
+
+02:24.020 --> 02:27.110
+You try to named route.
+
+02:30.750 --> 02:41.260
+Now we have the first use case for our named routes using redirect and then calling the route matters
+
+02:41.280 --> 02:42.780
+onto created object.
+
+02:43.670 --> 02:51.290
+Now you can redirect to unnamed route, so you might remember that we have given our routes names,
+
+02:52.040 --> 02:58.790
+for example, the one responsible for displaying aspecific a blog post has this post show name.
+
+03:02.930 --> 03:09.380
+So it's enough to just know the Roots name, you don't really need to rely on the your eyes, which
+
+03:09.380 --> 03:10.790
+of course might change.
+
+03:11.960 --> 03:14.270
+So let's use the posts.
+
+03:14.420 --> 03:21.480
+Show routes and parameters can be passed as the second array argument.
+
+03:21.830 --> 03:26.480
+So in our case, this might be I.D., which is equal to one.
+
+03:27.800 --> 03:38.150
+Oh, save the changes and let's hit this euro slash fun slash named route and we are redirected to the
+
+03:38.150 --> 03:40.340
+post slash one.
+
+03:44.010 --> 03:48.930
+So let's do it again, Kopitar route, and this time let's use way.
+
+03:51.060 --> 03:58.620
+So that's the simple example, how to redirect away from your website so you can use the redirect helper,
+
+03:58.860 --> 04:05.730
+which has an away method, so you can redirect, for example, to our Google com website.
+
+04:09.420 --> 04:16.260
+So let's try it fun slash away and we are at Google.

@@ -1,0 +1,118 @@
+WEBVTT
+
+00:01.110 --> 00:09.480
+Let's take a quick overview of the prerequisites of this course, you can use any operating system and
+
+00:09.480 --> 00:11.640
+successfully complete this course.
+
+00:12.480 --> 00:19.770
+I've recorded separate INDEF instructions for setting up your environment with both Mac OS and Windows
+
+00:20.310 --> 00:21.030
+Alvo.
+
+00:21.240 --> 00:29.220
+Linux instructions are not recorded 95 percent of the time things work the same as on Mac as both systems
+
+00:29.220 --> 00:31.620
+share a common ancestor, Unix.
+
+00:32.820 --> 00:37.920
+To complete the course, you will need certain software installed on your computer.
+
+00:38.190 --> 00:47.910
+It is absolutely essential to have BHB MySQL database and Noge as installed and some kind of code Edita.
+
+00:50.070 --> 00:57.240
+Don't worry, though, you will be guided step by step on how to get up and running to get the basic
+
+00:57.240 --> 01:03.810
+software, you might use some of the pre-existing packages like Zamp or Mump.
+
+01:04.620 --> 01:07.410
+This are recommended for beginners.
+
+01:08.000 --> 01:11.400
+You can also use doctor or vagrant.
+
+01:12.580 --> 01:18.820
+Tools available for all systems or Laravel valid, which is only for Mark.
+
+01:19.760 --> 01:24.350
+The course covers installing and setting up of some.
+
+01:25.350 --> 01:33.660
+You will install the Apache Web server, MySQL database, be set up, be to run scripts on the command
+
+01:33.660 --> 01:37.630
+line and install composer to manage dependencies.
+
+01:38.400 --> 01:43.500
+Finally, you will set up a custom local domain for the project, though that's optional.
+
+01:45.200 --> 01:53.270
+For writing the code, I recommend Visual Studio Code, it's very powerful, works on all operating
+
+01:53.270 --> 01:54.060
+systems.
+
+01:54.440 --> 01:58.510
+It has a rich set of extensions and is extremely popular.
+
+01:58.940 --> 02:02.990
+If you plan to code along, please use visual studio code.
+
+02:03.140 --> 02:06.060
+I can't stress enough how important that is.
+
+02:06.740 --> 02:14.810
+There is a separate lecture on suggested extension's themes and fonts to make your environment as close
+
+02:14.810 --> 02:16.360
+to mine as possible.
+
+02:17.320 --> 02:25.600
+There are other options, though, like baby storm, this is a powerful fully-fledged ID, though it
+
+02:25.600 --> 02:27.010
+is a paid option.
+
+02:30.370 --> 02:34.660
+Whether you plan to code along or just watch.
+
+02:35.980 --> 02:43.990
+You need to know the full source code for the course is available on GitHub and as a download more on
+
+02:43.990 --> 02:47.950
+how to get and use the source code in a separate lecture.
+
+02:51.520 --> 02:58.960
+I also need to mention that to learn comfortably in this course, it will be really good if you had
+
+02:58.960 --> 03:08.740
+any previous experience with HP databases, HDMI, and you understand how the Web works, trying to
+
+03:08.740 --> 03:14.920
+learn are back in framework without any previous programming, knowledge would be pretty hard.
+
+03:17.290 --> 03:25.900
+Finally, it's possible you might be having issues either with the set up process or later, I've tried
+
+03:25.900 --> 03:33.850
+hard to make sure the instructions are as clear as possible, but still, everyone has their own experience
+
+03:33.850 --> 03:35.010
+and knowledge level.
+
+03:35.500 --> 03:42.250
+If you feel stuck, please ask a question in the Q&amp;A section under a lecture you are having an issue
+
+03:42.250 --> 03:42.610
+with.
+
+03:43.120 --> 03:49.780
+Please also join our Dischord community where you can ask questions and get help from other students
+
+03:49.780 --> 03:50.200
+to.

@@ -1,0 +1,538 @@
+WEBVTT
+
+00:00.940 --> 00:07.050
+In this lecture we'll practice what we have learned in the previous one which means defining our group
+
+00:07.050 --> 00:13.920
+of roots which share some common parameters like they have a common prefix in the URL common prefix
+
+00:13.920 --> 00:19.350
+in their root name and we'll learn how to achieve that using the group method.
+
+00:19.380 --> 00:27.300
+But before we start let's open the terminal and run peach bee artisan route least which as you might
+
+00:27.300 --> 00:31.840
+remember displays the full list of older routes defined in the application.
+
+00:31.980 --> 00:34.090
+And this is quite a long list.
+
+00:34.200 --> 00:40.890
+So currently we'll be only working on the API routes and as you can see it's pretty hard to track them
+
+00:40.890 --> 00:49.530
+down so you can do a quick trick if you are on the mark or Unix and Linux distribution you can just
+
+00:49.530 --> 00:58.110
+run peach bee artisan route least and then pipe the results of this command and call grep API.
+
+00:58.110 --> 01:03.410
+This will only find that the lines which has the word API in them.
+
+01:03.720 --> 01:13.640
+Alternatively if you are on Windows you can use find SD R and inside the quotes you can specify API
+
+01:13.650 --> 01:14.100
+of course.
+
+01:14.100 --> 01:19.620
+This won't work on my machine as I am on Mac but this is the alternative to do it on Windows.
+
+01:19.620 --> 01:26.220
+Of course it's not necessary to do that but might just help you out to see the changes we are making
+
+01:26.280 --> 01:29.640
+visually quicker.
+
+01:29.790 --> 01:36.030
+Okay so let's go back to the visuals to your code and define the first thing and we will do a prefix
+
+01:36.120 --> 01:38.160
+and this is the URL prefix.
+
+01:38.220 --> 01:44.820
+So sometimes when you have your API as their version might change because you are introducing new features
+
+01:45.240 --> 01:52.260
+and then they are either front end still using the older version or some devices like mobile devices
+
+01:52.260 --> 01:59.910
+that just can't updated or use the new API because they just don't know about the new API so that's
+
+01:59.910 --> 02:03.840
+a typical thing you might do to prefix your roots with our version.
+
+02:03.840 --> 02:15.860
+In this case we say that this is the version 1 and that we can use group the closure and inside it what
+
+02:15.860 --> 02:19.640
+we might do is simple end point for a starter.
+
+02:19.640 --> 02:26.180
+So this would be just our route defined inside this file and this could be a status end point.
+
+02:26.180 --> 02:30.410
+This will just display if your API is working or not.
+
+02:32.700 --> 02:37.500
+Now this will just simply return Jason and to return Jason.
+
+02:37.500 --> 02:46.200
+You just called return call the response helper method and it has a method Jason which accepts somewhere
+
+02:46.530 --> 02:52.100
+array as the data and optionally a second parameter is the status code.
+
+02:52.590 --> 02:57.350
+So let's return that status OK.
+
+03:01.100 --> 03:01.610
+OK.
+
+03:01.670 --> 03:02.990
+If you have copied everything.
+
+03:03.050 --> 03:09.890
+Now let's run our route list so you can see how prefix works.
+
+03:09.890 --> 03:12.900
+So the first thing that we have is API.
+
+03:13.040 --> 03:21.650
+And of course this is directly taken from the map API roots because it's calling our prefix method and
+
+03:21.650 --> 03:25.350
+then groups all the files from the API speech.
+
+03:25.550 --> 03:28.220
+So that's the first prefix that is being added.
+
+03:28.670 --> 03:37.790
+So any subsequent calls to the prefix will just add this as a next parameter so you can see api v1 means
+
+03:37.790 --> 03:40.290
+version 1 status.
+
+03:40.430 --> 03:43.340
+Of course this end point does work.
+
+03:43.340 --> 03:46.340
+So if you copy it and now go to postman
+
+03:48.950 --> 03:53.770
+this would be the first and point that we have created and it of course returns.
+
+03:53.780 --> 03:54.720
+Jason.
+
+03:54.770 --> 04:00.540
+And you can see that we have the content type US application.
+
+04:00.540 --> 04:06.520
+Jason by the way you might have noticed that we got some cookies back.
+
+04:06.520 --> 04:13.740
+We have their response and well I've told you that with the API endpoints we don't have a session and
+
+04:13.800 --> 04:14.790
+cookies.
+
+04:15.030 --> 04:18.160
+But actually this is how postman works.
+
+04:18.160 --> 04:25.410
+So if it got some cookies from the previous attempts to our specific domain it will save this cookies
+
+04:25.710 --> 04:32.340
+and then we'll send them again as you can see there is this option temporary headers under this header
+
+04:32.340 --> 04:37.650
+stop and it just tries to re send back those cookies.
+
+04:37.770 --> 04:48.910
+So to clear that you will have to go to this cookies option and then just remove those cookies here.
+
+04:48.930 --> 04:54.980
+So now if you will call this end point again you can see that there is no cookies return back.
+
+04:54.990 --> 05:00.870
+And of course there are no temporary cookies in temporary headers and this is how API s work.
+
+05:00.870 --> 05:03.120
+So no session is being started.
+
+05:03.120 --> 05:09.030
+No cookies are stored on the server and you won't get any cookies back which means a session cookie
+
+05:09.030 --> 05:10.200
+for example.
+
+05:10.200 --> 05:16.800
+And we'll get of course to how to how to raise those end points later.
+
+05:16.800 --> 05:22.040
+So now let's go back to the Visual Studio code and play around with their prefix method again.
+
+05:22.050 --> 05:27.510
+So let's see how we can quickly are the new version of this end point as I've mentioned this might change
+
+05:27.540 --> 05:33.870
+and well some mobile devices Martin might not pick it up so you probably want sometimes to have two
+
+05:33.870 --> 05:36.810
+versions of the end point at the same time.
+
+05:37.680 --> 05:44.230
+And now we have created a new end point with V2 and this might for example change the response.
+
+05:44.460 --> 05:48.470
+So let's say that status is not OK but it's a boolean.
+
+05:48.480 --> 05:49.410
+So it's true
+
+05:52.620 --> 05:59.500
+and now let's call beauty artisan route least grep API and you can see that we have two status end points.
+
+05:59.970 --> 06:07.380
+So if you will now visit this in the post man you can see that's the version one and version two is
+
+06:07.440 --> 06:14.640
+different but the whole point of that is to demonstrate how we can use prefix to add some roots and
+
+06:14.670 --> 06:19.590
+they all will have to be defined inside this block.
+
+06:19.620 --> 06:24.690
+So you are adding something and then grouping those routes.
+
+06:24.690 --> 06:31.770
+So now let's keep working with the version 1 as this was just an example of using prefix.
+
+06:31.770 --> 06:36.420
+And if you will go back to the least you can see that there is empty think here.
+
+06:36.420 --> 06:38.330
+So those roots have no names.
+
+06:38.340 --> 06:44.940
+If we were called peach B aunties on the route least again the full list you can see that the normal
+
+06:44.940 --> 06:53.010
+routes that we have created have some kind of name and now in the case of the API of course there isn't
+
+06:53.040 --> 06:53.310
+any.
+
+06:53.310 --> 06:55.820
+Because we haven't defined anything.
+
+06:55.920 --> 07:03.240
+Now if I'm probably the first thing you will do with our current application is that now everything
+
+07:03.240 --> 07:10.670
+works on traditional endpoints you just display and HDL but you might have some corresponding controllers
+
+07:10.680 --> 07:13.460
+that do the same like display a list of comments.
+
+07:13.470 --> 07:24.240
+But through an API so not to confuse it with that giving the same names we can use the name method and
+
+07:24.270 --> 07:31.760
+if we'll do that if we were called name before we called group we can the prefix to the name of all
+
+07:31.760 --> 07:45.390
+of the roots so we can do something like api v1 and adopt let's clear the screen and call it again with
+
+07:45.390 --> 07:46.680
+this grep API.
+
+07:46.680 --> 07:54.480
+Now you can see that this is being added as a prefix but now currently since we haven't defined a name
+
+07:54.480 --> 07:59.110
+for this route it's just api v1 dot.
+
+07:59.130 --> 08:00.870
+So let's fix that.
+
+08:00.900 --> 08:03.090
+We can also do that here.
+
+08:05.940 --> 08:10.380
+So this will be V to any other name to this route.
+
+08:10.400 --> 08:16.220
+So name would be let's say status something simple.
+
+08:18.570 --> 08:23.420
+And now you can see that we have api v1 status and this is our route.
+
+08:23.420 --> 08:27.720
+Name you can use to generate you arouse inside your application.
+
+08:27.720 --> 08:33.050
+So it's always useful to have the root names defined.
+
+08:33.060 --> 08:35.970
+Now let's quickly take a look at the Web BHP.
+
+08:36.030 --> 08:43.590
+So we've often used the route resource to generate a controller that has some predefined actions that
+
+08:43.590 --> 08:46.020
+just center around a specific resource.
+
+08:46.020 --> 08:47.570
+In this case the post comments.
+
+08:47.580 --> 08:52.250
+So we have a list of comments we have methods for storing one.
+
+08:52.260 --> 08:59.250
+But also when you call a route resource it is creating two additional methods one for showing the forum
+
+08:59.280 --> 09:05.870
+to add this particular comment and then another one to show that forum for editing.
+
+09:05.870 --> 09:09.370
+So two additional actions are being added.
+
+09:09.570 --> 09:12.180
+So as a reminder we can check that out.
+
+09:12.180 --> 09:21.480
+So here this is actually not defined but let's say in post controller there is an update for actually
+
+09:21.480 --> 09:29.270
+changing the blog post but there is also a need to display a forum and this is how to generate a bi
+
+09:29.270 --> 09:30.110
+lateral.
+
+09:30.120 --> 09:36.920
+If you use the resource routes now there is something corresponding for API.
+
+09:37.470 --> 09:43.710
+But this just won't have those two additional routes because you don't need them as of course in API.
+
+09:43.950 --> 09:46.530
+You do not show any forums.
+
+09:47.340 --> 09:51.680
+So let's see how we can generate a controller.
+
+09:52.020 --> 10:00.090
+So you will run P2P artisan make controller as usual but this time since we will be coupling some of
+
+10:00.090 --> 10:08.940
+the functionality of post comment controller but this time we want it separate we would use then namespace
+
+10:08.940 --> 10:10.580
+method.
+
+10:10.590 --> 10:21.960
+So we have to define a namespace in this command Lane command line and this would be API V1 and not
+
+10:21.960 --> 10:31.680
+this one thing that I'm using this forward slash for their name spaces and in BHP this backslash.
+
+10:31.700 --> 10:35.050
+So that's very important because this will just break.
+
+10:35.090 --> 10:40.920
+If you would use the backslash you have to use forward slash when generating groups.
+
+10:40.940 --> 10:48.650
+So what this is saying is that create that under this namespace and this namespace means that there
+
+10:48.650 --> 10:50.950
+should be the base namespace used.
+
+10:51.560 --> 10:59.120
+If you do not remember this is in route service provider up HDP controllers and then we would like to
+
+10:59.120 --> 11:02.540
+create two additional folders API and V1.
+
+11:02.540 --> 11:08.180
+It's just a good practice to organize your controllers this way.
+
+11:08.840 --> 11:14.450
+So now the controller name this would be post command control controller.
+
+11:14.570 --> 11:20.060
+So mind that we can use the same name as we already have because this is in a different namespace so
+
+11:20.060 --> 11:22.190
+there is no conflict.
+
+11:22.190 --> 11:28.820
+And remember that we have previously used this resource flag to create a resource controller and for
+
+11:28.820 --> 11:33.110
+the API resource controllers will use a different flag.
+
+11:33.170 --> 11:37.380
+And it is called API before you run it.
+
+11:37.400 --> 11:38.440
+I've made a mistake.
+
+11:38.450 --> 11:41.450
+This actually should not be a space here.
+
+11:41.450 --> 11:43.780
+This has to be like that.
+
+11:43.790 --> 11:52.250
+Now let's run this and now we can see that we should have a new class generated inside up contour up
+
+11:52.280 --> 11:53.900
+HDP controllers.
+
+11:53.930 --> 11:58.260
+Now API V1 post command controller.
+
+11:58.400 --> 12:04.070
+So let's take a quick look at this controller so you can see that this is a resource controller.
+
+12:04.160 --> 12:07.670
+It is being generated specially for the API.
+
+12:07.670 --> 12:15.230
+And as I've said it only has index storage for saving show for displaying one element update for modifying
+
+12:15.260 --> 12:16.810
+one element and destroy.
+
+12:16.810 --> 12:25.230
+So two methods for showing the forum to add and update are missing because we don't need them so now
+
+12:25.800 --> 12:29.890
+we can use this using route.
+
+12:29.950 --> 12:40.740
+And this time we don't call their resource method it is actually API resource so you can specify it
+
+12:40.790 --> 12:45.860
+as post comments let's check what we have in the web.
+
+12:46.070 --> 12:49.890
+This is posts comments so let's be consistent.
+
+12:49.890 --> 12:54.100
+Post comments and then controller name.
+
+12:54.140 --> 13:04.940
+So this would be post comment controller but now we haven't added the namespace call here and.
+
+13:05.070 --> 13:07.070
+Well let's see what happens first.
+
+13:07.080 --> 13:13.500
+Let's open this API controller and you can see that the index method showing all elements is empty so
+
+13:13.500 --> 13:16.560
+it shouldn't produce anything.
+
+13:16.580 --> 13:28.830
+Now if you go to API V1 posts 1 comments you can see that we actually got some J some bug and well we
+
+13:28.830 --> 13:33.210
+just checked seconds ago that this wasn't implemented anywhere.
+
+13:33.270 --> 13:35.880
+So the method index is empty.
+
+13:35.880 --> 13:43.530
+And the reason for that is we haven't specified any additional namespace for those roots specifically
+
+13:43.530 --> 13:45.180
+for this one.
+
+13:45.210 --> 13:51.300
+So what lateral does is it is looking for the default namespace defined in room service provider which
+
+13:51.300 --> 13:59.880
+happens to be up HDP controllers and what happened is that we actually have a controller inside this
+
+13:59.880 --> 14:06.930
+directory and this is this old one that we played around with in previous sections and it returns some
+
+14:06.930 --> 14:18.000
+Jason so to tell a lot of where it should find the controllers we can use root namespace and while in
+
+14:18.000 --> 14:23.550
+this case it actually won't make sense to wrap all of this using single namespace because it's a different
+
+14:23.730 --> 14:31.890
+version and then well we might just create a separate controllers for this too so let's add namespace
+
+14:31.890 --> 14:33.480
+here so namespace
+
+14:36.130 --> 14:45.410
+and here we'll have to specify it as api v1 exactly the same as our new folder structure for those controllers.
+
+14:47.400 --> 14:53.790
+So now if you will save the changes and visit this link again you'll get an empty page.
+
+14:53.790 --> 15:02.190
+There is some H the amount generated by the lot of debug bar but if from here you will adjust the return
+
+15:02.340 --> 15:03.450
+response.
+
+15:03.450 --> 15:04.320
+J some
+
+15:11.090 --> 15:19.730
+something like this just some adjacent to return anything and run this again you will see that we actually
+
+15:19.730 --> 15:21.170
+have this end point
+
+15:25.550 --> 15:32.330
+so now let's go back to the terminal and run the artisan route least grep API again and now you'll see
+
+15:32.420 --> 15:38.740
+all of our end points and they all happen to have this prefixes that we have defined you.
+
+15:38.870 --> 15:40.780
+This is also API.
+
+15:40.780 --> 15:47.750
+The version that another prefix that we have added here there is Version 2 and apart from our 2 status
+
+15:47.800 --> 15:55.310
+and points which are closures there are also the resource routes defined using API resource for the
+
+15:55.310 --> 15:56.220
+comments.
+
+15:56.240 --> 16:04.640
+Look how nicely they are produced with the sensible argument names and also they have the names which
+
+16:04.640 --> 16:11.570
+want to duplicate the existing ones because we have other it also are prefixed to the name using the
+
+16:11.570 --> 16:17.300
+name method and now they also know where to pick up the controller.
+
+16:17.330 --> 16:23.690
+So they are using the controller from the API V1 folder.
+
+16:24.380 --> 16:31.160
+So now you know how to actually define those API routes and we have also created the first controller
+
+16:31.310 --> 16:37.700
+which we will proceed implementing in the next lecture and will of course reuse some of the stuff that
+
+16:37.700 --> 16:44.960
+we have here which actually shouldn't be in this place so we can have some first function of things
+
+16:45.020 --> 16:47.840
+in our API done for our application.

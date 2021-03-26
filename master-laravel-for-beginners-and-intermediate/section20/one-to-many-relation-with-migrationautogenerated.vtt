@@ -1,0 +1,235 @@
+WEBVTT
+
+00:01.110 --> 00:08.250
+This lecture would be a short introduction to the one to many relationship a very common kind of relationship
+
+00:08.250 --> 00:11.620
+that you will probably most often use.
+
+00:11.640 --> 00:13.500
+So take a look at this diagram.
+
+00:13.590 --> 00:19.620
+So as the name of the relationship suggests you can see that on the left we have the blog post model
+
+00:19.650 --> 00:21.940
+which we have already created.
+
+00:22.050 --> 00:25.200
+And on the right we have multiple command models.
+
+00:25.560 --> 00:33.900
+And as you can see a blog post can have many comments but one comment can only be assigned to one individual
+
+00:33.900 --> 00:35.310
+blog post.
+
+00:35.310 --> 00:42.870
+So actually in the one to many relationship the blog post could have one related comment.
+
+00:42.870 --> 00:52.960
+It could have zero related comments or as many as 10 20 or basically limitless amount of comments related.
+
+00:52.980 --> 00:57.610
+Now let's see how the database design would look like for this.
+
+00:57.630 --> 01:00.480
+So this is our existing blog post model.
+
+01:00.480 --> 01:01.590
+It won't change.
+
+01:01.590 --> 01:04.340
+We won't have to add anything else to it.
+
+01:04.590 --> 01:11.910
+But this new comment model that will create it contains that idea the usual timestamps the content that
+
+01:11.910 --> 01:17.180
+will hold the common text but also it has the blog post idea.
+
+01:17.610 --> 01:26.010
+And this column will hold the idea of the related blog post so also the reason why we have put the blog
+
+01:26.010 --> 01:33.870
+post idea inside the comment not the other way around should be pretty obvious since we can have many
+
+01:33.870 --> 01:40.460
+comment models and they all have to belong to a particular blog post.
+
+01:40.560 --> 01:47.640
+We wouldn't be able to put so many columns into the blog posts so that's why we always have to put that
+
+01:47.850 --> 01:50.390
+to the related model.
+
+01:50.400 --> 01:55.040
+Now just let's go ahead and create our new comment model.
+
+01:55.230 --> 01:58.400
+So as usual we will generate it using artisans.
+
+01:58.410 --> 02:03.110
+So we write BGP artisan make model comment.
+
+02:03.710 --> 02:09.970
+So that's the name of the model and we are the migration suffix because we want to generate migration.
+
+02:09.980 --> 02:13.510
+Migration for our comment model.
+
+02:13.670 --> 02:21.200
+So we already have the boiler plate with the IDA end times times and also the down function which will
+
+02:21.740 --> 02:23.910
+allow us to roll back this.
+
+02:23.930 --> 02:30.220
+Now let's add our content columns so it will be taxed.
+
+02:30.400 --> 02:34.710
+So we expect something more than 255 characters.
+
+02:34.720 --> 02:42.400
+That's why we've put text which would allow us for a longer text to be stored inside the comment content.
+
+02:42.850 --> 02:46.360
+And now we'll create foreign key.
+
+02:46.450 --> 02:49.810
+This would be blog post idea
+
+02:54.420 --> 03:04.590
+but first we have to add a column so first we had to use unsigned integer blog post I.D. We can also
+
+03:04.590 --> 03:06.240
+make it an index
+
+03:09.100 --> 03:16.340
+so it may improve the performance because it would be joined quite often probably with the blog post
+
+03:16.360 --> 03:19.190
+so we might just add an index on it.
+
+03:19.240 --> 03:21.790
+And now let's go back to our foreign key.
+
+03:21.820 --> 03:34.360
+So it is referencing Ida on the blog posts table OK.
+
+03:34.370 --> 03:36.760
+So migration looks good.
+
+03:36.800 --> 03:46.010
+Now let's run it using peach P artisan migrate and see how it looks inside the database.
+
+03:46.010 --> 03:56.470
+So we have our comments table and I.D. the timestamps content which is type text and blog post I.D.
+
+03:59.000 --> 04:03.440
+OK so now let's actually define those relations on their models.
+
+04:03.560 --> 04:10.500
+So first let's go to the blog post and create public function comments.
+
+04:10.580 --> 04:15.200
+So this would be in relation to the comments and we'll return this
+
+04:18.170 --> 04:19.100
+has many.
+
+04:19.580 --> 04:28.360
+So last time we used has one this time we'll use has many and it relates to the comment Model K.
+
+04:28.370 --> 04:29.920
+Let's say the changes.
+
+04:29.960 --> 04:37.790
+And now on the comments table we will create the opposite side of this relation.
+
+04:37.790 --> 04:42.490
+So it will be a blog post and it should return.
+
+04:42.680 --> 04:50.380
+This belongs to end up blog post.
+
+04:50.560 --> 04:54.700
+Now the name of this relation method is not a random.
+
+04:54.910 --> 05:03.310
+It is blog post because this is the way Lavell will look for the foreign key on the related model by
+
+05:03.340 --> 05:04.390
+default.
+
+05:04.390 --> 05:08.440
+So it will convert the method name to the snake snake case.
+
+05:08.560 --> 05:15.680
+So it will be something like this and it will suffix it with I.D..
+
+05:15.850 --> 05:18.090
+So this is what it will look for.
+
+05:18.220 --> 05:22.170
+If the method name of the relation is blog post I.D..
+
+05:22.840 --> 05:29.070
+And as you might remember it happens to be exactly the name we have given in our migration.
+
+05:29.080 --> 05:38.930
+So if I will change this name to post then Lara all by default will look for post I.D..
+
+05:39.640 --> 05:41.260
+So let's keep it blog post.
+
+05:41.410 --> 05:50.470
+And now another thing if you would like to use another name for the foreign key there is a second parameter
+
+05:50.500 --> 05:54.710
+you can use and you can use post I.D..
+
+05:54.760 --> 06:04.180
+So this would be for example in case where when your Frankie would be post I.D. inside the comments
+
+06:04.180 --> 06:05.980
+table.
+
+06:06.100 --> 06:13.960
+Also if the primary key of the block post model actually it is I.D. but if it would be different which
+
+06:13.960 --> 06:15.390
+can also be configured.
+
+06:15.400 --> 06:17.830
+And I will show you this later.
+
+06:17.830 --> 06:22.210
+There is a third parameter where you can specify something else.
+
+06:22.210 --> 06:25.720
+Let's say that the blog post primary key is not I.D..
+
+06:25.750 --> 06:34.930
+This blog post I.D. for some reason you can also specified on the relation in the first parameter but
+
+06:34.930 --> 06:42.490
+since it is I.D. we can use the defaults and we do not need this options just so you know it is possible
+
+06:42.640 --> 06:45.320
+to also configure it.
+
+06:45.670 --> 06:54.630
+So let's store it for later and just use the defaults and comments that out OK.
+
+06:54.640 --> 07:01.720
+Now we can save the genders and basically we have the relations defined and in the next lectures I will
+
+07:01.720 --> 07:09.700
+show you the basics of both storing the relations on both sides adding comments to the blog post and
+
+07:09.760 --> 07:17.710
+assigning a blog post to a comment and then also how you can easily read the related models both the
+
+07:17.710 --> 07:20.200
+comments from blog posts and the opposite.

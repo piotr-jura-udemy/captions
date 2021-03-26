@@ -1,0 +1,97 @@
+WEBVTT
+
+00:01.120 --> 00:06.520
+This time, we will also talk about a routine, so make sure you have the development server started
+
+00:06.520 --> 00:15.370
+and browser directed at this local Eurail den in called Let's open the Web File with the Roots.
+
+00:16.570 --> 00:19.860
+So in this lecture, we will see two things.
+
+00:20.200 --> 00:27.400
+First, one is how to get the least of all the routes defined in your application so you can do that
+
+00:27.400 --> 00:30.830
+through the terminal, through an artisan command, actually.
+
+00:31.120 --> 00:33.490
+So let's open the terminal in VS code.
+
+00:33.670 --> 00:36.240
+I will use a shortcut control field.
+
+00:36.460 --> 00:43.720
+You can check for your system in the View menu terminal was the shortcut for opening the terminal inside.
+
+00:43.810 --> 00:44.740
+Very cold.
+
+00:44.980 --> 00:49.930
+So the command is speech artisan route Kolon.
+
+00:49.930 --> 00:54.330
+Least now this is how the list looks like currently.
+
+00:54.640 --> 00:57.140
+So it has some useful parameters.
+
+00:57.970 --> 01:01.700
+Now, if we would define another route, it should show up in here.
+
+01:01.720 --> 01:09.660
+So let me close the terminal so we can have another practice of defining a route.
+
+01:09.670 --> 01:12.320
+Let's define our contact route.
+
+01:12.760 --> 01:17.200
+This will be just a simple page, returning the text.
+
+01:18.200 --> 01:18.950
+Contact.
+
+01:20.200 --> 01:26.590
+Save the charges, let's go back to the browser and verify if this actually works during this.
+
+01:29.390 --> 01:35.000
+Now, going back to VSC cold, open the terminal again, using control Tilda.
+
+01:36.400 --> 01:43.660
+And running the artisan route, at least again, will now show our newly defined route.
+
+01:45.640 --> 01:53.860
+Not eased up, the name parameter of all of our routes is empty and actually having named routes is
+
+01:53.860 --> 01:56.950
+very useful whenever you need to generate.
+
+01:56.950 --> 02:03.430
+Are you around to certain page, let's say to this contact page, it's better to use some name you can
+
+02:03.440 --> 02:11.440
+remember instead of relying on the your URL that might easily change in the future to give you routes
+
+02:11.440 --> 02:15.540
+some name you might chain a call to unnamed method.
+
+02:16.480 --> 02:24.820
+For example, we can call those two routes, let's say home index, and the second one can be called
+
+02:24.820 --> 02:26.320
+home contact.
+
+02:26.920 --> 02:29.420
+This is how you give your routes names.
+
+02:29.950 --> 02:37.150
+Now, if you will run a bipartisan route list again, they all have names.
+
+02:37.870 --> 02:43.360
+So you want to immediately see the benefits of giving routes, names.
+
+02:43.750 --> 02:46.300
+We'll have to move forward a little bit with the course.
+
+02:46.300 --> 02:51.670
+But for now, I need you to trust me that this is the best practice.

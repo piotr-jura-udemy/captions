@@ -1,0 +1,46 @@
+WEBVTT
+
+00:01.400 --> 00:09.980
+To include I compiled a JavaScript or txt file, you can use that as a helper first, make sure you
+
+00:09.980 --> 00:11.720
+have our only layout file.
+
+00:11.720 --> 00:14.710
+Open the ablate be.
+
+00:16.130 --> 00:19.850
+For stylesheets, use the link tag.
+
+00:21.440 --> 00:24.770
+For the JavaScript, the script tag.
+
+00:27.100 --> 00:32.630
+The path to the file should be relative to the public folder in your project.
+
+00:34.000 --> 00:43.180
+So first, with the stylesheets we are using the asset helper and the relative path is CSA slash up
+
+00:43.180 --> 00:44.140
+access.
+
+00:46.980 --> 00:48.270
+And for the script.
+
+00:51.710 --> 00:56.300
+It is just slash up, James.
+
+00:59.850 --> 01:07.980
+Make sure you the defer attributes to the script tag so the browser won't wait until the JavaScript
+
+01:07.980 --> 01:10.290
+is passed to render the page.
+
+01:12.100 --> 01:17.380
+After this simple change, let's check how the page looks like in the browser.
+
+01:19.940 --> 01:26.240
+We should immediately see a slight change in styling, and it's due to their bootstraps versus framework
+
+01:26.390 --> 01:28.460
+now being loaded and used.

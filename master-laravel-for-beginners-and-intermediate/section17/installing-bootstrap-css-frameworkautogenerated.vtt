@@ -1,0 +1,64 @@
+WEBVTT
+
+00:02.140 --> 00:08.410
+In this course, we will use that Bootstrap CCWs framework to add some style to this simple tutorial
+
+00:08.410 --> 00:15.910
+application, we have notes the course does not cover the bootstrap framework itself in detail, but
+
+00:15.910 --> 00:21.490
+what you will learn should be enough for you to understand the basics and pick up a finger to their
+
+00:21.490 --> 00:25.270
+choice was dictated by the popularity of this framework.
+
+00:26.080 --> 00:34.570
+Laravel has tools to install basic scaffolding for different UI tools, siestas frameworks like bootstrap
+
+00:34.570 --> 00:38.590
+or JavaScript frameworks, namely view or react.
+
+00:39.560 --> 00:44.720
+We will install the Laravel UI package that will do two things for us.
+
+00:45.170 --> 00:51.100
+It will set up the bootstrap framework but will also provide the authentication controller.
+
+00:51.130 --> 00:56.450
+So we would have the registration and signing in logic out of the box.
+
+00:56.810 --> 00:59.180
+But more on authentication later.
+
+01:01.780 --> 01:08.610
+Since the course is Laravel, eight based, we need to install a lot of UI version three.
+
+01:09.610 --> 01:19.870
+So in the project directory run composer require Laravel slash UI and specify an exact version.
+
+01:23.580 --> 01:30.540
+The UI component has the concept of presets, one of those is bootstrap.
+
+01:31.580 --> 01:39.680
+Now you can run by artisan UI bootstrap to configure bootstrap.
+
+01:40.820 --> 01:42.290
+Well, this is it.
+
+01:42.950 --> 01:46.110
+Bootstrap is now installed and configured.
+
+01:46.970 --> 01:52.670
+Also make sure to run BHB artisan UI comptrollers.
+
+01:54.500 --> 02:00.860
+This would generate authentication comptrollers, you will be reminded about that later, too, but
+
+02:00.860 --> 02:02.830
+it's good to have that out of the way.
+
+02:03.970 --> 02:08.940
+We are not going to see bootstrap in action in this lecture yet us.
+
+02:09.000 --> 02:12.940
+First, we need to learn how to use the Laravel mix.

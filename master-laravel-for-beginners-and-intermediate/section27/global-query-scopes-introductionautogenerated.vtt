@@ -1,0 +1,262 @@
+WEBVTT
+
+00:00.510 --> 00:07.350
+In the last lecture we have fixed the problem that the user I.D. haven't been automatically added for
+
+00:07.350 --> 00:08.960
+the new blog posts.
+
+00:09.240 --> 00:16.770
+But then after we have fixed that we noticed a problem that when we take a look at the list of the blog
+
+00:16.770 --> 00:23.270
+posts it happens that the blog posts that were most recently added are at the bottom.
+
+00:23.280 --> 00:26.880
+So we would like them to be seen first.
+
+00:26.880 --> 00:35.880
+So what we can do is inside our post controller we can sort those blog posts.
+
+00:35.880 --> 00:39.330
+So we are fetching blog posts with comments.
+
+00:39.330 --> 00:47.670
+And this returns our query builder so we can add some further parts to this query to use to sort the
+
+00:47.670 --> 00:57.820
+blog posts we can just use order by and specify the created art field which is the time where the blog
+
+00:57.820 --> 01:02.680
+post was created and sought by descending order.
+
+01:02.680 --> 01:05.160
+So the newest will be shown first.
+
+01:06.070 --> 01:10.500
+So save the changes and let's see what we have right now.
+
+01:12.790 --> 01:21.520
+So after scrolling to the to the top we can see that the newest blog post is shown first but this might
+
+01:21.520 --> 01:22.660
+have some problems.
+
+01:22.660 --> 01:25.260
+This solution is not perfect.
+
+01:25.270 --> 01:33.820
+Imagine that most of the time for specific things like model like blog post models you most probably
+
+01:33.880 --> 01:37.860
+would like to display the newest blog posts first.
+
+01:37.870 --> 01:46.540
+So it should be kind of a default behavior when you fetch the blog posts using either the all static
+
+01:46.540 --> 01:53.220
+method or by construct constructing a query with relations like we do here.
+
+01:53.290 --> 02:02.470
+So instead of each time adding this ordering or imagine that you might like to add some more constraints
+
+02:02.500 --> 02:08.870
+when fetching blog posts and you also would like them to be a difficult default behavior.
+
+02:09.760 --> 02:20.140
+So what we can do here and what will solve our problem is I think called query scopes so we will start
+
+02:20.230 --> 02:26.030
+by seeing and learning about the global query scopes.
+
+02:26.050 --> 02:29.820
+Now we can define global query scopes two ways.
+
+02:29.830 --> 02:36.190
+The first way is to use our closure and the second one is to define a specific class.
+
+02:36.190 --> 02:38.040
+So let's go with the second one.
+
+02:39.010 --> 02:48.400
+Let's create a new namespace inside the app folder called scopes and inside it create a new file and
+
+02:48.400 --> 02:52.960
+let's call it latest scope BHP.
+
+02:52.990 --> 02:59.000
+So as the name suggests we'll create a query scope called latest.
+
+02:59.680 --> 03:08.750
+So we will we are starting with an empty file so we have to add a namespace which is up scopes and define
+
+03:08.840 --> 03:11.930
+a class called latest scope
+
+03:16.290 --> 03:24.480
+now every scope class has to implement a specific interface and the name of the name of this interface
+
+03:24.510 --> 03:25.530
+is scope.
+
+03:25.920 --> 03:32.850
+So if you are using the Visual Studio Extension just to your code extensions that I am using this there
+
+03:32.850 --> 03:40.080
+is a lecture about that you can get this automatically important because it suggests what's the interface
+
+03:40.110 --> 03:45.510
+or class existing with that name and what namespace it is defined in.
+
+03:45.510 --> 03:52.080
+So you can just press enter and you can see I have the import automatically added.
+
+03:52.440 --> 04:00.270
+Now before I explain what those global scopes or query scopes actually do and how they do it let's see
+
+04:00.270 --> 04:02.550
+how we can implement a query scope.
+
+04:04.020 --> 04:13.620
+So each query scope has a public function called apply which accepts two arguments The Builder which
+
+04:13.620 --> 04:16.170
+is the query builder and the model.
+
+04:17.010 --> 04:20.100
+Additionally you can add type things here.
+
+04:20.100 --> 04:27.770
+So this would be a builder so to get on out to Matic import.
+
+04:27.780 --> 04:37.560
+We can see which one is that it's illuminate database eloquent builder so that's this one and this class
+
+04:37.770 --> 04:40.000
+this argument is of type model.
+
+04:40.470 --> 04:42.230
+So let's see what models do we have.
+
+04:42.230 --> 04:44.200
+There is only one fortunately.
+
+04:46.050 --> 04:56.590
+Now what we can do here is we can modify our default queries for older models that are using this global
+
+04:56.590 --> 04:57.760
+scopes.
+
+04:57.760 --> 05:01.960
+So what that means is let's see an example.
+
+05:01.960 --> 05:12.710
+So for example we're at the order by to the query builder that will order by the created out date descending
+
+05:12.910 --> 05:13.510
+order.
+
+05:13.600 --> 05:21.610
+So newest first if you do not remember created art is a column which we get out to magically added for
+
+05:21.610 --> 05:27.920
+the models that we use timestamps for and we do that for blog posts and comments too.
+
+05:29.860 --> 05:35.820
+Now creating this class won't do anything we have to register it first.
+
+05:36.070 --> 05:41.470
+And we have to do that for every model that should use this global query scope.
+
+05:41.980 --> 05:47.680
+So you do that inside the boot static method of a specific model.
+
+05:48.070 --> 05:57.020
+So you do static at global scope and here you have to create a new instance of the scope class that
+
+05:57.050 --> 05:58.280
+you would like to use.
+
+05:58.280 --> 06:09.360
+So that's the new latest scope also mind that you statement was ultimately added for me.
+
+06:09.370 --> 06:12.940
+Now we just have to save the changes.
+
+06:12.940 --> 06:16.660
+And now let's go to our list of blog posts.
+
+06:16.750 --> 06:24.190
+So now you can see that the blog posts are ordered by the newest first.
+
+06:24.460 --> 06:32.800
+And if you will go back to the post controller you can see that we aren't adding that order by anywhere
+
+06:32.950 --> 06:43.630
+inside this query so what global scopes do is they add something to the default queries that gets executed.
+
+06:43.630 --> 06:52.750
+For example if you would use blog post all to fetch all the blog posts from the blog post table if the
+
+06:52.750 --> 07:01.060
+latest scope will be added to this model it would it would always modify those queries to include what
+
+07:01.060 --> 07:03.490
+is defined inside the latest scope.
+
+07:03.490 --> 07:11.130
+So this would be ultimately ordered by the created date in descending order.
+
+07:11.230 --> 07:12.970
+So that's the first simple example.
+
+07:12.970 --> 07:20.170
+But what we can even improve in this case since we might use this for different models not only for
+
+07:20.170 --> 07:30.390
+the blog posts is we can use the model created at constant because what this does.
+
+07:30.420 --> 07:34.650
+It defines our name as you can see public const create a dot.
+
+07:34.650 --> 07:42.900
+It defines default name for the timestamp which means where name of the column of where when the model
+
+07:42.900 --> 07:44.190
+was created.
+
+07:44.190 --> 07:53.670
+So instead of using string here we can use the constants so if someone would modify this field name
+
+07:53.670 --> 08:00.810
+for any model which they can do by overwriting this constant we make sure that this code will work for
+
+08:00.900 --> 08:02.990
+every model.
+
+08:03.000 --> 08:12.180
+Now what you need to know about the global query scopes is that by appending a global query scope to
+
+08:12.180 --> 08:21.480
+a model like we did with the blog post will make Lavell at this part of the query to all the queries
+
+08:21.480 --> 08:25.740
+related with that model in explicitly.
+
+08:25.740 --> 08:33.690
+So you will never really have to tell Lavell to add this order by statement to every model that has
+
+08:33.690 --> 08:38.010
+this global query scope Lavell will do that for you.
+
+08:38.580 --> 08:46.710
+So for some cases it seems like a good solution but in the next lecture I will show you why sometimes
+
+08:46.920 --> 08:54.030
+it's not a good solution and why you should rely on local query scopes instead.
+
+08:54.060 --> 09:02.400
+Of course we'll also see how to implement a local query scope and how how to use that explicitly.
+
+09:02.400 --> 09:05.130
+So we'll see that in the next lecture.

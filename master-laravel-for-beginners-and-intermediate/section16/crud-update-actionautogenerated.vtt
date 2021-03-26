@@ -1,0 +1,112 @@
+WEBVTT
+
+00:00.860 --> 00:06.260
+Let's see how we should handle the action that updates an existing model.
+
+00:06.650 --> 00:15.260
+First off, we can reuse the store post request glass as we need the same validation rules for the form
+
+00:15.260 --> 00:15.900
+data.
+
+00:16.400 --> 00:19.460
+So update the method header.
+
+00:20.960 --> 00:21.800
+And then.
+
+00:23.000 --> 00:28.460
+Use the result of the request validated method.
+
+00:29.480 --> 00:32.900
+And assign it to the validated variable.
+
+00:36.340 --> 00:40.360
+This would return an array with validated data.
+
+00:43.760 --> 00:50.270
+But before you validate the data, you should make sure that the model with the given I.D. actually
+
+00:50.270 --> 00:51.260
+exists.
+
+00:52.460 --> 01:01.730
+So first to the post variable, let's assign the result of blog post find or fail as a reminder, this
+
+01:01.730 --> 01:07.820
+would return are for all four page if a blog post with the given ID won't exist.
+
+01:09.250 --> 01:11.620
+You already know the field.
+
+01:12.760 --> 01:16.130
+It was explained in the mass assignment lecture.
+
+01:16.810 --> 01:26.740
+Let's use it to apply the new input data to the model so we can do a post feel validated.
+
+01:30.150 --> 01:34.410
+Now called the save method to save the changes.
+
+01:37.260 --> 01:43.050
+Notice that creating new models and updating existing ones.
+
+01:44.130 --> 01:46.670
+Uses the same safe method.
+
+01:48.530 --> 01:56.090
+It won't hurt to tell the user his action was successful through our flash message, so let's add one.
+
+01:58.680 --> 02:06.900
+You can do that by using the request session method to access the session object and then called a flush
+
+02:06.900 --> 02:07.490
+method.
+
+02:09.420 --> 02:18.600
+Our recession variable name is called Status, and the Messages blog post was updated with an exclamation
+
+02:18.600 --> 02:18.990
+mark.
+
+02:20.330 --> 02:21.020
+Finally.
+
+02:22.110 --> 02:29.130
+Let's redirect to the Post page so you can see the changes in the flash message, so you return our
+
+02:29.140 --> 02:32.340
+redirect to a rude.
+
+02:34.500 --> 02:40.860
+Called posts show, and you have to pass a parameter, which is called Post.
+
+02:40.890 --> 02:47.610
+That's the idea of the newly created blog post sorry, not newly created updated blog post.
+
+02:50.770 --> 02:51.430
+There it is.
+
+02:53.940 --> 02:56.700
+Now, save the changes and let's try it out.
+
+02:58.250 --> 03:06.800
+So I am in the browser, the post is free, and in my case it has such title and such content, so make
+
+03:06.800 --> 03:11.900
+sure you just go to a blog post, which exists now manually.
+
+03:11.900 --> 03:20.630
+LEDs are added to the root to display a form and let's change it to something that can be clear that
+
+03:20.630 --> 03:27.530
+it was modified, but also make sure that this data will pass the validation so the text has to be long
+
+03:27.530 --> 03:28.010
+enough.
+
+03:31.290 --> 03:35.350
+And this is how the post with Idy free looks after the changes.
+
+03:35.350 --> 03:38.070
+So it means everything works perfectly.

@@ -1,0 +1,175 @@
+WEBVTT
+
+00:00.520 --> 00:08.470
+Now after we have created a policy for a blog post you still see that we display the edit and delete
+
+00:08.470 --> 00:10.900
+buttons for everyone.
+
+00:10.930 --> 00:17.240
+Even though I am currently not authenticated at all you can see that on the right there is no user name
+
+00:18.100 --> 00:26.440
+and also if I will authenticate as let's say John Doe which in our current application is an admin.
+
+00:26.440 --> 00:38.350
+And even though I have temporarily disabled inside the provider that there is an override to the general
+
+00:38.350 --> 00:43.530
+rules that we have defined inside the policy for the blog post.
+
+00:43.720 --> 00:52.390
+He can still see the buttons to edit and delete posts that are not created by John Doe and this results
+
+00:52.420 --> 00:55.300
+in the 400 free page.
+
+00:55.540 --> 01:03.070
+So it depends if you'd like to show that this behavior to the user that when he clicked something he
+
+01:03.070 --> 01:10.510
+knows that he's not authenticated but probably some of the times you would like to just hide the buttons
+
+01:10.510 --> 01:16.530
+from the user if he is unable to actually perform this operation.
+
+01:16.660 --> 01:21.870
+So obviously we are covered here inside the larval blade template.
+
+01:21.880 --> 01:34.030
+So what I opened here is the index blade BHP from within views posts folder and here those two things
+
+01:34.120 --> 01:40.060
+you can see is first one is the edit button and the second one is the delete button.
+
+01:40.090 --> 01:48.610
+Now we can verify user permissions from within Lara blade as we would inside the controllers so we can
+
+01:48.610 --> 01:51.150
+use that can directive.
+
+01:51.460 --> 01:58.810
+And now that we have defined our policy and registered the policy using our provider.
+
+01:58.840 --> 02:03.060
+So let's go to the ALF provide our service provider for a second.
+
+02:03.070 --> 02:11.770
+So as we have defined that there is a blog post policy inside this particular policy class.
+
+02:12.160 --> 02:15.580
+And of course the abilities are the method names.
+
+02:15.580 --> 02:24.010
+Now we can do what we did inside controller so we can check whether the current user can update the
+
+02:24.010 --> 02:24.610
+post
+
+02:30.150 --> 02:36.710
+and we have to close this directive using and can now we can do the same for the delete button.
+
+02:36.750 --> 02:46.940
+So we right can delete post and we close that by and can.
+
+02:46.950 --> 02:53.550
+So you can see it's extremely simple and even you can read this code as you would be reading a normal
+
+02:53.550 --> 02:54.260
+language.
+
+02:54.270 --> 02:56.250
+It really makes sense.
+
+02:56.250 --> 02:58.740
+So we are checking if someone can update a post.
+
+02:58.770 --> 03:00.260
+So there is.
+
+03:00.300 --> 03:02.070
+It's extremely verbose.
+
+03:02.070 --> 03:04.970
+It's very clear what is happening here.
+
+03:05.100 --> 03:06.990
+So save this changes.
+
+03:07.030 --> 03:10.020
+And now let's go to our blog post least.
+
+03:10.020 --> 03:14.010
+So now you can see I do not see any buttons.
+
+03:14.070 --> 03:21.060
+I only see buttons below the posts that were actually actually created by John Doe.
+
+03:21.120 --> 03:25.010
+So to further verify that it actually works.
+
+03:25.020 --> 03:33.180
+Let's go back to our our service provider and let's enable back for a second hour override our gate
+
+03:33.210 --> 03:40.320
+check interception to give every user that is an admin an ability to update their post.
+
+03:40.320 --> 03:49.600
+So this is what we have did before save the changes and now refresh this page while it didn't work.
+
+03:49.600 --> 03:55.930
+And the reason is because we haven't updated the name of the ability.
+
+03:55.930 --> 04:05.250
+So we previously have changed that to the posts update where we should actually modify its name because
+
+04:05.250 --> 04:06.590
+now it is just update.
+
+04:06.600 --> 04:10.110
+So let's modify that and refresh again.
+
+04:10.110 --> 04:20.640
+So now since John Doe is an admin we are authenticated as John Doe we can edit all the posts but we
+
+04:20.640 --> 04:29.910
+can only delete our own now if we would also give admins ability to delete everything like so we should
+
+04:29.910 --> 04:32.250
+be able to edit and delete everything
+
+04:35.660 --> 04:41.250
+now there is also another great directive we can use.
+
+04:41.250 --> 04:45.670
+So other than can we can use cannot.
+
+04:45.910 --> 04:51.070
+So it is just an opposite to what Ken is doing so we can check.
+
+04:51.070 --> 05:00.030
+Cannot let's say cannot delete post and cannot.
+
+05:00.090 --> 05:04.190
+So here will be able to display something like you.
+
+05:05.220 --> 05:08.160
+You can't delete this post.
+
+05:12.140 --> 05:13.500
+Let's see if that would work.
+
+05:15.440 --> 05:23.230
+So first we'll have to remove the delete ability from the admin abilities save the changes.
+
+05:23.450 --> 05:27.340
+And now you see this message that you cannot you can't delete this post.
+
+05:27.860 --> 05:32.000
+So obviously displaying a message like that doesn't make any sense.
+
+05:31.990 --> 05:39.800
+So I will just comment that out but just in case you will ever need to do that you will know how to
+
+05:39.830 --> 05:44.300
+make this checks inside the larval blade templates.

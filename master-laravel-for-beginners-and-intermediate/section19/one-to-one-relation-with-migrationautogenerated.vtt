@@ -1,0 +1,262 @@
+WEBVTT
+
+00:01.390 --> 00:06.020
+So far we only have created one simple blog post model.
+
+00:06.160 --> 00:13.520
+But as we will create more sometimes we will also need to relate them somehow to each other.
+
+00:13.540 --> 00:22.570
+So for example a blog post can have comments or it can have images or like in this case the outer can
+
+00:22.570 --> 00:27.490
+have his profile where for example he might keep his settings.
+
+00:27.730 --> 00:34.590
+Now the one to one relation that we'll talk about in this lecture is one of the simplest relations.
+
+00:34.600 --> 00:42.970
+And as you can see on this diagram the one outer can only have one profile not more while outer cannot
+
+00:42.970 --> 00:46.700
+have two profiles or more and the same is with profiles.
+
+00:46.720 --> 00:51.960
+Profiles cannot be the same profile cannot be assigned to two outers.
+
+00:51.970 --> 00:57.230
+It has to be assigned to exactly one hour or so.
+
+00:57.250 --> 01:04.340
+This is simple now let's take a look at how is the database design going to look like.
+
+01:04.360 --> 01:07.480
+So we have these two models out or end profile.
+
+01:07.540 --> 01:13.340
+Of course the outer would be the outer stable end profile the profile stable.
+
+01:14.200 --> 01:16.900
+And we haven't put a lot of fields on them.
+
+01:16.960 --> 01:18.450
+It's just an example.
+
+01:18.610 --> 01:23.330
+But you might notice that on the profile we have the outer I.D..
+
+01:23.650 --> 01:27.220
+So this is where our relation would be kept.
+
+01:27.220 --> 01:34.210
+And though there are reasons for this why we put that out or idea on profile and not the profile idea
+
+01:34.300 --> 01:35.560
+on the outer.
+
+01:35.560 --> 01:40.240
+It's because the profile cannot really exist on itself.
+
+01:40.270 --> 01:48.190
+So in the sense of this relations when you have an out or only then the outer can have a profile and
+
+01:48.280 --> 01:56.790
+a profile with some settings and preferences without an outer makes no sense.
+
+01:57.060 --> 02:01.380
+Now this is how you define relations in Laredo will implement that in a bit.
+
+02:01.500 --> 02:07.050
+So we'll be adding functions to our model and they can be named.
+
+02:07.080 --> 02:14.780
+However you like just you need to use this specific methods from the base model class to tell Lavell
+
+02:14.850 --> 02:17.100
+how the relation looks like.
+
+02:17.100 --> 02:20.910
+So in case of the profile as I said it has a profile.
+
+02:20.970 --> 02:27.920
+So we will use has one and then on the other side of the relation the profile belongs to our mouth or
+
+02:27.990 --> 02:34.520
+so we can call that belongs to with the fully qualified class name of the related model.
+
+02:34.530 --> 02:39.210
+Now we'll also create migrations and we have to do that manually.
+
+02:39.300 --> 02:46.290
+We can only generate the basic boilerplate for us and they are basically almost the same up to this
+
+02:46.290 --> 02:54.540
+point where we create the outer I.D. on that profile stable and notice that it is unsigned integer because
+
+02:54.540 --> 03:01.060
+we will hold the I.D. of the outdoor table inside it.
+
+03:02.010 --> 03:06.070
+And also this field would have to be unique.
+
+03:06.090 --> 03:13.800
+That's the whole point of the one to one relation we want every profile that is bank inserted to be
+
+03:14.280 --> 03:14.820
+unique.
+
+03:14.850 --> 03:19.690
+So you can't have one profile assigned to more than one out or.
+
+03:20.820 --> 03:26.230
+And we are also adding another database constraint called foreign key.
+
+03:26.280 --> 03:36.840
+And what this will force that database is to every outer I.D. column inside every row on the profiles
+
+03:36.930 --> 03:45.840
+table would have to contain a valid I.D. of the row on that outer stable.
+
+03:45.840 --> 03:55.230
+So it's a pretty simple concept and it will four beat us inserting any records with the outer I.D. field
+
+03:55.290 --> 04:07.680
+that would be new or inserting a row with any other outer I.D. value than row that exists inside the
+
+04:07.740 --> 04:08.610
+outer stable.
+
+04:08.610 --> 04:11.870
+So you will see how that works in a bit.
+
+04:11.880 --> 04:14.970
+So now let's go ahead and create our models.
+
+04:14.980 --> 04:22.780
+We'll do that inside visual studio called terminal so we'll run the peach bee artisan make model comment
+
+04:23.200 --> 04:33.290
+first will create the outer model and we want it created along with the migration and then we will immediately
+
+04:33.320 --> 04:36.990
+create another model which is the profile.
+
+04:37.040 --> 04:42.230
+And we also want it created without with the migration.
+
+04:42.230 --> 04:52.680
+So here they are the outer model and the profile model so now we have to add the methods inside out
+
+04:52.680 --> 05:07.570
+or we have public function profile and this will return the value of this has one up profile save the
+
+05:07.570 --> 05:18.620
+changes and the other side of the relation would also be a method we can call it outer and we will return
+
+05:18.620 --> 05:30.020
+the result of this belongs to method and specify the class as the up outdoor case that we have the relations
+
+05:30.020 --> 05:30.500
+defined.
+
+05:30.500 --> 05:32.570
+Now let's go to the migration.
+
+05:32.570 --> 05:36.860
+So the first one is create outers table.
+
+05:36.860 --> 05:39.920
+So as I've said we won't be putting any fields to it.
+
+05:39.950 --> 05:48.470
+So this migration is good enough but we will actually create out our idea field on the profiles table
+
+05:49.500 --> 05:56.130
+so we want to create an unsigned integer so an integer that starts from zero.
+
+05:57.030 --> 06:00.480
+And we will call that column out or I.D..
+
+06:00.870 --> 06:04.830
+And additionally we want the unique constraint on it.
+
+06:04.860 --> 06:13.050
+So each individual row inside this table has to have a unique outer I.D. column.
+
+06:13.410 --> 06:25.340
+And finally will the foreign key which is also outer I.D. So we specify the name of the column.
+
+06:25.350 --> 06:33.450
+We would like to add as a foreign key and lot of our will just come up with automatic name for it.
+
+06:33.480 --> 06:38.170
+So we don't really have to worry about naming your foreign I.D..
+
+06:38.400 --> 06:45.030
+And this is great because if you will just specify the column name then you can also drop the foreign
+
+06:45.030 --> 06:52.740
+key if you would like to move the migration down by specifying a column I.D. instead of differing key
+
+06:52.830 --> 06:54.060
+name.
+
+06:54.150 --> 06:59.700
+Now the foreign key is referencing the I.D. field
+
+07:04.420 --> 07:08.740
+on the outers table.
+
+07:09.610 --> 07:10.840
+So that's it.
+
+07:10.840 --> 07:14.100
+We have the model and migrations define.
+
+07:14.110 --> 07:26.850
+Now let's run this by by typing peach P artisan migrate so the BHP artisan migrate have run both migrations.
+
+07:26.920 --> 07:31.370
+Now let's see how the database table looks looks like.
+
+07:31.450 --> 07:33.730
+So we have the outer stable.
+
+07:34.060 --> 07:43.150
+You can see that it has on the I.D. and the timestamps and also we have profiles in this case it has
+
+07:43.180 --> 07:46.890
+the I.D. timestamps and the outer I.D..
+
+07:46.960 --> 07:49.580
+Now what I said about the foreign key.
+
+07:49.780 --> 07:51.670
+Let's try to check this.
+
+07:51.940 --> 07:57.820
+So we will be trying to insert something into the profiles tables so let's imagine.
+
+07:57.820 --> 08:05.230
+I'd like to assign the outer with I.D. one to this profile and see what happens.
+
+08:05.320 --> 08:13.780
+So you can see that we have error and it's due to our foreign key because you have noticed that I haven't
+
+08:13.870 --> 08:23.560
+added an outer yet to this outers table and that's why we can't add entry into the profile stable because
+
+08:23.650 --> 08:29.590
+it really has to have a valid I.D. that already exists on the outer stable
+
+08:33.240 --> 08:33.570
+OK.
+
+08:33.590 --> 08:35.540
+So that would be it for this lecture.
+
+08:35.570 --> 08:42.350
+And in the next one I will show you how you can read those relations and also how you can assign them
+
+08:42.380 --> 08:46.010
+both using the outer model and the profile model.

@@ -1,0 +1,67 @@
+WEBVTT
+
+00:00.990 --> 00:05.290
+It's time for the Post page, the first job is a clean up.
+
+00:05.970 --> 00:12.030
+I think you know how to use conditional rendering by now so we can get rid of this example's.
+
+00:19.780 --> 00:23.710
+Next, we should not use the array access anymore.
+
+00:25.990 --> 00:28.900
+As we have objects here, not a array's.
+
+00:41.010 --> 00:48.540
+Then, since a lot of us timestamped fields on every model, let's show the date when the post was added.
+
+00:50.110 --> 00:59.380
+Add a paragraph, Laravel uses the carbon date time library, so every date in Laravel is a carbon object
+
+00:59.380 --> 01:01.540
+instance by default.
+
+01:11.880 --> 01:20.250
+It's handy deve for humans method can show debate in how much time has passed since.
+
+01:23.510 --> 01:25.940
+Then let's add some flavor.
+
+01:28.380 --> 01:36.130
+If the post was added during the last five minutes, we would like to see the new barge on it.
+
+01:36.900 --> 01:37.800
+That's easy.
+
+01:38.790 --> 01:40.650
+Adn if DirecTV.
+
+01:42.010 --> 01:52.150
+Using now helper that generates the carbon object with the current time, compare it with the post created
+
+01:52.150 --> 01:53.140
+at Collum.
+
+02:01.890 --> 02:05.190
+If it's less than five.
+
+02:06.960 --> 02:11.460
+The post is new and we display about.
+
+02:17.270 --> 02:25.220
+Using alert and alert in four classes and a text should be new exclamation mark.
+
+02:26.850 --> 02:31.920
+So see if that changes and let's see how this looks like in action.
+
+02:34.700 --> 02:40.520
+So there it is, the title, the content and also the timestamp.
+
+02:43.350 --> 02:46.770
+So to see that barge, I would have to add a new blog post.
+
+02:56.300 --> 03:05.330
+That is first we've got our ugly red flush message, but on the bottom, we see on an alert that this
+
+03:05.330 --> 03:11.470
+is actually our new blog post added one second ago and this will be displayed for the next five minutes.

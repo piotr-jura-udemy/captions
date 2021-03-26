@@ -1,0 +1,187 @@
+WEBVTT
+
+00:03.860 --> 00:10.960
+In the last two lectures we learned the basics of defining routes using the route.
+
+00:11.120 --> 00:13.130
+Class methods.
+
+00:13.130 --> 00:21.970
+And also we learn the basics of rendering the views using the larval blade templating engine.
+
+00:22.160 --> 00:30.440
+But we only created individual pages like this home page or the contact page and also the blog post
+
+00:30.440 --> 00:30.820
+page.
+
+00:30.830 --> 00:35.610
+But there's no way to click through the links and go to this page.
+
+00:35.610 --> 00:46.400
+So now let's create a simple menu inside our layout and will use an unordered at least for that.
+
+00:46.400 --> 00:55.310
+So let's are the U L tag about the yield content and create two links.
+
+00:55.310 --> 01:05.380
+So the first one would be to the home page and the second one to the contact page.
+
+01:05.400 --> 01:09.530
+So those two URLs are slash contact
+
+01:13.210 --> 01:13.770
+okay.
+
+01:13.810 --> 01:17.480
+Now let's refresh this page.
+
+01:19.070 --> 01:20.840
+And of course this doesn't look great.
+
+01:20.840 --> 01:24.210
+Now we will get to that later.
+
+01:24.320 --> 01:29.650
+Let's see if that works so this menu is being rendered as part of the layout.
+
+01:29.660 --> 01:32.200
+So it would be always visible.
+
+01:32.210 --> 01:37.890
+And now we can easily navigate even if you will go to our blog post.
+
+01:38.270 --> 01:39.770
+You can see the same menu
+
+01:44.390 --> 01:51.500
+now you see here that we've defined those euros explicitly so they will always lead to the links that
+
+01:51.500 --> 01:55.080
+we've given inside the craft attribute.
+
+01:55.460 --> 01:59.690
+And let's now think what would happen if we will change the euro.
+
+01:59.720 --> 02:05.330
+For example for the contact page to contact to.
+
+02:05.480 --> 02:11.070
+So now if we would try to go to the contact page we get the funds.
+
+02:11.140 --> 02:18.480
+Hope 404 not found because we are trying to go to contact and the viewer has changed.
+
+02:18.980 --> 02:26.830
+So there has to be a better way to manage this and the race we will use then named routes.
+
+02:27.350 --> 02:34.970
+So the two other name to our route you have to add another method call after you defined the route.
+
+02:35.060 --> 02:44.050
+But first let's open the terminal and run peach partisan route least so you see there is this column
+
+02:44.140 --> 02:45.380
+name.
+
+02:45.400 --> 02:48.780
+So now let's add the names to our routes.
+
+02:49.600 --> 02:52.920
+So the first one would be home.
+
+02:53.230 --> 02:57.120
+Of course the contact would be contact.
+
+02:57.190 --> 03:05.420
+And the third one would be the blog post.
+
+03:05.450 --> 03:12.950
+Now if you rerun the P2P artisan route least you would see that those routes now contain the names so
+
+03:12.950 --> 03:21.500
+we can use that names to generate the actual you were out to our to the actual page instead of hard
+
+03:21.500 --> 03:26.030
+coding it inside templates or inside controllers.
+
+03:26.090 --> 03:36.860
+So let's go to our layout remove the direct you URL and we will render it by using double currently
+
+03:36.860 --> 03:47.450
+braces and to using the helper function root the route accepts a parameter which is the route name and
+
+03:47.450 --> 03:55.370
+since we've given our routes names let's open terminal again you can see that there is the home route
+
+03:57.340 --> 03:58.500
+and the contact route.
+
+03:58.780 --> 04:03.160
+So let's also remove this direct you Earl route.
+
+04:03.190 --> 04:08.520
+Contact.
+
+04:08.710 --> 04:10.200
+Now let's refresh this page.
+
+04:10.270 --> 04:15.260
+And if you will go to the home home page nothing changes because we haven't changed that.
+
+04:15.490 --> 04:20.110
+But if you will go to contact you can see that now it works.
+
+04:20.110 --> 04:27.340
+And it leads to the level that test slash contact tool because we've changed the URL inside our route
+
+04:27.340 --> 04:38.270
+definition file to contact to so if you will go again and reverted back to be just contact it should
+
+04:38.270 --> 04:46.310
+be automatically reflected if you click home and contact again you can see that the correct route was
+
+04:46.400 --> 04:47.840
+given.
+
+04:47.840 --> 04:58.100
+Now if you would like to add a link to your URL that has a parameter and in our case that's a blog post
+
+04:59.660 --> 05:02.180
+we can use the same root helper.
+
+05:02.510 --> 05:06.120
+And we have this route with the blog post name.
+
+05:06.290 --> 05:08.150
+So let's use it.
+
+05:08.150 --> 05:19.070
+The blog post and to pass a parameter we'll use an array the same as we did inside our route definitions.
+
+05:19.070 --> 05:29.180
+So it accepts two parameters the I.D. and an optional welcome parameter so let's pass the I.D. barometer
+
+05:29.540 --> 05:30.380
+to be one
+
+05:35.080 --> 05:44.890
+and let's close it and maybe we can call the link block post 1.
+
+05:44.900 --> 05:54.710
+Now we see this additional link and it is being correctly rendered as blog post slash 1 because we generate
+
+05:54.710 --> 06:01.580
+the route automatically in case we'll also like to modify the actual route like blog post to
+
+06:05.520 --> 06:13.820
+now when we refresh this page you can also see that now it leads to blog post to so let's fix that to
+
+06:13.820 --> 06:15.140
+be the correct one.
+
+06:17.380 --> 06:24.490
+And that would tweet about the basics of rooting and views and now follow to the next lecture when you
+
+06:24.490 --> 06:27.640
+will learn the concept of controllers.

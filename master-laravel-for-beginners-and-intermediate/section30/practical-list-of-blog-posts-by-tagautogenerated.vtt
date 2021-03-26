@@ -1,0 +1,334 @@
+WEBVTT
+
+00:00.630 --> 00:07.260
+In the last lecture we have created the Lavell blade component that this place all the tags associated
+
+00:07.260 --> 00:08.910
+with a particular blog post.
+
+00:08.910 --> 00:15.480
+And we've used this component on both the blog post The View and on the blog post last page where we
+
+00:15.480 --> 00:18.320
+also display this list of tags.
+
+00:18.330 --> 00:22.670
+Now when you click one of those links they lead nowhere right now.
+
+00:22.800 --> 00:29.190
+And I've said in the last lecture that in this lecture will actually implant the logic responsible for
+
+00:29.520 --> 00:35.070
+displaying all the blog posts associated with a particular tag.
+
+00:35.070 --> 00:40.590
+Now let's think where we should put the logic responsible for displaying blog posts that are targeted
+
+00:40.590 --> 00:42.960
+with a particular tag.
+
+00:42.960 --> 00:49.250
+So we have our post controller which has all these crude actions that are basically centered around
+
+00:49.250 --> 00:55.680
+a resource we even use the resource method to define the rules for this controller.
+
+00:56.010 --> 01:02.400
+And it already has a lot of things so obviously we shouldn't put it here because this controller is
+
+01:02.460 --> 01:09.020
+already bloated with a lot of code and definitely is a candidate to refactor it.
+
+01:09.060 --> 01:16.020
+So if you would like to put all the logic to let's say the Post controller just because this is somehow
+
+01:16.020 --> 01:23.100
+related with a post you might end up with a kind of Rambo controller that has a thousand lines because
+
+01:23.550 --> 01:24.320
+you might think.
+
+01:24.330 --> 01:31.980
+Where would you put a logic to let's say search for blog posts if you would put everything inside one
+
+01:32.010 --> 01:39.690
+single controller then your application will quickly be unreadable and unmanageable.
+
+01:39.690 --> 01:43.970
+So let's think what is actually a blog post we attack.
+
+01:44.250 --> 01:51.330
+So this can be treated as another kind of resource that we can manage so we can display a list of those
+
+01:51.330 --> 01:54.690
+blog posts that are associated with a tag.
+
+01:54.690 --> 02:04.200
+We can also associate tags with blog posts so it's actually a good candidate to create a separate controller
+
+02:04.710 --> 02:08.700
+that also would be centered around a kind of resource.
+
+02:08.700 --> 02:12.830
+So this is an abstract concept of what I'm describing here.
+
+02:12.840 --> 02:16.170
+There is no blog post tag resource.
+
+02:16.170 --> 02:18.450
+There is no model like that.
+
+02:18.450 --> 02:25.350
+But I think it's a good idea to create a controller that is centered around a concept.
+
+02:25.440 --> 02:26.610
+So let's see what I mean.
+
+02:27.300 --> 02:36.720
+So we can use peach bee artisan make controller to create a controller which we would call post TAC
+
+02:37.500 --> 02:38.190
+controller
+
+02:41.250 --> 02:43.470
+so we have our new controller created.
+
+02:43.500 --> 02:51.330
+And as I've said what we want to do first is we want to display all the blog posts associated with the
+
+02:51.340 --> 03:03.010
+tag so we can add an index action which by default and basically by convenience is used to display a
+
+03:03.010 --> 03:05.720
+list of some kind of resources.
+
+03:05.730 --> 03:11.700
+So in this case in post controller This is simply displaying a list of all the blog posts.
+
+03:11.700 --> 03:18.930
+And here we can define an action like that that will be responsible for of displaying all the blog posts
+
+03:19.020 --> 03:23.780
+that have particular tag associated.
+
+03:23.800 --> 03:31.000
+Now this definitely needs to know about which tag we mean to display all the blog posts related to it.
+
+03:31.000 --> 03:36.960
+So the first argument of this index method should be tag I.D..
+
+03:37.070 --> 03:43.600
+Now let's see how would we define our route for this so it's not really a full resource controller yet.
+
+03:43.940 --> 03:54.260
+So we can just add a normal route using the GED method and let it be posts tag and it will accept an
+
+03:54.260 --> 04:06.370
+argument which is our tag I.D. Now let's link it with post doc controller index action and give it a
+
+04:06.370 --> 04:08.020
+name.
+
+04:08.290 --> 04:12.120
+We can use the Post's prefix that we already have.
+
+04:12.220 --> 04:15.760
+So let's see what routes do we actually have right now.
+
+04:15.760 --> 04:26.760
+By calling P2P artisan route least let's first put a semicolon here because otherwise it will just break.
+
+04:26.830 --> 04:32.550
+So we have a couple of actions called that have the posts prefix.
+
+04:32.590 --> 04:37.630
+So let's do this as posts docs
+
+04:40.330 --> 04:43.900
+index.
+
+04:43.920 --> 04:45.470
+Now let's go back to the controller.
+
+04:45.480 --> 04:50.490
+So we are passing a tag I.D. and remember what I've said.
+
+04:50.520 --> 04:55.150
+Let's run BHP artisan route least again to see the changes.
+
+04:55.200 --> 04:57.440
+So this is our route.
+
+04:57.930 --> 05:05.940
+Now what I've said is that it doesn't matter how you call the parameters inside your route because Lavell
+
+05:05.940 --> 05:12.450
+will then pass them in order they appear inside the route name to your controller action.
+
+05:12.450 --> 05:16.370
+So here we specified it inside the route as I.D..
+
+05:16.890 --> 05:21.870
+But maybe let's call it just tag and call it the same here.
+
+05:21.870 --> 05:24.100
+So that's a tag.
+
+05:24.570 --> 05:32.660
+Now we can read our tag using that tag eloquent model so press enter here.
+
+05:32.660 --> 05:40.050
+So Visual Studio code will add an import or add it yourself if you do not have this feature we can use
+
+05:40.050 --> 05:48.690
+find or fail the finger we already know it will display our 404 not found page a particular tag doesn't
+
+05:48.690 --> 05:50.280
+exist.
+
+05:50.280 --> 05:58.520
+And basically what you can do right now is you can simply return a View using the view helper function
+
+05:59.090 --> 06:07.350
+will use the Post's index view that we already have and only think we have to do is to pass that post
+
+06:07.350 --> 06:13.290
+as a variable to this view or actually it's not the only thing we have to do but we will see a problem
+
+06:13.290 --> 06:14.700
+with that in a second.
+
+06:16.260 --> 06:23.820
+So since we can read the all the tax from our blog post but also we can read all the blog posts from
+
+06:23.820 --> 06:24.390
+a tag.
+
+06:24.840 --> 06:34.680
+So what we can do is dark blog posts by accessing this attribute which happens to be which happens to
+
+06:34.680 --> 06:40.870
+have the same name as the method for the relation that we have defined on the tag model.
+
+06:40.890 --> 06:45.600
+This will fetch all the tax associated with our particular blog post.
+
+06:46.290 --> 06:49.950
+So it seems that everything that is everything you have to do.
+
+06:50.370 --> 06:56.880
+But obviously it's not you will see the problem in a moment but first let's actually update the link
+
+06:56.940 --> 07:04.830
+to this new controller so we can click the tag and see what is the actual what are the blog posts from
+
+07:04.830 --> 07:05.470
+that tag.
+
+07:06.660 --> 07:17.930
+So we need to add the root and the root name is posts tags index and we have to pass our parameter the
+
+07:17.940 --> 07:23.680
+parameter name is well we actually change that to tag.
+
+07:23.680 --> 07:25.670
+So it's not I.D. anymore.
+
+07:25.720 --> 07:26.710
+So this is dog
+
+07:29.420 --> 07:32.890
+but tug is actually our tug I.D..
+
+07:33.650 --> 07:39.800
+So let's close the array and the route method or route function call sorry.
+
+07:39.800 --> 07:43.850
+Now let's save the changes and refresh this page.
+
+07:43.850 --> 07:50.960
+So now when we click one of those stocks we should see a list of blog posts but actually we don't.
+
+07:51.650 --> 07:53.150
+And you can see what's the problem.
+
+07:53.150 --> 08:01.010
+It expects a variable most commented and actually it expects expects a couple of more variables.
+
+08:01.010 --> 08:05.520
+Most comment that most active and most active last month.
+
+08:05.540 --> 08:07.130
+So let's open this view.
+
+08:07.130 --> 08:17.030
+This is index blade BHP which is BHP inside resources use posts and this is our problem.
+
+08:17.050 --> 08:24.430
+We are passing those variables and we are assuming that they are actually inside the view.
+
+08:24.430 --> 08:31.840
+So instead of copying this code which is quite a big chunk of code to every possible blog post we can
+
+08:31.840 --> 08:34.360
+solve it differently.
+
+08:34.360 --> 08:38.610
+But for now let's just pass it as an array.
+
+08:39.040 --> 08:44.110
+Most comment it will pass on empty array.
+
+08:44.110 --> 08:51.730
+Most active also an empty array because we actually have to pass something most active.
+
+08:51.800 --> 09:01.630
+Last month that's also an empty array.
+
+09:01.650 --> 09:06.990
+So now when you refresh the page at least it will work and you can see that it works because we have
+
+09:06.990 --> 09:15.040
+pressed the tag and currently we only have one blog post which has tags associated and those.
+
+09:15.090 --> 09:17.420
+This blog post has two tax associated.
+
+09:17.420 --> 09:24.360
+So whenever you click science or politics you will see only this one blog post but you can see on the
+
+09:24.360 --> 09:28.120
+URL that the tag I.D. is changing.
+
+09:28.350 --> 09:34.080
+But the problem is that on the right side of the page we see these blogs which are empty.
+
+09:34.080 --> 09:35.670
+This doesn't make any sense.
+
+09:35.670 --> 09:43.920
+This doesn't make our application functional but will solve that actually in the next lecture when you
+
+09:43.920 --> 09:47.010
+will learn about the view composers.
+
+09:47.010 --> 09:55.740
+So what you will learn is how to make the same code be available to all of your reviews without actually
+
+09:55.740 --> 10:00.100
+calling them explicitly inside your actions.
+
+10:01.310 --> 10:02.900
+This will solve our problem.
+
+10:02.900 --> 10:09.890
+And then whenever we will visit our list of blog posts or particular blog posts or blog posts that have
+
+10:09.890 --> 10:17.630
+a particular talk will will then see a list of most commented most active users and most active users
+
+10:17.780 --> 10:19.010
+last month.
+
+10:19.010 --> 10:21.440
+So let's see that in the next lecture.

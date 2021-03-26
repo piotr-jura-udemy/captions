@@ -1,0 +1,103 @@
+WEBVTT
+
+00:00.360 --> 00:06.460
+So now we serialize some additional information about the outer of the comment using the user field
+
+00:06.480 --> 00:09.410
+and we have created a specific resource for that.
+
+00:09.420 --> 00:16.560
+But as I've mentioned the problem is that we will be making a separate query to fetch the user of each
+
+00:16.560 --> 00:23.190
+comment because we are just using the comments relation as a field which is lazy loading it.
+
+00:23.220 --> 00:29.280
+So it's not loading it with all the relations that this comment might have.
+
+00:29.280 --> 00:34.730
+So there is actually extremely easy way to handle this in Lovell.
+
+00:34.770 --> 00:43.140
+So what we will do is we would tell this resource to only try to serialize the user relation of the
+
+00:43.140 --> 00:51.870
+comment if it is being already loaded and there is a method inside the resource class to achieve just
+
+00:51.870 --> 00:52.670
+that.
+
+00:52.890 --> 00:58.600
+And you will call that using this when loaded.
+
+00:58.990 --> 01:03.020
+So you are still creating this as an element of the array.
+
+01:03.130 --> 01:10.720
+You are creating the resource to serialize this user but you just have wrapped this user inside when
+
+01:10.720 --> 01:11.740
+loaded method
+
+01:14.460 --> 01:16.850
+and now let's see what we get.
+
+01:16.850 --> 01:17.540
+So
+
+01:20.760 --> 01:25.320
+something went wrong here yes.
+
+01:25.320 --> 01:34.220
+So actually this is not accepting that this user relation is accepting the name of the relationship.
+
+01:34.230 --> 01:34.920
+Sorry for that.
+
+01:34.920 --> 01:38.430
+So the name of the relationship is user.
+
+01:38.460 --> 01:40.620
+As you can check it on the comment model.
+
+01:40.650 --> 01:42.510
+That's the name of the method.
+
+01:42.720 --> 01:50.820
+So you have to provide the relation name which is user now let's refresh and voila.
+
+01:50.890 --> 01:58.120
+And while this is something that we do not wants to happen because now we don't have a user at all but
+
+01:58.120 --> 02:05.380
+it protects us from making unnecessary requests for relationships that weren't loaded at once.
+
+02:05.860 --> 02:15.130
+So now to have this user on every comment in the API we will pass different things to this comment resource
+
+02:15.130 --> 02:23.500
+collection static method and we will actually use this relationship as a method and tell it to fetch
+
+02:23.500 --> 02:26.570
+it with the user relationship.
+
+02:26.680 --> 02:35.040
+And of course since we are generating a query here finally we have to call get let's go back to that
+
+02:35.040 --> 02:45.260
+post mum and now you have the user and it is done effectively because older users are fetch together
+
+02:45.470 --> 02:46.310
+with comments.
+
+02:46.310 --> 02:54.080
+So basically to display this data you are making at most two queries and not one for the comments and
+
+02:54.080 --> 02:56.060
+then for every single comment.
+
+02:56.060 --> 02:58.460
+Another one to fetch a user.
+
+02:58.460 --> 03:00.340
+So this is how you would handle that.

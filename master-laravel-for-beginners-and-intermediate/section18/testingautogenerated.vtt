@@ -1,0 +1,220 @@
+WEBVTT
+
+00:01.130 --> 00:07.570
+So far each time we learn the new concept of LA travel and then implemented that inside our example
+
+00:07.560 --> 00:14.090
+LA travel blog application we verified if everything works by simply clicking through the application
+
+00:14.120 --> 00:15.580
+inside the browser.
+
+00:15.590 --> 00:22.930
+So this approach seems to be very simple and you might think that it saves you some time by not writing
+
+00:23.030 --> 00:31.100
+and it s but of course it's not true because it is first time consuming and then when your application
+
+00:31.100 --> 00:38.000
+grows it's almost impossible to verify that every feature of your application still works as expected.
+
+00:38.120 --> 00:44.570
+And of course you often make changes to the application and then verifying that everything still works
+
+00:44.990 --> 00:47.540
+is also pretty impossible.
+
+00:47.540 --> 00:53.150
+So you might think that you do not need to write tests for your apps because they are simple and you
+
+00:53.150 --> 01:00.440
+know what you are doing but you will be proven wrong sooner or later to make sure that products that
+
+01:00.440 --> 01:03.740
+we are creating always work as expected.
+
+01:03.800 --> 01:10.730
+We should write altimeter tests and tests can be divided into two simple categories.
+
+01:10.730 --> 01:18.830
+The first would be the unit tests and unit tests are for testing small isolated parts of your code like
+
+01:18.950 --> 01:22.030
+one class or one method functionality.
+
+01:22.340 --> 01:28.700
+And then we have feature tests which as the name suggests are for testing the specific features of your
+
+01:28.700 --> 01:34.420
+application for example it might be testing if the blog post was actually saved.
+
+01:34.460 --> 01:36.530
+When we sent our correct data.
+
+01:36.650 --> 01:40.900
+And then if we see the flash message that the blog post was created.
+
+01:41.390 --> 01:50.960
+So it might often involve making HDP requests to your running application by the way just a short reminder
+
+01:50.960 --> 01:56.290
+that everything I am talking about inside this lecture you can also read on the VQ page.
+
+01:56.300 --> 01:59.090
+The link is included under this lecture.
+
+02:00.090 --> 02:07.970
+OK so let's move to the Visual Studio code and see how tests are organized inside a lot of application.
+
+02:08.070 --> 02:15.300
+So by default we have this tests folder which lives inside the root directory of your larval application
+
+02:15.750 --> 02:24.210
+and it contains two directories the feature which contains all your feature tests and you need which
+
+02:24.210 --> 02:27.150
+will store all the unit tests.
+
+02:27.330 --> 02:35.130
+Also inside the tests directory there is a test case file which contains a test case class from which
+
+02:35.220 --> 02:38.580
+all your tests should extend.
+
+02:38.580 --> 02:41.760
+So now we know where we should store our tests.
+
+02:41.760 --> 02:47.420
+And now just let's take a look at two example tests that Lavell provides.
+
+02:47.430 --> 02:50.250
+So first let's take a look at the unit test.
+
+02:50.340 --> 02:58.050
+You can see that it extends the base test case class and that it contains one method called test basic
+
+02:58.350 --> 02:59.810
+test.
+
+02:59.850 --> 03:06.510
+So this is an important thing to remember that your test would be a class that would extend that test
+
+03:06.510 --> 03:15.540
+case and then it will contain some metals and older methods that are actual tests should start with
+
+03:15.540 --> 03:22.710
+the name test so let's take a look at another example that feature test.
+
+03:22.800 --> 03:30.060
+Let's open the example test and you can see that it also extends the same class but it is a little bit
+
+03:30.060 --> 03:30.970
+different.
+
+03:30.990 --> 03:37.710
+The name of the one test that is inside this class also starts with test.
+
+03:37.950 --> 03:43.520
+And this is actually a feature test and it's opening page.
+
+03:43.530 --> 03:50.700
+In this case it's the main page and then it checks whether the return status was two hundred.
+
+03:50.700 --> 03:58.980
+So that basically means if the page could be open and it is returning any result so you can run those
+
+03:58.980 --> 04:06.750
+tests inside the command line whether it is power shell or terminal inside your mark by running this
+
+04:06.750 --> 04:20.030
+command vendor been PDP need so after running this command you can see that two tests were run and they
+
+04:20.030 --> 04:30.970
+contain two assertions and everything is green which means that all of our tests are passing so we have
+
+04:31.000 --> 04:33.150
+two tests inside the application.
+
+04:33.220 --> 04:34.950
+So that would be the test.
+
+04:34.960 --> 04:42.490
+The method that name starts with test and then this is another test.
+
+04:42.670 --> 04:45.970
+Of course you can have many tests inside one class.
+
+04:46.060 --> 04:50.500
+So this is just an example as the name is suggesting.
+
+04:50.500 --> 04:54.990
+And those two assertions is this chunk of code.
+
+04:55.090 --> 05:02.020
+So inside your tests you will want to verify if something that you have expected has actually happened.
+
+05:02.050 --> 05:05.340
+And this is called an assertion inside the test.
+
+05:05.350 --> 05:13.690
+So in this case we are checking if after visiting this page with this URL the response status code was
+
+05:13.750 --> 05:18.430
+200 which usually means that the page was returned correctly.
+
+05:18.430 --> 05:20.320
+Everything works.
+
+05:20.320 --> 05:24.880
+And this another example test is even simpler.
+
+05:24.880 --> 05:32.410
+We are passing the true to the Assert true assertion method and verifying if true equals true.
+
+05:32.410 --> 05:35.300
+So of course this would always pass.
+
+05:35.470 --> 05:45.940
+So you can modify it to check if one equals two and after you will run peach period again you can see
+
+05:45.940 --> 05:53.380
+that it failed to assert that false is true of course one doesn't equal two if you will modify it to
+
+05:54.220 --> 05:58.720
+two equals two and run tests again.
+
+05:58.730 --> 06:01.610
+Now we can see that they are passing again.
+
+06:02.300 --> 06:06.590
+So now let's see what our typical test will consist of.
+
+06:06.860 --> 06:14.150
+So it will consist of three parts that are wrenched apart the act part and the assault part.
+
+06:14.720 --> 06:21.220
+So in this example test the first line is creating a new object.
+
+06:21.230 --> 06:22.670
+And this is that orange part.
+
+06:22.670 --> 06:30.170
+So we create a new object that will be testing then we have the act part when we actually call a method
+
+06:30.170 --> 06:31.660
+of this object.
+
+06:31.820 --> 06:39.830
+And the final line is to assert part when we verify that the results of this operation is as we expect
+
+06:39.830 --> 06:47.190
+them to be so the orange part will not always be there because there are cases when we do not have to
+
+06:47.190 --> 06:50.730
+create any objects or prepare anything for the test.
+
+06:50.730 --> 06:57.990
+But the act and assert will be there because we always have to do something and then we have to verify
+
+06:58.080 --> 07:02.430
+if the result of doing something is how we expected it to be.

@@ -1,0 +1,187 @@
+WEBVTT
+
+00:00.510 --> 00:07.440
+We have previously talked about deleting models but we haven't handled the case where our model has
+
+00:07.440 --> 00:15.660
+some relations and since we have written a quite complicated database cedar even vote there is no functionality
+
+00:15.660 --> 00:22.330
+yet in our application to add comments we can add some comments using our seeder.
+
+00:22.410 --> 00:31.760
+So make sure you see the database right now by running P2P artisan DB seed refreshing the database by
+
+00:31.760 --> 00:40.130
+typing yes and then just use defaults to make sure you have some blog posts and comments.
+
+00:40.220 --> 00:48.830
+So now on our application we can try to log in as John Lara Val dot test because that's one of the users
+
+00:48.830 --> 00:53.620
+that we are creating using the cedar and the password is secret.
+
+00:53.630 --> 00:55.500
+If you do not remember.
+
+00:55.910 --> 01:04.190
+Now let's go to the blog posts list and let's take a look at some of the blog posts that have comments
+
+01:04.250 --> 01:06.450
+like those two.
+
+01:06.560 --> 01:11.180
+So let's see what happens when we print press delete.
+
+01:11.180 --> 01:19.730
+So actually it doesn't get deleted and we got obscure error that the integrity constraint violation
+
+01:19.820 --> 01:21.740
+has happened.
+
+01:21.740 --> 01:29.360
+And it says that we cannot delete or update our parent role because our foreign key constraint fails.
+
+01:30.080 --> 01:39.710
+So what that means is that on our table on comments we have our foreign key on the blog post I.D..
+
+01:39.830 --> 01:47.480
+So when you tried to remove our blog post then this constraint will fail because there will be some
+
+01:47.480 --> 01:54.310
+comments in your database that still reference this idea of this party crowd blog post.
+
+01:54.320 --> 01:58.790
+And it's not allowed if you have foreign keys.
+
+01:58.790 --> 02:01.460
+So how can we solve that in Murrysville.
+
+02:01.910 --> 02:06.080
+So in this lecture I will show you the first way to solve it.
+
+02:07.220 --> 02:11.950
+So the first way we can solve it is using model events.
+
+02:12.170 --> 02:16.030
+So Model Events are being dispatched by a lot of.
+
+02:16.070 --> 02:24.000
+When something happens to a model so you can now take a look at this part of the larval documentation
+
+02:24.000 --> 02:27.260
+about eloquent events link is included.
+
+02:27.540 --> 02:35.100
+And it says that a lot of those models have some life cycle events that are being dispatched when something
+
+02:35.100 --> 02:36.600
+happens.
+
+02:36.600 --> 02:39.380
+So those are the possible events.
+
+02:39.390 --> 02:44.680
+But what will interest us at this point is the deleting event.
+
+02:44.740 --> 02:51.260
+We'll get to the events later and explain it a little bit more with much more usage examples.
+
+02:51.780 --> 02:58.350
+But for now it's enough for us to know that we can subscribe to the deleting event.
+
+02:58.350 --> 03:07.420
+It happens just before the blog post model or any other model is actually being deleted from the database.
+
+03:07.470 --> 03:14.160
+Now the simplest way you can subscribe to this event is inside the model itself.
+
+03:15.250 --> 03:21.780
+On the model itself you can define a static method called boot.
+
+03:21.790 --> 03:24.360
+It will be outsmarted CLI cold by Lara.
+
+03:24.360 --> 03:30.970
+Also you don't have to worry about it only think you'll have to do here is called the Parent boot method
+
+03:31.000 --> 03:38.740
+because it is actually implemented inside the base model class so don't forget to do that.
+
+03:38.830 --> 03:41.220
+Other than that it's pretty simple.
+
+03:42.710 --> 03:50.060
+We can use static deleting and here will specify a callback.
+
+03:50.060 --> 03:54.320
+So whatever has to happen when a model is being deleted.
+
+03:54.320 --> 03:57.050
+But just before it is deleted.
+
+03:57.050 --> 03:59.730
+So you have to put a closure here.
+
+03:59.870 --> 04:06.140
+And as an argument you will get an instance of the current model we can't even type painted with the
+
+04:06.650 --> 04:07.820
+blog post class
+
+04:12.530 --> 04:13.700
+and basically that's it.
+
+04:13.760 --> 04:18.020
+This would always be called when the model is being deleted.
+
+04:19.790 --> 04:28.970
+We can verify that by using D.D..
+
+04:29.020 --> 04:30.900
+Now let's go back to our blog post list.
+
+04:30.910 --> 04:32.910
+Press delete and you can see the message.
+
+04:32.980 --> 04:34.790
+I was deleted.
+
+04:34.990 --> 04:39.490
+Now this model actually wasn't deleted because we stopped before it was.
+
+04:40.450 --> 04:48.520
+So now we know that the blog post has comments.
+
+04:48.850 --> 04:55.990
+And when we access it as a function as a method not as a field because the field will fetch our least
+
+04:55.990 --> 05:03.640
+of all the comments but now we have some additional capabilities and this object returned by by the
+
+05:03.640 --> 05:11.060
+comments method on the blog post or any other model with our relation has our delete method.
+
+05:12.010 --> 05:19.870
+So what this does it it will delete all the related models from this particular model in this case it
+
+05:19.870 --> 05:22.830
+will delete all the comments from the database.
+
+05:22.840 --> 05:31.600
+So this will let us pass through this foreign key constraint and every related model will be deleted
+
+05:31.720 --> 05:33.160
+along the blog post.
+
+05:33.160 --> 05:42.780
+So let's save the changes and now try deleting one of the blog posts that actually have some comments
+
+05:44.070 --> 05:51.450
+so we can see everything works perfectly we can delete all the blog posts thanks to this event that
+
+05:51.450 --> 05:58.530
+we handle and delete all the comments in the next lecture you will see another way of handling deleting
+
+05:58.590 --> 06:02.280
+of their related models from our particular model.

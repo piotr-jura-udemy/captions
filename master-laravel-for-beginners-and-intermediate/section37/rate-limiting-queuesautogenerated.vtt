@@ -1,0 +1,598 @@
+WEBVTT
+
+00:01.050 --> 00:08.880
+In the last lecture we created our brand new job that created some more e-mails so we ended up sending
+
+00:08.880 --> 00:13.410
+quite a lot of e-mails about our particular comment that was added to a blog post.
+
+00:13.410 --> 00:20.360
+So we sent an e-mail to the altar of the blog post and also to everyone who commented on our blog post.
+
+00:20.460 --> 00:27.900
+So it actually happens that this mail truck tool has some limitations and it allows to send only two
+
+00:27.900 --> 00:32.520
+emails per 10 seconds on a free account at least.
+
+00:32.550 --> 00:39.300
+And basically this is an extreme example because well we are using a free account so we shouldn't expect
+
+00:39.300 --> 00:47.370
+much but it's actually a good example of how doing a background processing can help you better utilize
+
+00:47.370 --> 00:50.760
+the resources that you have available.
+
+00:50.760 --> 00:57.060
+So in our example the problem was that we sent more than two emails per 10 seconds.
+
+00:57.060 --> 01:04.620
+And even if those jobs failed and were retried they failed again because we have used the quota available.
+
+01:04.800 --> 01:07.160
+So let's immediately fix that.
+
+01:07.200 --> 01:13.740
+So our very naive method of handling this would be to remove this interface from that comment post that
+
+01:13.890 --> 01:21.690
+watched Malabo class and then create a simple timer so we can create a new instance of the date using
+
+01:21.870 --> 01:23.970
+now helper method.
+
+01:23.970 --> 01:32.880
+Then we will use that inside our closure so now and what we will actually do is instead of calling send
+
+01:32.910 --> 01:41.870
+on the mail for seed We'll call later and we will specify when that should be sent so we will do it
+
+01:41.870 --> 01:42.370
+like that.
+
+01:42.370 --> 01:50.730
+So instead of sand we'll be calling later and we'll add let's say six seconds to accommodate for the
+
+01:50.730 --> 01:54.990
+limit of two emails per 10 seconds.
+
+01:55.080 --> 01:59.380
+So this is now at seconds let's say six.
+
+01:59.460 --> 02:01.930
+So a very naive implementation of that.
+
+02:01.950 --> 02:09.040
+Now if you would run your Q Walker again so it should be empty right now.
+
+02:09.040 --> 02:11.210
+Now let's try to send an email.
+
+02:11.210 --> 02:11.820
+Well sorry.
+
+02:12.050 --> 02:15.650
+Let's try to either comment and comment naive
+
+02:19.170 --> 02:25.860
+and what you would see is immediately there is one job that is processing the email that is sent to
+
+02:25.860 --> 02:26.880
+the blog post out.
+
+02:26.910 --> 02:34.770
+Then we are having our job that notifies older user older users and then you can see those jobs slowly
+
+02:34.770 --> 02:41.850
+start starting to get process to send all the emails to all the people that are actually commented on
+
+02:41.850 --> 02:43.050
+a blog post before.
+
+02:43.530 --> 02:45.500
+And now they should all be processed.
+
+02:45.510 --> 02:54.120
+But it takes time and also another problem is that while you might have other places inside your application
+
+02:54.120 --> 02:57.510
+that might use a resource might try to send an email.
+
+02:57.510 --> 03:03.600
+So it's like a very naive and non effective way of solving this problem.
+
+03:03.690 --> 03:08.650
+So there is actually a thing you can do and it's called rate limiting.
+
+03:08.670 --> 03:16.050
+So first let's take a look at a lot of documentation about QS to rate limiting and what it says here
+
+03:16.140 --> 03:17.520
+with an asterisk.
+
+03:17.520 --> 03:19.890
+So it seems it is important.
+
+03:19.890 --> 03:27.190
+This feature requires that your application can interact with already server and actually achieving
+
+03:27.200 --> 03:34.560
+rate limiting is very simple you just need to add a specific key to using the Redis facade and well
+
+03:34.650 --> 03:37.500
+it's even described here what this is is doing.
+
+03:37.500 --> 03:44.920
+So you create a lock so not nothing else would be allowed to perform certain operation that is locked
+
+03:44.940 --> 03:47.280
+using specific key.
+
+03:47.280 --> 03:53.880
+And then this operation is only allowed to run extremes every X seconds.
+
+03:54.210 --> 04:00.970
+So or your job logic has to go inside this closure after that then call.
+
+04:01.020 --> 04:07.440
+And then when this job fails to run there is another closure which you will also have to implement.
+
+04:07.440 --> 04:14.280
+And in this case the release means that the job that was being or supposed to be processed should be
+
+04:14.280 --> 04:16.880
+released back to the queue onto the queue.
+
+04:16.920 --> 04:19.610
+So it can be processed again.
+
+04:19.680 --> 04:25.260
+Now this documentation might be a little bit misleading because it might suggest that for example you
+
+04:25.260 --> 04:31.700
+can use that my sequel database and then just use the Redis connection that you actually have.
+
+04:31.710 --> 04:33.050
+But that's not the case.
+
+04:33.060 --> 04:40.230
+And this will only work if your connection or you use the cube connection for the QS which is Redis.
+
+04:40.260 --> 04:48.450
+And currently we have set it up to run inside our database so to make this feature working you will
+
+04:48.450 --> 04:56.510
+actually have to open your dot and file and change the Q connection environment variable to Redis.
+
+04:56.700 --> 05:00.180
+So not is that normally we had that set up as a database.
+
+05:00.180 --> 05:01.740
+Now it has to change to Redis.
+
+05:01.740 --> 05:09.150
+Also you have to make sure that you have configured any Redis connection either using the free cloud
+
+05:09.150 --> 05:15.900
+solution that is in the other lecture or basically you can also set it up on your system doesn't really
+
+05:15.900 --> 05:16.250
+matter.
+
+05:16.250 --> 05:22.380
+You have to have a redis connection to continue and to actually see that this is working.
+
+05:22.380 --> 05:23.670
+So that's fine.
+
+05:23.670 --> 05:24.180
+We.
+
+05:24.270 --> 05:30.360
+Well basically we'll still have a failed job stable inside our database where all the jobs that have
+
+05:30.360 --> 05:33.370
+failed will be put inside this table.
+
+05:33.420 --> 05:37.410
+So whenever we would like to put something again on a queue there that's no problem.
+
+05:37.410 --> 05:43.490
+This would be just push to the Redis queue and in the end those queues are not a permanent storage.
+
+05:43.500 --> 05:49.520
+They are meant to put something on them and then process those jobs and immediately remove those things.
+
+05:49.520 --> 05:52.560
+So we shouldn't worry anyway.
+
+05:52.560 --> 05:54.660
+Let's go back to our implementation.
+
+05:54.660 --> 06:02.310
+So previously we came up with this naive thinking that if we limit something to be well to run less
+
+06:02.310 --> 06:09.510
+than this 10 seconds which may trump has a limit for it allows us to send two emails per 10 seconds.
+
+06:09.530 --> 06:15.470
+So if we will try to send one e-mail per six seconds then we are fine with their limit.
+
+06:15.630 --> 06:21.770
+Now actually this might be a problem because that's not the only place where we send emails.
+
+06:21.780 --> 06:29.100
+Even in this very action where we are adding a comment first we are submitting a comment to the queue.
+
+06:29.190 --> 06:37.170
+So anyway this would be processed as soon as possible and only then we notify other users that the post
+
+06:37.170 --> 06:43.710
+was comment that so we might fail anyway and well imagine that you might also have quite a lot of other
+
+06:43.710 --> 06:49.620
+emails sending all the time throughout your application so our example is very straightforward because
+
+06:49.620 --> 06:55.580
+currently we have two types of email and there are both sent when someone is commenting on a blog post.
+
+06:56.160 --> 07:02.280
+But obviously when your application grows you might be sending quite a lot of emails on every occasion.
+
+07:02.280 --> 07:05.720
+Some transactional emails any kind of that stuff.
+
+07:05.940 --> 07:12.060
+So let's not focus too much about this limit of mail drop but this is just an example of how you can
+
+07:12.390 --> 07:20.250
+work around those limits of the external API that you are using and well our mail drop actually has
+
+07:20.250 --> 07:27.200
+a limit that forbids us for doing more requests than to per 10 seconds.
+
+07:27.210 --> 07:34.260
+So to solve that what we will do is we'll actually create a specific job for our emails so we'll create
+
+07:35.100 --> 07:44.670
+new jobs so peach bee artisan make job and we'll call it fertile fruit old male so this command will
+
+07:44.820 --> 07:53.100
+create a new class for us inside the job folder and what we will do is we'll use this class to send
+
+07:53.160 --> 07:58.550
+all the emails to the male Trump API through this throttled male class.
+
+07:58.560 --> 08:02.010
+So mind that this is not a male not available.
+
+08:02.010 --> 08:03.700
+This is our job class.
+
+08:03.900 --> 08:07.110
+So first inside the constructor we will need two arguments.
+
+08:07.140 --> 08:17.090
+So there will be male level male and user for the user to whom we should send this email.
+
+08:17.080 --> 08:19.040
+So you have to add import.
+
+08:19.040 --> 08:26.200
+So first is the male we can use male level since all male classes are actually extending this class.
+
+08:26.210 --> 08:28.130
+So they're on the same type.
+
+08:28.130 --> 08:31.340
+So basically this type is safe for us.
+
+08:31.340 --> 08:36.800
+It will check if this class basically is male or extends male level.
+
+08:36.800 --> 08:42.130
+Now we'll store those those variables as a Fields on this job.
+
+08:42.140 --> 08:51.980
+So this male equals male and this user equals user let's also define those fields as public.
+
+08:52.190 --> 08:56.480
+So public user public male
+
+08:59.460 --> 09:06.420
+and now what we will do is we will actually use this rate limiting from the larval documentation example
+
+09:06.420 --> 09:10.200
+here so we can even copy that sorry.
+
+09:10.360 --> 09:11.710
+Remove this comment first.
+
+09:11.710 --> 09:15.400
+Copy that and this will be actually the job handling.
+
+09:15.400 --> 09:23.710
+So every email that we will try to send will go through this throttled email filter to my job queue.
+
+09:23.950 --> 09:29.920
+Now we will throttle it using a key lets say male trap because we have a limit there.
+
+09:29.920 --> 09:35.890
+So you have to just come up with a unique key throughout your application mind that this also makes
+
+09:35.890 --> 09:36.430
+sense.
+
+09:36.490 --> 09:40.510
+If you run plenty of queue workers not just one.
+
+09:40.540 --> 09:46.120
+And while that might be the case you might even run them on different servers not just the one server
+
+09:46.660 --> 09:53.200
+so using Redis as our front link or rate limiting tool is safe because if they all connect to the same
+
+09:53.200 --> 09:59.950
+ready server you will make sure this job is only run once and it is actually filtered on whichever queue
+
+09:59.950 --> 10:02.380
+worker it is bank run.
+
+10:02.380 --> 10:09.560
+So this is my job and we are allowed to actually run it 2 times per 12 seconds just to be safe.
+
+10:09.820 --> 10:11.130
+And this is our logic.
+
+10:11.140 --> 10:19.770
+So our logic would be male sorry male to this you this user.
+
+10:19.780 --> 10:24.000
+So we get the user and send mail.
+
+10:24.000 --> 10:26.460
+Sorry this mail.
+
+10:26.470 --> 10:34.050
+So this is only responsible for actually sending that email and then we release two jobs.
+
+10:34.090 --> 10:35.390
+Sorry we.
+
+10:35.500 --> 10:43.990
+Sorry that's a delay parameter so let's say 10 seconds or 5 seconds so really this means that if the
+
+10:43.990 --> 10:49.740
+particular job was tried to be run and well the key inside the Redis existed.
+
+10:49.750 --> 10:56.650
+So there was a lock for my made trap mean it cannot be executed at this time then would release this
+
+10:56.650 --> 11:01.810
+job to the key back again to the queue and it should be run again in five seconds.
+
+11:01.810 --> 11:02.860
+So this makes sense.
+
+11:02.860 --> 11:09.790
+We do not want to try it immediately after it has failed but just so you know you can just provide a
+
+11:09.790 --> 11:11.650
+parameter for this that default.
+
+11:11.650 --> 11:14.420
+Default is 0 if you want provide any.
+
+11:14.530 --> 11:18.130
+It would be tried to rerun immediately.
+
+11:18.370 --> 11:26.140
+Now that we have this throttled mail what we can do is here instead of trying to send mail using queue
+
+11:26.170 --> 11:33.010
+this first one to notify the outer of the blog post what we will do is we'll actually use our new filtered
+
+11:33.010 --> 11:35.670
+mail and will immediately dispatch it.
+
+11:35.700 --> 11:39.720
+And as we know it requires some parameters so my level.
+
+11:39.820 --> 11:41.620
+So this time this would be new.
+
+11:41.620 --> 11:51.320
+Comment posted markdown this one and then we have user which we know we can take from that post so post
+
+11:51.350 --> 11:53.490
+user.
+
+11:53.590 --> 11:59.370
+Now you can comment that or just remove it at all but let's leave it for for now.
+
+12:00.030 --> 12:01.620
+So that's the first part.
+
+12:01.620 --> 12:05.570
+And then inside notify users post was comment.
+
+12:05.570 --> 12:10.020
+And so what we can do here is actually we can remove this timer.
+
+12:10.020 --> 12:13.150
+We do not need that anymore.
+
+12:13.200 --> 12:17.390
+Now this job can be executed immediately because what this basically does.
+
+12:17.400 --> 12:23.730
+It will also create something on the queue to send the e-mail actually but the query can be executed
+
+12:23.760 --> 12:24.540
+immediately.
+
+12:25.500 --> 12:35.010
+And here we are also use for auto mail dispatch and we are sending that sorry the first parameter is
+
+12:35.010 --> 12:35.440
+mail.
+
+12:35.450 --> 12:37.590
+So we are sending this mail
+
+12:41.540 --> 12:44.260
+to the user since we are iterating over user.
+
+12:44.350 --> 12:44.630
+Yeah.
+
+12:44.660 --> 12:46.690
+That's the user we want to send out to.
+
+12:46.720 --> 12:48.160
+Let's make sure that's correct.
+
+12:48.170 --> 12:48.500
+Yes.
+
+12:48.530 --> 12:49.740
+OK.
+
+12:49.940 --> 12:52.920
+So now we can even remove this mail call here.
+
+12:52.920 --> 12:59.480
+Now let's make sure we have all the imports so well and we can remove this may if I say it's not required
+
+12:59.510 --> 13:02.620
+but we do not have an import for throttled mail.
+
+13:02.630 --> 13:07.250
+So let's make sure it's added.
+
+13:08.430 --> 13:14.360
+Well actually I was wrong Q2 we do not need this import again because this is the same namespace.
+
+13:14.370 --> 13:20.370
+It's actually a job and well throttled mail is from the same namespace so visual to your code is right
+
+13:20.400 --> 13:23.790
+by not asking me to add an import.
+
+13:23.790 --> 13:29.310
+So let's make sure we have throttled mail here in post comment controller of course here we can also
+
+13:29.310 --> 13:35.060
+remove unused say mail and also the command post that we are not using it anymore.
+
+13:35.070 --> 13:37.930
+So that's a great feature of visual studio.
+
+13:38.130 --> 13:40.420
+Giving us hints like that.
+
+13:40.830 --> 13:46.310
+Now inside throttled mail we are importing up user we are importing mail.
+
+13:47.100 --> 13:47.430
+Yes.
+
+13:47.430 --> 13:49.830
+So everything should be correct.
+
+13:49.830 --> 13:53.130
+We are sending them mail to the user.
+
+13:53.280 --> 13:54.290
+We end the mail.
+
+13:54.330 --> 13:55.860
+Is this one.
+
+13:55.890 --> 13:56.130
+OK.
+
+13:56.160 --> 13:57.570
+Now let's save the changes.
+
+13:57.570 --> 14:00.410
+Also remember to change your environment.
+
+14:00.450 --> 14:05.010
+Q connection to Redis now also inside the throttled mail.
+
+14:05.010 --> 14:09.270
+Well we do not have import for ready so I've just noticed that.
+
+14:09.270 --> 14:16.140
+So let's make sure we have a proper import for the Redis first aid and actually we also do not have
+
+14:16.140 --> 14:17.290
+the mail for sale.
+
+14:17.320 --> 14:18.690
+So let's type it again.
+
+14:18.690 --> 14:21.920
+So the visual studio code can add an import for it.
+
+14:21.950 --> 14:25.680
+So otherwise we will get all these jobs inside the failed jobs.
+
+14:25.680 --> 14:28.290
+If we haven't added those imports.
+
+14:28.290 --> 14:33.510
+So just so you know if you do not know why your job has failed you can always go to the failed jobs
+
+14:33.570 --> 14:37.780
+and then see any exception that actually has happened.
+
+14:37.800 --> 14:46.240
+So now let's run this worker and go to the application make sure you are logged in and add some comment.
+
+14:46.260 --> 14:48.680
+Doesn't really matter what you will right here.
+
+14:48.990 --> 14:55.730
+And now let's see the queue worker so it immediately starts with our throttled mail.
+
+14:55.740 --> 15:02.400
+So this is the first one for notifying the blog post out door and then from the notified users post
+
+15:02.400 --> 15:04.400
+was comment that this is run.
+
+15:04.410 --> 15:10.770
+Also immediately and then it is this badgering from old mail and you know it is processed one by one
+
+15:10.770 --> 15:18.780
+basically sometimes it might hold it for 12 seconds if for example there are actually two emails sent
+
+15:18.790 --> 15:23.460
+so we'd want to try that again and then it will be just locked.
+
+15:23.580 --> 15:25.910
+So this is how you will solve that.
+
+15:25.920 --> 15:29.780
+And then whenever you have limits like that inside your API.
+
+15:30.360 --> 15:37.020
+Then you just have to make sure that you are right limiting it with the same key.
+
+15:37.020 --> 15:41.730
+So make sure that this is only locking this process for our specific key.
+
+15:42.330 --> 15:49.320
+So whenever this would be this front of mail would be put on a queue from any place inside your application.
+
+15:49.320 --> 15:54.670
+This will make sure that it won't run more than two times every 12 seconds.
+
+15:54.930 --> 16:02.050
+While you can not only use that for the rate limiting of like external API but for example if you needed
+
+16:02.070 --> 16:03.870
+for any other reason.

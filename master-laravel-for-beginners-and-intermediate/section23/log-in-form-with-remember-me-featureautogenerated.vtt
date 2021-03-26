@@ -1,0 +1,229 @@
+WEBVTT
+
+00:00.360 --> 00:06.870
+So in the last lecture you've seen how to use the guest middle where to redirect when you are already
+
+00:06.870 --> 00:08.910
+out integrated.
+
+00:08.940 --> 00:12.390
+Now let's go and work on the logging forum.
+
+00:12.570 --> 00:19.560
+So starting with the logging controller from our project the first thing you would like to modify is
+
+00:19.560 --> 00:24.720
+the page you are being redirected to after you successfully logging.
+
+00:24.720 --> 00:26.960
+So let's change it to something that exists.
+
+00:26.970 --> 00:32.010
+So just slash because this home route doesn't exist.
+
+00:32.010 --> 00:33.300
+So save the changes.
+
+00:33.300 --> 00:41.940
+And now it uses this authenticates users straight and the show logging form action is responsible for
+
+00:41.940 --> 00:51.060
+displaying their logging form and it expects it to be of that logging where dot translates to the directory
+
+00:51.060 --> 00:52.610
+separator.
+
+00:52.680 --> 01:04.390
+So we should go to our reviews our folder and inside it create a new logging blade BHP.
+
+01:04.410 --> 01:08.520
+Now fortunately we do not have to write it from scratch.
+
+01:08.580 --> 01:14.880
+We can just copy the registration form and we want of course need everything from it.
+
+01:14.880 --> 01:20.260
+For example we do not need the name field.
+
+01:20.330 --> 01:21.910
+We will keep the e-mail.
+
+01:22.060 --> 01:30.250
+And if you remember it or not we won't be providing the user name for the user name credential for the
+
+01:30.250 --> 01:40.150
+user name part of the credentials because inside the authenticate users there is this validate logging
+
+01:40.510 --> 01:46.930
+method and inside it it is calling that this user name.
+
+01:46.930 --> 01:54.360
+So this method that you can of course define inside the logging controller to override it.
+
+01:54.550 --> 02:00.550
+It is specifying what is the name of the user name field.
+
+02:02.350 --> 02:10.510
+So since it is e-mail by default we can use the e-mail field name if you would like it to be for example
+
+02:10.510 --> 02:15.010
+user name if you will have this field on your user model.
+
+02:15.010 --> 02:20.200
+You can change that inside logging controller by overriding this method.
+
+02:20.230 --> 02:29.070
+So basically that means you will just copy it and paste it here maybe after the constructor it's a good
+
+02:29.070 --> 02:31.320
+practice to do that and modify it.
+
+02:31.350 --> 02:38.520
+Us user name that way the field used for user name would be user name not email.
+
+02:38.680 --> 02:39.580
+But we won't do that.
+
+02:39.580 --> 02:42.860
+So I'll just comment that out and leave it here.
+
+02:42.880 --> 02:44.450
+So you remember how to do that.
+
+02:45.130 --> 02:48.390
+OK let's go back to our logging forum.
+
+02:48.520 --> 02:52.530
+So we have the email and we also need passwords.
+
+02:52.540 --> 02:59.820
+So it's good for us but we do not need this because we do not have any password to retyped.
+
+02:59.830 --> 03:01.600
+We only do that when registering.
+
+03:01.600 --> 03:06.110
+And also we need to change the label to logging.
+
+03:06.280 --> 03:13.870
+And final thing is the action this form is being sent to so we have this route called register for registering
+
+03:13.930 --> 03:15.860
+and for logging in.
+
+03:16.120 --> 03:18.160
+It is called logging.
+
+03:18.160 --> 03:25.120
+You can check that by running BHP Artie's en route list and the forum when it will be sent.
+
+03:25.120 --> 03:30.900
+It would be directed to the logging method.
+
+03:31.260 --> 03:36.960
+So this is the one I've explained before.
+
+03:37.010 --> 03:43.280
+Now we have our forum and basically that is everything that you have to do you can also customize it
+
+03:43.310 --> 03:43.990
+if you want.
+
+03:44.000 --> 03:51.440
+If you would like some additional fields and we actually would like one additional field and this field
+
+03:51.440 --> 03:52.280
+would be called.
+
+03:52.910 --> 03:54.590
+Remember me.
+
+03:54.590 --> 03:58.200
+So we will allow the users to be remembered.
+
+03:58.250 --> 04:03.020
+So that's their session will be stored inside our cookie.
+
+04:03.440 --> 04:07.520
+So let's add a new field for this checkbox
+
+04:11.270 --> 04:16.100
+and inside it we'll use another class from bootstrap called Forum check
+
+04:22.920 --> 04:32.770
+and now lets out the input so it also needs a couple of classes from bootstrap to look nicely one of
+
+04:32.770 --> 04:37.600
+them is check forum check input.
+
+04:37.600 --> 04:47.050
+The type is checkbox and the name has to be remember and this is because that's the name of the parameter
+
+04:47.110 --> 04:54.610
+expected inside our logging controller to remember the user that was logged in.
+
+04:54.610 --> 04:56.480
+You can even find it here.
+
+04:59.670 --> 05:10.000
+When you find the remember parameter it's checking if the request contains the remember set us the checked
+
+05:10.000 --> 05:18.940
+field and then this attempt the method from the guard accepts the Remember Me as a boolean as a as its
+
+05:18.940 --> 05:23.340
+second parameter after credentials OK.
+
+05:23.360 --> 05:27.060
+So let's go back to doing our input.
+
+05:27.930 --> 05:37.040
+OK so we have the type we have the name and also we can use that value and specify all the value.
+
+05:37.100 --> 05:43.970
+In case this was checked before for example when someone is would specify an old password we can keep
+
+05:44.540 --> 05:46.050
+the old value.
+
+05:46.070 --> 05:49.720
+So now you can see how to do that with checkboxes.
+
+05:49.910 --> 05:51.900
+So we'll do it like this.
+
+05:52.730 --> 05:54.950
+If old remember
+
+05:58.570 --> 06:08.570
+if this would be true will echo checked and if you would if this would evaluate to false will just not
+
+06:08.570 --> 06:09.590
+return anything.
+
+06:09.590 --> 06:19.100
+That way we can keep the value of the input checkbox in record requests for example when this request
+
+06:19.100 --> 06:21.450
+would fail.
+
+06:21.720 --> 06:28.700
+Okay so we have the input and we should also add a label with specific class.
+
+06:28.840 --> 06:39.550
+That would be form check label and also specify what this is the label for and it is for ream.
+
+06:39.850 --> 06:40.660
+Remember
+
+06:44.140 --> 06:52.750
+and just specify the text that would be displayed inside like re member mi okay.
+
+06:52.760 --> 07:01.010
+We have our form ready but before we will be able to see it we need to log out somehow.
+
+07:01.070 --> 07:08.750
+So in the next lecture we'll modify our header for our application so that we would have a logout button
+
+07:08.960 --> 07:10.730
+when we are authenticated.

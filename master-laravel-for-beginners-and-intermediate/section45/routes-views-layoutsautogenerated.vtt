@@ -1,0 +1,388 @@
+WEBVTT
+
+00:01.080 --> 00:08.970
+After finishing the previous lecturer you should be able to go to this address H larval to test and
+
+00:08.970 --> 00:12.990
+that's the default page of a lot of the framework.
+
+00:13.050 --> 00:22.980
+Now let's open the Visual Studio code and open our larval project inside it so press that open folder
+
+00:23.430 --> 00:29.120
+and locate the lot of a folder in which you have created the brand new level project.
+
+00:34.520 --> 00:39.530
+Now the roots for our application can be found inside the roots folder.
+
+00:39.530 --> 00:50.180
+Web BHP files so let's open it you can see that the larval already created one route for us and the
+
+00:50.180 --> 00:56.450
+way we define routes is by using the static methods of the route object.
+
+00:56.450 --> 01:04.040
+Some note that you didn't have to add that I use statement for this route object and this is because
+
+01:04.160 --> 01:10.300
+this file does not leave on its own it is being included inside larval.
+
+01:10.370 --> 01:12.180
+I will show you later where.
+
+01:12.320 --> 01:19.370
+So you don't really have to worry about that and this object has a couple of useful methods and they
+
+01:19.370 --> 01:22.610
+correspond to the HDP verbs.
+
+01:22.910 --> 01:32.090
+So the default is the get but you can also use post or puff put or delete or any other HDTV verb out
+
+01:32.120 --> 01:34.550
+there.
+
+01:34.550 --> 01:43.490
+So get is typically used on the web to just fetch the data and the parameters of this static get method
+
+01:43.850 --> 01:47.450
+first is there address or the you url.
+
+01:47.450 --> 01:57.500
+So you see that there is only slash so it is for the main page and the second parameter is the closure.
+
+01:57.500 --> 02:00.620
+The closure is a function without a name.
+
+02:00.680 --> 02:05.570
+So that's on that's the function that only lives in this context.
+
+02:06.320 --> 02:14.270
+So what I mean is you cannot call this function from any other place it is being defined here and immediately
+
+02:14.360 --> 02:24.630
+called and how that works is for this route you have to call this function and it has to return some
+
+02:24.630 --> 02:31.690
+content and everything that this function will return is being rendered.
+
+02:31.800 --> 02:39.450
+Now you see that it has a return statement and it also calls a magic function called The View.
+
+02:39.450 --> 02:42.750
+So this is not a pitch be built in function.
+
+02:42.750 --> 02:50.900
+It's a function that comes from larval framework and it is one of the so-called helper functions will
+
+02:50.940 --> 02:53.640
+get to the helper functions later.
+
+02:53.880 --> 03:03.360
+For now you should just know that the view function responsibility is to find a template and templates
+
+03:03.390 --> 03:07.610
+are defined inside the resources views folder.
+
+03:08.160 --> 03:15.630
+So it tries to render a welcome template and you can see here on the left that there is a welcome dart
+
+03:15.630 --> 03:24.180
+blade that BHP file so you won't have to add this suffix to the Template name just a template name is
+
+03:24.180 --> 03:25.110
+enough.
+
+03:25.110 --> 03:28.680
+So let's open this template right now and the blade.
+
+03:28.680 --> 03:39.150
+BHP means that we'll be using of blade templating engine and it contains a lot of useful stuff to make
+
+03:39.210 --> 03:42.270
+composing templates easier.
+
+03:42.330 --> 03:48.000
+So that's the default template that is being created for us bi lateral will.
+
+03:48.030 --> 03:53.690
+We will not go into details of what's inside here that would be too much for now.
+
+03:53.790 --> 04:07.480
+But now let's just make a simple change and change the Lavell to larval course save the changes and
+
+04:07.480 --> 04:13.240
+now when you will go to the browser and refresh you can immediately see the change content.
+
+04:15.640 --> 04:23.440
+Now before we move even further I'd like you to know that I've prepared a repository on GitHub called
+
+04:23.560 --> 04:31.390
+larval cheat sheet and the link is included in this lecture and you can see all the options and code
+
+04:31.390 --> 04:39.760
+that we'll be using in this lecture and all the other lectures and you can easily find how to do a certain
+
+04:39.760 --> 04:43.410
+thing on this repository repositories.
+
+04:43.420 --> 04:46.370
+So I invite you to check it out.
+
+04:46.450 --> 04:50.910
+OK so let's go back to the visual studio code.
+
+04:51.100 --> 04:56.010
+And as I said everything what you will return from this function will be rendered.
+
+04:56.080 --> 05:05.420
+So if we comment out this view and just return the number you can also see that this number is displayed.
+
+05:05.420 --> 05:07.830
+So this function should return.
+
+05:07.850 --> 05:11.300
+Anything that should be displayed back to the user.
+
+05:11.450 --> 05:21.040
+So let's remove that now and bring it back to the view.
+
+05:21.100 --> 05:26.800
+Now we will remove this welcome blade template because it's not really useful for us.
+
+05:26.830 --> 05:35.950
+So let's thrash it and if you will try to see that page right now you see the error from the lateral
+
+05:35.960 --> 05:38.270
+that The View welcome was not found.
+
+05:38.630 --> 05:44.360
+And it throws an exception that invalid argument exception view name not found.
+
+05:44.390 --> 05:49.530
+So if you would try to render a view that doesn't exist you will see this error.
+
+05:50.690 --> 05:56.310
+So now let's create our own template and call it home.
+
+05:56.390 --> 06:04.490
+Blade peach P and render rendered render it here so as you remember you don't have to.
+
+06:04.510 --> 06:08.540
+And blade BHP just home.
+
+06:08.590 --> 06:11.980
+So right now it's working but it is an empty template.
+
+06:11.980 --> 06:13.990
+So let's add some content into it
+
+06:18.830 --> 06:22.580
+and maybe we can just display a header.
+
+06:22.760 --> 06:24.800
+Welcome to larval
+
+06:29.330 --> 06:30.580
+so this is working.
+
+06:30.590 --> 06:45.680
+We can even add some paragraphs saying this is the content of the main page save the changes and we
+
+06:45.680 --> 06:46.300
+get that.
+
+06:46.300 --> 06:51.620
+Now let's go back to the Web BJP and try to create another route
+
+06:55.600 --> 06:58.600
+and the route could be for example contact
+
+07:02.290 --> 07:03.850
+and it should return.
+
+07:03.850 --> 07:10.300
+Another review called contact.
+
+07:10.330 --> 07:18.350
+So now our application has two routes and of course the contact template doesn't exist yet.
+
+07:18.370 --> 07:25.270
+But before I will create it I will show you how we can least all the routes that are defined in our
+
+07:25.270 --> 07:26.320
+application of course.
+
+07:26.320 --> 07:29.940
+Now it is easy we can see that there are only two.
+
+07:30.160 --> 07:35.760
+But if your application grows you will have to manage it somehow.
+
+07:35.860 --> 07:45.660
+So open this terminal using terminal from view or you can just open the terminal window and type peach
+
+07:45.660 --> 07:53.560
+bee artisan and you can see a list of all the possible commands that you can execute mind that you have
+
+07:53.560 --> 07:58.530
+to be inside the folder where your larval application is.
+
+07:58.750 --> 08:07.600
+But what interests us at the moment is peach bee artisan root list.
+
+08:07.700 --> 08:14.540
+It allows you to see all the roots that are defined in your application including the you are I the
+
+08:14.540 --> 08:17.480
+method and how the action is defined.
+
+08:17.480 --> 08:25.190
+So now it shows closure but there are also another ways to define roots and we'll talk about them later.
+
+08:25.190 --> 08:29.690
+So just so you know peach bee artisan is your friend.
+
+08:30.230 --> 08:38.950
+Okay let's close it for now and after the contact template so create a new file and call it contact
+
+08:38.960 --> 08:52.150
+blade peach Bee let's also create a template and maybe we can also add a header contact and paragraph
+
+08:53.090 --> 09:02.840
+Hello this is contact save the changes and go back to the browser now you should be able to go to page
+
+09:02.980 --> 09:07.040
+lot the test slash contact and you can see your contact page
+
+09:11.040 --> 09:18.630
+so now everything is fine we have two pages but now let's go back to this templates you might notice
+
+09:18.630 --> 09:27.140
+that there is something repeating here we in both of these templates we have the same chunk of the HDMI
+
+09:27.140 --> 09:34.470
+mail which is being repeated so that's probably not a very good idea and we would like to move it into
+
+09:34.650 --> 09:41.750
+single file and only store the actual content of the templates inside them.
+
+09:41.880 --> 09:47.750
+Fortunately the lava has a tool for that and it's called layouts.
+
+09:48.090 --> 09:54.800
+So let's create our first layout inside a layout blade peach B file
+
+09:59.530 --> 10:08.860
+Okay so this will hold everything that we need to display on every page and those contact and home pages
+
+10:08.920 --> 10:15.220
+would only show the content that they need to the content that actually changes between the pages
+
+10:19.480 --> 10:21.550
+so let's save this now.
+
+10:22.000 --> 10:33.840
+And now inside the contact template will remove all that parts that are now in the layout and will use
+
+10:34.850 --> 10:37.380
+larval blade directive.
+
+10:37.470 --> 10:40.800
+So directive starts with the other sign
+
+10:44.050 --> 10:52.450
+and the directive we will use is called extends so here you have to type the layout template name that
+
+10:52.720 --> 10:53.470
+we extend.
+
+10:53.500 --> 10:57.550
+So in our case it is called layout but it can be called differently.
+
+10:57.550 --> 11:07.360
+So in each individual template you can extend a different layout so let's copy that and do the same
+
+11:07.480 --> 11:14.600
+in our home page.
+
+11:14.630 --> 11:15.120
+All right.
+
+11:15.130 --> 11:22.510
+So we have those two templates that should now extend our base layout.
+
+11:22.510 --> 11:25.260
+So let's see what do we have.
+
+11:27.110 --> 11:30.950
+So now on the contact page if you will check the source
+
+11:34.710 --> 11:39.840
+you can see that we have the content rendered on the top.
+
+11:39.870 --> 11:44.320
+Actually instead of bank rendered inside the body.
+
+11:44.550 --> 11:51.870
+So we have extended the layout and its content was being rendered but that's not what we wanted.
+
+11:51.870 --> 11:59.540
+We wanted to tell it where the content should be exactly rendered and we can achieve that using sections.
+
+12:02.250 --> 12:11.160
+Now sections are defined inside individual templates and you do that by using the Section directive
+
+12:11.340 --> 12:13.500
+followed by the section name.
+
+12:13.800 --> 12:24.860
+So we'll call this section content and you have to end it with the end section directive.
+
+12:24.860 --> 12:27.110
+Now let's do the same with the home.
+
+12:27.680 --> 12:29.010
+So it's also the
+
+12:31.840 --> 12:37.880
+content section and now see what happens when we refresh that document.
+
+12:37.900 --> 12:40.890
+So if you will check the source.
+
+12:40.900 --> 12:48.420
+Now you can see that actually nothing is being rendered and there is a reason for that inside the layout.
+
+12:48.460 --> 12:58.010
+We need to add another directive called yield and the yield is used to render a section.
+
+12:58.010 --> 13:06.410
+So since we have created a content section that means we would like to use yield to echo everything
+
+13:06.500 --> 13:13.460
+that's part of this section and everything that's between those two tracks will be rendered inside the
+
+13:13.460 --> 13:14.420
+layout.
+
+13:14.420 --> 13:21.860
+So save the changes everywhere and now refresh so we can see the contact page home page.
+
+13:22.220 --> 13:29.750
+Nothing much changed but when you look at the source now you can see that everything is being rendered
+
+13:29.810 --> 13:35.280
+inside the body tag where we wanted that.
+
+13:35.360 --> 13:35.800
+All right.
+
+13:35.820 --> 13:37.810
+I think that's enough for this lecture.
+
+13:37.860 --> 13:46.440
+Please continue to the next one well we will talk again about layouts views rendering data and configuring
+
+13:46.620 --> 13:47.220
+routes.

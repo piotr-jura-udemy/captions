@@ -1,0 +1,316 @@
+WEBVTT
+
+00:00.390 --> 00:08.520
+Now as usual with travel we can just generate a new mark down my level using the same command as we
+
+00:08.520 --> 00:11.430
+did for our previous Malabo class.
+
+00:11.430 --> 00:19.560
+So this is speech B artisan make male so our previous class was called comment posted.
+
+00:19.650 --> 00:21.340
+So let's call that comment.
+
+00:21.410 --> 00:27.090
+Post that markdown just to differentiate it somehow.
+
+00:27.090 --> 00:33.380
+Now additionally you can add a markdown parameter which would also generate our view for us.
+
+00:33.690 --> 00:34.960
+So let's call it Mark.
+
+00:35.190 --> 00:42.490
+Let's call it e-mails dot posts dot comment that mark down.
+
+00:42.520 --> 00:43.960
+So now this is created.
+
+00:43.960 --> 00:46.430
+Let's first check out the class.
+
+00:46.570 --> 00:53.770
+So this class will also extend their main level base class it by default has a constructor generated
+
+00:53.860 --> 00:56.710
+and then there is also the built method.
+
+00:56.710 --> 01:02.710
+So if you compare that to our comment posted class this is basically no different.
+
+01:02.770 --> 01:07.990
+The mark down also has a build method and then it also tries to render something.
+
+01:07.990 --> 01:13.160
+But here we call the view method inside our normal may level.
+
+01:13.180 --> 01:20.710
+So we just to render some HDR mail from our template and inside there mark down my level you will use
+
+01:20.710 --> 01:27.490
+the markdown method to also compile any markdown that might be inside those templates.
+
+01:27.490 --> 01:33.790
+So that's the only difference from the class perspective and other than that you can use all the methods
+
+01:33.820 --> 01:40.420
+that you have used here in comment post that so you can change the subject attach some files or specify
+
+01:40.600 --> 01:44.560
+from whom this email was sent.
+
+01:44.570 --> 01:51.890
+So now we know that markdown may class is basically the same as the normal mail class with one exception
+
+01:51.890 --> 01:55.090
+that to render the actual contents of the email.
+
+01:55.220 --> 02:02.180
+We use the markdown method instead of The View method on a normal may label class.
+
+02:02.180 --> 02:07.670
+So let's now check out this template that was generated together with this markdown may level class.
+
+02:07.670 --> 02:10.730
+It's common that markdown blade BHP.
+
+02:10.850 --> 02:16.430
+Here you can immediately notice what I've mentioned inside the first lecture from the section that this
+
+02:16.440 --> 02:25.710
+we will be using some pre-built lateral blade components specifically for rendering the markdown so
+
+02:25.710 --> 02:31.230
+if you will take a look at this diagram I've mentioned this at the very beginning that Lovell has a
+
+02:31.230 --> 02:39.390
+set of reusable blade components and they are actually part of la vela so you you might see that we
+
+02:39.570 --> 02:41.240
+haven't really created them yet.
+
+02:41.250 --> 02:48.270
+They are available to us so we can also customize those components and to customize them.
+
+02:48.300 --> 02:50.060
+You will have to publish them first.
+
+02:51.970 --> 02:56.430
+Now let's stop for a second and explain what publishing is.
+
+02:56.530 --> 03:03.610
+So by default as I have said those components are part of Lavell so they exist inside the vendor directory
+
+03:03.670 --> 03:07.280
+and are basically part of lateral library.
+
+03:07.420 --> 03:10.950
+So if you use them they will just have the default look.
+
+03:11.860 --> 03:16.420
+Now if you would like to customize them you have to run a specific command.
+
+03:16.420 --> 03:26.780
+So let's run it now BHP artisan vendor publish and you have to add a tag option and use the proper tag
+
+03:26.810 --> 03:30.040
+which is Lavell mail.
+
+03:30.590 --> 03:39.320
+Now what this did is it copied the directory from the vendor where the larval framework is to your application
+
+03:39.410 --> 03:40.100
+views.
+
+03:40.100 --> 03:47.380
+So now you can see that there is new folder inside the resources views and it is called vendor.
+
+03:47.470 --> 03:55.190
+Now as I've said those templates from the vendor library were copied inside our application to the resources
+
+03:55.190 --> 04:01.190
+views vendor mail and then we have two directories the HDMI mail and markdown.
+
+04:01.400 --> 04:09.080
+So whatever it is inside HD AML will be used to render HDMI out email but this will also send along
+
+04:09.170 --> 04:11.000
+a plain text version.
+
+04:11.000 --> 04:18.090
+So for example let's see an example we are using a button here and this is the default slot which will
+
+04:18.230 --> 04:20.920
+just this play some text on the bottom.
+
+04:21.140 --> 04:27.980
+So first let's check out how does it look like inside markdown which is markdown folder which is supposed
+
+04:27.980 --> 04:29.800
+to send a plain text.
+
+04:29.810 --> 04:36.290
+So what you can see here is basically a slot which will be this button text and a new URL.
+
+04:36.320 --> 04:40.920
+So this is trying to achieve something in the plain text.
+
+04:40.940 --> 04:44.970
+Now the other representation is basically HDMI.
+
+04:45.000 --> 04:47.780
+So you see some pre build syntax.
+
+04:47.780 --> 04:56.080
+There is some HDMI all and then there is also a slot and the URL and actually a call or this is another
+
+04:56.110 --> 04:56.620
+attribute.
+
+04:56.620 --> 05:02.430
+You can specify it's using the bootstrap styling and everything.
+
+05:02.440 --> 05:06.490
+You can also configure we'll get to that later.
+
+05:06.490 --> 05:08.020
+Now let's see another example.
+
+05:08.020 --> 05:13.960
+So there is the table component which well in this case where we will be sending plaintext will just
+
+05:14.140 --> 05:22.360
+output whatever there is because tables are not supported in plaintext at all but actually the corresponding
+
+05:22.630 --> 05:26.660
+HDMI component contains a diff class.
+
+05:26.680 --> 05:35.350
+We have a table so this is using some HDMI all already but then it will also use this markdown class
+
+05:35.890 --> 05:43.110
+which will pass and convert the markdown that was used inside this component and convert it to the H
+
+05:43.120 --> 05:44.300
+the AML.
+
+05:44.320 --> 05:45.670
+So let's see an example.
+
+05:46.240 --> 05:52.930
+So here on this markdown cheat sheet you see an example of how to define our table inside.
+
+05:53.170 --> 05:55.640
+Well using the markdown syntax.
+
+05:55.840 --> 05:59.320
+So this will be printed as it is in plaintext.
+
+05:59.500 --> 06:07.420
+But in h the email this would actually be converted to a normal h the AML table tax and will basically
+
+06:08.170 --> 06:15.060
+be properly styled so if you are feeling really confused at this moment.
+
+06:15.100 --> 06:19.140
+Now it's time to actually test it out and see how that works.
+
+06:19.150 --> 06:26.000
+So inside our template let's write something like hello from mark down.
+
+06:26.140 --> 06:32.770
+Now we will also have to check how we actually send this email inside the post comment controller because
+
+06:32.860 --> 06:34.870
+currently we are using the comment posted.
+
+06:34.900 --> 06:38.980
+So we have to use comment post that mark down.
+
+06:39.080 --> 06:41.260
+Now it doesn't accept any arguments yet.
+
+06:41.290 --> 06:45.280
+So don't worry about that mind that you have to add an import here.
+
+06:46.190 --> 06:46.450
+OK.
+
+06:46.450 --> 06:47.680
+Now let's save the changes.
+
+06:47.680 --> 06:52.070
+Let's go to the document and write something down like Hello.
+
+06:52.090 --> 06:57.120
+Something that is valid and would actually send this email.
+
+06:57.230 --> 07:02.760
+Now let's refresh our mail drop inbox and what you see here is what I talked about.
+
+07:02.760 --> 07:11.150
+So in this view in HDMI view we see a beautifully rendered HDMI all and this CEO says that is part of
+
+07:11.150 --> 07:14.060
+this e-mail that was sent is also configurable.
+
+07:14.060 --> 07:22.970
+It's part of the HP e-mail folder where we have our HDMI out templates but what you can also see inside
+
+07:22.970 --> 07:29.550
+this text box is basically a plain text version of the same email.
+
+07:29.570 --> 07:33.150
+So this comes directly from the markdown directory.
+
+07:33.170 --> 07:40.310
+Those are just some versions of this component that will just render plain text for clients that do
+
+07:40.310 --> 07:45.160
+not support HD AML or it is disabled in them.
+
+07:45.650 --> 07:48.510
+And hero you can see all the components that we have used.
+
+07:48.520 --> 07:54.260
+So there is the button there is the text and there is even this hello message.
+
+07:54.260 --> 08:01.640
+Now let's also take a look out on how this was actually composed so you can see that what is being used
+
+08:01.640 --> 08:10.750
+here is everything is wrapped inside the mail message component so if you will open that you can see
+
+08:10.750 --> 08:14.860
+that this actually is wrapped also inside may layout.
+
+08:14.860 --> 08:22.210
+So this is just using the mail layout component which contains plenty of HD AML some additional styles
+
+08:22.540 --> 08:24.940
+to make those e-mails responsive.
+
+08:25.570 --> 08:30.960
+Then everything from the slot is bank passed us mark down and rendered.
+
+08:31.120 --> 08:37.510
+So those components actually use each other at least some of them for example inside the message.
+
+08:37.510 --> 08:46.420
+You also have their slot for the few footer you are using the footer component which is inside the footer
+
+08:46.420 --> 08:55.140
+blade BHP and the corresponding components from the markdown folder basically are structured similarly
+
+08:55.140 --> 09:03.620
+early but they will only render the plain text so in this lecture we've learned how those markdown may
+
+09:03.620 --> 09:09.130
+levels working general how to customize them where all those fires are how to use them.
+
+09:09.500 --> 09:15.380
+But in the next one will actually modified this template we'll use some components and you will also
+
+09:15.380 --> 09:21.890
+see how you can customize the styles and everything regarding the markdown may label classes.

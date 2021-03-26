@@ -1,0 +1,199 @@
+WEBVTT
+
+00:00.390 --> 00:06.720
+In the last lecture we explained how the polymorphic one to one relationship looks like.
+
+00:06.720 --> 00:11.430
+So now let's take a look at the migration which created this image stable.
+
+00:12.360 --> 00:21.050
+So everything what is inside it is fine except this specific relation to the blog post I.D. so we'll
+
+00:21.120 --> 00:29.010
+remove that and add those fields that we require right now which is this imaginable I.D. and imaginable
+
+00:29.040 --> 00:40.340
+type so let's go ahead and create new migration using BHP artisan make migration and we'll call it up
+
+00:41.550 --> 00:41.980
+more
+
+00:45.080 --> 00:47.180
+two images table
+
+00:51.190 --> 00:53.800
+let's open a new migration.
+
+00:54.130 --> 01:02.900
+So we have the scaffolding to work on the images stable and what we have to do first is we will drop
+
+01:02.900 --> 01:06.280
+this column so blog post idea.
+
+01:06.320 --> 01:08.330
+It doesn't have our foreign key.
+
+01:08.350 --> 01:16.490
+So we do not really have to drop anything else now to add the imaginable I.D. or imaginable type.
+
+01:16.490 --> 01:26.930
+We can either specify them explicitly so we will add unsigned integer like image label I.D. and then
+
+01:27.080 --> 01:38.240
+another one which would be Stringer image able type but we can do something what we did before.
+
+01:38.240 --> 01:45.800
+So use a helper method like timestamps which basically creates created out and updated out fields.
+
+01:45.800 --> 01:54.110
+So obviously lava has something like that for polymorphic relationships which is scold morphs here you
+
+01:54.110 --> 02:02.930
+just specify image able and then it will create both image able idea and image able type.
+
+02:02.930 --> 02:15.040
+And also it will create our composite key which will consist of those two fields.
+
+02:15.050 --> 02:20.730
+Now we also have to implement Well the down method.
+
+02:20.930 --> 02:31.090
+This should create back the column the blog post iodine so we can just copy that from here and then
+
+02:31.750 --> 02:39.530
+we should do drop marks and just call it image able okay.
+
+02:39.560 --> 02:47.030
+Now please hold a little bit before running this migration and let's see what happens inside the morphs
+
+02:47.150 --> 02:47.780
+method.
+
+02:48.980 --> 02:51.250
+So this creates a string field.
+
+02:51.290 --> 02:59.180
+As I've said with the default length then it creates an unsigned big integer we should have the I.D.
+
+02:59.180 --> 03:07.850
+suffix so this was the type suffix so it will create two columns on the table but then it creates an
+
+03:07.910 --> 03:16.370
+index which is our composite index which means it is based not on a one column but on the two columns
+
+03:16.580 --> 03:18.590
+together.
+
+03:18.590 --> 03:26.510
+So this is done to be more efficient on fetching those polymorphic relationships but it will also make
+
+03:26.540 --> 03:28.730
+us some trouble.
+
+03:28.730 --> 03:38.510
+And it is that if we create an index based on a string and the default length of string is two hundred
+
+03:38.630 --> 03:43.700
+fifty five characters inside our my school database.
+
+03:43.700 --> 03:46.400
+This would make this key to long.
+
+03:46.820 --> 03:51.560
+So if you want to create keys we actually cover that at the beginning of the course.
+
+03:51.650 --> 04:01.100
+But I haven't then modified the default string length of the of all the string fields I've just modified
+
+04:01.250 --> 04:07.890
+the user email field length to be less than the default 255.
+
+04:07.910 --> 04:09.410
+Now let's actually do that.
+
+04:10.490 --> 04:16.560
+So what we have to do is you have to use the schema for seed.
+
+04:16.880 --> 04:25.910
+So make sure you have this import here and we have to specify default string length to be something
+
+04:25.910 --> 04:28.170
+like one hundred ninety one.
+
+04:28.640 --> 04:38.690
+So we have to do that because the default string length of 255 characters then it will take four bytes
+
+04:38.690 --> 04:41.960
+for each character when you use unicode.
+
+04:41.960 --> 04:43.300
+And we are doing that.
+
+04:44.120 --> 04:51.020
+And if you multiply it by four this is much more than I guess seven hundred thirty eight which is the
+
+04:51.020 --> 04:53.670
+maximum key length.
+
+04:53.960 --> 04:57.380
+So definitely this is bigger.
+
+04:57.380 --> 04:58.640
+And this would just fail.
+
+04:58.700 --> 05:05.690
+So to not cause us any trouble let's just set this default string land to be one hundred ninety one
+
+05:06.590 --> 05:09.200
+and only then run this migration.
+
+05:09.380 --> 05:15.830
+So if you are really keen to see what I mean why this would be a problem when the key is just too long
+
+05:16.220 --> 05:24.800
+you can skip adding this schema default string length run migration and well you will basically basically
+
+05:24.800 --> 05:27.560
+see that my sequel error.
+
+05:27.560 --> 05:31.550
+Anyway let's run BHP artisan migrate.
+
+05:31.730 --> 05:32.760
+Sorry I misspoke.
+
+05:32.770 --> 05:37.290
+The common name Peach Pit artisan migrate.
+
+05:37.310 --> 05:40.290
+OK so now we have random migration.
+
+05:40.310 --> 05:47.470
+And now let's refresh and you can see that we have immeasurable type which is var char that's the length
+
+05:48.440 --> 05:50.060
+we have imaginable I.D..
+
+05:50.450 --> 05:58.070
+And also there is this composite key which is based on the two columns that imaginable type and imaginable
+
+05:58.250 --> 05:59.090
+I.D..
+
+05:59.780 --> 06:00.080
+OK.
+
+06:00.110 --> 06:02.660
+So we have our changes made.
+
+06:02.690 --> 06:06.280
+So the migration modified our database scheme schema.
+
+06:06.320 --> 06:14.440
+Now we have to modify the relation definitions inside blog post model inside image itself.
+
+06:14.510 --> 06:22.010
+So we will see how this relation actually looks in a lot of old terms and also we'll add a new relation
+
+06:22.460 --> 06:26.390
+on the User model which can also hold an image.

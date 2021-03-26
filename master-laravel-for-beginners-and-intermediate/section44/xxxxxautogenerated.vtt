@@ -1,0 +1,325 @@
+WEBVTT
+
+00:00.810 --> 00:03.780
+So we have test how we can read from our API.
+
+00:03.780 --> 00:08.250
+Now let's see how we can test storing a new comment through our API.
+
+00:08.910 --> 00:19.290
+So first thing we would like to do is to test adding comments when not our authenticated and as the
+
+00:19.290 --> 00:25.680
+name of the test suggests will be checking whether we should see an error whether you when user is not
+
+00:25.680 --> 00:34.170
+authenticated and tries to add a new comment so we can also try to reuse this blog post factory again
+
+00:34.230 --> 00:35.620
+and again and again.
+
+00:35.760 --> 00:41.670
+But instead if you see our repeating pattern you can just copy that and move it to the base class.
+
+00:41.670 --> 00:43.430
+This would be the simplest solution.
+
+00:43.440 --> 00:49.400
+So let's either protect that function post
+
+00:52.400 --> 00:56.120
+and just return it from this method.
+
+00:56.120 --> 01:04.010
+So you can also safely use this user here because it is actually defined in this very same class.
+
+01:04.040 --> 01:10.070
+So now let's also modify this quickly and call this post
+
+01:13.720 --> 01:15.040
+also modified here.
+
+01:15.070 --> 01:22.920
+This post and now we can do this simply inside our new method.
+
+01:22.920 --> 01:29.280
+So just call this post to get our brand new blog post created
+
+01:32.590 --> 01:34.800
+and now we call them.
+
+01:34.870 --> 01:44.440
+We create a response variable and call this Jason the method for creating is as you might remember that
+
+01:44.440 --> 01:51.980
+posts and the euro is api v1 post 1
+
+01:55.980 --> 01:59.020
+or dissenters will be post free comments.
+
+01:59.340 --> 02:03.930
+And then inside the final argument you have to specify the body.
+
+02:03.930 --> 02:09.420
+So we did it you do it using a normal peach array which would be converted to J some.
+
+02:09.420 --> 02:16.490
+Thanks to this Jason method of flat out though and you only have to specify are content so let it be.
+
+02:16.490 --> 02:28.590
+Hello and now what we expect to get back from this response is our CERT status to be 401.
+
+02:28.590 --> 02:30.050
+So let's verify that.
+
+02:31.360 --> 02:38.370
+Well actually we got an error here and it's a mistake I've made and it is because actually this test
+
+02:38.370 --> 02:45.740
+case class has a method post and it's used to make our request using the post HDP verb.
+
+02:45.780 --> 02:55.560
+So let's rename it to block post so you will just know that whenever you see an error like that this
+
+02:55.560 --> 03:01.650
+means that you actually have called one of your helper methods the same as another method that actually
+
+03:01.650 --> 03:03.350
+existed in the base class.
+
+03:03.810 --> 03:05.310
+So you just need to rename it.
+
+03:05.340 --> 03:07.720
+So let's just do that.
+
+03:07.720 --> 03:12.590
+Quickly so now it's a blog post everywhere.
+
+03:13.000 --> 03:15.980
+Okay let's save changes and run this test again.
+
+03:21.410 --> 03:28.100
+And the final thing from the error messages that you can see is that I actually have to order you statement
+
+03:28.100 --> 03:37.430
+for up a blog post in the base class.
+
+03:37.530 --> 03:40.910
+Now the final mistake is actually the URL is incorrect.
+
+03:40.920 --> 03:43.160
+It should be posts not a post.
+
+03:43.290 --> 03:47.450
+So let's rerun again and you can see that everything works now.
+
+03:47.490 --> 03:54.140
+So instead of using the actual HBP status code that you will have to remember that 401.
+
+03:54.150 --> 03:56.490
+Is when user is not right.
+
+03:56.490 --> 04:03.540
+So he is not alt indicated to do something in the new version of La Evo which is five point eight point
+
+04:03.630 --> 04:04.900
+twenty four.
+
+04:04.950 --> 04:11.880
+So if yours is at least this you can use this helper method as it assert unauthorized.
+
+04:11.880 --> 04:15.610
+So he doesn't accept any parameters you just call this method.
+
+04:15.630 --> 04:19.890
+And this is doing exactly as to assert its status with their 401.
+
+04:19.900 --> 04:21.180
+Past.
+
+04:21.340 --> 04:28.140
+So this was the first part of testing the storing of a new comment when the user wasn't authenticated.
+
+04:28.140 --> 04:33.600
+Now let's also test if everything works when the user is actually authenticated.
+
+04:33.600 --> 04:45.700
+So test the comments when out then Kate it would look essentially the same so we can copy this test
+
+04:45.730 --> 04:52.510
+over here but you might remember from our post as that to actually impersonate a user.
+
+04:52.510 --> 04:52.860
+So.
+
+04:52.900 --> 04:57.530
+So Lavell knows which user you would like to perform this request.
+
+04:57.910 --> 05:12.240
+You can use acting as method so you will call this before the GSM so we can get this user.
+
+05:12.240 --> 05:16.550
+So you just have to specify our user model which you'd like to use.
+
+05:16.550 --> 05:21.700
+So we can just create one for this as anyone can post comments to blog posts.
+
+05:21.720 --> 05:30.600
+But this time instead of just pretending that we are this user we also have to specify the guard as
+
+05:30.600 --> 05:36.480
+you might remember from me explaining the differences between the Web and API guards.
+
+05:36.480 --> 05:43.530
+By default the web guard is assumed by but being authenticated using session won't work for the API.
+
+05:43.920 --> 05:45.470
+So let's check it out
+
+05:48.230 --> 05:52.490
+and well of course this is green because we are checking for 401.
+
+05:52.490 --> 05:57.440
+And we should check for 201 which means that the resource was created.
+
+05:57.440 --> 06:01.880
+And if you run this well of course you got 401.
+
+06:01.880 --> 06:04.220
+Because you are not authenticated.
+
+06:04.250 --> 06:12.200
+So how to do that with API is is well it's very simple you just have to specify the guard name as the
+
+06:12.200 --> 06:16.300
+second argument which is the API.
+
+06:16.350 --> 06:24.770
+So now having a code like this when you rerun it well actually the blog post idea is incorrect.
+
+06:24.770 --> 06:26.410
+It should be for.
+
+06:26.420 --> 06:33.150
+So now when you rerun it you would see everything green which means that you succeed successfully out
+
+06:33.150 --> 06:43.200
+antiquated as user that you have just created using the API guard and that you can post a comment and
+
+06:43.200 --> 06:48.780
+that status is for 201 which means that the blog post was created.
+
+06:48.780 --> 06:55.500
+Now one final thing you might be checking for when adding new resources for your API is checking whether
+
+06:55.500 --> 06:58.350
+the data is actually valid.
+
+06:58.350 --> 07:00.230
+So let's create a new test for that.
+
+07:00.240 --> 07:08.860
+So public function test adding comment with invalid invalid data.
+
+07:08.970 --> 07:12.750
+Now we can also reuse a big chunk of this code.
+
+07:13.650 --> 07:15.320
+So we create a new blog post.
+
+07:15.330 --> 07:18.620
+We are acting as a user.
+
+07:18.720 --> 07:20.980
+So this means we will have a valid token.
+
+07:21.690 --> 07:31.560
+Let's also modify the idea to be five and you might want to send it with empty data.
+
+07:31.560 --> 07:43.200
+So let's remove this content part and just send an empty array so in this case you don't expect to 101
+
+07:43.740 --> 07:44.880
+if you will run it.
+
+07:44.910 --> 07:45.890
+You can see that.
+
+07:45.960 --> 07:55.420
+Of course this would fail and the error code for sending invalid data is four hundred twenty two.
+
+07:55.440 --> 08:00.120
+You can verify that in postman if you will prepare our request.
+
+08:00.120 --> 08:06.990
+Mind that you need to add those two headers accept content type and then alteration you need to provide
+
+08:07.110 --> 08:14.610
+a valid token so if you will send an empty body you can see that we have this error messages and the
+
+08:14.610 --> 08:16.110
+error code returned.
+
+08:16.120 --> 08:22.380
+BI lateral is four hundred twenty two unprocessed rebel entity.
+
+08:22.380 --> 08:25.710
+Now let's go back and expect this code.
+
+08:25.710 --> 08:29.970
+So we assert that status is 400 22
+
+08:32.570 --> 08:40.580
+and now we can also call our Sir Jason because we actually expect the exact Jason to be returned in
+
+08:40.580 --> 08:42.510
+this specific case.
+
+08:42.660 --> 08:52.690
+And this Jason is exactly what you see here so we want this message to be returned so let's also just
+
+08:52.690 --> 08:55.570
+convert it to P P from there.
+
+08:55.570 --> 09:03.550
+Jason then we want errors so there will be errors which would be an array
+
+09:06.370 --> 09:08.170
+it will contain content.
+
+09:12.390 --> 09:18.560
+And the content would also be an array with this specific message.
+
+09:23.380 --> 09:30.280
+So this is how the response should look like and now if you will rerun this test everything is green.
+
+09:30.310 --> 09:35.380
+So we have checked for the proper error code because we have sent empty body.
+
+09:35.380 --> 09:43.270
+And also we are verifying that the messages coming back from Lavell are also exactly the ones that we
+
+09:43.270 --> 09:44.060
+expect.
+
+09:44.770 --> 09:49.030
+So of course this is just a simple way to write those test.
+
+09:49.040 --> 09:54.760
+I'm just showing you the concepts but of course when you are writing your applications you will have
+
+09:54.760 --> 09:56.740
+probably everything checked.
+
+09:56.740 --> 10:01.810
+So we will check for all the possible errors for all the possible situations.
+
+10:01.810 --> 10:05.910
+So your test in your application should actually be longer.
+
+10:05.920 --> 10:14.230
+They should test everything but here you just got the basics of how you can verify your of all API.
+
+10:14.290 --> 10:16.360
+The most important things at least.

@@ -1,0 +1,67 @@
+WEBVTT
+
+00:01.480 --> 00:10.510
+Applying good looking styles to forms is very easy with vertical forms, every input element should
+
+00:10.510 --> 00:15.840
+be surrounded by a deep element and we already have that.
+
+00:16.690 --> 00:23.860
+And this development should get the form group class.
+
+00:25.450 --> 00:29.950
+The input itself gets the form control class.
+
+00:39.310 --> 00:41.440
+Let's also add a label.
+
+00:43.760 --> 00:50.480
+For attribute should point to an ID of the form element their label is bound to.
+
+00:52.650 --> 01:01.530
+Associating labels with input has benefits first, accessibility screen readers can read out loud the
+
+01:01.530 --> 01:09.630
+label for the given input element and second, clicking the label will focus on the actual input element
+
+01:09.630 --> 01:10.560
+bounce to it.
+
+01:12.530 --> 01:17.420
+Make sure you also add the ID element I'd attributes on the input element.
+
+01:21.090 --> 01:31.290
+Let's do the same with the content field, so first we add a form group to the surrounding def element.
+
+01:34.520 --> 01:36.320
+Then we are adding a label.
+
+01:42.340 --> 01:49.330
+Then the text area needs a class called Form Control and an ID.
+
+01:50.650 --> 01:51.340
+Content.
+
+01:52.980 --> 02:00.290
+Now, let's put some text into these labels, so here there is the title and then there is the content.
+
+02:03.100 --> 02:08.440
+Finally, the buttons in the create and added templates should be styled.
+
+02:12.700 --> 02:23.200
+Beaton will style this buttons using the default bootstrap button style between primary will make the
+
+02:23.200 --> 02:27.010
+buttons blue and BGN block.
+
+02:28.610 --> 02:32.780
+Will make the buttons, take the whole whiff of the containing element.
+
+02:34.490 --> 02:39.440
+You can just copy over this glass to the edit form into the input.
+
+02:42.990 --> 02:48.080
+Let's check how our refreshed form looks like right now.
+
+02:50.010 --> 02:52.650
+Now, that is what I call a makeover.

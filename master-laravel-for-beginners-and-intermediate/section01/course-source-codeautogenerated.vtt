@@ -1,0 +1,67 @@
+WEBVTT
+
+00:00.610 --> 00:07.540
+The source code for discourse is available on GitHub, which is a platform to host code, including
+
+00:07.540 --> 00:10.740
+all the changes made in the project called comets.
+
+00:11.800 --> 00:14.530
+Thanks to this, you can do many interesting things.
+
+00:15.460 --> 00:22.900
+First off, you can browse cource code with the state that it had after every single lecture, just
+
+00:22.900 --> 00:29.170
+go to the comet least and find a comet that matches the title of the lecture that you are watching.
+
+00:31.400 --> 00:36.380
+Click this button to browse the code with the state it had at a specific point.
+
+00:39.210 --> 00:46.230
+Pressing the green code button will give you some options, like downloading the code at a specific
+
+00:46.230 --> 00:47.250
+point in a zip.
+
+00:51.680 --> 00:58.940
+Or if something does not work and you think you typed the code correctly, just find the file you are
+
+00:58.940 --> 01:02.000
+working with and verify if yours looks the same.
+
+01:03.090 --> 01:10.890
+For example, at this point, we were talking about partial templates and creating a partial template
+
+01:10.890 --> 01:12.690
+called Post Blade BHP.
+
+01:13.590 --> 01:19.620
+Prayers go to file and type post Blade BHB.
+
+01:20.660 --> 01:25.640
+And this is how this fire looked like after the specific lecture.
+
+01:28.060 --> 01:34.280
+Another useful feature is to review all the changes made during a specific lecture.
+
+01:34.900 --> 01:36.820
+Let's go back to the Middle East.
+
+01:41.910 --> 01:49.620
+Click the comet's title, this letter is about form request classes had the following changes made.
+
+01:50.750 --> 01:56.990
+Green color means the code added and the red color, the code that was removed.
+
+01:58.290 --> 02:01.510
+Remember, the cold is always there available for you.
+
+02:01.980 --> 02:08.910
+Alternatively, if you prefer, under this very lecture, there is the zip file containing the full
+
+02:08.920 --> 02:15.600
+source code of this course into files, specifically for the first introductory section, which was
+
+02:15.600 --> 02:21.630
+recently rerecorded from scratch and the other containing the whole full course code.

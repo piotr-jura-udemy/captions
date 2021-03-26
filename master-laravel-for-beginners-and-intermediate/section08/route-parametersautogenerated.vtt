@@ -1,0 +1,118 @@
+WEBVTT
+
+00:01.620 --> 00:09.210
+In this lecture, we will talk about routes with parameters, but first, let's introduce the problem
+
+00:09.210 --> 00:10.580
+we are trying to solve.
+
+00:11.070 --> 00:15.300
+So currently we have two pages, the main page and a contact page.
+
+00:15.690 --> 00:20.420
+Now, imagine you would like to add some blog posts to your website.
+
+00:21.000 --> 00:24.260
+So let's say you currently have two blog posts.
+
+00:24.690 --> 00:27.920
+So how would you go about creating the routes for them?
+
+00:28.320 --> 00:38.390
+So the naive way could be to define a route like post slash one and then return some response from it.
+
+00:38.400 --> 00:42.570
+Let's say that would be blog post one.
+
+00:44.160 --> 00:49.000
+Then you have another blog post, let's say blog posts, too.
+
+00:49.500 --> 00:54.030
+You can also define another word for it and return their response.
+
+00:54.190 --> 00:55.440
+Well, this will work.
+
+00:56.100 --> 00:57.300
+Let's verify that.
+
+00:57.990 --> 01:04.630
+So posts one and posts to it all works fine.
+
+01:05.460 --> 01:10.910
+Now, just because something can be done, it doesn't mean that that's the way to do it.
+
+01:11.340 --> 01:18.570
+For example, with our blog posts and our current way, whenever we would like to add a new one, we
+
+01:18.570 --> 01:21.480
+will have to define a route for it manually.
+
+01:22.820 --> 01:29.690
+And then you would probably read those blog posts from some kind of database and imagine adding the
+
+01:29.690 --> 01:36.560
+same code in every of those functions, reading our specific blog posts from the database.
+
+01:36.830 --> 01:39.130
+Of course, that's not the way to do it.
+
+01:40.670 --> 01:47.210
+In such cases, you would like to use the route parameters first, let's get rid of those the routes,
+
+01:47.210 --> 01:51.890
+we won't need them anymore and then let's convert this one to have a route parameter.
+
+01:52.820 --> 01:57.620
+So parameters are enclosed in curly braces and they should have a name.
+
+01:58.040 --> 02:01.870
+Name should consist of alphabetic characters and underscores.
+
+02:02.330 --> 02:08.990
+Now, you can define as many parameters as you wish, but then remember that they will be passed to
+
+02:08.990 --> 02:11.400
+your function in an order.
+
+02:11.420 --> 02:16.170
+They were defined and the name of those parameters does not matter.
+
+02:16.340 --> 02:20.090
+So that means you can call your arguments any way you like.
+
+02:20.360 --> 02:26.090
+It can be either ID or blog post ID, whatever you prefer.
+
+02:27.730 --> 02:33.700
+OK, I would call it ID, I think that's the better practice to just call your function arguments the
+
+02:33.700 --> 02:36.800
+same as the root parameters are being called.
+
+02:37.310 --> 02:45.820
+Now we would have this idea variable available within this function and it will contain the value of
+
+02:45.820 --> 02:57.670
+whatever was provided after posts slash so we can try to output this like so say, the changes.
+
+02:57.880 --> 03:01.210
+And let's go back to the browser to verify if that works.
+
+03:02.350 --> 03:06.850
+So I've refreshed the page, we know that we had at least two routes.
+
+03:06.880 --> 03:09.190
+Now let's check with some bigger number.
+
+03:09.700 --> 03:10.270
+There it is.
+
+03:10.270 --> 03:12.550
+You can see that this still works.
+
+03:13.770 --> 03:20.930
+From time to time, I will remind you that it's a good idea to go over to Laravel documentation and
+
+03:20.970 --> 03:24.120
+read more about the topic you have just learned about.

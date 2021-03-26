@@ -1,0 +1,196 @@
+WEBVTT
+
+00:00.930 --> 00:07.530
+Now that we have learned the basic methods of manipulating the cash in Lavell using the cash for saved
+
+00:07.920 --> 00:10.830
+let's implement something interesting.
+
+00:10.920 --> 00:17.250
+So far we have used the cash to reduce the amount of the esky well queries that were made and we knew
+
+00:17.250 --> 00:19.550
+that we won't need to make those queries.
+
+00:19.560 --> 00:22.440
+Each time someone will visit our page.
+
+00:22.440 --> 00:29.240
+So we implemented the cash for the most come into the blog post and most active users and last time.
+
+00:29.250 --> 00:35.970
+We also implemented our simple cash to catch the blog posts with the comments for one hour.
+
+00:36.300 --> 00:44.390
+In this lecture we'll actually implement a counter of the users that are currently on the page so far.
+
+00:44.400 --> 00:50.060
+We have used the cash to reduce the amount of the queries made to the database.
+
+00:50.220 --> 00:58.920
+So as I've said before if the cash back and system is it a redis or mem cached it's usually stored inside
+
+00:58.920 --> 01:00.440
+the application memory.
+
+01:00.810 --> 01:06.960
+So this is much faster than doing an obscure query and reading from the database.
+
+01:06.960 --> 01:14.310
+Now this time will also use cash a little bit differently because previously we used that to reduce
+
+01:14.310 --> 01:16.760
+the amount of the Eskew our queries made.
+
+01:16.890 --> 01:24.690
+And this time we will store some information directly into cash and will read it directly into cash.
+
+01:24.690 --> 01:31.860
+It won't be stored into the database so let's go ahead and start implementing this functionality.
+
+01:32.040 --> 01:38.620
+So inside the post control our show action will add a new variable and call it counter.
+
+01:38.850 --> 01:46.980
+It will begin by having the 0 assigned and now will pass this counter to our view so we can display
+
+01:46.980 --> 01:50.210
+how many users are currently on the page.
+
+01:50.220 --> 01:57.990
+So now let's open the show blade BHP template and maybe below the dates when the post was added or updated
+
+01:58.050 --> 02:04.280
+will display information about how many people are currently on this page.
+
+02:04.620 --> 02:09.290
+So we'll say currently read by counter
+
+02:12.650 --> 02:20.590
+people save the changes and after you refresh we can see this text with the 0 people on the counter.
+
+02:20.810 --> 02:26.800
+And now let's see a diagram of how this would be actually be implemented.
+
+02:26.930 --> 02:28.530
+Now this is our diagram.
+
+02:28.580 --> 02:30.880
+First let's take a look at the legend.
+
+02:31.370 --> 02:38.570
+So the rectangle with normal lines would be something that we will do inside the code so it won't interact
+
+02:38.570 --> 02:46.850
+with the cache and now rectangle with this dotted lines would mean that something will be actually read
+
+02:46.970 --> 02:54.780
+or stored inside the cache and this symbol means that at this point we are making a decision.
+
+02:54.830 --> 03:03.000
+So the condition is either true or false and here you can see the flow of how this algorithm will work.
+
+03:03.180 --> 03:05.230
+So let's explain it from the beginning.
+
+03:06.000 --> 03:11.270
+So for each blog post we will store two items inside the cache.
+
+03:11.310 --> 03:18.900
+One of them would be the least of all the session ideas together with their last visit time and why
+
+03:18.900 --> 03:20.220
+we are using this session.
+
+03:20.230 --> 03:28.530
+Idea is because everyone who visits your page gets ultimately assigned a unique session I.D. that is
+
+03:28.530 --> 03:36.110
+being then stored inside the browser cookie and it is sent whenever the user is making another request.
+
+03:36.120 --> 03:44.490
+So this way we can easily uniquely identify users and another information under different key will be
+
+03:44.490 --> 03:48.690
+the actual account or the number of users currently on the page
+
+03:51.320 --> 03:58.690
+so our first step is to fetch the least of the users and their last visit time from the cash.
+
+03:58.970 --> 04:07.460
+So inside this cash element we will store an array where the key is the session I.D. and the value is
+
+04:07.460 --> 04:17.320
+the last visit time of the user now will iterate over this list and we will check whether the last visit
+
+04:17.330 --> 04:22.340
+time for a particular user is more than one minute.
+
+04:22.340 --> 04:30.230
+If it is we will remove this user from the list and decrease the counter so mind that we are decreasing
+
+04:30.230 --> 04:32.570
+the counter for that user on the list.
+
+04:32.570 --> 04:40.100
+We are not storing anything in cash yet if the user visited visited the page less than one minute ago
+
+04:40.370 --> 04:48.170
+we will keep him on the list so we'll keep our separate variable which we then will only store inside
+
+04:48.170 --> 04:51.730
+the cash with the users that should stay on that list.
+
+04:51.740 --> 04:56.090
+So they are not expired.
+
+04:56.120 --> 05:01.740
+Now we will verify if the current user is not on the list.
+
+05:01.940 --> 05:10.070
+If he isn't on that list then we'll check if he was on that list but was expired.
+
+05:10.680 --> 05:16.880
+So if the user is not in the least will simply increase the counter by 1.
+
+05:16.950 --> 05:24.150
+Also if the user was on the list but was due to be removed because he visited the page more than one
+
+05:24.150 --> 05:28.500
+minute ago will also increment countered by one.
+
+05:28.500 --> 05:36.840
+But otherwise if those both conditions are false we are just store the users that should stay on the
+
+05:36.840 --> 05:45.390
+list and then put down directly into the cash so we'll recalculate the list of those users that are
+
+05:45.390 --> 05:48.900
+still active on each visit to this page
+
+05:52.070 --> 06:00.230
+now finally we will see if the item in cash for the counter where we store the actual number of people
+
+06:00.260 --> 06:08.960
+on the page actually exists in the cash if it doesn't will set the counter as one.
+
+06:08.960 --> 06:11.260
+So we will set an initial value.
+
+06:11.260 --> 06:19.090
+So one would actually represent the user currently on page and then we'll store it in cash forever so
+
+06:19.090 --> 06:22.960
+we won't give it on expired time now.
+
+06:22.990 --> 06:30.850
+Otherwise we'll just read the amount of users from the cash to display it to the user.
+
+06:30.940 --> 06:32.160
+Don't worry right now.
+
+06:32.200 --> 06:39.370
+If this seems to be complicated we will implement it step by step in the next lecture and we'll also
+
+06:39.370 --> 06:43.630
+go back to this diagram to see what is actually happening.
